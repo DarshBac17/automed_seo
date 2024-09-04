@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="test_module.menu_test_module"
+              name="Test module"/>
+<!--              web_icon="owl_demo/static/description/icon.png"-->
+<!--    />-->
+
+    <menuitem id="test_module.menu_dashboard"
+              name="Dashboard"
+              parent="test_module.menu_test_module"/>
+
+<!--    <menuitem id="test_module.menu_blog"-->
+<!--              name="My blogs"-->
+<!--              parent="owl_demo.menu_dashboard"-->
+<!--              action="action_owl_demo_blog_js"/>-->
+
+</odoo>
