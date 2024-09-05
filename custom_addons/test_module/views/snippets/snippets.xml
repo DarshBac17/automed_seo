@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="custom_snippets" inherit_id="website.snippets" name="Custom snippets">
+
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Salesforce offers</div>
+                <div class="o_panel_body">
+                    <t t-snippet="test_module.salesforce_offers_static" string="Salesforce offers static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Salesforce offers static</keywords>
+                    </t>
+<!--                    <t t-snippet="test_module.custom_page" string="custom page" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
+<!--                        <keywords>Custom page</keywords>-->
+<!--                    </t>-->
+                    <t t-snippet="test_module.explore_cities" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>explore, cities</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

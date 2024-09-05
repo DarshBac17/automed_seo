@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="test_module.custom_page" name="Custom Page">
+        <t t-name="test_module.OWLPortal" owl="1">
+            <section class="container">
+
+                <div class="oe_structure">
+                    <t t-component="test_module.OWLPortal" />
+                    Componente desde OWL
+                    <p t-esc = 'state.value'/>
+                </div>
+            </section>
+        </t>
+    </template>
+
+
+
+</odoo>
