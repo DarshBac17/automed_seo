@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- offers form view -->
+        <record id="test_module_offer_benefit_form_view" model="ir.ui.view">
+            <field name="name">test_module.offer_benefit.form.view</field>
+            <field name="model">test_module.offer_benefits</field>
+            <field name="arch" type="xml">
+                <form string="Offer benefits">
+                    <sheet>
+                        <group>
+                            <field name="benefit_title"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- offers list or tree view -->
+        <record id="test_module_offers_tree_view" model="ir.ui.view">
+            <field name="name">test_module.offer_benefit.view</field>
+            <field name="model">test_module.offer_benefits</field>
+            <field name="arch" type="xml">
+                <tree string="Offers benefits">
+                    <field name="benefit_title"/>
+                </tree>
+            </field>
+        </record>
+
+<!--
+        &lt;!&ndash; offers Action for city submenu &ndash;&gt;
+        <record id="test_module_offers_action" model="ir.actions.act_window">
+            <field name="name">Offers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">test_module.offers</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">No offers yet!</p>
+                <p>Please add a new offer!</p>
+            </field>
+        </record>
+-->
+
+
+    </data>
+</odoo>
