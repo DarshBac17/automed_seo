@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Test module Root Menu -->
+        <menuitem id="test_module_root_menu"
+                  name="Test Module"
+                  sequence="85"
+                  parent="website.menu_website_configuration"/>
+
+        <!-- offers Submenu -->
+        <menuitem id="test_module_offers_menu"
+                  name="Offers"
+                  sequence="1"
+                  parent="test_module_root_menu"
+                  action="test_module.test_module_offers_action"/>
+    </data>
+
+</odoo>

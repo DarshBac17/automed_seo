@@ -11,11 +11,15 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/snippets/offer_dynamic_snippet.xml',
         'views/snippets/explore-cities.xml',
         'views/snippets/owl_template.xml',
         'views/snippets/test.xml',
         'views/snippets/snippets.xml',
+        'views/offer_benefits_website_view.xml',
+        'views/offers_website_view.xml',
         'views/yh_cities.xml',
+        'views/website_menus.xml',
         'views/menus.xml',
     ],
     # only loaded in demonstration mode
@@ -28,6 +32,7 @@
             'test_module/static/src/components/*/*.js',
             'test_module/static/src/components/*/*.xml',
             'test_module/static/src/js/explore-cities.js',
+            'test_module/static/src/js/offers.js',
         ],
     },
 }

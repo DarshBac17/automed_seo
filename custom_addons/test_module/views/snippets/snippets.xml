@@ -16,6 +16,9 @@
                     <t t-snippet="test_module.explore_cities" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>explore, cities</keywords>
                     </t>
+                    <t t-snippet="test_module.offers_dynamic_snippet" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
                 </div>
             </div>
         </xpath>
