@@ -10,9 +10,12 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'views/snippets/explore-cities.xml',
+        'views/snippets/owl_template.xml',
         'views/snippets/test.xml',
         'views/snippets/snippets.xml',
+        'views/yh_cities.xml',
         'views/menus.xml',
     ],
     # only loaded in demonstration mode
@@ -21,7 +24,10 @@
     ],
     'assets': {
         'web.assets_frontend': [
-          'test_module/static/src/css/*.css',
+            'test_module/static/src/css/*.css',
+            'test_module/static/src/components/*/*.js',
+            'test_module/static/src/components/*/*.xml',
+            'test_module/static/src/js/explore-cities.js',
         ],
     },
 }

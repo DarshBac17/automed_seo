@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
 
 
 # class TestModule(http.Controller):
@@ -19,3 +19,9 @@
 #         return http.request.render('test_module.object', {
 #             'object': obj
 #         })
+
+
+class TestModule(http.Controller):
+    @http.route(['/test_module/test'], type="http", website=True, auth="public")
+    def text(self):
+        return "Bacancy"

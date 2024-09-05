@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<templates xml:space="preserve">
+    <t t-name="test_module.OWLPortal" owl="1">
+        Componente desde OWL
+         <p t-esc = 'state.value'/>
+    </t>
+</templates>
