@@ -26,8 +26,7 @@ publicWidget.registry.TestModuleOffers = publicWidget.Widget.extend({
                     let benefit_html = ""
                     offer.benefits.forEach(benefit=>{
                         console.log(benefit)
-                        console.log(benefit.benefit_title)
-                        benefit_html += `<li>${benefit.benefit_title ? benefit.benefit_title : ""}</li>`
+                        benefit_html += `<li>${benefit ? benefit : ""}</li>`
                     })
                     console.log(benefit_html)
                     html += `<div class="col-12">
