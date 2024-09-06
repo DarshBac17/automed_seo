@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <odoo>
-    <template id="test_module.salesforce_offers_static" name="Salesforce offers Static">
+    <template id="test_module.salesforce_offers_static" name="Offers Static">
 
         <section class="container">
             <div class="cont-padding">
