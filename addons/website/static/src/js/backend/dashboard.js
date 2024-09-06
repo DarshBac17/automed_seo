@@ -333,7 +333,7 @@ var Dashboard = AbstractAction.extend({
     getValue: function(d) { return d[1]; },
     format_number: function(value, type, digits, symbol) {
         if (type === 'currency') {
-            return this.render_monetary_field(value, this.currency_id);
+            return this.render_monetary_field(value, this.currency_id);c
         } else {
             return field_utils.format[type](value || 0, {digits: digits}) + ' ' + symbol;
         }

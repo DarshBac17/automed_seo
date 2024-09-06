@@ -1,39 +1,129 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-
 <odoo>
     <template id="test_module.offers_dynamic_snippet" name="Offers Dynamic">
 
         <section class="offers-dynamic">
 
-            <div class="container" id="default-offer">
-                <div class="cont-padding">
-                    <h2>Business Benefits of Financial Services Cloud Salesforce Offer</h2>
-                    <p>Maximize Salesforce Financial Services Cloud's potential to enhance efficiency and boost user engagement. With financial services cloud Salesforce, we ensure security and streamline financial operations.</p>
-                </div>
-                <div class="style-check">
-                    <ul>
-                        <li>Optimize and automate financial processes to reduce manual workload and streamline operations using Salesforce Financial Services Cloud.</li>
-                        <li>With centralized client data and insights, Salesforce Financial Cloud allows for better finance decision-making and a unified view of client interactions.</li>
-                        <li>Salesforce Financial Cloud ensures excellent customer engagement and delivers personalized user experience for onboarding, account opening, and compliance checks.</li>
-                        <li>Adhere to industry regulation with Salesforce Financial Services Cloud to automate reports and obtain built-in compliance features.</li>
-                        <li>Strengthen your financial processes through advanced tools within the Salesforce Financial Service Cloud, improving user experiences.</li>
-                        <li>By utilizing Financial Service Cloud, you can meet specific goals with the help of Einstein AI, which provides accurate and reliable analysis.</li>
-                    </ul>
-                    <a href="#form" class="btn btn-outline-primary mt-md">talk to our salesforce experts</a>
-                </div>
-            </div>
-
-
             <div class="container">
+                <div class="row" id="default-offer">
+                    <div class="col-12">
 
+                        <div class="cont-padding">
+                            <h2 id="title">Business Benefits of Financial Services Cloud Salesforce Offer</h2>
+                            <p id="description">Maximize Salesforce Financial Services Cloud's potential to enhance efficiency and boost user engagement. With financial services cloud Salesforce, we ensure security and streamline financial operations.</p>
+                        </div>
+                        <div class="style-check" id="benefits">
+                            <ul>
+                                <li>Optimize and automate financial processes to reduce manual workload and streamline operations using Salesforce Financial Services Cloud.</li>
+                                <li>With centralized client data and insights, Salesforce Financial Cloud allows for better finance decision-making and a unified view of client interactions.</li>
+                                <li>Salesforce Financial Cloud ensures excellent customer engagement and delivers personalized user experience for onboarding, account opening, and compliance checks.</li>
+                                <li>Adhere to industry regulation with Salesforce Financial Services Cloud to automate reports and obtain built-in compliance features.</li>
+                                <li>Strengthen your financial processes through advanced tools within the Salesforce Financial Service Cloud, improving user experiences.</li>
+                                <li>By utilizing Financial Service Cloud, you can meet specific goals with the help of Einstein AI, which provides accurate and reliable analysis.</li>
+                            </ul>
+                            <a href="#form" class="btn btn-outline-primary mt-md">talk to our salesforce experts</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="row" id="dynamic-offer">
 
                 </div>
 
             </div>
 
+
+
+
+
+
         </section>
 
     </template>
 </odoo>
+        <!--<odoo>-->
+        <!--    <template id="test_module.offers_dynamic_snippet" name="Offers Dynamic">-->
+        <!--        <section class="offers-dynamic">-->
+        <!--            <div class="container">-->
+        <!--                <div class="row" id="dynamic-offer">-->
+        <!--                    &lt;!&ndash; Placeholder for edit mode and initial load &ndash;&gt;-->
+        <!--                    <div class="col-12 text-center oe_structure oe_empty">-->
+        <!--                        <h3>Offers Dynamic Snippet</h3>-->
+        <!--                        <p>This content will be dynamically replaced with offers when viewed on the website.</p>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </section>-->
+        <!--    </template>-->
+
+        <!--    &lt;!&ndash; Separate template for individual offer (used by JavaScript) &ndash;&gt;-->
+        <!--    <template id="test_module.offer_template" name="Offer Template">-->
+        <!--        <div class="col-lg-4 offer-container" t-att-data-offer-id="offer['id']">-->
+        <!--            <div class="card">-->
+        <!--                <div class="card-body">-->
+        <!--                    <input type="text" class="form-control offer-title mb-2" t-att-value="offer['title']"/>-->
+        <!--                    <textarea class="form-control offer-description mb-2" rows="3"><t t-esc="offer['description']"/></textarea>-->
+        <!--                    <h5>Benefits:</h5>-->
+        <!--                    <ul class="list-group">-->
+        <!--                        <t t-foreach="offer['benefits']" t-as="benefit">-->
+        <!--                            <li class="list-group-item">-->
+        <!--                                <input type="text" class="form-control offer-benefit" t-att-value="benefit"/>-->
+        <!--                            </li>-->
+        <!--                        </t>-->
+        <!--                    </ul>-->
+        <!--                    <button class="btn btn-primary mt-3 save-offer-btn">Save Changes</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </template>-->
+        <!--</odoo>-->
+        <!--<odoo>-->
+        <!--    <template id="test_module.offers_dynamic_snippet" name="Offers Dynamic">-->
+
+        <!--        <section class="offers-dynamic">-->
+
+        <!--            <div class="container" id="default-offer">-->
+        <!--                <div class="cont-padding">-->
+        <!--                    <h2>Business Benefits of Financial Services Cloud Salesforce Offer</h2>-->
+        <!--                    <p>Maximize Salesforce Financial Services Cloud's potential to enhance efficiency and boost user engagement. With financial services cloud Salesforce, we ensure security and streamline financial operations.</p>-->
+        <!--                </div>-->
+        <!--                <div class="style-check">-->
+        <!--                    <ul>-->
+        <!--                        <li>Optimize and automate financial processes to reduce manual workload and streamline operations using Salesforce Financial Services Cloud.</li>-->
+        <!--                        <li>With centralized client data and insights, Salesforce Financial Cloud allows for better finance decision-making and a unified view of client interactions.</li>-->
+        <!--                        <li>Salesforce Financial Cloud ensures excellent customer engagement and delivers personalized user experience for onboarding, account opening, and compliance checks.</li>-->
+        <!--                        <li>Adhere to industry regulation with Salesforce Financial Services Cloud to automate reports and obtain built-in compliance features.</li>-->
+        <!--                        <li>Strengthen your financial processes through advanced tools within the Salesforce Financial Service Cloud, improving user experiences.</li>-->
+        <!--                        <li>By utilizing Financial Service Cloud, you can meet specific goals with the help of Einstein AI, which provides accurate and reliable analysis.</li>-->
+        <!--                    </ul>-->
+        <!--                    <a href="#form" class="btn btn-outline-primary mt-md">talk to our salesforce experts</a>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="offer-container" t-att-data-offer-id="offer['id']">-->
+        <!--            <div class="card">-->
+        <!--                <div class="card-body">-->
+        <!--                    <input type="text" class="cont-padding" t-att-value="offer['title']"/>-->
+        <!--                    <textarea class="form-control offer-description mb-2" rows="3"><t t-esc="offer['description']"/></textarea>-->
+        <!--                    <h5>Benefits:</h5>-->
+        <!--                    <ul class="list-group">-->
+        <!--                        <t t-foreach="offer['benefits']" t-as="benefit">-->
+        <!--                            <li class="list-group-item">-->
+        <!--                                <input type="text" class="form-control offer-benefit" t-att-value="benefit"/>-->
+        <!--                            </li>-->
+        <!--                        </t>-->
+        <!--                    </ul>-->
+        <!--                    <button class="btn btn-primary mt-3 save-offer-btn">Save Changes</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--            <div class="container">-->
+
+        <!--                <div class="row" id="dynamic-offer">-->
+
+        <!--                </div>-->
+
+        <!--            </div>-->
+
+        <!--        </section>-->
+
+        <!--    </template>-->
+        <!--</odoo>-->

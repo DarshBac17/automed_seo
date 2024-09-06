@@ -33,6 +33,7 @@
             'test_module/static/src/components/*/*.xml',
             'test_module/static/src/js/explore-cities.js',
             'test_module/static/src/js/offers.js',
+            # 'test_module/static/src/js/offers_save.js',
         ],
     },
 }
