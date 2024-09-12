@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_yh_cities,yh_cities,model_yh_cities,,1,1,1,1
-access_test_module_offers,access.test_module.offers,model_test_module_offers,,1,1,1,1
-access_test_module_offers_benefits,access.test_module.offer_benefits,model_test_module_offer_benefits,,1,1,1,1
