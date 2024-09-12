@@ -66,9 +66,9 @@ MANIFEST.in
 LICENSE
 COPYRIGHT
 CONTRIBUTING.md
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/featured_brand_snippet
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/my_blog_snippet
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/product_brand_sale
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/qweb_demo2
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/qweb_demo
-/home/bacancy/Development/AutomedSEO/automed_seo/custom_addons/yourhome
+/custom_addons/featured_brand_snippet
+/custom_addons/my_blog_snippet
+/custom_addons/product_brand_sale
+/custom_addons/qweb_demo2
+/custom_addons/qweb_demo
+/custom_addons/yourhome
