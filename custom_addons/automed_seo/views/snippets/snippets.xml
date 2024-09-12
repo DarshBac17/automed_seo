@@ -22,6 +22,7 @@
                      <t t-snippet="automed_seo.trusted_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
+
                      <t t-snippet="automed_seo.banner_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
