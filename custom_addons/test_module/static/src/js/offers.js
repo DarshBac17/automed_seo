@@ -8,7 +8,7 @@ publicWidget.registry.TestModuleOffers = publicWidget.Widget.extend({
 
     start() {
         console.log("Widget started");
-         let default_offer = this.el.querySelector("#default-offer");
+        let default_offer = this.el.querySelector("#default-offer");
         if (default_offer) {
              default_offer.style.display = 'none';
         }
@@ -18,7 +18,7 @@ publicWidget.registry.TestModuleOffers = publicWidget.Widget.extend({
     _loadOffers() {
         let dynamic_offer = this.el.querySelector("#dynamic-offer");
 
-        if (default_offer) {
+        if (dynamic_offer) {
             this._rpc({
                 route: "/offers/",
                 params: {}
@@ -60,11 +60,12 @@ publicWidget.registry.TestModuleOffers = publicWidget.Widget.extend({
     _onSaveOfferClick() {
         console.log("Save offer click triggered");
         let dynamic_offer_row = this.el.querySelector("#dynamic-offer");
-        if (dynamic_offer_row) {
+        let offer_id = dynamic_offer_row.querySelector("offer_id");
+        if (dynamic_offer_row && offer_id) {
             let title = dynamic_offer_row.querySelector("h2").textContent;
             let description = dynamic_offer_row.querySelector("p").textContent;
             let benefits = Array.from(dynamic_offer_row.querySelectorAll("ul li")).map(li => li.textContent);
-            let offer_id =1;
+            let offer_id = 1;
             this._saveOfferChanges(offer_id,title, description, benefits);
         }
     },

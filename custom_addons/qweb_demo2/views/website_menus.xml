@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Test module Root Menu -->
+        <menuitem id="automed_seo_root_menu"
+                  name="Automed_seo"
+                  sequence="85"
+                  parent="website.menu_website_configuration"/>
+
+        <!-- offers Submenu -->
+        <menuitem id="automed_seo_offers_menu"
+                  name="Offers"
+                  sequence="1"
+                  parent="automed_seo_root_menu"
+                  action="automed_seo.automed_seo_offers_action"/>
+    </data>
+
+</odoo>

@@ -8,7 +8,7 @@
                     <div class="col-12">
 
                         <div class="cont-padding">
-                            <h2 id="title">Business Benefits of Financial Services Cloud Salesforce Offer</h2>
+                            <h2 id="title" t-out="title"></h2>
                             <p id="description">Maximize Salesforce Financial Services Cloud's potential to enhance efficiency and boost user engagement. With financial services cloud Salesforce, we ensure security and streamline financial operations.</p>
                         </div>
                         <div class="style-check" id="benefits">

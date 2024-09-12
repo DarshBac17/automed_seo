@@ -28,15 +28,22 @@ from crypt import methods
     #     return offers
 from odoo import http
 
+from automed_seo.odoo.http import request
+
+
 class Offers(http.Controller):
 
-    @http.route('/offers/', auth="public", type="json", website=True)
+    @http.route('/offers/', auth="public", type="http", website=True)
     def get_offers_json(self):
-        offers = http.request.env['test_module.offers'].search_read([])
-        for i in range(len(offers)):
-            offer_data = http.request.env['test_module.offer_benefits'].browse(offers[i].get('benefits')).read()
-            offers[i]['benefits'] = [data.get('benefit_title') for data in offer_data]
-        return offers
+        print("================get_offers_json")
+        # offers = http.request.env['test_module.offers'].search([])
+        # for i in range(len(offers)):
+        #     offer_data = http.request.env['test_module.offer_benefits'].browse(offers[i].get('benefits')).read()
+        #     offers[i]['benefits'] = [data.get('benefit_title') for data in offer_data]
+        data = {
+            'title': 'QWeb Demo'
+        }
+        return request.render('test_module.offers_dynamic_snippet',data)
 
     @http.route('/offers/save', auth="public", type="json", website=True, methods=['POST'])
     def save_offer_changes(self, **post):

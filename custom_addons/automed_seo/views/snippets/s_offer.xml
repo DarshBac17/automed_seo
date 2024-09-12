@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="automed_seo.salesforce_offers_static" name="Offers Static">
+
+        <section class="container">
+            <div class="cont-padding">
+                <h2>Business Benefits of Financial Services Cloud Salesforce Offer</h2>
+                <p>Maximize Salesforce Financial Services Cloud's potential to enhance efficiency and boost user engagement. With financial services cloud Salesforce, we ensure security and streamline financial operations.</p>
+            </div>
+            <div class="style-check">
+                <ul>
+                    <li>Optimize and automate financial processes to reduce manual workload and streamline operations using Salesforce Financial Services Cloud.</li>
+                    <li>With centralized client data and insights, Salesforce Financial Cloud allows for better finance decision-making and a unified view of client interactions.</li>
+                    <li>Salesforce Financial Cloud ensures excellent customer engagement and delivers personalized user experience for onboarding, account opening, and compliance checks.</li>
+                    <li>Adhere to industry regulation with Salesforce Financial Services Cloud to automate reports and obtain built-in compliance features.</li>
+                    <li>Strengthen your financial processes through advanced tools within the Salesforce Financial Service Cloud, improving user experiences.</li>
+                    <li>By utilizing Financial Service Cloud, you can meet specific goals with the help of Einstein AI, which provides accurate and reliable analysis.</li>
+                </ul>
+                <a href="#form" class="btn btn-outline-primary mt-md">talk to our salesforce experts</a>
+            </div>
+        </section>
+
+    </template>
+</odoo>

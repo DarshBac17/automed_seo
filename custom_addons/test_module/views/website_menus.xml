@@ -3,7 +3,7 @@
     <data>
         <!-- Test module Root Menu -->
         <menuitem id="test_module_root_menu"
-                  name="Test Module"
+                  name="Test Module2"
                   sequence="85"
                   parent="website.menu_website_configuration"/>
 

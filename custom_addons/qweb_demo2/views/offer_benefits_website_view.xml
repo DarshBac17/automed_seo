@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- offers form view -->
+        <record id="automed_seo_offer_benefit_form_view" model="ir.ui.view">
+            <field name="name">automed_seo.offer_benefit.form.view</field>
+            <field name="model">automed_seo.offer_benefits</field>
+            <field name="arch" type="xml">
+                <form string="Offer benefits">
+                    <sheet>
+                        <group>
+                            <field name="benefit_title"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- offers list or tree view -->
+        <record id="automed_seo_offers_tree_view" model="ir.ui.view">
+            <field name="name">automed_seo.offer_benefit.view</field>
+            <field name="model">automed_seo.offer_benefits</field>
+            <field name="arch" type="xml">
+                <tree string="Offers benefits">
+                    <field name="benefit_title"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
