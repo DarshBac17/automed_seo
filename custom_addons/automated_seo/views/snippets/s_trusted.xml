@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="automed_seo.trusted_static" name="Trusted">
+    <template id="automated_seo.trusted_static" name="Trusted">
         <section class="bg-gray-light py-md">
             <div class="container">
                 <div class="grid gap-6 grid-cols-3 md:grid-cols-6 lg:grid-cols-7 items-center justify-center [&amp;_div]:m-auto">

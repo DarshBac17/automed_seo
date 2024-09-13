@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="automed_seo.banner_static" name="Banner">
+    <template id="automated_seo.banner_static" name="Banner">
         <section class="banner banner-post header-top bg-dark">
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg"
                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg"
