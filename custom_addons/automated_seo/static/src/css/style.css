@@ -1116,7 +1116,7 @@ p:not(:last-child, .mb-0) {
 
 .bg-primary {
     --tw-bg-opacity: 1;
-    background-color: rgb(245 130 32/var(--tw-bg-opacity))
+    background-color: rgb(245 130 32/var(--tw-bg-opacity))!important
 }
 
 .bg-transparent {
@@ -1294,7 +1294,7 @@ p:not(:last-child, .mb-0) {
 
 .text-primary-custom {
     --tw-text-opacity: 1;
-    color: rgb(245 130 32/var(--tw-text-opacity))
+    color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
 
 .text-secondary {
@@ -1546,7 +1546,7 @@ button.close {
 
 .hover\:text-primary:hover {
     --tw-text-opacity: 1;
-    color: rgb(245 130 32/var(--tw-text-opacity))
+    color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
 
 @media not all and (min-width:992px) {
@@ -1879,7 +1879,7 @@ button.close {
 
 .\[\&_\.nav-menu\.active_span\]\:text-primary .nav-menu.active span {
     --tw-text-opacity: 1;
-    color: rgb(245 130 32/var(--tw-text-opacity))
+    color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
 
 .\[\&_\.nav-menu_\>\*\]\:mr-4 .nav-menu>* {
@@ -1945,7 +1945,7 @@ button.close {
 
 .\[\&_li\.active\]\:text-primary li.active {
     --tw-text-opacity: 1;
-    color: rgb(245 130 32/var(--tw-text-opacity))
+    color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
 
 .\[\&_li\:last-child\]\:mb-0 li:last-child {
@@ -1970,7 +1970,7 @@ button.close {
 
 .\[\&_li_a\:hover\:not\(\.btn\)\]\:text-primary li a:hover:not(.btn) {
     --tw-text-opacity: 1;
-    color: rgb(245 130 32/var(--tw-text-opacity))
+    color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
 
 .\[\&_li_a\:hover\]\:bg-secondary li a:hover {
