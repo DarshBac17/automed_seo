@@ -13,7 +13,7 @@
                     <div class="shadow-form bg-white">
                         <div class="boxed">
                             <div class="flex items-center justify-center">
-                                <p class="text-h1 text-primary font-bold mb-0">$18</p>
+                                <p class="text-h1 text-primary-custom font-bold mb-0">$18</p>
                                 <div class="toggle-price svg-icon ml-sm">
                                     <img src="/automed_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
                                 </div>
@@ -32,7 +32,7 @@
                         </div>
                        <div class="boxed pt-20">
                             <div class="flex items-center justify-center">
-                                <p class="text-h1 text-primary font-bold mb-0">$2560</p>
+                                <p class="text-h1 text-primary-custom font-bold mb-0">$2560</p>
                                 <div class="toggle-price svg-icon ml-sm">
                                     <img src="/automed_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
                                 </div>
@@ -48,7 +48,7 @@
                     <div class="shadow-form bg-white">
                         <div class="boxed">
                             <div class="flex items-center justify-center">
-                                <p class="text-h1 text-primary font-bold mb-0">$12000</p>
+                                <p class="text-h1 text-primary-custom font-bold mb-0">$12000</p>
                                 <div class="toggle-price svg-icon ml-sm">
                                     <img src="automed_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
                                 </div>
