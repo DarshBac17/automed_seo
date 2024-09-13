@@ -17,7 +17,10 @@
     ],
     'assets': {
             'web.assets_frontend': [
-            'automed_seo/static/src/css/*.css',
+            'automed_seo/static/src/css/casestudy.css',
+            'automed_seo/static/src/css/faq.css',
+            'automed_seo/static/src/css/footer-slider.css',
+            'automed_seo/static/src/css/style.css',
             ]
     },
     'installable': True,
