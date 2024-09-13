@@ -1,5 +1,5 @@
 {
-    'name': 'AutomedSEO',
+    'name': 'AutomatedSEO',
     'version': '1.0',
     'category': 'Extra Tools',
     'summary': 'A simple QWeb demo',
@@ -17,10 +17,10 @@
     ],
     'assets': {
             'web.assets_frontend': [
-            'automed_seo/static/src/css/casestudy.css',
-            'automed_seo/static/src/css/faq.css',
-            'automed_seo/static/src/css/footer-slider.css',
-            'automed_seo/static/src/css/style.css',
+            'automated_seo/static/src/css/casestudy.css',
+            'automated_seo/static/src/css/faq.css',
+            'automated_seo/static/src/css/footer-slider.css',
+            'automated_seo/static/src/css/style.css',
             ]
     },
     'installable': True,
