@@ -1,10 +1,10 @@
 {
-    'name': 'AutomatedSEO',
+    'name': 'AutomedSEO',
     'version': '1.0',
     'category': 'Extra Tools',
     'summary': 'A simple QWeb demo',
     'description': """This module demonstrates a basic QWeb template in Odoo 16.""",
-    'author': 'Darsh Patel',
+    'author': 'Hetul Patel',
     'depends': ['base', 'web'],
     'data': [
         "views/snippets/s_offer.xml",
@@ -17,7 +17,10 @@
     ],
     'assets': {
             'web.assets_frontend': [
-            'automated_seo/static/src/css/*.css',
+            'automed_seo/static/src/css/casestudy.css',
+            'automed_seo/static/src/css/faq.css',
+            'automed_seo/static/src/css/footer-slider.css',
+            'automed_seo/static/src/css/style.css',
             ]
     },
     'installable': True,
