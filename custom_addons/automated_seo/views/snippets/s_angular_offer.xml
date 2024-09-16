@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="automated_seo.angular_offer_static" name=" Angular Offer Static">
-        <section class="bg-gray-light">
+    <template id="automated_seo.angular_offer_static_template" name="Angular Offer Static Template">
+        <section t-attf-class="#{snippet_name} #{snippet_classes} s_dynamic bg-gray-light"
+                 t-att-data-snippet="snippet_name">
             <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2">
                 <div class="order-1 md:order-1">
                     <div class="side-sticky">
@@ -20,6 +21,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Second div - Align Right and Scrollable -->
                 <div class="order-2 md:order-2 overflow-y-auto max-h-96">
                     <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two">
                         <div class="boxed bg-white">
@@ -67,8 +69,10 @@
                         <div class="boxed bg-white">
                             <h3 class="text-h4">Angular Upgrade Services</h3>
                             <p>Upgrade your outdated projects to the latest version with our Angular developers. Get
-                                best-in-class <a class="text-primary font-bold">Angular Upgrade Services</a> for
-                                improved performance and access to new features that improve functionality and UX.
+                                best-in-class <a class="text-primary font-bold text-primary-custom">Angular Upgrade
+                                    Services
+                                </a> for improved performance and access to new features that improve functionality and
+                                UX.
                             </p>
                         </div>
                         <div class="boxed bg-white">
@@ -80,14 +84,46 @@
                         </div>
                         <div class="boxed bg-white">
                             <h3 class="text-h4">Angular Consulting Services</h3>
-                            <p>Get ideal <a class="text-primary font-bold">Angular Consulting Services</a> to maximize
-                                your business app potential. Our expert consultants guide you at every development
-                                phase, from planning to execution, for effective results and performance.
+                            <p>Get ideal <a class="text-primary font-bold text-primary-custom">Angular Consulting
+                                Services
+                            </a> to maximize your business app potential. Our expert consultants guide you at every
+                                development phase, from planning to execution, for effective results and performance.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+    </template>
+
+    <template id="automated_seo.angular_offer_static" name="Angular Offer Static">
+        <t t-call="automated_seo.angular_offer_static_template">
+            <t t-set="snippet_name" t-value="'angular_offer'"/>
+        </t>
+    </template>
+
+    <template id="automated_seo.angular_offer_static_options_template">
+        <div t-attf-data-js="#{snippet_name}" t-attf-data-selector="#{snippet_selector}" data-no-preview="true">
+            <we-select string="Filter" data-name="filter_opt" data-attribute-name="filterId" data-no-preview="true">
+            </we-select>
+            <we-select string="Template" data-name="template_opt" data-attribute-name="templateKey"
+                       data-no-preview="true">
+            </we-select>
+            <we-select string="Fetched elements" data-name="number_of_records_opt" data-attribute-name="numberOfRecords"
+                       data-no-preview="true">
+                <we-button t-foreach="range(1, 17)" t-as="value" t-att-data-select-data-attribute="value"
+                           t-esc="value"/>
+            </we-select>
+            <t t-out="0"/>
+        </div>
+    </template>
+    <template id="test_options_snippet_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="automated_seo.angular_offer_static_options_template">
+                <t t-set="snippet_name" t-value="'angular_offer_widget'"/>
+                <t t-set="snippet_selector" t-value="'.angular_offer'"/>
+            </t>
+        </xpath>
     </template>
 </odoo>

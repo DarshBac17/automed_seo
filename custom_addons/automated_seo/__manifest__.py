@@ -21,7 +21,11 @@
                 'automated_seo/static/src/css/faq.css',
                 'automated_seo/static/src/css/footer-slider.css',
                 'automated_seo/static/src/css/style.css',
-            ]
+            ],
+            'website.assets_wysiwyg': [
+                ('include', 'web._assets_helpers'),
+                'automated_seo/static/src/js/angular_offer.js'
+            ],
     },
     'installable': True,
     'application': False,
