@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="automated_seo.angular_offer_static" name="Angular Developer offer">
-
-
+    <template id="automated_seo.hire_angular_offer_static" name="Hire Angular Developer">
         <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2">
             <div>
-                <div class="side-sticky">
+                <div class="side-sticky" style="top: 197px;">
                     <div class="md:cont-padding">
                         <h2>Hire AngularJS Developers From Us To Improve Your Product Efficiency</h2>
                         <p>
@@ -24,10 +22,10 @@
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer">
                 <div class="accordian-outer">
                     <div class="accordion-item accordian-tab bg-gray-light">
-                        <div class="faq-heading active">
+                        <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Start 15 Days Risk-Free Trial!</h3>
                         </div>
-                        <div class="accordian-text active">
+                        <div class="accordian-text active" style="display: none;">
                             <p>Try our exceptional service free for 15 days. No commitment, no risk. See if it exceeds
                                 your expectations.
                             </p>
@@ -37,7 +35,7 @@
                         <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Hiring Engagement Options at Bacancy:</h3>
                         </div>
-                        <div class="accordian-text">
+                        <div class="accordian-text" style="display: none;">
                             <p>We provide three types of hiring engagement models. You can choose the preferred model
                                 that fits your business needs and hire Angular developers from Bacancy.
                             </p>
@@ -54,7 +52,7 @@
                                 Bacancy?
                             </h3>
                         </div>
-                        <div class="accordian-text">
+                        <div class="accordian-text" style="display: none;">
                             <p>Hiring Angular developers from our company offers several advantages:</p>
                             <ul>
                                 <li>Onboarding Within 48 Hrs</li>
@@ -69,6 +67,33 @@
                 </div>
             </div>
         </section>
+          <script type="text/javascript" t-js="true">
+            document.addEventListener('DOMContentLoaded', function() {
+                var accordionItems = document.querySelectorAll('.sidebar_right_outer .res-submenu, .sidebar_right_outer .res-submenu, .accordion-item .faq-heading');
 
+                accordionItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        var parent = this.closest('.accordion-item');
+                        var content = parent.querySelector('.accordian-text');
+                        var allItems = document.querySelectorAll('.accordion-item');
+
+                        allItems.forEach(function(otherItem) {
+                            if (otherItem !== parent) {
+                                otherItem.classList.remove('active');
+                                var otherContent = otherItem.querySelector('.accordian-text');
+                                if (otherContent) {
+                                    otherContent.style.display = 'none';
+                                }
+                            }
+                        });
+
+                        parent.classList.toggle('active');
+                        if (content) {
+                            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                        }
+                    });
+                });
+            });
+        </script>
     </template>
 </odoo>

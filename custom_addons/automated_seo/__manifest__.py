@@ -9,10 +9,13 @@
     'data': [
         "views/snippets/s_offer.xml",
         "views/snippets/s_angular_offer.xml",
-        "views/snippets/s_hire_angular_offer.xml",
+        "views/snippets/s_hire_angular_dev.xml",
+        "views/snippets/s_angular_offer.xml",
         "views/snippets/s_schedule_interview.xml",
+        "views/snippets/s_angular_dev_expertise.xml",
         "views/snippets/s_trusted.xml",
         "views/snippets/s_banner.xml",
+        "views/snippets/s_full_stack_angular_type.xml",
         'views/snippets/snippets.xml',
     ],
     'assets': {
@@ -21,11 +24,12 @@
                 'automated_seo/static/src/css/faq.css',
                 'automated_seo/static/src/css/footer-slider.css',
                 'automated_seo/static/src/css/style.css',
+
             ],
-            'website.assets_wysiwyg': [
-                ('include', 'web._assets_helpers'),
-                'automated_seo/static/src/js/angular_offer.js'
-            ],
+            # 'website.assets_wysiwyg': [
+            #     ('include', 'web._assets_helpers'),
+            #     'automated_seo/static/src/js/angular_offer.js'
+            # ],
     },
     'installable': True,
     'application': False,

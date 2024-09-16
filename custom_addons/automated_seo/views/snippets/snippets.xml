@@ -16,6 +16,9 @@
                     <t t-snippet="automated_seo.hire_angular_offer_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
+                    <t t-snippet="automated_seo.angular_offer_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
                     <t t-snippet="automated_seo.schedule_interview_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
@@ -23,6 +26,12 @@
                         <keywords>offers, dynamic</keywords>
                     </t>
                      <t t-snippet="automated_seo.banner_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.full_stack_angular_type" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.angular_dev_expertise" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
                 </div>

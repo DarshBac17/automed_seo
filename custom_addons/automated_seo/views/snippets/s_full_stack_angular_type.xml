@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="automated_seo.full_stack_angular_type" name="Full stack angular type">
+            <section class="overflow-hidden">
+        <div class="container">
+            <div class="cont-padding text-center">
+                <h2>Drive Web Excellence with Our Top Full-Stack Angular Developers</h2>
+                <p>Angular is an excellent choice for front-end development when paired with other back-end technologies like Rails, Node.js, PHP, etc. Leverage the Angular front-end with other combinations to build next-gen solutions that make your app stand out.</p>
+            </div>
+            <div class="center-slide">
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/aws.svg" data-src="/automated_seo/static/src/img/aws.svg" alt="aws icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + AWS</h3>
+                    <p class="small-heading-two">Combine Angular with AWS for scalable cloud hosting, seamless CI/CD and robust backend, and dynamic web applications with enhanced performance and security.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/docker.svg" data-src="/automated_seo/static/src/img/docker.svg" alt="docker icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + DOCKER</h3>
+                    <p class="small-heading-two">Use Docker with Angular for a consistent environment and simplified deployments. Build containerized apps for faster development cycles and enhanced scalability.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/ror.svg" data-src="/automated_seo/static/src/img/ror.svg" alt="ror icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + ROR</h3>
+                    <p class="small-heading-two">Pair Angular with Ruby on Rails to achieve a powerful front end and a rapid and flexible back end. Build dynamic and responsive systems quickly and efficiently.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/home/bacancy/Development/AutomedSEO/automated_seo/custom_addons/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/dotnet.svg" data-src="/automated_seo/static/src/img/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + .NET</h3>
+                    <p class="small-heading-two">Build robust, high-performance, secure enterprise applications with the Angular and the .NET combination. Get seamless integrations and scalability for large-scale solutions.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/node.svg" data-src="/automated_seo/static/src/img/node.svg" alt="node icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + NODE</h3>
+                    <p class="small-heading-two">Leverage the ideal Angular with Node.js combination for a complete JavaScript solution. Achieve real-time data processing and high-performance dynamic applications.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/laravel.svg" data-src="https://assets.bacancytechnology.com/ain-boot-5/images/tech-icon-svg/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + Laravel</h3>
+                    <p class="small-heading-two">Pair your Angular applications with Laravel for a clean, elegant, syntax, and robust backend. Develop highly interactive and secure web applications with ease.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/java.svg" data-src="/automated_seo/static/src/img/java.svg" alt="java icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + Java</h3>
+                    <p class="small-heading-two">Combine Angular with Java for scalable, secure, and high-performing applications. Get robust performance for building large-scale enterprise-grade solutions.</p>
+                </div>
+                <div class="item bg-gray-light boxed">
+                    <div class="flex svg-icon mb-sm">
+                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                        <img src="/automated_seo/static/src/img/golang.svg" data-src="/automated_seo/static/src/img/golang.svg" alt="golang icon" loading="lazy" height="60" width="60"></img>
+                    </div>
+                    <h3 class="text-h4 small-heading">ANGULAR + Golang</h3>
+                    <p class="small-heading-two">Use Angular with Golang for fast, efficient, and scalable applications. Build reliable web apps with efficient concurrency support and efficient memory management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" t-js="true" >
+         document.addEventListener('DOMContentLoaded', function() {
+                var slider = document.querySelector('.center-slide');
+                if (!slider) return;
+
+                var slides = slider.querySelectorAll('.item');
+                var currentSlide = 0;
+                var slideCount = slides.length;
+
+                function getSlidesToShow() {
+                    var width = window.innerWidth;
+                    if (width &lt;= 767) return 1;
+                    if (width &lt;= 991) return 2;
+                    return 3;
+                }
+
+                function showSlides() {
+                    var slidesToShow = getSlidesToShow();
+                    slides.forEach(function(slide, index) {
+                        if (index >= currentSlide &amp;&amp; index &lt; currentSlide + slidesToShow) {
+                            slide.style.display = 'block';
+                        } else {
+                            slide.style.display = 'none';
+                        }
+                        slide.style.marginRight = '10px';
+                        slide.style.marginLeft = '10px';
+                    });
+                    updateDots();
+                }
+
+                function createDots() {
+                    var dotContainer = document.createElement('div');
+                    dotContainer.className = 'slider-dots';
+                    var dotCount = Math.ceil(slideCount / getSlidesToShow());
+                    for (var i = 0; i &lt; dotCount; i++) {
+                        var dot = document.createElement('span');
+                        dot.className = 'dot';
+                        dot.addEventListener('click', function() {
+                            currentSlide = i * getSlidesToShow();
+                            showSlides();
+                        });
+                        dotContainer.appendChild(dot);
+                    }
+                    slider.appendChild(dotContainer);
+                }
+
+                function updateDots() {
+                    var dots = slider.querySelectorAll('.dot');
+                    var activeDotIndex = Math.floor(currentSlide / getSlidesToShow());
+                    dots.forEach(function(dot, index) {
+                        dot.classList.toggle('active', index === activeDotIndex);
+                    });
+                }
+
+                createDots();
+                showSlides();
+
+                window.addEventListener('resize', showSlides);
+            });
+    </script>
+
+    </template>
+</odoo>
