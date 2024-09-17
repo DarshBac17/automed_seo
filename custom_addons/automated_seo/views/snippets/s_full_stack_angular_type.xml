@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="automated_seo.full_stack_angular_type" name="Full stack angular type">
+        <section class="overflow-hidden">
+            <div class="container">
+                <div class="cont-padding text-center">
+                    <h2>Drive Web Excellence with Our Top Full-Stack Angular Developers</h2>
+                    <p>Angular is an excellent choice for front-end development when paired with other back-end
+                        technologies like Rails, Node.js, PHP, etc. Leverage the Angular front-end with other
+                        combinations to build next-gen solutions that make your app stand out.
+                    </p>
+                </div>
+                            <div class="center-slide">
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/aws.svg" data-src="/automated_seo/static/src/img/aws.svg" alt="aws icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + AWS</h3>
+                                    <p class="small-heading-two">Combine Angular with AWS for scalable cloud hosting, seamless CI/CD and robust backend, and dynamic web applications with enhanced performance and security.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/docker.svg" data-src="/automated_seo/static/src/img/docker.svg" alt="docker icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + DOCKER</h3>
+                                    <p class="small-heading-two">Use Docker with Angular for a consistent environment and simplified deployments. Build containerized apps for faster development cycles and enhanced scalability.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/ror.svg" data-src="/automated_seo/static/src/img/ror.svg" alt="ror icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + ROR</h3>
+                                    <p class="small-heading-two">Pair Angular with Ruby on Rails to achieve a powerful front end and a rapid and flexible back end. Build dynamic and responsive systems quickly and efficiently.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/dotnet.svg" data-src="/automated_seo/static/src/img/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + .NET</h3>
+                                    <p class="small-heading-two">Build robust, high-performance, secure enterprise applications with the Angular and the .NET combination. Get seamless integrations and scalability for large-scale solutions.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/node.svg" data-src="/automated_seo/static/src/img/node.svg" alt="node icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + NODE</h3>
+                                    <p class="small-heading-two">Leverage the ideal Angular with Node.js combination for a complete JavaScript solution. Achieve real-time data processing and high-performance dynamic applications.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/laravel.svg" data-src="https://assets.bacancytechnology.com/ain-boot-5/images/tech-icon-svg/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + Laravel</h3>
+                                    <p class="small-heading-two">Pair your Angular applications with Laravel for a clean, elegant, syntax, and robust backend. Develop highly interactive and secure web applications with ease.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/java.svg" data-src="/automated_seo/static/src/img/java.svg" alt="java icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + Java</h3>
+                                    <p class="small-heading-two">Combine Angular with Java for scalable, secure, and high-performing applications. Get robust performance for building large-scale enterprise-grade solutions.</p>
+                                </div>
+                                <div class="item bg-gray-light boxed">
+                                    <div class="flex svg-icon mb-sm">
+                                        <img src="/automated_seo/static/src/img/angular.svg" data-src="/automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>
+                                        <img src="/automated_seo/static/src/img/golang.svg" data-src="/automated_seo/static/src/img/golang.svg" alt="golang icon" loading="lazy" height="60" width="60"></img>
+                                    </div>
+                                    <h3 class="text-h4 small-heading">ANGULAR + Golang</h3>
+                                    <p class="small-heading-two">Use Angular with Golang for fast, efficient, and scalable applications. Build reliable web apps with efficient concurrency support and efficient memory management.
+                                    </p>
+                                </div>
+                            </div>
+<!--                <div class="center-slide slick-initialized slick-slider slick-dotted">-->
+
+
+<!--                    <div class="slick-list draggable">-->
+<!--                        <div class="slick-track"-->
+<!--                             style="opacity: 1; width: 3032px; transform: translate3d(0px, 0px, 0px);">-->
+<!--                            <div class="item bg-gray-light boxed slick-slide slick-current slick-active"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="0"-->
+<!--                                 aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide40"-->
+<!--                                 aria-describedby="slick-slide-control40">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg"-->
+<!--                                         alt="aws icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + AWS</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Combine Angular with AWS for-->
+<!--                                    scalable cloud hosting, seamless CI/CD and robust backend, and dynamic web-->
+<!--                                    applications with enhanced performance and security.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide slick-active"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="1"-->
+<!--                                 aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide41"-->
+<!--                                 aria-describedby="slick-slide-control41">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/docker.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/docker.svg"-->
+<!--                                         alt="docker icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + DOCKER</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Use Docker with Angular for a-->
+<!--                                    consistent environment and simplified deployments. Build containerized apps for-->
+<!--                                    faster development cycles and enhanced scalability.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="2"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide42"-->
+<!--                                 aria-describedby="slick-slide-control42">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg"-->
+<!--                                         alt="ror icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + ROR</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Pair Angular with Ruby on Rails to-->
+<!--                                    achieve a powerful front end and a rapid and flexible back end. Build dynamic and-->
+<!--                                    responsive systems quickly and efficiently.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="3"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide43"-->
+<!--                                 aria-describedby="slick-slide-control43">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg"-->
+<!--                                         alt="dotnet icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + .NET</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Build robust, high-performance,-->
+<!--                                    secure enterprise applications with the Angular and the .NET combination. Get-->
+<!--                                    seamless integrations and scalability for large-scale solutions.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="4"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide44"-->
+<!--                                 aria-describedby="slick-slide-control44">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/node.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/node.svg"-->
+<!--                                         alt="node icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + NODE</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Leverage the ideal Angular with-->
+<!--                                    Node.js combination for a complete JavaScript solution. Achieve real-time data-->
+<!--                                    processing and high-performance dynamic applications.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="5"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide45"-->
+<!--                                 aria-describedby="slick-slide-control45">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg"-->
+<!--                                         alt="laravel icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + Laravel</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Pair your Angular applications with-->
+<!--                                    Laravel for a clean, elegant, syntax, and robust backend. Develop highly interactive-->
+<!--                                    and secure web applications with ease.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="6"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide46"-->
+<!--                                 aria-describedby="slick-slide-control46">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg"-->
+<!--                                         alt="java icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + Java</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Combine Angular with Java for-->
+<!--                                    scalable, secure, and high-performing applications. Get robust performance for-->
+<!--                                    building large-scale enterprise-grade solutions.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="item bg-gray-light boxed slick-slide"-->
+<!--                                 style="width: 359px; margin-right: 10px; margin-left: 10px;" data-slick-index="7"-->
+<!--                                 aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide47"-->
+<!--                                 aria-describedby="slick-slide-control47">-->
+<!--                                <div class="flex svg-icon mb-sm">-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"-->
+<!--                                         alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"></img>-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg"-->
+<!--                                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg"-->
+<!--                                         alt="golang icon" loading="lazy" height="60" width="60"></img>-->
+<!--                                </div>-->
+<!--                                <h3 class="text-h4 small-heading" style="height: 32px;">ANGULAR + Golang</h3>-->
+<!--                                <p class="small-heading-two" style="height: 140px;">Use Angular with Golang for fast,-->
+<!--                                    efficient, and scalable applications. Build reliable web apps with efficient-->
+<!--                                    concurrency support and efficient memory management.-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <ul class="slick-dots" style="display: block;" role="tablist">-->
+<!--                        <li class="slick-active" role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control40" aria-controls="slick-slide40"-->
+<!--                                    aria-label="1 of 4" tabindex="0" aria-selected="true">1-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control41" aria-controls="slick-slide41"-->
+<!--                                    aria-label="2 of 4" tabindex="-1">2-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control42" aria-controls="slick-slide42"-->
+<!--                                    aria-label="3 of 4" tabindex="-1">3-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control43" aria-controls="slick-slide43"-->
+<!--                                    aria-label="4 of 4" tabindex="-1">4-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control44" aria-controls="slick-slide44"-->
+<!--                                    aria-label="5 of 4" tabindex="-1">5-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control45" aria-controls="slick-slide45"-->
+<!--                                    aria-label="6 of 4" tabindex="-1">6-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li role="presentation">-->
+<!--                            <button type="button" role="tab" id="slick-slide-control46" aria-controls="slick-slide46"-->
+<!--                                    aria-label="7 of 4" tabindex="-1">7-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+        </section>
+        <script type="text/javascript" t-js="true">
+            document.addEventListener('DOMContentLoaded', function() {
+            var slider = document.querySelector('.center-slide');
+            if (!slider) return;
+
+            var slides = slider.querySelectorAll('.item');
+            var currentSlide = 0;
+            var slideCount = slides.length;
+
+            function getSlidesToShow() {
+            var width = window.innerWidth;
+            if (width &lt;= 767) return 1;
+            if (width &lt;= 991) return 2;
+            return 3;
+            }
+
+            function showSlides() {
+            var slidesToShow = getSlidesToShow();
+            slides.forEach(function(slide, index) {
+            if (index &gt;= currentSlide &amp;&amp; index &lt; currentSlide + slidesToShow) {
+            slide.style.display = 'block';
+            } else {
+            slide.style.display = 'none';
+            }
+            slide.style.marginRight = '10px';
+            slide.style.marginLeft = '10px';
+            });
+            updateDots();
+            }
+
+            function createDots() {
+            var dotContainer = document.createElement('div');
+            dotContainer.className = 'slider-dots';
+            var dotCount = Math.ceil(slideCount / getSlidesToShow());
+            for (var i = 0; i &lt; dotCount; i++) {
+            var dot = document.createElement('span');
+            dot.className = 'dot';
+            dot.addEventListener('click', function() {
+            currentSlide = i * getSlidesToShow();
+            showSlides();
+            });
+            dotContainer.appendChild(dot);
+            }
+            slider.appendChild(dotContainer);
+            }
+
+            function updateDots() {
+            var dots = slider.querySelectorAll('.dot');
+            var activeDotIndex = Math.floor(currentSlide / getSlidesToShow());
+            dots.forEach(function(dot, index) {
+            dot.classList.toggle('active', index === activeDotIndex);
+            });
+            }
+
+            createDots();
+            showSlides();
+
+            window.addEventListener('resize', showSlides);
+
+            // Additional functionality from the provided JavaScript
+            var singleItemSlider = document.querySelector('.single-item-slider');
+            if (singleItemSlider) {
+            // Initialize single-item slider (you may need to implement this functionality)
+            }
+
+            // Apply margin to slide elements
+            var slideElements = document.querySelectorAll('.slick-track > div:not(footer .slick-track > div)');
+            slideElements.forEach(function(element) {
+            element.style.marginRight = '10px';
+            element.style.marginLeft = '10px';
+            });
+            });
+        </script>
+
+    </template>
+</odoo>

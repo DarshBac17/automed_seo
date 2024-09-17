@@ -5,6 +5,7 @@ odoo.define('automated_seo.angular_stories_static_template', function (require) 
 
     publicWidget.registry.AngularStoriesSlider = publicWidget.Widget.extend({
         selector: '.casestudy-merge-col',
+        selector: '.overflow-hidden',
         start: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
