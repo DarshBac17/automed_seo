@@ -1,0 +1,13 @@
+<odoo>
+   <menuitem id="menu_automated_seo_root"
+              name="Automated SEO"
+              web_icon="automated_seo,static/description/icon.png"
+              sequence="10"/>
+
+    <menuitem id="menu_automated_seo_views"
+              name="Views"
+              parent="menu_automated_seo_root"
+              action="automated_seo.views_action"
+              sequence="10"/>
+
+</odoo>
