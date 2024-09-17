@@ -25,6 +25,24 @@
                      <t t-snippet="automated_seo.banner_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
+                     <t t-snippet="automated_seo.angular_stories_static_template" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.angular_choose_developer_static_template" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.angular_heir_steps_static_template" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.angular_heir_tag_static_template" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.about_angular_team_static_template" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.header_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
                 </div>
             </div>
         </xpath>

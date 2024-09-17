@@ -11,21 +11,21 @@
                     <form action="" class="inquiry-form-block form--square tech-form" id="contactfullForm" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields" novalidate="novalidate">
                         <div class="grid gap-6 grid-cols-1 lg:grid-cols-3">
                             <div>
-                                <input type="text" class="form-control" id="focus-id" maxlength="80" name="contactName" size="20" placeholder="Your Name"></input>
+                                <input type="text" class="form-control" id="focus-id" maxlength="80" name="contactName" size="20" placeholder="Your Name"/>
                             </div>
                             <div class="relative">
-                                <input type="text" class="form-control validate-required" placeholder="Work Email Address" id="email" maxlength="80" name="contactEmail" size="20"></input>
+                                <input type="text" class="form-control validate-required" placeholder="Work Email Address" id="email" maxlength="80" name="contactEmail" size="20"/>
                             </div>
                             <div>
-                                <input type="number" class="form-control" placeholder="Phone Number" id="phone" maxlength="40" name="contactPhone" size="20" nkeypress="return isNumberKey(event)"></input>
+                                <input type="number" class="form-control" placeholder="Phone Number" id="phone" maxlength="40" name="contactPhone" size="20" nkeypress="return isNumberKey(event)"/>
                             </div>
                             <div class="col-span-full">
-                                <textarea class="form-control" rows="3" placeholder="Describe Your Requirements" name="contactMessage"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Describe Your Requirements" name="contactMessage"/>
                             </div>
                             <div class="col-span-full text-center text-white">
                                 <button class="btn btn-primary" name="contactBtn">inquire now</button>
                                 <div class="md:flex text-h2 items-center justify-center mt-sm [&amp;_.mail-id]:border-white [&amp;_.mail-id]:border-b-2 [&amp;_.mail-id]:font-bold">
-                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"></img>
+                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>
                                     <a href="mailto:solutions@bacancy.com" class="mail-id">solutions@bacancy.com</a> </div>
                                 <p class="mt-sm">Your Success Is Guaranteed</p>
                                 <p>We accelerate the release of digital products and guarantee your success</p>

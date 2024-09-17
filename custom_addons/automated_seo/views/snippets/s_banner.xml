@@ -65,7 +65,7 @@
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png"
                          data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png"
                          alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754"
-                         loading="lazy" class="w-full"></img>
+                         loading="lazy" class="w-full"/>
                 </div>
             </div>
         </section>

@@ -15,7 +15,7 @@
                             <div class="flex items-center justify-center">
                                 <p class="text-h1 text-primary-custom font-bold mb-0">$18</p>
                                 <div class="toggle-price svg-icon ml-sm">
-                                    <img src="/automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
+                                    <img src="/automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"/>
                                 </div>
                             </div>
                             <p class="font-bold text-dark">Hourly (USD)</p>
@@ -28,13 +28,13 @@
                 <a href="#form">
                     <div class="shadow-form relative bg-white">
                         <div class="svg-icon relative -top-3">
-                            <img src="/automated_seo/static/src/img/startwith.svg" alt="icon" height="40" width="164" class="mx-auto" loading="lazy"></img>
+                            <img src="/automated_seo/static/src/img/startwith.svg" alt="icon" height="40" width="164" class="mx-auto" loading="lazy"/>
                         </div>
                        <div class="boxed pt-20">
                             <div class="flex items-center justify-center">
                                 <p class="text-h1 text-primary-custom font-bold mb-0">$2560</p>
                                 <div class="toggle-price svg-icon ml-sm">
-                                    <img src="/automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
+                                    <img src="/automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"/>
                                 </div>
                             </div>
                             <p class="font-bold text-dark">Monthly (USD)</p>
@@ -50,7 +50,7 @@
                             <div class="flex items-center justify-center">
                                 <p class="text-h1 text-primary-custom font-bold mb-0">$12000</p>
                                 <div class="toggle-price svg-icon ml-sm">
-                                    <img src="automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"></img>
+                                    <img src="automated_seo/static/src/img/open-eye.svg" alt="Show Price" width="40" height="40" class="price-hidden"/>
                                 </div>
                             </div>
                             <p class="font-bold text-dark">Monthly (USD)</p>
