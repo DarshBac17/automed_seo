@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.php_mapper_view">
+        <field name="name">PHP Mapper</field>
+        <field name="model">automated_seo.php_mapper</field>
+        <field name="arch" type="xml">
+            <tree string="PHP Mapper">
+                <field name="name"/>
+                <field name="element_class"/>
+                <field name="php_tag"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_web_page_management_author_form">
+        <field name="name">PHP Mapper</field>
+        <field name="model">automated_seo.php_mapper</field>
+        <field name="arch" type="xml">
+            <form string = "PHP Mapper">
+                <group>
+                   <field name="name"/>
+                    <field name="element_class"/>
+                    <field name="php_tag"/>
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.php_mapper_action">
+        <field name="name"> PHP Mapper</field>
+        <field name="res_model">automated_seo.php_mapper</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
