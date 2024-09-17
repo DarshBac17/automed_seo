@@ -34,6 +34,18 @@
                     <t t-snippet="automated_seo.angular_dev_expertise" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
+                    <t t-snippet="automated_seo.useful_links" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.frequently_ask_questions" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.help" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.footer" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>offers, dynamic</keywords>
+                    </t>
                 </div>
             </div>
         </xpath>

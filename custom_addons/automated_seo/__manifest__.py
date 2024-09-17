@@ -16,6 +16,10 @@
         "views/snippets/s_trusted.xml",
         "views/snippets/s_banner.xml",
         "views/snippets/s_full_stack_angular_type.xml",
+        "views/snippets/s_useful_links.xml",
+        "views/snippets/s_frequently_ask_questions.xml",
+        "views/snippets/s_footer.xml",
+        "views/snippets/s_help.xml",
         'views/snippets/snippets.xml',
     ],
     'assets': {
@@ -24,7 +28,7 @@
                 'automated_seo/static/src/css/faq.css',
                 'automated_seo/static/src/css/footer-slider.css',
                 'automated_seo/static/src/css/style.css',
-
+                'automated_seo/static/src/css/tech-stack.css',
             ],
             # 'website.assets_wysiwyg': [
             #     ('include', 'web._assets_helpers'),
