@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="automated_seo.userful_links" name="Useful links">
+        <section class="bg-gray-light">
+        <div class="container">
+            <h2 class="text-center cont-padding">Useful Links</h2>
+            <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 [&amp;_h3]:text-white [&amp;_h3]:text-base">
+                <div class="boxed banner-post">
+                    <img src="/automated_seo/static/src/img/blog-img-1.png" data-src="/automated_seo/static/src/img/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img" loading="lazy" width="352" height="226"></img>
+                    <div class="content">
+                        <span class="tag mb-sm">blog</span>
+                        <h3 class="small-heading">Why Use Angular in 2024?</h3>
+                        <a href="<?php echo BLOG_URL; ?>why-use-angular" class="btn btn-outline-primary">Keep Reading</a>
+                    </div>
+                </div>
+                <div class="boxed banner-post">
+                    <img src="/automated_seo/static/src/img/blog-img-2.jpg" data-src="/automated_seo/static/src/img/blog-img-2.jpg" alt="What’s New in Angular 18?" title="What’s New in Angular 18?" class="banner-post-img" loading="lazy" width="352" height="226"></img>
+                    <div class="content">
+                        <span class="tag mb-sm">blog</span>
+                        <h3 class="small-heading">What’s New in Angular 18?</h3>
+                        <a href="<?php echo BLOG_URL; ?>whats-new-in-angular-18" class="btn btn-outline-primary">Keep Reading</a>
+                    </div>
+                </div>
+                <div class="boxed banner-post">
+                    <img src="/automated_seo/static/src/img/blog-3.jpg" data-src="/automated_seo/static/src/img/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img" loading="lazy" width="352" height="226"></img>
+                    <div class="content">
+                        <span class="tag mb-sm">blog</span>
+                        <h3 class="small-heading">Upgrading AngularJS to Angular: A Comprehensive Guide</h3>
+                        <a href="<?php echo BLOG_URL; ?>upgrading-angular-js-to-angular" class="btn btn-outline-primary">Keep Reading</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </template>
+</odoo>
