@@ -2,11 +2,15 @@
     'name': 'AutomatedSEO',
     'version': '1.0',
     'category': 'Extra Tools',
+    'license':'LGPL-3',
     'summary': 'A simple QWeb demo',
     'description': """This module demonstrates a basic QWeb template in Odoo 16.""",
     'author': 'Hetul Patel',
     'depends': ['base', 'web'],
     'data': [
+        'security/ir.model.access.csv',
+        "views/php_mapper_view.xml",
+        "views/views.xml",
         "views/snippets/s_angular_header.xml",
         "views/snippets/s_angular_heir_tag.xml",
         "views/snippets/s_about_angular_team.xml",
@@ -43,7 +47,4 @@
             'automated_seo/static/src/js/angular_offer.js'
         ],
     },
-    'installable': True,
-    'application': False,
-    'auto_install': False,
 }
