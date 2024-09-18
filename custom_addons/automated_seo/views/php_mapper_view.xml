@@ -12,7 +12,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_web_page_management_author_form">
+    <record model="ir.ui.view" id="automated_seo.php_mapper_form">
         <field name="name">PHP Mapper</field>
         <field name="model">automated_seo.php_mapper</field>
         <field name="arch" type="xml">
