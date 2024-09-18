@@ -9,6 +9,7 @@
     'depends': ['base', 'web'],
     'data': [
         'security/ir.model.access.csv',
+        "views/php_mapper_view.xml",
         "views/views.xml",
         "views/automated_seo_menu.xml",
         "views/snippets/s_angular_header.xml",
