@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record model="ir.ui.view" id="automated_seo.php_mapper_view">
+    <record model="ir.ui.view" id="automated_seo.php_mapper_tree">
         <field name="name">PHP Mapper</field>
         <field name="model">automated_seo.php_mapper</field>
         <field name="arch" type="xml">
@@ -18,7 +18,7 @@
         <field name="arch" type="xml">
             <form string = "PHP Mapper">
                 <group>
-                   <field name="name"/>
+                    <field name="name"/>
                     <field name="element_class"/>
                     <field name="php_tag"/>
                 </group>
@@ -32,4 +32,11 @@
         <field name="res_model">automated_seo.php_mapper</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
+    <menuitem id="menu_automated_seo_php_mapper"
+              name="PHP Mapper"
+              parent="menu_automated_seo_root"
+              action="automated_seo.php_mapper_action"
+              sequence="10"/>
 </odoo>
