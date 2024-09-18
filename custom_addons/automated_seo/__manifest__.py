@@ -11,7 +11,6 @@
         'security/ir.model.access.csv',
         "views/php_mapper_view.xml",
         "views/views.xml",
-        "views/automated_seo_menu.xml",
         "views/snippets/s_angular_header.xml",
         "views/snippets/s_angular_heir_tag.xml",
         "views/snippets/s_about_angular_team.xml",

@@ -24,7 +24,7 @@
                     <field name="name"/>
                     <field name="type"/>
                     <field name="model"/>
-<!--                    <field name="create_date" widget="datetime"/>-->
+                    <!--                    <field name="create_date" widget="datetime"/>-->
                     <field name="inherit_id"/>
                 </group>
             </form>
@@ -37,4 +37,16 @@
         <field name="res_model">ir.ui.view</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
+    <menuitem id="menu_automated_seo_root"
+              name="Automated SEO"
+              web_icon="automated_seo,static/description/icon.png"
+              sequence="10"/>
+
+    <menuitem id="menu_automated_seo_views"
+              name="Views"
+              parent="menu_automated_seo_root"
+              action="automated_seo.views_action"
+              sequence="10"/>
 </odoo>
