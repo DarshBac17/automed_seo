@@ -17,7 +17,7 @@
         <field name="res_model">automated_seo.php_mapper</field>
         <field name="view_mode">tree,form</field>
     </record>
-
+  
     <menuitem id="menu_automated_seo_php_mapper"
               name="PHP Mapper"
               parent="menu_automated_seo_root"
