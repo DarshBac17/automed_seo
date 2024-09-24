@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record model="ir.ui.view" id="automated_seo.views_tree">
-        <field name="name">Views</field>
+    <!-- Tree View for Automated SEO Views -->
+    <record model="ir.ui.view" id="automated_seo.view_tree">
+        <field name="name">automated.seo.view.tree</field>
         <field name="model">ir.ui.view</field>
         <field name="arch" type="xml">
-            <tree string="Views">
+            <tree string="Automated SEO Views">
                 <field name="name"/>
                 <field name="type"/>
                 <field name="model"/>
@@ -13,32 +14,35 @@
             </tree>
         </field>
     </record>
-
-
-    <record model="ir.ui.view" id="automated_seo.views_form">
-        <field name="name">Views</field>
+    <record id="automated_seo.view_form_inherit" model="ir.ui.view">
+        <field name="name">automated.seo.view.form.inherit</field>
         <field name="model">ir.ui.view</field>
+        <field name="inherit_id" ref="base.view_view_form"/>
         <field name="arch" type="xml">
-            <form string="PHP Mapper">
-                <group>
-                    <field name="name"/>
-                    <field name="type"/>
-                    <field name="model"/>
-                    <!--                    <field name="create_date" widget="datetime"/>-->
-                    <field name="inherit_id"/>
-                </group>
-            </form>
+            <xpath expr="//field[@name='track']" position="after">
+                <button name="action_custom_button"
+                        type="object"
+                        string="Custom Action"
+                        class="btn-primary"
+                        context="{'view_name': name}"/>
+            </xpath>
+            <notebook position="inside">
+                <page string="PHP Mapper Output">
+                    <field name="parse_html"/>
+                </page>
+            </notebook>
         </field>
     </record>
 
-
-    <record model="ir.actions.act_window" id="automated_seo.views_action">
+    <record model="ir.actions.act_window" id="automated_seo.view_action">
         <field name="name">Views</field>
         <field name="res_model">ir.ui.view</field>
+        <field name="domain">[('website_id', '!=', False)]</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="automated_seo.view_tree"/>
     </record>
 
-
+    <!-- Menu Items -->
     <menuitem id="menu_automated_seo_root"
               name="Automated SEO"
               web_icon="automated_seo,static/description/icon.png"
@@ -47,6 +51,6 @@
     <menuitem id="menu_automated_seo_views"
               name="Views"
               parent="menu_automated_seo_root"
-              action="automated_seo.views_action"
+              action="automated_seo.view_action"
               sequence="10"/>
 </odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_footer_slider_bg_white" name="Footer slider White">
+        <section class="bg-white" id="footer-form-id">
+            <div class="container">
+                <div class="footer-slider slick-slider slick-dotted">
+                    <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
+                            aria-disabled="true">Previous
+                    </button>
+                    <div class="slick-list draggable bg-gray-light">
+                        <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                            <!-- Slide 1 -->
+                            <div class="slick-slide slick-current slick-active" data-slick-index="0"
+                                 aria-hidden="false">
+                                <div class="grid gap-6 md:grid-cols-2 justify-center items-center">
+                                    <!--                                    <div>-->
+                                    <!--                                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-1.jpg"-->
+                                    <!--                                             data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-1.jpg"-->
+                                    <!--                                             alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"-->
+                                    <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
+                                    <!--                 a                   </div>-->
+                                    <div class="top-tier">
+                                        <img src="/automated_seo/static/src/img/insight-slide-1.jpg"
+                                             alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"
+                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
+                                    </div>
+                                    <div>
+                                        <p class="text-h3 font-bold text-dark">Top-Tier IT Geniuses</p>
+                                        <p>Bacancy Technology is an exclusive hub of top dedicated software developers,
+                                            UI/UX designers, QA experts, and product managers with incredibly rare and
+                                            hidden talents you will ever come across. We let you access the exceptional
+                                            IT talent globally, from independent software developers to fully managed
+                                            teams.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="slick-slide" data-slick-index="1" aria-hidden="true">
+                                <div class="grid gap-6 md:grid-cols-2 items-center justify-center">
+<!--                                    <div>-->
+<!--                                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-2.jpg"-->
+<!--                                             data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-2.jpg"-->
+<!--                                             alt="Time Zone Aligned" title="Time Zone Aligned" loading="lazy"-->
+<!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
+<!--                                    </div>-->
+                                    <div class="time-zone">
+                                        <img src="/automated_seo/static/src/img/insight-slide-2.jpg"
+                                             alt="Time Zone Aligned" title="Time Zone Aligned" loading="lazy"
+                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
+                                    </div>
+                                    <div>
+                                        <p class="text-h3 font-bold text-dark">Time Zone Aligned</p>
+                                        <p>Timezone is never a constraint when you are working with Bacancy Technology.
+                                            Hire dedicated software developers from us and collaborate from far away to
+                                            work according to your time zone, deadline, and milestone.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="slick-slide" data-slick-index="2" aria-hidden="true">
+                                <div class="grid gap-6 md:grid-cols-2 items-center justify-center">
+<!--                                    <div>-->
+<!--                                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-3.jpg"-->
+<!--                                             data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/insight-slide-3.jpg"-->
+<!--                                             alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"-->
+<!--                                             width="365" class="m-auto w-[max(365px,4.932vw)]">-->
+<!--                                    </div>-->
+                                    <div class="experience-team">
+                                        <img src="/automated_seo/static/src/img/insight-slide-3.jpg"
+                                             alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"
+                                             width="365" class="m-auto w-[max(365px,4.932vw)]"/>
+                                    </div>
+                                    <div>
+                                        <p class="text-h3 font-bold text-dark">Experienced Team</p>
+                                        <p>Whether you are looking for skilled developers in emerging technologies or
+                                            looking for an extended arm to augment your existing team, we can lend a
+                                            helping hand. We are a full-stack software development company with 1050+
+                                            skilled and experienced developers to address ongoing business challenges.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slick-next slick-arrow" aria-label="Next" type="button">Next</button>
+                    <ul class="slick-dots" role="tablist">
+                        <li class="slick-active" role="presentation">
+                            <button role="tab" aria-controls="slick-slide20" aria-label="1 of 3">
+                                <span>01</span>
+                                Top-Tier IT Geniuses
+                            </button>
+                        </li>
+                        <li role="presentation">
+                            <button role="tab" aria-controls="slick-slide21" aria-label="2 of 3">
+                                <span>02</span>
+                                Time Zone Aligned
+                            </button>
+                        </li>
+                        <li role="presentation">
+                            <button role="tab" aria-controls="slick-slide22" aria-label="3 of 3">
+                                <span>03</span>
+                                Experienced Team
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+    </template>
+</odoo>
