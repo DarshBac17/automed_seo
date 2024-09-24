@@ -2,9 +2,6 @@ from odoo import http
 import  json
 from bs4 import BeautifulSoup
 
-from automated_seo.odoo.tools import pickle
-
-
 class WebPageController(http.Controller):
     @http.route('/automated_seo/php_mapper',auth='public',http=True,website=True)
     def php_mapper(self):
@@ -25,10 +22,9 @@ class WebPageController(http.Controller):
         for element in elements:
             tags = None
             tags= soup.find_all(class_=element.get('element_class'))
-
             for tag in tags:
                 new_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                new_tag = new_tag_soup.find(class_=element.get('element_class'))
-                if new_tag:
-                    tag.replace_with(new_tag)
+                # new_tag = new_tag_soup.find(class_=element.get('element_class'))
+                # if new_tag:
+                tag.replace_with(new_tag_soup)
         return str(soup)

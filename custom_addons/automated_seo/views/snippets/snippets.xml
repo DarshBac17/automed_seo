@@ -3,11 +3,33 @@
 <odoo>
     <template id="automed_snippets" inherit_id="website.snippets" name="Automed snippets">
 
-        <xpath expr="//div[@id='snippet_structure']" position="before">
-            <div id="snippet_structure" class="o_panel">
-                <div class="o_panel_header">Automed SEO</div>
+
+
+                <!--<xpath expr="//div[@id='snippets_menu']/button[span[contains(text(), 'Customize')]]" position="replace">
+                    <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">
+                        <button type="button" tabindex="2" class="o_we_customize_snippet_btn text-uppercase">
+                            <span>Customize</span>
+                        </button>
+                    </t>
+                </xpath>-->
+
+
+        <xpath expr="//div[@id='snippet_structure']" position="replace">
+            <div id="snippet_forms" class="o_panel">
+                <div class="o_panel_header">Forms</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.salesforce_offers_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+<!--                    <t t-snippet="automated_seo.s_banner_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
+<!--                        <keywords>banner, form,dark</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_center_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
+<!--                        <keywords>center, form, dark</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
+<!--                        <keywords>footer, form, dark</keywords>-->
+<!--                    </t><t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
+<!--                        <keywords>footer, form, dark</keywords>-->
+<!--                    </t>-->
+                    <!--<t t-snippet="automated_seo.salesforce_offers_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
                     </t>
                     <t t-snippet="automated_seo.angular_offer_static" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -63,9 +85,74 @@
                     </t>
                     <t t-snippet="automated_seo.angular_dev_expertise" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>offers, dynamic</keywords>
+                    </t>-->
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Footer</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_footer_slider" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_footer" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_footer_slider_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_footer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer</keywords>
+                    </t>
+
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Counting</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_counting_sec" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>count</keywords>
                     </t>
                 </div>
             </div>
         </xpath>
     </template>
+
+
+<!--    <template id="test_module.offers_dynamic_snippet_options_template">
+        <div t-attf-data-js="#{snippet_name}" t-attf-data-selector="#{snippet_selector}" data-no-preview="true">
+            <we-select string="Filter" data-name="filter_opt" data-attribute-name="filterId" data-no-preview="true">
+            </we-select>
+            <we-select string="Template" data-name="template_opt" data-attribute-name="templateKey" data-no-preview="true">
+            </we-select>
+            <we-select string="Fetched elements" data-name="number_of_records_opt" data-attribute-name="numberOfRecords" data-no-preview="true">
+                <we-button t-foreach="range(1, 17)" t-as="value" t-att-data-select-data-attribute="value" t-esc="value"/>
+            </we-select>
+            <t t-out="0"/>
+        </div>
+    </template>
+    <template id="offers_dynamic_snippet_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="test_module.offers_dynamic_snippet_options_template">
+                <t t-set="snippet_name" t-value="'offer_dynamic_snippet_option'"/>
+                <t t-set="snippet_selector" t-value="'.offers-dynamic'"/>
+            </t>
+        </xpath>
+    </template>-->
+<!--    <template id="automated_seo.salesforce_offers_static_options" inherit_id="website.snippet_options">-->
+<!--        <xpath expr="//div[@data-js='Box']" position="after">-->
+<!--            <div data-selector=".s_offer">-->
+<!--                <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">-->
+<!--                    <we-select string="Image border">-->
+<!--                        <we-button data-select-class="border-small">small</we-button>-->
+<!--                        <we-button data-select-class="border-medium">medium</we-button>-->
+<!--                        <we-button data-select-class="border-large">large</we-button>-->
+<!--                        <we-button data-select-class="border-extra-large" data-name="so_width_100">extra large</we-button>-->
+<!--                        <we-button data-select-class="border-extra-large" data-name="so_width_100">request.env.user.has_group('automated_seo.group_automated_seo_admins')</we-button>-->
+<!--                    </we-select>-->
+<!--                </t>-->
+<!--            </div>-->
+
+<!--        </xpath>-->
+<!--    </template>-->
+
 </odoo>
