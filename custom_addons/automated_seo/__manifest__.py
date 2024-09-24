@@ -6,7 +6,7 @@
     'summary': 'A simple QWeb demo',
     'description': """This module demonstrates a basic QWeb template in Odoo 16.""",
     'author': 'Hetul Patel',
-    'depends': ['base',"web", 'website'],
+    'depends': ['base', 'web',"website"],
     'data': [
         # 'security/security.xml',
         'security/ir.model.access.csv',
