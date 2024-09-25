@@ -22,13 +22,13 @@
             <xpath expr="//field[@name='track']" position="after">
                 <button name="action_custom_button"
                         type="object"
-                        string="Custom Action"
+                        string="Prepare Output"
                         class="btn-primary"
                         context="{'view_name': name}"/>
             </xpath>
             <notebook position="inside">
                 <page string="PHP Mapper Output">
-                    <field name="parse_html"/>
+                    <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
                 </page>
             </notebook>
         </field>
