@@ -36,8 +36,8 @@ hr {
 }
 
 abbr:where([title]) {
-    -webkit-text-decoration: underline dotted;
-    text-decoration: underline dotted
+    -webkit-text-decoration: underline dotted; !important
+    text-decoration: underline dotted !important
 }
 
 h1,
@@ -51,8 +51,8 @@ h6 {
 }
 
 a {
-    color: inherit;
-    text-decoration: inherit
+    color: inherit;!important
+    text-decoration: inherit!important
 }
 
 b,
@@ -257,12 +257,12 @@ html {
 .btn,
 .cursor-pointer,
 a {
-    display: inline-block;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: .15s;
-    transition-delay: 75ms;
-    transition-timing-function: cubic-bezier(.4, 0, 1, 1)
+    display: inline-block;!important
+    transition-property: all;!important
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);!important
+    transition-duration: .15s;!important
+    transition-delay: 75ms;!important
+    transition-timing-function: cubic-bezier(.4, 0, 1, 1)!important
 }
 
 img {
@@ -1292,7 +1292,7 @@ p:not(:last-child, .mb-0) {
     color: rgb(34 34 34/var(--tw-text-opacity))
 }
 
-.text-primary-custom {
+.text-primary {
     --tw-text-opacity: 1;
     color: rgb(245 130 32/var(--tw-text-opacity))!important
 }
@@ -1331,9 +1331,9 @@ p:not(:last-child, .mb-0) {
 }
 
 .transition {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;!important
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;!important
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;!important
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s
 }
