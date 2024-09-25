@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_footer_form" name="Footer Form">
+
+        <section class="bg-gray-light" id="footer-form-id">
+            <div class="footer-form-condition"/>
+            <!--<?php
+                    $formType = 'footer';
+                    include("tailwind/template/form.php");
+                    ?>-->
+            <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11">
+                <div class="col-span-1 md:col-span-3 cont-padding">
+                    <h2 class="mb-0">How Can We Help?</h2>
+                </div>
+                <div class="col-span-1 md:col-span-8">
+                    <form action="" class="inquiry-form-block form--square" id="contactForm"
+                          data-success="Thanks for your enquiry, we'll be in touch soon"
+                          data-error="Please fill all required fields">
+                        <div class="grid gap-6 grid-cols-1 md:grid-cols-3">
+                            <div>
+                                <input type="text" class="form-control border border-dark bg-transparent" id="focus-id"
+                                       maxlength="80" name="contactName" size="20" placeholder="Your Name"/>
+                            </div>
+                            <div class="relative">
+                                <input type="text"
+                                       class="form-control border border-dark bg-transparent validate-required"
+                                       placeholder="Work Email Address" id="email" maxlength="80" name="contactEmail"
+                                       size="20"/>
+                                <div class="contact-email"/>
+                                <!--<?php if (isset($errors['contactEmail'])) : ?>
+                                <span class="error-message" style="color: red; float: left;"><?php echo $errors['contactEmail']; ?></span>
+                                <?php endif; ?>-->
+                            </div>
+                            <div>
+                                <input type="number" class="form-control border border-dark bg-transparent"
+                                       placeholder="Phone Number" id="phone" maxlength="40" name="contactPhone"
+                                       size="20" nkeypress="return isNumberKey(event)"/>
+                                <div class="contact-phone"/>
+                                <!--<?php if (isset($errors['contactPhone'])) : ?>
+                                <span class="error-message" style="color: red;float: left;"><?php echo $errors['contactPhone']; ?></span>
+                                <?php endif; ?>-->
+                            </div>
+                            <div class="col-span-full">
+                                <textarea class="form-control border border-dark bg-transparent" rows="3"
+                                          placeholder="Describe Your Requirements" name="contactMessage"/>
+                            </div>
+                            <div class="col-span-full text-right">
+                                <button class="btn btn-outline-primary" name="contactBtn">inquire now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_banner_side_image_bg_white" name="Banner side image white">
+        <section class="container">
+            <div class="grid lg:grid-cols-2 gap-6">
+
+                <div>
+                    <div class="cont-padding">
+                        <h2>Why Choose Bacancy To Hire AngularJS Developers?</h2>
+<!--                        <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest to-->
+<!--                            find and hire Angular developers ends here. Collaborate with a top <a-->
+<!--                                    href="<?php echo BASE_URL; ?>angular-js-development-company"-->
+<!--                                    class="text-primary font-bold ">Angular development company-->
+<!--                            </a> that can help you build highly interactive, scalable, data-driven, and well-structured-->
+<!--                            cross-platform web apps using the latest Angular framework.-->
+<!--                        </p>-->
+                           <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest to
+                            find and hire Angular developers ends here. Collaborate with a top <a
+                                    href="#"
+                                    class="text-primary font-bold department-link ">Angular development company
+                            </a> that can help you build highly interactive, scalable, data-driven, and well-structured
+                            cross-platform web apps using the latest Angular framework.
+                        </p>
+                        <p>With us, you will work with agile experts who fit into your company’s culture. When you
+                            choose us as your dedicated development partner, we take care of everything from onboarding
+                            to infrastructure, administrative to payroll, and compliance to help you onboard dedicated
+                            AngularJS developers faster.
+                        </p>
+                    </div>
+                    <a href="#form" class="btn btn-outline-primary">Hire Angular Developers</a>
+                </div>
+                <div class="text-center max-lg:-order-1">
+                    <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" alt="Why Choose Bacancy To Hire AngularJS Developers?" title="Why Choose Bacancy To Hire AngularJS Developers?" class="w-full mx-auto" loading="lazy" width="540" height="535">-->
+                    <img src="automated_seo/static/src/img/why-choose.svg"
+                         data-src="automated_seo/static/src/img/why-choose.svg"
+                         alt="Why Choose Bacancy To Hire AngularJS Developers?"
+                         title="Why Choose Bacancy To Hire AngularJS Developers?" class="w-full mx-auto why-choose" loading="lazy"
+                         width="540" height="535"/>
+
+                </div>
+            </div>
+
+        </section>
+    </template>
+</odoo>
+
