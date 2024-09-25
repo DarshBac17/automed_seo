@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="automated_seo.angular_stories_static_template" name="Angular Stories Static Template">
+
+        <section class="container casestudy-merge-col" id="case-study">
+            <div class="cont-padding text-center">
+                <h2>Explore Our Impressive Angular Success Stories!</h2>
+                <p>Our experienced AngularJS developers have transformed client visions into high-performing web apps, delivering exceptional UX and robust performance. Explore real-world examples of our successful Angular Case Studies for clients across the globe.</p>
+            </div>
+            <div class="bg-dark boxed single-item-slider">
+                <div>
+                    <h3 class="text-center text-white cont-padding">UPS Courier Service</h3>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div class="text-white">
+                            <p><span class="text-primary">Industry:</span> Transportation</p>
+                            <p><span class="text-primary">Technical Stack:</span> Angular, Nodejs, Postgres</p>
+                            <p>Clients want to manage complex system analytics with proper process flow in mobile fuel delivery. Our Angular developer implemented the Javascript library to manage workflow. Also, delivers a better, quicker, and seamless user experience by decentralizing their existing and diverse platforms such as customer, business, DSP, and drive in the fleet marketing domain.</p>
+                            <a href="#form" class="btn btn-outline-primary">Request For Quotation</a>
+                        </div>
+                        <div class="max-md:hidden">
+                            <img src="/automated_seo/static/src/img/case-1.jpg" data-src="/automated_seo/static/src/img/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-center text-white cont-padding">The Credit Repairman</h3>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div class="text-white">
+                            <p><span class="text-primary">Industry:</span> Finance</p>
+                            <p><span class="text-primary">Technical Stack:</span> Angular, Asp.net, Drupal</p>
+                            <p>The client Repairmen wanted to hire dedicated angularjs developer from bacancy to maintain and develop more features to their project efficiently. We provided them with tailored solutions with dedicated Angular developers, who managed projects and communicated with the client on a daily basis.</p>
+                            <a href="#form" class="btn btn-outline-primary">Request For Quotation</a>
+                        </div>
+                        <div class="max-md:hidden">
+                            <img src="/automated_seo/static/src/img/case-2.jpg" data-src="/automated_seo/static/src/img/case-2.jpg" alt="The Credit Repairman" title="The Credit Repairman" width="645" height="320" loading="lazy" class="object-cover h-full w-full"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-center text-white cont-padding">Portfolio Workbench for Cambridge</h3>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div class="text-white">
+                            <p><span class="text-primary">Industry:</span> Finance</p>
+                            <p><span class="text-primary">Technical Stack:</span> Angular, Python</p>
+                            <p>The biggest challenge for the Portfolio Workbench was not being able to automate the process. Our well-versed developers did the calculations and had an estimation process from scratch. Once we had a new calculation, we tested it with real-time data and achieved 100% accuracy over time, resulting in immaculate accuracy and 100% efficiency.</p>
+                            <a href="#form" class="btn btn-outline-primary">Request For Quotation</a>
+                        </div>
+                        <div class="max-md:hidden">
+                            <img src="/automated_seo/static/src/img/case-3.jpg" data-src="/automated_seo/static/src/img/case-3.jpg" alt="Portfolio Workbench for Cambridge" title="Portfolio Workbench for Cambridge" width="645" height="320" loading="lazy" class="object-cover h-full w-full"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </template>
+</odoo>

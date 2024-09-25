@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_banner_cta" name="Banner CTA">
+       <section class="bg-gray-light">
+        <div class="container">
+            <div class="boxed text-center bg-dark">
+                <h2 class="text-white cont-padding">Looking to Hire Dedicated Angular Developers to Give Your Front-End Development the Pinch of Perfection?</h2>
+<!--                <a href="https://calendly.com/<?php echo $calendlyPath;?>/30-minute-meeting" class="btn btn-primary">Schedule A Call Now</a>-->
+                <a href="#" class="btn btn-primary schedule-call">Schedule A Call Now</a>
+            </div>
+        </div>
+    </section>
+    </template>
+</odoo>
+
+
