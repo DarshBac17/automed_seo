@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_useful_links" name="Useful links">
+    <template id="s_useful_links_bg_gray" name="Useful links Gray">
         <section class="bg-gray-light">
             <div class="container">
                 <h2 class="text-center cont-padding">Useful Links</h2>

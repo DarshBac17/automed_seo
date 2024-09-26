@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_footer" name="Footer">
+    <template id="s_footer_bg_gray" name="Footer Gray">
         <section>
             <div class="footer-php"/>
             <!--<?php include("tailwind/template/footer.php"); ?>-->

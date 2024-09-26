@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <odoo>
-    <template id="automated_seo.s_hire_steps" name="Hire Steps">
+    <template id="automated_seo.s_hire_steps_bg_gray" name="Hire Steps Gray">
 
         <section class="container bg-gray-light">
             <h2 class="text-center cont-padding">Your heading text here</h2>

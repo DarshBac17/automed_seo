@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_developer_pricing" name="Developer pricing">
+    <template id="s_developer_pricing_bg_gray" name="Developer pricing Gray">
         <section class="bg-gray-light form-dark">
             <div class="container">
                 <div class="text-center cont-padding">
