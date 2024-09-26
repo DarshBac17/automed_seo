@@ -23,6 +23,7 @@
         "views/snippets/page/s_hire_steps_bg_white.xml",
         "views/snippets/page/s_angular_dev_expertise.xml",
         "views/snippets/page/s_trusted.xml",
+        "views/snippets/page/s_trusted_bg_white.xml",
         "views/snippets/page/s_useful_links.xml",
         "views/snippets/page/s_useful_links_bg_white.xml",
         "views/snippets/banner/s_banner_side_image.xml",
