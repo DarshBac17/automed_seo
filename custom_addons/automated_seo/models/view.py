@@ -1,12 +1,14 @@
 from odoo import models, fields, api
 from bs4 import BeautifulSoup
 import  html
-
+import base64
 
 
 class View(models.Model):
     _inherit = 'ir.ui.view'
     parse_html = fields.Text(string="Parse HTML")
+    parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
+    parse_html_filename = fields.Char(string="Parsed HTML Filename")
 
     # @api.model
     # def create(self, vals):
@@ -24,7 +26,11 @@ class View(models.Model):
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
             html_parser = html.unescape(html_parser)
-            self.write({'parse_html': html_parser})
+            self.write({
+                'parse_html': html_parser,
+                'parse_html_binary': base64.b64encode(html_parser.encode('utf-8')),
+                'parse_html_filename': f"{view_name}_parsed.html"
+            })
 
     def php_mapper(self,html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
@@ -57,3 +63,12 @@ class View(models.Model):
                 tag.attrs.pop(attr, None)
 
         return  soup.prettify()
+
+    def action_download_parsed_html(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=ir.ui.view&id={}&field=parse_html_binary&filename_field=parse_html_filename&download=true'.format(
+                self.id),
+            'target': 'self',
+        }

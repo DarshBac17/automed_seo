@@ -14,17 +14,33 @@
             </tree>
         </field>
     </record>
+
     <record id="automated_seo.view_form_inherit" model="ir.ui.view">
         <field name="name">automated.seo.view.form.inherit</field>
         <field name="model">ir.ui.view</field>
         <field name="inherit_id" ref="base.view_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='track']" position="after">
+            <xpath expr="//header" position="inside">
                 <button name="action_custom_button"
                         type="object"
                         string="Prepare Output"
                         class="btn-primary"
                         context="{'view_name': name}"/>
+            </xpath>
+            <xpath expr="//field[@name='track']" position="after">
+                <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
+                <label for="parse_html_filename" string="Parsed HTML File:"
+                       attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
+                <div class="o_row">
+                    <field name="parse_html_filename" readonly="1" nolabel="1"
+                           attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
+                    <button name="action_download_parsed_html"
+                            type="object"
+                            icon="fa-download"
+                            class="btn btn-link p-0"
+                            attrs="{'invisible': [('parse_html_binary', '=', False)]}"
+                            title="Download File"/>
+                </div>
             </xpath>
             <notebook position="inside">
                 <page string="PHP Mapper Output">
