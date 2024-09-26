@@ -3,22 +3,22 @@
 <odoo>
     <template id="automated_seo.s_hire_steps_bg_white" name="Hire Steps white">
         <section class="container">
-            <h2 class="text-center cont-padding">Your heading text here</h2>
+            <h2 class="text-center cont-padding">Header Header Header Header  </h2>
             <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>
-                    <h3 class="text-h4 small-heading">Subheading text here</h3>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
                     <p class="small-heading-two">CLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                 </div>
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">2</span>
-                    <h3 class="text-h4 small-heading">Subheading text here</h3>
-                    <p class="small-heading-two">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. .</p>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>
                 </div>
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">3</span>
-                    <h3 class="text-h4 small-heading">Subheading text here</h3>
-                    <p class="small-heading-two">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
             </div>
             <div class="text-center mt-md">
