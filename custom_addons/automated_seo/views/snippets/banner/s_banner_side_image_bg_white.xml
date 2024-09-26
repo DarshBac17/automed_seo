@@ -6,28 +6,23 @@
 
                 <div>
                     <div class="cont-padding">
-                        <h2>Why Choose Bacancy To Hire AngularJS Developers?</h2>
-<!--                        <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest to-->
-<!--                            find and hire Angular developers ends here. Collaborate with a top <a-->
-<!--                                    href="<?php echo BASE_URL; ?>angular-js-development-company"-->
-<!--                                    class="text-primary font-bold ">Angular development company-->
-<!--                            </a> that can help you build highly interactive, scalable, data-driven, and well-structured-->
-<!--                            cross-platform web apps using the latest Angular framework.-->
-<!--                        </p>-->
-                           <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest to
-                            find and hire Angular developers ends here. Collaborate with a top <a
-                                    href="#"
-                                    class="text-primary font-bold department-link ">Angular development company
-                            </a> that can help you build highly interactive, scalable, data-driven, and well-structured
-                            cross-platform web apps using the latest Angular framework.
-                        </p>
-                        <p>With us, you will work with agile experts who fit into your company’s culture. When you
-                            choose us as your dedicated development partner, we take care of everything from onboarding
-                            to infrastructure, administrative to payroll, and compliance to help you onboard dedicated
-                            AngularJS developers faster.
-                        </p>
+                        <h2>Heading Heading Heading Heading Heading Heading Heading</h2>
+<!--                                                        <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest-->
+<!--                                                            to find and hire Angular developers ends here. Collaborate with a top <a-->
+<!--                                                                    href="<?php echo BASE_URL; ?>angular-js-development-company"-->
+<!--                                                                    class="text-primary font-bold">Angular development company-->
+<!--                                                            </a> that can help you build highly interactive, scalable, data-driven, and-->
+<!--                                                            well-structured cross-platform web apps using the latest Angular framework.-->
+<!--                                                        </p>-->
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in <a
+                                        href="#"
+                                        class="text-primary font-bold department-link ">Spam text Spam text Spam text
+                                </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null
+                            </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
                     </div>
-                    <a href="#form" class="btn btn-outline-primary">Hire Angular Developers</a>
+                    <a href="#form" class="btn btn-outline-primary">Button text</a>
                 </div>
                 <div class="text-center max-lg:-order-1">
                     <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" alt="Why Choose Bacancy To Hire AngularJS Developers?" title="Why Choose Bacancy To Hire AngularJS Developers?" class="w-full mx-auto" loading="lazy" width="540" height="535">-->
