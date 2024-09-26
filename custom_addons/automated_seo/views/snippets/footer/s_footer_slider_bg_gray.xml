@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_footer_slider" name="Footer slider">
+    <template id="s_footer_slider_bg_gray" name="Footer slider Gray">
         <section class="bg-gray-light" id="footer-form-id">
             <div class="container">
                 <div class="footer-slider slick-slider slick-dotted">
