@@ -11,11 +11,11 @@
                     <a href="#form">
                         <div class="shadow-form bg-gray-light">
                             <div class="boxed">
-                                <p class="text-h1 text-primary font-bold mb-0"><!--<?php echo constant("ANGULAR_USA_HOURLY") ?>-->$100</p>
+                                <p class="text-h1 text-primary font-bold mb-0 hourly-price"><!--<?php echo constant("ANGULAR_USA_HOURLY") ?>-->$100</p>
                                 <p class="font-bold text-dark">Hourly (USD)</p>
                             </div>
                             <div class="boxed border-t border-primary">
-                                <p>Lorem ipsum dolor sit amet<br class='none md:block' /> ipsum dolor sit amet</p>
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
                             </div>
                         </div>
                     </a>
@@ -30,7 +30,7 @@
                                 <p class="font-bold text-dark">Monthly (USD)</p>
                             </div>
                             <div class="boxed border-t border-primary">
-                                <p>Lorem ipsum dolor sit amet<br class='none md:block' /> ipsum dolor sit amet</p>
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
                             </div>
                         </div>
                     </a>
@@ -41,7 +41,7 @@
                                 <p class="font-bold text-dark">Yearly (USD)</p>
                             </div>
                             <div class="boxed border-t border-primary">
-                                <p>Lorem ipsum dolor sit amet<br class='none md:block' /> ipsum dolor sit amet</p>
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
                             </div>
                         </div>
                     </a>

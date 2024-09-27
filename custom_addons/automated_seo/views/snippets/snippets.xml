@@ -159,6 +159,17 @@
                     <t t-snippet="automated_seo.s_banner_cta_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_banner_cards" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Cards</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_card" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
 
                 </div>
             </div>

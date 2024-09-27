@@ -30,6 +30,8 @@
         "views/snippets/banner/s_banner_side_image_bg_white.xml",
         "views/snippets/banner/s_banner_cta_bg_gray.xml",
         "views/snippets/banner/s_banner_cta_bg_white.xml",
+        "views/snippets/banner/s_banner_cards.xml",
+        "views/snippets/cards/s_card.xml",
         'views/snippets/snippets.xml',
 
         # "views/snippets/s_angular_offer.xml",

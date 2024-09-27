@@ -10,7 +10,7 @@
                         <img src="automated_seo/static/src/img/blog-img-1.png" data-src="automated_seo/static/src/img/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img blog-img-1" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
-                            <h3 class="small-heading">Subtitle Subtitle Subtitle Subtitle </h3>
+                            <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
 <!--                            <a href="<?php echo BLOG_URL; ?>why-use-angular" class="btn btn-outline-primary">Keep Reading</a>-->
                             <a href="#" class="btn btn-outline-primary why-use">Keep Reading</a>
                         </div>
@@ -19,7 +19,7 @@
                         <img src="automated_seo/static/src/img/blog-img-2.jpg" data-src="automated_seo/static/src/img/blog-img-2.jpg" alt="What’s New in Angular 18?" title="What’s New in Angular 18?" class="banner-post-img blog-img-2" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
-                            <h3 class="small-heading">What’s New in Angular 18?</h3>
+                            <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
 <!--                            <a href="<?php echo BLOG_URL; ?>whats-new-in-angular-18" class="btn btn-outline-primary">Keep Reading</a>-->
                             <a href="#" class="btn btn-outline-primary whats-new">Keep Reading</a>
                         </div>
