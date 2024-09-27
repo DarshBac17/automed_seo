@@ -40,6 +40,8 @@
         "views/snippets/cards/s_card_success_core_bg_white.xml",
         "views/snippets/cards/s_card_hire_model_bg_gray.xml",
         "views/snippets/cards/s_card_hire_model_bg_white.xml",
+        "views/snippets/leadership/s_leadership_bg_gray.xml",
+        "views/snippets/leadership/s_leadership_bg_white.xml",
         "views/snippets/sub_cards/s_card.xml",
         "views/snippets/case_study/s_case_study_bg_white.xml",
         "views/snippets/combination/s_combination_bg_white.xml",
