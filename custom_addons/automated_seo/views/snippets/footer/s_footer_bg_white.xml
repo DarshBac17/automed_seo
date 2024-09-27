@@ -6,7 +6,7 @@
             <!--<?php include("tailwind/template/footer.php"); ?>-->
             <footer class="footer py-lg bg-white">
                 <div class="container">
-                    <p class="text-black">Offices and Development Centers</p>
+                    <p class="text-black">Header</p>
                     <div class="grid gap-6 grid-cols-1 lg:grid-cols-11 [&amp;_p]:leading-normal [&amp;_p+p]:text-[max(15px,0.833vw)]">
                         <div class="col-span-1 lg:col-span-7 md:flex flex-col justify-between">
                             <div class="footer-address border [&amp;_p:not(:last-child)]:mb-1 border-light [&amp;_.boxed:first-child]:border-l-0">

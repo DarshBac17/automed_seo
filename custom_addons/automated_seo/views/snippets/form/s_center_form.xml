@@ -19,7 +19,7 @@
                         <?php else: ?>
                             <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
                         <?php endif ?>-->
-                        <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
+                        <h2 class="text-white">Heading Heading Heading Heading Heading</h2>
 
                         <!--<?php if ($short_desc) : ?>
                             <p class="text-h5 text-white">
@@ -28,7 +28,7 @@
                         <?php else: ?>
                             <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement.</p>
                         <?php endif ?>-->
-                        <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement.</p>
+                        <p class="text-h5 text-white">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
 
                     </div>
                     <form action="" class="inquiry-form-block form--square tech-form" id="contactfullForm" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
@@ -60,9 +60,9 @@
                                     <!--                        <?php echo $bacancymailid ?>-->
                                     <p>company@gmail.com</p>
                                 </div>
-                                <p class="mt-sm">Your Success Is Guaranteed</p>
-                                <p>We accelerate the release of digital products and guarantee your success</p>
-                                <p>We Use <b>Slack</b>, <b>Jira</b> &amp; <b>GitHub</b> for Accurate Deployment and Effective Communication.</p>
+                                <p class="mt-sm">Text Text Text Text</p>
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <p>Description<b>Text</b>, <b>Text</b> &amp; <b>Text</b> Description Description Description Description Description Description</p>
                             </div>
                         </div>
                     </form>
