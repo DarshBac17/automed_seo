@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_card_success_core_bg_gray" name="Success Core Gray">
+        <section class="bg-gray-light">
+            <div class="container">
+                <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check">
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>machine-learning-development" class="text-primary">Machine-->
+                            <!--                            Learning & Deep Learning-->
+                            <!--                        </a>-->
+                            <a href="#" class="text-primary">
+                                Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>language-processing-development" class="text-primary">Natural-->
+                            <!--                            Language Processing (NLP)-->
+                            <!--                        </a>-->
+                            <a href="#" class="text-primary">
+                                Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>computer-vision-services" class="text-primary">Computer Vision-->
+                            <!--                        </a>-->
+                            <a href="#" class="text-primary">Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>data-analytics-services" class="text-primary">Predictive-->
+                            <!--                            Analytics-->
+                            <!--                        </a>-->
+                            <a href="#" class="text-primary">Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>ai-integration-services" class="text-primary">AI Integration</a>-->
+                            <a href="#" class="text-primary">Title Title Title Title Title Title</a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                    <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+                            <!--                        <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
+                            <!--                            Automation-->
+                            <!--                        </a>-->
+                            <a href="#" class="text-primary">Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-md">
+                    <a href="#form" class="btn btn-outline-primary">Description Description</a>
+                    <a href="#form" class="btn btn-outline-primary">Description Description</a>
+                </div>
+            </div>
+        </section>
+
+    </template>
+</odoo>
+

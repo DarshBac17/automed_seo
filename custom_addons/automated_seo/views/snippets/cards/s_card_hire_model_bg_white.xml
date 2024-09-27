@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_card_hire_model_bg_white" name="Hire Model Gray">
+        <section class="container">
+            <div class="cont-padding text-center">
+                <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
+                <p>Description Description Description Description Description Description Description Description
+                    Description Description Description
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-light boxed">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
+                        <img src="automated_seo/static/src/img/slide-icon-svg-1.svg"
+                             data-src="automated_seo/static/src/img/slide-icon-svg-1.svg"
+                             alt="Angular Team Augmentation" loading="lazy" height="48" width="48" class="slide-icon-svg-1"/>
+
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description
+                        Description Description Description
+                    </p>
+                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                </div>
+                <div class="bg-gray-light boxed">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
+                        <img src="automated_seo/static/src/img/slide-icon-svg-2.svg"
+                             data-src="automated_seo/static/src/img/slide-icon-svg-2.svg" alt="Dedicated Angular Team"
+                             loading="lazy" height="48" width="48" class="slide-icon-svg-2"/>
+
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description
+                        Description Description Description
+                    </p>
+                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                </div>
+                <div class="bg-gray-light boxed">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
+                        <img src="automated_seo/static/src/img/slide-icon-svg-3.svg"
+                             data-src="automated_seo/static/src/img/slide-icon-svg-3.svg" alt="Dedicated Angular Team"
+                             loading="lazy" height="48" width="48" class="slide-icon-svg-3"/>
+
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description
+                        Description Description Description
+                    </p>
+                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
+
