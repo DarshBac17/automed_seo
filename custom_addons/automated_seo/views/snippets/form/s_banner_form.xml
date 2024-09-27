@@ -16,8 +16,8 @@
                 <img src="automated_seo/static/src/img/banner-side-4.png" data-src="automated_seo/static/src/img/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="banner-side-4 w-full"/>
 
                 <div class="lg:col-span-3">
-                    <h1>Hire Angular Developers</h1>
-                    <p>Hire Angular developers from us to create dynamic and interactive web applications. Our experienced developers ensure seamless performance, easy navigation, and enhanced UX, delivering 2x faster results. Get in touch to build consistent, scalable front-ends that drive your business growth.</p>
+                    <h1>Heading Heading Heading Heading Heading</h1>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                     <!--                    <?php-->
                     <!--                            $formType = 'banner';-->
                     <!--                            $bannerDevName = "Angular";-->
@@ -39,7 +39,7 @@
                                 </button>
                                 <?php endif ?>-->
                                 <button class="btn btn-primary h-full" name="contactBtn">
-                                    HIRE <!--<?php echo $bannerDevName ?>--> Developer NOW
+                                    <!--HIRE &lt;!&ndash;<?php echo $bannerDevName ?>&ndash;&gt; Developer NOW--> Button Text
                                 </button>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
                                 <img src="automated_seo/static/src/img/banner-1.svg" data-src="automated_seo/static/src/img/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class=" banner-1 w-full"/>
                             </div>
-                            <p class="w-3/4"><!--<?php echo $companyYears ?>--><span class="echo-company-year"/> Years of Experience</p>
+                            <p class="w-3/4"><!--<?php echo $companyYears ?>--><span class="echo-company-year"/> Text Text Text</p>
                         </div>
                         <div class="flex items-center">
                             <div class="w-28 md:w-1/5 mr-sm">
@@ -65,7 +65,7 @@
                                 <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
                                 <img src="automated_seo/static/src/img/banner-3.svg" data-src="automated_seo/static/src/img/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="banner-3 w-full"/>
                             </div>
-                            <p class="w-3/4">15 Days Risk Free Trial</p>
+                            <p class="w-3/4">Text Text Text</p>
                         </div>
                     </div>
                 </div>

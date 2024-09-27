@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_side_img_with_list_bg_white" name="side img with list bg white">
+        <section class="container">
+            <div class="cont-padding">
+                <h2>Heading Heading Heading Heading Heading </h2>
+                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-c-plus/side-img-11.jpg"
+                         data-src=" <?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-c-plus/side-img-11.jpg"
+                         alt="Why Choose Bacancy To Hire iOS App Developers?"
+                         title="Why Choose Bacancy To Hire iOS App Developers?"
+                         class="w-full h-full object-cover" loading="lazy" width="540" height="553"/>-->
+                    <img src="automated_seo/static/src/img/side-img-11.jpg"
+                         data-src="automated_seo/static/src/img/side-img-11.jpg"
+                         alt="Why Choose Bacancy To Hire iOS App Developers?"
+                         title="Why Choose Bacancy To Hire iOS App Developers?"
+                         class="w-full h-full object-cover side-img-11" loading="lazy" width="540" height="553"/>
+                </div>
+                <div class="style-check">
+                    <p class="text-primary font-bold">Text Text Text Text Text Text</p>
+                    <ul>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                    </ul>
+                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
