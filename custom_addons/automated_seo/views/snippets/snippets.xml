@@ -173,6 +173,25 @@
 
                 </div>
             </div>
+
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Case Study</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_case_study_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Combination</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_combination_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+
+                </div>
+            </div>
         </xpath>
     </template>
 
