@@ -34,6 +34,8 @@
         "views/snippets/services/s_banner_cards.xml",
         "views/snippets/services/s_hire_developer_bg_white.xml",
         "views/snippets/cards/s_card.xml",
+        "views/snippets/case_study/s_case_study_bg_white.xml",
+        "views/snippets/combination/s_combination_bg_white.xml",
         'views/snippets/snippets.xml',
 
         # "views/snippets/s_angular_offer.xml",
