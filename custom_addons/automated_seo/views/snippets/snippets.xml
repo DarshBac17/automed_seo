@@ -125,7 +125,17 @@
                         <keywords>card</keywords>
                     </t>
 
-
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Leader</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_leadership_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>leader</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_leadership_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>leader</keywords>
+                    </t>
 
                 </div>
             </div>
