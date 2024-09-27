@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_side_img_with_cards_bg_gray" name="Side img with cards bg gray">
+        <section class="bg-gray-light text-center">
+            <div class="container">
+                <h2 class="cont-padding">Header Header Header Header</h2>
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <div>
+                        <img src="automated_seo/static/src/img/section-side-1.jpg" data-src=" automated_seo/static/src/img/section-side-1.jpg" alt="Client Achievements with Our AI Consultancy" title="Client Achievements with Our AI Consultancy" class="w-full h-full object-cover section-side-1" loading="lazy" width="645" height="371"/>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="boxed bg-white">
+                            <h3 class="text-primary text-h4">21%</h3>
+                            <p class="small-heading">Text Text Text Text Text</p>
+                        </div>
+                        <div class="boxed bg-white">
+                            <h3 class="text-primary text-h4">30%</h3>
+                            <p class="small-heading">Text Text Text Text Text</p>
+                        </div>
+                        <div class="boxed bg-white">
+                            <h3 class="text-primary text-h4">25%</h3>
+                            <p class="small-heading">Text Text Text Text Text</p>
+                        </div>
+                        <div class="boxed bg-white">
+                            <h3 class="text-primary text-h4">40%</h3>
+                            <p class="small-heading">Text Text Text Text Text</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

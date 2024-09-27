@@ -203,6 +203,18 @@
                     <t t-snippet="automated_seo.s_side_img_with_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_right_side_img_with_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_right_side_img_with_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_side_img_with_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_side_img_with_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
 
 
                 </div>
