@@ -6,7 +6,7 @@
             <div class="container content">
                 <div class="cont-padding [&amp;_&gt;_*]:text-white company-years">
                     <h2><!--<?php echo $companyYears ?> --> Heading heading heading</h2>
-                    <p class="text-h5 font-light count-dev-name"> <!--<?php echo $countDevName ?>-->Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit eligendi saepe, vero distinctio, qui voluptas molestiae voluptates cupiditate soluta omnis</p>
+                    <p class="text-h5 font-light count-dev-name"> <!--<?php echo $countDevName ?>-->Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
                 <div class="grid gap-6 md:grid-cols-2 lg:items-center">
                     <div>

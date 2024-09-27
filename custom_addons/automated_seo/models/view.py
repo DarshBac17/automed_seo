@@ -48,9 +48,7 @@ class View(models.Model):
         wrap_tag.unwrap()
         return  str(soup)
 
-
-
-    def remove_odoo_classes_from_tag(self,html_parser):
+    def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
@@ -59,10 +57,15 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
-            for attr in ['data-name', 'data-snippet', 'style', 'order-1','md:order-1']:
+            for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-        return  soup.prettify()
+            class_to_remove = ['oe_structure', 'remove']
+            for tag in soup.find_all(class_=class_to_remove):
+                # Replace the tag with its contents
+                tag.replace_with(*tag.contents)
+
+        return soup.prettify()
 
     def action_download_parsed_html(self):
         self.ensure_one()
