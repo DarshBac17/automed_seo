@@ -16,8 +16,8 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <script type="text/javascript"
-                                src="https://fast.wistia.com/embed/medias/ewi6xwr809.jsonp"></script>
-                        <script type="text/javascript" src="https://fast.wistia.com/assets/external/E-v1.js"></script>
+                                src="https://fast.wistia.com/embed/medias/ewi6xwr809.jsonp"/>
+                        <script type="text/javascript" src="https://fast.wistia.com/assets/external/E-v1.js"/>
                         <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
                             <div class="wistia_responsive_wrapper"
                                  style="height:100%;left:0;position:absolute;top:0;width:100%;">

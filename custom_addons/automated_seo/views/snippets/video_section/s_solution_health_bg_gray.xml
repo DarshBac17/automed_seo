@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_solution_health_bg_white" name="Solution Health White">
+    <template id="s_solution_health_bg_gray" name="Solution Health Gray">
 
-        <section class="overflow-hidden">
+        <section class="overflow-hidden bg-gray-light">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
@@ -13,7 +13,7 @@
                     </p>
                 </div>
                 <div class="center-slide">
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -22,7 +22,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -31,7 +31,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -40,7 +40,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -49,7 +49,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -58,7 +58,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -67,7 +67,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -75,7 +75,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>
@@ -83,7 +83,7 @@
                             <li>Description Description</li>
                         </ul>
                     </div>
-                    <div class="boxed bg-gray-light item style-check">
+                    <div class="boxed bg-white item style-check">
                         <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
                         <ul class="small-heading-two">
                             <li>Description Description</li>

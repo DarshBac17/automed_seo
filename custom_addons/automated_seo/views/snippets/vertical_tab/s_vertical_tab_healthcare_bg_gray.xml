@@ -1,126 +1,155 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_vertical_tab_healthcare_bg_gray" name="Health Care Gray">
-        <section class="tabs tabbibg-sec side-tab">
-        <div class="container">
-            <div class="cont-padding text-center">
-                <h2>A Trusted Partner For All-Inclusive Healthcare IT Services</h2>
-                <p>Bacancy offers 360 Healthcare IT solutions of medical technology management which include IT strategy planning to software development, modernization and healthcare IT support.</p>
-            </div>
-            <div class="tab-content style-check md:bg-gray-light">
-                <div class="tab-header">
-                    <div class="tab-head bg-gray-light active">
-                        <div class="head">Healthcare Software Development</div>
+        <section class="tabs tabbibg-sec side-tab bg-gray-light">
+            <div class="container">
+                <div class="cont-padding text-center">
+                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+                        Heading
+                    </h2>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="tab-content style-check md:bg-white">
+                    <div class="tab-header">
+                        <div class="tab-head bg-white active">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
                     </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Healthcare IT Consulting</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">IT Modernization</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Cloud Migration</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Healthcare Data Analytics</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Healthcare IT Support</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Managed IT Services</div>
-                    </div>
-                    <div class="tab-head bg-gray-light">
-                        <div class="head">Cybersecurity and Compliance</div>
+                    <div class="side-tab-content">
+                        <div class="tab-pane boxed active">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="side-tab-content">
-                    <div class="tab-pane boxed active">
-                        <p>Focus on growth, we'll handle the tech. Our healthcare IT team builds custom healthcare software based on your needs. From concept to completion, we deliver efficient, high-performing solutions.</p>
-                        <ul>
-                            <li>Healthcare Mobile App Development</li>
-                            <li>Healthcare CRM Systems, SaMD or SaaS Development</li>
-                            <li>Custom EHR/EMR Software </li>
-                            <li>Medical Web Design and Development</li>
-                            <li>Patient Engagement Software Development</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Healthcare IT consulting services from Bacancy. We provide expert guidance to optimize your IT infrastructure and launch new medical apps. Let us navigate your healthcare journey to success.</p>
-                        <ul>
-                            <li>IT Strategy Consulting</li>
-                            <li>Workflow Analysis and Optimization</li>
-                            <li>Technology Consulting and Support</li>
-                            <li>IT Cost-Reduction Strategies</li>
-                            <li>Medical Solution Consulting</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Upgrade to a future-proof healthcare system. Our IT modernization services enhance efficiency, security, and scalability. Let us transform your legacy software into high-performing solutions.</p>
-                        <ul>
-                            <li>Legacy Healthcare Systems Modernization</li>
-                            <li>Healthcare App Integration (e.g., EHR integration)</li>
-                            <li>Healthcare Data Consolidation</li>
-                            <li>IT Infrastructure Optimization and Upgrades</li>
-                            <li>Information Security and Compliance</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Migrate your healthcare IT solutions and data to cloud-based infrastructure and enable on-demand software scalability with our top-notch cloud migration services.</p>
-                        <ul>
-                            <li>Cloud Strategy and Planning</li>
-                            <li>HIPAA-compliant Cloud Assessment</li>
-                            <li>Secure Cloud Data Migration Strategy</li>
-                            <li>Cloud Infrastructure Management</li>
-                            <li>Cloud Application, Server, Data Warehouse, and Desktop Migration </li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Bacancy helps healthcare providers make informed, data-driven decisions by deriving actionable insights from mountains of unstructured, raw healthcare data resources. Gain valuable information within seconds through AI-powered data analytics.</p>
-                        <ul>
-                            <li>Healthcare Data Analytics Consulting</li>
-                            <li>Medical Data Warehousing</li>
-                            <li>Healthcare Business Intelligence and Reporting</li>
-                            <li>Real-time Data Visualization</li>
-                            <li>Big Data and Predictive Analytics</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Having <?php echo $companyYears ?> years of experience in IT support, Bacancy provides unmatched support to ensure your healthcare IT infrastructure is always up and running. From IT help desk services to infrastructure maintenance and modernization, we have got you covered.</p>
-                        <ul>
-                            <li>Proactive and Reactive support</li>
-                            <li>Healthcare System Monitoring and Maintenance</li>
-                            <li>Helpdesk Services</li>
-                            <li>Software Security and Performance Management</li>
-                            <li>Regulatory Compliance Management</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Our passionate and dedicated team proactively monitors and manages your healthcare IT infrastructure and systems, consistently optimizing, upgrading, and maintaining them.</p>
-                        <ul>
-                            <li>Proactive IT Infrastructure Monitoring </li>
-                            <li>Managed IT Services For Healthcare Management</li>
-                            <li>Managed Application and Security Services</li>
-                            <li>Backup and Recovery Solutions</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane boxed">
-                        <p>Make sure your sensitive healthcare data is protected, secured, and meet defined regulatory requirements, such as HIPAA, GDPR, FDA, HITECH, and other requirements.</p>
-                        <ul>
-                            <li>Cybersecurity Consulting</li>
-                            <li>Risk Assessments and Audits </li>
-                            <li>HIPAA-compliant Software Consulting</li>
-                            <li>Data Encryption and Network Security Solutions</li>
-                            <li>SaMD Verification and Testing</li>
-                        </ul>
-                    </div>
+                <div class="text-center mt-md">
+                    <a href="#form" class="btn btn-outline-primary">Button name</a>
                 </div>
             </div>
-            <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Let’s Discuss Your Project</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
     </template>
 </odoo>
