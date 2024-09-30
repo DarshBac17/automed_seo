@@ -156,6 +156,79 @@
                     </t>
                 </div>
             </div>
+             <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Video Section</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_solution_health_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_solution_health_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_build_software_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_build_software_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Vertical tab</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_vertical_tab_healthcare_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Vertical,Tab</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_vertical_tab_healthcare_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Vertical,Tab</keywords>
+                    </t>
+
+                </div>
+            </div>
+
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Testimonials</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_client_feedback_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Testimonials</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_client_feedback_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Testimonials</keywords>
+                    </t>
+
+                </div>
+            </div>
+             <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Image Section</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_image_hire_expert_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Image</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_image_hire_expert_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Image</keywords>
+                    </t>
+
+                </div>
+            </div>
+                 <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Horizontal tab</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_salesforce_tech_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Horizontal</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_salesforce_tech_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Horizontal</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Horizontal</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Horizontal</keywords>
+                    </t>
+
+                </div>
+            </div>
+
 
              <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Industries</div>
@@ -166,8 +239,7 @@
                      <t t-snippet="automated_seo.s_enable_growth_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
-
-                </div>
+                   </div>
             </div>
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Sub Cards</div>
@@ -181,10 +253,16 @@
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Service</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_banner_cards" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_banner_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_hire_developer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_expertise_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">

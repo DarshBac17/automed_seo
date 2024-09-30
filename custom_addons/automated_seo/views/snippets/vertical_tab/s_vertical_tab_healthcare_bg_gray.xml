@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_vertical_tab_healthcare_bg_gray" name="Health Care Gray">
+        <section class="tabs tabbibg-sec side-tab bg-gray-light">
+            <div class="container">
+                <div class="cont-padding text-center">
+                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+                        Heading
+                    </h2>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="tab-content style-check md:bg-white">
+                    <div class="tab-header">
+                        <div class="tab-head bg-white active">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                        <div class="tab-head bg-white">
+                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                        </div>
+                    </div>
+                    <div class="side-tab-content">
+                        <div class="tab-pane boxed active">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane boxed">
+                            <p>Description Description Description Description Description Description Description
+                                Description
+                                Description Description Description Description Description Description Description
+                                Description
+                            </p>
+                            <ul>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                                <li>Description Description</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-md">
+                    <a href="#form" class="btn btn-outline-primary">Button name</a>
+                </div>
+            </div>
+        </section>
+
+    </template>
+</odoo>
