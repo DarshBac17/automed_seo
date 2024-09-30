@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_banner_health_bg_gray" name="Banner Health Gray">
+        <section class="banner banner-post header-top text-center">
+        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/home/banner.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/home/banner.jpg" alt="Healthcare IT Solutions and Services" title="Healthcare IT Solutions and Services" width="1900" height="900" loading="eager" class="banner-post-img">
+        <div class="content container">
+            <div class="cont-padding text-center">
+                <h1 class="text-dark">Healthcare IT Solutions and Services</h1>
+                <p>Bacancy offers Healthcare IT Services, consulting, development, support and upgrade & maintenance services. We deliver secure and cost-effective medical IT solutions with agility to adapt to changing requirements.</p>
+            </div>
+            <div class="grid grid-cols-subgrid gap-6 sm:grid-cols-2 md:grid-cols-3 md:[&>div:not(:last-child)]:border-r md:[&>div:not(:last-child)]:pr-2">
+                <div>
+                    <p class="text-h3 font-bold text-primary mb-0"><?php echo $companyYears ?> Years</p>
+                    <p>In Healthcare IT</p>
+                </div>
+                <div>
+                    <p class="text-h3 font-bold text-primary mb-0">1000+</p>
+                    <p>Medical IT Specialists/Dedicated Experts</p>
+                </div>
+                <div>
+                    <p class="text-h3 font-bold text-primary mb-0">100+ </p>
+                    <p>Happy Healthcare Clients</p>
+                </div>
+            </div>
+            <a href="#form" class="btn btn-outline-primary mt-md">Build Your Healthcare IT Now</a>
+        </div>
+    </section>
+
+    </template>
+</odoo>

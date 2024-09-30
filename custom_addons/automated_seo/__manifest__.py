@@ -56,6 +56,9 @@
         "views/snippets/internal_linking/s_internal_other_service_bg_gray.xml",
         "views/snippets/industries/s_enable_growth_bg_gray.xml",
         "views/snippets/industries/s_enable_growth_bg_white.xml",
+        "views/snippets/video_section/s_build_software_bg_gray.xml",
+
+
         "views/snippets/sub_cards/s_card.xml",
         "views/snippets/case_study/s_case_study_bg_white.xml",
         "views/snippets/combination/s_combination_bg_white.xml",
