@@ -5,11 +5,18 @@
      <section class="bg-gray-light text-center">
         <div class="container">
             <div class="cont-padding">
-                <h2>Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App</h2>
-                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" title="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" class="mx-auto lg:w-1/2 mb-sm" loading="lazy" width="600" height="106">
-                <p>Hire Vue.js and Nuxt.js experts from us to build fast-loading and SEO-friendly applications with dynamic UI. Our cost-effective and flexible hourly engagement model gives you the best of both worlds to gauge the effectiveness of your project. We can lend Vue.js / Nuxt.jsJS experts to help you achieve your business goals by fulfilling your business needs.</p>
+                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+                        Heading
+                    </h2>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+<!--                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" title="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" class="mx-auto lg:w-1/2 mb-sm" loading="lazy" width="600" height="106">-->
+
+
+                <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" title="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" class="mx-auto lg:w-1/2 mb-sm vue-nuxtjs" loading="lazy" width="600" height="106"/>
             </div>
-            <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
+            <a href="#form" class="btn btn-outline-primary">Button text</a>
         </div>
     </section>
     </template>

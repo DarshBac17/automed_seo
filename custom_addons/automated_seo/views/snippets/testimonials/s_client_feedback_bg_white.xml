@@ -4,35 +4,52 @@
 
         <section class="container">
         <div class="cont-padding text-center">
-            <h2>We Are Trusted By Businesses Across the Globe</h2>
-            <p>Leading companies have trusted us with staff augmentation to fulfill their IT needs.</p>
-        </div>
-        <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <div class="boxed bg-gray-light pt-0">
-                <div class="size-60 -mt-5 mb-sm">
-                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px">
-                </div>
-                <p class="text-primary small-heading">Steve</p>
-                <p>“I’ve built multiple cloud-based software products and worked with many tech partners, but Bacancy is the perfect one with expert-level skills, agile processes, and solid project management. They helped build a complex solution powered by ML, AI, and integrated video conferencing, payment processes, etc. Highly recommended!”</p>
+               <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+                        Heading
+                    </h2>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
             </div>
-            <div class="boxed bg-gray-light pt-0">
-                <div class="size-60 -mt-5 mb-sm">
-                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px">
+            <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div class="boxed bg-gray-light pt-0">
+                    <div class="size-60 -mt-5 mb-sm">
+<!--                        https://assets.bacancytechnology.com-->
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px" class="steve"/>
+
+                    </div>
+                    <p class="text-primary small-heading">Heading</p>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
                 </div>
-                <p class="text-primary small-heading">Gerry Dunne</p>
-                <p>“Finding a software developer is easy, but if you need a strategic partner who understands your business goals and helps grow your web presence in the long term, choose Bacancy as your one-stop solution partner. Thanks to their industry expertise and skilled resources, my project is a success.”</p>
-            </div>
-            <div class="boxed bg-gray-light pt-0">
-                <div class="size-60 -mt-5 mb-sm">
-                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px">
+                <div class="boxed bg-gray-light pt-0">
+                    <div class="size-60 -mt-5 mb-sm">
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px" class="gerry-dunne"/>
+
+                    </div>
+                    <p class="text-primary small-heading">Heading</p>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
                 </div>
-                <p class="text-primary small-heading">David Carta</p>
-                <p>“We approached Bacancy for iOS, Android, and Ruby on Rails development and were happy about it. For our project, not only did they follow an agile workflow, but they also had a good management structure. They’ve senior and junior developers available with varied skills and expertise. I’d consider partnering with them again.”</p>
+                <div class="boxed bg-gray-light pt-0">
+                    <div class="size-60 -mt-5 mb-sm">
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px" class="david-carta"/>
+
+                    </div>
+                    <p class="text-primary small-heading">Heading</p>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="text-center mt-md">
-            <a href="#form" class="btn btn-outline-primary">TALK TO OUR EXPERT</a>
-        </div>
+            <div class="text-center mt-md">
+                <a href="#form" class="btn btn-outline-primary">Button Name</a>
+            </div>
     </section>
     </template>
 </odoo>

@@ -5,203 +5,111 @@
     <section class="tabs tabbibg-sec" id="technical-stack">
         <div class="container">
             <div class="cont-padding text-center">
-                <h2>Salesforce Technologies and Tools</h2>
-                <p>We use many cutting-edge Salesforce technologies and tools to build and integrate a powerful salesforce platform that helps you serve millions of users with the best services and support.</p>
-            </div>
-            <div class="tab-content">
-                <div class="tab-header md:flex md:flex-wrap justify-between md:bg-gray-light">
-                    <div class="tab-head active">
-                        <div class="head bg-gray-light">Salesforce UI/UX Solutions</div>
+                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+                        Heading
+                    </h2>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-header md:flex md:flex-wrap justify-between md:bg-white">
+                        <div class="tab-head active">
+                            <div class="head bg-white">Heading Heading</div>
+                        </div>
+                        <div class="tab-head">
+                            <div class="head bg-white">Heading Heading</div>
+                        </div>
+                        <div class="tab-head">
+                            <div class="head bg-white">Heading Heading</div>
+                        </div>
+                        <div class="tab-head">
+                            <div class="head bg-white">Heading Heading</div>
+                        </div>
                     </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">Salesforce Cloud</div>
-                    </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">AppExchange Packages</div>
-                    </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">Salesforce Integration</div>
+                    <div>
+                        <div class="tab-pane active">
+                            <ul class="flex flex-wrap gap-2">
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+
+
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane">
+                            <ul class="flex flex-wrap gap-2">
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane">
+                            <ul class="flex flex-wrap gap-2">
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane">
+                            <ul class="flex flex-wrap gap-2">
+                               <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                                <li class="border border-secondary p-2">Description</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="tab-pane active">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">Force.com</li>
-                            <li class="border border-secondary p-2">Salesforce1</li>
-                            <li class="border border-secondary p-2">Pardot</li>
-                            <li class="border border-secondary p-2">Heroku</li>
-                            <li class="border border-secondary p-2">Apex</li>
-                            <li class="border border-secondary p-2">Chatter</li>
-                            <li class="border border-secondary p-2">Informatica Cloud</li>
-                            <li class="border border-secondary p-2">MuleSoft</li>
-                            <li class="border border-secondary p-2">Lightning</li>
-                            <li class="border border-secondary p-2">CPQ</li>
-                            <li class="border border-secondary p-2">Jitterbit</li>
-                            <li class="border border-secondary p-2">Customer 360</li>
-                            <li class="border border-secondary p-2">Shield</li>
-                            <li class="border border-secondary p-2">Salesforce CLI</li>
-                            <li class="border border-secondary p-2">Ant Migration Tool</li>
-                            <li class="border border-secondary p-2">Case Management</li>
-                            <li class="border border-secondary p-2">Workbench</li>
-                            <li class="border border-secondary p-2">Data loader</li>
-                            <li class="border border-secondary p-2">Clickdeploy</li>
-                            <li class="border border-secondary p-2">FSL</li>
-                            <li class="border border-secondary p-2">Vlocity</li>
-                            <li class="border border-secondary p-2">Incident Management</li>
-                            <li class="border border-secondary p-2">Tableau Analytics</li>
-                            <li class="border border-secondary p-2">Salesforce Einstein</li>
-                            <li class="border border-secondary p-2">Work.com</li>
-                            <li class="border border-secondary p-2">LWC</li>
-                            <li class="border border-secondary p-2">Aura Components</li>
-                            <li class="border border-secondary p-2">Visualforce</li>
-                            <li class="border border-secondary p-2">Automation Tools</li>
-                            <li class="border border-secondary p-2">Customization</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-service-cloud">Service Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-sales-cloud">Sales Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-commerce-cloud">Commerce Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-financial-services-cloud">Financial Services Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-marketing-cloud">Marketing Cloud</a></li>
-                            <li class="border border-secondary p-2">Field Service Cloud</li>
-                            <li class="border border-secondary p-2">Community Cloud</li>
-                            <li class="border border-secondary p-2">App Cloud</li>
-                            <li class="border border-secondary p-2">Health Cloud</li>
-                            <li class="border border-secondary p-2">Experience Cloud</li>
-                            <li class="border border-secondary p-2">Industry Cloud</li>
-                            <li class="border border-secondary p-2">Analytics Cloud</li>
-                            <li class="border border-secondary p-2">IoT Cloud</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">Conga Composer</li>
-                            <li class="border border-secondary p-2">Conga Sign</li>
-                            <li class="border border-secondary p-2">E3Excel</li>
-                            <li class="border border-secondary p-2">DocuSign</li>
-                            <li class="border border-secondary p-2">Dataloader.io</li>
-                            <li class="border border-secondary p-2">Nintex Drawloop DocGen</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">ERP Integration</li>
-                            <li class="border border-secondary p-2">Marketing Automation Integration</li>
-                            <li class="border border-secondary p-2">Accounting Integration</li>
-                            <li class="border border-secondary p-2">E-Commerce Integration</li>
-                            <li class="border border-secondary p-2">Salesforce Email Integration</li>
-                            <li class="border border-secondary p-2">Collaboration System Integration</li>
-                            <li class="border border-secondary p-2">Social Media Integration</li>
-                            <li class="border border-secondary p-2">CTI Integration</li>
-                            <li class="border border-secondary p-2">Salesforce Database Integration</li>
-                            <li class="border border-secondary p-2">ITSM Integration</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-        <section class="tabs tabbibg-sec" id="technical-stack">
-        <div class="container">
-            <div class="cont-padding text-center">
-                <h2>Salesforce Technologies and Tools</h2>
-                <p>We use many cutting-edge Salesforce technologies and tools to build and integrate a powerful salesforce platform that helps you serve millions of users with the best services and support.</p>
-            </div>
-            <div class="tab-content">
-                <div class="tab-header md:flex md:flex-wrap justify-between md:bg-gray-light">
-                    <div class="tab-head active">
-                        <div class="head bg-gray-light">Salesforce UI/UX Solutions</div>
-                    </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">Salesforce Cloud</div>
-                    </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">AppExchange Packages</div>
-                    </div>
-                    <div class="tab-head">
-                        <div class="head bg-gray-light">Salesforce Integration</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="tab-pane active">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">Force.com</li>
-                            <li class="border border-secondary p-2">Salesforce1</li>
-                            <li class="border border-secondary p-2">Pardot</li>
-                            <li class="border border-secondary p-2">Heroku</li>
-                            <li class="border border-secondary p-2">Apex</li>
-                            <li class="border border-secondary p-2">Chatter</li>
-                            <li class="border border-secondary p-2">Informatica Cloud</li>
-                            <li class="border border-secondary p-2">MuleSoft</li>
-                            <li class="border border-secondary p-2">Lightning</li>
-                            <li class="border border-secondary p-2">CPQ</li>
-                            <li class="border border-secondary p-2">Jitterbit</li>
-                            <li class="border border-secondary p-2">Customer 360</li>
-                            <li class="border border-secondary p-2">Shield</li>
-                            <li class="border border-secondary p-2">Salesforce CLI</li>
-                            <li class="border border-secondary p-2">Ant Migration Tool</li>
-                            <li class="border border-secondary p-2">Case Management</li>
-                            <li class="border border-secondary p-2">Workbench</li>
-                            <li class="border border-secondary p-2">Data loader</li>
-                            <li class="border border-secondary p-2">Clickdeploy</li>
-                            <li class="border border-secondary p-2">FSL</li>
-                            <li class="border border-secondary p-2">Vlocity</li>
-                            <li class="border border-secondary p-2">Incident Management</li>
-                            <li class="border border-secondary p-2">Tableau Analytics</li>
-                            <li class="border border-secondary p-2">Salesforce Einstein</li>
-                            <li class="border border-secondary p-2">Work.com</li>
-                            <li class="border border-secondary p-2">LWC</li>
-                            <li class="border border-secondary p-2">Aura Components</li>
-                            <li class="border border-secondary p-2">Visualforce</li>
-                            <li class="border border-secondary p-2">Automation Tools</li>
-                            <li class="border border-secondary p-2">Customization</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-service-cloud">Service Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-sales-cloud">Sales Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-commerce-cloud">Commerce Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-financial-services-cloud">Financial Services Cloud</a></li>
-                            <li class="border border-secondary p-2 text-primary"><a href="<?php echo BASE_URL; ?>salesforce-marketing-cloud">Marketing Cloud</a></li>
-                            <li class="border border-secondary p-2">Field Service Cloud</li>
-                            <li class="border border-secondary p-2">Community Cloud</li>
-                            <li class="border border-secondary p-2">App Cloud</li>
-                            <li class="border border-secondary p-2">Health Cloud</li>
-                            <li class="border border-secondary p-2">Experience Cloud</li>
-                            <li class="border border-secondary p-2">Industry Cloud</li>
-                            <li class="border border-secondary p-2">Analytics Cloud</li>
-                            <li class="border border-secondary p-2">IoT Cloud</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">Conga Composer</li>
-                            <li class="border border-secondary p-2">Conga Sign</li>
-                            <li class="border border-secondary p-2">E3Excel</li>
-                            <li class="border border-secondary p-2">DocuSign</li>
-                            <li class="border border-secondary p-2">Dataloader.io</li>
-                            <li class="border border-secondary p-2">Nintex Drawloop DocGen</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane">
-                        <ul class="flex flex-wrap gap-2">
-                            <li class="border border-secondary p-2">ERP Integration</li>
-                            <li class="border border-secondary p-2">Marketing Automation Integration</li>
-                            <li class="border border-secondary p-2">Accounting Integration</li>
-                            <li class="border border-secondary p-2">E-Commerce Integration</li>
-                            <li class="border border-secondary p-2">Salesforce Email Integration</li>
-                            <li class="border border-secondary p-2">Collaboration System Integration</li>
-                            <li class="border border-secondary p-2">Social Media Integration</li>
-                            <li class="border border-secondary p-2">CTI Integration</li>
-                            <li class="border border-secondary p-2">Salesforce Database Integration</li>
-                            <li class="border border-secondary p-2">ITSM Integration</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     </template>
