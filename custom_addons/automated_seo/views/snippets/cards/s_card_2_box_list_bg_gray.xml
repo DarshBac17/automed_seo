@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_card_2_box_list_bg_gray" name="2 Box list Card Gray">
+             <section class="bg-gray-light">
+        <div class="container">
+            <div class="text-center cont-padding">
+                <h2>How Our Python Coders Ensure The Code Quality Of Your Project</h2>
+                <p>Consider Python developer hire for your next project to ensure high-quality code with best practices, style-checking tools, clear documentation, thorough testing, and organized code, using revision control systems and IDEs to enhance efficiency.</p>
+            </div>
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check">
+                <div class="boxed bg-white">
+                    <h3 class="text-primary text-h4 small-heading">Code Review Practices</h3>
+                    <ul class="small-heading-two">
+                        <li>Static analysis tools (linters, type checkers)</li>
+                        <li>Functionality review</li>
+                        <li>Readability review</li>
+                        <li>Maintainability review</li>
+                        <li>Efficiency review</li>
+                        <li>Performance review</li>
+                        <li>Testing practices review</li>
+                        <li>Code review checklists</li>
+                        <li>Positive and constructive feedback</li>
+                        <li>Collaborative review</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-white">
+                    <h3 class="text-primary text-h4 small-heading">Code Quality Assessment Metrics</h3>
+                    <ul class="small-heading-two">
+                        <li>Cyclomatic Complexity</li>
+                        <li>Cognitive Complexity</li>
+                        <li>Naming Conventions</li>
+                        <li>Time and Space Complexity</li>
+                        <li>Code Coverage</li>
+                        <li>Test Maintainability</li>
+                        <li>Static Security Analysis</li>
+                        <li>PEP 8 Compliance</li>
+                        <li>Documentation</li>
+                        <li>Technical Debt</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-md">
+                <a href="#form" class="btn btn-outline-primary">Hire Python Developer</a>
+            </div>
+        </div>
+    </section>
+    </template>
+</odoo>
+

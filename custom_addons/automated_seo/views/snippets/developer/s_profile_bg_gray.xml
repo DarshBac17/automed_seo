@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_profile_bg_gray" name="Profile Gray">
+         <section class="bg-gray-light">
+        <div class="container">
+            <div class="text-center cont-padding">
+                <h2>Hire Battle-Tested NET Full Stack Developers</h2>
+                <p>Hire dot net developers from us and onboard top-tier professionals who have immense experience in
+                    delivering robust, secure, and scalable solutions. Our experts guarantee the timely and efficient
+                    delivery of projects without compromising the development quality.</p>
+            </div>
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div class="boxed bg-white">
+                    <div class="flex items-center mb-sm small-heading-three">
+                        <div class="size-60 mr-sm">
+                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                alt=".Net Developer Alpesh" title=".Net Developer Alpesh" width="60" height="60"
+                                loading="lazy">
+                        </div>
+                        <div>
+                            <h3 class="text-h4 mb-0">Alpesh Maniya</h3>
+                            <p>Lead Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-sm gap-6 small-heading-four">
+                        <div>
+                            <p class="mb-0 font-bold">9+ Years</p>
+                            <p>Experience</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">Full-time</p>
+                            <p>Availability</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">6+ Projects</p>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <p class="small-heading">Having expertise in Regulatory Submission, Sales Force Automation, and the
+                        Fintech domain, Alpesh has successfully delivered numerous projects across industries. He is
+                        proficient in C#, .NET MVC, .NET Core, SQL, Entity Framework, jQuery, and Angular.</p>
+                    <div class="svg-icon">
+                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            alt="Expert in" width="102" height="48" loading="lazy">
+                    </div>
+                    <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
+                        <span class="border border-primary bg-light-orange px-2"><a
+                                href="<?php echo BASE_URL;?>hire-c-sharp-developer"
+                                class="text-primary font-bold">C#</a></span>
+                        <span class="border border-primary bg-light-orange px-2">.Net MVC</span>
+                        <span class="border border-primary bg-light-orange px-2">.Net Core</span>
+                        <span class="border border-primary bg-light-orange px-2">SQL</span>
+                        <span class="border border-primary bg-light-orange px-2">Entity Framework</span>
+                        <span class="border border-primary bg-light-orange px-2"> jQuery</span>
+                        <span class="border border-primary bg-light-orange px-2"> Angular</span>
+                    </div>
+                    <a href="#form" class="btn btn-outline-primary mt-md">get a quote</a>
+                </div>
+                <div class="boxed bg-white">
+                    <div class="flex items-center mb-sm small-heading-three">
+                        <div class="size-60 mr-sm">
+                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/hemant-net.png"
+                                data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/hemant-net.png"
+                                alt=".Net Developer Hemant" title=".Net Developer Hemant" width="60" height="60"
+                                loading="lazy">
+                        </div>
+                        <div>
+                            <h3 class="text-h4 mb-0">Hemant Chauhan</h3>
+                            <p>Engineering Manager</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-sm gap-6 small-heading-four">
+                        <div>
+                            <p class="mb-0 font-bold">9+ Years</p>
+                            <p>Experience</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">Full-time</p>
+                            <p>Availability</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">8+ Projects</p>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <p class="small-heading">Hemant has hands-on experience in C#, ASP.NET and ASP.NET MVC, .NET (2.0, 3.5),
+                        .NET Core, XML, JavaScript, AJAX, SQL Server, LINQ, HTML, CSS, Visual Studio 2019, and SSMS. Strong
+                        skills in Object Oriented Design, version control, and client communication.</p>
+                    <div class="svg-icon">
+                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            alt="Expert in" width="102" height="48" loading="lazy">
+                    </div>
+                    <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
+                        <span class="border border-primary bg-light-orange px-2">C#</span>
+                        <span class="border border-primary bg-light-orange px-2"><a
+                                href="<?php echo BASE_URL;?>mvc-asp-net-development"
+                                class="text-primary font-bold">ASP.NET</a></span>
+                        <span class="border border-primary bg-light-orange px-2">ASP.NET MVC</span>
+                        <span class="border border-primary bg-light-orange px-2">.NET Core</span>
+                        <span class="border border-primary bg-light-orange px-2">ADO.NET</span>
+                        <span class="border border-primary bg-light-orange px-2">Dapper</span>
+                    </div>
+                    <a href="#form" class="btn btn-outline-primary mt-md">get a quote</a>
+                </div>
+                <div class="boxed bg-white">
+                    <div class="flex items-center mb-sm small-heading-three">
+                        <div class="size-60 mr-sm">
+                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
+                                data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
+                                alt=".Net Developer Jignesh" title=".Net Developer Jignesh" width="60" height="60"
+                                loading="lazy">
+                        </div>
+                        <div>
+                            <h3 class="text-h4 mb-0">Jignesh Sakariya</h3>
+                            <p>Lead Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-sm gap-6 small-heading-four">
+                        <div>
+                            <p class="mb-0 font-bold">8+ Years</p>
+                            <p>Experience</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">Full-time</p>
+                            <p>Availability</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">5+ Projects</p>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <p class="small-heading">Jignesh, a versatile software engineer, specializes in Web and Windows-based
+                        app development. He is proficient in ASP.NET, ADO.Net, C#, .NET, SQL, MVC, LINQ, .NET Core, Web
+                        APIs, and Javascript. Skilled at writing database queries and maintaining business apps.</p>
+                    <div class="svg-icon">
+                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            alt="Expert in" width="102" height="48" loading="lazy">
+                    </div>
+                    <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
+                        <span class="border border-primary bg-light-orange px-2">ASP.NET</span>
+                        <span class="border border-primary bg-light-orange px-2">ADO.Net</span>
+                        <span class="border border-primary bg-light-orange px-2">MS SQL</span>
+                        <span class="border border-primary bg-light-orange px-2">C#.NET</span>
+                        <span class="border border-primary bg-light-orange px-2">MVC</span>
+                        <span class="border border-primary bg-light-orange px-2"><a
+                                href="<?php echo BASE_URL;?>dot-net-core-developer" class="text-primary font-bold">.Net
+                                Core</a></span>
+                    </div>
+                    <a href="#form" class="btn btn-outline-primary mt-md">get a quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </template>
+</odoo>

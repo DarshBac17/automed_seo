@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_build_software_bg_white" name="Build Software White">
+
+            <section class="overflow-hidden">
+        <div class="container">
+            <div class="cont-padding text-center">
+                <h2>Modern IT Solutions For Healthcare We Offer</h2>
+                <p>Streamline operations, enhance patient care, and strengthen the overall security of your critical medical data, all with our compelling suite of <i>healthcare IT solutions</i>. From advanced telemedicine software to SaMD development, we design highly responsive, interactive, and performant medical IT solutions that smoothly integrate with your existing IT systems.</p>
+            </div>
+            <div class="center-slide">
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Telemedicine Software</h3>
+                    <ul class="small-heading-two">
+                        <li>Virtual Healthcare Consultations</li>
+                        <li>Secure Video Conferencing and Chats</li>
+                        <li>Track Appointments and Vitals</li>
+                        <li>Automated Billing With EHR Integration</li>
+                        <li>Data Analytics For Patient Health Diagnosis and Outcomes</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Chronic Disease Management</h3>
+                    <ul class="small-heading-two">
+                        <li>Advanced Functionality To Manage Distinctive Chronic Conditions</li>
+                        <li>Medication Intake Schedules</li>
+                        <li>Telemedicine Appointments and Sessions</li>
+                        <li>Personalized Care Plans</li>
+                        <li>Vitals Monitoring and Alerts For Abnormal Parameters</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Remote Patient Monitoring (RPM)</h3>
+                    <ul class="small-heading-two">
+                        <li>SaMD, Medical Devices, and Smart Wearables To Track Patient’s Health</li>
+                        <li>Continuous Data Collection Patient’s Vitals</li>
+                        <li>Real-time Alerts and Instant Notifications</li>
+                        <li>Remote Patient Data Synchronization With Healthcare IT Systems</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Medical Device Software and SaMD</h3>
+                    <ul class="small-heading-two">
+                        <li>Real-time Data Analysis with SaMD and Medical Device Software</li>
+                        <li>Compliant Software for FDA Class II and Class III Medical Devices, like CT Scanners, Wearable Glucose Monitors, and Pacemakers.</li>
+                        <li>Software as a Medical Device (SaMD) Operable With Smartphones, PCs, and Other Smart Devices.</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Custom EHR Systems</h3>
+                    <ul class="small-heading-two">
+                        <li>Efficient and Secure Patient Records Management</li>
+                        <li>PHI Storage with EHR Systems</li>
+                        <li>Highly Engaging UX/UI For EHRs Controllable With Desktops, Tablets, and Smartphones</li>
+                        <li>EHR Systems With Advanced Features like blockchain-based records storage, AI-powered chatbots, voice assistance, and image recognition.</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Home Health Software</h3>
+                    <ul class="small-heading-two">
+                        <li>Remote Health Tracking Systems</li>
+                        <li>Home Medical Consultation Scheduling</li>
+                        <li>Offline App Features For Hinterlands</li>
+                        <li>Online Visit Verification and Automated Billing</li>
+                        <li>Home Healthcare Data Analytics and Medication Management</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Digital Therapeutics (DTx)</h3>
+                    <ul class="small-heading-two">
+                        <li>Personalized Treatment Plans and Progress Assessments</li>
+                        <li>Diseases and Symptoms Diagnosis and Management (Instant Alerts for Asthma Triggers)</li>
+                        <li>Disease-centric Prevention Systems (Monitoring Carbohydrates for prediabetic patients)</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Patient Engagement Solutions</h3>
+                    <ul class="small-heading-two">
+                        <li>Interactive Patient Portals and Platforms (Book appointments, schedule sessions, request medication refills, and more)</li>
+                        <li>Apps That Promote Health (Education about health checkups, live workout sessions, etc.)</li>
+                        <li>Data Trackers For Patient’s Health Conditions</li>
+                    </ul>
+                </div>
+                <div class="boxed bg-gray-light item style-check">
+                    <h3 class="text-h4 small-heading">Administrative Software For Healthcare Providers</h3>
+                    <ul class="small-heading-two">
+                        <li>Advanced Healthcare CRM With Automated Billing and Invoicing</li>
+                        <li>Efficient Medical Inventory Management</li>
+                        <li>Staff Scheduling and HR Management</li>
+                        <li>Self-service Portals For Claims Submissions and Check Insurance Eligibility</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-md text-center">
+                <a href="#form" class="btn btn-outline-primary mt-md">Book A 30 min Call</a>
+            </div>
+        </div>
+    </section>
+    </template>
+</odoo>
