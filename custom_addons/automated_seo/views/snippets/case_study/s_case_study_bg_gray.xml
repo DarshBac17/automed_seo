@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_case_study_bg_gray" name="Case Study gray">
+
+        <section class="bg-gray-light casestudy-merge-col" id="case-study">
+            <div class="container">
+                <div class="cont-padding text-center">
+                    <h2>Heading Heading Heading Heading Heading Heading </h2>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                </div>
+                <div class="bg-dark boxed single-item-slider">
+                    <div>
+                        <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="text-white">
+                                <p><span class="text-primary">Spam Text:</span> Text</p>
+                                <p><span class="text-primary">Spam Text</span> Text</p>
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <a href="#form" class="btn btn-outline-primary">Subtitle Subtitle Subtitle Subtitle</a>
+                            </div>
+                            <div class="max-md:hidden">
+                                <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
+                                <img src="automated_seo/static/src/img/case-1.jpg" data-src="automated_seo/static/src/img/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full case1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="text-white">
+                                <p><span class="text-primary">Spam Text:</span> Text</p>
+                                <p><span class="text-primary">Spam Text:</span> Text</p>
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                            </div>
+                            <div class="max-md:hidden">
+                                <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-2.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-2.jpg" alt="The Credit Repairman" title="The Credit Repairman" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
+                                <img src="automated_seo/static/src/img/case-2.jpg" data-src="automated_seo/static/src/img/case-2.jpg" alt="The Credit Repairman" title="The Credit Repairman" width="645" height="320" loading="lazy" class="object-cover h-full w-full case2"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div class="text-white">
+                                <p><span class="text-primary">Spam Text:</span> Text</p>
+                                <p><span class="text-primary">Spam Text:</span> Text</p>
+                                <p>TDescription Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                            </div>
+                            <div class="max-md:hidden">
+                                <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-3.jpg" alt="Portfolio Workbench for Cambridge" title="Portfolio Workbench for Cambridge" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
+                                <img src="automated_seo/static/src/img/case-3.jpg" data-src="automated_seo/static/src/img/case-3.jpg" alt="Portfolio Workbench for Cambridge" title="Portfolio Workbench for Cambridge" width="645" height="320" loading="lazy" class="object-cover h-full w-full case3"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </template>
+</odoo>

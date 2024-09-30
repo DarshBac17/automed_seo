@@ -13,8 +13,8 @@
                 <div class="bg-white boxed">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
-                        <img src="automated_seo/static/src/img/slide-icon-svg-1.svg"
-                             data-src="automated_seo/static/src/img/slide-icon-svg-1.svg"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
                              alt="Angular Team Augmentation" loading="lazy" height="48" width="48"
                             class="slide-icon-svg-1"/>
 
@@ -24,13 +24,13 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
                 </div>
                 <div class="bg-white boxed">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
-                        <img src="automated_seo/static/src/img/slide-icon-svg-2.svg"
-                             data-src="automated_seo/static/src/img/slide-icon-svg-2.svg" alt="Dedicated Angular Team"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"
                              loading="lazy" height="48" width="48" class="slide-icon-svg-2"/>
 
                     </div>
@@ -39,13 +39,13 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
                 </div>
                 <div class="bg-white boxed">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
-                        <img src="automated_seo/static/src/img/slide-icon-svg-3.svg"
-                             data-src="automated_seo/static/src/img/slide-icon-svg-3.svg" alt="Dedicated Angular Team"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Dedicated Angular Team"
                              loading="lazy" height="48" width="48" class="slide-icon-svg-3"/>
 
                     </div>
@@ -54,7 +54,7 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
+                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
                 </div>
             </div>
             </div>

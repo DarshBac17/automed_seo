@@ -100,6 +100,9 @@
                     <t t-snippet="automated_seo.s_banner_cta_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_banner_health_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
 
                 </div>
             </div>
@@ -122,6 +125,18 @@
                         <keywords>card</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_hire_model_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_card_2_box_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_card_2_box_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_card_hire_dedicated_dev_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_card_hire_dedicated_dev_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>card</keywords>
                     </t>
 
@@ -278,6 +293,21 @@
                     <t t-snippet="automated_seo.s_case_study_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_case_study_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Developer</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_profile_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_profile_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
 
                 </div>
             </div>
@@ -285,6 +315,9 @@
                 <div class="o_panel_header">Combination</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_combination_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_combination_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
 

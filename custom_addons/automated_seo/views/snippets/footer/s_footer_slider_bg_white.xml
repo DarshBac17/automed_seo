@@ -20,12 +20,12 @@
                                     <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                 a                   </div>-->
                                     <div class="top-tier">
-                                        <img src="/automated_seo/static/src/img/insight-slide-1.jpg"
+                                        <img src="automated_seo/static/src/img/insight-slide-1.jpg"
                                              alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
                                     <div>
-                                        <p class="text-h3 font-bold text-dark">Top-Tier IT Geniuses</p>
+                                        <p class="text-h3 font-bold text-dark">Title Title Title</p>
                                         <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                                         </p>
                                     </div>
@@ -46,7 +46,7 @@
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
                                     <div>
-                                        <p class="text-h3 font-bold text-dark">Time Zone Aligned</p>
+                                        <p class="text-h3 font-bold text-dark">Title Title Title</p>
                                         <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                                         </p>
                                     </div>
@@ -67,7 +67,7 @@
                                              width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
                                     <div>
-                                        <p class="text-h3 font-bold text-dark">Experienced Team</p>
+                                        <p class="text-h3 font-bold text-dark">Title Title Title</p>
                                         <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                                         </p>
                                     </div>
