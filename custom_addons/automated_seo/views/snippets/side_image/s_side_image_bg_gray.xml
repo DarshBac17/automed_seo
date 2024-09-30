@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_image_bg_gray" name="Banner side image Gray">
+    <template id="s_side_image_bg_gray" name="side image bg Gray">
         <section class="bg-gray-light">
             <div class="container">
                 <div class="grid lg:grid-cols-2 gap-6">

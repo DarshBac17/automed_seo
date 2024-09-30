@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_img_with_list_bg_white" name="side img with list bg white">
+    <template id="s_right_side_img_list_bg_white" name="right side img list bg white">
         <section class="container">
             <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading </h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
             </div>
             <div class="grid md:grid-cols-2 gap-6">
-                <div>
+                <div class="lg:order-2">
                     <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-c-plus/side-img-11.jpg"
                          data-src=" <?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-c-plus/side-img-11.jpg"
                          alt="Why Choose Bacancy To Hire iOS App Developers?"

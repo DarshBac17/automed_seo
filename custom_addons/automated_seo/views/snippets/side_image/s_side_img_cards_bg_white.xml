@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_img_with_cards_bg_white" name="Side img with cards bg white">
+    <template id="s_side_img_cards_bg_white" name="Side img cards bg white">
         <section class="container text-center">
             <h2 class="cont-padding">Header Header Header Header</h2>
             <div class="grid lg:grid-cols-2 gap-6">
