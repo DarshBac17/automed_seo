@@ -40,7 +40,6 @@
         "views/snippets/banner/s_banner_cta_bg_gray.xml",
         "views/snippets/banner/s_banner_cta_bg_white.xml",
         "views/snippets/banner/s_banner_health_bg_gray.xml",
-        "views/snippets/services/s_banner_cards.xml",
         "views/snippets/services/s_banner_cards_bg_white.xml",
         "views/snippets/services/s_banner_cards_bg_gray.xml",
         "views/snippets/services/s_hire_developer_bg_white.xml",
