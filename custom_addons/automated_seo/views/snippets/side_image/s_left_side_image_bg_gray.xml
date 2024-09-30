@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_left_side_image_bg_gray" name="Banner left side image Gray">
+    <template id="s_left_side_image_bg_gray" name="Left side image Gray">
         <section class="bg-gray-light">
             <div class="container">
                 <div class="grid lg:grid-cols-2 gap-6">
@@ -16,17 +16,17 @@
                     <div>
                         <div class="cont-padding">
                             <h2>Heading Heading Heading Heading Heading Heading Heading</h2>
-                            <!--                                                        <p>So, whether you are a start-up, scale-up, or a well-established organization, your quest-->
-                            <!--                                                            to find and hire Angular developers ends here. Collaborate with a top <a-->
-                            <!--                                                                    href="<?php echo BASE_URL; ?>angular-js-development-company"-->
-                            <!--                                                                    class="text-primary font-bold">Angular development company-->
-                            <!--                                                            </a> that can help you build highly interactive, scalable, data-driven, and-->
-                            <!--                                                            well-structured cross-platform web apps using the latest Angular framework.-->
-                            <!--                                                        </p>-->
+                                                                                    <!--<p>So, whether you are a start-up, scale-up, or a well-established organization, your quest
+                                                                                        to find and hire Angular developers ends here. Collaborate with a top <a
+                                                                                                href="<?php echo BASE_URL; ?>angular-js-development-company"
+                                                                                                class="text-primary font-bold">Angular development company
+                                                                                        </a> that can help you build highly interactive, scalable, data-driven, and
+                                                                                        well-structured cross-platform web apps using the latest Angular framework.
+                                                                                    </p>-->
                             <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                                 <a
                                         href="#"
-                                        class="text-primary font-bold department-link ">Spam text Spam text
+                                        class="text-primary font-bold department-link">Spam text Spam text
                                 </a> Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                             </p>
                             <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description

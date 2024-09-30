@@ -14,7 +14,7 @@
         </xpath>-->
 
 
-        <xpath expr="//div[@id='snippet_structure']" position="replace">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
             <div id="snippet_forms" class="o_panel">
                 <div class="o_panel_header">Forms</div>
                 <div class="o_panel_body">
@@ -227,26 +227,35 @@
                     <t t-snippet="automated_seo.s_left_side_image_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_side_img_with_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_side_img_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_side_img_with_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_side_img_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_right_side_img_with_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_right_side_img_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_right_side_img_with_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_right_side_img_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_side_img_with_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_side_img_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_side_img_with_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_side_img_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-
-
+                </div>
+            </div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Trusted Parties</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_trusted_parties_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_trusted_parties_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, slider</keywords>
+                    </t>
                 </div>
             </div>
         </xpath>
