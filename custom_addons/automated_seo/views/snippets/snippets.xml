@@ -139,6 +139,36 @@
 
                 </div>
             </div>
+              <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Internal Linking</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_internal_leverage_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Internal,Linking</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_internal_leverage_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Internal,Linking</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_internal_other_service_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Internal,Linking</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_internal_other_service_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Internal,Linking</keywords>
+                    </t>
+                </div>
+            </div>
+
+             <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Industries</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_enable_growth_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+                     <t t-snippet="automated_seo.s_enable_growth_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries</keywords>
+                    </t>
+
+                </div>
+            </div>
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Sub Cards</div>
                 <div class="o_panel_body">
