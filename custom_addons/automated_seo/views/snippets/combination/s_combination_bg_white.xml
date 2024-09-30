@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_combination_bg_white" name=" combination bg white">
+        <!--         TODO add php tag-->
         <section class="overflow-hidden">
         <div class="container">
             <div class="cont-padding text-center">

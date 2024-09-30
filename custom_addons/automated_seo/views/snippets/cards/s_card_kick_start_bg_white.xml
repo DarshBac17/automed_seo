@@ -12,8 +12,8 @@
                 <div class="boxed bg-gray-light">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
-                        <img src="automated_seo/static/src/img/icon-1.svg"
-                             data-src="automated_seo/static/src/img/icon-1.svg" alt="Understand" width="48" height="48"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48"
                              loading="lazy" class="mx-auto icon-1"/>
 
                     </div>
@@ -25,8 +25,8 @@
                 <div class="boxed bg-gray-light">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48" loading="lazy" class="mx-auto">-->
-                        <img src="automated_seo/static/src/img/icon-2.svg"
-                             data-src="automated_seo/static/src/img/icon-2.svg" alt="Strategize" width="48" height="48"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48"
                              loading="lazy" class="mx-auto icon-2"/>
 
                     </div>
@@ -38,8 +38,8 @@
                 <div class="boxed bg-gray-light">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
-                        <img src="automated_seo/static/src/img/icon-3.svg"
-                             data-src="automated_seo/static/src/img/icon-3.svg" alt="Implement" width="48" height="48"
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48"
                              loading="lazy" class="mx-auto icon-3"/>
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading</h3>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">GET IN TOUCH WITH OUR EXPERT</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
             </div>
         </section>
     </template>
