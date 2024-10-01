@@ -12,9 +12,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon angular" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon angular" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/aws.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/aws.svg" alt="aws icon" loading="lazy" height="60" width="60"/>-->
-                            <img src="automated_seo/static/src/img/aws.svg" data-src="automated_seo/static/src/img/aws.svg" alt="aws icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/aws.svg" data-src="automated_seo/static/src/img/aws.svg" alt="aws icon" loading="lazy" height="60" width="60" class="aws"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -22,9 +22,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/docker.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/docker.svg" alt="docker icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/docker.svg" data-src="automated_seo/static/src/img/docker.svg" alt="docker icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/docker.svg" data-src="automated_seo/static/src/img/docker.svg" alt="docker icon" loading="lazy" height="60" width="60" class="docker"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -32,9 +32,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/ror.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/ror.svg" alt="ror icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/ror.svg" data-src="automated_seo/static/src/img/ror.svg" alt="ror icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/ror.svg" data-src="automated_seo/static/src/img/ror.svg" alt="ror icon" loading="lazy" height="60" width="60" class="ror"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -42,9 +42,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/dotnet.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/dotnet.svg" data-src="automated_seo/static/src/img/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/dotnet.svg" data-src="automated_seo/static/src/img/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60" class="dotnet"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -52,9 +52,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/node.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/node.svg" alt="node icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/node.svg" data-src="automated_seo/static/src/img/node.svg" alt="node icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/node.svg" data-src="automated_seo/static/src/img/node.svg" alt="node icon" loading="lazy" height="60" width="60" class="node"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -62,9 +62,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/laravel.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/laravel.svg" data-src="automated_seo/static/src/img/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/laravel.svg" data-src="automated_seo/static/src/img/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60" class="laravel"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -72,9 +72,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/java.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/java.svg" alt="java icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/java.svg" data-src="automated_seo/static/src/img/java.svg" alt="java icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/java.svg" data-src="automated_seo/static/src/img/java.svg" alt="java icon" loading="lazy" height="60" width="60" class="java"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -82,9 +82,9 @@
                     <div class="item bg-white boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/golang.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/golang.svg" alt="golang icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/golang.svg" data-src="automated_seo/static/src/img/golang.svg" alt="golang icon" loading="lazy" height="60" width="60"/>
+                            <img src="automated_seo/static/src/img/golang.svg" data-src="automated_seo/static/src/img/golang.svg" alt="golang icon" loading="lazy" height="60" width="60" class="golang"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description
