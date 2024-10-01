@@ -27,9 +27,7 @@
                     </t>
                     <t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>footer, form, dark</keywords>
-                    </t><t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                    <keywords>footer, form, dark</keywords>
-                </t>
+                    </t>
                 </div>
             </div>
             <div id="snippet_footer" class="o_panel">
