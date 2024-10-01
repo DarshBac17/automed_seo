@@ -3,7 +3,7 @@
     <template id="s_center_form" name="Center Form">
 
         <section class="pt-0 form-sec">
-            <div class="container">
+            <div class="container center-form">
 <!--               <?php-->
 <!--            $formType = 'tech-dark-form';-->
 <!--            include("tailwind/template/form.php");-->
