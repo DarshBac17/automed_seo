@@ -3,7 +3,7 @@
     <template id="s_footer_form" name="Footer Form">
 
         <section class="bg-gray-light" id="footer-form-id">
-            <div class="footer-form-condition"/>
+            <div class="footer-form-condition footer-form"/>
             <!--<?php
                     $formType = 'footer';
                     include("tailwind/template/form.php");
