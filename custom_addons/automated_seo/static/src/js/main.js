@@ -1,6 +1,7 @@
 
 
 $(document).ready(function() {
+    console.log("main.js loaded")
     $(".nav-menu").click(function() {
         $(".nav-menu").removeClass("active");
         $(this).addClass("active");
@@ -8,7 +9,7 @@ $(document).ready(function() {
         $(this).find(".dropdown-menu").addClass("flex").removeClass("hidden");
     });
 
-    var headerHeight = $("header").outerHeight(true) + 100;
+    var headerHeight = $(".s_header").outerHeight(true) + 100;
     $(".side-sticky").css({ top: headerHeight });
 
     function maskPrice(price) {

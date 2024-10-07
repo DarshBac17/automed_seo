@@ -15,18 +15,11 @@
 
 
         <xpath expr="//div[@id='snippet_structure']" position="before">
-            <div id="snippet_forms" class="o_panel">
-                <div class="o_panel_header">Forms</div>
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Header</div>
                 <div class="o_panel_body">
-
-                    <t t-snippet="automated_seo.s_banner_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, form,dark</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_center_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>center, form, dark</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>footer, form, dark</keywords>
+                    <t t-snippet="automated_seo.s_header" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>header</keywords>
                     </t>
                 </div>
             </div>
@@ -50,18 +43,27 @@
 
                 </div>
             </div>
+            <div id="snippet_forms" class="o_panel">
+                <div class="o_panel_header">Forms</div>
+                <div class="o_panel_body">
+
+                    <t t-snippet="automated_seo.s_banner_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, form,dark</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer, form, dark</keywords>
+                    </t>
+                </div>
+            </div>
+
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Other</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_counting_sec" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>count</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_developer_pricing_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>price, dark</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_developer_pricing_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>price, light</keywords>
-                    </t>
+
+
                     <t t-snippet="automated_seo.s_hire_steps_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>hire, steps</keywords>
                     </t>
@@ -152,7 +154,20 @@
 
                 </div>
             </div>
-              <div id="snippet_footer" class="o_panel">
+                <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Developer price</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_developer_price_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>price, Gray</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_developer_price_bg_orange" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>price, Orange</keywords>
+                    </t>
+
+                </div>
+            </div>
+
+            <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Internal Linking</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_internal_leverage_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -161,15 +176,15 @@
                     <t t-snippet="automated_seo.s_internal_leverage_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Internal,Linking</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_internal_other_service_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_internal_other_service_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Internal,Linking</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_internal_other_service_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_internal_other_service_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Internal,Linking</keywords>
                     </t>
                 </div>
             </div>
-             <div id="snippet_footer" class="o_panel">
+            <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Video Section</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_solution_health_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -178,10 +193,10 @@
                     <t t-snippet="automated_seo.s_solution_health_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_build_software_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_build_software_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_build_software_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_build_software_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
                 </div>
@@ -211,7 +226,7 @@
 
                 </div>
             </div>
-             <div id="snippet_footer" class="o_panel">
+            <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Image Section</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_image_hire_expert_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -223,7 +238,7 @@
 
                 </div>
             </div>
-                 <div id="snippet_footer" class="o_panel">
+            <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Horizontal tab</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_salesforce_tech_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -243,16 +258,16 @@
             </div>
 
 
-             <div id="snippet_footer" class="o_panel">
+            <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Industries</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_enable_growth_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_enable_growth_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_enable_growth_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Industries</keywords>
                     </t>
-                   </div>
+                </div>
             </div>
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Sub Cards</div>
