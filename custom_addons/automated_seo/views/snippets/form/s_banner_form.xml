@@ -24,8 +24,8 @@
                     <!--                            include("tailwind/template/form.php");-->
                     <!--                            ?>-->
                     <!---->
-                    <p class="banner-dev-name"></p>
-                    <form class="emailFormbanner_org" id="emailFormbanner" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
+
+                    <form class="emailFormbanner_org banner-form" id="emailFormbanner" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
                         <div class="grid md:gap-0 gap-6 md:grid-cols-2">
                             <div class="relative">
                                 <input type="text" class="form-control h-full w-full p-3 text-secondary" placeholder="Email Address" id="email" maxlength="80" name="contactEmailHD" size="20"/>
