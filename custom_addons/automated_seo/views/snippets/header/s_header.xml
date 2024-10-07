@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_header" name="Header">
+
+            <section class="border-b border-secondary s_header">
+                <a href="https://www.bacancytechnology.com/" class="logo">
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/bacancy-logo-black.svg" alt="Bacancy" height="44" width="200" loading="lazy" class=""/>
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/bacancy-logo-white.svg" alt="Bacancy" height="44" width="200" loading="lazy" class="hidden"/>
+                </a>
+
+                <ul class="header-nav hidden xxl:flex ml-auto [&amp;_.nav-menu_>span]:text-dark [&amp;_.dropdown-menu]:z-20">
+
+                    <li class="nav-menu">
+                        <span class="cursor-pointer nav-link">About Us</span>
+                        <div class="dropdown-menu about-us-menu hidden bg-white p-7 absolute left-0 right-0 mx-8 top-full flex-col tabs">
+                            <div class="flex gap-6">
+                                <ul class="[&amp;_li]:cursor-pointer w-1/3 [&amp;_li]:block [&amp;_li.active]:text-primary border-secondary border-r [&amp;_li.active]:bg-arrowrightOrange [&amp;_li]:bg-right tab-header menu-list-height">
+                                    <li class="active">About Company</li>
+                                    <li>Resources</li>
+                                    <li>Careers</li>
+                                </ul>
+                                <div class="tab-content [&amp;_.tab-pane]:hidden [&amp;_.tab-pane.active]:flex w-9/12">
+                                    <div class="tab-pane active">
+                                        <div class="w-full">
+                                            <p class="font-bold inline-block before-border">About Company</p>
+                                            <div class="grid md:grid-cols-2">
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/about-us">About Us</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/leadership">Leadership Team</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/testimonials">Customer Reviews</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/awards-recognition">Awards &amp; Recognition</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/infrastructure">Infrastructure</a></li>
+                                                </ul>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/bacancy-values">Bacancy Values</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/bacancy-culture">Bacancy Culture</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/agile-mindset">Agile Mindset</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/locations">Our Locations</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/partnership">Partnership</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane">
+                                        <div class="w-full">
+                                            <p class="font-bold inline-block before-border"> Resources</p>
+                                            <div class="grid md:grid-cols-2">
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/blog/">Blog</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/resources/infographics">Infographics</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/resources/whitepapers">Whitepapers</a></li>
+                                                </ul>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/blog/insights">Insights</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/media-coverage">Media Coverage</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane">
+                                        <div class="w-full">
+                                            <p class="font-bold inline-block before-border">Careers</p>
+                                            <div class="grid md:grid-cols-2">
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/careers">Career</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/jobs/">Job Openings</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/life-at-bacancy">Life@Bacancy</a></li>
+                                                </ul>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/events">Events</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/great-place-to-work">Great place to work</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom-box-wrap border-t border-secondary flex items-center">
+                                <div class="flex-box">
+                                    <div class="svg-icon-32">
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-1.svg" alt="icon" width="48" height="48" loading="eager" class="w-full"/>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold">We are great place to work certified™</span>
+                                        <p>Building and Sustaining High-Trust, High-Performance Culture</p>
+                                    </div>
+                                </div>
+                                <div class="ml-auto">
+                                    <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote<span class="bg-rightarrowLine"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-menu">
+                        <span class="cursor-pointer nav-link">Services</span>
+                        <div class="dropdown-menu gap-6 hidden bg-white p-7 absolute left-0 right-0 mx-8 top-full flex-col tabs">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <div class="box-title-wrap">
+                                        <span class="font-bold">Engagement Models</span>
+                                        <p><a href="https://www.bacancytechnology.com/hire-software-developers" class="underline">Hiring Software Developers</a> becomes easier with just a few clicks.</p>
+                                    </div>
+                                    <div class="icon-text-box">
+                                        <div class="svg-icon-24">
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-2.svg" alt="icon" width="24" height="24" loading="eager" class="w-full"/>
+                                        </div>
+                                        <div>
+                                            <span class="icon-text-heading font-bold"><a href="https://www.bacancytechnology.com/hire-dedicated-developers-india">Dedicated Developer/Teams</a></span>
+                                            <p>Hire developers dedicatedly working for your project</p>
+                                        </div>
+                                    </div>
+                                    <div class="icon-text-box">
+                                        <div class="svg-icon-24">
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-3.svg" alt="icon" width="24" height="24" loading="eager" class="w-full"/>
+                                        </div>
+                                        <div>
+                                            <span class="icon-text-heading font-bold"><a href="https://www.bacancytechnology.com/software-development-outsourcing">Software Development Outsourcing</a></span>
+                                            <p>Get custom solution built as per your requirement.</p>
+                                        </div>
+                                    </div>
+                                    <div class="icon-text-box">
+                                        <div class="svg-icon-24">
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-4.svg" alt="icon" width="24" height="24" loading="eager" class="w-full"/>
+                                        </div>
+                                        <div>
+                                            <span class="icon-text-heading font-bold"><a href="https://www.bacancytechnology.com/it-staff-augmentation-services">Staff Augmentation</a></span>
+                                            <p>Bridge the skill gap in your in-house team</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-6">
+                                    <ul class="[&amp;_li]:cursor-pointer [&amp;_li]:block [&amp;_li.active]:text-primary border-secondary border-r [&amp;_li.active]:bg-arrowrightOrange [&amp;_li]:bg-right tab-header menu-list-height">
+                                        <li class="active">AI/ML</li>
+                                        <li>Software Engineering</li>
+                                        <li>Application Development</li>
+                                        <li>Data Engineering</li>
+                                        <li>Automation</li>
+                                        <li>Quality Assurance</li>
+                                        <li>Cloud</li>
+                                        <li>Platforms</li>
+                                        <li>IT Services</li>
+                                        <li>SaaS</li>
+                                        <li>Technologies</li>
+                                    </ul>
+                                    <div class="tab-content [&amp;_.tab-pane]:hidden [&amp;_.tab-pane.active]:flex menu-list-height">
+                                        <div class="tab-pane active items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">AI/ML</p>
+                                                <div class="accordian-outer">
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading active">
+                                                            <p class="font-bold">Artificial Intelligence</p>
+                                                        </div>
+                                                        <div class="accordian-text active" style="display: block;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/ai-consulting">AI Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/ai-development-services">AI Development</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/computer-vision-services">Computer Vision</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/language-processing-development">NLP</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/ai-ml-development-services">AI And ML Services</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/generative-ai">Generative AI</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/large-language-model-development">LLM Development</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/adaptive-ai-development">Adaptive AI</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Machine Learning</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/machine-learning-consulting">ML Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/deep-learning-development">Deep Learning</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/tensorflow-development">Tensorflow Development</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/machine-learning-development">ML Development</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Software Engineering</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/software-consulting-services">Software consulting </a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/software-development-company">Software Development Services</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/enterprise-software-development">Enterprise Software Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/custom-software-development">Custom Software Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/software-product-development">Software Product Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/software-development-outsourcing">Software Development Outsourcing</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/offshore-software-development">Offshore Software Development</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Application Development</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/web-development-services">Web Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/mobile-app-development">Mobile App Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/ecommerce-development">Ecommerce App Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/full-stack-development">Full Stack Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/application-development-services">Application Development Services</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/application-modernization-services">Application Modernization Services</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Data Engineering</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/data-analytics-services">Data Analytics</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-analysis-services">Data Analysis</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-warehouse-services">Data Warehouse</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-migration-services">Data Migration</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-cleansing-services">Data Cleaning</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-visualization-services">Data Visualization</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-collection-services">Data Collection</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-integration-services">Data Integration</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/big-data-consulting-services">Big Data</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/business-intelligence-services">Business Intelligence</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/data-science-consulting-services">Data science consulting </a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Automation</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/rpa-consulting-services">RPA Consulting</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/workflow-automation-services">Workflow Automation</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Quality Assurance</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/quality-assurance-testing-services">QA Testing</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/functional-testing-services">Functional Testing</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/automation-testing-services">Automation Testing</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/security-testing-services">Security Testing</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/performance-testing-services">Performance Testing</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Cloud</p>
+                                                <div class="accordian-outer">
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading active">
+                                                            <p class="font-bold">Cloud Services</p>
+                                                        </div>
+                                                        <div class="accordian-text active" style="display: block;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-services-and-solutions">Cloud Services and Solution</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-migration-services">Cloud Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-consulting-services">Cloud Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-integration-services">Cloud Integration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-support-and-maintenance-services">Cloud Support And Maintenance</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-managed-services">Cloud Managed</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">AWS</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/aws-consulting-services">AWS Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/aws-migration-services">AWS Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/aws-managed-services">AWS Managed</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/aws-integration-services">AWS Integration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/aws-support-and-maintenance-services">AWS Support And Maintenance</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Azure</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/azure-consulting-services">Azure Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/azure-migration-services">Azure Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/azure-support-and-maintenance-services">Azure Support and Maintenance</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/azure-managed-services">Azure Managed</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/azure-integration-services">Azure Integration</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Google Cloud</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/google-cloud-consulting-services">Google Cloud Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/google-cloud-migration-services">Google Cloud Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/google-cloud-support-and-maintenance-services">Google Cloud Support and Maintenance</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/google-cloud-managed-services">Google Cloud Managed</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/google-cloud-integration-services">Google Cloud Integration</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">Platforms</p>
+                                                <div class="accordian-outer">
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading active">
+                                                            <p class="font-bold">Salesforce</p>
+                                                        </div>
+                                                        <div class="accordian-text active" style="display: block;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-customization">Salesforce Customization</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-implementation-services">Salesforce Implementation</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-integration-services">Salesforce Integration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-development-services">Salesforce Development</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-consulting-service">Salesforce Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-appexchange-development-services">Salesforce Appexchange</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-cpq">Salesforce CPQ</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-data-migration-services">Salesforce Data Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-managed-services">Salesforce Managed Services</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-staff-augmentation">Salesforce Staff Augmentation</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-app-development">Salesforce App Development</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-classic-to-lightning-migration">Salesforce Classic To Lightning Migration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-service-cloud">Salesforce Service Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-marketing-cloud">Salesforce Marketing Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-sales-cloud">Salesforce Sales Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-commerce-cloud">Salesforce Commerce Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-financial-services-cloud">Salesforce Financial Services Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/salesforce-support-services">Salesforce Support</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Microsoft</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/dynamics-365-consulting">Microsoft Dynamics Consulting</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-implementation">Dynamics 365 Implementation</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-integration">Dynamics 365 Integration</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/dynamics-crm-customization">Dynamics 365 Customization</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-support">Microsoft Dynamics 365 Support</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">SAP</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/sap-consulting-services">SAP Consulting</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">IT Services</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/it-consulting">IT Consulting</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/it-staff-augmentation-services">IT Staff Augmentation</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/it-support-services">IT Support</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/it-outsourcing">IT Outsourcing </a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border">SaaS</p>
+                                                <ul>
+                                                    <li><a href="https://www.bacancytechnology.com/saas-development">Saas Development</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/saas-consulting">Saas Consulting</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/saas-web-design">Saas Web Design</a></li>
+                                                    <li><a href="https://www.bacancytechnology.com/saas-architecture-development">Saas Architecture</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane items-start">
+                                            <div class="w-full">
+                                                <p class="font-bold inline-block before-border"><a href="https://www.bacancytechnology.com/technologies">Technologies</a></p>
+                                                <div class="accordian-outer">
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading active">
+                                                            <p class="font-bold">Front End</p>
+                                                        </div>
+                                                        <div class="accordian-text active" style="display: block;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/angular-js-development-company">Angular</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/reactjs-development">React</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/vuejs-development">Vue</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/ui-ux-enhancement-service">UI/UX</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Back End</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/laravel-development">Laravel</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/python-development">Python</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/golang-development">Golang</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/ruby-on-rails-development-company">Ruby on Rails</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/node-js-development">Node</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/java-development">Java </a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/outsource-php-development">PHP</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/rust-development">Rust</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/net-development-company">.NET</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Mobile</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/react-native-app-development">React Native</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/flutter-app-development">Flutter</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/android-application-development">Android</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-item accordian-tab">
+                                                        <div class="faq-heading">
+                                                            <p class="font-bold">Advanced Technologies</p>
+                                                        </div>
+                                                        <div class="accordian-text" style="display: none;">
+                                                            <ul>
+                                                                <li><a href="https://www.bacancytechnology.com/cloud-consulting-services">Cloud</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/devops-consulting-services">DevOps</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/internet-of-things-consulting-services">IoT</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/big-data-consulting-services">Big Data</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/data-science-consulting-services">Data Science</a></li>
+                                                                <li><a href="https://www.bacancytechnology.com/ai-ml-development-services">AI/ML</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom-box-wrap border-t border-secondary flex items-center">
+                                <div class="flex-box">
+                                    <div class="svg-icon-32">
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/header/header-icon-1.svg" alt="icon" width="48" height="48" loading="eager" class="w-full"/>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold">High-quality, Cost-effective IT Outsourcing</span>
+                                        <p>Schedule a free discovery session to explore your needs and find tailored solutions with no obligation.</p>
+                                    </div>
+                                </div>
+                                <div class="ml-auto shrink-0">
+                                    <a href="https://www.bacancytechnology.com/services" class="btn btn-dark">explore all services <span class="bg-rightarrowLine"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-menu">
+                        <span class="cursor-pointer nav-link">Industries</span>
+                        <div class="dropdown-menu industries-menu hidden bg-white p-7 absolute left-0 right-0 mx-8 top-full flex-col">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <p class="font-bold inline-block before-border">Industries</p>
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <ul>
+                                            <li><a href="https://www.bacancytechnology.com/banking-finance-insurance-software-development">BFSI</a></li>
+                                            <li><a href="https://www.bacancytechnology.com/oil-and-gas-enterprise-mobility-solution">Oil &amp; Gas</a></li>
+                                            <li><a href="https://www.bacancytechnology.com/healthcare/">Healthcare</a></li>
+                                        </ul>
+                                        <ul>
+                                            <li><a href="https://www.bacancytechnology.com/real-estate-software-development">Real Estate &amp; Construction </a></li>
+                                            <li><a href="https://www.bacancytechnology.com/logistics-mobile-application-development">Logistics </a></li>
+                                            <li><a href="https://www.bacancytechnology.com/fintech-software-development">Fintech </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bg-light-orange boxed">
+                                    <div class="box-title-wrap mb-0">
+                                        <span class="font-bold block">Let's Grow Together!</span>
+                                        <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark mt-sm">Get Quote<span class="bg-rightarrowLine"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-menu">
+                        <span class="cursor-pointer nav-link">Hire Team</span>
+                        <div class="dropdown-menu hidden bg-white p-7 absolute left-0 right-0 mx-8 top-full tabs flex-col">
+                            <div class="w-full">
+                                <div class="flex gap-6">
+                                    <ul class="menu-list-height w-3/12 [&amp;_li]:cursor-pointer [&amp;_li]:block [&amp;_li.active]:text-primary border-secondary border-r [&amp;_li.active]:bg-arrowrightOrange [&amp;_li]:bg-right tab-header">
+                                        <li class="active">Frontend</li>
+                                        <li>Backend</li>
+                                        <li>Software</li>
+                                        <li>Mobile App</li>
+                                        <li>Automation</li>
+                                        <li>Platforms</li>
+                                        <li>Artificial Intelligence</li>
+                                        <li>Machine Learning</li>
+                                        <li>DevOps</li>
+                                        <li>Data Science</li>
+                                        <li>Cloud</li>
+                                    </ul>
+                                    <div class="tab-content [&amp;_.tab-pane]:hidden [&amp;_.tab-pane.active]:flex w-9/12">
+                                        <div class="tab-pane active">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Frontend</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/angular-js-development">Angular Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-reactjs-developer">React Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-vuejs-developer">Vue Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-javascript-developer">Javascript Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-ui-ux-designer">UI/UX Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-html-css-developer">HTML/CSS Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-tailwind-css-developer">Tailwind CSS Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Your Very Own UI/UX Architects</span>
+                                                            <p class="mt-sm mb-sm">Experience smooth navigation and user-friendly designs with our front-end expertise.</p>
+                                                            <a href="https://www.bacancytechnology.com/hire-front-end-developer" class="btn btn-dark">Hire Frontend Developer<span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Back End</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-laravel-developer">Laravel Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-python-developer">Python Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-golang-developer">Golang Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/ruby-on-rails-development">Ruby on Rails Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-node-developer">Node Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-dot-net-developer">.NET Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/dot-net-core-developer">.NET Core Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-java-developers">Java Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-spring-boot-developer">Spring Boot Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-r-developer">R Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-php-developer">PHP Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-django-developer">Django Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/rust-developers">Rust Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-c-sharp-developer">C# Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Server Solutions To Change Power Dynamics</span>
+                                                            <p class="mt-sm mb-sm">Transform your data into digital experiences with optimized coding standards.</p>
+                                                            <a href="https://www.bacancytechnology.com/hire-back-end-developer" class="btn btn-dark">Hire Backend Developer<span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Software</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-software-developers">Software Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-software-tester">Software Tester</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-full-stack-developer">Full Stack Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-offshore-developers">Offshore Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-remote-developers">Remote Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Dedicated Talent With Skilled Approach</span>
+                                                            <p class="mt-sm mb-sm">Bring your digital visions to life with a hired resource at your convenience.</p>
+                                                            <a href="https://www.bacancytechnology.com/hire-dedicated-developers-india" class="btn btn-dark">Hire Dedicated Developer<span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Mobile App</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-react-native-developer">React Native Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-flutter-developer">Flutter Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/ionic-framework">Ionic Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-kotlin-developers">Kotlin Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-iphone-application-developer">iOS Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-android-app-developer">Android Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Innovating Mobile-Friendly App Solutions</span>
+                                                            <p class="mt-sm mb-sm">Create dynamic mobile apps that make your brand stand out from the crowd.</p>
+                                                            <a href="https://www.bacancytechnology.com/hire-mobile-app-developers" class="btn btn-dark">Hire Mobile App Developer<span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Automation</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-rpa-developer">RPA Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-uipath-developer">UiPath Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Automating At The Edge of Efficiency</span>
+                                                            <p class="mt-sm mb-sm">Scale your development processes to the edge of automation for improved efficiency.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Platforms</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-salesforce-developer">Salesforce Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-microsoft-dynamics-365-developer">MS Dynamics 365 Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-servicenow-developer">ServiceNow Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Fueling Possibilities of Customer Engagement</span>
+                                                            <p class="mt-sm mb-sm">Improving customer engagement with advanced CRM solutions.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Artificial Intelligence</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-ai-developer">AI Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-chatgpt-developer">ChatGPT Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-alexa-skill-developer">Alexa Skill Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-openai-developer">OpenAI Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-pytorch-developer">Pytorch Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-prompt-engineers">Prompt Engineer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-aiops-engineers">AIOps Engineers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Combining Today The Tech of the Future</span>
+                                                            <p class="mt-sm mb-sm">Dive into the domain of tomorrow and bring the future of AI to today's apps.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Machine Learning</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-ml-developer">ML Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-neural-network-developer">Neural Network Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Teaching Your System To Learn And Predict</span>
+                                                            <p class="mt-sm mb-sm">Leverage the power of machines and benefit your business with unique ML algorithms.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">DevOps</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-devops-developers">DevOps Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-devsecops-engineers">DevsecOps Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Connecting Development With Operations</span>
+                                                            <p class="mt-sm mb-sm">Bridging the gap between development and operations for seamless software development.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Data Science</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-tableau-consultant">Tableau Consultant</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-data-analyst">Data Analyst</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-data-scientist">Data Scientist</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-power-bi-consultant">PowerBI Consultant</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-data-engineer">Data Engineer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-qlik-developer">Qlik Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-automation-anywhere-developer">Automation Anywhere Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Guiding Decisions WIth Data-Driven Insights</span>
+                                                            <p class="mt-sm mb-sm">Transition from your gut calls to actionable insights with our rich Data Science expertise.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane">
+                                            <div class="w-full">
+                                                <div class="flex gap-6 items-start">
+                                                    <div class="w-1/3 menu-list-height">
+                                                        <p class="font-bold inline-block before-border">Cloud</p>
+                                                        <ul>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-cloud-developers">Cloud Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-aws-developers">AWS Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-azure-developers">Azure Developer</a></li>
+                                                            <li><a href="https://www.bacancytechnology.com/hire-google-cloud-developers">Google Cloud Developer</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bg-light-orange boxed w-9/12">
+                                                        <div class="box-title-wrap mb-0">
+                                                            <span class="font-bold block">Redefining Scalable Digital Infrastructures</span>
+                                                            <p class="mt-sm mb-sm">Make your data accessible worldwide at will, and leave the stress behind.</p>
+                                                            <a href="https://www.bacancytechnology.com/get-quote" class="btn btn-dark">Get Quote <span class="bg-rightarrowLine"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-menu">
+                        <a href="https://www.bacancytechnology.com/case-study/" rel="nofollow" class="text-dark">Portfolio</a>
+                    </li>
+                    <li class="nav-menu">
+                        <a href="https://www.bacancytechnology.com/contactus" class="text-dark">Contact Us</a>
+                    </li>
+                </ul>
+                <div class="flex right-nav">
+                    <div class="flex items-center mr-sm">
+                        <a href="https://calendly.com/bacancymeeting/30-minute-meeting" target="_blank" class="btn btn-dark text-lowercase hidden md:block book-call-org" id="book-a-30-min-call-b-t-cta">book a 30 min call<span class="bg-rightarrowLine"></span></a>
+                    </div>
+                    <div class="menu-icon flex xxl:hidden items-center p-3 cursor-pointer [&amp;.active_span:first-child]:rotate-45 [&amp;.active_span:last-child]:-rotate-45 [&amp;.active_span:nth-child(2)]:opacity-0 [&amp;.active_span:last-child]:top-[-14px] relative border-l [&amp;.active_>_div]:top-2 border-secondary">
+                        <div class="*:h-0.5 *:w-[35px] *:bg-dark *:inline-block *:transition-all *:ease-in *:delay-75 h-4 flex flex-col justify-between *:relative relative">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_right_outer w-100 bg-white boxed hidden d-xxl-none">
+                    <ul>
+                        <li class="menu_parent">
+                            <span class="res-submenu">About Us</span>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">About Company</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/about-us">About Us</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/leadership">Leadership Team</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/testimonials">Customer Reviews</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/awards-recognition">Awards &amp; Recognition</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/infrastructure">Infrastructure</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/bacancy-values">Bacancy Values</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/bacancy-culture">Bacancy Culture</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/agile-mindset">Agile Mindset</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/locations">Our Locations</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/partnership">Partnership</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Resources</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/blog/">Blog</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/resources/infographics">Infographics</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/resources/whitepapers">Whitepapers</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/blog/insights">Insights</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/media-coverage">Media Coverage</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Careers</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/careers">Career</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/jobs/">Job Openings</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/life-at-bacancy">Life@Bacancy</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/events">Events</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/great-place-to-work">Great place to work</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu_parent">
+                            <span class="res-submenu">Services</span>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Software Engineering</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/software-consulting-services">Software consulting </a></li>
+                                    <li><a href="https://www.bacancytechnology.com/software-development-company">Software Development Services</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/enterprise-software-development">Enterprise Software
+                                        Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/custom-software-development">Custom Software Development</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/software-product-development">Software Product Development</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/software-development-outsourcing">Software Development
+                                        Outsourcing</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/offshore-software-development">Offshore Software Development</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Application Development</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/web-development-services">Web Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/mobile-app-development">Mobile App Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ecommerce-development">Ecommerce App Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/full-stack-development">Full Stack Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/application-development-services">Application Development
+                                        Services</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/application-modernization-services">Application Modernization
+                                        Services</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Data Engineering</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/data-analytics-services">Data Analytics</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-analysis-services">Data Analysis</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-warehouse-services">Data Warehouse</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-migration-services">Data Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-cleansing-services">Data Cleaning</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-visualization-services">Data Visualization</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-collection-services">Data Collection</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-integration-services">Data Integration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/big-data-consulting-services">Big Data</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/business-intelligence-services">Business Intelligence</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-science-consulting-services">Data science consulting </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">AI/ML</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Artificial Intelligence </li>
+                                    <li><a href="https://www.bacancytechnology.com/ai-consulting">AI Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/generative-ai">Generative AI</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ai-development-services">AI Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/computer-vision-services">Computer Vision</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/language-processing-development">NLP</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ai-ml-development-services">AI And ML Services</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/large-language-model-development">LLM Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/adaptive-ai-development">Adaptive AI</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Machine Learning</li>
+                                    <li><a href="https://www.bacancytechnology.com/machine-learning-consulting">ML Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/deep-learning-development">Deep Learning</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/tensorflow-development">Tensorflow Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/machine-learning-development">ML Development</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Automation</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/rpa-consulting-services">RPA Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/workflow-automation-services">Workflow Automation</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Quality Assurance</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/quality-assurance-testing-services">QA Testing</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/functional-testing-services">Functional Testing</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/automation-testing-services">Automation Testing</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/security-testing-services">Security Testing</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/performance-testing-services">Performance Testing</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Cloud</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Cloud Services</li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-services-and-solutions">Cloud Services and Solution</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-migration-services">Cloud Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-consulting-services">Cloud Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-integration-services">Cloud Integration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-support-and-maintenance-services">Cloud Support And
+                                        Maintenance</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-managed-services">Cloud Managed</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">AWS</li>
+                                    <li><a href="https://www.bacancytechnology.com/aws-consulting-services">AWS Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/aws-migration-services">AWS Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/aws-managed-services">AWS Managed</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/aws-integration-services">AWS Integration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/aws-support-and-maintenance-services">AWS Support And
+                                        Maintenance</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Azure</li>
+                                    <li><a href="https://www.bacancytechnology.com/azure-consulting-services">Azure Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/azure-migration-services">Azure Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/azure-support-and-maintenance-services">Azure Support and Maintenance</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/azure-managed-services">Azure Managed</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/azure-integration-services">Azure Integration</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Google Cloud</li>
+                                    <li><a href="https://www.bacancytechnology.com/google-cloud-consulting-services">Google Cloud Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/google-cloud-migration-services">Google Cloud Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/google-cloud-support-and-maintenance-services">Google Cloud Support and Maintenance</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/google-cloud-managed-services">Google Cloud Managed</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/google-cloud-integration-services">Google Cloud Integration</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Platforms</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Salesforce</li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-customization">Salesforce Customization</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-implementation-services">Salesforce
+                                        Implementation</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-integration-services">Salesforce Integration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-development-services">Salesforce Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-consulting-service">Salesforce Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-appexchange-development-services">Salesforce
+                                        Appexchange</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-cpq">Salesforce CPQ</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-data-migration-services">Salesforce Data
+                                        Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-managed-services">Salesforce Managed Services</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-staff-augmentation">Salesforce Staff Augmentation</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-app-development">Salesforce App Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-classic-to-lightning-migration">Salesforce Classic To
+                                        Lightning Migration</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-service-cloud">Salesforce Service Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-marketing-cloud">Salesforce Marketing Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-sales-cloud">Salesforce Sales Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-commerce-cloud">Salesforce Commerce Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-financial-services-cloud">Salesforce Financial
+                                        Services Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/salesforce-support-services">Salesforce Support</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">Microsoft</li>
+                                    <li><a href="https://www.bacancytechnology.com/dynamics-365-consulting">Microsoft Dynamics Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-implementation">Dynamics 365
+                                        Implementation</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-integration">Dynamics 365 Integration</a>
+                                    </li>
+                                    <li><a href="https://www.bacancytechnology.com/dynamics-crm-customization">Dynamics 365 Customization</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/microsoft-dynamics-365-support">Microsoft Dynamics 365
+                                        Support</a></li>
+                                    <li class="text-dark border-b border-b-dark font-bold inline-block">SAP</li>
+                                    <li><a href="https://www.bacancytechnology.com/sap-consulting-services">SAP Consulting</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">IT Services</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/it-consulting">IT Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/it-staff-augmentation-services">IT Staff Augmentation</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/it-support-services">IT Support</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/it-outsourcing">IT Outsourcing </a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">SaaS</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/saas-development">Saas Development</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/saas-consulting">Saas Consulting</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/saas-web-design">Saas Web Design</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/saas-architecture-development">Saas Architecture</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Technologies</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <p class="text-dark border-b border-b-dark font-bold inline-block">Front End</p>
+                                    <li><a href="https://www.bacancytechnology.com/angular-js-development-company">Angular</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/reactjs-development">React</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/vuejs-development">Vue</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ui-ux-enhancement-service">UI/UX</a></li>
+                                    <p class="text-dark border-b border-b-dark font-bold inline-block">Back End</p>
+                                    <li><a href="https://www.bacancytechnology.com/laravel-development">Laravel</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/python-development">Python</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/golang-development">Golang</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ruby-on-rails-development-company">Ruby on Rails</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/node-js-development">Node</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/java-development">Java </a></li>
+                                    <li><a href="https://www.bacancytechnology.com/outsource-php-development">PHP</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/rust-development">Rust</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/net-development-company">.NET</a></li>
+                                    <p class="text-dark border-b border-b-dark font-bold inline-block">Mobile</p>
+                                    <li><a href="https://www.bacancytechnology.com/react-native-app-development">React Native</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/flutter-app-development">Flutter</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/android-application-development">Android</a></li>
+                                    <p class="text-dark border-b border-b-dark font-bold inline-block">Advanced Technologies</p>
+                                    <li><a href="https://www.bacancytechnology.com/cloud-consulting-services">Cloud</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/devops-consulting-services">DevOps</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/internet-of-things-consulting-services">IoT</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/big-data-consulting-services">Big Data</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/data-science-consulting-services">Data Science</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ai-ml-development-services">AI/ML</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-side" style="display: none;">
+                                <a href="https://www.bacancytechnology.com/services" class="btn btn-dark">Explore All Services</a>
+                            </div>
+                        </li>
+                        <li class="menu_parent">
+                            <span class="res-submenu">Industries</span>
+                            <ul class="sub-side" style="display: none;">
+                                <li><a href="https://www.bacancytechnology.com/banking-finance-insurance-software-development">BFSI</a></li>
+                                <li><a href="https://www.bacancytechnology.com/oil-and-gas-enterprise-mobility-solution">Oil &amp; Gas</a></li>
+                                <li><a href="https://www.bacancytechnology.com/healthcare/">Healthcare</a></li>
+                                <li><a href="https://www.bacancytechnology.com/real-estate-software-development">Real Estate &amp; Construction </a>
+                                </li>
+                                <li><a href="https://www.bacancytechnology.com/logistics-mobile-application-development">Logistics </a></li>
+                                <li><a href="https://www.bacancytechnology.com/fintech-software-development">Fintech </a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_parent">
+                            <span class="res-submenu">Hire Talent</span>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Frontend</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/angular-js-development">Angular Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-reactjs-developer">React Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-vuejs-developer">Vue Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-javascript-developer">Javascript Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-ui-ux-designer">UI/UX Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-html-css-developer">HTML/CSS Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-tailwind-css-developer">Tailwind CSS Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-front-end-developer">Hire Frontend-developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Backend</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/ruby-on-rails-development">Ruby on Rails Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-node-developer">Node Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-golang-developer">Golang Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-laravel-developer">Laravel Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-dot-net-developer">.NET Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/dot-net-core-developer">.NET Core Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-java-developers">Java Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-spring-boot-developer">Spring Boot Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-python-developer">Python Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-r-developer">R Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-php-developer">PHP Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-django-developer">Django Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/rust-developers">Rust Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-c-sharp-developer">C# Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-back-end-developer">Hire Backend Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Hire Developer</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-dedicated-developers-india">Dedicated Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-software-developers">Software Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-software-tester">Software Tester</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-full-stack-developer">Full Stack Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-offshore-developers">Offshore Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-dedicated-developers-india">Hire Dedicated Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Mobile App</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-react-native-developer">React Native Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-flutter-developer">Flutter Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/ionic-framework">Ionic Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/kotlin-app-development">Kotlin Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-iphone-application-developer">iOS Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-android-app-developer">Android Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-mobile-app-developers">Mobile App Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Automation</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-rpa-developer">RPA Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-uipath-developer">UiPath Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Platforms</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-salesforce-developer">Salesforce Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-microsoft-dynamics-365-developer">MS Dynamics 365
+                                        Developer</a> </li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-servicenow-developer">ServiceNow Developer</a> </li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Artificial Intelligence</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-ai-developer">AI Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-chatgpt-developer">ChatGPT Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-alexa-skill-developer">Alexa Skill Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-openai-developer">OpenAI Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-pytorch-developer">Pytorch Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-prompt-engineers">Prompt Engineer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-aiops-engineers">AIOps Engineers</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Machine Learning</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-ml-developer">ML Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-neural-network-developer">Neural Network Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">DevOps</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-devops-developers">DevOps</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Data Science</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-tableau-consultant">Tableau Consultant</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-data-analyst">Data Analyst</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-data-scientist">Data Scientist</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-power-bi-consultant">PowerBI Consultant</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-data-engineer">Data Engineer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-qlik-developer">Qlik Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-automation-anywhere-developer">Automation Anywhere Developer</a></li>
+                                </ul>
+                            </ul>
+                            <ul class="sub-side" style="display: none;">
+                                <span class="res-submenu-two">Cloud</span>
+                                <ul class="sub-side-two" style="display: none;">
+                                    <li><a href="https://www.bacancytechnology.com/hire-cloud-developers">Cloud Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-aws-developers">AWS Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-azure-developers">Azure Developer</a></li>
+                                    <li><a href="https://www.bacancytechnology.com/hire-google-cloud-developers">Google Cloud Developer</a></li>
+                                </ul>
+                            </ul>
+                        </li>
+                        <li><a href="https://www.bacancytechnology.com/case-study/">Portfolio</a></li>
+                        <li><a href="https://www.bacancytechnology.com/contactus">Contact Us</a></li>
+                        <li class="mt-sm">
+                            <a href="https://calendly.com/bacancymeeting/30-minute-meeting" target="_blank" class="btn btn-dark" id="book-a-30-min-call-b-t-cta">book a 30 min call</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+    </template>
+</odoo>

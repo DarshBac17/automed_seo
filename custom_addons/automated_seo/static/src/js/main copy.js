@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    console.log("main copy.js loaded")
     // Navigation menu click event
     $(".nav-menu").click(function() {
         $(".nav-menu").removeClass("active");
@@ -8,7 +9,7 @@ $(document).ready(function() {
     });
 
     // Set the top position for side-sticky
-    var headerHeight = $("header").outerHeight(true);
+    var headerHeight = $("s_header").outerHeight(true);
     headerHeight += 100;
     $(".side-sticky").css({ top: headerHeight });
 
