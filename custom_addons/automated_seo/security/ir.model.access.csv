@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_automated_seo_php_mapper,access.automated.seo.php.mapper,model_automated_seo_php_mapper,base.group_user,1,1,1,1
+access_automated_seo_mapper,access.automated.seo.mapper,model_automated_seo_mapper,base.group_user,1,1,1,1
+access_automated_seo_style_mapper,access.automated.seo.style.mapper,model_automated_seo_style_mapper,base.group_user,1,1,1,1

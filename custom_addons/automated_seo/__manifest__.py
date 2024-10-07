@@ -11,7 +11,9 @@
         # 'security/security.xml',
         'security/ir.model.access.csv',
         "views/views.xml",
+        "views/mapper_view.xml",
         "views/php_mapper_view.xml",
+        "views/style_view.xml",
         "views/snippets/footer/s_footer_slider_bg_gray.xml",
         "views/snippets/footer/s_footer_slider_bg_white.xml",
         "views/snippets/footer/s_footer_bg_gray.xml",
@@ -89,6 +91,7 @@
         "views/snippets/form/s_footer_form.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
+        'views/snippets/header/s_header.xml',
         'views/snippets/snippets.xml',
 
         # "views/snippets/s_angular_offer.xml",

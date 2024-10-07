@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_footer_slider_bg_gray" name="Footer slider Gray">
-        <section class="bg-gray-light" id="footer-form-id">
+        <section class="bg-gray-light">
             <div class="container">
                 <div class="footer-slider slick-slider slick-dotted">
                     <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
