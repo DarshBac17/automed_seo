@@ -1,0 +1,54 @@
+@media not all and (min-width:992px) {
+    .hiring-modal-table {
+        overflow-x: scroll
+    }
+}
+
+.hiring-modal-table table {
+    border-width: max(1px, .052vw)
+}
+
+@media not all and (min-width:992px) {
+    .hiring-modal-table table {
+        width: -moz-max-content;
+        width: max-content;
+        overflow-x: scroll
+    }
+}
+
+.hiring-modal-table table * {
+    padding: max(8px, .417vw)
+}
+
+.hiring-modal-table table td:first-child {
+    border-bottom-width: max(1px, .052vw);
+    --tw-bg-opacity: 1;
+    background-color: rgb(105 105 105/var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity))
+}
+
+.hiring-modal-table table td,
+.hiring-modal-table table td:first-child {
+    border-right-width: max(1px, .052vw)
+}
+
+.hiring-modal-table table th:last-child {
+    border-right-width: 0
+}
+
+.hiring-modal-table table th {
+    border-right-width: max(1px, .052vw);
+    --tw-bg-opacity: 1;
+    background-color: rgb(245 130 32/var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity))
+}
+
+.hiring-modal-table table tr:last-child td:first-child {
+    border-bottom-width: 0
+}
+
+.hiring-modal-table table tr {
+    border-bottom-width: max(1px, .052vw)
+}

@@ -13,6 +13,7 @@
         "views/views.xml",
         "views/php_mapper_view.xml",
         "views/snippets/footer/s_footer_slider_bg_gray.xml",
+        "views/snippets/header/s_header.xml",
         "views/snippets/footer/s_footer_slider_bg_white.xml",
         "views/snippets/footer/s_footer_bg_gray.xml",
         "views/snippets/footer/s_footer_bg_white.xml",
@@ -120,6 +121,14 @@
             'automated_seo/static/src/css/footer-slider.css',
             'automated_seo/static/src/css/style.css',
             'automated_seo/static/src/css/tech-stack.css',
+            'automated_seo/static/src/css/header.css',
+            'automated_seo/static/src/css/footer.css',
+            'automated_seo/static/src/css/form.css',
+            'automated_seo/static/src/css/hiring-modal-table.css',
+            'automated_seo/static/src/css/indu-sec.css',
+            'automated_seo/static/src/css/tab-sec.css',
+            'automated_seo/static/src/js/main.js',
+            'automated_seo/static/src/js/main copy.js',
 
         ],
         'website.assets_wysiwyg': [
