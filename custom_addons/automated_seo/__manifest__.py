@@ -20,7 +20,7 @@
         "views/snippets/page/s_counting_sec.xml",
         "views/snippets/page/s_hire_steps_bg_gray.xml",
         "views/snippets/page/s_hire_steps_bg_white.xml",
-        "views/snippets/page/s_angular_dev_expertise.xml",
+        "views/snippets/page/s_technical_stack.xml",
         "views/snippets/page/s_trusted_bg_gray.xml",
         "views/snippets/page/s_trusted_bg_white.xml",
         "views/snippets/page/s_useful_links_bg_gray.xml",
