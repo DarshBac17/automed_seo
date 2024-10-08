@@ -127,8 +127,6 @@
             'automated_seo/static/src/css/indu-sec.css',
             'automated_seo/static/src/css/tab-sec.css',
             'automated_seo/static/src/js/main.js',
-            'automated_seo/static/src/js/main copy.js',
-
         ],
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
