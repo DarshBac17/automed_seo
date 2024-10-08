@@ -76,8 +76,8 @@
                     <t t-snippet="automated_seo.s_trusted_static_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>trusted, dynamic</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_angular_dev_expertise" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>expertise, dynamic</keywords>
+                    <t t-snippet="automated_seo.s_technical_stack" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Technical, stack</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_useful_links_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>expertise, dynamic</keywords>
