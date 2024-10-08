@@ -34,13 +34,35 @@ class View(models.Model):
 
     def php_mapper(self,html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
-        elements = self.env['automated_seo.php_mapper'].search([]).read(['element_class', 'php_tag'])
-        for element in elements:
-            tags = None
-            tags = soup.find_all(class_=element.get('element_class'))
-            for tag in tags:
-                new_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                tag.replace_with(new_tag_soup)
+        sections = soup.find_all('section', {'data-snippet': True})
+        snippet_ids=[]
+        for section in sections:
+            snippet_ids.append(section.get('data-snippet'))
+
+        for snippet_id in snippet_ids:
+            snippet_record = self.env['automated_seo.mapper'].search([('snippet_id', '=', snippet_id)], limit=1)
+
+            if snippet_record:
+                elements = snippet_record.php_tags.read(['element_class', 'php_tag'])
+                for element in elements:
+                    print("=======================")
+                    print(element.get('element_class'))
+                    tags = soup.find_all(class_=element.get('element_class'))
+                    for tag in tags:
+                        original_src = tag.get('src')
+                        print(original_src)
+                        new_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                        if original_src:
+                            image_name = original_src.split('/')[-1]  # Extract just the file name from the src
+                            img_tag = new_tag_soup.find('img')
+                            print(img_tag)
+                            if img_tag:
+                                img_tag['src'] = f'path/to/images/{image_name}'  # Modify as needed
+                                # Update the data-src attribute if necessary
+                                img_tag['data-src'] = f'path/to/images/{image_name}'
+                            print(img_tag)
+
+                        tag.replace_with(new_tag_soup)
 
         for tag in soup.find_all('t'):
             tag.unwrap()
