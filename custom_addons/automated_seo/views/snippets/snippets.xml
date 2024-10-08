@@ -58,10 +58,10 @@
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Developer pricing</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_developer_pricing_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_developer_price_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>price, dark</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_developer_pricing_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_developer_price_bg_orange" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>price, light</keywords>
                     </t>
                 </div>
@@ -70,10 +70,6 @@
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Hire steps</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_counting_sec" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>count</keywords>
-                    </t>
-
                     <t t-snippet="automated_seo.s_hire_steps_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>hire, steps</keywords>
                     </t>
@@ -99,9 +95,6 @@
             <div id="snippet_footer" class="o_panel">
                 <div class="o_panel_header">Useful links</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_technical_stack" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Technical, stack</keywords>
-                    </t>
                     <t t-snippet="automated_seo.s_useful_links_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>useful, links</keywords>
                     </t>
@@ -121,10 +114,10 @@
                 </div>
             </div>
             <div id="snippet_footer" class="o_panel">
-                <div class="o_panel_header">Dev Expertise</div>
+                <div class="o_panel_header">Tech Stack</div>
                 <div class="o_panel_body">
-                     <t t-snippet="automated_seo.s_angular_dev_expertise" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>expertise, dynamic</keywords>
+                     <t t-snippet="automated_seo.s_technical_stack" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Technical, stack</keywords>
                     </t>
                 </div>
             </div>
@@ -136,9 +129,8 @@
                     </t>
                 </div>
             </div>
-
             <div id="snippet_footer" class="o_panel">
-                <div class="o_panel_header">Banner</div>
+                <div class="o_panel_header">CTA</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_banner_cta_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
@@ -146,10 +138,15 @@
                     <t t-snippet="automated_seo.s_banner_cta_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
+                </div>
+            </div>
+
+            <div id="snippet_footer" class="o_panel">
+                <div class="o_panel_header">Banner</div>
+                <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_banner_health_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, slider</keywords>
                     </t>
-
                 </div>
             </div>
             <div id="snippet_footer" class="o_panel">
