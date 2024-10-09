@@ -85,6 +85,7 @@
         "views/snippets/developer/s_profile_bg_white.xml",
         "views/snippets/form/s_banner_form.xml",
         "views/snippets/form/s_footer_form.xml",
+        "views/snippets/form/s_center_form.xml",
         "views/snippets/developer_price/s_developer_price_bg_gray.xml",
         "views/snippets/developer_price/s_developer_price_bg_orange.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
