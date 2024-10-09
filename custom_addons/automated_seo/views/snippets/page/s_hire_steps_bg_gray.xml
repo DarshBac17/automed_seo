@@ -3,7 +3,8 @@
 <odoo>
     <template id="automated_seo.s_hire_steps_bg_gray" name="Hire Steps Gray">
 
-        <section class="container bg-gray-light">
+        <section class="bg-gray-light">
+            <div class="container">
             <h2 class="text-center cont-padding">Header Header Header Header  </h2>
             <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div class="boxed bg-white">
@@ -24,6 +25,7 @@
             </div>
             <div class="text-center mt-md">
                 <a href="#form" class="btn btn-outline-primary">Button text</a>
+            </div>
             </div>
         </section>
 
