@@ -17,86 +17,87 @@
             </div>
 
             <div class="md:col-span-8 faq-head-outer">
-                <div class="accordian-outer">
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
+                <div class="accordian-outer" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
+                     <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                         <div class="faq-heading active">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text active" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">>
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-gray-light" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-gray-light" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-gray-light" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-gray-light" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
                     </div>
-                    <div class="accordion-item accordian-tab bg-gray-light" itemprop="mainEntity">
-                        <div class="faq-heading active">
+                    <div class="accordion-item accordian-tab bg-gray-light" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemprop="acceptedAnswer">
+                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
                             <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
