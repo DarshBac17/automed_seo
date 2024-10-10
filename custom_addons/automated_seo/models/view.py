@@ -27,7 +27,7 @@ class View(models.Model):
         view_name = self.env.context.get('view_name', 'Unknown')
         page = self.env['ir.ui.view'].search([('name', '=', view_name),('website_id','!=', 'False',)]).read(['arch'])
         html_parser =  page[0].get('arch')
-        html_parser = self.php_mapper(html_parser=html_parser)
+        html_parser = self.php_mapper(html_parser=html_parser,page=page[0])
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -38,7 +38,7 @@ class View(models.Model):
                 'parse_html_filename': f"{view_name}_parsed.html"
             })
 
-    def php_mapper(self,html_parser):
+    def php_mapper(self,html_parser, page):
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
         snippet_ids=[]
@@ -49,28 +49,36 @@ class View(models.Model):
             snippet_record = self.env['automated_seo.mapper'].search([('snippet_id', '=', snippet_id)], limit=1)
 
             if snippet_record:
-                elements = snippet_record.php_tags.read(['element_class', 'php_tag'])
+                elements = snippet_record.php_tags.read(['element_class', 'php_tag','image_name'])
                 for element in elements:
-                    print("=======================")
-                    print(element.get('element_class'))
                     tags = soup.find_all(class_=element.get('element_class'))
                     for tag in tags:
+                        print("===========================")
+                        print(tag)
                         new_src = tag.get('src')
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if new_src:
                             new_image_name = new_src.split('/')[-1]  # Extract just the file name from the src
                             old_img_tag = old_tag_soup.find('img')
-                            old_img_name = old_img_tag.get('src').split('/')[-1]
+                            # old_img_name = old_img_tag.get('src').split('/')[-1]
+                            old_img_name = element.get('image_name')
+
                             # temp = self.env['ir.attachment'].search([('name', '=',old_img_name )])
                             if old_img_tag and old_img_name!=new_image_name:
                                 hash_suffix = self.generate_hash()
                                 name, ext = new_image_name.rsplit('.', 1)
                                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                                 old_img_tag['src'] = f'path/to/images/{new_image_name}'
+
                                 old_img_tag['data-src'] = f'path/to/images/{new_image_name}'
+                                php_mapper_record = self.env['automated_seo.php_mapper'].browse(element['id'])
+                                php_mapper_record.write({
+                                    'php_tag': str(old_tag_soup),
+                                    'image_name':str(new_image_name)
+                                })
 
 
-                        tag.replace_with(old_tag_soup)
+                    tag.replace_with(old_tag_soup)
 
         for tag in soup.find_all('t'):
             tag.unwrap()

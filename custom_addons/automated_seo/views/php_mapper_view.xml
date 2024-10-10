@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="element_class"/>
                 <field name="php_tag"/>
+                <field name="image_name"/>
             </tree>
         </field>
     </record>
