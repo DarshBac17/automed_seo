@@ -87,6 +87,10 @@ class View(models.Model):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
 
+        for tag in soup.find_all(True):
+            if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
+                tag.attrs['itemscope'] = None  # Keep as a flag attribute
+
         return soup.prettify()
 
     def action_download_parsed_html(self):
