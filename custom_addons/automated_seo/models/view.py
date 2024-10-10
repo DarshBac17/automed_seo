@@ -56,20 +56,19 @@ class View(models.Model):
                     tags = soup.find_all(class_=element.get('element_class'))
                     for tag in tags:
                         new_src = tag.get('src')
-                        print(new_src)
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if new_src:
                             new_image_name = new_src.split('/')[-1]  # Extract just the file name from the src
                             old_img_tag = old_tag_soup.find('img')
                             old_img_name = old_img_tag.get('src').split('/')[-1]
-                            print(old_img_tag)
+                            # temp = self.env['ir.attachment'].search([('name', '=',old_img_name )])
                             if old_img_tag and old_img_name!=new_image_name:
                                 hash_suffix = self.generate_hash()
-                                new_image_name = f"{new_image_name}_{hash_suffix}"
-                                old_tag_soup['src'] = f'path/to/images/{new_image_name}'  # Modify as needed
-                                # Update the data-src attribute if necessary
-                                old_tag_soup['data-src'] = f'path/to/images/{new_image_name}'
-                            print(old_tag_soup)
+                                name, ext = new_image_name.rsplit('.', 1)
+                                new_image_name = f"{name}_{hash_suffix}.{ext}"
+                                old_img_tag['src'] = f'path/to/images/{new_image_name}'
+                                old_img_tag['data-src'] = f'path/to/images/{new_image_name}'
+
 
                         tag.replace_with(old_tag_soup)
 
