@@ -2,7 +2,8 @@ from odoo import models, fields, api
 from bs4 import BeautifulSoup
 import  html
 import base64
-
+import random
+import string
 
 class View(models.Model):
     _inherit = 'ir.ui.view'
@@ -16,6 +17,11 @@ class View(models.Model):
     #         vals['app_name'] = 'automated_seo'  # Set dynamic default value
     #     return super(View, self).create(vals)
 
+
+
+    def generate_hash(self,length=6):
+        """Generate a random string of fixed length."""
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
@@ -49,20 +55,23 @@ class View(models.Model):
                     print(element.get('element_class'))
                     tags = soup.find_all(class_=element.get('element_class'))
                     for tag in tags:
-                        original_src = tag.get('src')
-                        print(original_src)
-                        new_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                        if original_src:
-                            image_name = original_src.split('/')[-1]  # Extract just the file name from the src
-                            img_tag = new_tag_soup.find('img')
-                            print(img_tag)
-                            if img_tag:
-                                img_tag['src'] = f'path/to/images/{image_name}'  # Modify as needed
+                        new_src = tag.get('src')
+                        print(new_src)
+                        old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                        if new_src:
+                            new_image_name = new_src.split('/')[-1]  # Extract just the file name from the src
+                            old_img_tag = old_tag_soup.find('img')
+                            old_img_name = old_img_tag.get('src').split('/')[-1]
+                            print(old_img_tag)
+                            if old_img_tag and old_img_name!=new_image_name:
+                                hash_suffix = self.generate_hash()
+                                new_image_name = f"{new_image_name}_{hash_suffix}"
+                                old_tag_soup['src'] = f'path/to/images/{new_image_name}'  # Modify as needed
                                 # Update the data-src attribute if necessary
-                                img_tag['data-src'] = f'path/to/images/{image_name}'
-                            print(img_tag)
+                                old_tag_soup['data-src'] = f'path/to/images/{new_image_name}'
+                            print(old_tag_soup)
 
-                        tag.replace_with(new_tag_soup)
+                        tag.replace_with(old_tag_soup)
 
         for tag in soup.find_all('t'):
             tag.unwrap()
