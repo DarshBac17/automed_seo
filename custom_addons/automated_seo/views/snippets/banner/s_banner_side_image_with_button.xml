@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_banner_side_image_with_button" name="Banner side image with button">
+        <section class="banner banner-post header-top banner-after">
+
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"
+                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"
+                 alt="Hire iOS Developers" title="Hire iOS Developers" width="1900" height="900" loading="eager"
+                 class="banner-post-img hire-iphone-application-banner-2"/>
+
+            <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
+
+                <div class="lg:col-span-3">
+                    <h1>Heading Heading Heading Heading Heading</h1>
+                    <p>Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                        Description Description Description Description Description Description Description Description
+                    </p>
+
+                        <a href="#case-study" class="btn btn-outline-primary">Button Name</a>
+
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
