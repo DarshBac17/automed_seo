@@ -102,6 +102,8 @@ class View(models.Model):
             for tag in soup.find_all(class_=class_to_remove):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
+                # tag.replace_with( tag.decode_contents())
+
 
         for tag in soup.find_all(True):
             if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
