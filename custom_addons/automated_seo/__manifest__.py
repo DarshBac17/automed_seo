@@ -26,6 +26,7 @@
         "views/snippets/page/s_useful_links_bg_gray.xml",
         "views/snippets/page/s_useful_links_bg_white.xml",
         "views/snippets/page/s_ask_questions_bg_white.xml",
+        "views/snippets/page/s_technical_stack_bg_white.xml",
         "views/snippets/side_image/s_side_image_bg_gray.xml",
         "views/snippets/side_image/s_side_image_bg_white.xml",
         "views/snippets/side_image/s_left_side_image_bg_gray.xml",

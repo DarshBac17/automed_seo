@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_hire_model_bg_gray" name="Hire Model Gray">
+    <template id="s_card_with_list_and_button_bg_gray" name="Card with list and button Gray">
         <section class="bg-gray-light">
             <div class="container">
                 <div class="cont-padding text-center">
