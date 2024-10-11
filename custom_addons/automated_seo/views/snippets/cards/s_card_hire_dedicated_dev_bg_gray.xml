@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_hire_dedicated_dev_bg_gray" name="Hire Dedicated Dev Gray">
+    <template id="s_card_hire_dedicated_dev_bg_gray" name="Hiring Model Gray">
         <section class="bg-gray-light text-center">
             <div class="container">
                 <div class="cont-padding">

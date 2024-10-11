@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_ask_questions_bg_white" name="Asked Questions White">
+    <template id="s_ask_questions_bg_white" name="FAQ White">
         <section class="bg-gray-light">
         <div class="container grid md:gap-6 grid-cols-1 md:grid-cols-11">
 

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_technical_stack" name="Technical stack gray">
-        <section class="bg-gray-light tech-stack" id="tech-stack">
-            <div class="container">
-                <div class="text-center cont-padding">
-                    <h2>Heading Heading Heading Heading Heading Heading Heading</h2>
+    <template id="s_technical_stack_bg_white" name="Technical stack white">
+<section class="container tech-stack" id="tech-stack">
+        <div class="text-center cont-padding">
+            <h2>Heading Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                         Description Description Description Description
@@ -372,10 +371,9 @@
 
                     </tbody>
                 </table>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Button text</a>
-                </div>
-            </div>
-        </section>
+        <div class="text-center mt-md">
+            <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
+        </div>
+    </section>
     </template>
 </odoo>

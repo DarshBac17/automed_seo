@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_success_core_bg_white" name="Success Core White">
+    <template id="s_card_with_list_bg_white" name="Card with list white">
         <section class="container">
             <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check">

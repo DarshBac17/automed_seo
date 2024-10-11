@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_vertical_tab_healthcare_bg_gray" name="Health Care Gray">
+    <template id="s_vertical_tab_healthcare_bg_gray" name="Vertical tab Gray">
         <section class="tabs tabbibg-sec side-tab bg-gray-light">
             <div class="container">
                 <div class="cont-padding text-center">

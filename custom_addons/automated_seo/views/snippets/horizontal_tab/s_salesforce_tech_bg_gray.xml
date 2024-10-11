@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_salesforce_tech_bg_gray" name="Salesforce Tech/Tool Gray">
+    <template id="s_salesforce_tech_bg_gray" name="Horizontal tab Gray">
 
         <section class="bg-gray-light tabs tabbibg-sec" id="technical-stack">
             <div class="container">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_build_software_bg_white" name="Build Software White">
+    <template id="s_build_software_bg_white" name="Side video White">
 
         <section class="container">
             <div class="cont-padding">
