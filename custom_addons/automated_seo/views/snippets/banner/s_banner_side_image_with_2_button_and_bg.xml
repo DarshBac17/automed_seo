@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_banner_side_image_with_2_button_and_bg" name="Banner side image with 2 button and bg">
+        <section class="banner banner-post header-top bg-dark">
+            <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
+            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
+            <?php endif; ?>-->
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="ruby-on-rails-development_banner-3 banner-post-img"/>
+
+            <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
+                <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
+                <div class="lg:col-span-2 lg:order-2">
+                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
+                </div>
+                <?php endif; ?>-->
+                <img src="automated_seo/static/src/img/banner-side-4.png" data-src="automated_seo/static/src/img/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="banner-side-4 w-full"/>
+
+                <div class="lg:col-span-3">
+                    <h1>Heading Heading Heading Heading Heading</h1>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                    <!--                    <?php-->
+                    <!--                            $formType = 'banner';-->
+                    <!--                            $bannerDevName = "Angular";-->
+                    <!--                            include("tailwind/template/form.php");-->
+                    <!--                            ?>-->
+                    <!---->
+                    <div class="flex flex-wrap gap-6 text-center resp-btn-two">
+                    <a href="#case-study" class="btn btn-outline-primary">Button Name</a>
+                    <a href="#tech-stack" class="btn btn-primary">Button Name</a>
+                </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
