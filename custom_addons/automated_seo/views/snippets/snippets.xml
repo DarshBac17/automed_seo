@@ -15,7 +15,7 @@
 
 
         <xpath expr="//div[@id='snippet_structure']" position="before">
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_header" class="o_panel">
                 <div class="o_panel_header">Header</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_header" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -23,7 +23,7 @@
                     </t>
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_footer" class="o_panel">
                 <div class="o_panel_header">Footer</div>
                 <div class="o_panel_body">
 
@@ -43,67 +43,64 @@
 
                 </div>
             </div>
-            <div id="snippet_forms" class="o_panel">
+            <div id="snippets_forms" class="o_panel">
                 <div class="o_panel_header">Forms</div>
                 <div class="o_panel_body">
-<!--                    <t t-snippet="automated_seo.s_banner_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
-<!--                        <keywords>banner, form,dark</keywords>-->
-<!--                    </t>-->
                     <t t-snippet="automated_seo.s_footer_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>footer, form, dark</keywords>
+                        <keywords>footer, form</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_center_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>footer, form, dark</keywords>
+                    <t t-snippet="automated_seo.s_single_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>single, form</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_developer_price_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>price, Gray</keywords>
+                    <t t-snippet="automated_seo.s_form_with_price_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>price, Gray, form</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_developer_price_bg_orange" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>price, Orange</keywords>
+                    <t t-snippet="automated_seo.s_form_with_price_orange" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>price, Orange, form</keywords>
                     </t>
                 </div>
             </div>
 
 
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_step_section" class="o_panel">
                 <div class="o_panel_header">Step section</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_hire_steps_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>hire, steps</keywords>
+                    <t t-snippet="automated_seo.s_steps_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>steps, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_steps_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>hire, dynamic</keywords>
+                    <t t-snippet="automated_seo.s_steps_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>steps, white</keywords>
                     </t>
                 </div>
             </div>
 
 
-            <div id="snippet_footer" class="o_panel">
-                <div class="o_panel_header">Trusted static</div>
+            <div id="snippets_trusted_by" class="o_panel">
+                <div class="o_panel_header">Trusted By</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_trusted_static_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>trusted, dynamic</keywords>
+                    <t t-snippet="automated_seo.s_trusted_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>trusted, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_trusted_static_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>trusted, dynamic</keywords>
+                    <t t-snippet="automated_seo.s_trusted_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>trusted, white</keywords>
                     </t>
                 </div>
             </div>
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_useful_links" class="o_panel">
                 <div class="o_panel_header">Useful links</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_useful_links_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>useful, links</keywords>
+                        <keywords>useful, links, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_useful_links_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>useful, links</keywords>
+                        <keywords>useful, links, white</keywords>
                     </t>
                 </div>
             </div>
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_counting_sec" class="o_panel">
                 <div class="o_panel_header">Counting sec</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_counting_sec" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -112,78 +109,78 @@
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_tech_stack" class="o_panel">
                 <div class="o_panel_header">Tech Stack</div>
                 <div class="o_panel_body">
-                     <t t-snippet="automated_seo.s_technical_stack" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Technical, stack</keywords>
+                     <t t-snippet="automated_seo.s_technical_stack_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>technical, tech, stack, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_technical_stack_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Technical, stack</keywords>
+                        <keywords>technical, stack, tech, white</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
-                <div class="o_panel_header">FAQ </div>
+            <div id="snippets_faq" class="o_panel">
+                <div class="o_panel_header">FAQ</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_ask_questions_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>ask, questions</keywords>
+                    <t t-snippet="automated_seo.s_faq_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>ask, questions, faq, white</keywords>
                     </t>
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_cta" class="o_panel">
                 <div class="o_panel_header">CTA</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_banner_cta_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                    <t t-snippet="automated_seo.s_dark_cta_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>cta, dark, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_banner_cta_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                    <t t-snippet="automated_seo.s_dark_cta_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>cta, dark, white</keywords>
                     </t>
                 </div>
             </div>
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_banner" class="o_panel">
                 <div class="o_panel_header">Banner</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_banner_health_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, health, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_banner_side_image_with_form_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, side image, form</keywords>
                     </t><t t-snippet="automated_seo.s_banner_side_image_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, side image, button</keywords>
                     </t><t t-snippet="automated_seo.s_banner_side_image_with_2_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, side image, button</keywords>
                     </t><t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, side image, button</keywords>
                     </t><t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, side, matrix, button</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_cards" class="o_panel">
                 <div class="o_panel_header">Cards</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_card_with_icon_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, icon, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_with_icon_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, icon, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_with_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, list, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_with_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, list, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_with_list_and_button_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, list, button, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_card_with_list_and_button_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>card</keywords>
+                        <keywords>card, list, button, gray</keywords>
                     </t>
 <!--                    <t t-snippet="automated_seo.s_card_2_box_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
 <!--                        <keywords>card</keywords>-->
@@ -200,26 +197,26 @@
 
                 </div>
             </div>
-             <div id="snippet_footer" class="o_panel">
+             <div id="snippets_hiring_model_section" class="o_panel">
                 <div class="o_panel_header">Hiring Models Section</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_card_hire_dedicated_dev_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Hiring</keywords>
+                    <t t-snippet="automated_seo.s_hiring_model_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Hiring, model, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_card_hire_dedicated_dev_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Hiring</keywords>
+                    <t t-snippet="automated_seo.s_hiring_model_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Hiring, model, white</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_leader" class="o_panel">
                 <div class="o_panel_header">Leader</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_leadership_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>leader</keywords>
+                        <keywords>leader, leadership, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_leadership_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>leader</keywords>
+                        <keywords>leader, leadership, white</keywords>
                     </t>
 
                 </div>
@@ -237,20 +234,20 @@
 <!--                </div>-->
 <!--            </div>-->
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_internal_linking" class="o_panel">
                 <div class="o_panel_header">Internal Linking</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_internal_linking_box_with_arrow_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Internal,Linking</keywords>
+                        <keywords>Internal, Linking, boc, arrow, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_internal_linking_box_with_arrow_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Internal,Linking</keywords>
+                        <keywords>Internal, Linking, boc, arrow, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_internal_linking_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Internal,Linking</keywords>
+                        <keywords>Internal, Linking, list, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_internal_linking_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Internal,Linking</keywords>
+                        <keywords>Internal, Linking, list, gray</keywords>
                     </t>
                 </div>
             </div>
@@ -278,183 +275,183 @@
 <!--                </div>-->
 <!--            </div>-->
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_testimonials" class="o_panel">
                 <div class="o_panel_header">Testimonials</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_client_feedback_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Testimonials</keywords>
+                        <keywords>Testimonials, client, feedback, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_client_feedback_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Testimonials</keywords>
+                        <keywords>Testimonials, client, feedback, white</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_image_section" class="o_panel">
                 <div class="o_panel_header">Image Section</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_image_hire_expert_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Image</keywords>
+                    <t t-snippet="automated_seo.s_hire_expert_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>hire, expert, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_image_hire_expert_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Image</keywords>
+                    <t t-snippet="automated_seo.s_hire_expert_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>hire, expert, gray</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_tab" class="o_panel">
                 <div class="o_panel_header">Tab</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_salesforce_tech_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                    <t t-snippet="automated_seo.s_horizontal_tab_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Tab, horizontal, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_salesforce_tech_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                    <t t-snippet="automated_seo.s_horizontal_tab_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Tab, horizontal, gray</keywords>
                     </t>
-                     <t t-snippet="automated_seo.s_vertical_tab_healthcare_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                     <t t-snippet="automated_seo.s_vertical_tab_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Tab, vertical, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_vertical_tab_healthcare_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                    <t t-snippet="automated_seo.s_vertical_tab_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Tab, vertical, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                        <keywords>hire, dedicated, developer, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Tab</keywords>
+                        <keywords>hire, dedicated, developer, white</keywords>
                     </t>
 
                 </div>
             </div>
 
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_industries" class="o_panel">
                 <div class="o_panel_header">Industries</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_enable_growth_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Industries</keywords>
+                    <t t-snippet="automated_seo.s_industries_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_enable_growth_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Industries</keywords>
+                    <t t-snippet="automated_seo.s_industries_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Industries, white</keywords>
                     </t>
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_sub_cards" class="o_panel">
                 <div class="o_panel_header">Sub Cards</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_card" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>sub card, card</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_service" class="o_panel">
                 <div class="o_panel_header">Service</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_banner_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, cards, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_banner_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, cards, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, developer, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_developer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, developer, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_hire_expertise_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>banner, expertise, developer, white</keywords>
                     </t>
 
                 </div>
             </div>
 
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_case_study" class="o_panel">
                 <div class="o_panel_header">Case Study</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_case_study_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>case, study, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_case_study_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>case, study, gray</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
-                <div class="o_panel_header">Developer</div>
+            <div id="snippets_profile" class="o_panel">
+                <div class="o_panel_header">Profile</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_profile_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>profile, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_profile_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>profile, white</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_slider" class="o_panel">
                 <div class="o_panel_header">Slider</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_combination_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                    <t t-snippet="automated_seo.s_combination_slider_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>combination, slider, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_combination_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                    <t t-snippet="automated_seo.s_combination_slider_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>combination, slider, gray</keywords>
                     </t>
 
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_side_image" class="o_panel">
                 <div class="o_panel_header">side image</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_side_image_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_side_image_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_left_side_image_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, left, image, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_left_side_image_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, left, image, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_side_img_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, list, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_side_img_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, list, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_right_side_img_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, list, gray, right</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_right_side_img_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, list, white, right</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_side_img_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, gray, cards</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_side_img_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>side, image, white, cards</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_build_software_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Industries</keywords>
+                    <t t-snippet="automated_seo.s_side_video_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>side, video, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_build_software_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>Industries</keywords>
+                    <t t-snippet="automated_seo.s_side_video_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>side, video, gray</keywords>
                     </t>
                 </div>
             </div>
-            <div id="snippet_footer" class="o_panel">
+            <div id="snippets_trusted_parties" class="o_panel">
                 <div class="o_panel_header">Trusted Parties</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_trusted_parties_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>trusted, parties</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_trusted_parties_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, slider</keywords>
+                        <keywords>trusted, parties</keywords>
                     </t>
                 </div>
             </div>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_side_video_bg_gray" name="Side video Gray">
+
+        <section class="bg-gray-light">
+            <div class="container">
+                <div class="cont-padding">
+                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <script type="text/javascript"
+                                src="https://fast.wistia.com/embed/medias/ewi6xwr809.jsonp"/>
+                        <script type="text/javascript" src="https://fast.wistia.com/assets/external/E-v1.js"/>
+                        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                            <div class="wistia_responsive_wrapper"
+                                 style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                                <div class="wistia_embed wistia_async_ewi6xwr809 videoFoam=true"
+                                     style="height:100%;position:relative;width:100%">
+                                    <div class="wistia_swatch"
+                                         style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                                        <img src="https://fast.wistia.com/embed/medias/ewi6xwr809/swatch"
+                                             style="filter:blur(5px);height:100%;object-fit:contain;width:100%;"
+                                             alt="We are Most Preferred Choice of Startups, SMEs, and Enterprises to Build Offshore Software Development Team"
+                                             aria-hidden="true" onload="this.parentNode.style.opacity=1;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-h4 small-heading">Heading Heading</h3>
+                        <div class="grid grid-cols-subgrid sm:grid-cols-2 gap-6">
+                            <div class="boxed bg-white">
+                                <h4 class="text-h5 mb-0 text-dark">100%</h4>
+                                <p>Text Text Text</p>
+                            </div>
+                            <div class="boxed bg-white">
+                                <h4 class="text-h5 mb-0 text-dark">50%</h4>
+                                <p>Text Text Text</p>
+                            </div>
+                            <div class="boxed bg-white">
+                                <h4 class="text-h5 mb-0 text-dark">99%</h4>
+                                <p>Text Text Text</p>
+                            </div>
+                            <div class="boxed bg-white">
+                                <h4 class="text-h5 mb-0 text-dark">100%</h4>
+                                <p>Text Text Text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

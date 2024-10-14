@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_form_with_price_gray" name="Form with price Gray">
+        <section class="bg-gray-light form-dark">
+
+            <div class="container">
+                <div class="text-center cont-padding">
+                    <h2>Heading Heading Heading</h2>
+                    <p>Description Description Description Description Description Description Description Description Description Description</p>
+                </div>
+                <div class="grid lg:grid-cols-3 md:grid-cols-2 text-center items-end gap-y-6">
+                    <a href="#form">
+                        <div class="shadow-form bg-white">
+                            <div class="boxed">
+                                <p class="text-h1 text-primary font-bold mb-0 hourly-price"><!--<?php echo constant("ANGULAR_USA_HOURLY") ?>-->$100</p>
+                                <p class="font-bold text-dark">Hourly (USD)</p>
+                            </div>
+                           <div class="boxed border-t border-primary">
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#form">
+                        <div class="shadow-form relative bg-white">
+                            <div class="svg-icon relative -top-3">
+                                <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/startwith.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/startwith.svg" alt="icon" height="40" width="164" class="mx-auto" loading="lazy">-->
+                                <img src="automated_seo/static/src/img/startwith.svg" data-src="automated_seo/static/src/img/startwith.svg" alt="icon" height="40" width="164" class="mx-auto start-with" loading="lazy"/>
+                            </div>
+                            <div class="boxed">
+                                <p class="text-h1 text-primary font-bold mb-0 monthly-price"> <!--<?php echo constant("ANGULAR_USA_MONTHLY") ?>-->$2000</p>
+                                <p class="font-bold text-dark">Monthly (USD)</p>
+                            </div>
+                            <div class="boxed border-t border-primary">
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#form">
+                        <div class="shadow-form bg-white">
+                            <div class="boxed">
+                                <p class="text-h1 text-primary font-bold mb-0 no-developer" ><!--<?php echo constant("ANGULAR_USA_MONTHLY_5") ?>-->$1000</p>
+                                <p class="font-bold text-dark">Yearly (USD)</p>
+                            </div>
+                            <div class="boxed border-t border-primary bg-white">
+                                <p>Description Description<br class='none md:block' /> Description Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="text-center mt-md">
+                    <a href="#form" class="btn btn-primary">Button text</a>
+                </div>
+            </div>
+        </section>
+        <section class="pt-0 form-sec">
+            <div class="container center-form">
+<!--               <?php-->
+<!--            $formType = 'tech-dark-form';-->
+<!--            include("tailwind/template/form.php");-->
+<!--            ?>-->
+
+                <!--        <div class="<?php echo $mtRemove ? 'px-0 py-lg' : 'form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark'; ?>" id="form">-->
+                <div class="form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark" id="form">
+                    <div class="text-center cont-padding" id="schedule-interview">
+                        <!--<?php if ($tech_dark_form_heading) : ?>
+                            <h2 class="text-white">
+                                <?php echo $tech_dark_form_heading ?>
+                            </h2>
+                        <?php else: ?>
+                            <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
+                        <?php endif ?>-->
+                        <h2 class="text-white">Heading Heading Heading Heading Heading</h2>
+
+                        <!--<?php if ($short_desc) : ?>
+                            <p class="text-h5 text-white">
+                                <?php echo $short_desc ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement.</p>
+                        <?php endif ?>-->
+                        <p class="text-h5 text-white">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+
+                    </div>
+                    <form action="" class="inquiry-form-block form--square tech-form" id="contactfullForm" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
+                        <div class="grid gap-6 grid-cols-1 lg:grid-cols-3">
+                            <div>
+                                <input type="text" class="form-control"  id="focus-id" maxlength="80" name="contactName" size="20" placeholder="Your Name" />
+                            </div>
+                            <div class="relative">
+                                <input type="text" class="form-control validate-required" placeholder="Work Email Address" id="email" maxlength="80" name="contactEmail" size="20"/>
+                                <!--<?php if (isset($errors['contactEmail'])) : ?>
+                                    <span class="error-message" style="color: red; float: left;"><?php echo $errors['contactEmail']; ?></span>
+                                <?php endif; ?>-->
+                            </div>
+                            <div>
+                                <input type="number" class="form-control" placeholder="Phone Number" id="phone" maxlength="40" name="contactPhone" size="20" nkeypress="return isNumberKey(event)" />
+                                <!--<?php if (isset($errors['contactPhone'])) : ?>
+                                    <span class="error-message" style="color: red;float: left;"><?php echo $errors['contactPhone']; ?></span>
+                                <?php endif; ?>-->
+
+                            </div>
+                            <div class="col-span-full">
+                                <textarea class="form-control" rows="3" placeholder="Describe Your Requirements" name="contactMessage"/>
+                            </div>
+                            <div class="col-span-full text-center text-white">
+                                <button class="btn btn-primary" name="contactBtn">Button Text</button>
+                                <div class="md:flex text-h2 items-center justify-center mt-sm [&amp;_.mail-id]:border-white [&amp;_.mail-id]:border-b-2 [&amp;_.mail-id]:font-bold">
+                                    <!--                         <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>-->
+                                    <img src="automated_seo/static/src/img/email-svg-icon.svg" data-src="automated_seo/static/src/img/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>
+                                    <!--                        <?php echo $bacancymailid ?>-->
+                                    <p>company@gmail.com</p>
+                                </div>
+                                <p class="mt-sm">Text Text Text Text</p>
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <p>Description<b>Text</b>, <b>Text</b> &amp; <b>Text</b> Description Description Description Description Description Description</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </template>
+</odoo>
