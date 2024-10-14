@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_dark_cta_bg_white" name="Dark CTA White">
+       <section class="container">
+            <div class="boxed text-center bg-dark">
+                <h2 class="text-white cont-padding">Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text</h2>
+<!--                <a href="https://calendly.com/<?php echo $calendlyPath;?>/30-minute-meeting" class="btn btn-primary">Button text</a>-->
+                <a href="#" class="btn btn-primary schedule-call">Button text</a>
+        </div>
+    </section>
+    </template>
+</odoo>
+
+

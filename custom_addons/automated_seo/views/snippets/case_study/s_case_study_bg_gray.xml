@@ -16,7 +16,7 @@
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text</span> Text</p>
                                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <a href="#form" class="btn btn-outline-primary">Subtitle Subtitle Subtitle Subtitle</a>
+                                <a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
