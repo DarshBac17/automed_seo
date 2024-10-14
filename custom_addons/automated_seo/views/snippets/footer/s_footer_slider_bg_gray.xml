@@ -7,7 +7,7 @@
                     <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
                             aria-disabled="true">Previous
                     </button>
-                    <div class="slick-list draggable bg-white ">
+                    <div class="slick-list draggable bg-gray-light">
                         <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
                             <!-- Slide 1 -->
                             <div class="slick-slide slick-current slick-active" data-slick-index="0"

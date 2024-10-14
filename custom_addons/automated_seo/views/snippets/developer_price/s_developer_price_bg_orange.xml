@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_developer_price_bg_orange" name="Developer price Orange">
+    <template id="s_developer_price_bg_orange" name="Form with price Orange">
         <section class="bg-light-orange form-dark">
 
             <div class="container">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_internal_leverage_bg_white" name="Internal leverage White">
+    <template id="s_internal_linking_box_with_arrow_bg_white" name="Internal linking box with arrow white">
  <section class="container hover-box">
         <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>

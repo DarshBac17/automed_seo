@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_internal_other_service_bg_white" name="Internal Other Service White">
+    <template id="s_internal_linking_list_bg_white" name="Internal linking list White">
         <section class="container">
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>

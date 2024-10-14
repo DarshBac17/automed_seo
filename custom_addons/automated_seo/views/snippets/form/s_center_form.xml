@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_center_form" name="Center Form">
+    <template id="s_center_form" name="Single Form">
 
         <section class="pt-0 form-sec">
             <div class="container center-form">

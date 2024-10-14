@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_enable_growth_bg_gray" name="Enable Growth Gray">
+    <template id="s_enable_growth_bg_gray" name="Industries Gray">
         <section class="bg-gray-light industry-sec">
         <div class="container">
             <div class="cont-padding text-center">
