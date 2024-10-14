@@ -284,6 +284,12 @@
                     <t t-snippet="automated_seo.s_client_feedback_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Testimonials, client, feedback, white</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_client_feedback_2_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Testimonials, client, feedback 2, gray</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_client_feedback_2_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Testimonials, client, feedback 2, white</keywords>
+                    </t>
 
                 </div>
             </div>

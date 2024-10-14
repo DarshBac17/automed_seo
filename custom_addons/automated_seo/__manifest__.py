@@ -72,7 +72,8 @@
         "views/snippets/industries/s_industries_white.xml",
         "views/snippets/video_section/s_solution_health_bg_white.xml",
         "views/snippets/video_section/s_solution_health_bg_gray.xml",
-
+        "views/snippets/testimonials/s_client_feedback_2_bg_white.xml",
+        "views/snippets/testimonials/s_client_feedback_2_bg_gray.xml",
         "views/snippets/testimonials/s_client_feedback_bg_white.xml",
         "views/snippets/testimonials/s_client_feedback_bg_gray.xml",
         "views/snippets/image_section/s_hire_expert_bg_white.xml",
