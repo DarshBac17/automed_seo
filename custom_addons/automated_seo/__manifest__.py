@@ -63,6 +63,7 @@
         "views/snippets/cards/s_card_2_box_list_bg_white.xml",
         "views/snippets/cards/s_card_2_box_list_bg_gray.xml",
         "views/snippets/cards/s_card_with_icon_grid_2_bg_white.xml",
+        "views/snippets/cards/s_card_with_button_bg_white.xml",
         "views/snippets/hiring_model/s_hiring_model_bg_white.xml",
         "views/snippets/hiring_model/s_hiring_model_bg_gray.xml",
         "views/snippets/leadership/s_leadership_bg_gray.xml",
