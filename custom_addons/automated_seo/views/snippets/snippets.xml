@@ -133,6 +133,17 @@
                     </t>
                 </div>
             </div>
+               <div id="snippets_fortune" class="o_panel">
+                <div class="o_panel_header">Fortune</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_fortune" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>fortune</keywords>
+
+                    </t>
+
+                </div>
+            </div>
+
             <div id="snippets_cta" class="o_panel">
                 <div class="o_panel_header">CTA</div>
                 <div class="o_panel_body">

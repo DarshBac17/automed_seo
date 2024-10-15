@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_fortune" name="Fortune">
+    <section class="pb-0 bg-gray-light fortune">
+        <div class="container">
+            <h2>Heading Heading</h2>
+            <p>Description Description Description Description Description Description Description Description</p>
+            <a href="#form" class="btn btn-primary mb-md">Button Text</a>
+        </div>
+    </section>
+
+
+    <section class="bg-black text-center">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-9 px-md">
+            <div>
+                <h3 class="text-primary text-h4">Heading</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/ups.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/ups.svg" alt="UPS" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/varizon.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/varizon.svg" alt="Varizon" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/scotch.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/scotch.svg" alt="Scotch" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/publicis.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/publicis.svg" alt="Publicis" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/wb.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/wb.svg" alt="WB" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/academy.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/academy.svg" alt="Academy" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/disney.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/disney.svg" alt="Disney" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/3m.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/3m.svg" alt="3m" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                </div>
+            </div>
+            <div class="md:px-sm md:border-l lg:border-r">
+                <h3 class="text-primary text-h4">Heading Heading</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/dubai-bazaar.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/dubai-bazaar.svg" alt="Dubai bazaar" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/royal-court-affairs.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/royal-court-affairs.svg" alt="Royal court affairs" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/danube-home.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/danube-home.svg" alt="Danube home" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/gord.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/gord.svg" alt="Gord" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/right-farm.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/right-farm.svg" alt="Right farm" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/renault.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/renault.svg" alt="Renault" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/volkswagen.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/volkswagen.svg" alt="Volkswagen" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/startsappz.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/startsappz.svg" alt="Startsappz" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-primary text-h4">Heading</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/infosys-1.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/infosys-1.svg" alt="infosys" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/shell.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/shell.svg" alt="Shell" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/bangkok-bank.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/bangkok-bank.svg" alt="bangkok" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/wipro.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/wipro.svg" alt="wipro" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/swiggy.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/swiggy.svg" alt="swiggy" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/bridgestone.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/bridgestone.svg" alt="bridgestone" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/protea.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/protea.svg" alt="protea" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <div class="svg-icon">
+                        <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/comviva.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/comviva.svg" alt="comviva" class="mx-auto" loading="lazy" height="48" width="48"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </template>
+</odoo>

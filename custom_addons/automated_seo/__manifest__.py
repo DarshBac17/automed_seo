@@ -99,6 +99,8 @@
         "views/snippets/form/s_single_form.xml",
         "views/snippets/form/s_form_with_price_gray.xml",
         "views/snippets/form/s_form_with_price_orange.xml",
+        "views/snippets/fortune/s_fortune.xml",
+
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
         'views/snippets/snippets.xml',
