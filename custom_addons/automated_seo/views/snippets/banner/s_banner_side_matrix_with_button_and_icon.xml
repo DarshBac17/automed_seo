@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_side_matrix_with_button_and_icon" name="Banner side matrix with Button">
+    <template id="s_banner_side_matrix_with_button_and_icon" name="Banner side matrix with Button and icon">
         <section class="banner banner-post header-top bg-dark">
             <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
