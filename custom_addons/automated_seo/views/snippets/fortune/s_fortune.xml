@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_fortune" name="Fortune">
-    <section class="pb-0 bg-gray-light fortune">
+        <div class="fortune">
+    <section class="pb-0 bg-gray-light">
         <div class="container">
             <h2>Heading Heading</h2>
             <p>Description Description Description Description Description Description Description Description</p>
@@ -101,5 +102,6 @@
             </div>
         </div>
     </section>
+        </div>
     </template>
 </odoo>

@@ -16,19 +16,19 @@
             </div>
             <div class="lg:col-span-2 flex flex-wrap text-center">
                 <div class="boxed w-1/2 border-r border-b border-secondary">
-                    <p class="text-white text-h2 mb-0 font-bold">142</p>
+                    <p class="text-white text-h2 mb-0 font-bold companyYears">142</p>
                     <p class="text-primary">Description Description</p>
                 </div>
                 <div class="boxed w-1/2 border-b border-secondary">
                     <p class="text-white text-h2 mb-0 font-bold employeeCount">1000</p>
-                    <p class="text-primary">Description</p>
+                    <p class="text-primary agiledevetext">Description</p>
                 </div>
                 <div class="boxed w-1/2 border-r border-secondary">
                     <p class="text-white text-h2 mb-0 font-bold">98%</p>
                     <p class="text-primary">Description Description</p>
                 </div>
                 <div class="boxed w-1/2">
-                    <p class="text-white text-h2 mb-0 font-bold">1022</p>
+                    <p class="text-white text-h2 mb-0 font-bold clientproject">1022</p>
                     <p class="text-primary">Description Description</p>
                 </div>
             </div>
