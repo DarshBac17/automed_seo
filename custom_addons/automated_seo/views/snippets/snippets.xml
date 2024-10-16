@@ -380,19 +380,19 @@
             <div id="snippets_service" class="o_panel">
                 <div class="o_panel_header">Service</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_banner_cards_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_service_card_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, cards, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_banner_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_service_card_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, cards, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_service_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, developer, white</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_developer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_service_tab_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, developer, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_expertise_developer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_service_tab_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, expertise, developer, white</keywords>
                     </t>
 

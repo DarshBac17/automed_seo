@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_cards_bg_white" name="Banner cards White">
-        <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2">
+    <template id="s_service_card_bg_gray" name="Service card Gray">
+        <section class="bg-gray-light">
+        <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 ">
             <div>
                 <div class="side-sticky">
                     <div class="md:cont-padding">
@@ -16,47 +17,49 @@
             </div>
 
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two">
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-white">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
+
                 <div class="oe_structure" data-name="add_child_card">
                     <!-- Drag and drop zone for new cards -->
                 </div>
 
             </div>
+        </div>
         </section>
     </template>
 </odoo>
