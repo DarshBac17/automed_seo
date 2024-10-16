@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_card_with_icon_grid_2_bg_white" name="Card with icon grid 2 white">
+        <section class="container text-center">
+            <div class="cont-padding">
+                <h2>Heading Heading Heading Heading Heading Heading</h2>
+                <p>Description Description Description Description Description Description Description Description
+                    Description Description Description
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="boxed bg-gray-light">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
+                             alt="Understand" width="48" height="48"
+                             loading="lazy" class="mx-auto icon-1"/>
+
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="boxed bg-gray-light">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48" loading="lazy" class="mx-auto">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
+                             alt="Strategize" width="48" height="48"
+                             loading="lazy" class="mx-auto icon-2"/>
+
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="boxed bg-gray-light">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
+                             alt="Implement" width="48" height="48"
+                             loading="lazy" class="mx-auto icon-3"/>
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description Description Description Description
+                    </p>
+                </div>
+                <div class="boxed bg-gray-light">
+                    <div class="svg-icon mb-sm">
+                        <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
+                             alt="Implement" width="48" height="48"
+                             loading="lazy" class="mx-auto icon-3"/>
+                    </div>
+                    <h3 class="text-h4 small-heading">Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description Description Description Description
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-md">
+                <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
+            </div>
+        </section>
+    </template>
+</odoo>
+

@@ -126,9 +126,24 @@
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_faq_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>ask, questions, faq, white</keywords>
+
+                    </t>
+                    <t t-snippet="automated_seo.s_faq_with_button_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>ask, questions, faq, white</keywords>
                     </t>
                 </div>
             </div>
+               <div id="snippets_fortune" class="o_panel">
+                <div class="o_panel_header">Fortune</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_fortune" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>fortune</keywords>
+
+                    </t>
+
+                </div>
+            </div>
+
             <div id="snippets_cta" class="o_panel">
                 <div class="o_panel_header">CTA</div>
                 <div class="o_panel_body">
@@ -155,7 +170,10 @@
                         <keywords>banner, side image, button</keywords>
                     </t><t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, side image, button</keywords>
-                    </t><t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    </t><t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side, matrix, button</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, side, matrix, button</keywords>
                     </t>
 
@@ -182,6 +200,14 @@
                     <t t-snippet="automated_seo.s_card_with_list_and_button_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>card, list, button, gray</keywords>
                     </t>
+                     <t t-snippet="automated_seo.s_card_with_icon_grid_2_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card, list, button, gray, grid</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_card_with_button_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>card, list, button, gray, grid</keywords>
+                    </t>
+
+
 <!--                    <t t-snippet="automated_seo.s_card_2_box_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
 <!--                        <keywords>card</keywords>-->
 <!--                    </t>-->
