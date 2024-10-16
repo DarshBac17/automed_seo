@@ -4,6 +4,8 @@ import  html
 import base64
 import boto3
 import io
+import random
+import string
 # import os
 from botocore.exceptions import ClientError
 # from dotenv import load_dotenv
@@ -23,6 +25,9 @@ class View(models.Model):
     #         vals['app_name'] = 'automated_seo'  # Set dynamic default value
     #     return super(View, self).create(vals)
 
+    def generate_hash(self,length=6):
+        """Generate a random string of fixed length."""
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
