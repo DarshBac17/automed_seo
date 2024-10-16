@@ -27,7 +27,7 @@ class View(models.Model):
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
-        html_parser = self._php_mapper(view_name=view_name)
+        html_parser = self.php_mapper(view_name=view_name)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -110,10 +110,15 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('oe')]
+
+            if not tag['class']:
+                del tag['class']
+
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-            class_to_remove = ['oe_structure', 'remove']
+            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title']
             for tag in soup.find_all(class_=class_to_remove):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
