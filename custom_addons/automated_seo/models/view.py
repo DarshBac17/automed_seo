@@ -4,13 +4,12 @@ import  html
 import base64
 import boto3
 import io
-import os
+# import os
 from botocore.exceptions import ClientError
-from dotenv import load_dotenv
-load_dotenv()
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# from dotenv import load_dotenv
+AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
 
 class View(models.Model):
     _inherit = 'ir.ui.view'
@@ -105,12 +104,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
-
-            if not tag['class']:
-                del tag['class']
-
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('oe')]
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')] + [cls for cls in tag['class'] if not cls.startswith('oe')]
 
             if not tag['class']:
                 del tag['class']
