@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_hire_expertise_developer_bg_white" name="Hire Expertise developer White">
+    <template id="s_service_list_bg_white" name="Service list White">
         <section class="container grid md:grid-cols-2 gap-6">
             <div class="order-1 md:order-1">
                 <div class="side-sticky">
