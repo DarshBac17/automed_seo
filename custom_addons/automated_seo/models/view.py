@@ -110,10 +110,15 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('oe')]
+
+            if not tag['class']:
+                del tag['class']
+
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-            class_to_remove = ['oe_structure', 'remove']
+            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title']
             for tag in soup.find_all(class_=class_to_remove):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
