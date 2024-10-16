@@ -2,7 +2,14 @@ from odoo import models, fields, api
 from bs4 import BeautifulSoup
 import  html
 import base64
-
+import boto3
+import io
+import os
+from dotenv import load_dotenv
+load_dotenv()
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 class View(models.Model):
     _inherit = 'ir.ui.view'
@@ -19,9 +26,7 @@ class View(models.Model):
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
-        page = self.env['ir.ui.view'].search([('name', '=', view_name),('website_id','!=', 'False',)]).read(['arch'])
-        html_parser =  page[0].get('arch')
-        html_parser = self.php_mapper(html_parser=html_parser)
+        html_parser = self._php_mapper(view_name=view_name)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -32,21 +37,68 @@ class View(models.Model):
                 'parse_html_filename': f"{view_name}_parsed.html"
             })
 
-    def php_mapper(self,html_parser):
+    def php_mapper(self,view_name):
+        page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+        html_parser = page.view_id.arch
+        print(html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
-        elements = self.env['automated_seo.php_mapper'].search([]).read(['element_class', 'php_tag'])
-        for element in elements:
-            tags = None
-            tags = soup.find_all(class_=element.get('element_class'))
-            for tag in tags:
-                new_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                tag.replace_with(new_tag_soup)
+
+        sections = soup.find_all('section', {'data-snippet': True})
+
+        snippet_ids = []
+        for section in sections:
+            snippet_ids.append(section.get('data-snippet'))
+        for snippet_id in snippet_ids:
+            snippet_record = self.env['automated_seo.mapper'].search([('snippet_id', '=', snippet_id)], limit=1)
+
+            if snippet_record:
+                elements = snippet_record.php_tags.read(['element_class', 'php_tag', 'image_name'])
+                for element in elements:
+                    tags = soup.find_all(class_=element.get('element_class'))
+                    for tag in tags:
+                        new_src = tag.get('src')
+                        old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                        if new_src:
+                            new_image_name = new_src.split('/')[-1]  # Extract just the file name from the src
+                            old_img_tag = old_tag_soup.find('img')
+                            old_img_name = element.get('image_name')
+
+                            if old_img_tag and old_img_name != new_image_name:
+                                hash_suffix = self.generate_hash()
+                                name, ext = new_image_name.rsplit('.', 1)
+                                new_image_name = f"{name}_{hash_suffix}.{ext}"
+
+                                image_id = int(new_src.split('/')[-2].split('-')[0])
+                                attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
+
+                                if attachment:
+                                    new_image_data = attachment.datas
+                                    new_image = base64.b64decode(new_image_data)
+                                    image_file = io.BytesIO(new_image)
+                                    self.upload_file_to_s3(file=image_file, s3_filename=new_image_name)
+
+                                image_path = '/'.join(new_src.split('/')[:-1])
+                                tag['src'] = image_path + '/' + new_image_name
+                                tag['data-src'] = image_path + '/' + new_image_name
+                                page.view_id.arch = soup
+                                old_img_tag['src'] = f'Inhouse/{new_image_name}'
+                                old_img_tag['data-src'] = f'Inhouse/{new_image_name}'
+                                php_mapper_record = self.env['automated_seo.php_mapper'].browse(element['id'])
+                                php_mapper_record.write({
+                                    'php_tag': str(old_tag_soup),
+                                    'image_name': str(new_image_name)
+                                })
+                                attachment.write({
+                                    'name': new_image_name
+                                })
+
+                        tag.replace_with(old_tag_soup)
 
         for tag in soup.find_all('t'):
             tag.unwrap()
         wrap_tag = soup.find(id="wrap")
         wrap_tag.unwrap()
-        return  str(soup)
+        return str(soup)
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
@@ -81,3 +133,21 @@ class View(models.Model):
                 self.id),
             'target': 'self',
         }
+
+    def upload_file_to_s3(self, file, s3_filename):
+        s3 = boto3.client('s3',
+                          aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                          )
+        try:
+            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{s3_filename}')
+            print(f"File {s3_filename} uploaded successfully to bucket {AWS_STORAGE_BUCKET_NAME}!")
+        except ClientError as e:
+            if e.response['Error']['Code'] == 'AccessDenied':
+                print("Access Denied. Please check your AWS credentials and bucket permissions.")
+            elif e.response['Error']['Code'] == 'NoSuchBucket':
+                print(f"The bucket {AWS_STORAGE_BUCKET_NAME} does not exist.")
+            else:
+                print(f"An error occurred: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
