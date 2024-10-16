@@ -61,10 +61,10 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         sections = soup.find_all('section', {'data-snippet': True})
+
         snippet_ids = []
         for section in sections:
             snippet_ids.append(section.get('data-snippet'))
-
         for snippet_id in snippet_ids:
             snippet_record = self.env['automated_seo.mapper'].search([('snippet_id', '=', snippet_id)], limit=1)
 
@@ -97,9 +97,8 @@ class View(models.Model):
                                 tag['src'] = image_path + '/' + new_image_name
                                 tag['data-src'] = image_path + '/' + new_image_name
                                 page.view_id.arch = soup
-                                old_img_tag['src'] = f'path/to/images/{new_image_name}'
-
-                                old_img_tag['data-src'] = f'path/to/images/{new_image_name}'
+                                old_img_tag['src'] = f'Inhouse/{new_image_name}'
+                                old_img_tag['data-src'] = f'Inhouse/{new_image_name}'
                                 php_mapper_record = self.env['automated_seo.php_mapper'].browse(element['id'])
                                 php_mapper_record.write({
                                     'php_tag': str(old_tag_soup),
