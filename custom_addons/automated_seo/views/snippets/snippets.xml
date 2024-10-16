@@ -346,11 +346,11 @@
                     <t t-snippet="automated_seo.s_vertical_tab_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Tab, vertical, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>hire, dedicated, developer, gray</keywords>
+                    <t t-snippet="automated_seo.s_dedicated_dev_tack_stack_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>tack, stack, developer, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_hire_dedicated_dev_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>hire, dedicated, developer, white</keywords>
+                    <t t-snippet="automated_seo.s_dedicated_dev_tack_stack_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>tack, stack, developer, white</keywords>
                     </t>
 
                 </div>

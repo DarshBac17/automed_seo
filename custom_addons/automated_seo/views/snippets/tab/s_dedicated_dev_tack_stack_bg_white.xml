@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--    TODO add php tag-->
-    <template id="s_hire_dedicated_dev_bg_gray" name="Hire Dedicated Dev Gray">
+    <template id="s_dedicated_dev_tack_stack_bg_white" name="Dedicated Dev tech stack White">
 
-        <section class="bg-gray-light tabs tabbibg-sec hover-box">
-            <div class="container">
-                <div class="cont-padding text-center">
+    <section class="container tabs tabbibg-sec hover-box">
+        <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
                         Heading
                     </h2>
@@ -788,7 +786,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+
+    </section>
     </template>
 </odoo>

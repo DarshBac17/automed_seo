@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_img_list_bg_gray" name="side img list bg gray">
+    <template id="s_side_img_list_bg_gray" name="Side img list bg gray">
         <section class="bg-gray-light">
             <div class="container">
                 <div class="cont-padding">
