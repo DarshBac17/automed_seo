@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_banner_cards_bg_gray" name="Banner cards Gray">
-        <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 bg-gray-light">
+        <section class="bg-gray-light">
+        <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 ">
             <div>
                 <div class="side-sticky">
                     <div class="md:cont-padding">
@@ -58,6 +59,7 @@
                 </div>
 
             </div>
+        </div>
         </section>
     </template>
 </odoo>
