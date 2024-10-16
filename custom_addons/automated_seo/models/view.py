@@ -27,7 +27,7 @@ class View(models.Model):
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
-        html_parser = self._php_mapper(view_name=view_name)
+        html_parser = self.php_mapper(view_name=view_name)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
