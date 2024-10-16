@@ -4,11 +4,11 @@
         <field name="name">Mapper</field>
         <field name="model">automated_seo.mapper</field>
         <field name="arch" type="xml">
-            <tree string="Mapper" editable="bottom">
+            <tree string="Mapper" editable="top">
                 <field name="name"/>
                 <field name="snippet_id"/>
-                <field name="styles" widget='many2many_tags' options="{'color_field': 'id'}"/>
-                <field name="php_tags"/>
+<!--                <field name="styles" widget='many2many_tags' options="{'color_field': 'id'}"/>-->
+                <field name="php_tags" widget="many2many_tags"/>
             </tree>
         </field>
     </record>

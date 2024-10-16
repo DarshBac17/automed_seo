@@ -3,7 +3,7 @@
     <template id="s_single_form" name="Single Form">
 
         <section class="bg-dark py-0">
-            <div class="container center-form">
+            <div class="container single-form">
 <!--               <?php-->
 <!--            $formType = 'tech-dark-form';-->
 <!--            include("tailwind/template/form.php");-->

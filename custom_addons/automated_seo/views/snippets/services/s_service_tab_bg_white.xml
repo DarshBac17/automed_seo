@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_hire_developer_bg_white" name="Hire developer White">
+    <template id="s_service_tab_bg_white" name="Service tab White">
        <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2">
         <div>
             <div class="side-sticky">

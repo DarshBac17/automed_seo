@@ -18,12 +18,6 @@
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    <!--                    <?php-->
-                    <!--                            $formType = 'banner';-->
-                    <!--                            $bannerDevName = "Angular";-->
-                    <!--                            include("tailwind/template/form.php");-->
-                    <!--                            ?>-->
-                    <!---->
                     <div class="flex flex-wrap gap-6 text-center resp-btn-two">
                     <a href="#case-study" class="btn btn-outline-primary">Button Name</a>
                     <a href="#tech-stack" class="btn btn-primary">Button Name</a>
