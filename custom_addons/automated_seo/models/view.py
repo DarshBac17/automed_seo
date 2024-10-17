@@ -30,9 +30,9 @@ class View(models.Model):
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
-            html_parser = html.unescape(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
+            html_parser = html.unescape(html_parser)
             self.write({
                 'parse_html': html_parser,
                 'parse_html_binary': base64.b64encode(html_parser.encode('utf-8')),
