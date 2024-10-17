@@ -19,11 +19,6 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
 
-    # @api.model
-    # def create(self, vals):
-    #     if 'app_name' not in vals:
-    #         vals['app_name'] = 'automated_seo'  # Set dynamic default value
-    #     return super(View, self).create(vals)
 
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
@@ -127,6 +122,22 @@ class View(models.Model):
         for tag in soup.find_all(True):
             if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
                 tag.attrs['itemscope'] = None  # Keep as a flag attribute
+
+        html_content = html.unescape(str(soup))
+
+        # Convert remaining XML entities and &nbsp;
+        xml_entities = {
+            '&amp;': '&',
+            '&lt;': '<',
+            '&gt;': '>',
+            '&apos;': "'",
+            '&quot;': '"',
+            '&nbsp;': ' '
+        }
+        for entity, char in xml_entities.items():
+            html_content = html_content.replace(entity, char)
+
+        # Parse the modified content back into BeautifulSoup
 
         return soup.prettify()
 
