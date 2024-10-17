@@ -106,7 +106,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')] + [cls for cls in tag['class'] if not cls.startswith('oe')]
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
 
             if not tag['class']:
                 del tag['class']
