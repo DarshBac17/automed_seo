@@ -62,7 +62,10 @@ class View(models.Model):
 
         snippet_ids = []
         for section in sections:
-            snippet_ids.append(section.get('data-snippet'))
+            snippet_ids.append(section.get('data-snippet')+'_'+self.generate_hash())
+        for i in range(len(sections)):
+            sections[i]['data-snippet'] = snippet_ids[i]
+        breakpoint()
         for snippet_id in snippet_ids:
             snippet_record = self.env['automated_seo.mapper'].search([('snippet_id', '=', snippet_id)], limit=1)
 
@@ -206,6 +209,18 @@ class View(models.Model):
         for tag in soup.find_all(True):
             if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
                 tag.attrs['itemscope'] = None  # Keep as a flag attribute
+
+                # Convert remaining XML entities and &nbsp;
+        xml_entities = {
+            '&amp;': '&',
+            '&lt;': '<',
+            '&gt;': '>',
+            '&apos;': "'",
+            '&quot;': '"',
+            '&nbsp;': ' '
+        }
+        for entity, char in xml_entities.items():
+            soup = soup.replace(entity, char)
 
         return soup.prettify()
 
