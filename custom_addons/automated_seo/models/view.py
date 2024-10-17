@@ -83,8 +83,8 @@ class View(models.Model):
                                 tag['src'] = image_path + '/' + new_image_name
                                 tag['data-src'] = image_path + '/' + new_image_name
                                 page.view_id.arch = soup
-                                old_img_tag['src'] = f'Inhouse/{new_image_name}'
-                                old_img_tag['data-src'] = f'Inhouse/{new_image_name}'
+                                old_img_tag['src'] = f'<?php echo BASE_URL_IMAGE; ?>Inhouse/{new_image_name}'
+                                old_img_tag['data-src'] = f'<?php echo BASE_URL_IMAGE; ?>Inhouse/{new_image_name}'
                                 php_mapper_record = self.env['automated_seo.php_mapper'].browse(element['id'])
                                 php_mapper_record.write({
                                     'php_tag': str(old_tag_soup),
