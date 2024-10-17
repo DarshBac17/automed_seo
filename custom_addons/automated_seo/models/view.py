@@ -19,11 +19,6 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
 
-    # @api.model
-    # def create(self, vals):
-    #     if 'app_name' not in vals:
-    #         vals['app_name'] = 'automated_seo'  # Set dynamic default value
-    #     return super(View, self).create(vals)
 
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
@@ -35,6 +30,8 @@ class View(models.Model):
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
+            soup = BeautifulSoup(html_parser, "html.parser")
+            html_parser = soup.prettify()
             html_parser = html.unescape(html_parser)
             self.write({
                 'parse_html': html_parser,
@@ -86,8 +83,8 @@ class View(models.Model):
                                 tag['src'] = image_path + '/' + new_image_name
                                 tag['data-src'] = image_path + '/' + new_image_name
                                 page.view_id.arch = soup
-                                old_img_tag['src'] = f'Inhouse/{new_image_name}'
-                                old_img_tag['data-src'] = f'Inhouse/{new_image_name}'
+                                old_img_tag['src'] = f'<?php echo BASE_URL_IMAGE; ?>Inhouse/{new_image_name}'
+                                old_img_tag['data-src'] = f'<?php echo BASE_URL_IMAGE; ?>Inhouse/{new_image_name}'
                                 php_mapper_record = self.env['automated_seo.php_mapper'].browse(element['id'])
                                 php_mapper_record.write({
                                     'php_tag': str(old_tag_soup),
@@ -109,7 +106,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')] + [cls for cls in tag['class'] if not cls.startswith('oe')]
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
 
             if not tag['class']:
                 del tag['class']
@@ -128,7 +125,23 @@ class View(models.Model):
             if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
                 tag.attrs['itemscope'] = None  # Keep as a flag attribute
 
-        return soup.prettify()
+        html_content = html.unescape(str(soup))
+
+        # Convert remaining XML entities and &nbsp;
+        xml_entities = {
+            '&amp;': '&',
+            '&lt;': '<',
+            '&gt;': '>',
+            '&apos;': "'",
+            '&quot;': '"',
+            '&nbsp;': ' '
+        }
+        for entity, char in xml_entities.items():
+            html_content = html_content.replace(entity, char)
+
+        # Parse the modified content back into BeautifulSoup
+
+        return html_content
 
     def action_download_parsed_html(self):
         self.ensure_one()
