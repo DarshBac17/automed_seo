@@ -4,13 +4,14 @@ import  html
 import base64
 import boto3
 import io
-import os
+import random
+import string
+# import os
 from botocore.exceptions import ClientError
-from dotenv import load_dotenv
-load_dotenv()
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# from dotenv import load_dotenv
+AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
 
 class View(models.Model):
     _inherit = 'ir.ui.view'
@@ -24,10 +25,13 @@ class View(models.Model):
     #         vals['app_name'] = 'automated_seo'  # Set dynamic default value
     #     return super(View, self).create(vals)
 
+    def generate_hash(self,length=6):
+        """Generate a random string of fixed length."""
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
-        html_parser = self._php_mapper(view_name=view_name)
+        html_parser = self.php_mapper(view_name=view_name)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -105,7 +109,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')] + [cls for cls in tag['class'] if not cls.startswith('oe')]
 
             if not tag['class']:
                 del tag['class']
@@ -113,7 +117,7 @@ class View(models.Model):
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-            class_to_remove = ['oe_structure', 'remove']
+            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title']
             for tag in soup.find_all(class_=class_to_remove):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
