@@ -4,15 +4,27 @@
 
         <record model="ir.module.category" id="module_category_automated_seo">
             <field name="name">Automated Seo</field>
-            <field name="sequence">5</field>
-            <!--      <field name="visible" eval="0" />-->
+            <field name="sequence">4</field>
         </record>
 
+        <record id="group_automated_seo_bacancy_seo" model="res.groups">
+            <field name="name">Bacancy Seo</field>
+            <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">This user has website access and view access</field>
+        </record>
+
+        <odoo>
+            <!-- Restrict Bacancy Seo group from seeing the Apps menu -->
+            <record id="base.menu_apps" model="ir.ui.menu">
+                <field name="groups_id" eval="[(3, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            </record>
+        </odoo>
         <record id="group_automated_seo_admin" model="res.groups">
             <field name="name">Admin</field>
             <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-            <field name="comment">this users have all access</field>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="comment">This user has all access</field>
         </record>
     </data>
 </odoo>
