@@ -7,7 +7,7 @@
                 <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 [&amp;_h3]:text-white [&amp;_h3]:text-base">
                     <div class="boxed banner-post">
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/blog-img-1.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img" loading="lazy" width="352" height="226">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-img-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img blog-img-1" loading="lazy" width="352" height="226"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img blog-img-1" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
                             <h3 class="small-heading">Subtitle Subtitle Subtitle Subtitle </h3>
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="boxed banner-post">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-img-2.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-img-2.jpg" alt="What’s New in Angular 18?" title="What’s New in Angular 18?" class="banner-post-img blog-img-2" loading="lazy" width="352" height="226"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" alt="What’s New in Angular 18?" title="What’s New in Angular 18?" class="banner-post-img blog-img-2" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="boxed banner-post">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img blog-img-3" loading="lazy" width="352" height="226"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img blog-img-3" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
