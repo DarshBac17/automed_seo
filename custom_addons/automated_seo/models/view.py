@@ -249,7 +249,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')] + [cls for cls in tag['class'] if not cls.startswith('oe')]
+            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
 
             if not tag['class']:
                 del tag['class']
@@ -257,7 +257,7 @@ class View(models.Model):
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title']
+            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title', 'custom-flex-layout', 'custom-left-section','custom-right-section']
             for tag in soup.find_all(class_=class_to_remove):
                 # Replace the tag with its contents
                 tag.replace_with(*tag.contents)
