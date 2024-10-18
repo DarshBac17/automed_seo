@@ -56,7 +56,7 @@
                                 <button class="btn btn-primary" name="contactBtn">Button Text</button>
                                 <div class="md:flex text-h2 items-center justify-center mt-sm [&amp;_.mail-id]:border-white [&amp;_.mail-id]:border-b-2 [&amp;_.mail-id]:font-bold">
                                     <!--                         <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>-->
-                                    <img src="automated_seo/static/src/img/email-svg-icon.svg" data-src="automated_seo/static/src/img/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>
+                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>
                                     <!--                        <?php echo $bacancymailid ?>-->
                                     <p>company@gmail.com</p>
                                 </div>

@@ -9,8 +9,8 @@
 <!--                         data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/enterprise-software/ceo-bg.jpg"-->
 <!--                         alt="Mr. Chandresh Patel" title="Mr. Chandresh Patel" width="1320" height="423" loading="lazy"-->
 <!--                         class="banner-post-img">-->
-                    <img src="automated_seo/static/src/img/ceo-bg.jpg"
-                         data-src="automated_seo/static/src/img/ceo-bg.jpg"
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/enterprise-software/ceo-bg.jpg"
+                         data-src="https://assets.bacancytechnology.com/main-boot-5/images/enterprise-software/ceo-bg.jpg"
                          alt="Mr. Chandresh Patel" title="Mr. Chandresh Patel" width="1320" height="423" loading="lazy"
                          class="banner-post-img ceo-bg"/>
                     <div class="content text-white">
@@ -22,8 +22,8 @@
 <!--                        </a>-->
                         <a href="https://www.linkedin.com/in/agilechandreshpatel" target="_blank">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/cp.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/cp.svg" alt="Mr. Chandresh Patel" title="Mr. Chandresh Patel" width="173" height="164" loading="lazy" class="mx-auto">-->
-                            <img src="automated_seo/static/src/img/cp.svg"
-                                 data-src="automated_seo/static/src/img/cp.svg" alt="Mr. Chandresh Patel"
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/cp.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/enterprise-software/cp.svg" alt="Mr. Chandresh Patel"
                                  title="Mr. Chandresh Patel" width="173" height="164" loading="lazy" class="mx-auto leader"/>
 
                         </a>
