@@ -204,8 +204,8 @@ class View(models.Model):
 
                                     website_page.view_id.arch = soup.prettify()
 
-                                    old_img_tag['src'] = f'Inhouse/{new_image_name}'
-                                    old_img_tag['data-src'] = f'Inhouse/{new_image_name}'
+                                    old_img_tag['src'] = f'<?php echo BLOG_URL; ?>Inhouse/{new_image_name}'
+                                    old_img_tag['data-src'] = f'<?php echo BLOG_URL; ?>Inhouse/{new_image_name}'
                                     php_mapper_record = self.env['automated_seo.snippet_mapper'].browse(element['id'])
                                     php_mapper_record.write({
                                         'php_tag': str(old_tag_soup),
@@ -295,13 +295,13 @@ class View(models.Model):
             'target': 'self',
         }
 
-    def upload_file_to_s3(self, file, s3_filename):
+    def upload_file_to_s3(self, file, s3_filename,view_name):
         s3 = boto3.client('s3',
                           aws_access_key_id=AWS_ACCESS_KEY_ID,
                           aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                           )
         try:
-            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{s3_filename}')
+            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{view_name}/{s3_filename}')
             print(f"File {s3_filename} uploaded successfully to bucket {AWS_STORAGE_BUCKET_NAME}!")
         except ClientError as e:
             if e.response['Error']['Code'] == 'AccessDenied':
