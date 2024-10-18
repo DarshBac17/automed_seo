@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_service_tab_bg_gray" name="Service tab Gray">
-       <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 bg-gray-light">
-        <div>
+       <section class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 bg-gray-light custom-flex-layout">
+        <div class="custom-left-section">
             <div class="side-sticky">
                 <div class="md:cont-padding">
                     <h2>Header Header Header Header Header Header Header Header Header Header Header Header</h2>
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-y-6 resp-btn-outer">
+        <div class="grid grid-cols-1 gap-y-6 resp-btn-outer custom-right-section">
             <div class="accordian-outer">
                 <div class="accordion-item accordian-tab bg-white">
                     <div class="faq-heading active">

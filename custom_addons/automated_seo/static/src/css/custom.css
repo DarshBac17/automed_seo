@@ -1,0 +1,20 @@
+.custom-flex-layout {
+    display: flex;  /* Switch from grid to flex */
+    flex-direction: row;  /* Ensure it's a row layout */
+    justify-content: space-between;
+    gap: 20px;  /* Add some spacing between left and right sections */
+}
+
+.custom-left-section {
+    order: 1;  /* Keep the left section in the first place */
+    flex-basis: 30%;  /* Set the desired width */
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.custom-right-section {
+    order: 2;  /* Keep the right section in the second place */
+    flex-basis: 65%;  /* Set the desired width */
+    flex-grow: 1;  /* Allow it to grow if needed */
+}
