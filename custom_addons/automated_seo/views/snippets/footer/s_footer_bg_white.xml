@@ -10,66 +10,66 @@
                         <div class="col-span-1 lg:col-span-7 md:flex flex-col justify-between">
                             <div class="footer-address border [&amp;_p:not(:last-child)]:mb-1 border-light [&amp;_.boxed:first-child]:border-l-0">
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Ahmedabad" title="Bacancy Ahmedabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ahmedabad</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Ahmedabad" title="Bacancy Ahmedabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ahmedabad</p>
                                     <p class="text-secondary small-heading-two">Address 1</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Gandhinagar" title="Bacancy Gandhinagar" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Gandhinagar</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Gandhinagar" title="Bacancy Gandhinagar" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Gandhinagar</p>
                                     <p class="text-secondary small-heading-two">Address 2</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Hyderabad" title="Bacancy Hyderabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Hyderabad</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Hyderabad" title="Bacancy Hyderabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Hyderabad</p>
                                     <p class="text-secondary small-heading-two">Address 3</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Mumbai" title="Bacancy Mumbai" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Mumbai</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Mumbai" title="Bacancy Mumbai" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Mumbai</p>
                                     <p class="text-secondary small-heading-two">Address 4</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Pune" title="Bacancy Pune" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Pune</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Pune" title="Bacancy Pune" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Pune</p>
                                     <p class="text-secondary small-heading-two">Address 5</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/india-flag.svg" data-src="automated_seo/static/src/img/india-flag.svg" alt="Bacancy Bangalore" title="Bacancy Bangalore" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Bangalore</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Bangalore" title="Bacancy Bangalore" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Bangalore</p>
                                     <p class="text-secondary small-heading-two">Address 6</p>
                                 </div>
                             </div>
                             <p class="text-black mt-sm">Global Presence</p>
                             <div class="footer-address border [&amp;_p:not(:last-child)]:mb-1 border-light [&amp;_.boxed:first-child]:border-l-0">
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/usa-flag.svg" data-src="automated_seo/static/src/img/usa-flag.svg" alt="Bacancy New Jersey" title="Bacancy New Jersey" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>New Jersey</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy New Jersey" title="Bacancy New Jersey" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>New Jersey</p>
                                     <p class="text-secondary small-heading-two">Address 1</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/usa-flag.svg" data-src="automated_seo/static/src/img/usa-flag.svg" alt="Bacancy California" title="Bacancy California" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> California</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy California" title="Bacancy California" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> California</p>
                                     <p class="text-secondary small-heading-two">Address 2</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/usa-flag.svg" data-src="automated_seo/static/src/img/usa-flag.svg" alt="Bacancy Massachusetts" title="Bacancy Massachusetts" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Massachusetts</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Massachusetts" title="Bacancy Massachusetts" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Massachusetts</p>
                                     <p class="text-secondary small-heading-two">Address 3</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/usa-flag.svg" data-src="automated_seo/static/src/img/usa-flag.svg" alt="Bacancy Florida" title="Bacancy Florida" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Florida</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Florida" title="Bacancy Florida" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Florida</p>
                                     <p class="text-secondary small-heading-two">Address 4</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/flag-uk.svg" data-src="automated_seo/static/src/img/flag-uk.svg" alt="Bacancy London" title="Bacancy London" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>London</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" alt="Bacancy London" title="Bacancy London" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>London</p>
                                     <p class="text-secondary small-heading-two">Address 5</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/canada-flag.svg" data-src="automated_seo/static/src/img/canada-flag.svg" alt="Bacancy Ontario" title="Bacancy Ontario" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ontario</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" alt="Bacancy Ontario" title="Bacancy Ontario" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ontario</p>
                                     <p class="text-secondary small-heading-two">Address 6</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/australia-flag.svg" data-src="automated_seo/static/src/img/australia-flag.svg" alt="Bacancy Australia" title="Bacancy Australia" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Australia</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" alt="Bacancy Australia" title="Bacancy Australia" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Australia</p>
                                     <p class="text-secondary small-heading-two">Address 7</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/uae-flag.svg" data-src="automated_seo/static/src/img/uae-flag.svg" alt="Bacancy UAE" title="Bacancy UAE" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>UAE</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" alt="Bacancy UAE" title="Bacancy UAE" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>UAE</p>
                                     <p class="text-secondary small-heading-two">Address 8</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="automated_seo/static/src/img/sweden-flag.svg" data-src="automated_seo/static/src/img/sweden-flag.svg" alt="Bacancy Sweden" title="Bacancy Sweden" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Sweden</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" alt="Bacancy Sweden" title="Bacancy Sweden" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Sweden</p>
                                     <p class="text-secondary small-heading-two">Address 9</p>
                                 </div>
                             </div>
@@ -77,12 +77,12 @@
                         <div class="lg:col-span-4">
                             <div class="boxed border border-light h-full flex flex-col justify-between">
                                 <div class="flex items-center">
-                                    <img src="automated_seo/static/src/img/gpw.svg" data-src="automated_seo/static/src/img/gpw.svg" alt="Bacancy GPTW" class="footer-gptw" height="197" width="136" loading="lazy"/>
+                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/gpw.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/gpw.svg" alt="Bacancy GPTW" class="footer-gptw" height="197" width="136" loading="lazy"/>
                                     <a href="#" class="text-black text-h4 head-inn hover:text-primary">Get in Touch</a>
                                 </div>
                                 <div class="flex mt-sm">
                                     <div class="icon-cont">
-                                        <img src="automated_seo/static/src/img/call.svg" data-src="automated_seo/static/src/img/call.svg" alt="Bacancy Call" height="60" width="60" loading="lazy"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/call.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/call.svg" alt="Bacancy Call" height="60" width="60" loading="lazy"/>
                                     </div>
                                     <div class="ml-sm">
                                         <p class="mb-0 font-semibold">Contact Number</p>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="flex mt-sm">
                                     <div class="icon-cont">
-                                        <img src="automated_seo/static/src/img/mail-icon.svg" data-src="automated_seo/static/src/img/mail-icon.svg" alt="Bacancy Mail" height="60" width="60" loading="lazy"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/mail-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/mail-icon.svg" alt="Bacancy Mail" height="60" width="60" loading="lazy"/>
                                     </div>
                                     <div class="ml-sm">
                                         <p class="mb-0 font-semibold">Email Us</p>
@@ -120,47 +120,47 @@
                                 <div class="w-1/5">
                                     <a href="https://www.google.com/search?q=bacancytechnology&amp;oq=bacancytechnology&amp;aqs=chrome..69i57j69i60l3j0l2.7015j1j4&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x395e9b596be1e50d:0x9b14edd4c5fa8634,1,,," target="_blank" rel="nofollow">
                                         <div class="flex items-center">
-                                            <img src="automated_seo/static/src/img/star.svg" data-src="automated_seo/static/src/img/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.6</p>
                                         </div>
-                                        <img src="automated_seo/static/src/img/google.svg" data-src="automated_seo/static/src/img/google.svg" alt="icon" width="60" height="77" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/google.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/google.svg" alt="icon" width="60" height="77" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
                                 </div>
                                 <div class="w-1/5">
                                     <a href="https://clutch.co/profile/bacancy" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
-                                            <img src="automated_seo/static/src/img/star.svg" data-src="automated_seo/static/src/img/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.8</p>
                                         </div>
-                                        <img src="automated_seo/static/src/img/clutch.svg" data-src="automated_seo/static/src/img/clutch.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/clutch.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/clutch.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
                                 </div>
                                 <div class="w-1/5">
                                     <a href="https://www.goodfirms.co/company/bacancy-technology" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
-                                            <img src="automated_seo/static/src/img/star.svg" data-src="automated_seo/static/src/img/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
+                                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.8</p>
                                         </div>
-                                        <img src="automated_seo/static/src/img/goodfirm.svg" data-src="automated_seo/static/src/img/goodfirm.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/goodfirm.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/goodfirm.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
                                 </div>
                                 <div class="w-1/5">
                                     <a href="#">
-                                        <img src="automated_seo/static/src/img/iso.svg" data-src="automated_seo/static/src/img/iso.svg" alt="icon" width="138" height="50" loading="lazy" class="pr-2 w-[max(110px,5.729vw)]"/>
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/iso.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/iso.svg" alt="icon" width="138" height="50" loading="lazy" class="pr-2 w-[max(110px,5.729vw)]"/>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="lg:col-span-4">
                             <ul class="[&amp;_li_a]:h-[max(32px,1.66vw)] [&amp;_li_a]:w-[max(32px,1.66vw)]  [&amp;_li_a:hover]:bg-secondary [&amp;_li_a:hover]:bg-opacity-45 ease-in delay-150 [&amp;_li_a]:p-1.5 flex items-center lg:float-right [&amp;_li_a]:flex [&amp;_li_a]:justify-center justify-center">
-                                <li><a href="https://www.facebook.com/BacancyTechnologyLimited" target="_blank" aria-label="Facebook"><img src="automated_seo/static/src/img/facebook.svg" data-src="automated_seo/static/src/img/facebook.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://twitter.com/BacancyTech" target="_blank" aria-label="twitter"><img src="automated_seo/static/src/img/twitter.svg" data-src="automated_seo/static/src/img/twitter.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://www.linkedin.com/company/bacancy-technology/" target="_blank" aria-label="Linkedin"><img src="automated_seo/static/src/img/linkedin.svg" data-src="automated_seo/static/src/img/linkedin.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://www.youtube.com/user/Bacancytechnology" target="_blank" aria-label="Youtube"><img src="automated_seo/static/src/img/youtube.svg" data-src="automated_seo/static/src/img/youtube.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://www.instagram.com/bacancytechnology/" target="_blank" aria-label="Instagram"><img src="automated_seo/static/src/img/Insta.svg" data-src="automated_seo/static/src/img/Insta.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://dribbble.com/bacancytechnology" target="_blank" aria-label="Dribble"><img src="automated_seo/static/src/img/dribbble.svg" data-src="automated_seo/static/src/img/dribbble.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li> <a href="https://www.behance.net/bacancytechnology" target="_blank" aria-label="Behance"><img src="automated_seo/static/src/img/behance.svg" data-src="automated_seo/static/src/img/behance.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
-                                <li><a href="https://in.pinterest.com/bacancytech/" target="_blank" aria-label="Pinterest"><img src="automated_seo/static/src/img/pInterst.svg" data-src="automated_seo/static/src/img/pInterst.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://www.facebook.com/BacancyTechnologyLimited" target="_blank" aria-label="Facebook"><img src="https://assets.bacancytechnology.com/main-boot-5/images/facebook.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/facebook.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://twitter.com/BacancyTech" target="_blank" aria-label="twitter"><img src="https://assets.bacancytechnology.com/main-boot-5/images/twitter.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/twitter.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://www.linkedin.com/company/bacancy-technology/" target="_blank" aria-label="Linkedin"><img src="https://assets.bacancytechnology.com/main-boot-5/images/linkedin.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/linkedin.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://www.youtube.com/user/Bacancytechnology" target="_blank" aria-label="Youtube"><img src="https://assets.bacancytechnology.com/main-boot-5/images/youtube.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/youtube.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://www.instagram.com/bacancytechnology/" target="_blank" aria-label="Instagram"><img src="https://assets.bacancytechnology.com/main-boot-5/images/Insta.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/Insta.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://dribbble.com/bacancytechnology" target="_blank" aria-label="Dribble"><img src="https://assets.bacancytechnology.com/main-boot-5/images/dribbble.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/dribbble.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li> <a href="https://www.behance.net/bacancytechnology" target="_blank" aria-label="Behance"><img src="https://assets.bacancytechnology.com/main-boot-5/images/behance.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/behance.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
+                                <li><a href="https://in.pinterest.com/bacancytech/" target="_blank" aria-label="Pinterest"><img src="https://assets.bacancytechnology.com/main-boot-5/images/pInterst.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/pInterst.svg" alt="icon" width="18" height="10" loading="lazy" class="w-6"/></a></li>
                             </ul>
                         </div>
                         <div class="col-span-full">

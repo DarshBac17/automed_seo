@@ -13,7 +13,7 @@
                     <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
                 </div>
                 <?php endif; ?>-->
-                <img src="automated_seo/static/src/img/banner-side-4.png" data-src="automated_seo/static/src/img/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="banner-side-4 w-full"/>
+                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="banner-side-4 w-full"/>
 
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>
