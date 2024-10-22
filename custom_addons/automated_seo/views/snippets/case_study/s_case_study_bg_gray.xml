@@ -2,8 +2,8 @@
 <odoo>
     <template id="s_case_study_bg_gray" name="Case Study gray">
 
-        <section class="bg-gray-light casestudy-merge-col" id="case-study">
-            <div class="o_automated_seo_snippet container">
+        <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col" id="case-study">
+            <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading </h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>

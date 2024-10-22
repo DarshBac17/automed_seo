@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_client_feedback_bg_gray" name="Client feedback Gray">
 
-     <section class="bg-gray-light">
+     <section class="o_automated_seo_snippet bg-gray-light">
        <div class="container">
             <div class="cont-padding text-center">
                <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

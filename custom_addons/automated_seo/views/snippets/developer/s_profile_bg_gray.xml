@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_profile_bg_gray" name="Profile Gray">
-        <section class="bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
                 <div class="text-center cont-padding">
                     <h2>Header Header Header Header</h2>

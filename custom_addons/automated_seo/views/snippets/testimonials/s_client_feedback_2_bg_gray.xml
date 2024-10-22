@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_client_feedback_2_bg_gray" name="Client Feedback 2 gray">
-        <section class="bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
 
                 <div class="cont-padding text-center">
