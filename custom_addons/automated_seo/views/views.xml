@@ -1,71 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Tree View for Automated SEO Views -->
-    <record model="ir.ui.view" id="automated_seo.view_tree">
-        <field name="name">automated.seo.view.tree</field>
-        <field name="model">ir.ui.view</field>
+    <!-- Tree View -->
+    <record id="automated_seo.view_tree" model="ir.ui.view">
+        <field name="name">automated_seo.view.tree</field>
+        <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <tree string="Automated SEO Views">
+            <tree>
                 <field name="name"/>
-                <field name="type"/>
-                <field name="model"/>
+                <field name="create_uid"/>
                 <field name="create_date"/>
-                <field name="inherit_id"/>
+                <field name="write_date"/>
+
             </tree>
         </field>
     </record>
 
-    <record id="automated_seo.view_form_inherit" model="ir.ui.view">
-        <field name="name">automated.seo.view.form.inherit</field>
-        <field name="model">ir.ui.view</field>
-        <field name="inherit_id" ref="base.view_view_form"/>
+    <!-- Form View -->
+    <record id="automated_seo.view_form" model="ir.ui.view">
+        <field name="name">automated_seo.view.form</field>
+        <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <button name="action_custom_button"
-                        type="object"
-                        string="Prepare Output"
-                        class="btn-primary"
-                        context="{'view_name': name}"/>
-            </xpath>
-            <xpath expr="//field[@name='track']" position="after">
-                <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
-                <label for="parse_html_filename" string="Parsed HTML File:"
-                       attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                <div class="o_row">
-                    <field name="parse_html_filename" readonly="1" nolabel="1"
-                           attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                    <button name="action_download_parsed_html"
-                            type="object"
-                            icon="fa-download"
-                            class="btn btn-link p-0"
-                            attrs="{'invisible': [('parse_html_binary', '=', False)]}"
-                            title="Download File"/>
-                </div>
-            </xpath>
-            <notebook position="inside">
-                <page string="PHP Mapper Output">
-                    <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
-                </page>
-            </notebook>
+            <form>
+                <xpath expr="//header" position="inside">
+
+                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
+
+                        <button name="action_custom_button"
+                                type="object"
+                                string="Compile"
+                                context="{'view_name': name}"
+                                class="btn oe_highlight"/>
+                    </div>
+                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
+                        <button name="action_view_website_page"
+                                type="object"
+                                string="Preview"
+                                icon="fa-eye"
+                                class="btn oe_highlight"/>
+                    </div>
+                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
+                        <button name="action_edit_website_page"
+                                type="object"
+                                string="Edit"
+                                class="btn oe_highlight fa fa-pencil"/>
+                    </div>
+
+                </xpath>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="create_uid"/>
+                        <field name="create_date"/>
+                        <field name="write_date"/>
+                        <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
+                        <label for="parse_html_filename" string="Parsed HTML File:"
+                               attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
+                        <div class="o_row">
+                            <field name="parse_html_filename" readonly="1" nolabel="1"
+                                   attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
+                            <button name="action_download_parsed_html"
+                                    type="object"
+                                    icon="fa-download"
+                                    class="btn btn-link p-0"
+                                    attrs="{'invisible': [('parse_html_binary', '=', False)]}"
+                                    title="Download File"/>
+                        </div>
+                    </group>
+                    <notebook position="inside">
+                        <page string="PHP Mapper Output" attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
+                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
         </field>
     </record>
 
+    <!-- Action -->
     <record model="ir.actions.act_window" id="automated_seo.view_action">
-        <field name="name">Views</field>
-        <field name="res_model">ir.ui.view</field>
-        <field name="domain">[('website_id', '!=', False)]</field>
+        <field name="name">Page Management</field>
+        <field name="res_model">automated_seo.view</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="automated_seo.view_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new record to manage views
+            </p>
+        </field>
     </record>
 
-    <!-- Menu Items -->
     <menuitem id="menu_automated_seo_root"
               name="Automated SEO"
               web_icon="automated_seo,static/description/icon.png"
               sequence="10"/>
-
-    <menuitem id="menu_automated_seo_views"
-              name="Views"
+    <!-- Menu -->
+    <menuitem id="menu_automated_view"
+              name="Pages"
               parent="menu_automated_seo_root"
               action="automated_seo.view_action"
               sequence="10"/>
