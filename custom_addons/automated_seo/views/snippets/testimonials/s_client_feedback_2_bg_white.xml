@@ -6,7 +6,7 @@
                 <h2>Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check or_structure">
                 <div class="boxed bg-gray-light">
                     <div class="flex items-center mb-sm small-heading">
                         <div class="size-60 mr-sm">
@@ -23,7 +23,7 @@
                 <div class="boxed bg-gray-light">
                     <div class="flex items-center mb-sm small-heading">
                         <div class="size-60 mr-sm">
-<!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full">-->
+                            <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full">-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full mike"/>
                         </div>
                         <div>
@@ -37,7 +37,7 @@
                 <div class="boxed bg-gray-light">
                     <div class="flex items-center mb-sm small-heading">
                         <div class="size-60 mr-sm">
-<!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full">-->
+                            <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full">-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full laura"/>
                         </div>
                         <div>

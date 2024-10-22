@@ -11,7 +11,7 @@
                         Description Description Description Description Description Description Description Description
                     </p>
             </div>
-            <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
                 <div class="boxed bg-gray-light pt-0">
                     <div class="size-60 -mt-5 mb-sm">
 <!--                        https://assets.bacancytechnology.com-->

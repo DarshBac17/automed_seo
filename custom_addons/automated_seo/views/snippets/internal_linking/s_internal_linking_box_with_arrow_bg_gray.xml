@@ -9,7 +9,7 @@
                         Description Description Description
                     </p>
                 </div>
-                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 oe_structure">
                     <div class="boxed bg-white">
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-fintech" class="w-full flex items-center"><h3 class="text-base mb-0 text-primary">AI in Fintech</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
                         <a href="#" class="w-full flex items-center">

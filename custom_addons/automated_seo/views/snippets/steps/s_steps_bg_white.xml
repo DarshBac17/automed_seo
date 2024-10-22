@@ -3,21 +3,21 @@
 <odoo>
     <template id="s_steps_bg_white" name="Steps white">
         <section class="container">
-            <h2 class="text-center cont-padding">Header Header Header Header  </h2>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <h2 class="text-center cont-padding">Header Header Header Header</h2>
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>
-                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">2</span>
-                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>
                 </div>
                 <div class="boxed bg-gray-light">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">3</span>
-                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading </h3>
+                    <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
             </div>

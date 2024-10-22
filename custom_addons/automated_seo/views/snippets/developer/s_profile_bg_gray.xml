@@ -7,7 +7,7 @@
                     <h2>Header Header Header Header</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
                     <div class="boxed bg-white">
                         <div class="flex items-center mb-sm small-heading-three">
                             <div class="size-60 mr-sm">

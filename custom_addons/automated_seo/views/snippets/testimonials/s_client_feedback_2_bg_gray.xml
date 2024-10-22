@@ -8,7 +8,7 @@
                     <h2>Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check oe_structure">
                     <div class="boxed bg-white">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">

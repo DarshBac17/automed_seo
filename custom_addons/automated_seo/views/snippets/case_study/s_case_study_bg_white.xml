@@ -8,7 +8,7 @@
                 <h2>Heading Heading Heading Heading Heading Heading </h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="bg-dark boxed single-item-slider">
+            <div class="bg-dark boxed single-item-slider oe_structure">
                 <div>
                     <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
                     <div class="grid gap-6 md:grid-cols-2">
@@ -16,7 +16,7 @@
                             <p><span class="text-primary">Spam Text:</span> Text</p>
                             <p><span class="text-primary">Spam Text</span> Text</p>
                             <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                            <a href="#form" class="btn btn-outline-primary">Subtitle Subtitle Subtitle Subtitle</a>
+                            <a href="#form" class="btn btn-outline-primary">Button text</a>
                         </div>
                         <div class="max-md:hidden">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-center text-white cont-padding">Button Text</h3>
+                    <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
                     <div class="grid gap-6 md:grid-cols-2">
                         <div class="text-white">
                             <p><span class="text-primary">Spam Text:</span> Text</p>
