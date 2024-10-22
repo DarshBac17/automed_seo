@@ -590,6 +590,30 @@
     </template>
 
 
+      <template id="s_sub_sections_options" inherit_id="website.snippet_options">
+         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
+                 <we-row string="Content">
+                     <we-button data-add-item="" data-item=".o_automated_seo_layout > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                         Add Item
+                     </we-button>
+                 </we-row>
+             </div>
+         </xpath>
+     </template>
+    <!--<template id="s_sub_tabs_options" inherit_id="website.snippet_options">
+         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
+                 <we-row string="Content">
+                     <we-button data-add-item="" data-item=".o_automated_seo_layout > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                         Add Item
+                     </we-button>
+                 </we-row>
+             </div>
+         </xpath>
+     </template>-->
+
+
     <!--    <template id="test_module.offers_dynamic_snippet_options_template">
             <div t-attf-data-js="#{snippet_name}" t-attf-data-selector="#{snippet_selector}" data-no-preview="true">
                 <we-select string="Filter" data-name="filter_opt" data-attribute-name="filterId" data-no-preview="true">

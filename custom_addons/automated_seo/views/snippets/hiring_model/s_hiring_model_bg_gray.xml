@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_hiring_model_bg_gray" name="Hiring Model Gray">
-        <section class="bg-gray-light text-center">
+        <section class="o_automated_seo_snippet bg-gray-light text-center">
             <div class="container">
                 <div class="cont-padding">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 oe_structure">
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 o_automated_seo_layout">
                     <div class="boxed bg-primary">
                         <div class="svg-icon mb-sm">
                             <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/remote-dev/icon-04.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/remote-dev/icon-04.svg" alt="Fixed Price" width="48" height="48" loading="lazy" class="mx-auto">-->

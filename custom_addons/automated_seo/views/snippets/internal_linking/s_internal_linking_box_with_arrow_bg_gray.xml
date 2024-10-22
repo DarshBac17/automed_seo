@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_internal_linking_box_with_arrow_bg_gray" name="Internal linking box with arrow gray">
-        <section class="bg-gray-light hover-box">
+        <section class="o_automated_seo_snippet bg-gray-light hover-box">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
@@ -9,7 +9,7 @@
                         Description Description Description
                     </p>
                 </div>
-                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 oe_structure">
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 o_automated_seo_layout">
                     <div class="boxed bg-white">
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-fintech" class="w-full flex items-center"><h3 class="text-base mb-0 text-primary">AI in Fintech</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
                         <a href="#" class="w-full flex items-center">

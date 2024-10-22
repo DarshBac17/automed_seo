@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--    TODO add php tag-->
+
     <template id="s_dedicated_dev_tack_stack_bg_gray" name="Dedicated Dev tech stack Gray">
 
         <section class="bg-gray-light tabs tabbibg-sec hover-box">

@@ -27,7 +27,7 @@
                     <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
                 </div>
             </div>
-    </section>
+        </section>
 
     </template>
 </odoo>

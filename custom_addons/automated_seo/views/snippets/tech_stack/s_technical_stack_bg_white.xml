@@ -10,9 +10,9 @@
                 </p>
             </div>
             <table>
-                <tbody>
+                <tbody class="s_tech_stack_main o_automated_seo_layout">
                     <tr>
-                        <td>Description Description</td>
+                        <td>Title Title Title</td>
                         <td>
                             <span>Description</span>
                             <span>Description</span>
@@ -33,7 +33,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Description Description</td>
+                        <td>Title Title Title</td>
                         <td>
                             <span>Description</span>
                             <span>Description</span>
@@ -54,7 +54,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Description Description</td>
+                        <td>Title Title Title</td>
                         <td>
                             <span>Description</span>
                             <span>Description</span>
@@ -75,7 +75,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Description Description</td>
+                        <td>Title Title Title</td>
                         <td>
                             <span>Description</span>
                             <span>Description</span>

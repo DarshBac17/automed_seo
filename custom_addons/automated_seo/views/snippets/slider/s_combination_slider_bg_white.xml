@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_combination_slider_bg_white" name="Combination slider bg white">
-        <section class="overflow-hidden">
+        <section class="o_automated_seo_snippet overflow-hidden">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading </h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description </p>
                 </div>
-                <div class="center-slide oe_structure">
+                <div class="center-slide o_automated_seo_layout">
                     <div class="item bg-gray-light boxed">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->

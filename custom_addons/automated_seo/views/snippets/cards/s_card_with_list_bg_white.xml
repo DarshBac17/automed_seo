@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_with_list_bg_white" name="Card with list white">
-        <section class="container">
+        <section class="o_automated_seo_snippet container">
             <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check oe_structure">
-                <div class="boxed bg-gray-light">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check o_automated_seo_layout">
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>machine-learning-development" class="text-primary">Machine-->
 <!--                            Learning & Deep Learning-->
@@ -19,8 +19,8 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>language-processing-development" class="text-primary">Natural-->
 <!--                            Language Processing (NLP)-->
@@ -35,8 +35,8 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>computer-vision-services" class="text-primary">Computer Vision-->
 <!--                        </a>-->
@@ -49,8 +49,8 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>data-analytics-services" class="text-primary">Predictive-->
 <!--                            Analytics-->
@@ -64,8 +64,8 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>ai-integration-services" class="text-primary">AI Integration</a>-->
                         <a href="#" class="text-primary">Title Title Title Title Title Title </a>
@@ -76,8 +76,8 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
 <!--                            Automation-->
@@ -91,7 +91,7 @@
                         <li>Description Description</li>
                         <li>Description Description</li>
                     </ul>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
                 <a href="#form" class="btn btn-outline-primary">Button Text </a>

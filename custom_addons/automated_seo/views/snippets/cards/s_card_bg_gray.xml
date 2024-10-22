@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_bg_gray" name="Card gray">
-        <section class="bg-gray-light text-center">
+        <section class="o_automated_seo_snippet bg-gray-light text-center">
             <div class="container">
                 <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading</h2>
@@ -10,27 +10,27 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="boxed bg-white">
+                <section class="boxed bg-white">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-white">
+                </section>
+                <section class="boxed bg-white">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-white">
+                </section>
+                <section class="boxed bg-white">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
                 <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
