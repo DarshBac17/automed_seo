@@ -32,22 +32,22 @@
                     <div>
                         <h3 class="text-h4 small-heading">Heading Heading</h3>
                         <div class="grid grid-cols-subgrid sm:grid-cols-2 gap-6 o_automated_seo_layout">
-                            <div class="boxed bg-white">
+                            <section class="boxed bg-white o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">100%</h4>
                                 <p>Text Text Text</p>
-                            </div>
-                            <div class="boxed bg-white">
+                            </section>
+                            <section class="boxed bg-white o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">50%</h4>
                                 <p>Text Text Text</p>
-                            </div>
-                            <div class="boxed bg-white">
+                            </section>
+                            <section class="boxed bg-white o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">99%</h4>
                                 <p>Text Text Text</p>
-                            </div>
-                            <div class="boxed bg-white">
+                            </section>
+                            <section class="boxed bg-white o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">100%</h4>
                                 <p>Text Text Text</p>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
             <div class="container">
                 <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check o_automated_seo_layout">
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                                                     <!--<a href="<?php echo BASE_URL; ?>machine-learning-development" class="text-primary">Machine
                                                         Learning & Deep Learning
@@ -21,7 +21,7 @@
                             <li>Description Description</li>
                         </ul>
                     </section>
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                             <!--                        <a href="<?php echo BASE_URL; ?>language-processing-development" class="text-primary">Natural-->
                             <!--                            Language Processing (NLP)-->
@@ -37,7 +37,7 @@
                             <li>Description Description</li>
                         </ul>
                     </section>
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
 <!--                                                    <a href="<?php echo BASE_URL; ?>computer-vision-services" class="text-primary">Computer Vision-->
 <!--                                                    </a>-->
@@ -51,7 +51,7 @@
                             <li>Description Description</li>
                         </ul>
                     </section>
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                                                     <!--<a href="<?php echo BASE_URL; ?>data-analytics-services" class="text-primary">Predictive
                                                         Analytics
@@ -66,7 +66,7 @@
                             <li>Description Description</li>
                         </ul>
                     </section>
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                             <!--                        <a href="<?php echo BASE_URL; ?>ai-integration-services" class="text-primary">AI Integration</a>-->
                             <a href="#" class="text-primary ai-integration-services">Title Title Title Title Title Title</a>
@@ -78,7 +78,7 @@
                             <li>Description Description</li>
                         </ul>
                     </section>
-                    <section class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
 <!--                                                    <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
 <!--                                                        Automation-->

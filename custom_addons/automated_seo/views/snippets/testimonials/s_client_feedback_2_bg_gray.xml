@@ -9,7 +9,7 @@
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check o_automated_seo_layout">
-                    <div class="boxed bg-white">
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" title="Gerry Dunne" width="60" height="60" loading="lazy" class="w-full">-->
@@ -21,8 +21,8 @@
                             </div>
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full">-->
@@ -35,8 +35,8 @@
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
 
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full">-->
@@ -49,7 +49,7 @@
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
 
-                    </div>
+                    </section>
                 </div>
                 <div class="text-center mt-md">
                     <a href="#footer-form-id" class="btn btn-outline-primary">Button Text</a>

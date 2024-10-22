@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_automated_seo_layout">
-                <section class="bg-white boxed">
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
@@ -26,7 +26,7 @@
                     </p>
                     <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
                 </section>
-                <section class="bg-white boxed">
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg"
@@ -41,7 +41,7 @@
                     </p>
                     <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
                 </section>
-                <section class="bg-white boxed">
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg"

@@ -9,7 +9,7 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 gap-6 o_automated_seo_layout">
-                <section class="boxed bg-gray-light">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
@@ -23,7 +23,7 @@
                         Description Description Description Description Description
                     </p>
                 </section>
-                <section class="boxed bg-gray-light">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
@@ -37,7 +37,7 @@
                         Description Description Description Description Description
                     </p>
                 </section>
-                <section class="boxed bg-gray-light">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
@@ -50,7 +50,7 @@
                         Description Description Description Description Description
                     </p>
                 </section>
-                <section class="boxed bg-gray-light">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
