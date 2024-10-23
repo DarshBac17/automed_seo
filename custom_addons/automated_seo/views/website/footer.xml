@@ -1,75 +1,78 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <odoo>
-    <template id="s_footer_bg_gray" name="Footer Gray">
-        <section class="footer-php">
+    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+
+        <xpath expr="//footer" position="replace">
+            <section class="footer-php">
             <!--<?php include("tailwind/template/footer.php"); ?>-->
-            <footer class="footer py-lg bg-black">
+            <footer class="footer py-lg bg-white">
                 <div class="container">
-                    <p class="text-white">Title TItle TItle</p>
+                    <p class="text-black">Title TItle TItle</p>
                     <div class="grid gap-6 grid-cols-1 lg:grid-cols-11 [&amp;_p]:leading-normal [&amp;_p+p]:text-[max(15px,0.833vw)]">
                         <div class="col-span-1 lg:col-span-7 md:flex flex-col justify-between">
                             <div class="footer-address border [&amp;_p:not(:last-child)]:mb-1 border-light [&amp;_.boxed:first-child]:border-l-0">
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Ahmedabad" title="Bacancy Ahmedabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ahmedabad</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Ahmedabad" title="Bacancy Ahmedabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ahmedabad</p>
                                     <p class="text-secondary small-heading-two">Address 1</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Gandhinagar" title="Bacancy Gandhinagar" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Gandhinagar</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Gandhinagar" title="Bacancy Gandhinagar" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Gandhinagar</p>
                                     <p class="text-secondary small-heading-two">Address 2</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Hyderabad" title="Bacancy Hyderabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Hyderabad</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Hyderabad" title="Bacancy Hyderabad" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Hyderabad</p>
                                     <p class="text-secondary small-heading-two">Address 3</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Mumbai" title="Bacancy Mumbai" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Mumbai</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Mumbai" title="Bacancy Mumbai" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Mumbai</p>
                                     <p class="text-secondary small-heading-two">Address 4</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Pune" title="Bacancy Pune" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Pune</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Pune" title="Bacancy Pune" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Pune</p>
                                     <p class="text-secondary small-heading-two">Address 5</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Bangalore" title="Bacancy Bangalore" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Bangalore</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/india-flag.svg" alt="Bacancy Bangalore" title="Bacancy Bangalore" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Bangalore</p>
                                     <p class="text-secondary small-heading-two">Address 6</p>
                                 </div>
                             </div>
-                            <p class="text-white mt-sm">Global Presence</p>
+                            <p class="text-black mt-sm">Global Presence</p>
                             <div class="footer-address border [&amp;_p:not(:last-child)]:mb-1 border-light [&amp;_.boxed:first-child]:border-l-0">
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy New Jersey" title="Bacancy New Jersey" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>New Jersey</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy New Jersey" title="Bacancy New Jersey" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>New Jersey</p>
                                     <p class="text-secondary small-heading-two">Address 1</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy California" title="Bacancy California" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> California</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy California" title="Bacancy California" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> California</p>
                                     <p class="text-secondary small-heading-two">Address 2</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Massachusetts" title="Bacancy Massachusetts" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Massachusetts</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Massachusetts" title="Bacancy Massachusetts" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Massachusetts</p>
                                     <p class="text-secondary small-heading-two">Address 3</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Florida" title="Bacancy Florida" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Florida</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/usa-flag.svg" alt="Bacancy Florida" title="Bacancy Florida" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/> Florida</p>
                                     <p class="text-secondary small-heading-two">Address 4</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" alt="Bacancy London" title="Bacancy London" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>London</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/flag-uk.svg" alt="Bacancy London" title="Bacancy London" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>London</p>
                                     <p class="text-secondary small-heading-two">Address 5</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" alt="Bacancy Ontario" title="Bacancy Ontario" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ontario</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/canada-flag.svg" alt="Bacancy Ontario" title="Bacancy Ontario" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Ontario</p>
                                     <p class="text-secondary small-heading-two">Address 6</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" alt="Bacancy Australia" title="Bacancy Australia" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Australia</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/australia-flag.svg" alt="Bacancy Australia" title="Bacancy Australia" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Australia</p>
                                     <p class="text-secondary small-heading-two">Address 7</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" alt="Bacancy UAE" title="Bacancy UAE" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>UAE</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/uae-flag.svg" alt="Bacancy UAE" title="Bacancy UAE" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>UAE</p>
                                     <p class="text-secondary small-heading-two">Address 8</p>
                                 </div>
                                 <div class="p-5 border-l border-light">
-                                    <p class="text-white text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" alt="Bacancy Sweden" title="Bacancy Sweden" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Sweden</p>
+                                    <p class="text-black text-h4 small-heading flex items-center"> <img src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/sweden-flag.svg" alt="Bacancy Sweden" title="Bacancy Sweden" class="mr-sm w-[max(31px,1.615vw)]" height="18" width="31" loading="lazy"/>Sweden</p>
                                     <p class="text-secondary small-heading-two">Address 9</p>
                                 </div>
                             </div>
@@ -78,7 +81,7 @@
                             <div class="boxed border border-light h-full flex flex-col justify-between">
                                 <div class="flex items-center">
                                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/gpw.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/gpw.svg" alt="Bacancy GPTW" class="footer-gptw" height="197" width="136" loading="lazy"/>
-                                    <a href="#" class="text-white text-h4 head-inn hover:text-primary">Get in Touch</a>
+                                    <a href="#" class="text-black text-h4 head-inn hover:text-primary">Get in Touch</a>
                                 </div>
                                 <div class="flex mt-sm">
                                     <div class="icon-cont">
@@ -86,7 +89,7 @@
                                     </div>
                                     <div class="ml-sm">
                                         <p class="mb-0 font-semibold">Contact Number</p>
-                                        <a href="tel:+13474414161" class="text-white text-h4 head-inn hover:text-primary">+1 347 441 4161</a>
+                                        <a href="tel:+13474414161" class="text-black text-h4 head-inn hover:text-primary">+1 347 441 4161</a>
                                     </div>
                                 </div>
                                 <div class="flex mt-sm">
@@ -95,7 +98,7 @@
                                     </div>
                                     <div class="ml-sm">
                                         <p class="mb-0 font-semibold">Email Us</p>
-                                        <a href="mailto:solutions@bacancy.com" class="text-white text-h4 head-inn hover:text-primary">solutions@bacancy.com</a>
+                                        <a href="mailto:solutions@bacancy.com" class="text-black text-h4 head-inn hover:text-primary">solutions@bacancy.com</a>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +124,7 @@
                                     <a href="https://www.google.com/search?q=bacancytechnology&amp;oq=bacancytechnology&amp;aqs=chrome..69i57j69i60l3j0l2.7015j1j4&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x395e9b596be1e50d:0x9b14edd4c5fa8634,1,,," target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
-                                            <p class="text-white font-bold ml-1.5">4.6</p>
+                                            <p class="text-black font-bold ml-1.5">4.6</p>
                                         </div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/google.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/google.svg" alt="icon" width="60" height="77" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
@@ -130,7 +133,7 @@
                                     <a href="https://clutch.co/profile/bacancy" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
-                                            <p class="text-white font-bold ml-1.5">4.8</p>
+                                            <p class="text-black font-bold ml-1.5">4.8</p>
                                         </div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/clutch.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/clutch.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
@@ -139,7 +142,7 @@
                                     <a href="https://www.goodfirms.co/company/bacancy-technology" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
-                                            <p class="text-white font-bold ml-1.5">4.8</p>
+                                            <p class="text-black font-bold ml-1.5">4.8</p>
                                         </div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/goodfirm.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/goodfirm.svg" alt="icon" width="100" height="80" loading="lazy" class="pr-2 mt-1 w-[max(110px,5.729vw)]"/>
                                     </a>
@@ -164,13 +167,13 @@
                             </ul>
                         </div>
                         <div class="col-span-full">
-                            <p class="text-white text-center text-sm">Copyright &amp;copy; 2024 Bacancy. All Rights Reserved. An ISO 27001:2013. Certified Company</p>
+                            <p class="text-black text-center text-sm">Copyright &amp;copy; 2024 Bacancy. All Rights Reserved. An ISO 27001:2013. Certified Company</p>
                         </div>
                     </div>
                 </div>
             </footer>
 
         </section>
-
+        </xpath>
     </template>
 </odoo>

@@ -13,6 +13,8 @@
         "views/views.xml",
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
+        "views/website/header.xml",
+        "views/website/footer.xml",
         "views/snippets/steps/s_steps_bg_white.xml",
         "views/snippets/steps/s_steps_bg_gray.xml",
         "views/snippets/steps/s_sub_step_white.xml",
