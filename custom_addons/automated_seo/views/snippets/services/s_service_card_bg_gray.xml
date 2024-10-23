@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_service_card_bg_gray" name="Service card Gray">
-        <section class="bg-gray-light">
+    <template id="s_service_card_bg_gray" name="Service card gray">
+        <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 custom-flex-layout">
 
                 <div class="custom-left-section">
@@ -18,47 +18,25 @@
 
                 </div>
 
-                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section">
-                    <div class="boxed bg-white">
+                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section o_automated_seo_layout">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4">Title Title Title Title Title Title</h3>
                         <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4">Title Title Title Title Title Title</h3>
                         <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4">Title Title Title Title Title Title</h3>
                         <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white">
-                        <h3 class="text-h4">Title Title Title Title Title Title</h3>
-                        <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                    </div>
+                    </section>
 
-                    <div class="oe_structure" data-name="add_child_card">
-                        <!-- Drag and drop zone for new cards -->
+<!--
+                    <div class="o_automated_seo_layout grid grid-cols-1 gap-y-6" data-name="add_child_card">
+                        &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                     </div>
+-->
 
                 </div>
 
@@ -66,3 +44,5 @@
         </section>
     </template>
 </odoo>
+
+

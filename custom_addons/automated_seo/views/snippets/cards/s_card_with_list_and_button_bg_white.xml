@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_with_list_and_button_bg_white" name="Card with list and button white">
-        <section class="container">
+        <section class="o_automated_seo_snippet container">
             <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description
                     Description Description Description
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-light boxed">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_automated_seo_layout">
+                <section class="bg-gray-light boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
@@ -23,8 +23,8 @@
                         Description Description Description
                     </p>
                     <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
-                <div class="bg-gray-light boxed">
+                </section>
+                <section class="bg-gray-light boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg"
@@ -38,8 +38,8 @@
                         Description Description Description
                     </p>
                     <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
-                <div class="bg-gray-light boxed">
+                </section>
+                <section class="bg-gray-light boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg"
@@ -53,7 +53,7 @@
                         Description Description Description
                     </p>
                     <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
+                </section>
             </div>
         </section>
     </template>

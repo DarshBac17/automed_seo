@@ -77,4 +77,4 @@ odoo-bin
 /.github
 
 /custom_addons/automated_seo/controller
-/temp
+/custom_addons/automated_seo/views/test.xml

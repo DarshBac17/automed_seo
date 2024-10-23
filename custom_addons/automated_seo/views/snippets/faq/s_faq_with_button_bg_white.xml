@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_faq_with_button_bg_white" name="FAQ with button White">
-        <section class="bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light">
         <div class="container grid md:gap-6 grid-cols-1 md:grid-cols-11">
 
             <div class="md:col-span-3">
@@ -17,8 +17,8 @@
             </div>
 
             <div class="md:col-span-8 faq-head-outer">
-                <div class="accordian-outer" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="accordian-outer o_automated_seo_layout" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                         <div class="faq-heading active">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
@@ -29,8 +29,8 @@
                                 answer answer answer answer
                             </p>
                         </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    </section>
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
 
                         <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
@@ -42,8 +42,8 @@
                                 answer answer answer answer
                             </p>
                         </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    </section>
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                         <div class="faq-heading">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                 questions ?
@@ -54,56 +54,7 @@
                                 answer answer answer answer
                             </p>
                         </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <div class="faq-heading">
-                            <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
-                                questions ?
-                            </h3>
-                        </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
-                                answer answer answer answer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <div class="faq-heading">
-                            <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
-                                questions ?
-                            </h3>
-                        </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
-                                answer answer answer answer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <div class="faq-heading">
-                            <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
-                                questions ?
-                            </h3>
-                        </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
-                                answer answer answer answer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <div class="faq-heading">
-                            <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
-                                questions ?
-                            </h3>
-                        </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
-                                answer answer answer answer
-                            </p>
-                        </div>
-                    </div>
-
+                    </section>
                 </div>
             </div>
 

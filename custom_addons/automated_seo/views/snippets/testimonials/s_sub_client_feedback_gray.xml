@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_client_feedback_gray" name="sub client feedback gray">
+        <section class="remove" style="margin: 0; padding: 0;">
+            <div class="boxed bg-gray-light pt-0">
+                <div class="size-60 -mt-5 mb-sm">
+                    <!--                        https://assets.bacancytechnology.com-->
+                    <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px">-->
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px" class="steve"/>
+
+                </div>
+                <p class="text-primary small-heading">Heading</p>
+                <p>Description Description Description Description Description Description Description Description
+                    Description Description Description Description Description Description Description Description
+                </p>
+            </div>
+        </section>
+
+    </template>
+</odoo>

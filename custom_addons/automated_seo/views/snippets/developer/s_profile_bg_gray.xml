@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_profile_bg_gray" name="Profile Gray">
-        <section class="bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
                 <div class="text-center cont-padding">
                     <h2>Header Header Header Header</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="boxed bg-white">
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 o_automated_seo_layout">
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading-three">
                             <div class="size-60 mr-sm">
                                 <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
@@ -62,8 +62,8 @@
                             <span class="border border-primary bg-light-orange px-2">Span</span>
                         </div>
                         <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading-three">
                             <div class="size-60 mr-sm">
                                 <!--  <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/hemant-net.png"
@@ -116,8 +116,8 @@
                             <span class="border border-primary bg-light-orange px-2">Span</span>
                         </div>
                         <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading-three">
                             <div class="size-60 mr-sm">
                                 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
@@ -168,7 +168,7 @@
                                     href="#" class="text-primary font-bold dot-net-core-developer">span</a></span>
                         </div>
                         <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                    </div>
+                    </section>
                 </div>
             </div>
         </section>

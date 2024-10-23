@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_card_with_list_white" name="sub card with list white">
+        <section class="remove" style="margin: 0; padding: 0;">
+            <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">
+<!--                                                    <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
+<!--                                                        Automation-->
+<!--                                                    </a>-->
+                            <a href="#" class="text-primary rpa-consulting-services">Title Title Title Title Title Title
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                            <li>Description Description</li>
+                        </ul>
+                    </div>
+        </section>
+
+    </template>
+</odoo>

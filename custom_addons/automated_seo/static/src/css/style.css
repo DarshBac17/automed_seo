@@ -1047,6 +1047,11 @@ p:not(:last-child, .mb-0) {
     row-gap: max(24px, 1.25vw)
 }
 
+/*.custom-gap {
+    row-gap: max(24px, 1.25vw);
+    display: grid;
+}*/
+
 .overflow-hidden {
     overflow: hidden
 }

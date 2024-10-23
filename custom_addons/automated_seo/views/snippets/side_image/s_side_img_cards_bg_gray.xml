@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_side_img_cards_bg_gray" name="Side img cards bg gray">
-        <section class="bg-gray-light text-center">
+        <section class="o_automated_seo_snippet bg-gray-light text-center">
             <div class="container">
                 <h2 class="cont-padding">Header Header Header Header</h2>
                 <div class="grid lg:grid-cols-2 gap-6">
@@ -9,23 +9,23 @@
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/section-side-1.jpg" data-src=" <?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/section-side-1.jpg" alt="Client Achievements with Our AI Consultancy" title="Client Achievements with Our AI Consultancy" class="w-full h-full object-cover" loading="lazy" width="645" height="371">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/section-side-1.jpg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/section-side-1.jpg" alt="Client Achievements with Our AI Consultancy" title="Client Achievements with Our AI Consultancy" class="w-full h-full object-cover section-side-1" loading="lazy" width="645" height="371"/>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="boxed bg-white">
+                    <div class="grid md:grid-cols-2 gap-6 o_automated_seo_layout">
+                        <section class="boxed bg-white o_replace_section_div">
                             <h3 class="text-primary text-h4">21%</h3>
                             <p class="small-heading">Text Text Text Text Text</p>
-                        </div>
-                        <div class="boxed bg-white">
+                        </section>
+                        <section class="boxed bg-white o_replace_section_div">
                             <h3 class="text-primary text-h4">30%</h3>
                             <p class="small-heading">Text Text Text Text Text</p>
-                        </div>
-                        <div class="boxed bg-white">
+                        </section>
+                        <section class="boxed bg-white o_replace_section_div">
                             <h3 class="text-primary text-h4">25%</h3>
                             <p class="small-heading">Text Text Text Text Text</p>
-                        </div>
-                        <div class="boxed bg-white">
+                        </section>
+                        <section class="boxed bg-white o_replace_section_div">
                             <h3 class="text-primary text-h4">40%</h3>
                             <p class="small-heading">Text Text Text Text Text</p>
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>
