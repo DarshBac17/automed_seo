@@ -351,6 +351,40 @@ class View(models.Model):
         # Return the modified HTML content
         return soup.prettify()
 
+        # html_parser = self.replace_div_with_section(html_content=str(soup))
+        # soup = BeautifulSoup(html_parser, "html.parser")
+        # website_page.view_id.arch = soup.prettify()
+        # website_page.view_id.arch_db = soup.prettify()
+
+
+    def replace_section_with_div(self,html_content):
+        # Parse the HTML content with BeautifulSoup
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        # Find all 'section' tags with the class 'replace_section_div'
+        sections = soup.find_all('section', class_='o_replace_section_div')
+
+        for section in sections:
+            # Change the tag from 'section' to 'div'
+            section.name = 'div'
+
+        # Return the modified HTML
+        return str(soup)
+
+    def replace_div_with_section(self,html_content):
+        # Parse the HTML content with BeautifulSoup
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        # Find all 'section' tags with the class 'replace_section_div'
+        sections = soup.find_all('div', class_='o_replace_section_div')
+
+        for section in sections:
+            # Change the tag from 'section' to 'div'
+            section.name = 'section'
+
+        # Return the modified HTML
+        return str(soup)
+
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
