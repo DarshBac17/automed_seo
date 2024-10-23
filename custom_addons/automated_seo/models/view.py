@@ -10,6 +10,8 @@ from odoo.exceptions import UserError
 # import os
 from botocore.exceptions import ClientError
 import re
+import random
+
 
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
@@ -19,9 +21,11 @@ AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
 class View(models.Model):
     _name = 'automated_seo.view'
     _description = 'Automated SEO View'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True, default='New')
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
+    unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
     parse_html = fields.Text(string="Parse HTML")
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
@@ -29,17 +33,25 @@ class View(models.Model):
 
     @api.model
     def create(self, vals):
-        # breakpoint()
         if not self.env.context.get('from_ir_view'):
             page_name = vals['name']
-            new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
+            # new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
+            new_page = self.env['website'].with_context(
+                from_seo_view=True,
+                website_id=self.env['website'].get_current_website().id
+            ).new_page(
+                name=page_name,
+                add_menu=True,  # Add to website menu
+                template='website.default_page',  # Use default template
+                ispage=True
+            )
             vals['page_id'] = [(6, 0, new_page.get('view_id'))]
+            formatted_name = page_name.replace(' ', '').upper()
+            vals['unique_page_id'] = formatted_name+str(random.randint(10000, 99999))
             website_page = self.env['website.page'].search([('view_id', '=', new_page['view_id'])], limit=1)
             if website_page:
                 vals['website_page_id'] = website_page.id
         return super(View, self).create(vals)
-
-
 
     def action_view_website_page(self):
         self.ensure_one()
@@ -74,6 +86,11 @@ class View(models.Model):
                 website_page = self.env['website.page'].search([('view_id', '=', view.page_id.id)], limit=1)
                 if website_page:
                     website_page.unlink()
+                page = self.env['automated_seo.page'].search([('page_name', '=', view.name)], limit=1)
+                print("page",page)
+                if page:
+                    page.unlink()
+
         return super(View, self).unlink()
 
     def generate_hash(self,length=6):
@@ -100,9 +117,8 @@ class View(models.Model):
             })
 
     def remove_extra_spaces(self,html_parser):
-        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p']
+        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3']
         for tag in inline_tags:
-            # Remove newlines and extra spaces within inline tags
             pattern = f'<{tag}([^>]*)>\s*([^<]*)\s*</{tag}>'
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
 
@@ -110,16 +126,11 @@ class View(models.Model):
     def update_snippet_ids(self, view_name):
         page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
-        html_parser = website_page.view_id.arch
-
+        html_parser = website_page.view_id.arch_db
+        html_parser  = self.replace_section_with_div(html_content=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
-
-
         sections = soup.find_all('section', {'data-snippet': True})
-
-
         snippet_ids = []
-
         if not page:
             page = self.env['automated_seo.page'].create({
                 'page_name': view_name
@@ -132,14 +143,25 @@ class View(models.Model):
                 sections[i]['data-snippet'] = snippet_ids[i]
                 orginal_snippet_id = snippet_ids[i].split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
+
                 for snippet_record in snippet_records:
+                    php_class = snippet_record.get('element_class')
+                    # php_tags = sections[i].find_all(class_=php_class)
+                    # for php_tag in php_tags:
+                        # new_php_tag_class = php_class + self.generate_hash(length=6)
+                        # php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
                     self.env['automated_seo.snippet_mapper'].create({
                         'snippet_id': snippet_ids[i],
                         'php_tag': snippet_record.get('php_tag'),
-                        'element_class': snippet_record.get('element_class'),
+                        'element_class': php_class,
                         'image_name': snippet_record.get('image_name'),
                     })
-                website_page.view_id.arch = soup.prettify()
+                website_page.view_id.arch = soup.prettify()            # html_parser = self.replace_div_with_section(html_content=str(soup))
+            # soup = BeautifulSoup(html_parser, "html.parser")
+            # website_page.view_id.arch = soup.prettify()
+            # website_page.view_id.arch_db = soup.prettify()
+            # print(website_page.view_id.arch_db)
+            # print(website_page.view_id.arch)
 
         for section in sections:
             if len(section.get('data-snippet').split('-')) != 2:
@@ -162,7 +184,8 @@ class View(models.Model):
     def update_images_in_html_and_php(self, view_name):
         # breakpoint()
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
-        html_parser = website_page.view_id.arch
+        html_parser = website_page.view_id.arch_db
+        html_parser = self.replace_section_with_div(html_content=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
         snippet_ids = []
@@ -346,11 +369,13 @@ class WebsitePage(models.Model):
     @api.model
     def create(self, vals):
         record = super(WebsitePage, self).create(vals)
-
         if not self.env.context.get('from_seo_view'):
+            formatted_name = record.name.replace(' ', '').upper()
+            unique_page_id= formatted_name + str(random.randint(10000, 99999))
             seo_view = self.env['automated_seo.view'].with_context(from_ir_view=True).create({
                 'name': record.name,
-                'website_page_id': record.id
+                'website_page_id': record.id,
+                'unique_page_id': unique_page_id
             })
             record.view_id.page_id = seo_view.id
 

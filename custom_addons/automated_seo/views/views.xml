@@ -7,10 +7,9 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="create_uid"/>
+                <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
-
             </tree>
         </field>
     </record>
@@ -20,64 +19,84 @@
         <field name="name">automated_seo.view.form</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <form>
-                <xpath expr="//header" position="inside">
+            <form string="SEO View Management">
+                <header>
+                    <!-- Compile Button -->
+                    <button name="action_custom_button"
+                            type="object"
+                            string="Compile"
+                            class="btn oe_highlight"
+                            context="{'view_name': name}"/>
 
-                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
+                    <!-- Preview Button -->
+                    <button name="action_view_website_page"
+                            type="object"
+                            string="Preview"
+                            class="btn oe_highlight"/>
 
-                        <button name="action_custom_button"
-                                type="object"
-                                string="Compile"
-                                context="{'view_name': name}"
-                                class="btn oe_highlight"/>
-                    </div>
-                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
-                        <button name="action_view_website_page"
-                                type="object"
-                                string="Preview"
-                                icon="fa-eye"
-                                class="btn oe_highlight"/>
-                    </div>
-                    <div class="btn-group" style="margin-right: 10px; padding:10px ">
-                        <button name="action_edit_website_page"
-                                type="object"
-                                string="Edit"
-                                class="btn oe_highlight fa fa-pencil"/>
-                    </div>
-
-                </xpath>
+                    <!-- Edit Button -->
+                    <button name="action_edit_website_page"
+                            type="object"
+                            string="Edit"
+                            class="btn oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="create_uid"/>
-                        <field name="create_date"/>
-                        <field name="write_date"/>
-                        <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
-                        <label for="parse_html_filename" string="Parsed HTML File:"
-                               attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                        <div class="o_row">
-                            <field name="parse_html_filename" readonly="1" nolabel="1"
+                        <group>
+                            <div class="o_col" style="width:250px">
+                                <h1>
+                                    <field name="unique_page_id" nolabel="1" readonly="1" attrs="{'invisible': [('id', '=', False)]}"/>
+                                </h1>
+                                 <div class="o_row">
+                                     Owner<p style="margin-left:5px">:</p>
+
+                                <field name="create_uid" widget="many2one_avatar" options="{'size': [250, 250]}" style="margin-left:5px"
+                                       nolabel="1"/>
+                                </div>
+
+                                <div class="o_row">
+                                    Created On<p style="margin-left:5px">:</p>
+                                    <field name="create_date" style="margin-left:5px"/>
+                                </div>
+                                <div class="o_row">
+                                    Updated On<p style="margin-left:5px">:</p>
+                                    <field name="write_date" style="margin-left:5px"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
+                            <label for="parse_html_filename" string="Parsed HTML File:"
                                    attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                            <button name="action_download_parsed_html"
-                                    type="object"
-                                    icon="fa-download"
-                                    class="btn btn-link p-0"
-                                    attrs="{'invisible': [('parse_html_binary', '=', False)]}"
-                                    title="Download File"/>
-                        </div>
+                            <div class="d-flex align-items-center">
+                                <field name="parse_html_filename" readonly="1" nolabel="1"
+                                       attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
+                                <button name="action_download_parsed_html" type="object"
+                                        icon="fa-download" class="btn btn-link ms-2"
+                                        attrs="{'invisible': [('parse_html_binary', '=', False)]}"
+                                        title="Download File"/>
+                            </div>
+                        </group>
                     </group>
-                    <notebook position="inside">
-                        <page string="PHP Mapper Output" attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
+                    <notebook>
+                        <page string="PHP Mapper Output"
+                              attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
                             <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+                    <!--                    <field name="activity_ids" widget="mail_activity"/>-->
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
 
-    <!-- Action -->
-    <record model="ir.actions.act_window" id="automated_seo.view_action">
+    <!-- Action for Page Management -->
+    <record id="automated_seo.view_action" model="ir.actions.act_window">
         <field name="name">Page Management</field>
         <field name="res_model">automated_seo.view</field>
         <field name="view_mode">tree,form</field>
@@ -88,14 +107,16 @@
         </field>
     </record>
 
+    <!-- Main Menu for SEO Management -->
     <menuitem id="menu_automated_seo_root"
               name="Automated SEO"
-              web_icon="automated_seo,static/description/icon.png"
               sequence="10"/>
-    <!-- Menu -->
+
+    <!-- Submenu for Page Management -->
     <menuitem id="menu_automated_view"
               name="Pages"
               parent="menu_automated_seo_root"
               action="automated_seo.view_action"
               sequence="10"/>
 </odoo>
+
