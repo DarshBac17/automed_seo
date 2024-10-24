@@ -53,6 +53,36 @@ class View(models.Model):
                 vals['website_page_id'] = website_page.id
         return super(View, self).create(vals)
 
+    def write(self, vals):
+        for record in self:
+            if 'name' in vals and record.website_page_id:
+                new_name = vals['name']
+                current_website = self.env['website'].get_current_website()
+
+                # Update website page
+                record.website_page_id.write({
+                    'name': new_name,
+                    'url': '/' + new_name.lower().replace(' ', '-'),
+                })
+
+                # Update view
+                if record.page_id:
+                    record.page_id.write({
+                        'name': new_name,
+                        'key': 'website.' + new_name.lower().replace(' ', '_'),
+                    })
+                menu_item = self.env['website.menu'].search([
+                    ('page_id', '=', record.website_page_id.id),
+                    ('website_id', '=', current_website.id)
+                ], limit=1)
+                if menu_item:
+                    menu_item.write({'name': new_name})
+
+                if not self.env.context.get('from_ir_view'):
+                    formatted_name = new_name.replace(' ', '').upper()
+                    vals['unique_page_id'] = formatted_name + str(random.randint(10000, 99999))
+        return super(View, self).write(vals)
+
     def action_view_website_page(self):
         self.ensure_one()
         if not self.page_id:
