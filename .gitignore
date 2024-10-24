@@ -78,3 +78,4 @@ odoo-bin
 
 /custom_addons/automated_seo/controller
 /custom_addons/automated_seo/views/test.xml
+/temp
