@@ -31,6 +31,15 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
 
+
+    def _get_next_page_id(self):
+        last_view = self.search([], order='id desc', limit=1)
+        if last_view and last_view.unique_page_id:
+            last_id_num = int(last_view.unique_page_id[4:])
+            return f'PAGE{str(last_id_num + 1).zfill(4)}'
+        else:
+            return 'PAGE0001'
+
     @api.model
     def create(self, vals):
         if not self.env.context.get('from_ir_view'):
