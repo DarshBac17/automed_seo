@@ -10,6 +10,8 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        "views/website/footer.xml",
+        "views/website/header.xml",
         "views/views.xml",
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
