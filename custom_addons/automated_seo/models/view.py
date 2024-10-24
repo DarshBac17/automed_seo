@@ -23,7 +23,7 @@ class View(models.Model):
     _description = 'Automated SEO View'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Name', required=True, default='New')
+    name = fields.Char(string='Name', required=True)
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
     unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
@@ -46,8 +46,7 @@ class View(models.Model):
                 ispage=True
             )
             vals['page_id'] = [(6, 0, new_page.get('view_id'))]
-            formatted_name = page_name.replace(' ', '').upper()
-            vals['unique_page_id'] = formatted_name+str(random.randint(10000, 99999))
+            vals['unique_page_id'] = self._get_next_page_id()
             website_page = self.env['website.page'].search([('view_id', '=', new_page['view_id'])], limit=1)
             if website_page:
                 vals['website_page_id'] = website_page.id
@@ -396,16 +395,22 @@ class IrUiView(models.Model):
 class WebsitePage(models.Model):
     _inherit = 'website.page'
 
+    def _get_next_page_id(self):
+        last_view = self.env['automated_seo.view'].search([], order='id desc', limit=1)
+        if last_view and last_view.unique_page_id:
+            last_id_num = int(last_view.unique_page_id[4:])
+            return f'PAGE{str(last_id_num + 1).zfill(4)}'
+        else:
+            return 'PAGE0001'
+
     @api.model
     def create(self, vals):
         record = super(WebsitePage, self).create(vals)
         if not self.env.context.get('from_seo_view'):
-            formatted_name = record.name.replace(' ', '').upper()
-            unique_page_id= formatted_name + str(random.randint(10000, 99999))
             seo_view = self.env['automated_seo.view'].with_context(from_ir_view=True).create({
                 'name': record.name,
                 'website_page_id': record.id,
-                'unique_page_id': unique_page_id
+                'unique_page_id': self._get_next_page_id()
             })
             record.view_id.page_id = seo_view.id
 
