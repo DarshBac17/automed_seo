@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_card_white" name="sub card white">
+        <section class="remove" style="margin: 0; padding: 0;">
+            <div class="boxed bg-white">
+
+                    <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
+                    <p class="small-heading-two">Description Description Description Description Description Description
+                        Description Description Description Description Description
+                    </p>
+                </div>
+        </section>
+
+    </template>
+</odoo>

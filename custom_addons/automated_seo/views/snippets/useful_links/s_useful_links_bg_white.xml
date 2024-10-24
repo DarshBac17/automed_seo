@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_useful_links_bg_white" name="Useful links bg white">
-        <section class="bg-white">
+        <section class="o_automated_seo_snippet bg-white">
             <div class="container">
                 <h2 class="text-center cont-padding">Header Header Header</h2>
-                <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 [&amp;_h3]:text-white [&amp;_h3]:text-base">
-                    <div class="boxed banner-post">
+                <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 [&amp;_h3]:text-white [&amp;_h3]:text-base oe_structure">
+                    <div class="boxed banner-post o_replace_section_div">
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/blog-img-1.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img" loading="lazy" width="352" height="226">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" alt="Why Use Angular in 2024?" title="Why Use Angular in 2024?" class="banner-post-img blog-img-1" loading="lazy" width="352" height="226"/>
                         <div class="content">
@@ -15,7 +15,7 @@
                             <a href="#" class="btn btn-outline-primary why-use">Keep Reading</a>
                         </div>
                     </div>
-                    <div class="boxed banner-post">
+                    <div class="boxed banner-post o_replace_section_div">
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" alt="What’s New in Angular 18?" title="What’s New in Angular 18?" class="banner-post-img blog-img-2" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
@@ -24,7 +24,7 @@
                             <a href="#" class="btn btn-outline-primary whats-new">Keep Reading</a>
                         </div>
                     </div>
-                    <div class="boxed banner-post">
+                    <div class="boxed banner-post o_replace_section_div">
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img blog-img-3" loading="lazy" width="352" height="226"/>
                         <div class="content">
                             <span class="tag mb-sm">blog</span>
@@ -37,4 +37,16 @@
             </div>
         </section>
     </template>
+
+  <!--  <template id="s_useful_links_white_options" inherit_id="website.snippet_options">
+         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+             <div data-js="MultipleItems" data-selector=".o_useful_links_bg_white">
+                 <we-row string="Content">
+                     <we-button data-add-item="" data-item=".oe_structure > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                         Add Item
+                     </we-button>
+                 </we-row>
+             </div>
+         </xpath>
+     </template>-->
 </odoo>

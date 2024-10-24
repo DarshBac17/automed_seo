@@ -2,14 +2,14 @@
 <odoo>
     <template id="s_case_study_bg_gray" name="Case Study gray">
 
-        <section class="bg-gray-light casestudy-merge-col" id="case-study">
+        <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col" id="case-study">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading </h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="bg-dark boxed single-item-slider">
-                    <div>
+                <div class="bg-dark boxed single-item-slider oe_structure">
+                    <div class="o_replace_section_div">
                         <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
                         <div class="grid gap-6 md:grid-cols-2">
                             <div class="text-white">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="o_replace_section_div">
                         <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
                         <div class="grid gap-6 md:grid-cols-2">
                             <div class="text-white">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="o_replace_section_div">
                         <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>
                         <div class="grid gap-6 md:grid-cols-2">
                             <div class="text-white">

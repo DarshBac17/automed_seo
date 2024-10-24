@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_2_box_list_bg_white" name="2 Box list Card White">
-        <section class="container">
+        <section class="o_automated_seo_snippet container">
 
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check">
-                <div class="boxed bg-gray-light">
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check oe_structure">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                     <ul class="small-heading-two">
                         <li>List Item Text</li>
@@ -22,7 +22,7 @@
                         <li>List Item Text</li>
                     </ul>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                     <ul class="small-heading-two">
                         <li>List Item Text</li>
