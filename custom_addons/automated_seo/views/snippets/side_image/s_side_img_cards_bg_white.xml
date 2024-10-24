@@ -8,23 +8,23 @@
 <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/section-side-1.jpg" data-src=" <?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/section-side-1.jpg" alt="Client Achievements with Our AI Consultancy" title="Client Achievements with Our AI Consultancy" class="w-full h-full object-cover" loading="lazy" width="645" height="371">-->
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/section-side-1.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/section-side-1.jpg" alt="Client Achievements with Our AI Consultancy" title="Client Achievements with Our AI Consultancy" class="w-full h-full object-cover section-side-1" loading="lazy" width="645" height="371"/>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6 o_automated_seo_layout">
-                    <section class="boxed bg-gray-light o_replace_section_div">
+                <div class="grid md:grid-cols-2 gap-6 oe_structure">
+                    <div class="boxed bg-gray-light o_replace_section_div">
                         <h3 class="text-primary text-h4">21%</h3>
                         <p class="small-heading">Text Text Text Text Text</p>
-                    </section>
-                    <section class="boxed bg-gray-light o_replace_section_div">
+                    </div>
+                    <div class="boxed bg-gray-light o_replace_section_div">
                         <h3 class="text-primary text-h4">30%</h3>
                         <p class="small-heading">Text Text Text Text Text</p>
-                    </section>
-                    <section class="boxed bg-gray-light o_replace_section_div">
+                    </div>
+                    <div class="boxed bg-gray-light o_replace_section_div">
                         <h3 class="text-primary text-h4">25%</h3>
                         <p class="small-heading">Text Text Text Text Text</p>
-                    </section>
-                    <section class="boxed bg-gray-light o_replace_section_div">
+                    </div>
+                    <div class="boxed bg-gray-light o_replace_section_div">
                         <h3 class="text-primary text-h4">40%</h3>
                         <p class="small-heading">Text Text Text Text Text</p>
-                    </section>
+                    </div>
                 </div>
             </div>
         </section>

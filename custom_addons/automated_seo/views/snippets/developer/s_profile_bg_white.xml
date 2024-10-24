@@ -6,8 +6,8 @@
                 <h2>Header Header Header Header</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 o_automated_seo_layout">
-                <section class="boxed bg-gray-light o_replace_section_div">
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="flex items-center mb-sm small-heading-three">
                         <div class="size-60 mr-sm">
                             <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
@@ -61,8 +61,8 @@
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                     </div>
                     <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                </section>
-                <section class="boxed bg-gray-light o_replace_section_div">
+                </div>
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="flex items-center mb-sm small-heading-three">
                         <div class="size-60 mr-sm">
                             <!--  <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/hemant-net.png"
@@ -115,8 +115,8 @@
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                     </div>
                     <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                </section>
-                <section class="boxed bg-gray-light o_replace_section_div">
+                </div>
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="flex items-center mb-sm small-heading-three">
                         <div class="size-60 mr-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
@@ -167,7 +167,7 @@
                                 href="#" class="text-primary font-bold dot-net-core-developer">span</a></span>
                     </div>
                     <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                </section>
+                </div>
             </div>
         </section>
 

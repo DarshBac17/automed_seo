@@ -15,7 +15,7 @@
             </div>
 
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer custom-right-section">
-                <div class="accordian-outer o_automated_seo_layout">
+                <div class="accordian-outer oe_structure">
                     <section class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading active">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
@@ -64,7 +64,7 @@
                             </ul>
                         </div>
                     </section>
-<!--                    <div class="o_automated_seo_layout grid grid-cols-1 gap-y-6" data-name="add_child_card">
+<!--                    <div class="oe_structure grid grid-cols-1 gap-y-6" data-name="add_child_card">
                         &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                     </div>-->
                 </div>
