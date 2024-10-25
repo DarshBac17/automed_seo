@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+<record id="view_version_tree" model="ir.ui.view">
+    <field name="name">website.page.version.tree</field>
+    <field name="model">website.page.version</field>
+    <field name="arch" type="xml">
+        <tree delete="false" create="false" edit="false" js_class="version_list">
+            <field name="name"/>
+            <field name="description"/>
+            <field name="user_id" widget="many2one_avatar" options="{'size': [250, 250]}"/>
+            <field name="create_date"/>
+            <field name="write_date"/>
+            <field name="status" widget="boolean_reload_toggle"/>
+            <button name="action_version"
+                    type="object"
+                    string="Publish"
+                    class="btn btn-primary"/>
+        </tree>
+    </field>
+</record>
+
+    <!-- Action -->
+    <record id="action_version_list" model="ir.actions.act_window">
+        <field name="name">Version</field>
+        <field name="res_model">website.page.version</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_version_tree"/>
+        <field name="target">current</field>
+
+    </record>
+
+    <!-- Assets Bundle -->
+<!---->
+</odoo>

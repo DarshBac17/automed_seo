@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_website_page_version_public,website.page.version.public,model_website_page_version,website.group_website_designer,1,1,1,1
 access_automated_seo_page,access.automated.seo.page,model_automated_seo_page,automated_seo.group_automated_seo_admin,1,1,1,1
 access_automated_seo_snippet_mapper,access.automated.seo.snippet.mapper,model_automated_seo_snippet_mapper,automated_seo.group_automated_seo_admin,1,1,1,1
 access_automated_seo_view,access.automated.seo.view,model_automated_seo_view,automated_seo.group_automated_seo_bacancy_seo,1,1,1,1
@@ -6,3 +7,5 @@ access_automated_seo_php_mapper,access.automated.seo.php.mapper,model_automated_
 access_automated_seo_mapper,access.automated.seo.mapper,model_automated_seo_mapper,automated_seo.group_automated_seo_admin,1,1,1,1
 access_restrict_bacancy_seo_settings,restrict_bacancy_seo_settings,base.model_ir_config_parameter,automated_seo.group_automated_seo_bacancy_seo,0,0,0,0
 access_restrict_bacancy_seo_apps,restrict_bacancy_seo_apps,base.model_ir_module_module,automated_seo.group_automated_seo_bacancy_seo,0,0,0,0
+
+

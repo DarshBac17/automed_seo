@@ -6,11 +6,14 @@
     'summary': 'A simple QWeb demo',
     'description': """This module demonstrates a basic QWeb template in Odoo 16.""",
     'author': 'Hetul Patel',
-    'depends': ['base',"web", 'website'],
+    'depends': ['website', 'web_editor','base',"web", ],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        # "views/temp.xml",
         "views/views.xml",
+        'views/templates.xml',
+        'views/version.xml',
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
         "views/snippets/steps/s_steps_bg_white.xml",
@@ -106,7 +109,7 @@
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
         'views/snippets/snippets.xml',
-
+        # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",
         # "views/snippets/page/s_developer_pricing_bg_white.xml",
         # "views/snippets/s_angular_header.xml",
@@ -131,6 +134,7 @@
     ],
     'assets': {
         'web.assets_frontend': [
+            'automated_seo/static/src/js/toggle.js',
             'automated_seo/static/src/css/custom.css',
             'automated_seo/static/src/css/casestudy.css',
             'automated_seo/static/src/css/faq.css',
@@ -144,10 +148,15 @@
             'automated_seo/static/src/css/indu-sec.css',
             'automated_seo/static/src/css/tab-sec.css',
             'automated_seo/static/src/js/main.js',
+
         ],
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
+            'automated_seo/static/src/js/website_version.js',
             'automated_seo/static/src/js/angular_offer.js'
+        ],
+            'web.assets_backend': [
+            'automated_seo/static/src/js/toggle.js',
         ],
     },
 }

@@ -30,6 +30,7 @@ class View(models.Model):
     parse_html = fields.Text(string="Parse HTML")
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
+    version = fields.One2many('website.page.version','view_id',string="Version")
 
 
     def _get_next_page_id(self):
