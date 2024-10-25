@@ -18,7 +18,7 @@
 
                 <div class="md:col-span-8 faq-head-outer">
                     <div class="accordian-outer oe_structure" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
-                        <DIV class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <div class="faq-heading active">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                     questions ?
@@ -29,8 +29,8 @@
                                     answer answer answer answer
                                 </p>
                             </div>
-                        </DIV>
-                        <DIV class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        </div>
+                        <div class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
 
                             <div class="faq-heading">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
@@ -42,8 +42,8 @@
                                     answer answer answer answer
                                 </p>
                             </div>
-                        </DIV>
-                        <DIV class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        </div>
+                        <div class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <div class="faq-heading">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                                     questions ?
@@ -54,7 +54,7 @@
                                     answer answer answer answer
                                 </p>
                             </div>
-                        </DIV>
+                        </div>
                     </div>
                 </div>
 

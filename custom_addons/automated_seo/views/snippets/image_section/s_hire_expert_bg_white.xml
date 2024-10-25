@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_hire_expert_bg_white" name="Hire Expert White">
-<section class="container text-center">
-        <div class="container">
-            <div class="cont-padding">
-                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
+        <section class="container text-center">
+            <div class="container">
+                <div class="cont-padding">
+                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
                         Heading
                     </h2>
                     <p>Description Description Description Description Description Description Description Description
