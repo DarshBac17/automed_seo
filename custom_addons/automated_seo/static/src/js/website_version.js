@@ -227,7 +227,7 @@ odoo.define('automated_seo.snippet.editor', function (require) {
                 alert('Version name is required');
                 return;
             }
-
+            this.$('.o_we_website_top_actions button[data-action=save]').trigger('click');
             // Call the backend with the version data
             ajax.jsonRpc('/website/version/save', 'call', {
                 'name': name,
