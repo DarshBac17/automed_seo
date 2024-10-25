@@ -1,6 +1,10 @@
 from email.policy import default
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError
+
+from automated_seo.odoo.modules.module import current_test
+
 
 class WebsitePageVersion(models.Model):
     _name = 'website.page.version'
@@ -19,8 +23,47 @@ class WebsitePageVersion(models.Model):
     status = fields.Boolean('Status',default=False)
 
     def action_version(self):
-        print("action call")
+        print("==========================")
+        # print(self.env.context)
+        # id = self.env.context.get('params', 'Unknown')
+        # id = int(id.get('id'))
+        # print(id)
+        # print("==========================")
+        #
+        # current_version  = self.env['website.page.version'].search([('status','=',True)],limit=1)
+        # current_version.status = False
+        # active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
+        # active_version.status = True
 
+
+
+
+
+    # def get_formview_id(self, access_uid=None):
+    #     """Disable form view"""
+    #     return False
+
+    @api.model
+    def get_view(self, view_id=None, view_type='form', **options):
+        """Override to prevent form view from loading"""
+        result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
+        if view_type == 'form':
+            raise UserError('Form view is not available for you')
+        return result
+
+    def write(self):
+        print("writecall==============================")
+
+    # def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+    #     result = super(WebsitePageVersion, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
+    #                                                              submenu=submenu)
+    #     if view_type == 'form':
+    #         print("=============insdie")
+    #         # Return tree view instead of form view
+    #         return super(WebsitePageVersion, self).fields_view_get(
+    #             view_id=self.env.ref('your_module.view_version_tree').id, view_type='tree', toolbar=toolbar,
+    #             submenu=submenu)
+    #     return result
 
 # from odoo import models, fields, api
 #

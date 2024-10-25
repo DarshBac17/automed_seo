@@ -104,7 +104,7 @@
                     <notebook>
                         <page string="Page Versions"
                               attrs="{'invisible': [('version', 'in', [False, ''])]}">
-                            <field name="version" style="pointer-events:none;"/>
+                            <field name="version" />
                         </page>
                         <page string="Compile Output"
                               attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
