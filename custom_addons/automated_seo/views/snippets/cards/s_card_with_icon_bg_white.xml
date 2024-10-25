@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_with_icon_bg_white" name="Card with icon white">
-        <section class="container text-center">
+        <section class="o_automated_seo_snippet container text-center">
             <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description
                     Description Description Description
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="boxed bg-gray-light">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 oe_structure">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
@@ -22,7 +22,7 @@
                         Description Description Description Description Description
                     </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
@@ -35,7 +35,7 @@
                         Description Description Description Description Description
                     </p>
                 </div>
-                <div class="boxed bg-gray-light">
+                <div class="boxed bg-gray-light o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"

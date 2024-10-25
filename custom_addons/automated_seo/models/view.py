@@ -308,9 +308,12 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
+        class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title', 'title', 'custom-flex-layout',
+                           'custom-left-section', 'custom-right-section']
 
         for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class'] if not cls.startswith('o_')]
+            tag['class'] = [cls for cls in tag['class']
+                            if not cls.startswith('o_') and cls not in class_to_remove]
 
             if not tag['class']:
                 del tag['class']
@@ -318,10 +321,9 @@ class View(models.Model):
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
 
-            class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title','title', 'custom-flex-layout', 'custom-left-section','custom-right-section']
-            for tag in soup.find_all(class_=class_to_remove):
-                # Replace the tag with its contents
-                tag.replace_with(*tag.contents)
+            # for tag in soup.find_all(class_=class_to_remove):
+            #     # Replace the tag with its contents
+            #     tag.replace_with(*tag.contents)
                 # tag.replace_with( tag.decode_contents())
 
 

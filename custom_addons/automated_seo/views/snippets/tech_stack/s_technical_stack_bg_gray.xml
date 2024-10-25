@@ -11,30 +11,9 @@
                     </p>
                 </div>
                 <table>
-                    <tbody>
+                    <tbody class="s_tech_stack_main oe_structure">
                         <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
+                            <td>Title Title Title</td>
                             <td>
                                 <span>Description</span>
                                 <span>Description</span>
@@ -55,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Description Description</td>
+                            <td>Title Title Title</td>
                             <td>
                                 <span>Description</span>
                                 <span>Description</span>
@@ -76,49 +55,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                       <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                       <tr>
-                            <td>Description Description</td>
+                            <td>Title Title Title</td>
                             <td>
                                 <span>Description</span>
                                 <span>Description</span>
@@ -139,7 +76,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Description Description</td>
+                            <td>Title Title Title</td>
                             <td>
                                 <span>Description</span>
                                 <span>Description</span>
@@ -159,217 +96,6 @@
                                 <span>Description</span>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr><tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr><tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Description Description</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-
-
-
                     </tbody>
                 </table>
                 <div class="text-center mt-md">
@@ -377,5 +103,17 @@
                 </div>
             </div>
         </section>
+    </template>
+
+    <template id="s_technical_stack_options" inherit_id="website.snippet_options">
+        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+            <div data-js="MultipleItems" data-selector=".tech-stack">
+                <we-row string="Content">
+                    <we-button data-add-item="" data-item=".s_tech_stack_main > tr:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                        Add Item
+                    </we-button>
+                </we-row>
+            </div>
+        </xpath>
     </template>
 </odoo>
