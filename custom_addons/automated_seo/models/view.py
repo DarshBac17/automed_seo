@@ -1,4 +1,3 @@
-from lxml.html import html_parser
 from odoo import models, fields, api
 from bs4 import BeautifulSoup
 import  html
@@ -157,8 +156,7 @@ class View(models.Model):
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
         # html_parser = self.php_mapper(view_name=view_name)
-        html_parser = self.update_snippet_ids(view_name)
-        self.add_sub_snippet_php_tag(html_parser = html_parser)
+        self.update_snippet_ids(view_name)
         html_parser = self.update_images_in_html_and_php(view_name=view_name)
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
         if html_parser:
@@ -223,31 +221,22 @@ class View(models.Model):
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
-                    php_tags = sections[i].find_all(class_=php_class)
-                    if len(php_tags)!=1:
-                        for php_tag in php_tags:
-                            new_php_tag_class = php_class + self.generate_hash(length=6)
-                            php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
-                            self.env['automated_seo.snippet_mapper'].create({
-                                'snippet_id': snippet_ids[i],
-                                'php_tag': snippet_record.get('php_tag'),
-                                'element_class': new_php_tag_class,
-                                'image_name': snippet_record.get('image_name'),
-                            })
-                    else:
-                        self.env['automated_seo.snippet_mapper'].create({
-                            'snippet_id': snippet_ids[i],
-                            'php_tag': snippet_record.get('php_tag'),
-                            'element_class': php_class,
-                            'image_name': snippet_record.get('image_name'),
-                        })
+                    # php_tags = sections[i].find_all(class_=php_class)
+                    # for php_tag in php_tags:
+                        # new_php_tag_class = php_class + self.generate_hash(length=6)
+                        # php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
+                    self.env['automated_seo.snippet_mapper'].create({
+                        'snippet_id': snippet_ids[i],
+                        'php_tag': snippet_record.get('php_tag'),
+                        'element_class': php_class,
+                        'image_name': snippet_record.get('image_name'),
+                    })
                 website_page.view_id.arch = soup.prettify()            # html_parser = self.replace_div_with_section(html_content=str(soup))
             # soup = BeautifulSoup(html_parser, "html.parser")
             # website_page.view_id.arch = soup.prettify()
             # website_page.view_id.arch_db = soup.prettify()
             # print(website_page.view_id.arch_db)
             # print(website_page.view_id.arch)
-            return soup.prettify()
 
         for section in sections:
             if len(section.get('data-snippet').split('-')) != 2:
@@ -258,26 +247,13 @@ class View(models.Model):
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
                                                                           limit=1).php_tags.read(
                     ['element_class', 'php_tag', 'image_name'])
-                php_class = snippet_records.get('element_class')
-                php_tags = section.find_all(class_=php_class)
                 for snippet_record in snippet_records:
-                    if len(php_tags)!=1:
-                        for php_tag in php_tags:
-                            new_php_tag_class = php_class + self.generate_hash(length=6)
-                            php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
-                            self.env['automated_seo.snippet_mapper'].create({
-                                'snippet_id': new_data_snippet_id,
-                                'php_tag': snippet_record.get('php_tag'),
-                                    'element_class': new_php_tag_class,
-                                'image_name': snippet_record.get('image_name'),
-                            })
-                    else:
-                        self.env['automated_seo.snippet_mapper'].create({
-                            'snippet_id': new_data_snippet_id,
-                            'php_tag': php_tags,
-                            'element_class': php_class,
-                            'image_name': snippet_record.get('image_name'),
-                        })
+                    self.env['automated_seo.snippet_mapper'].create({
+                        'snippet_id': new_data_snippet_id,
+                        'php_tag': snippet_record.get('php_tag'),
+                        'element_class': snippet_record.get('element_class'),
+                        'image_name': snippet_record.get('image_name'),
+                    })
                 website_page.view_id.arch = soup.prettify()
 
     def update_images_in_html_and_php(self, view_name):
