@@ -162,11 +162,21 @@ class View(models.Model):
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
 
         return html_parser
+
+    def remove_sub_snippet_sections(self,html_parser):
+        # Parse the HTML content
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        section = soup.find(class_='remove')
+        if section:
+            section.unwrap()
+        return soup.prettify()
+
     def update_snippet_ids(self, view_name):
         page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
-        # html_parser  = self.replace_section_with_div(html_content=html_parser)
+        html_parser  = self.remove_sub_snippet_sections(html_parser=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
         snippet_ids = []
