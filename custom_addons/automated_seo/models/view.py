@@ -193,21 +193,16 @@ class View(models.Model):
         # Parse the HTML content
         soup = BeautifulSoup(html_parser, 'html.parser')
 
-        # Find the <section> tag and unwrap it (remove the tag but keep its contents)
         section = soup.find(class_='remove')
         if section:
             section.unwrap()
-
-        # Print the modified HTML
-        print(soup.prettify())
         return soup.prettify()
 
     def update_snippet_ids(self, view_name):
         page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
-        html_parser = self.remove_sub_snippet_sections(html_parser=html_parser)
-        # html_parser  = self.replace_section_with_div(html_content=html_parser)
+        html_parser  = self.remove_sub_snippet_sections(html_parser=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
         snippet_ids = []
@@ -287,7 +282,6 @@ class View(models.Model):
                                 old_img_tag = old_tag_soup.find('img')
                                 old_img_name = element.get('image_name')
                                 if old_img_tag and old_img_name != new_image_name:
-
                                     hash_suffix = self.generate_hash()
                                     name, ext = new_image_name.rsplit('.', 1)
                                     new_image_name = f"{name}_{hash_suffix}.{ext}"
@@ -336,24 +330,10 @@ class View(models.Model):
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
                     element_class = element.get('element_class')
-                    # print('====element=================')
-
-                    # print(element)
-
                     tags = soup.find_all(class_=element_class)
                     for tag in tags:
-                        # print('====tag=================')
-                        # print(tag)
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                        # print('====element_class=================')
-
-                        # print(element_class)
-                        # print('====old_tag_soup=================')
-
-                        # print(old_tag_soup)
                         tag.replace_with(old_tag_soup)
-                        # print('=====================')
-
 
         for tag in soup.find_all('t'):
             tag.unwrap()
@@ -363,7 +343,7 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
-        class_to_remove = ['oe_structure','data-bs-original-title', 'title', 'custom-flex-layout',
+        class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title', 'title', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section']
 
         for tag in soup.find_all(class_=True):
@@ -375,10 +355,10 @@ class View(models.Model):
 
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
-            sub_snippet_remove = ['remove']
-            for tag in soup.find_all(class_=sub_snippet_remove):
-                # Replace the tag with its contents
-                tag.replace_with(*tag.contents)
+
+            # for tag in soup.find_all(class_=class_to_remove):
+            #     # Replace the tag with its contents
+            #     tag.replace_with(*tag.contents)
                 # tag.replace_with( tag.decode_contents())
 
 
@@ -492,5 +472,4 @@ class WebsitePage(models.Model):
             record.view_id.page_id = seo_view.id
 
         return record
-
 

@@ -16,7 +16,7 @@
 
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer custom-right-section">
                 <div class="accordian-outer oe_structure">
-                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
+                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading active">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -31,8 +31,8 @@
 
                             </ul>
                         </div>
-                    </section>
-                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
+                    </div>
+                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -47,8 +47,8 @@
 
                             </ul>
                         </div>
-                    </section>
-                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
+                    </div>
+                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -63,7 +63,7 @@
 
                             </ul>
                         </div>
-                    </section>
+                    </div>
 <!--                    <div class="oe_structure grid grid-cols-1 gap-y-6" data-name="add_child_card">
                         &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                     </div>-->
