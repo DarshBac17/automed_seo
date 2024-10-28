@@ -12,7 +12,7 @@
                     <h1>Heading Heading Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
 
-                <a href="#price-sec" class="btn btn-primary">Button Name</a>
+                <a href="#price-sec" class="btn btn-primary">Button Text</a>
             </div>
             <div class="lg:col-span-2 flex flex-wrap text-center">
                 <div class="boxed w-1/2 border-r border-b border-secondary">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="boxed w-1/2 border-b border-secondary">
                     <p class="text-white text-h2 mb-0 font-bold employeeCount">1000</p>
-                    <p class="text-primary agiledevetext">Description</p>
+                    <p class="text-primary agiledevetext">Description Description</p>
                 </div>
                 <div class="boxed w-1/2 border-r border-secondary">
                     <p class="text-white text-h2 mb-0 font-bold">98%</p>
