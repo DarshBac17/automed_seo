@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_version_tree" model="ir.ui.view">
+        <field name="name">website.page.version.tree</field>
+        <field name="model">website.page.version</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="id" invisible="1"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="user_id" widget="many2one_avatar" options="{'size': [250, 250]}"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+                <field name="status" widget="boolean_toggle" readonly="1"/>
+                <button name="action_version"
+                        type="object"
+                        string="Active"
+                        class="btn btn-primary"
+                        context="{'id': id}"
+
+                />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_version_list" model="ir.actions.act_window">
+        <field name="name">Version</field>
+        <field name="res_model">website.page.version</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_version_tree"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Access Rule -->
+<!--    <record id="website_page_version_rule" model="ir.rule">-->
+<!--        <field name="name">Website Page Version Access</field>-->
+<!--        <field name="model_id" ref="model_website_page_version"/>  &lt;!&ndash; Changed this line &ndash;&gt;-->
+<!--        <field name="domain_force">[('id', '!=', False)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>  &lt;!&ndash; Added this line &ndash;&gt;-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="False"/>-->
+<!--        <field name="perm_create" eval="False"/>-->
+<!--        <field name="perm_unlink" eval="False"/>-->
+<!--    </record>-->
+</odoo>
