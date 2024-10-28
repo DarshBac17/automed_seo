@@ -15,7 +15,7 @@
                 <field name="status" widget="boolean_toggle" readonly="1"/>
                 <button name="action_version"
                         type="object"
-                        string="Publish"
+                        string="Active"
                         class="btn btn-primary"
                         context="{'id': id}"
 

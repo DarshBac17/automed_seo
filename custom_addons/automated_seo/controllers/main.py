@@ -34,6 +34,10 @@ class WebsiteVersion(http.Controller):
             def clean_content(content):
                 soup = BeautifulSoup(content, 'html.parser')
 
+                # Find the <section> tag and unwrap it (remove the tag but keep its contents)
+                section = soup.find('main')
+                if section:
+                    section.unwrap()
                 # Find the wrap div
                 wrap_div = soup.find('div', id='wrap')
                 if wrap_div:

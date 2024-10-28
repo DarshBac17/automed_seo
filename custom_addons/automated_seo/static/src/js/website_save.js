@@ -9,7 +9,7 @@ odoo.define('website.custom.editor', function (require) {
     const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
         events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
             'click .o_we_website_top_actions button[data-action=save]': '_onSaveRequest',
-//            'click .o_we_website_top_actions button[data-action=save]':'_onDiscardClick'
+            'click .o_we_website_top_actions button[data-action=cancel]':'_onDiscardRequest'
         }),
 
         start: function () {
@@ -53,37 +53,14 @@ odoo.define('website.custom.editor', function (require) {
                 console.error("Save failed:", error);
             }
         },
-//        _onDiscardClick: async function (ev) {
-//            console.log("Discard button clicked");
-//
-//            try {
-//                // Prevent default behavior
-//                ev.preventDefault();
-//                ev.stopPropagation();
-//
-//                // Get the wysiwyg instance
-//
-//
-//                // Call the original save function
-//                await this.trigger_up('request_cancel', {
-//                    reloadEditor: true,
-//                    onSuccess: () => {
-//                        console.log("Save completed successfully");
-//                        // Wait a bit before reloading to ensure save is complete
-//                        setTimeout(() => {
-//                            console.log("Reloading page...");
-//                            window.location.reload(true);
-//                        }, 500);
-//                    },
-//                    onFailure: () => {
-//                        console.error("Save operation failed");
-//                    },
-//                });
-//
-//            } catch (error) {
-//                console.error("Save failed:", error);
-//            }
-//        },
+        _onDiscardRequest: async function (ev) {
+            try {
+                await this.trigger_up('request_cancel');
+
+            } catch (error) {
+                console.error("Discard failed:", error);
+            }
+        }
     });
 
     return {

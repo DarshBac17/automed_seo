@@ -167,7 +167,7 @@ class View(models.Model):
             html_parser = html.unescape(html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
-            version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)])
+            version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.id}_parsed.html"
             self.write({
                 'parse_html': html_parser,
@@ -210,7 +210,6 @@ class View(models.Model):
         # html_parser  = self.replace_section_with_div(html_content=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
-        breakpoint()
         snippet_ids = []
         if not page:
             page = self.env['automated_seo.page'].create({
@@ -455,18 +454,14 @@ class IrUiView(models.Model):
 
     @api.model
     def create(self, vals):
-        print("create callss======================")
         return super(IrUiView, self).create(vals)
 
     def write(self,vals):
-        # breakpoint()
         record = super(IrUiView, self).write(vals)
         seo_view = self.env['automated_seo.view'].search([('page_id','=',self.id)])
         version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)])
         if version:
-            print("version write calls======================")
             if 'arch' in vals:
-                print("write calls======================")
                 version.view_arch = self.arch
 
         return record
