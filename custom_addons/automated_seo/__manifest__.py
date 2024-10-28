@@ -13,7 +13,7 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         "views/views.xml",
-        'views/templates.xml',
+        # 'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
