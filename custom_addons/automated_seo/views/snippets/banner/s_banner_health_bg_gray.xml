@@ -17,11 +17,11 @@
                 </div>
                 <div>
                     <p class="text-h3 font-bold text-primary mb-0">1000+</p>
-                    <p>Title Title Title Title Title Title</p>
+                    <p>Text Text Text</p>
                 </div>
                 <div>
                     <p class="text-h3 font-bold text-primary mb-0">100+ </p>
-                    <p>Title Title Title</p>
+                    <p>Text Text Text</p>
                 </div>
             </div>
             <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>

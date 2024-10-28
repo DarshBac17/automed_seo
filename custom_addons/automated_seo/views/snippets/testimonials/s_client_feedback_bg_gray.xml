@@ -20,7 +20,7 @@
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px" class="steve"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
@@ -31,7 +31,7 @@
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px" class="gerry-dunne"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
@@ -42,14 +42,14 @@
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px" class="david-carta"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
                 </div>
             </div>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button Name</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
             </div>
        </div>
     </section>

@@ -1,13 +1,16 @@
 
-
 $(document).ready(function() {
-    console.log("main.js loaded")
+    console.log("======================main.js loaded");
+
+
     $(".nav-menu").click(function() {
         $(".nav-menu").removeClass("active");
         $(this).addClass("active");
         $(".dropdown-menu").removeClass("flex").addClass("hidden");
         $(this).find(".dropdown-menu").addClass("flex").removeClass("hidden");
     });
+
+
 
     var headerHeight = $(".s_header").outerHeight(true) + 100;
     $(".side-sticky").css({ top: headerHeight });

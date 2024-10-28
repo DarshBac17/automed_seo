@@ -85,8 +85,6 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="write_date" style="margin-left:5px"/>
                                 </div>
-
-
                                 <div class="o_row">
                                     <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
                                     <label for="parse_html_filename" string="File:"
@@ -100,15 +98,14 @@
                                                 title="Download File"/>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                         </group>
                     </group>
                     <notebook>
-
+                        <page string="Page Versions"
+                              attrs="{'invisible': [('version', 'in', [False, ''])]}">
+                            <field name="version" style="pointer-events:none;" />
+                        </page>
                         <page string="Compile Output"
                               attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
                             <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>

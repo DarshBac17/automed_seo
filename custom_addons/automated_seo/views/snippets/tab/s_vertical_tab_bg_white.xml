@@ -14,28 +14,28 @@
                 <div class="tab-content style-check md:bg-gray-light">
                     <div class="tab-header">
                         <div class="tab-head bg-gray-light active">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                         <div class="tab-head bg-gray-light">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
+                            <div class="head">Title Title</div>
                         </div>
                     </div>
                     <div class="side-tab-content">
@@ -46,10 +46,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -59,10 +59,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -72,10 +72,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -85,10 +85,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -98,10 +98,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -111,10 +111,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -124,10 +124,10 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                         <div class="tab-pane boxed">
@@ -137,16 +137,16 @@
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Button name</a>
+                    <a href="#form" class="btn btn-outline-primary">Button Text</a>
                 </div>
             </div>
         </section>

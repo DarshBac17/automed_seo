@@ -14,10 +14,10 @@
                         </a>
                     </h3>
                     <ul>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
                 <div class="boxed bg-gray-light o_replace_section_div">
@@ -30,24 +30,23 @@
                         </a>
                     </h3>
                     <ul>
-                       <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                       <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
                 <div class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>computer-vision-services" class="text-primary">Computer Vision-->
 <!--                        </a>-->
-                        <a href="#" class="text-primary">Title Title Title Title Title Title
-                        </a>
+                        <a href="#" class="text-primary">Title Title Title Title Title Title</a>
                     </h3>
                     <ul>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
                 <div class="boxed bg-gray-light o_replace_section_div">
@@ -55,26 +54,25 @@
 <!--                        <a href="<?php echo BASE_URL; ?>data-analytics-services" class="text-primary">Predictive-->
 <!--                            Analytics-->
 <!--                        </a>-->
-                        <a href="#" class="text-primary">Title Title Title Title Title Title
-                        </a>
+                        <a href="#" class="text-primary">Title Title Title Title Title Title</a>
                     </h3>
                     <ul>
-                       <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                       <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
                 <div class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-h4 small-heading">
 <!--                        <a href="<?php echo BASE_URL; ?>ai-integration-services" class="text-primary">AI Integration</a>-->
-                        <a href="#" class="text-primary">Title Title Title Title Title Title </a>
+                        <a href="#" class="text-primary">Title Title Title Title Title Title</a>
                     </h3>
                     <ul>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
                 <div class="boxed bg-gray-light o_replace_section_div">
@@ -82,20 +80,19 @@
 <!--                        <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
 <!--                            Automation-->
 <!--                        </a>-->
-                        <a href="#" class="text-primary">Title Title Title Title Title Title
-                        </a>
+                        <a href="#" class="text-primary">Title Title Title Title Title Title</a>
                     </h3>
                     <ul>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
-                        <li>Description Description</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
+                        <li>Item Item Item Item</li>
                     </ul>
                 </div>
             </div>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button Text </a>
-                <a href="#form" class="btn btn-outline-primary">Button Text </a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
             </div>
         </section>
     </template>

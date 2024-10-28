@@ -3,7 +3,7 @@
     <template id="s_right_side_img_list_bg_white" name="Right side img list bg white">
         <section class="container">
             <div class="cont-padding">
-                <h2>Heading Heading Heading Heading Heading </h2>
+                <h2>Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
             </div>
             <div class="grid md:grid-cols-2 gap-6">
