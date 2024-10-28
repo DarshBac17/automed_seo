@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_card_with_list_gray" name="sub card with list gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="boxed bg-gray">
+            <div class="sub_card boxed bg-gray">
                         <h3 class="text-h4 small-heading">
 <!--                                                    <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
 <!--                                                        Automation-->

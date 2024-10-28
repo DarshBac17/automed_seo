@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_card_with_list_and_button_gray" name="sub card with list and button gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="bg-gray-light boxed">
+            <div class="sub_card bg-gray-light boxed">
                 <div class="svg-icon mb-sm">
                     <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"

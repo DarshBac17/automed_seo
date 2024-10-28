@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_video_card_white" name="sub video card gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="boxed bg-white">
+            <div class="sub_card boxed bg-white">
                 <h4 class="text-h5 mb-0 text-dark">100%</h4>
                 <p>Text Text Text</p>
             </div>

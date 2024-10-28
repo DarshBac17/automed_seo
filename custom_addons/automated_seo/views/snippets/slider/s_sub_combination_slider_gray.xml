@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_combination_slider_gray" name="sub combination slider gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="item bg-gray-light boxed">
+            <div class="sub_card item bg-gray-light boxed">
                 <div class="flex svg-icon mb-sm">
                     <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon angular" class="mr-sm angular" loading="lazy" height="60" width="60"/>

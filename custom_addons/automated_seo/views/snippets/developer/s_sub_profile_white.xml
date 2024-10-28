@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_profile_white" name="sub profile white">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="boxed bg-white">
+            <div class="sub_card boxed bg-white">
                     <div class="flex items-center mb-sm small-heading-three">
                         <div class="size-60 mr-sm">
                             <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
