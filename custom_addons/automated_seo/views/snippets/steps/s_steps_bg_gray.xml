@@ -7,21 +7,21 @@
             <div class="container">
                 <h2 class="text-center cont-padding">Header Header Header Header</h2>
                 <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
-                    <section class="boxed bg-white o_replace_section_div">
+                    <div class="boxed bg-white o_replace_section_div">
                         <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>
                         <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>
-                    </section>
-                    <section class="boxed bg-white o_replace_section_div">
+                    </div>
+                    <div class="boxed bg-white o_replace_section_div">
                         <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">2</span>
                         <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>
-                    </section>
-                    <section class="boxed bg-white o_replace_section_div">
+                    </div>
+                    <div class="boxed bg-white o_replace_section_div">
                         <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">3</span>
                         <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description</p>
-                    </section>
+                    </div>
                 </div>
                 <div class="text-center mt-md">
                     <a href="#form" class="btn btn-outline-primary">Button text</a>
