@@ -191,10 +191,12 @@
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
             'automated_seo/static/src/js/website_version.js',
+            'automated_seo/static/src/js/website_save.js',
             'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [
-            'automated_seo/static/src/js/toggle.js',
+                # 'automated_seo/static/src/js/website_version.js',
+                'automated_seo/static/src/js/toggle.js',
         ],
     },
 }

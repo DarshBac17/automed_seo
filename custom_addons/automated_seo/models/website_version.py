@@ -3,7 +3,6 @@ from email.policy import default
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 import json
-from automated_seo.odoo.modules.module import current_test
 
 
 class WebsitePageVersion(models.Model):
@@ -31,13 +30,16 @@ class WebsitePageVersion(models.Model):
         active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
         if active_version:
             active_version.status = True
-            breakpoint()
-            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id)],limit=1)
-            # view.parse_html = active_version.parse_html
-            view.page_id.arch_db = active_version.view_arch
-            view.parse_html_filename = active_version.parse_html_filename if active_version.parse_html_filename else "first"
+            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id.id)])
 
 
+            view.parse_html = active_version.parse_html if active_version.parse_html else None
+
+            view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
+
+            view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
+
+            view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
 
 

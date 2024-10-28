@@ -43,6 +43,7 @@ class View(models.Model):
 
     @api.model
     def create(self, vals):
+        website_page = False
         if not self.env.context.get('from_ir_view'):
             page_name = vals['name']
             # new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
@@ -60,7 +61,17 @@ class View(models.Model):
             website_page = self.env['website.page'].search([('view_id', '=', new_page['view_id'])], limit=1)
             if website_page:
                 vals['website_page_id'] = website_page.id
-        return super(View, self).create(vals)
+        record  = super(View, self).create(vals)
+        self.env['website.page.version'].create({
+            'name' : 'v1.0.0',
+            'description' : 'First Version',
+            'view_id':record.id,
+            'page_id':website_page.id,
+            'view_arch':website_page.view_id.arch,
+            'user_id':self.env.user.id,
+            'status':True
+        })
+        return record
 
     def write(self, vals):
         for record in self:
@@ -117,18 +128,24 @@ class View(models.Model):
             'target': 'self',
         }
 
-
     def unlink(self):
         for view in self:
-            if view.page_id:
-                # Find the associated website page and delete it
-                website_page = self.env['website.page'].search([('view_id', '=', view.page_id.id)], limit=1)
-                if website_page:
-                    website_page.unlink()
-                page = self.env['automated_seo.page'].search([('page_name', '=', view.name)], limit=1)
-                print("page",page)
-                if page:
-                    page.unlink()
+            try:
+                versions = self.env['website.page.version'].search([('view_id', '=', view.id)])
+                if versions:
+                    versions.unlink()
+                # Delete associated website page
+                if view.page_id:
+                    website_page = self.env['website.page'].search([('view_id', 'in', view.page_id.ids)], limit=1)
+                    if website_page:
+                        website_page.unlink()
+                seo_page = self.env['automated_seo.page'].search([('page_name', '=', view.name)], limit=1)
+                if seo_page:
+                    seo_page.unlink()
+
+            except Exception as e:
+                print(f"Error while deleting associated records for view {view.name}: {str(e)}")
+                raise
 
         return super(View, self).unlink()
 
@@ -149,10 +166,19 @@ class View(models.Model):
             html_parser = soup.prettify()
             html_parser = html.unescape(html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            file = base64.b64encode(html_parser.encode('utf-8'))
+            version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)])
+            file_name = f"{view_name}_{version.id}_parsed.html"
             self.write({
                 'parse_html': html_parser,
-                'parse_html_binary': base64.b64encode(html_parser.encode('utf-8')),
-                'parse_html_filename': f"{view_name}_parsed.html"
+                'parse_html_binary': file ,
+                'parse_html_filename': file_name,
+
+            })
+            version.write({
+                'parse_html': html_parser,
+                'parse_html_binary':file,
+                'parse_html_filename' : file_name
             })
 
     def remove_extra_spaces(self,html_parser):
@@ -162,13 +188,29 @@ class View(models.Model):
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
 
         return html_parser
+
+    def remove_sub_snippet_sections(self,html_parser):
+        # Parse the HTML content
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        # Find the <section> tag and unwrap it (remove the tag but keep its contents)
+        section = soup.find(class_='remove')
+        if section:
+            section.unwrap()
+
+        # Print the modified HTML
+        print(soup.prettify())
+        return soup.prettify()
+
     def update_snippet_ids(self, view_name):
         page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
+        html_parser = self.remove_sub_snippet_sections(html_parser=html_parser)
         # html_parser  = self.replace_section_with_div(html_content=html_parser)
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
+        breakpoint()
         snippet_ids = []
         if not page:
             page = self.env['automated_seo.page'].create({
@@ -221,7 +263,6 @@ class View(models.Model):
                 website_page.view_id.arch = soup.prettify()
 
     def update_images_in_html_and_php(self, view_name):
-        # breakpoint()
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
         # html_parser = self.replace_section_with_div(html_content=html_parser)
@@ -247,6 +288,7 @@ class View(models.Model):
                                 old_img_tag = old_tag_soup.find('img')
                                 old_img_name = element.get('image_name')
                                 if old_img_tag and old_img_name != new_image_name:
+
                                     hash_suffix = self.generate_hash()
                                     name, ext = new_image_name.rsplit('.', 1)
                                     new_image_name = f"{name}_{hash_suffix}.{ext}"
@@ -295,10 +337,24 @@ class View(models.Model):
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
                     element_class = element.get('element_class')
+                    # print('====element=================')
+
+                    # print(element)
+
                     tags = soup.find_all(class_=element_class)
                     for tag in tags:
+                        # print('====tag=================')
+                        # print(tag)
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                        # print('====element_class=================')
+
+                        # print(element_class)
+                        # print('====old_tag_soup=================')
+
+                        # print(old_tag_soup)
                         tag.replace_with(old_tag_soup)
+                        # print('=====================')
+
 
         for tag in soup.find_all('t'):
             tag.unwrap()
@@ -308,7 +364,7 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
-        class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title', 'title', 'custom-flex-layout',
+        class_to_remove = ['oe_structure','data-bs-original-title', 'title', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section']
 
         for tag in soup.find_all(class_=True):
@@ -320,10 +376,10 @@ class View(models.Model):
 
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
-
-            # for tag in soup.find_all(class_=class_to_remove):
-            #     # Replace the tag with its contents
-            #     tag.replace_with(*tag.contents)
+            sub_snippet_remove = ['remove']
+            for tag in soup.find_all(class_=sub_snippet_remove):
+                # Replace the tag with its contents
+                tag.replace_with(*tag.contents)
                 # tag.replace_with( tag.decode_contents())
 
 
@@ -399,7 +455,21 @@ class IrUiView(models.Model):
 
     @api.model
     def create(self, vals):
+        print("create callss======================")
         return super(IrUiView, self).create(vals)
+
+    def write(self,vals):
+        # breakpoint()
+        record = super(IrUiView, self).write(vals)
+        seo_view = self.env['automated_seo.view'].search([('page_id','=',self.id)])
+        version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)])
+        if version:
+            print("version write calls======================")
+            if 'arch' in vals:
+                print("write calls======================")
+                version.view_arch = self.arch
+
+        return record
 
 
 
@@ -427,4 +497,5 @@ class WebsitePage(models.Model):
             record.view_id.page_id = seo_view.id
 
         return record
+
 
