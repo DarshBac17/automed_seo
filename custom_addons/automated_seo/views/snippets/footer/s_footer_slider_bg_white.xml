@@ -47,7 +47,7 @@
 <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
 <!--                                    </div>-->
                                     <div class="time-zone">
-                                        <img src="/https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-2.jpg"
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-2.jpg"
                                              alt="Time Zone Aligned" title="Time Zone Aligned" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
@@ -73,7 +73,7 @@
 <!--                                             width="365" class="m-auto w-[max(365px,4.932vw)]">-->
 <!--                                    </div>-->
                                     <div class="experience-team">
-                                        <img src="/https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-3.jpg"
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-3.jpg"
                                              alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"
                                              width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
