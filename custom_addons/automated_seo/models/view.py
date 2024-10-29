@@ -170,6 +170,8 @@ class View(models.Model):
             html_parser = soup.prettify()
             html_parser = html.unescape(html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.remove_extra_spaces(html_parser = html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.html"
@@ -453,6 +455,31 @@ class View(models.Model):
                 a['href'] = url.replace("https://www.bacancytechnology.com/", base_url_php)
 
         return str(soup.prettify())
+
+    def remove_empty_tags(self, html_parser):
+
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        all_tags = soup.find_all()
+
+        for tag in all_tags:
+            tag_string = str(tag)
+
+
+            pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
+
+            # Check if it's an empty tag
+            if re.match(pattern, tag_string):
+                print(pattern, tag_string)
+                tag.decompose()
+            pattern = f'<{tag.name}></{tag.name}>'
+            if re.match(pattern, tag_string):
+                print("============================")
+                print(pattern, tag_string)
+                tag.decompose()
+
+
+        return soup.prettify()
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
