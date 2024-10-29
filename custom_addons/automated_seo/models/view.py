@@ -33,6 +33,10 @@ class View(models.Model):
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
     version = fields.One2many('website.page.version','view_id',string="Version")
 
+    _sql_constraints = [
+        ('unique_name', 'unique(name)', 'The name must be unique!')
+    ]
+
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -157,10 +161,13 @@ class View(models.Model):
     def action_custom_button(self):
         view_name = self.env.context.get('view_name', 'Unknown')
         # html_parser = self.php_mapper(view_name=view_name)
-        html_parser = self.update_snippet_ids(view_name)
-        self.add_sub_snippet_php_tag(html_parser = html_parser)
-        html_parser = self.update_images_in_html_and_php(view_name=view_name)
+        self.update_snippet_ids(view_name)
+        self.add_sub_snippet_php_tag(view_name = view_name)
+        # html_parser = self.update_images_in_html_and_php(view_name=view_name)
+        html_parser = self.handle_dynamic_img_tag(view_name=view_name)
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
+
+
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -170,7 +177,7 @@ class View(models.Model):
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
-            file_name = f"{view_name}_{version.name}_parsed.html"
+            file_name = f"{view_name}_{version.name}_{version.id}.html"
             self.write({
                 'parse_html': html_parser,
                 'parse_html_binary': file ,
@@ -182,9 +189,55 @@ class View(models.Model):
                 'parse_html_binary':file,
                 'parse_html_filename' : file_name
             })
+    def  add_sub_snippet_php_tag(self,view_name):
+        page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
+        website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+        html_parser = website_page.view_id.arch_db
+        html_parser = self.remove_sub_snippet_sections(html_parser=html_parser)
+        soup = BeautifulSoup(html_parser, "html.parser")
+        sections = soup.find_all('section', {'data-snippet': True})
+        snippet_ids = []
+        for section in sections:
+            snippet_ids.append(section.get('data-snippet'))
+        for i in range(len(snippet_ids)):
+            section = sections[i]
+            sub_cards = section.find_all('div', class_='sub_card')
+            if sub_cards:
+                data_snippet_value = sub_cards[0].find_parent(attrs={"data-snippet": True})['data-snippet']
+                orginal_snippet_id = data_snippet_value.split('-')[0]
+                snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
+                                                                          limit=1).php_tags.read(
+                    ['element_class', 'php_tag', 'image_name', 'name'])
+                for sub_card in sub_cards:
+
+                    for snippet_record in snippet_records:
+                        if snippet_record.get('name').split('-')[0]=='sub':
+                            php_class = snippet_record.get('element_class')
+                            new_php_tag_class = php_class + self.generate_hash(length=6)
+                            php_tag = sub_card.find_all(class_=php_class)
+
+                            # breakpoint()
+                            # for php_tag in php_tags:
+                            php_tag[0]['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag[0]['class']]
+                            self.env['automated_seo.snippet_mapper'].create({
+                                'snippet_id': snippet_ids[i],
+                                'php_tag': snippet_record.get('php_tag'),
+                                'element_class': new_php_tag_class,
+                                'image_name': snippet_record.get('image_name'),
+                            })
+                            class_to_remove = ['sub_card']
+
+                            for tag in soup.find_all(class_=True):
+                                tag['class'] = [cls for cls in tag['class']
+                                                if cls not in class_to_remove]
+
+                                if not tag['class']:
+                                    del tag['class']
+                            website_page.view_id.arch = soup.prettify()
+
 
     def remove_extra_spaces(self,html_parser):
-        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3']
+        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h2','image','h1','h4','h5','h6']
         for tag in inline_tags:
             pattern = f'<{tag}([^>]*)>\s*([^<]*)\s*</{tag}>'
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
@@ -208,6 +261,7 @@ class View(models.Model):
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
         snippet_ids = []
+        # breakpoint()
         if not page:
             page = self.env['automated_seo.page'].create({
                 'page_name': view_name
@@ -216,32 +270,42 @@ class View(models.Model):
                 snippet_ids.append(section.get('data-snippet') + '-' + self.generate_hash())
 
 
-            for i in range(len(sections)):
-                sections[i]['data-snippet'] = snippet_ids[i]
-                orginal_snippet_id = snippet_ids[i].split('-')[0]
+            for section in sections:
+                snippet_id = section.get('data-snippet')
+                # breakpoint()
+                orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
-                    php_tags = sections[i].find_all(class_=php_class)
+                    php_tags = soup.find_all(class_=php_class)
                     if len(php_tags)!=1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
                             php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
                             self.env['automated_seo.snippet_mapper'].create({
-                                'snippet_id': snippet_ids[i],
+                                'snippet_id': snippet_id,
                                 'php_tag': snippet_record.get('php_tag'),
                                 'element_class': new_php_tag_class,
                                 'image_name': snippet_record.get('image_name'),
                             })
                     else:
+                        # breakpoint()
                         self.env['automated_seo.snippet_mapper'].create({
-                            'snippet_id': snippet_ids[i],
+                            'snippet_id': snippet_id,
                             'php_tag': snippet_record.get('php_tag'),
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
                         })
-                website_page.view_id.arch = soup.prettify()            # html_parser = self.replace_div_with_section(html_content=str(soup))
+            for tag in soup.find_all(class_=True):
+                tag['class'] = [cls for cls in tag['class']
+                                if cls not in ['sub_card']]
+
+                if not tag['class']:
+                    del tag['class']
+            website_page.view_id.arch_db = soup.prettify()
+            website_page.view_id.arch = soup.prettify()            # html_parser = self.replace_div_with_section(html_content=str(soup))
+                # html_parser = self.replace_div_with_section(html_content=str(soup))
             # soup = BeautifulSoup(html_parser, "html.parser")
             # website_page.view_id.arch = soup.prettify()
             # website_page.view_id.arch_db = soup.prettify()
@@ -258,9 +322,10 @@ class View(models.Model):
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
                                                                           limit=1).php_tags.read(
                     ['element_class', 'php_tag', 'image_name'])
-                php_class = snippet_records.get('element_class')
-                php_tags = section.find_all(class_=php_class)
+
                 for snippet_record in snippet_records:
+                    php_class = snippet_record.get('element_class')
+                    php_tags = soup.find_all(class_=php_class)
                     if len(php_tags)!=1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
@@ -278,7 +343,52 @@ class View(models.Model):
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
                         })
+                for tag in soup.find_all(class_=True):
+                    tag['class'] = [cls for cls in tag['class']
+                                    if cls not in ['sub_card']]
+
+                    if not tag['class']:
+                        del tag['class']
+                website_page.view_id.arch_db = soup.prettify()
                 website_page.view_id.arch = soup.prettify()
+
+    def handle_dynamic_img_tag(self,view_name):
+        website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+        html_parser = website_page.view_id.arch_db
+        # breakpoint()
+
+        # TODO:
+        soup = BeautifulSoup(html_parser, "html.parser")
+        base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
+        for img in soup.select('img'):
+
+            url = img.get('src')
+            if url and url.startswith("/web/image/"):
+                new_image_name = url.split('/')[-1]
+                image_id = int(url.split('/')[-2].split('-')[0])
+                attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
+                hash_suffix = self.generate_hash()
+                name, ext = new_image_name.rsplit('.', 1)
+                new_image_name = f"{name}_{hash_suffix}.{ext}"
+                if attachment:
+                    print("uploaded succesfully=======================")
+                    # new_image_data = attachment.datas
+                    # new_image = base64.b64decode(new_image_data)
+                    # image_file = io.BytesIO(new_image)
+                    # self.upload_file_to_s3(file=image_file, view_name=view_name, s3_filename=new_image_name)
+                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
+                img['src'] = odoo_img_url
+                img['data-src'] = odoo_img_url
+                for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width"]:
+                    if img.has_attr(attr):
+                        del img[attr]
+                website_page.view_id.arch_db = soup.prettify()
+                website_page.view_id.arch = soup.prettify()
+
+            img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+
+        return str(soup.prettify())
 
     def update_images_in_html_and_php(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
@@ -353,11 +463,12 @@ class View(models.Model):
             if snippet_records:
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
-                    element_class = element.get('element_class')
-                    tags = soup.find_all(class_=element_class)
-                    for tag in tags:
-                        old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
-                        tag.replace_with(old_tag_soup)
+                    if not element.get('image_name'):
+                        element_class = element.get('element_class')
+                        tags = soup.find_all(class_=element_class)
+                        for tag in tags:
+                            old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                            tag.replace_with(old_tag_soup)
 
         for tag in soup.find_all('t'):
             tag.unwrap()
