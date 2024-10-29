@@ -23,6 +23,7 @@
         "views/snippets/steps/s_steps_bg_gray.xml",
         "views/snippets/steps/s_sub_step_white.xml",
         "views/snippets/steps/s_sub_step_gray.xml",
+        "views/snippets/footer/s_slider_form_footer_white.xml",
         "views/snippets/footer/s_footer_slider_bg_gray.xml",
         "views/snippets/header/s_header.xml",
         "views/snippets/footer/s_footer_slider_bg_white.xml",

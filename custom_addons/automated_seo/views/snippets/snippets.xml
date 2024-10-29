@@ -546,7 +546,10 @@
                 <div class="o_panel_header">Footer</div>
                 <div class="o_panel_body">
 
-                    <t t-snippet="automated_seo.s_footer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_slider_form_footer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>footer,Slider,form</keywords>
+                    </t>
+                   <!-- <t t-snippet="automated_seo.s_footer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>footer</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_footer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
@@ -558,7 +561,7 @@
                     </t>
                     <t t-snippet="automated_seo.s_footer_slider_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>footer</keywords>
-                    </t>
+                    </t>-->
 
                 </div>
             </div>

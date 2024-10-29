@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_horizontal_tab_bg_gray" name="Horizontal tab Gray">
+    <template id="s_horizontal_tab_bg_gray" name="Horizontal Tab Gray">
 
         <section class="bg-gray-light tabs tabbibg-sec" id="technical-stack">
             <div class="container">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_trusted_parties_bg_white" name="Trusted parties bg white">
+    <template id="s_trusted_parties_bg_white" name="Trusted Parties BG White">
         <section class="container">
             <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>

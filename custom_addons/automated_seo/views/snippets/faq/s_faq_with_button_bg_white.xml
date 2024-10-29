@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_faq_with_button_bg_white" name="FAQ with button White">
+    <template id="s_faq_with_button_bg_white" name="FAQ with Button White">
         <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container grid md:gap-6 grid-cols-1 md:grid-cols-11">
 

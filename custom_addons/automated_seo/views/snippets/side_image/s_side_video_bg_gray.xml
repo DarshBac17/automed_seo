@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_video_bg_gray" name="Side video Gray">
+    <template id="s_side_video_bg_gray" name="Side Video Gray">
 
         <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">

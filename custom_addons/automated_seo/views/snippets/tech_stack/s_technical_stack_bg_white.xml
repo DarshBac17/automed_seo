@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_technical_stack_bg_white" name="Technical stack white">
+    <template id="s_technical_stack_bg_white" name="Technical Stack White">
         <section class="container tech-stack" id="tech-stack">
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading</h2>

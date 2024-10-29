@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_img_list_bg_white" name="Side img list bg white">
+    <template id="s_side_img_list_bg_white" name="Side Img List BG White">
         <section class="container">
             <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading </h2>

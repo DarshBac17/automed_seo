@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_hiring_model" name="sub hiring model">
+    <template id="s_sub_hiring_model" name="Sub Hiring Model">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-primary">
                 <div class="svg-icon mb-sm">

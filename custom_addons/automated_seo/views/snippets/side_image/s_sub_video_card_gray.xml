@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_video_card_gray" name="sub video card gray">
+    <template id="s_sub_video_card_gray" name="Sub Video Card Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="boxed bg-gray-light">
                 <h4 class="text-h5 mb-0 text-dark">100%</h4>

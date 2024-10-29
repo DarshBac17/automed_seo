@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_case_study" name="sub case study">
+    <template id="s_sub_case_study" name="Sub Case Study">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card">
                 <h3 class="text-center text-white cont-padding">Subtitle Subtitle Subtitle Subtitle</h3>

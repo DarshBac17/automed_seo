@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_footer_slider_bg_white" name="Footer slider White">
+    <template id="s_footer_slider_bg_white" name="Footer Slider White">
         <section>
             <div class="container footer-slider">
                 <div class="footer-slider slick-slider slick-dotted">

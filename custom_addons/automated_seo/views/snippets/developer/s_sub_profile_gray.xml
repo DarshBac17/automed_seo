@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_profile_gray" name="sub profile gray">
+    <template id="s_sub_profile_gray" name="Sub Profile Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-gray-light">
                     <div class="flex items-center mb-sm small-heading-three">

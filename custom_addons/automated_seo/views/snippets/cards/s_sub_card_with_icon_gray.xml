@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_card_with_icon_gray" name="sub card with icon gray">
+    <template id="s_sub_card_with_icon_gray" name="Sub Card with Icon Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-gray-light">
                         <div class="svg-icon mb-sm">

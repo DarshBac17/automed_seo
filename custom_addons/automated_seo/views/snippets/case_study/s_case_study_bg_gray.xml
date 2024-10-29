@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_case_study_bg_gray" name="Case Study gray">
+    <template id="s_case_study_bg_gray" name="Case Study Gray">
 
         <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col" id="case-study">
             <div class="container">

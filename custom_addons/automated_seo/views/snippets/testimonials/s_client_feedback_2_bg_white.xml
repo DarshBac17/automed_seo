@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_client_feedback_2_bg_white" name="Client Feedback 2 white">
+    <template id="s_client_feedback_2_bg_white" name="Client Feedback 2 White">
         <section class="o_automated_seo_snippet container">
             <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading</h2>

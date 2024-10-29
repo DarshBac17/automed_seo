@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_client_feedback_white" name="sub client feedback white">
+    <template id="s_sub_client_feedback_white" name="Sub Client Feedback White">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-white pt-0">
                 <div class="size-60 -mt-5 mb-sm">

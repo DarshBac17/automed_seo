@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_useful_links_bg_white" name="Useful links bg white">
+    <template id="s_useful_links_bg_white" name="Useful Links BG White">
         <section class="o_automated_seo_snippet bg-white">
             <div class="container">
                 <h2 class="text-center cont-padding">Header Header Header</h2>

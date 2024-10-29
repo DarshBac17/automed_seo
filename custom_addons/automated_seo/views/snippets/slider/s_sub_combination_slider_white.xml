@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_combination_slider_white" name="sub combination slider white">
+    <template id="s_sub_combination_slider_white" name="Sub Combination Slider White">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card item bg-white boxed">
                 <div class="flex svg-icon mb-sm">
