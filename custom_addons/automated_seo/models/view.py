@@ -349,7 +349,7 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
-        class_to_remove = ['oe_structure', 'remove', 'data-bs-original-title', 'title', 'custom-flex-layout',
+        class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section']
 
         for tag in soup.find_all(class_=True):
@@ -358,6 +358,10 @@ class View(models.Model):
 
             if not tag['class']:
                 del tag['class']
+
+            for attr in ['data-bs-original-title', 'title','aria-describedby']:
+                if tag.has_attr(attr):
+                    del tag[attr]
 
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
                 tag.attrs.pop(attr, None)
