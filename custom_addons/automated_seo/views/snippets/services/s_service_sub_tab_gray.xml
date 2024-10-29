@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_service_sub_tab_gray" name="service sub tab gray">
+    <template id="s_service_sub_tab_gray" name="Service Sub Tab Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="accordion-item accordian-tab bg-gray-light">
                 <div class="faq-heading">

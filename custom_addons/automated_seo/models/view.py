@@ -162,6 +162,7 @@ class View(models.Model):
         self.update_snippet_ids(view_name)
         html_parser = self.update_images_in_html_and_php(view_name=view_name)
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
+        html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
         if html_parser:
@@ -431,6 +432,27 @@ class View(models.Model):
         # Return the modified HTML content
         return soup.prettify()
 
+    def handle_dynamic_anchar_tag(self,html_parser):
+        soup = BeautifulSoup(html_parser, "html.parser")
+        link_css_classes = ['text-primary', 'font-bold']
+        base_url_php = "<?php echo BASE_URL; ?>"
+        for a in soup.select('a:not(.btn)'):
+            # Get current classes on the <a> tag or initialize with an empty list
+            current_classes = a.get('class', [])
+
+            # Add each class from link_css_classes if it’s not already present
+            for css_class in link_css_classes:
+                if css_class not in current_classes:
+                    current_classes.append(css_class)
+
+            # Update the class attribute on the <a> tag
+            a['class'] = current_classes
+
+            url = a.get('href')
+            if url and url.startswith("https://www.bacancytechnology.com/"):
+                a['href'] = url.replace("https://www.bacancytechnology.com/", base_url_php)
+
+        return str(soup.prettify())
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'

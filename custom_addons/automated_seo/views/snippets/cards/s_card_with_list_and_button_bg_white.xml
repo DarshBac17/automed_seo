@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_with_list_and_button_bg_white" name="Card with list and button white">
+    <template id="s_card_with_list_and_button_bg_white" name="Card with List and Button White">
         <section class="o_automated_seo_snippet container">
             <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_video_bg_white" name="Side video White">
+    <template id="s_side_video_bg_white" name="Side Video White">
 
         <section class="o_automated_seo_snippet container">
             <div class="cont-padding">

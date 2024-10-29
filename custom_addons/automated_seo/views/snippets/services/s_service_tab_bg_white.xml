@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_service_tab_bg_white" name="Service tab White">
+    <template id="s_service_tab_bg_white" name="Service Tab White">
         <section class="o_automated_seo_snippet container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 custom-flex-layout">
             <div class="custom-left-section">
                 <div class="side-sticky">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_tech_stack" name="sub tech stack">
+    <template id="s_sub_tech_stack" name="Sub Tech Stack">
        <section class="remove" style="margin: 0; padding: 0;">
             <table class="remove">
                 <tbody class="remove">

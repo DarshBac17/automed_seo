@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_bg_gray" name="Card gray">
+    <template id="s_card_bg_gray" name="Card Gray">
         <section class="o_automated_seo_snippet bg-gray-light text-center">
             <div class="container">
                 <div class="cont-padding">

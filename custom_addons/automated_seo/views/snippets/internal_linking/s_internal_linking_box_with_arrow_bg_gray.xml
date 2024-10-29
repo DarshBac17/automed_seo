@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_internal_linking_box_with_arrow_bg_gray" name="Internal linking box with arrow gray">
+    <template id="s_internal_linking_box_with_arrow_bg_gray" name="Internal Linking Box with Arrow Gray">
         <section class="o_automated_seo_snippet bg-gray-light hover-box">
             <div class="container">
                 <div class="cont-padding text-center">

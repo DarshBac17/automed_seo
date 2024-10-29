@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_combination_slider_bg_white" name="Combination slider bg white">
+    <template id="s_combination_slider_bg_white" name="Combination Slider BG White">
         <section class="o_automated_seo_snippet overflow-hidden">
             <div class="container">
                 <div class="cont-padding text-center">

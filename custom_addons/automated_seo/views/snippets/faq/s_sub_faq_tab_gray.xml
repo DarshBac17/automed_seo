@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_faq_tab_gray" name="sub faq tab gray">
+    <template id="s_sub_faq_tab_gray" name="Sub FAQ Tab Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="accordion-item accordian-tab bg-gray" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                 <div class="faq-heading">

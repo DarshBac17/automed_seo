@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_card_with_icon_gray" name="sub card with icon gray">
+    <template id="s_sub_card_with_icon_gray" name="Sub Card with Icon Gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="boxed bg-gray-light">
+            <div class="o_sub_card boxed bg-gray-light">
                         <div class="svg-icon mb-sm">
                             <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"

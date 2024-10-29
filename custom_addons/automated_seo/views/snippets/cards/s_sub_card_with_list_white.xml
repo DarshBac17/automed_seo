@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_card_with_list_white" name="sub card with list white">
+    <template id="s_sub_card_with_list_white" name="Sub Card with List White">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="boxed bg-white">
                         <h3 class="text-h4 small-heading">

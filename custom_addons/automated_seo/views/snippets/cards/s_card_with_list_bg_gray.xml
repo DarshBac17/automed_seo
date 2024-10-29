@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_with_list_bg_gray" name="Card with list gray">
+    <template id="s_card_with_list_bg_gray" name="Card with List Gray">
         <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
                 <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
