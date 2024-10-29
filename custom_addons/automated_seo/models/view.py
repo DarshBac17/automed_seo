@@ -31,6 +31,9 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
     version = fields.One2many('website.page.version','view_id',string="Version")
+    _sql_constraints = [
+        ('unique_name', 'unique(name)', 'The name must be unique!')
+    ]
 
 
     def _get_next_page_id(self):
