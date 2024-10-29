@@ -4,7 +4,7 @@
         <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
                 <h2 class="cont-padding text-center">Heading Heading Heading Heading Heading Heading</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check oe_structure">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check o_sub_items_container">
                     <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                                                     <!--<a href="<?php echo BASE_URL; ?>machine-learning-development" class="text-primary">Machine

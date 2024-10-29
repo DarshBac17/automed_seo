@@ -7,7 +7,7 @@
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check oe_structure">
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check o_sub_items_container">
                 <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                     <ul class="small-heading-two">

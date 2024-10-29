@@ -6,10 +6,9 @@
 
             <div class="md:col-span-3">
                 <div class="side-sticky">
-                    <h2 class="cont-padding">Header Header Header</h2>
-                    <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">questions questions
-                        questions?
-                        <span class="md:block">description
+                    <h2 class="cont-padding">Frequently Asked Questions</h2>
+                    <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">Still have questions?
+                        <span class="md:block">Let’s talk
                             <span class="bg-rightarrowLineBlack"></span>
                         </span>
                     </a>
@@ -17,7 +16,7 @@
             </div>
 
             <div class="md:col-span-8 faq-head-outer">
-                <div class="accordian-outer oe_structure" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
+                <div class="accordian-outer o_sub_items_container" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
                     <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                         <div class="faq-heading active">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions

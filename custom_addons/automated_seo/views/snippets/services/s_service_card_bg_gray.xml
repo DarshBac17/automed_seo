@@ -18,7 +18,7 @@
 
                 </div>
 
-                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section oe_structure">
+                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section o_sub_items_container">
                     <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4">Title Title Title Title Title Title</h3>
                         <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
@@ -33,7 +33,7 @@
                     </section>
 
 <!--
-                    <div class="oe_structure grid grid-cols-1 gap-y-6" data-name="add_child_card">
+                    <div class="o_sub_items_container grid grid-cols-1 gap-y-6" data-name="add_child_card">
                         &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                     </div>
 -->

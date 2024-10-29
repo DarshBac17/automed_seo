@@ -573,7 +573,7 @@
         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
                 <we-row string="Content">
-                    <we-button data-add-item="" data-item=".oe_structure > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                    <we-button data-add-item="" data-item=".o_sub_items_container > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
                         Add Item
                     </we-button>
                 </we-row>

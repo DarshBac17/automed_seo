@@ -9,7 +9,7 @@
                     Description Description Description
                     </p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 oe_structure">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_sub_items_container">
                     <section class="boxed bg-white o_replace_section_div">
                         <div class="svg-icon mb-sm">
                             <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
