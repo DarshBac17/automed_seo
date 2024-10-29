@@ -10,27 +10,27 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 oe_structure">
-                <div class="boxed bg-white o_replace_section_div">
+                <section class="boxed bg-white o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-white o_replace_section_div">
+                </section>
+                <section class="boxed bg-white o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-white o_replace_section_div">
+                </section>
+                <section class="boxed bg-white o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
                 <a href="#form" class="btn btn-outline-primary">Button Text</a>
