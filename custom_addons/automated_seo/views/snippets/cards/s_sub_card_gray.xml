@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_card_gray" name="sub card gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="sub_card boxed bg-gray-light">
+            <div class="boxed bg-gray-light">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description

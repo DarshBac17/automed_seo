@@ -3,7 +3,7 @@
     <template id="s_sub_faq_tab_white" name="sub faq tab white">
         <section class="remove" style="margin: 0; padding: 0;">
 
-            <div class="sub_card accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <div class="accordion-item accordian-tab bg-white" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                 <div class="faq-heading">
                     <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                         questions ?

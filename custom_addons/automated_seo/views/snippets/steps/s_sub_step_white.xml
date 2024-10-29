@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_step_white" name="sub step white">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="sub_card boxed bg-white">
+            <div class="boxed bg-white">
                 <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>
                 <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                 <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>

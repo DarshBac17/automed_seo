@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_service_sub_tab_gray" name="service sub tab gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="sub_card accordion-item accordian-tab bg-gray-light">
+            <div class="accordion-item accordian-tab bg-gray-light">
                 <div class="faq-heading">
                     <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                 </div>

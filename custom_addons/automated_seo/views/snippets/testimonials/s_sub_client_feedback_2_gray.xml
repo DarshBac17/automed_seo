@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_sub_client_feedback_2_gray" name="sub client feedback 2 gray">
         <section class="remove" style="margin: 0; padding: 0;">
-            <div class="sub_card boxed bg-gray-light">
+            <div class="o_sub_card boxed bg-gray-light">
                 <div class="flex items-center mb-sm small-heading">
                     <div class="size-60 mr-sm">
                         <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" title="Gerry Dunne" width="60" height="60" loading="lazy" class="w-full">-->
