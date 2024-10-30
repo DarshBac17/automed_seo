@@ -165,10 +165,10 @@ class View(models.Model):
         if html_parser:
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = html.unescape(html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = html.unescape(html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.html"
@@ -311,9 +311,9 @@ class View(models.Model):
                                         'php_tag': str(old_tag_soup),
                                         'image_name': str(new_image_name)
                                     })
-                                    attachment.write({
-                                        'name': new_image_name
-                                    })
+                                    # attachment.write({
+                                    #     'name': new_image_name
+                                    # })
 
                                     tag.replace_with(old_tag_soup)
         return soup.prettify()
