@@ -6,9 +6,8 @@
 
                 <div class="md:col-span-3">
                     <div class="side-sticky">
-                        <h2 class="cont-padding">Header Header Header</h2>
-                        <a href="#footer-form-id" class="text-h5 faq-head max-md:mt-sm">questions questions
-                            questions?
+                        <h2 class="cont-padding">Frequently Asked Questions</h2>
+                        <a href="#footer-form-id" class="text-h5 faq-head max-md:mt-sm">Still have questions?
                             <span class="md:block">
                                 <a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </span>

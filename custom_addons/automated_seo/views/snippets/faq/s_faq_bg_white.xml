@@ -4,12 +4,11 @@
         <section class="o_automated_seo_snippet bg-gray-light">
         <div class="container grid md:gap-6 grid-cols-1 md:grid-cols-11">
 
-            <div class="md:col-span-3">
+           <div class="md:col-span-3">
                 <div class="side-sticky">
-                    <h2 class="cont-padding">Header Header Header</h2>
-                    <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">questions questions
-                        questions?
-                        <span class="md:block">description
+                    <h2 class="cont-padding">Frequently Asked Questions</h2>
+                    <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">Still have questions?
+                        <span class="md:block">Let’s talk
                             <span class="bg-rightarrowLineBlack"></span>
                         </span>
                     </a>
