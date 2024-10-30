@@ -11,6 +11,7 @@ from odoo.exceptions import UserError
 from botocore.exceptions import ClientError
 import re
 import random
+import mimetypes
 
 
 # from dotenv import load_dotenv
@@ -289,14 +290,15 @@ class View(models.Model):
                                     name, ext = new_image_name.rsplit('.', 1)
                                     new_image_name = f"{name}_{hash_suffix}.{ext}"
 
-                                    image_id = int(new_src.split('/')[-2].split('-')[0])
+                                    # image_id = int(new_src.split('/')[-2].split('-')[0])
+                                    image_id = tag.get('data-original-id')
                                     attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
 
                                     if attachment:
                                         new_image_data = attachment.datas
                                         new_image = base64.b64decode(new_image_data)
                                         image_file = io.BytesIO(new_image)
-                                        self.upload_file_to_s3(file=image_file,s3_filename=new_image_name)
+                                        self.upload_file_to_s3(file=image_file,s3_filename=new_image_name,view_name = view_name)
 
                                     image_path = '/'.join(new_src.split('/')[:-1])
                                     tag['src'] = image_path + '/' + new_image_name
@@ -311,9 +313,9 @@ class View(models.Model):
                                         'php_tag': str(old_tag_soup),
                                         'image_name': str(new_image_name)
                                     })
-                                    # attachment.write({
-                                    #     'name': new_image_name
-                                    # })
+                                    attachment.write({
+                                        'name': new_image_name
+                                    })
 
                                     tag.replace_with(old_tag_soup)
         return soup.prettify()
@@ -402,14 +404,23 @@ class View(models.Model):
         }
 
     def upload_file_to_s3(self, file, s3_filename,view_name = None):
+
+        content_type, _ = mimetypes.guess_type(s3_filename)
+
+        content_type = content_type or 'application/octet-stream'
         s3 = boto3.client('s3',
                           aws_access_key_id=AWS_ACCESS_KEY_ID,
                           aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                           )
         try:
-            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{s3_filename}')
-            # s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{view_name}/{s3_filename}')
-            print(f"File {s3_filename} uploaded successfully to bucket {AWS_STORAGE_BUCKET_NAME}!")
+            if view_name:
+                view_name = view_name.replace(',', '_').strip()
+                s3_key = f'Inhouse/{view_name}/{s3_filename}'
+            else:
+                s3_key = f'Inhouse/{s3_filename}'
+            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
+                'ContentType': content_type})
+
         except ClientError as e:
             if e.response['Error']['Code'] == 'AccessDenied':
                 print("Access Denied. Please check your AWS credentials and bucket permissions.")
