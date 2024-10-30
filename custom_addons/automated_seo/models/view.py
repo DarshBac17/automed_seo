@@ -455,8 +455,29 @@ class View(models.Model):
                 name, ext = new_image_name.rsplit('.', 1)
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if attachment:
-                    processed_image
+                    processed_image = self.process_image_with_params(attachment= attachment.datas,img_tag=img)
                     print("uploaded succesfully=======================")
+                    temp_folder_path = Path('./temp')
+                    # Ensure the temp folder exists
+                    temp_folder_path.mkdir(parents=True, exist_ok=True)
+
+                    # Define the full file path including filename and extension
+                    file_path = temp_folder_path / f"{new_image_name}"
+
+                    # Write the processed image data to the file
+                    with open(file_path, 'wb') as image_file:
+                        # Check if processed_image is BytesIO and get the byte content
+                        if isinstance(processed_image, io.BytesIO):
+                            processed_image.seek(0)  # Move to the start of the BytesIO stream
+                            image_data = processed_image.read()  # Read as bytes
+                        else:
+                            image_data = processed_image  # Assume it's already in bytes
+
+                        # Ensure image_data is valid before writing
+                        if image_data:
+                            image_file.write(image_data)
+                        else:
+                            raise ValueError("Image data is None after processing.")
                     # new_image_data = attachment.datas
                     # new_image = base64.b64decode(new_image_data)
                     # image_file = io.BytesIO(new_image)
