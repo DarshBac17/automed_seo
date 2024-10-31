@@ -19,18 +19,18 @@
 
 
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section o_sub_items_container">
-                <div class="boxed bg-gray-light o_replace_section_div">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-h4">Title Title Title Title Title Title</h3>
                     <p>Description Description Description Description  <a href="#" class="text-primary font-bold">Description Description Description Description </a> Description Description Description Description Description Description Description Description Description Description Description Description </p>
-                </div>
+                </section>
 <!--                <div class="o_sub_items_container grid grid-cols-1 gap-y-6" data-name="add_child_card">
                     &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                 </div>-->
