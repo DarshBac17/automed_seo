@@ -13,13 +13,13 @@
                 <field name="create_date"/>
                 <field name="write_date"/>
                 <field name="status" widget="boolean_toggle" readonly="1"/>
-<!--                <button name="action_version"-->
-<!--                        type="object"-->
-<!--                        string="Active"-->
-<!--                        class="btn btn-primary"-->
-<!--                        context="{'id': id}"-->
+                <button name="action_version"
+                        type="object"
+                        string="Active"
+                        class="btn btn-primary"
+                        context="{'id': id}"
 
-<!--                />-->
+                />
             </tree>
         </field>
     </record>

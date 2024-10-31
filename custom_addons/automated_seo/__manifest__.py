@@ -13,7 +13,7 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         "views/views.xml",
-        # 'views/templates.xml',
+        'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
@@ -191,8 +191,8 @@
         ],
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
-            # 'automated_seo/static/src/js/website_version.js',
-            # 'automated_seo/static/src/js/website_save.js',
+            'automated_seo/static/src/js/website_version.js',
+            'automated_seo/static/src/js/website_save.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [
