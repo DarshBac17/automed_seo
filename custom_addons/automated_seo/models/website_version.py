@@ -48,13 +48,13 @@ class WebsitePageVersion(models.Model):
     #     """Disable form view"""
     #     return False
 
-    # @api.model
-    # def get_view(self, view_id=None, view_type='form', **options):
-    #     """Override to prevent form view from loading"""
-    #     result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
-    #     if view_type == 'form':
-    #         raise UserError('Form view is not available for you')
-    #     return result
+    @api.model
+    def get_view(self, view_id=None, view_type='form', **options):
+        """Override to prevent form view from loading"""
+        result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
+        if view_type == 'form':
+            raise UserError('Form view is not available for you')
+        return result
 
     def write(self,vals):
         return super(WebsitePageVersion, self).write(vals)
