@@ -200,9 +200,9 @@
                     <t t-snippet="automated_seo.s_side_img_cards_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>side, image, white, cards</keywords>
                     </t>
-                     <!--<t t-snippet="automated_seo.s_side_img_sub_card_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                         <keywords>side, image, sub, white, cards</keywords>
-                     </t>-->
+                    <!--<t t-snippet="automated_seo.s_side_img_sub_card_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>side, image, sub, white, cards</keywords>
+                    </t>-->
                     <t t-snippet="automated_seo.s_side_video_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>side, video, white</keywords>
                     </t>
@@ -502,9 +502,9 @@
                     <t t-snippet="automated_seo.s_client_feedback_2_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>Testimonials, client, feedback 2, white</keywords>
                     </t>
-                     <!--<t t-snippet="automated_seo.s_sub_client_feedback_2_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                         <keywords>Testimonials, sub, client, feedback 2, white</keywords>
-                     </t>-->
+                    <!--<t t-snippet="automated_seo.s_sub_client_feedback_2_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>Testimonials, sub, client, feedback 2, white</keywords>
+                    </t>-->
 
                 </div>
             </div>
@@ -545,9 +545,9 @@
                 <div class="o_panel_header">Footer</div>
                 <div class="o_panel_body">
 
-<!--                    <t t-snippet="automated_seo.s_slider_form_footer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">-->
-<!--                        <keywords>footer,Slider,form</keywords>-->
-<!--                    </t>-->
+                    <!--                    <t t-snippet="automated_seo.s_slider_form_footer_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                                            <keywords>footer,Slider,form</keywords>
+                                        </t>-->
                     <t t-snippet="automated_seo.s_footer_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>footer</keywords>
                     </t>
@@ -574,6 +574,18 @@
             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
                 <we-row string="Content">
                     <we-button data-add-item="" data-item=".o_sub_items_container > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
+                        Add Item
+                    </we-button>
+                </we-row>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="s_technical_stack_options" inherit_id="website.snippet_options">
+        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+            <div data-js="MultipleItems" data-selector=".tech-stack">
+                <we-row string="Content">
+                    <we-button data-add-item="" data-item=".o_sub_items_container > tr:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
                         Add Item
                     </we-button>
                 </we-row>

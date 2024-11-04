@@ -10,102 +10,102 @@
                     </p>
                 </div>
                 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 o_sub_items_container">
-                    <div class="boxed bg-white o_replace_section_div">
+                    <section class="boxed bg-white o_replace_section_div">
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-fintech" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Fintech</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-insurance" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Insurance</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-gaming" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Gaming</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-banking" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Banking</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-accounting" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Accounting</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-energy" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Energy</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-manufacturing" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Manufacturing</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-marketing" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Marketing</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-news" class="w-full flex items-center"><h3 class="text-base mb-0">AI in News</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-fashion" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Fashion</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-transportation" class="w-full flex items-center"><h3 class="text-base mb-0">AI in Transportation</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <a href="#" class="w-full flex items-center">
                             <h3 class="text-base mb-0">Title Title Title</h3>
                             <span class="ml-auto bg-rightarrowLineBlack mt-1"></span>
                         </a>
 
                         <!--                    <a href="<?php echo BASE_URL; ?>artificial-intelligence-solutions" class="w-full flex items-center"><h3 class="text-base mb-0">Custom AI Solutions</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
-                    </div>
+                    </section>
                 </div>
                 <div class="text-center mt-md">
                     <a href="#form" class="btn btn-outline-primary">Button Text</a>
