@@ -2,9 +2,9 @@
 <odoo>
     <template id="s_service_card_bg_gray" name="Service Card Gray">
         <section class="o_automated_seo_snippet bg-gray-light">
-            <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 custom-flex-layout">
+            <div class="container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 o_custom-flex-layout">
 
-                <div class="custom-left-section">
+                <div class="o_custom-left-section">
                     <div class="side-sticky">
                         <div class="md:cont-padding">
                             <h2>Heading Heading Heading Heading Heading</h2>
@@ -18,7 +18,7 @@
 
                 </div>
 
-                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two custom-right-section o_sub_items_container">
+                <div class="grid grid-cols-1 gap-y-6 resp-btn-outer-two o_custom-right-section o_sub_items_container">
                     <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4">Title Title Title Title Title Title</h3>
                         <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>

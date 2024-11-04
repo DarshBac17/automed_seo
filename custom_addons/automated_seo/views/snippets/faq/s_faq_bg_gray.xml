@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_faq_bg_gray" name="FAQ gray">
+        <section class="o_automated_seo_snippet bg-gray-light">
+            <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11 o_tab_custom-flex-layout">
+
+                <div class="o_tab_custom-left-section md:col-span-3">
+                    <div class="side-sticky">
+                        <h2 class="cont-padding">Frequently Asked Questions</h2>
+                        <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">Still have questions?
+                            <span class="md:block">Let’s talk
+                                <span class="bg-rightarrowLineBlack"></span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="md:col-span-8 faq-head-outer o_tab_custom-right-section">
+                    <div class="accordian-outer o_sub_items_container" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-heading active">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
+                                    questions ?
+                                </h3>
+                            </div>
+                            <div class="accordian-text active" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                                <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                                    answer answer answer answer
+                                </p>
+                            </div>
+                        </section>
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+
+                            <div class="faq-heading">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
+                                    questions ?
+                                </h3>
+                            </div>
+                            <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                                <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                                    answer answer answer answer
+                                </p>
+                            </div>
+                        </section>
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-heading">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
+                                    questions ?
+                                </h3>
+                            </div>
+                            <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                                <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                                    answer answer answer answer
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </template>
+</odoo>

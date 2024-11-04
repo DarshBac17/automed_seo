@@ -254,6 +254,9 @@
                     <t t-snippet="automated_seo.s_faq_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>ask, questions, faq, white</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_faq_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>ask, questions, faq, gray</keywords>
+                    </t>
                     <!--<t t-snippet="automated_seo.s_sub_faq_tab_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>ask, sub, faq tabs, questions, faq, white</keywords>
                     </t>
@@ -262,6 +265,9 @@
                     </t>-->
                     <t t-snippet="automated_seo.s_faq_with_button_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>ask, questions, faq, white</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_faq_with_button_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>ask, questions, faq, gray</keywords>
                     </t>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_service_tab_bg_white" name="Service Tab White">
-        <section class="o_automated_seo_snippet container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 custom-flex-layout">
-            <div class="custom-left-section">
+        <section class="o_automated_seo_snippet container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 o_custom-flex-layout">
+            <div class="o_custom-left-section">
                 <div class="side-sticky">
                     <div class="md:cont-padding">
                         <h2>Header Header Header Header Header Header Header Header Header Header Header Header</h2>
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 gap-y-6 resp-btn-outer custom-right-section">
+            <div class="grid grid-cols-1 gap-y-6 resp-btn-outer o_custom-right-section">
                 <div class="accordian-outer o_sub_items_container">
                     <section class="accordion-item accordian-tab bg-gray-light o_replace_section_div">
                         <div class="faq-heading active">
