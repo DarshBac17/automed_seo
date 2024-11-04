@@ -14,7 +14,7 @@ import random
 from PIL import Image
 import os
 from pathlib import Path
-
+import mimetypes
 
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
@@ -460,26 +460,35 @@ class View(models.Model):
 
 
 
+
     def handle_img_change(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
         soup = BeautifulSoup(html_parser, "html.parser")
+        img_name_list = []
         for img in soup.select('img'):
             url = img.get('src')
             img_tag_classes  = img.get("class",[])
             if url and url.startswith("/web/image/"):
-                new_image_name = url.split('/')[-1]
+                image_name = url.split('/')[-1]
                 image_id = int(url.split('/')[-2].split('-')[0])
                 attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
                 hash_suffix = self.generate_hash()
-                name, ext = new_image_name.rsplit('.', 1)
+                name, ext = image_name.rsplit('.', 1)
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
+                    img_name_list.append(new_image_name)
                     img['class'] = list(filter(lambda cls: not cls.startswith('o_au_img_'), img['class']))
                     img['class'].append(f'o_au_img_{name}_{image_id}')
                     if attachment:
                         processed_image = self.process_image_with_params(attachment=attachment, img_tag=img)
                         print("uploaded successfully=======================")
+
+                        # new_image_data = attachment.datas
+                        # new_image = base64.b64decode(new_image_data)
+                        # image_file = io.BytesIO(processed_image)
+                        # self.upload_file_to_s3(file=processed_image, view_name=view_name, s3_filename=new_image_name)
+
                         temp_folder_path = Path('./temp')
                         # Ensure the temp folder exists
                         temp_folder_path.mkdir(parents=True, exist_ok=True)
@@ -504,16 +513,23 @@ class View(models.Model):
 
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
+                else:
+                    img_name_list.append(image_name)
 
-                for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
-                    if img.has_attr(attr):
-                        del img[attr]
+                # img['height'] = img.get('data-height', img.get('height'))
+                # img['width'] = img.get('data-width', img.get('width'))
+                #
+                # for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
+                #     if img.has_attr(attr):
+                #         del img[attr]
 
-                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
-                img['src'] = odoo_img_url
-                img['data-src'] = odoo_img_url
+                # odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name}/{new_image_name}"
+                # img['src'] = odoo_img_url
+                # img['data-src'] = odoo_img_url
+            else:
+                img_name_list.append(None)
 
-        return str(self.handle_dynamic_img_tag2(view_name=view_name,html_parser = soup.prettify()))
+        return str(self.handle_dynamic_img_tag(view_name=view_name,img_name_list = img_name_list))
     # def handle_dynamic_img_tag(self,view_name):
     #     website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
     #     html_parser = website_page.view_id.arch_db
@@ -698,6 +714,38 @@ class View(models.Model):
     #
     #     return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
 
+    def handle_dynamic_img_tag(self,view_name,img_name_list):
+        website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+        html_parser = website_page.view_id.arch_db
+
+        print(f"$$$$$$$$$$$$$$$$$$$$$44     {img_name_list}")
+
+        soup = BeautifulSoup(html_parser, "html.parser")
+
+        breakpoint()
+        for index,img in enumerate(soup.select('img')):
+            url = img.get('src')
+            if url and url.startswith("/web/image/"):
+                # new_image_name = url.split('/')[-1]
+                # hash_suffix = self.generate_hash()
+                # name, ext = new_image_name.rsplit('.', 1)
+                # new_image_name = f"{name}_{hash_suffix}.{ext}"
+                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{img_name_list[index]}"
+                img['src'] = odoo_img_url
+                img['data-src'] = odoo_img_url
+
+                # Example usage of the index if needed
+                print(f"Processed image {index}: {odoo_img_url}")
+            img['height'] = img.get('data-height', img.get('height'))
+            img['width'] = img.get('data-width', img.get('width'))
+
+            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
+                if img.has_attr(attr):
+                    del img[attr]
+
+        return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
+
+
     def handle_dynamic_img_tag2(self,html_parser, view_name):
         print(html_parser)
         # website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
@@ -720,6 +768,7 @@ class View(models.Model):
             print("============soup============================")
 
         return str(soup.prettify())
+
     def update_images_in_html_and_php(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -807,6 +856,7 @@ class View(models.Model):
                     element_class = element.get('element_class')
                     tags = soup.find_all(class_=element_class)
                     for tag in tags:
+                        # if tag["class"].startswith("o_au_php_variable")
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         tag.replace_with(old_tag_soup)
 
@@ -873,15 +923,24 @@ class View(models.Model):
             'target': 'self',
         }
 
-    def upload_file_to_s3(self, file, s3_filename,view_name = None):
+    def upload_file_to_s3(self, file, s3_filename, view_name=None):
+
+        content_type, _ = mimetypes.guess_type(s3_filename)
+
+        content_type = content_type or 'application/octet-stream'
         s3 = boto3.client('s3',
                           aws_access_key_id=AWS_ACCESS_KEY_ID,
                           aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                           )
         try:
-            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{s3_filename}')
-            # s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, f'Inhouse/{view_name}/{s3_filename}')
-            print(f"File {s3_filename} uploaded successfully to bucket {AWS_STORAGE_BUCKET_NAME}!")
+            if view_name:
+                view_name = view_name.replace(',', '_').strip()
+                s3_key = f'Inhouse/{view_name}/{s3_filename}'
+            else:
+                s3_key = f'Inhouse/{s3_filename}'
+            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
+                'ContentType': content_type})
+
         except ClientError as e:
             if e.response['Error']['Code'] == 'AccessDenied':
                 print("Access Denied. Please check your AWS credentials and bucket permissions.")
