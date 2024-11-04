@@ -7,8 +7,8 @@
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description Description Description Description Description</p>
             </div>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check oe_structure">
-                <div class="boxed bg-gray-light o_replace_section_div">
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check o_sub_items_container">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                     <ul class="small-heading-two">
                         <li>List Item Text</li>
@@ -21,8 +21,8 @@
                         <li>List Item Text</li>
                         <li>List Item Text</li>
                     </ul>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                     <ul class="small-heading-two">
                         <li>List Item Text</li>
@@ -35,7 +35,7 @@
                         <li>List Item Text</li>
                         <li>List Item Text</li>
                     </ul>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
                 <a href="#form" class="btn btn-outline-primary">Title Title Title Title</a>

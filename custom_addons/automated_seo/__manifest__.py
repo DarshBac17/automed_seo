@@ -13,7 +13,7 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         "views/views.xml",
-        # 'views/templates.xml',
+        'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
@@ -39,7 +39,9 @@
         "views/snippets/useful_links/s_useful_links_bg_white.xml",
         "views/snippets/useful_links/s_sub_useful_link.xml",
         "views/snippets/faq/s_faq_bg_white.xml",
+        "views/snippets/faq/s_faq_bg_gray.xml",
         "views/snippets/faq/s_faq_with_button_bg_white.xml",
+        "views/snippets/faq/s_faq_with_button_bg_gray.xml",
         "views/snippets/faq/s_sub_faq_tab_white.xml",
         "views/snippets/faq/s_sub_faq_tab_gray.xml",
         "views/snippets/side_image/s_side_image_bg_gray.xml",
@@ -191,8 +193,8 @@
         ],
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
-            # 'automated_seo/static/src/js/website_version.js',
-            # 'automated_seo/static/src/js/website_save.js',
+            'automated_seo/static/src/js/website_version.js',
+            'automated_seo/static/src/js/website_save.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [

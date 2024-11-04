@@ -3,7 +3,7 @@
     <template id="s_sub_useful_link" name="Sub Useful Link">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed banner-post">
-                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img blog-img-3" loading="lazy" width="352" height="226"/>
+                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img" loading="lazy" width="352" height="226"/>
                 <div class="content">
                     <span class="tag mb-sm">blog</span>
                     <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>

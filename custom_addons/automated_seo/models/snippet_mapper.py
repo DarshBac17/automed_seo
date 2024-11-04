@@ -8,3 +8,4 @@ class SnippetMapper(models.Model):
     php_tag = fields.Text(string="Php Tag")
     image_name = fields.Char(string="Image Name")
     page = fields.Many2one('automated_seo.page',string ='Page')
+    version_id = fields.Char(string = "Version id")
