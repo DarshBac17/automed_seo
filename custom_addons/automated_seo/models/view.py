@@ -465,7 +465,6 @@ class View(models.Model):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
         soup = BeautifulSoup(html_parser, "html.parser")
-        img_name_list = []
         for img in soup.select('img'):
             url = img.get('src')
             img_tag_classes  = img.get("class",[])
@@ -477,9 +476,10 @@ class View(models.Model):
                 name, ext = image_name.rsplit('.', 1)
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
-                    img_name_list.append(new_image_name)
+                    # img_name_list.append(new_image_name)
                     img['class'] = list(filter(lambda cls: not cls.startswith('o_au_img_'), img['class']))
                     img['class'].append(f'o_au_img_{name}_{image_id}')
+                    img['class'].append(f'o_imagename_{new_image_name}')
                     if attachment:
                         processed_image = self.process_image_with_params(attachment=attachment, img_tag=img)
                         print("uploaded successfully=======================")
@@ -513,8 +513,8 @@ class View(models.Model):
 
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
-                else:
-                    img_name_list.append(image_name)
+                # else:
+                #     img_name_list.append(image_name)
 
                 # img['height'] = img.get('data-height', img.get('height'))
                 # img['width'] = img.get('data-width', img.get('width'))
@@ -526,10 +526,10 @@ class View(models.Model):
                 # odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name}/{new_image_name}"
                 # img['src'] = odoo_img_url
                 # img['data-src'] = odoo_img_url
-            else:
-                img_name_list.append(None)
+            # else:
+            #     img_name_list.append(None)
 
-        return str(self.handle_dynamic_img_tag(view_name=view_name,img_name_list = img_name_list))
+        return str(self.handle_dynamic_img_tag(view_name=view_name))
     # def handle_dynamic_img_tag(self,view_name):
     #     website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
     #     html_parser = website_page.view_id.arch_db
@@ -714,28 +714,35 @@ class View(models.Model):
     #
     #     return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
 
-    def handle_dynamic_img_tag(self,view_name,img_name_list):
+    def handle_dynamic_img_tag(self,view_name):
+        # breakpoint()
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
 
-        print(f"$$$$$$$$$$$$$$$$$$$$$44     {img_name_list}")
 
         soup = BeautifulSoup(html_parser, "html.parser")
 
-        breakpoint()
-        for index,img in enumerate(soup.select('img')):
+        # breakpoint()
+        for img in soup.select('img'):
             url = img.get('src')
             if url and url.startswith("/web/image/"):
-                # new_image_name = url.split('/')[-1]
-                # hash_suffix = self.generate_hash()
-                # name, ext = new_image_name.rsplit('.', 1)
-                # new_image_name = f"{name}_{hash_suffix}.{ext}"
-                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{img_name_list[index]}"
-                img['src'] = odoo_img_url
-                img['data-src'] = odoo_img_url
+                img_tag_classes = img.get("class", [])
+                # element = img.find(class_=lambda x: x and x.startswith('o_imagename'))
+                # new_image_name = element.split('_')[-1]
+                element = next((cls for cls in img_tag_classes if cls.startswith('o_imagename')), None)
 
-                # Example usage of the index if needed
-                print(f"Processed image {index}: {odoo_img_url}")
+                if element:
+                    # Extract the new image name from the class
+                    new_image_name = element.split('_',2)[-1]
+                    # breakpoint()
+
+                    # Construct the new image URL
+                    odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
+
+                    # Update the 'src' and 'data-src' attributes
+                    img['src'] = odoo_img_url
+                    img['data-src'] = odoo_img_url
+
             img['height'] = img.get('data-height', img.get('height'))
             img['width'] = img.get('data-width', img.get('width'))
 
@@ -747,25 +754,14 @@ class View(models.Model):
 
 
     def handle_dynamic_img_tag2(self,html_parser, view_name):
-        print(html_parser)
-        # website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
-        # html_parser = website_page.view_id.arch_db
         soup = BeautifulSoup(html_parser, "html.parser")
         base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
         for img in soup.select('img'):
             url = img.get('src')
 
-            print("============soup============================")
-            print(soup)
-            print("============soup============================")
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            print("============img============================")
-            print(img)
-            print("============img============================")
-            print("============soup============================")
-            print(soup)
-            print("============soup============================")
+
 
         return str(soup.prettify())
 
