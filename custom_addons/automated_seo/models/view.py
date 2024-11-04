@@ -4,15 +4,12 @@ import  html
 import base64
 import boto3
 import io
-import random
 import string
 from odoo.exceptions import UserError
-# import os
 from botocore.exceptions import ClientError
 import re
 import random
 from PIL import Image
-import os
 from pathlib import Path
 import mimetypes
 
@@ -403,13 +400,7 @@ class View(models.Model):
                 if not tag['class']:
                     del tag['class']
             website_page.view_id.arch_db = soup.prettify()
-            website_page.view_id.arch = soup.prettify()            # html_parser = self.replace_div_with_section(html_content=str(soup))
-                # html_parser = self.replace_div_with_section(html_content=str(soup))
-            # soup = BeautifulSoup(html_parser, "html.parser")
-            # website_page.view_id.arch = soup.prettify()
-            # website_page.view_id.arch_db = soup.prettify()
-            # print(website_page.view_id.arch_db)
-            # print(website_page.view_id.arch)
+            website_page.view_id.arch = soup.prettify()
             return soup.prettify()
 
         for section in sections:
