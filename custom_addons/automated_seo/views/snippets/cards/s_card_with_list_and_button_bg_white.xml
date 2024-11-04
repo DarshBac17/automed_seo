@@ -14,7 +14,7 @@
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
-                             alt="Angular Team Augmentation" loading="lazy" height="48" width="48" class="slide-icon-svg-1"/>
+                             alt="Angular Team Augmentation" loading="lazy" height="48" width="48"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
@@ -29,7 +29,7 @@
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"
-                             loading="lazy" height="48" width="48" class="slide-icon-svg-2"/>
+                             loading="lazy" height="48" width="48"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
@@ -44,7 +44,7 @@
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Dedicated Angular Team"
-                             loading="lazy" height="48" width="48" class="slide-icon-svg-3"/>
+                             loading="lazy" height="48" width="48"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
