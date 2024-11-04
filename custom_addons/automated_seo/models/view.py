@@ -505,7 +505,7 @@ class View(models.Model):
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
 
-                for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width"]:
+                for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
                     if img.has_attr(attr):
                         del img[attr]
 
