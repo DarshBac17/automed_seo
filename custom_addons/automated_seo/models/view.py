@@ -15,6 +15,7 @@ from PIL import Image
 import os
 from pathlib import Path
 
+
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -72,7 +73,7 @@ class View(models.Model):
             'description' : 'First Version',
             'view_id':record.id,
             'page_id':website_page.id,
-            'view_arch':website_page.view_id.arch,
+            'view_arch':website_page.view_id.arch_db,
             'user_id':self.env.user.id,
             'status':True
         })
@@ -184,7 +185,6 @@ class View(models.Model):
 
             # Extract CSS transform scales if present
             style = img_tag.get('style', '')
-            import re
             css_scale_x = 1
             css_scale_y = 1
 
@@ -258,7 +258,12 @@ class View(models.Model):
                     website_page = self.env['website.page'].search([('view_id', 'in', view.page_id.ids)], limit=1)
                     if website_page:
                         website_page.unlink()
-                seo_page = self.env['automated_seo.page'].search([('page_name', '=', view.name)], limit=1)
+                seo_page = self.env['automated_seo.page'].search([('page_name', '=', view.name)])
+                # breakpoint()
+                # snippet_mapper = self.env['automated_seo.snippet_mapper'].search([('page','=',seo_page)])
+                # if snippet_mapper:
+                #     breakpoint()
+                #     snippet_mapper.unlink()
                 if seo_page:
                     seo_page.unlink()
 
@@ -336,19 +341,27 @@ class View(models.Model):
         return soup.prettify()
 
     def update_snippet_ids(self, view_name):
-        page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
+        seo_view = self.env['automated_seo.view'].search([('name','=',view_name)],limit=1)
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+
+        version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)],limit=1)
+
+        page = self.env['automated_seo.page'].search(['&',('page_name', '=', view_name),('version_id','=',version.id)], limit=1)
         html_parser = website_page.view_id.arch_db
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})
-        snippet_ids = []
         # breakpoint()
+        snippet_ids = []
         if not page:
             page = self.env['automated_seo.page'].create({
-                'page_name': view_name
+                'page_name': view_name,
+                'version_id':version.id
             })
             for section in sections:
-                snippet_ids.append(section.get('data-snippet') + '-' + self.generate_hash())
+                new_data_snippet_id = section.get('data-snippet') + '-' + self.generate_hash()
+                snippet_ids.append(new_data_snippet_id)
+                section['data-snippet'] = new_data_snippet_id
+
 
 
             for section in sections:
@@ -369,6 +382,8 @@ class View(models.Model):
                                 'php_tag': snippet_record.get('php_tag'),
                                 'element_class': new_php_tag_class,
                                 'image_name': snippet_record.get('image_name'),
+                                'version_id':version.id,
+                                'page':page.id
                             })
                     else:
                         # breakpoint()
@@ -377,6 +392,9 @@ class View(models.Model):
                             'php_tag': snippet_record.get('php_tag'),
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
+                            'version_id':version.id,
+                            'page': page.id
+
                         })
             for tag in soup.find_all(class_=True):
                 tag['class'] = [cls for cls in tag['class']
@@ -416,6 +434,9 @@ class View(models.Model):
                                 'php_tag': snippet_record.get('php_tag'),
                                     'element_class': new_php_tag_class,
                                 'image_name': snippet_record.get('image_name'),
+                            'version_id':version.id,
+                                'page': page.id
+
                             })
                     else:
                         self.env['automated_seo.snippet_mapper'].create({
@@ -423,6 +444,9 @@ class View(models.Model):
                             'php_tag': php_tags,
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
+                            'version_id': version.id,
+                            'page': page.id
+
                         })
                 for tag in soup.find_all(class_=True):
                     tag['class'] = [cls for cls in tag['class']
@@ -433,45 +457,9 @@ class View(models.Model):
                 website_page.view_id.arch_db = soup.prettify()
                 website_page.view_id.arch = soup.prettify()
 
-    def handle_dynamic_img_tag2(self,html_parser, view_name):
-        print(html_parser)
-        # website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
-        # html_parser = website_page.view_id.arch_db
-        soup = BeautifulSoup(html_parser, "html.parser")
-        base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
-        for img in soup.select('img'):
-            url = img.get('src')
 
-            print("============soup============================")
-            print(soup)
-            print("============soup============================")
-            img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            print("============img============================")
-            print(img)
-            print("============img============================")
-            print("============soup============================")
-            print(soup)
-            print("============soup============================")
 
-        return str(soup.prettify())
 
-    def handle_dynamic_img_tag(self,view_name):
-        website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
-        html_parser = website_page.view_id.arch_db
-        soup = BeautifulSoup(html_parser, "html.parser")
-        for img in soup.select('img'):
-            url = img.get('src')
-            if url and url.startswith("/web/image/"):
-                new_image_name = url.split('/')[-1]
-                hash_suffix = self.generate_hash()
-                name, ext = new_image_name.rsplit('.', 1)
-                new_image_name = f"{name}_{hash_suffix}.{ext}"
-                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
-                img['src'] = odoo_img_url
-                img['data-src'] = odoo_img_url
-
-        return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
     def handle_img_change(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -486,7 +474,6 @@ class View(models.Model):
                 hash_suffix = self.generate_hash()
                 name, ext = new_image_name.rsplit('.', 1)
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
-
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
                     img['class'] = list(filter(lambda cls: not cls.startswith('o_au_img_'), img['class']))
                     img['class'].append(f'o_au_img_{name}_{image_id}')
@@ -514,36 +501,19 @@ class View(models.Model):
                                 image_file.write(image_data)
                             else:
                                 raise ValueError("Image data is None after processing.")
-                        # new_image_data = attachment.datas
-                        # new_image = base64.b64decode(new_image_data)
-                        # image_file = io.BytesIO(new_image)
-                        # self.upload_file_to_s3(file=image_file, view_name=view_name, s3_filename=new_image_name)
+
+                        website_page.view_id.arch_db = soup.prettify()
+                        website_page.view_id.arch = soup.prettify()
 
                 for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width"]:
                     if img.has_attr(attr):
                         del img[attr]
 
-                website_page.view_id.write({
-                    'arch_db': soup.prettify(),
-                    'arch': soup.prettify()
-                })
-                # website_page.view_id.arch_db = soup.prettify()
-                # website_page.view_id.arch = soup.prettify()
-            # print("============soup============================")
-            # print(soup)
-            # print("============soup============================")
-            # html_parser = website_page.view_id.arch_db
-            # soup = BeautifulSoup(html_parser, "html.parser")
-            # img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            # img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            # print("============img============================")
-            # print(img)
-            # print("============img============================")
-            # print("============soup============================")
-            # print(soup)
-            # print("============soup============================")
+                odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
+                img['src'] = odoo_img_url
+                img['data-src'] = odoo_img_url
 
-        return str(self.handle_dynamic_img_tag(view_name=view_name))
+        return str(self.handle_dynamic_img_tag2(view_name=view_name,html_parser = soup.prettify()))
     # def handle_dynamic_img_tag(self,view_name):
     #     website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
     #     html_parser = website_page.view_id.arch_db
@@ -708,7 +678,48 @@ class View(models.Model):
     #                     'image_name': snippet_record.get('image_name'),
     #                 })
     #             website_page.view_id.arch = soup.prettify()
+    # def handle_dynamic_img_tag(self,view_name,html_parser =None):
+    #     website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+    #     # html_parser = website_page.view_id.arch_db
+    #     html_parser = html_parser
+    #     soup = BeautifulSoup(html_parser, "html.parser")
+    #
+    #     # for img in soup.select('img'):
+    #     #     url = img.get('src')
+    #     #     img_tag_classes  = img.get("class",[])
+    #     #     if url and url.startswith("/web/image/"):
+    #     #         new_image_name = url.split('/')[-1]
+    #     #         hash_suffix = self.generate_hash()
+    #     #         name, ext = new_image_name.rsplit('.', 1)
+    #     #         new_image_name = f"{name}_{hash_suffix}.{ext}"
+    #     #         odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{new_image_name}"
+    #     #         img['src'] = odoo_img_url
+    #     #         img['data-src'] = odoo_img_url
+    #
+    #     return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
 
+    def handle_dynamic_img_tag2(self,html_parser, view_name):
+        print(html_parser)
+        # website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
+        # html_parser = website_page.view_id.arch_db
+        soup = BeautifulSoup(html_parser, "html.parser")
+        base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
+        for img in soup.select('img'):
+            url = img.get('src')
+
+            print("============soup============================")
+            print(soup)
+            print("============soup============================")
+            img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            print("============img============================")
+            print(img)
+            print("============img============================")
+            print("============soup============================")
+            print(soup)
+            print("============soup============================")
+
+        return str(soup.prettify())
     def update_images_in_html_and_php(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -957,6 +968,9 @@ class IrUiView(models.Model):
         version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)])
         if version:
             if 'arch' in vals:
+                print("=========WRITE====================")
+                print(self.arch)
+                print("=========WRITE====================")
                 version.view_arch = self.arch
 
         return record
