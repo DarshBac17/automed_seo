@@ -41,6 +41,18 @@ class WebsitePageVersion(models.Model):
 
             view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
+    def action_download_html(self):
+        """Download the parsed HTML file"""
+        self.ensure_one()
+        if not self.parse_html_binary:
+            raise UserError('No HTML file available for download')
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=website.page.version&id=%s&field=parse_html_binary&filename_field=parse_html_filename&download=true' % (
+                self.id),
+            'target': 'self',
+        }
 
 
 
