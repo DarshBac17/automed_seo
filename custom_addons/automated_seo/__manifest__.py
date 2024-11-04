@@ -23,6 +23,7 @@
         "views/snippets/steps/s_steps_bg_gray.xml",
         "views/snippets/steps/s_sub_step_white.xml",
         "views/snippets/steps/s_sub_step_gray.xml",
+        "views/snippets/footer/s_slider_form_footer_white.xml",
         "views/snippets/footer/s_footer_slider_bg_gray.xml",
         "views/snippets/header/s_header.xml",
         "views/snippets/footer/s_footer_slider_bg_white.xml",
@@ -38,7 +39,9 @@
         "views/snippets/useful_links/s_useful_links_bg_white.xml",
         "views/snippets/useful_links/s_sub_useful_link.xml",
         "views/snippets/faq/s_faq_bg_white.xml",
+        "views/snippets/faq/s_faq_bg_gray.xml",
         "views/snippets/faq/s_faq_with_button_bg_white.xml",
+        "views/snippets/faq/s_faq_with_button_bg_gray.xml",
         "views/snippets/faq/s_sub_faq_tab_white.xml",
         "views/snippets/faq/s_sub_faq_tab_gray.xml",
         "views/snippets/side_image/s_side_image_bg_gray.xml",
@@ -191,10 +194,12 @@
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
             'automated_seo/static/src/js/website_version.js',
-            'automated_seo/static/src/js/angular_offer.js'
+            'automated_seo/static/src/js/website_save.js',
+            # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [
-            'automated_seo/static/src/js/toggle.js',
+                # 'automated_seo/static/src/js/website_version.js',
+                # 'automated_seo/static/src/js/toggle.js',
         ],
     },
 }

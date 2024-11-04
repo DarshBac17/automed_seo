@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_card_gray" name="sub card gray">
+    <template id="s_sub_card_gray" name="Sub Card Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="boxed bg-gray-light">
 

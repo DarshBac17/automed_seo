@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_counting_sec" name="Counting second">
+    <template id="s_counting_sec" name="Counting Second">
         <section class="banner-post text-center text-white">
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/counting-bg.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/counting-bg.jpg" alt="Our Development Center Strength" title="Our Development Center Strength" width="1900" height="900" loading="lazy" class="banner-post-img"/>
             <div class="container content">

@@ -1,170 +1,891 @@
-//odoo.define('automated_seo.snippet.editor', function (require) {
-//    'use strict';
-//
-//    const websiteSnippetEditor = require('website.snippet.editor');
-//    const Dialog = require('web.Dialog');
-//    const core = require('web.core');
-//    const QWeb = core.qweb;
-//    const _t = core._t;
-//
-//    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
-//        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
-//            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick'
-//        }),
-//
-//        /**
-//         * Initialize the modal when the editor is started
-//         */
-//        start: function () {
-//            return this._super.apply(this, arguments).then(() => {
-//                // Load the modal template
-//                const modalHtml = QWeb.render('website_version_modal');
-//                this.$modal = $(modalHtml);
-//                $('body').append(this.$modal);
-//                this._initializeVersionModal();
-//            });
-//        },
-//
-//        /**
-//         * Initialize the version modal and its events
-//         */
-//        _initializeVersionModal: function () {
-//            console.log("Initializing version modal");
-//
-//            if (!this.$modal || this.$modal.length === 0) {
-//                console.error('Modal element not found in DOM');
-//                return;
-//            }
-//
-//            console.log("Modal element found:", this.$modal);
-//
-//            // Initialize Bootstrap modal
-//            try {
-//                this.versionModal = new bootstrap.Modal(this.$modal[0], {
-//                    keyboard: true,
-//                    backdrop: true
-//                });
-//
-//                this.$saveBtn = this.$modal.find('#saveVersion');
-//                this.$nameInput = this.$modal.find('#versionName');
-//                this.$descriptionInput = this.$modal.find('#versionDescription');
-//
-//                // Bind save button click event
-//                this.$saveBtn.off('click').on('click', () => this._saveVersion());
-//
-//                // Clear form when modal is hidden
-//                this.$modal.off('hidden.bs.modal').on('hidden.bs.modal', () => {
-//                    this.$nameInput.val('');
-//                    this.$descriptionInput.val('');
-//                });
-//
-//                console.log("Modal initialized successfully");
-//            } catch (error) {
-//                console.error('Error initializing modal:', error);
-//            }
-//        },
-//
-//        /**
-//         * Handle version button click
-//         * @param {Event} ev
-//         */
-//        _onVersionClick: function (ev) {
-//            console.log("Version click handler called");
-//            ev.preventDefault();
-//
-//            if (this.versionModal) {
-//                console.log("Showing modal");
-//                this.versionModal.show();
-//            } else {
-//                console.error('Bootstrap Modal instance not found');
-//                // Try to reinitialize
-//                this._initializeVersionModal();
-//                if (this.versionModal) {
-//                    this.versionModal.show();
-//                }
-//            }
-//        },
-//
-//        /**
-//         * Save the version
-//         */
-//        _saveVersion: function () {
-//            const name = this.$nameInput.val().trim();
-//            if (!name) {
-//                this.displayNotification({
-//                    type: 'warning',
-//                    title: _t('Warning'),
-//                    message: _t('Version name is required'),
-//                });
-//                return;
-//            }
-//
-//            // Get current page ID from the URL
-//            const pageId = this._getPageId();
-//            if (!pageId) {
-//                this.displayNotification({
-//                    type: 'error',
-//                    title: _t('Error'),
-//                    message: _t('Could not determine page ID'),
-//                });
-//                return;
-//            }
-//
-//            this._rpc({
-//                route: '/website/version/save',
-//                params: {
-//                    name: name,
-//                    description: this.$descriptionInput.val(),
-//                    page_id: pageId,
-//                },
-//            }).then((result) => {
-//                if (result.error) {
-//                    this.displayNotification({
-//                        type: 'error',
-//                        title: _t('Error'),
-//                        message: result.error,
-//                    });
-//                } else {
-//                    this.displayNotification({
-//                        type: 'success',
-//                        title: _t('Success'),
-//                        message: _t('Version saved successfully'),
-//                    });
-//                    this.versionModal.hide();
-//                }
-//            }).guardedCatch(() => {
-//                this.displayNotification({
-//                    type: 'error',
-//                    title: _t('Error'),
-//                    message: _t('Failed to save version'),
-//                });
-//            });
-//        },
-//
-//        /**
-//         * Get the current page ID from the URL
-//         * @returns {string|null}
-//         */
-//        _getPageId: function () {
-//            const match = window.location.pathname.match(/\/page\/(\d+)/);
-//            return match ? match[1] : null;
-//        },
-//
-//        /**
-//         * Clean up when destroying the editor
-//         */
-//        destroy: function () {
-//            if (this.$modal) {
-//                this.$modal.remove();
-//            }
-//            this._super.apply(this, arguments);
-//        },
-//    });
-//
-//    return {
-//        SnippetsMenu: aSnippetMenu,
-//    };
-//});
+odoo.define('automated_seo.snippet.editor', function (require) {
+    'use strict';
+
+    const websiteSnippetEditor = require('website.snippet.editor');
+    const ajax = require('web.ajax');
+    const Wysiwyg = require('web_editor.wysiwyg');
+
+    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
+        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
+            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick',
+
+        }),
+
+        start: function () {
+            this._super.apply(this, arguments);
+            console.log("Snippet editor started");
+
+            if (!$('#versionModal').length) {
+                this._appendModalToDOM();
+            }
+
+            this.$modal = $('#versionModal');
+        },
+        _onVersionClick: function (ev) {
+            ev.preventDefault();
+            console.log("Version modal opening...");
+            this.$modal.modal('show');
+        },
+
+        _getPageContent: function() {
+            // Get the current editor instance
+            const editor = this.options.wysiwyg;
+            if (!editor) {
+                console.error("Editor not found");
+                throw new Error('Editor instance not found');
+            }
+
+            // Try to get the editable content area
+            let $editableContent = $('.o_editable[data-oe-model="ir.ui.view"]');
+
+            if (!$editableContent.length) {
+                // If not found, try to get content from the editor directly
+                $editableContent = editor.$editable;
+            }
+
+            if (!$editableContent.length) {
+                // Last resort: try to find the main content area
+                $editableContent = $('#wrapwrap .oe_structure.oe_empty, #wrapwrap .oe_structure').first();
+            }
+
+            if ($editableContent.length) {
+                console.log("Found editable content");
+
+                // Create a clone to avoid modifying the actual content
+                const $clone = $editableContent.clone();
+
+                // Remove any editor-specific classes and data attributes
+                $clone.find('*').each(function() {
+                    const $el = $(this);
+                    // Keep the essential structure but remove editor-specific attributes
+                    $el.removeAttr('contenteditable')
+                       .removeAttr('data-oe-model')
+                       .removeAttr('data-oe-id')
+                       .removeAttr('data-oe-field')
+                       .removeAttr('data-oe-xpath')
+                       .removeAttr('data-oe-source-id');
+                });
+
+                // Get the cleaned HTML content
+                const content = $clone.html();
+
+                // Verify we have meaningful content
+                if (!content || content.trim().length === 0) {
+                    throw new Error('Empty content found');
+                }
+
+                console.log("Content preview:", content.substring(0, 100));
+                return content;
+            }
+
+            throw new Error('No editable content found on the page');
+        },
+
+        _saveVersion: function (ev) {
+            const self = this;
+            const name = this.$modal.find('#versionName').val();
+            const description = this.$modal.find('#versionDescription').val();
+
+            if (!name) {
+                alert('Version name is required');
+                return;
+            }
+
+            try {
+                const content = this._getPageContent();
+
+                // Debug log to check content
+                console.log("=== Content Being Saved ===");
+                console.log(content);
+                console.log("==========================");
+
+                ajax.jsonRpc('/website/version/save', 'call', {
+                    'name': name,
+                    'description': description,
+                    'page_id': window.location.href,
+                    'current_arch': content
+                })
+                .then((result) => {
+                    if (result && result.error) {
+                        throw new Error(result.error);
+                    }
+                    self._closeModal();
+                    alert('Version saved successfully!');
+                })
+                .catch((error) => {
+                    console.error("Error during save operation:", error);
+                    alert(error.message || 'An error occurred while saving the version');
+                });
+            } catch (error) {
+                console.error("Error getting page content:", error);
+                alert('Could not find the page content. Please ensure you are on an editable page.');
+            }
+        },
+
+        _closeModal: function () {
+            this.$modal.modal('hide');
+            this.$modal.find('#versionName').val('');
+            this.$modal.find('#versionDescription').val('');
+        },
+
+        _appendModalToDOM: function () {
+            const modalHTML = `
+                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="versionModalLabel">Save Page Version</h5>
+                                <button type="button" class="close" aria-label="Close" id="closeModalButton">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="versionName">Version Name</label>
+                                    <input type="text" class="form-control" id="versionName" placeholder="Enter version name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="versionDescription">Version Description</label>
+                                    <textarea class="form-control" id="versionDescription" rows="3" placeholder="Enter version description"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeModalButtonFooter">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveVersionButton">Save Version</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('body').append(modalHTML);
+            this.$modal = $('#versionModal');
+            this.$modal.find('#closeModalButton, #closeModalButtonFooter').on('click', this._closeModal.bind(this));
+            this.$modal.find('#saveVersionButton').on('click', this._saveVersion.bind(this));
+        },
+    });
+
+    return {
+        SnippetsMenu: aSnippetMenu,
+    };
+});
+
+/*odoo.define('automated_seo.snippet.editor', function (require) {
+    'use strict';
+
+    const websiteSnippetEditor = require('website.snippet.editor');
+    const ajax = require('web.ajax');
+    const Wysiwyg = require('web_editor.wysiwyg');
+
+    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
+        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
+            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick'
+        }),
+
+        start: function () {
+            this._super.apply(this, arguments);
+            console.log("Snippet editor started");
+
+            if (!$('#versionModal').length) {
+                this._appendModalToDOM();
+            }
+
+            this.$modal = $('#versionModal');
+        },
+
+        _onVersionClick: function (ev) {
+            ev.preventDefault();
+            console.log("Version modal opening...");
+            this.$modal.modal('show');
+        },
+
+
+
+        _saveVersion: function (ev) {
+
+
+            const self = this;
+            const name = this.$modal.find('#versionName').val();
+            const description = this.$modal.find('#versionDescription').val();
+
+            if (!name) {
+                alert('Version name is required');
+                return;
+            }
+
+    // Use jQuery to select <main> and check if it exists
+            const $main = $('main');
+                if ($main.length) {
+                    // Optionally select a specific child div inside <main>, if required
+                    const $contentDiv = $main.find('div'); // Adjust selector as needed
+                    if ($contentDiv.length) {
+                        const content = $contentDiv.html(); // Get the HTML content safely
+                        console.log("==========================");
+                        console.log(content);
+                        console.log("==========================");
+
+                        ajax.jsonRpc('/website/version/save', 'call', {
+                            'name': name,
+                            'description': description,
+                            'page_id': window.location.href,
+                            'current_arch': content
+                        })
+                        .then((result) => {
+                            if (result && result.error) {
+                                throw new Error(result.error);
+                            }
+
+                            // Close the version modal
+                            self._closeModal();
+
+                            alert('Version saved successfully!');
+                        })
+                        .catch((error) => {
+                            console.error("Error during save operation:", error);
+                            alert(error.message || 'An error occurred while saving the version');
+                        });
+                    } else {
+                        console.error("No <div> found inside <main>");
+                        alert('Could not find the content to save.');
+                    }
+                } else {
+                    console.error("<main> element not found");
+                    alert('Could not find the main content.');
+                }
+            },
+
+
+        _closeModal: function () {
+            this.$modal.modal('hide');
+            this.$modal.find('#versionName').val('');
+            this.$modal.find('#versionDescription').val('');
+        },
+
+        _appendModalToDOM: function () {
+            const modalHTML = `
+                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="versionModalLabel">Save Page Version</h5>
+                                <button type="button" class="close" aria-label="Close" id="closeModalButton">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="versionName">Version Name</label>
+                                    <input type="text" class="form-control" id="versionName" placeholder="Enter version name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="versionDescription">Version Description</label>
+                                    <textarea class="form-control" id="versionDescription" rows="3" placeholder="Enter version description"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeModalButtonFooter">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveVersionButton">Save Version</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('body').append(modalHTML);
+            console.log("Modal HTML injected");
+
+            this.$modal = $('#versionModal');
+            this.$modal.find('#closeModalButton, #closeModalButtonFooter').on('click', this._closeModal.bind(this));
+            this.$modal.find('#saveVersionButton').on('click', this._saveVersion.bind(this));
+        },
+    });
+
+    return {
+        SnippetsMenu: aSnippetMenu,
+    };
+});*/
+/*odoo.define('automated_seo.snippet.editor', function (require) {
+    'use strict';
+
+    const core = require('web.core');
+    const WebsiteEditor = require('website.editor');
+    const ajax = require('web.ajax');
+    const _t = core._t;
+
+    WebsiteEditor.include({
+        events: _.extend({}, WebsiteEditor.prototype.events, {
+            'click button[data-action="version"]': '_onSaveVersionClick',
+        }),
+
+        *//**
+         * @override
+         *//*
+        start: async function () {
+            await this._super(...arguments);
+            this._initializeVersioning();
+        },
+
+        *//**
+         * Initialize versioning functionality
+         * @private
+         *//*
+        _initializeVersioning: function () {
+            if (!$('#versionModal').length) {
+                this._appendVersionModalToDOM();
+            }
+            this.$versionModal = $('#versionModal');
+        },
+
+        *//**
+         * Click handler for version button
+         * @private
+         * @param {Event} ev
+         *//*
+        _onSaveVersionClick: function (ev) {
+            ev.preventDefault();
+            if (this.$versionModal) {
+                this.$versionModal.modal('show');
+            }
+        },
+
+        *//**
+         * Get current content from editor
+         * @private
+         * @returns {Promise<string>}
+         *//*
+        _getEditableContent: async function () {
+            try {
+                // Get the main editable content
+                const $mainContent = this.$el.find('#wrapwrap #wrap').first();
+
+                if (!$mainContent.length) {
+                    console.error('Main content area not found');
+                    return false;
+                }
+
+                // Clone to avoid modifying original
+                const $clone = $mainContent.clone();
+
+                // Clean up editor artifacts
+                $clone.find('.o_snippet_editor, .o_handle, .o_we_overlay').remove();
+                $clone.find('.o_editable').removeClass('o_editable o_dirty');
+                $clone.find('[contenteditable]').removeAttr('contenteditable');
+                $clone.find('[data-oe-model]').removeAttr('data-oe-model data-oe-id data-oe-field data-oe-type data-oe-expression');
+
+                return $clone.html();
+            } catch (err) {
+                console.error('Error getting editable content:', err);
+                return false;
+            }
+        },
+
+        *//**
+         * Save the current version
+         * @private
+         *//*
+        _saveVersion: async function (ev) {
+
+
+            const name = this.$versionModal.find('#versionName').val();
+            const description = this.$versionModal.find('#versionDescription').val();
+
+            if (!name) {
+                this.displayNotification({
+                    type: 'warning',
+                    title: _t('Warning'),
+                    message: _t('Version name is required'),
+                });
+                return;
+            }
+
+            try {
+                const content = await this._getEditableContent();
+                if (!content) {
+                    throw new Error(_t('Could not get page content'));
+                }
+
+                const result = await ajax.jsonRpc('/website/version/save', 'call', {
+                    name: name,
+                    description: description,
+                    page_id: window.location.href,
+                    current_arch: content,
+                });
+
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+
+                this.$versionModal.modal('hide');
+                this.displayNotification({
+                    type: 'success',
+                    title: _t('Success'),
+                    message: _t('Version saved successfully!'),
+                });
+            } catch (error) {
+                console.error('Version save error:', error);
+                this.displayNotification({
+                    type: 'danger',
+                    title: _t('Error'),
+                    message: error.message || _t('Failed to save version'),
+                });
+            }
+        },
+
+        *//**
+         * Append version modal to DOM
+         * @private
+         *//*
+        _appendVersionModalToDOM: function () {
+            const modalHTML = `
+                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Save Page Version</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="versionName">Version Name</label>
+                                    <input type="text" class="form-control" id="versionName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="versionDescription">Description</label>
+                                    <textarea class="form-control" id="versionDescription" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="saveVersionBtn">Save Version</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $(document.body).append(modalHTML);
+
+            // Bind save button click
+            $('#saveVersionButton').on('click', () => this._saveVersion());
+        },
+    });
+});*/
+/*odoo.define('automated_seo.snippet.editor', function (require) {
+    'use strict';
+
+    const websiteSnippetEditor = require('website.snippet.editor');
+    const ajax = require('web.ajax');
+    const Wysiwyg = require('web_editor.wysiwyg');
+
+    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
+        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
+            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick'
+        }),
+
+        start: function () {
+            this._super.apply(this, arguments);
+            console.log("Snippet editor started");
+
+            if (!$('#versionModal').length) {
+                this._appendModalToDOM();
+            }
+
+            this.$modal = $('#versionModal');
+        },
+
+        _onVersionClick: function (ev) {
+            ev.preventDefault();
+            console.log("Version modal opening...");
+            this.$modal.modal('show');
+        },
+
+        // Get current editor content without saving
+        _getCurrentContent: function() {
+            return new Promise((resolve) => {
+                try {
+                    // Get the main editable area
+                    const $editable = $('[data-oe-model="ir.ui.view"]').first();
+
+                    if (!$editable.length) {
+                        console.error('No editable content found');
+                        resolve(false);
+                        return;
+                    }
+
+                    // Clone the content to avoid modifying the actual editor
+                    const $contentClone = $editable.clone();
+
+                    // Clean up editor-specific elements and attributes
+                    $contentClone.find('.o_snippet_editor, .o_handle').remove();
+                    $contentClone.find('[data-oe-model]').removeAttr('data-oe-model');
+                    $contentClone.find('[data-oe-id]').removeAttr('data-oe-id');
+                    $contentClone.find('[data-oe-field]').removeAttr('data-oe-field');
+                    $contentClone.find('[data-oe-type]').removeAttr('data-oe-type');
+                    $contentClone.find('[data-oe-expression]').removeAttr('data-oe-expression');
+                    $contentClone.find('.o_editable').removeClass('o_editable');
+                    $contentClone.find('[contenteditable]').removeAttr('contenteditable');
+                    $contentClone.find('.o_dirty').removeClass('o_dirty');
+
+                    // Alternative method to get content if needed
+                    let content;
+                    if (this.options && this.options.wysiwyg) {
+                        content = this.options.wysiwyg.getValue();
+                    } else {
+                        content = $contentClone.html();
+                    }
+
+                    resolve(content);
+                } catch (error) {
+                    console.error('Error getting current content:', error);
+                    resolve(false);
+                }
+            });
+        },
+
+        _saveVersion: function () {
+            const self = this;
+            const name = this.$modal.find('#versionName').val();
+            const description = this.$modal.find('#versionDescription').val();
+
+            if (!name) {
+                alert('Version name is required');
+                return;
+            }
+
+            // Get current content without saving
+            this._getCurrentContent().then((content) => {
+                if (!content) {
+                    alert('Error getting current page content');
+                    return;
+                }
+
+                return ajax.jsonRpc('/website/version/save', 'call', {
+                    'name': name,
+                    'description': description,
+                    'page_id': window.location.href,
+                    'current_arch': content
+                });
+            })
+            .then((result) => {
+                if (result && result.error) {
+                    throw new Error(result.error);
+                }
+
+                // Close the version modal
+                self._closeModal();
+
+                alert('Version saved successfully!');
+            })
+            .catch((error) => {
+                console.error("Error during save operation:", error);
+                alert(error.message || 'An error occurred while saving the version');
+            });
+        },
+
+        _closeModal: function () {
+            this.$modal.modal('hide');
+            this.$modal.find('#versionName').val('');
+            this.$modal.find('#versionDescription').val('');
+        },
+
+        _appendModalToDOM: function () {
+            const modalHTML = `
+                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="versionModalLabel">Save Page Version</h5>
+                                <button type="button" class="close" aria-label="Close" id="closeModalButton">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="versionName">Version Name</label>
+                                    <input type="text" class="form-control" id="versionName" placeholder="Enter version name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="versionDescription">Version Description</label>
+                                    <textarea class="form-control" id="versionDescription" rows="3" placeholder="Enter version description"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeModalButtonFooter">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveVersionButton">Save Version</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('body').append(modalHTML);
+            console.log("Modal HTML injected");
+
+            this.$modal = $('#versionModal');
+            this.$modal.find('#closeModalButton, #closeModalButtonFooter').on('click', this._closeModal.bind(this));
+            this.$modal.find('#saveVersionButton').on('click', this._saveVersion.bind(this));
+        },
+    });
+
+    return {
+        SnippetsMenu: aSnippetMenu,
+    };
+});*/
+/*odoo.define('automated_seo.snippet.editor', function (require) {
+    'use strict';
+
+    const websiteSnippetEditor = require('website.snippet.editor');
+    const ajax = require('web.ajax');
+
+    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
+        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
+            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick'
+        }),
+
+        start: function () {
+            this._super.apply(this, arguments);
+            console.log("Snippet editor started");
+
+            if (!$('#versionModal').length) {
+                this._appendModalToDOM();
+            }
+
+            this.$modal = $('#versionModal');
+        },
+
+        _onVersionClick: function (ev) {
+            ev.preventDefault();
+            console.log("Version modal opening...");
+            this.$modal.modal('show');
+        },
+
+        // Function to ensure the website editor save is complete
+        _ensureWebsiteEditorSave: function() {
+            const self = this;
+            return new Promise((resolve, reject) => {
+                try {
+                    // Get the save and close buttons
+                    const $saveButton = self.$('.o_we_website_top_actions button[data-action=save]');
+
+                    if (!$saveButton.length) {
+                        console.warn('Save button not found');
+                        reject(new Error('Save button not found'));
+                        return;
+                    }
+
+                    // Function to check if save is needed
+                    const needsSave = !$saveButton.prop('disabled');
+                    console.log('Needs save:', needsSave);
+
+                    if (!needsSave) {
+                        console.log('No save needed, proceeding...');
+                        resolve();
+                        return;
+                    }
+
+                    // Set up event listeners for save completion
+                    const saveCompletionHandler = function() {
+                        console.log('Save completion detected');
+                        $(document).off('website_save_done.editor', saveCompletionHandler);
+                        resolve();
+                    };
+
+                    $(document).on('website_save_done.editor', saveCompletionHandler);
+
+                    // Trigger the save
+                    console.log('Triggering save button click');
+                    $saveButton.trigger('click');
+
+                    // Backup timeout in case the event doesn't fire
+                    setTimeout(() => {
+                        $(document).off('website_save_done.editor', saveCompletionHandler);
+                        console.log('Save timeout reached, proceeding...');
+                        resolve();
+                    }, 5000);
+
+                } catch (error) {
+                    console.error('Error in _ensureWebsiteEditorSave:', error);
+                    reject(error);
+                }
+            });
+        },
+
+        _saveVersion: function () {
+            const self = this;
+            const name = this.$modal.find('#versionName').val();
+            const description = this.$modal.find('#versionDescription').val();
+
+            console.log('version name ==================', name);
+            console.log('version description ============', description);
+
+            if (!name) {
+                alert('Version name is required');
+                return;
+            }
+
+            // First ensure the website editor is saved
+            self._ensureWebsiteEditorSave()
+                .then(() => {
+                    console.log("Website save completed, proceeding with version save...");
+                    return ajax.jsonRpc('/website/version/save', 'call', {
+                        'name': name,
+                        'description': description,
+                        'page_id': window.location.href,
+                    });
+                })
+                .then((result) => {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+
+                    // Close the version modal
+                    self._closeModal();
+
+                    // Find the close button
+                    const $closeButton = self.$('.o_we_website_top_actions button[data-action=close]');
+
+                    // Show success message
+                    alert('Version saved successfully!');
+
+                    // Ensure the edit tab is closed
+                    if ($closeButton.length) {
+                        console.log('Triggering close button');
+                        $closeButton.trigger('click');
+                    } else {
+                        console.warn('Close button not found');
+                        // Fallback: try to reload the page
+                        window.location.reload();
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during save operation:", error);
+                    alert(error.message || 'An error occurred while saving the version');
+                });
+        },
+
+        _closeModal: function () {
+            this.$modal.modal('hide');
+            this.$modal.find('#versionName').val('');
+            this.$modal.find('#versionDescription').val('');
+        },
+
+        _appendModalToDOM: function () {
+            const modalHTML = `
+                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="versionModalLabel">Save Page Version</h5>
+                        <button type="button" class="close" aria-label="Close" id="closeModalButton">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="versionName">Version Name</label>
+                          <input type="text" class="form-control" id="versionName" placeholder="Enter version name">
+                        </div>
+                        <div class="form-group">
+                          <label for="versionDescription">Version Description</label>
+                          <textarea class="form-control" id="versionDescription" rows="3" placeholder="Enter version description"></textarea>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModalButtonFooter">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveVersionButton">Save Version</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            `;
+
+            $('body').append(modalHTML);
+            console.log("Modal HTML injected");
+
+            this.$modal = $('#versionModal');
+            this.$modal.find('#closeModalButton, #closeModalButtonFooter').on('click', this._closeModal.bind(this));
+            this.$modal.find('#saveVersionButton').on('click', this._saveVersion.bind(this));
+        },
+    });
+
+    return {
+        SnippetsMenu: aSnippetMenu,
+    };
+});*/
+/*
+in odoo i make versioning system in which is there any way by which when i get current page arch content without saving it.
+
+this is my model
+
+class WebsitePageVersion(models.Model):
+    _name = 'website.page.version'
+    _description = 'Website Page Version'
+    _order = 'create_date desc'
+
+    name = fields.Char('Version Name', required=True)
+    description = fields.Text('Description')
+    view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
+    page_id = fields.Many2one('website.page', string='Website Page', required=True)
+    view_arch = fields.Text('Saved View Architecture', required=True)
+    parse_html = fields.Text(string="Parse HTML")
+    parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
+    parse_html_filename = fields.Char(string="Parsed HTML Filename")
+    user_id = fields.Many2one('res.users', string='Created by')
+    status = fields.Boolean('Status',default=False)
+
+    def action_version(self):
+
+        id =self.env.context.get('id', 'Unknown')
+        current_version  = self.env['website.page.version'].search([('status','=',True)],limit=1)
+        if current_version:
+            current_version.status = False
+        active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
+        if active_version:
+            active_version.status = True
+            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id.id)],limit=1)
+            # view.parse_html = active_version.parse_html
+            view.page_id.arch_db = active_version.view_arch
+            view.parse_html_filename = active_version.parse_html_filename if active_version.parse_html_filename else "first"
+
+this is controller
+class WebsiteVersion(http.Controller):
+    @http.route(['/website/version/save'], type='json', auth="user", website=True)
+    def save_version(self, **kwargs):
+        name = kwargs.get('name')
+        description = kwargs.get('description')
+        page_id = kwargs.get('page_id')
+        url = page_id.split('/')[-1]
+        page = request.env['website.page'].search([('url', '=', f'/{url}')], limit=1)
+        view = request.env['automated_seo.view'].search([('website_page_id', '=', page.id)], limit=1)
+
+
+        # page_id = page.id
+        if not name or not page_id:
+            return {'error': 'Missing required fields'}
+
+        # page = request.env['website.page'].browse(int(page_id))
+        if not page.exists():
+            return {'error': 'Page not found'}
+
+        version = request.env['website.page.version'].create({
+            'name': name,
+            'description': description,
+            'page_id': page.id,
+            'view_arch': page.view_id.arch,
+            'view_id':view.id,
+            'user_id': request.env.user.id
+        })
+
+        return {
+            'success': True,
+            'version_id': version.id
+        }
+this is js
+*/
+
+/*
 odoo.define('automated_seo.snippet.editor', function (require) {
     'use strict';
 
@@ -212,35 +933,88 @@ odoo.define('automated_seo.snippet.editor', function (require) {
 //                alert('Error fetching page ID.');
 //            });
 //        },
+        init: function () {
+            this._super.apply(this, arguments);
+            this._isSaveRequestCompleted = false;  // Flag to track when save is complete
+        },
 
-        // Function to handle saving the version
+        // Modified _onSaveRequest to set a flag after completion
+        _onSaveRequest: function (ev) {
+            const data = ev.data || {};
+            if (ev.target === this && !data._toMutex) {
+                return;
+            }
+            delete data._toMutex;
+            ev.stopPropagation();
+            this._buttonClick(async (after) => {
+                await this.postSnippetDropPromise;
+                return this._execWithLoadingEffect(async () => {
+                    console.log("ir.ui.view saved");
+
+                    // Set onFailure callback to trigger after completion
+                    const oldOnFailure = data.onFailure;
+                    data.onFailure = () => {
+                        if (oldOnFailure) {
+                            oldOnFailure();
+                        }
+                        after();
+                    };
+                    this.trigger_up('request_save', data);
+
+                    // Set the completion flag
+                    this._isSaveRequestCompleted = true;
+                }, true);
+            }, this.$el[0].querySelector('button[data-action=save]'));
+        },
+
+        // _saveVersion function with dependency on _onSaveRequest completion
         _saveVersion: function () {
             const self = this;
-
-            const name = this.$modal.find('#versionName').val();  // Access the value from modal input field
-            const description = this.$modal.find('#versionDescription').val();  // Access the description
-
-            console.log('version name ==================', name);  // Log the value to check if it's being accessed
-            console.log('version description ============', description);
+            const name = this.$modal.find('#versionName').val();
+            const description = this.$modal.find('#versionDescription').val();
 
             if (!name) {
                 alert('Version name is required');
                 return;
             }
-            this.$('.o_we_website_top_actions button[data-action=save]').trigger('click');
-            // Call the backend with the version data
-            ajax.jsonRpc('/website/version/save', 'call', {
-                'name': name,
-                'description': description,
-                'page_id': window.location.href,  // Use the fetched page ID
-            }).then(function (result) {
-                if (result.error) {
-                    alert(result.error);
-                } else {
-                    alert('Version saved successfully!');
-                    self._closeModal();  // Close modal after saving
-                }
+
+            // Step 1: Trigger Save Click
+            this._triggerSaveClick(() => {
+                // Check periodically if _onSaveRequest has completed
+                const checkSaveCompletion = setInterval(() => {
+                    if (this._isSaveRequestCompleted) {
+                        clearInterval(checkSaveCompletion);  // Stop checking
+
+                        // Reset the flag for future uses
+                        this._isSaveRequestCompleted = false;
+
+                        // Step 2: Call the backend with the version data after Save completes
+                        ajax.jsonRpc('/website/version/save', 'call', {
+                            'name': name,
+                            'description': description,
+                            'page_id': window.location.href,
+                        }).then(function (result) {
+                            if (result.error) {
+                                console.log("got error!");
+                                alert(result.error);
+                            } else {
+                                console.log("saved successfully!");
+                                alert('Version saved successfully!');
+                                self._closeModal();  // Close modal after saving
+                            }
+                        }).catch(function (error) {
+                            console.error("Error occurred during RPC:", error);
+                            alert("An error occurred while saving the version.");
+                        });
+                    }
+                }, 100);  // Check every 100ms
             });
+        },
+
+        // Helper function to trigger save button click and wait for completion
+        _triggerSaveClick: function (callback) {
+            this.$('.o_we_website_top_actions button[data-action=save]').trigger('click');
+            callback();
         },
 
         // Function to handle closing the modal
@@ -299,379 +1073,4 @@ odoo.define('automated_seo.snippet.editor', function (require) {
     return {
         SnippetsMenu: aSnippetMenu,
     };
-});
-
-
-
-
-
-//odoo.define('automated_seo.snippet.editor', function (require) {
-//    'use strict';
-//
-//    const websiteSnippetEditor = require('website.snippet.editor');
-//    const ajax = require('web.ajax');
-//
-//    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
-//        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
-//            'click .o_we_website_top_actions button[data-action=version]': '_onVersionClick',
-//            'click #saveVersionButton': '_onSaveVersion'
-//        }),
-//
-//        start: function () {
-//            this._super.apply(this, arguments);
-//            console.log("Snippet editor started");
-//
-//            // Inject modal HTML if it's not already in the DOM
-//            if (!$('#versionModal').length) {
-//                this._appendModalToDOM();
-//            }
-//
-//            this.$modal = $('#versionModal');  // Make sure this is reassigned after appending modal
-//        },
-//
-//        _onVersionClick: function (ev) {
-//            ev.preventDefault();
-//            console.log("Version modal opening...");  // Ensure this logs in the console
-//            this.$modal.modal('show');  // Ensure modal is correctly assigned
-//        },
-//
-//        _onSaveVersion: function (ev) {
-//            ev.preventDefault();
-//            const self = this;
-//
-//            const name = this.$('#versionName').val();
-//            const description = this.$('#versionDescription').val();
-//
-//            if (!name) {
-//                alert('Version name is required');
-//                return;
-//            }
-//
-//            ajax.jsonRpc('/website/version/save', 'call', {
-//                'name': name,
-//                'description': description,
-//                'page_id': this._getPageId(),
-//            }).then(function (result) {
-//                if (result.error) {
-//                    alert(result.error);
-//                } else {
-//                    alert('Version saved successfully!');
-//                    self.$modal.modal('hide');
-//                    self.$('#versionName').val('');
-//                    self.$('#versionDescription').val('');
-//                }
-//            });
-//        },
-//
-//        _getPageId: function () {
-//            return $('html').data('website-page-id');
-//        },
-//
-//        _appendModalToDOM: function () {
-//            const modalHTML = `
-//                <div id="versionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel" aria-hidden="true">
-//                  <div class="modal-dialog" role="document">
-//                    <div class="modal-content">
-//                      <div class="modal-header">
-//                        <h5 class="modal-title" id="versionModalLabel">Save Page Version</h5>
-//                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                          <span aria-hidden="true">&times;</span>
-//                        </button>
-//                      </div>
-//                      <div class="modal-body">
-//                        <div class="form-group">
-//                          <label for="versionName">Version Name</label>
-//                          <input type="text" class="form-control" id="versionName" placeholder="Enter version name">
-//                        </div>
-//                        <div class="form-group">
-//                          <label for="versionDescription">Version Description</label>
-//                          <textarea class="form-control" id="versionDescription" rows="3" placeholder="Enter version description"></textarea>
-//                        </div>
-//                      </div>
-//                      <div class="modal-footer">
-//                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-//                        <button type="button" class="btn btn-primary" id="saveVersionButton">Save Version</button>
-//                      </div>
-//                    </div>
-//                  </div>
-//                </div>
-//            `;
-//            $('body').append(modalHTML);
-//            console.log("Modal HTML injected");
-//            this.$modal = $('#versionModal');  // Reassign the modal after injection
-//        },
-//    });
-//
-//    return {
-//        SnippetsMenu: aSnippetMenu,
-//    };
-//});
-
-
-//});
-//$(document).ready(function() {
-//    console.log("DOM fully loaded");
-//
-//    // Use event delegation since the button might be loaded dynamically
-//    $(document).on('click', '#version-btn', function(e) {
-//        console.log("Button is clicked!");
-//        e.preventDefault();
-//    });
-//
-//    // For debugging - check if button exists in intervals
-//    setTimeout(function() {
-//        var button = $('#version-btn');
-//        console.log("Button check after timeout:", button.length);
-//    }, 1000);
-//
-//    console.log("after===============");
-//});
-//console.log("Loading version button script...");
-//
-//$(document).ready(function() {
-//    console.log("DOM ready triggered");
-//
-//    // Debug: Log all buttons on the page
-//    console.log("All buttons found:", $('button').length);
-//    $('button').each(function() {
-//        console.log("Button:", this.id, this.className);
-//    });
-//
-//    // Multiple timing checks
-//    checkButton();
-//
-//    // Monitor DOM changes for button appearance
-//    const observer = new MutationObserver(function(mutations) {
-//        mutations.forEach(function(mutation) {
-//            if (mutation.addedNodes.length) {
-//                checkButton();
-//            }
-//        });
-//    });
-//
-//    observer.observe(document.body, {
-//        childList: true,
-//        subtree: true
-//    });
-//});
-//
-//function checkButton() {
-//    const button = $('#version-btn');
-//    console.log("Button check:", {
-//        found: button.length > 0,
-//        timestamp: new Date().toISOString(),
-//        buttonObject: button
-//    });
-//
-//    if (button.length > 0) {
-//        console.log("Button found! Adding click handler...");
-//        button.off('click').on('click', function(e) {
-//            console.log("Button clicked!");
-//            e.preventDefault();
-//        });
-//    }
-//}
-//button.addEventListener("click", versionclick);
-//function versionclick() {
-//        console.log("=========================version")
-//    }
-//odoo.define('website.version', function (require) {
-//    'use strict';
-//
-//    var core = require('web.core');
-//    var Dialog = require('web.Dialog');
-//    var publicWidget = require('web.public.widget');
-//    var utils = require('web.utils');
-//    var ajax = require('web.ajax');
-//    var _t = core._t;
-//
-//    var VersionDialog = Dialog.extend({
-//        template: 'website.version_dialog',
-//        events: _.extend({}, Dialog.prototype.events, {
-//            'click .btn-primary': '_onSave',
-//        }),
-//
-//        init: function (parent, options) {
-//            options = _.extend({
-//                title: _t("Save Version"),
-//                buttons: [
-//                    {
-//                        text: _t("Save"),
-//                        classes: 'btn-primary',
-//                        click: this._onSave.bind(this),
-//                    },
-//                    {
-//                        text: _t("Discard"),
-//                        close: true,
-//                    },
-//                ],
-//                size: 'medium',
-//            }, options || {});
-//            this._super(parent, options);
-//        },
-//
-//        _onSave: function () {
-//            var name = this.$('#versionName').val();
-//            var description = this.$('#versionDescription').val();
-//
-//            if (!name) {
-//                this.displayNotification({
-//                    type: 'danger',
-//                    title: _t("Error"),
-//                    message: _t("Version name is required"),
-//                });
-//                return;
-//            }
-//
-//            this.trigger_up('version_save', {
-//                name: name,
-//                description: description,
-//            });
-//            this.close();
-//        },
-//    });
-//
-//    var WebsiteVersionButton = publicWidget.Widget.extend({
-//        selector: '#version-btn',
-//        events: {
-//            'click': '_onVersionClick',
-//        },
-//
-//        /**
-//         * @override
-//         */
-//        start: function () {
-//            var def = this._super.apply(this, arguments);
-//            this.pageId = $('html').data('website-page-id');
-//            return def;
-//        },
-//
-//        //--------------------------------------------------------------------------
-//        // Handlers
-//        //--------------------------------------------------------------------------
-//
-//        /**
-//         * @private
-//         * @param {MouseEvent} ev
-//         */
-//        _onVersionClick: function (ev) {
-//            ev.preventDefault();
-//            var self = this;
-//
-//            var dialog = new VersionDialog(this, {});
-//            dialog.on('version_save', this, function (ev) {
-//                return ajax.jsonRpc('/website/version/save', 'call', {
-//                    name: ev.data.name,
-//                    description: ev.data.description,
-//                    page_id: self.pageId,
-//                }).then(function (result) {
-//                    if (result.error) {
-//                        self.displayNotification({
-//                            type: 'danger',
-//                            title: _t("Error"),
-//                            message: result.error,
-//                        });
-//                    } else {
-//                        self.displayNotification({
-//                            type: 'success',
-//                            title: _t("Success"),
-//                            message: _t("Version saved successfully!"),
-//                        });
-//                    }
-//                });
-//            });
-//            dialog.open();
-//        },
-//    });
-//
-//    publicWidget.registry.WebsiteVersion = WebsiteVersionButton;
-//
-//    return {
-//        VersionDialog: VersionDialog,
-//        WebsiteVersionButton: WebsiteVersionButton,
-//    };
-//});
-//document.addEventListener('DOMContentLoaded', function() {
-//    console.log("call====================================");
-//    // Initialize the version functionality
-//    const VersionManager = {
-//        init: function() {
-//            this.versionBtn = document.getElementById('version-btn');
-//            this.modal = document.getElementById('versionModal');
-//            this.saveVersionBtn = document.getElementById('saveVersion');
-//            this.versionNameInput = document.getElementById('versionName');
-//            this.versionDescriptionInput = document.getElementById('versionDescription');
-//
-//            this.bindEvents();
-//        },
-//
-//        bindEvents: function() {
-//            // Version button click handler
-//            this.versionBtn.addEventListener('click', (ev) => {
-//                ev.preventDefault();
-//                console.log("versioncall====================================");
-//                this.showModal();
-//            });
-//
-//            // Save version button click handler
-//            this.saveVersionBtn.addEventListener('click', (ev) => {
-//                ev.preventDefault();
-//                this.saveVersion();
-//            });
-//        },
-//
-//        showModal: function() {
-//            // Using Bootstrap modal
-//            $(this.modal).modal('show');
-//        },
-//
-//        hideModal: function() {
-//            $(this.modal).modal('hide');
-//        },
-//
-//        getPageId: function() {
-//            return document.documentElement.dataset.websitePageId;
-//        },
-//
-//        saveVersion: function() {
-//            const name = this.versionNameInput.value;
-//            const description = this.versionDescriptionInput.value;
-//
-//            if (!name) {
-//                alert('Version name is required');
-//                return;
-//            }
-//
-//            // Make the AJAX request
-//            fetch('/website/version/save', {
-//                method: 'POST',
-//                headers: {
-//                    'Content-Type': 'application/json',
-//                },
-//                body: JSON.stringify({
-//                    name: name,
-//                    description: description,
-//                    page_id: this.getPageId()
-//                })
-//            })
-//            .then(response => response.json())
-//            .then(result => {
-//                if (result.error) {
-//                    alert(result.error);
-//                } else {
-//                    this.hideModal();
-//                    this.versionNameInput.value = '';
-//                    this.versionDescriptionInput.value = '';
-//                    alert('Version saved successfully!');
-//                }
-//            })
-//            .catch(error => {
-//                console.error('Error:', error);
-//                alert('An error occurred while saving the version');
-//            });
-//        }
-//    };
-//
-//    // Initialize the version manager
-//    VersionManager.init();
-//});
+});*/

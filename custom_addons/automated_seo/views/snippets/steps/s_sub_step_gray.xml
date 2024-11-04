@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_step_gray" name="sub step gray">
+    <template id="s_sub_step_gray" name="Sub Step Gray">
         <section class="remove" style="margin: 0; padding: 0;">
             <div class="boxed bg-gray-light">
                 <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>

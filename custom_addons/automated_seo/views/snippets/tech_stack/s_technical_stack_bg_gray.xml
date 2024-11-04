@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_technical_stack_bg_gray" name="Technical stack gray">
+    <template id="s_technical_stack_bg_gray" name="Technical Stack Gray">
         <section class="bg-gray-light tech-stack" id="tech-stack">
             <div class="container">
                 <div class="text-center cont-padding">
@@ -11,7 +11,7 @@
                     </p>
                 </div>
                 <table>
-                    <tbody class="s_tech_stack_main oe_structure">
+                    <tbody class="o_sub_items_container">
                         <tr>
                             <td>Title Title Title</td>
                             <td>
@@ -103,17 +103,5 @@
                 </div>
             </div>
         </section>
-    </template>
-
-    <template id="s_technical_stack_options" inherit_id="website.snippet_options">
-        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
-            <div data-js="MultipleItems" data-selector=".tech-stack">
-                <we-row string="Content">
-                    <we-button data-add-item="" data-item=".s_tech_stack_main > tr:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
-                        Add Item
-                    </we-button>
-                </we-row>
-            </div>
-        </xpath>
     </template>
 </odoo>

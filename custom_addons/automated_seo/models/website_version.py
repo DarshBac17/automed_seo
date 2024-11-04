@@ -3,7 +3,6 @@ from email.policy import default
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 import json
-from automated_seo.odoo.modules.module import current_test
 
 
 class WebsitePageVersion(models.Model):
@@ -31,13 +30,16 @@ class WebsitePageVersion(models.Model):
         active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
         if active_version:
             active_version.status = True
-            breakpoint()
-            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id)],limit=1)
-            # view.parse_html = active_version.parse_html
-            view.page_id.arch_db = active_version.view_arch
-            view.parse_html_filename = active_version.parse_html_filename if active_version.parse_html_filename else "first"
+            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id.id)])
 
 
+            view.parse_html = active_version.parse_html if active_version.parse_html else None
+
+            view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
+
+            view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
+
+            view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
 
 
@@ -46,13 +48,13 @@ class WebsitePageVersion(models.Model):
     #     """Disable form view"""
     #     return False
 
-    # @api.model
-    # def get_view(self, view_id=None, view_type='form', **options):
-    #     """Override to prevent form view from loading"""
-    #     result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
-    #     if view_type == 'form':
-    #         raise UserError('Form view is not available for you')
-    #     return result
+    @api.model
+    def get_view(self, view_id=None, view_type='form', **options):
+        """Override to prevent form view from loading"""
+        result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
+        if view_type == 'form':
+            raise UserError('Form view is not available for you')
+        return result
 
     def write(self,vals):
         return super(WebsitePageVersion, self).write(vals)

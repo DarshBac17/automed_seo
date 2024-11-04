@@ -1,11 +1,11 @@
-.custom-flex-layout {
+.o_custom-flex-layout {
     display: flex;  /* Switch from grid to flex */
     flex-direction: row;  /* Ensure it's a row layout */
     justify-content: space-between;
     gap: 20px;  /* Add some spacing between left and right sections */
 }
 
-.custom-left-section {
+.o_custom-left-section {
     order: 1;  /* Keep the left section in the first place */
     flex-basis: 30%;  /* Set the desired width */
     position: sticky;
@@ -13,8 +13,46 @@
     align-self: flex-start;
 }
 
-.custom-right-section {
+.o_custom-right-section {
     order: 2;  /* Keep the right section in the second place */
     flex-basis: 65%;  /* Set the desired width */
     flex-grow: 1;  /* Allow it to grow if needed */
+}
+
+
+/* Flex container for the entire layout */
+.o_tab_custom-flex-layout {
+    display: flex;
+    justify-content: space-between; /* Ensures no extra space on the right side */
+    gap: 20px; /* Space between left and right sections */
+    max-width: 1200px; /* Set a maximum width for the layout */
+    width: 100%; /* Ensure it takes the full width of the container */
+    margin: 0 auto; /* Center-aligns the layout */
+    padding-left: 0; /* Remove left padding */
+    padding-right: 0; /* Remove right padding */
+    box-sizing: border-box; /* Include padding within width */
+}
+
+/* Left section styling */
+.o_tab_custom-left-section {
+    flex: 1;
+
+    margin: 0; /* Remove any extra margin */
+    padding: 0; /* Remove any extra padding */
+    box-sizing: border-box; /* Include padding within width */
+}
+
+/* Right section styling */
+.o_tab_custom-right-section {
+    flex: 2;
+
+    margin: 0; /* Remove any extra margin */
+    padding: 0; /* Remove any extra padding */
+    box-sizing: border-box; /* Include padding within width */
+}
+
+
+.o_replace_section_div {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }

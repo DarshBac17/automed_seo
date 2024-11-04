@@ -14,7 +14,7 @@
             <section class="bg-black text-center">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-9 px-md">
                     <div>
-                        <h3 class="text-primary text-h4">Heading</h3>
+                        <h3 class="text-primary text-h4">Title Title Title</h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
                             <div class="svg-icon">
                                 <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/ups.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/ups.svg" alt="UPS" class="mx-auto" loading="lazy" height="48" width="48"/>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="md:px-sm md:border-l lg:border-r">
-                        <h3 class="text-primary text-h4">Heading Heading</h3>
+                        <h3 class="text-primary text-h4">Title Title Title</h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
                             <div class="svg-icon">
                                 <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/dubai-bazaar.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/dubai-bazaar.svg" alt="Dubai bazaar" class="mx-auto" loading="lazy" height="48" width="48"/>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-primary text-h4">Heading</h3>
+                        <h3 class="text-primary text-h4">Title Title Title</h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-9">
                             <div class="svg-icon">
                                 <img src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/infosys-1.svg" data-src=" https://assets.bacancytechnology.com/main-boot-5/images/fortune-svg/infosys-1.svg" alt="infosys" class="mx-auto" loading="lazy" height="48" width="48"/>

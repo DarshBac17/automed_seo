@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_with_list_and_button_bg_gray" name="Card with list and button Gray">
+    <template id="s_card_with_list_and_button_bg_gray" name="Card with List and Button Gray">
         <section class="o_automated_seo_snippet bg-gray-light">
             <div class="container">
                 <div class="cont-padding text-center">
@@ -9,14 +9,14 @@
                     Description Description Description
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 oe_structure">
-                <div class="bg-white boxed o_replace_section_div">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_sub_items_container">
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-1.svg" alt="Angular Team Augmentation" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-1.svg"
                              alt="Angular Team Augmentation" loading="lazy" height="48" width="48"
-                            class="slide-icon-svg-1"/>
+                        />
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
@@ -24,14 +24,14 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
-                <div class="bg-white boxed o_replace_section_div">
+                    <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                </section>
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"  loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-2.svg" alt="Dedicated Angular Team"
-                             loading="lazy" height="48" width="48" class="slide-icon-svg-2"/>
+                             loading="lazy" height="48" width="48"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
@@ -39,14 +39,14 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
-                <div class="bg-white boxed o_replace_section_div">
+                    <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                </section>
+                <section class="bg-white boxed o_replace_section_div">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Angular Development Outsourcing" loading="lazy" height="48" width="48">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/slide-icon-svg-3.svg" alt="Dedicated Angular Team"
-                             loading="lazy" height="48" width="48" class="slide-icon-svg-3"/>
+                             loading="lazy" height="48" width="48"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading Heading Heading Heading</h3>
@@ -54,8 +54,8 @@
                         Description Description
                         Description Description Description
                     </p>
-                    <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
-                </div>
+                    <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                </section>
             </div>
             </div>
         </section>

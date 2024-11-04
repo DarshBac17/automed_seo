@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_with_icon_bg_white" name="Card with icon white">
+    <template id="s_card_with_icon_bg_white" name="Card with Icon White">
         <section class="o_automated_seo_snippet container text-center">
             <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading</h2>
@@ -8,48 +8,48 @@
                     Description Description Description
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 oe_structure">
-                <div class="boxed bg-gray-light o_replace_section_div">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_sub_items_container">
+                <section class="boxed bg-gray-light d">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-1.svg" alt="Understand" width="48" height="48"
-                             loading="lazy" class="mx-auto icon-1"/>
+                             loading="lazy" class="mx-auto"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light d">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-2.svg" alt="Strategize" width="48" height="48"
-                             loading="lazy" class="mx-auto icon-2"/>
+                             loading="lazy" class="mx-auto"/>
 
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light d">
                     <div class="svg-icon mb-sm">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48" loading="lazy" class="mx-auto">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-consulting/icon-3.svg" alt="Implement" width="48" height="48"
-                             loading="lazy" class="mx-auto icon-3"/>
+                             loading="lazy" class="mx-auto"/>
                     </div>
                     <h3 class="text-h4 small-heading">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
             </div>
         </section>
     </template>

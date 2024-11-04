@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_side_image_with_form_and_bg" name="Banner side image with form and bg image">
+    <template id="s_banner_side_image_with_form_and_bg" name="Banner Side Image with Form and BG Image">
         <section class="banner banner-post header-top bg-dark">
             <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
             <?php endif; ?>-->
-            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="ruby-on-rails-development_banner-3 banner-post-img"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img"/>
 
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
                 <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
@@ -13,7 +13,7 @@
                     <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
                 </div>
                 <?php endif; ?>-->
-                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="banner-side-4 w-full"/>
+                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="w-full"/>
 
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>
@@ -49,21 +49,21 @@
                         <div class="flex items-center">
                             <div class="w-28 md:w-1/5 mr-sm">
                                 <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
-                                <img src="automated_seo/static/src/img/angular-js-dev/banner-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class=" banner-1 w-full"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
                             </div>
                             <p class="w-3/4"><!--<?php echo $companyYears ?>--><span class="echo-company-year"/>Text Text Text</p>
                         </div>
                         <div class="flex items-center">
                             <div class="w-28 md:w-1/5 mr-sm">
                                 <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-2.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
-                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" alt="icon" width="40" height="40" loading="lazy" class=" banner-2 w-full"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
                             </div>
                             <p class="w-3/4">Text Text Text</p>
                         </div>
                         <div class="flex items-center">
                             <div class="w-28 md:w-1/5 mr-sm">
                                 <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
-                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="banner-3 w-full"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
                             </div>
                             <p class="w-3/4">Text Text Text</p>
                         </div>

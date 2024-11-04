@@ -19,7 +19,7 @@
                         <?php else: ?>
                             <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
                         <?php endif ?>-->
-                        <h2 class="text-white">Heading Heading Heading Heading Heading</h2>
+                        <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
 
                         <!--<?php if ($short_desc) : ?>
                             <p class="text-h5 text-white">
@@ -28,7 +28,7 @@
                         <?php else: ?>
                             <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement.</p>
                         <?php endif ?>-->
-                        <p class="text-h5 text-white">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                        <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement</p>
 
                     </div>
                     <form action="" class="inquiry-form-block form--square tech-form" id="contactfullForm" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
@@ -52,18 +52,18 @@
                             <div class="col-span-full">
                                 <textarea class="form-control" rows="3" placeholder="Describe Your Requirements" name="contactMessage"/>
                             </div>
-                            <div class="col-span-full text-center text-white">
-                                <button class="btn btn-primary" name="contactBtn">Button Text</button>
-                                <div class="md:flex text-h2 items-center justify-center mt-sm [&amp;_.mail-id]:border-white [&amp;_.mail-id]:border-b-2 [&amp;_.mail-id]:font-bold">
-                                    <!--                         <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>-->
-                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>
-                                    <!--                        <?php echo $bacancymailid ?>-->
-                                    <p>company@gmail.com</p>
-                                </div>
-                                <p class="mt-sm">Text Text Text Text</p>
-                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <p>Description<b>Text</b>, <b>Text</b> &amp; <b>Text</b> Description Description Description Description Description Description</p>
-                            </div>
+<!--                            <div class="col-span-full text-center text-white">-->
+<!--                                <button class="btn btn-primary" name="contactBtn">Button Text</button>-->
+<!--                                <div class="md:flex text-h2 items-center justify-center mt-sm [&amp;_.mail-id]:border-white [&amp;_.mail-id]:border-b-2 [&amp;_.mail-id]:font-bold">-->
+<!--                                    &lt;!&ndash;                         <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>&ndash;&gt;-->
+<!--                                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/email-svg-icon.svg" alt="Mail Icon" height="42" width="42" class="h-11 w-11 max-md:mx-auto md:mr-sm" loading="lazy"/>-->
+<!--                                    &lt;!&ndash;                        <?php echo $bacancymailid ?>&ndash;&gt;-->
+<!--                                    <p>company@gmail.com</p>-->
+<!--                                </div>-->
+<!--                                <p class="mt-sm">Text Text Text Text</p>-->
+<!--                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>-->
+<!--                                <p>Description<b>Description</b>, <b>Description</b> &amp; <b>Description</b> Description Description Description Description Description Description</p>-->
+<!--                            </div>-->
                         </div>
                     </form>
                 </div>

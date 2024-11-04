@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_technical_stack_bg_white" name="Technical stack white">
+    <template id="s_technical_stack_bg_white" name="Technical Stack White">
         <section class="container tech-stack" id="tech-stack">
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading</h2>
@@ -10,7 +10,7 @@
                 </p>
             </div>
             <table>
-                <tbody class="s_tech_stack_main oe_structure">
+                <tbody class="o_sub_items_container">
                     <tr>
                         <td>Title Title Title</td>
                         <td>
@@ -99,7 +99,7 @@
                 </tbody>
             </table>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
             </div>
         </section>
     </template>
