@@ -477,7 +477,9 @@ class View(models.Model):
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
                     # img_name_list.append(new_image_name)
-                    img['class'] = list(filter(lambda cls: not cls.startswith('o_au_img_'), img['class']))
+                    img['class'] = [cls for cls in img['class'] if
+                                    not (cls.startswith('o_au_img_') or cls.startswith('o_imagename_'))]
+
                     img['class'].append(f'o_au_img_{name}_{image_id}')
                     img['class'].append(f'o_imagename_{new_image_name}')
                     if attachment:
