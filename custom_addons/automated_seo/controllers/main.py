@@ -17,8 +17,7 @@ class WebsiteVersion(http.Controller):
 
             # Find the page
             domain = [('url', 'in', ['/' + url, url])]
-            if request.env['website.page.version'].search([('name','=',name)]):
-                return {'error': f' the page is already prest'}
+
 
             page = request.env['website.page'].search(domain, limit=1)
             if not page:
@@ -31,6 +30,9 @@ class WebsiteVersion(http.Controller):
 
             if not view:
                 return {'error': 'Associated view not found'}
+
+            if request.env['website.page.version'].search(['&',('name', '=', name),('view_id', '=', view.id)]):
+                return {'error': f' the page is already prest'}
 
             template_name = f"website.{url}" if url else "website.page"
             soup = BeautifulSoup(current_arch, 'html.parser')

@@ -409,7 +409,7 @@ class View(models.Model):
                     else:
                         self.env['automated_seo.snippet_mapper'].create({
                             'snippet_id': new_data_snippet_id,
-                            'php_tag': php_tags,
+                            'php_tag': snippet_record.get('php_tag'),
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
                             'version_id': version.id,
@@ -629,6 +629,20 @@ class View(models.Model):
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section']
 
+
+        tech_stack_cells = soup.find_all('td', class_='o_tech_stack')
+
+        # Iterate over each <td> element
+        for cell in tech_stack_cells:
+            # Get the text content, split by '|', and clear the cell's content
+            descriptions = cell.text.split('|')
+            cell.clear()
+
+            # Create a <span> for each description and append it to the cell
+            for description in descriptions:
+                span = soup.new_tag('span')
+                span.string = description.strip()  # Trim whitespace
+                cell.append(span)
         for tag in soup.find_all(class_=True):
             tag['class'] = [cls for cls in tag['class']
                             if not cls.startswith('o_') and cls not in class_to_remove]
@@ -652,6 +666,7 @@ class View(models.Model):
         for tag in soup.find_all(True):
             if 'itemscope' in tag.attrs and (tag.attrs['itemscope'] == 'itemscope' or tag.attrs['itemscope'] == 'acceptedAnswer'):
                 tag.attrs['itemscope'] = None  # Keep as a flag attribute
+
 
         html_content = html.unescape(str(soup))
 
