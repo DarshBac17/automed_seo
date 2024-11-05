@@ -72,7 +72,7 @@
             </div>
         </section>
         <section class="pt-0 form-sec">
-            <div class="container center-form">
+            <div class="container o_au_php_form_center-form">
                 <!--               <?php-->
                 <!--            $formType = 'tech-dark-form';-->
                 <!--            include("tailwind/template/form.php");-->
@@ -88,7 +88,7 @@
                             <?php else: ?>
                                 <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
                             <?php endif ?>-->
-                            <h2 class="text-white">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
+                            <h2 class="text-white o_au_php_var_tag_tech_dark_form_heading">Schedule A Developer Interview and Get 15 Days Risk-Free Trial</h2>
 
                             <!--<?php if ($short_desc) : ?>
                                 <p class="text-h5 text-white">
@@ -97,7 +97,7 @@
                             <?php else: ?>
                                 <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement.</p>
                             <?php endif ?>-->
-                            <p class="text-h5 text-white">We ensure you’re matched with the right talent resource based on your requirement
+                            <p class="text-h5 text-white o_au_php_var_tag_short_desc">We ensure you’re matched with the right talent resource based on your requirement
                             </p>
 
                         </div>

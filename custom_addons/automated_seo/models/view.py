@@ -597,6 +597,9 @@ class View(models.Model):
                     tags = soup.find_all(class_=element_class)
                     for tag in tags:
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
+                        if element_class.startswith("o_au_php_form_"):
+                            php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
+                            old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
 
         for tag in soup.find_all('t'):
@@ -604,6 +607,22 @@ class View(models.Model):
         wrap_tag = soup.find(id="wrap")
         wrap_tag.unwrap()
         return str(soup)
+
+    def replace_php_var_value(self,old_tag_soup,php_var_tags):
+        for sub_tag in php_var_tags:
+            tag_content = str(sub_tag.get_text(strip=True)).strip()
+            print(tag_content)
+            var_name = next((cls for cls in sub_tag['class'] if cls.startswith("o_au_php_var_tag_")), None)[len("o_au_php_var_tag_"):]
+
+            print(var_name)
+            if var_name:
+                pattern = rf'\${var_name}\s*=\s*".*?";'
+                new_php_var = f'${var_name} = "{tag_content}";'
+                # Search for the variable assignment and replace it with the new one
+                old_tag_soup = re.sub(pattern, new_php_var, old_tag_soup)
+
+        return BeautifulSoup(old_tag_soup, 'html.parser').prettify()
+
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
