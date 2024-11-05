@@ -29,7 +29,7 @@
                     <!--                            ?>-->
                     <!---->
 
-                    <form class="emailFormbanner_org banner-form" id="emailFormbanner" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
+                    <form class="emailFormbanner_org o_au_php_form_banner-form" id="emailFormbanner" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
                         <div class="grid md:gap-0 gap-6 md:grid-cols-2">
                             <div class="relative">
                                 <input type="text" class="form-control h-full w-full p-3 text-secondary" placeholder="Email Address" id="email" maxlength="80" name="contactEmailHD" size="20"/>
@@ -42,8 +42,8 @@
                                     HIRE <?php echo $bannerDevName ?> Developer NOW
                                 </button>
                                 <?php endif ?>-->
-                                <button class="btn btn-primary h-full contactBtn" name="contactBtn">
-                                    <!--HIRE &lt;!&ndash;<?php echo $bannerDevName ?>&ndash;&gt; Developer NOW--> Button Text
+                                <button class="btn btn-primary h-full contactBtn" name="contactBtn">Hire <span class="o_au_php_var_tag_bannerDevName o_au_php_tag_val_color"># Change Text #</span>
+                                    <!--HIRE &lt;!&ndash;<?php echo $bannerDevName ?>&ndash;&gt; Developer NOW--> Developer NOW
                                 </button>
                             </div>
                         </div>
