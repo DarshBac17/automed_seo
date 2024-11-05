@@ -409,7 +409,7 @@ class View(models.Model):
                     else:
                         self.env['automated_seo.snippet_mapper'].create({
                             'snippet_id': new_data_snippet_id,
-                            'php_tag': php_tags,
+                            'php_tag': snippet_record.get('php_tag'),
                             'element_class': php_class,
                             'image_name': snippet_record.get('image_name'),
                             'version_id': version.id,
