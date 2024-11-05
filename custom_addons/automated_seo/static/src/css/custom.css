@@ -56,3 +56,12 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
+
+
+.device-type-if,
+.device-type-endif {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}

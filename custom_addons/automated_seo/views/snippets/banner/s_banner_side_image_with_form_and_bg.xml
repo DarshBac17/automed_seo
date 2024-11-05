@@ -16,9 +16,9 @@
                     <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
                 </div>
                 <?php endif; ?>-->
-                <div class="device-type-if"/>
+                <p class="device-type-if"/>
                 <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="w-full"/>
-                <div class="device-type-endif"/>
+                <p class="device-type-endif"/>
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
