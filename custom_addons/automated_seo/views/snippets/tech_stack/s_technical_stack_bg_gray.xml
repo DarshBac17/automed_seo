@@ -14,86 +14,20 @@
                     <tbody class="o_sub_items_container">
                         <tr>
                             <td>Title Title Title</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
+                            <td class="o_tech_stack">
+                                Description|Description|Description|Description|Description
                             </td>
                         </tr>
                         <tr>
                             <td>Title Title Title</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
+                            <td class="o_tech_stack">
+                                Description|Description|Description|Description|Description|Description
                             </td>
                         </tr>
                         <tr>
                             <td>Title Title Title</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Title Title Title</td>
-                            <td>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
-                                <span>Description</span>
+                            <td class="o_tech_stack">
+                                Description|Description|Description|Description|Description|Description
                             </td>
                         </tr>
                     </tbody>
