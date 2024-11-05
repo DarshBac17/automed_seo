@@ -229,6 +229,7 @@ class View(models.Model):
         except Exception as e:
             print(f"Error processing image: {str(e)}")
             return None
+
     def action_edit_website_page(self):
         """Opens the related website page in edit mode."""
         self.ensure_one()
@@ -446,27 +447,27 @@ class View(models.Model):
                     img['class'].append(f'o_imagename_{new_image_name}')
                     if attachment:
                         processed_image = self.process_image_with_params(attachment=attachment, img_tag=img)
-                        print("uploaded successfully=======================")
+                        # print("uploaded successfully=======================")
 
                         # new_image_data = attachment.datas
                         # new_image = base64.b64decode(new_image_data)
                         # image_file = io.BytesIO(processed_image)
-                        # self.upload_file_to_s3(file=processed_image, view_name=view_name, s3_filename=new_image_name)
+                        self.upload_file_to_s3(file=processed_image, view_name=view_name, s3_filename=new_image_name)
 
-                        temp_folder_path = Path('./temp')
-                        temp_folder_path.mkdir(parents=True, exist_ok=True)
-                        file_path = temp_folder_path / f"{new_image_name}"
-                        with open(file_path, 'wb') as image_file:
-                            # Check if processed_image is BytesIO and get the byte content
-                            if isinstance(processed_image, io.BytesIO):
-                                processed_image.seek(0)  # Move to the start of the BytesIO stream
-                                image_data = processed_image.read()  # Read as bytes
-                            else:
-                                image_data = processed_image  # Assume it's already in bytes
-                            if image_data:
-                                image_file.write(image_data)
-                            else:
-                                raise ValueError("Image data is None after processing.")
+                        # temp_folder_path = Path('./temp')
+                        # temp_folder_path.mkdir(parents=True, exist_ok=True)
+                        # file_path = temp_folder_path / f"{new_image_name}"
+                        # with open(file_path, 'wb') as image_file:
+                        #     # Check if processed_image is BytesIO and get the byte content
+                        #     if isinstance(processed_image, io.BytesIO):
+                        #         processed_image.seek(0)  # Move to the start of the BytesIO stream
+                        #         image_data = processed_image.read()  # Read as bytes
+                        #     else:
+                        #         image_data = processed_image  # Assume it's already in bytes
+                        #     if image_data:
+                        #         image_file.write(image_data)
+                        #     else:
+                        #         raise ValueError("Image data is None after processing.")
 
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
@@ -497,10 +498,10 @@ class View(models.Model):
                 if img.has_attr(attr):
                     del img[attr]
 
-        return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify()), view_name=view_name))
+        return str(self.handle_dynamic_img_tag2(html_parser=str(soup.prettify())))
 
 
-    def handle_dynamic_img_tag2(self,html_parser, view_name):
+    def handle_dynamic_img_tag2(self,html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
         base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
         for img in soup.select('img'):
