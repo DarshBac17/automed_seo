@@ -31,9 +31,31 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
     version = fields.One2many('website.page.version','view_id',string="Version")
+    contributor_ids = fields.Many2many(
+        'res.users',
+        'seo_view_contributor_rel',
+        'view_id',
+        'user_id',
+        string='Contributors',
+        tracking=True
+    )
+    is_owner = fields.Boolean(
+        compute='_compute_is_owner',
+        string='Is Owner',
+        store=False
+    )
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
+    @api.depends('create_uid')
+    def _compute_is_owner(self):
+        """Compute if current user is the owner"""
+        current_user = self.env.user
+        for record in self:
+            record.is_owner = current_user.id == record.create_uid.id
+
+
 
 
     def _get_next_page_id(self):
@@ -233,10 +255,14 @@ class View(models.Model):
     def action_edit_website_page(self):
         """Opens the related website page in edit mode."""
         self.ensure_one()
+
+        for record in self:
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
+                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
+
         base_url = self.website_page_id.url
-        # Remove trailing slash if present
         base_url = base_url.rstrip('/')
 
         return {
