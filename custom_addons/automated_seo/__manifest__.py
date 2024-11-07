@@ -19,6 +19,7 @@
         "views/php_mapper_view.xml",
         "views/website/header.xml",
         "views/website/footer.xml",
+        'views/snippet_options.xml',
         "views/snippets/steps/s_steps_bg_white.xml",
         "views/snippets/steps/s_steps_bg_gray.xml",
         "views/snippets/steps/s_sub_step_white.xml",
@@ -195,6 +196,7 @@
             ('include', 'web._assets_helpers'),
             'automated_seo/static/src/js/website_version.js',
             'automated_seo/static/src/js/website_save.js',
+            'automated_seo/static/src/js/snippet_options.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [

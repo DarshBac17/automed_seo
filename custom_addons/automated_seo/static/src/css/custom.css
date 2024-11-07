@@ -65,3 +65,10 @@
     height: 0;
     overflow: hidden;
 }
+
+.php-var-1,
+.php-var-2,
+.php-var-3,
+.php-var-4 {
+    font-weight: bold;
+}
