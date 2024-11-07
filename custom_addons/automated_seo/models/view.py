@@ -272,22 +272,25 @@ class View(models.Model):
         }
 
     def unlink(self):
-        for view in self:
+
+        for record in self:
             try:
-                versions = self.env['website.page.version'].search([('view_id', '=', view.id)])
+                if self.env.user.id != record.create_uid.id and not self.env.user.has_group('base.group_system'):
+                    raise UserError("You do not have permission to delete this page. Only the owner can edit it.")
+                versions = self.env['website.page.version'].search([('view_id', '=', record.id)])
                 if versions:
                     versions.unlink()
                 # Delete associated website page
-                if view.page_id:
-                    website_page = self.env['website.page'].search([('view_id', 'in', view.page_id.ids)], limit=1)
+                if record.page_id:
+                    website_page = self.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
                     if website_page:
                         website_page.unlink()
-                seo_page = self.env['automated_seo.page'].search([('page_name', '=', view.name)])
+                seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
 
             except Exception as e:
-                print(f"Error while deleting associated records for view {view.name}: {str(e)}")
+                print(f"Error while deleting associated records for view {record.name}: {str(e)}")
                 raise
 
         return super(View, self).unlink()

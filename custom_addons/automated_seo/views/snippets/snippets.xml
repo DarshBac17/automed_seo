@@ -599,6 +599,12 @@
         </xpath>
     </template>
 
+    <template id="website_layout" inherit_id="website.layout">
+
+        <xpath expr="//a[@class='o_frontend_to_backend_edit_btn px-3 d-flex align-items-center justify-content-center text-decoration-none']" position="replace"/>
+
+    </template>
+
 
 
     <!--    <template id="test_module.offers_dynamic_snippet_options_template">
