@@ -66,9 +66,7 @@
     overflow: hidden;
 }
 
-.php-var-1,
-.php-var-2,
-.php-var-3,
-.php-var-4 {
-    font-weight: bold;
+
+.o_au_php_tag_val_color {
+    color: #dc3545; /* Red */
 }

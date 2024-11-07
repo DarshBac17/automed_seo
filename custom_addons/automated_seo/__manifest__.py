@@ -141,7 +141,6 @@
         "views/snippets/developer/s_profile_bg_white.xml",
         "views/snippets/developer/s_sub_profile_gray.xml",
         "views/snippets/developer/s_sub_profile_white.xml",
-        "views/snippets/form/s_banner_form.xml",
         "views/snippets/form/s_footer_form.xml",
         "views/snippets/form/s_single_form.xml",
         "views/snippets/form/s_form_with_price_gray.xml",
