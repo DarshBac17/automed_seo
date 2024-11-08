@@ -70,3 +70,7 @@
 .o_au_php_tag_val_color {
     color: #dc3545; /* Red */
 }
+
+.o_text-php-var-info {
+    color: #17a2b8; /* Cyan */
+}
