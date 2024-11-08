@@ -183,16 +183,6 @@ class View(models.Model):
         self.write({'stage': 'approved'})
         self.message_post(body="Record approved", message_type="comment")
 
-    @api.model
-    def get_view(self, view_id=None, view_type='form', **options):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'My Form',
-            'res_model': 'automated_seo.view',
-            'view_mode': 'form',
-            'view_id': self.env.ref('automated_seo.view_form').id,
-            'context': {'uid': self.env.user.id},
-        }
     def action_edit_website_page(self):
         """Opens the related website page in edit mode."""
         self.ensure_one()
