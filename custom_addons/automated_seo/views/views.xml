@@ -85,18 +85,16 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="write_date" style="margin-left:5px"/>
                                 </div>
-                                <div class="o_row">
-                                    <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
-                                    <label for="parse_html_filename" string="File:"
-                                           attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                                    <div class="d-flex align-items-center">
-                                        <field name="parse_html_filename" readonly="1" nolabel="1"
-                                               attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                                        <button name="action_download_parsed_html" type="object"
-                                                icon="fa-download" class="btn btn-link ms-2"
-                                                attrs="{'invisible': [('parse_html_binary', '=', False)]}"
-                                                title="Download File"/>
-                                    </div>
+                                    <field name="is_owner" invisible="1"/>
+
+                                <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
+                                    Contributors
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="contributor_ids"
+                                           widget="many2many_tags_avatar"
+                                           options="{'color_field': 'color', 'no_create_edit': True}"
+                                           placeholder="Add contributors..."/>
+
                                 </div>
                             </div>
                         </group>
