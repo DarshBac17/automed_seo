@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_with_list_and_button_bg_gray" name="Card with List and Button Gray">
-        <section class="o_automated_seo_snippet bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>

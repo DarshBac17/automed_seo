@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_hire_expert_bg_gray" name="Hire Expert Gray">
 
-        <section class="bg-gray-light text-center">
+        <section class="bg-gray-light text-center o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

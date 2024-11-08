@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_horizontal_tab_bg_gray" name="Horizontal Tab Gray">
 
-        <section class="bg-gray-light tabs tabbibg-sec" id="technical-stack">
+        <section class="bg-gray-light tabs tabbibg-sec o_automated_seo_php_variable" id="technical-stack">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

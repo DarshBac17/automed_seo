@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_sub_profile_white" name="Sub Profile White">
-        <section class="remove" style="margin: 0; padding: 0;">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-white">
                     <div class="flex items-center mb-sm small-heading-three">
                         <div class="size-60 mr-sm">

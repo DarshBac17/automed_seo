@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_trusted_bg_white" name="Trusted White">
-        <section class="trusted bg-white py-md">
+        <section class="trusted bg-white py-md o_automated_seo_php_variable">
             <div class="container">
                 <div class="grid gap-6 grid-cols-3 md:grid-cols-6 lg:grid-cols-7 items-center justify-center [&amp;_div]:m-auto">
                     <p class="mb-0 text-h5 text-dark col-span-full text-center lg:col-span-1">Trusted By</p>

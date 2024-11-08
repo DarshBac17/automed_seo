@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_client_feedback_bg_white" name="Client feedback White">
 
-        <section class="o_automated_seo_snippet container">
+        <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
         <div class="cont-padding text-center">
                <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
                         Heading

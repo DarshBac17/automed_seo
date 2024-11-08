@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_faq_with_button_bg_gray" name="FAQ with Button gray">
-        <section class="o_automated_seo_snippet bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
             <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11 o_tab_custom-flex-layout">
 
                 <div class="o_tab_custom-left-section md:col-span-3">

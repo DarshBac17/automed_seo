@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_dark_cta_bg_gray" name="Dark CTA Gray">
-       <section class="bg-gray-light">
+       <section class="bg-gray-light o_automated_seo_php_variable">
         <div class="container">
             <div class="boxed text-center bg-dark">
                 <h2 class="text-white cont-padding">Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text</h2>

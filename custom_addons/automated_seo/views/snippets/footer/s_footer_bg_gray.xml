@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_footer_bg_gray" name="Footer Gray">
-        <section class="footer-php">
+        <section class="footer-php o_automated_seo_php_variable">
             <!--<?php include("tailwind/template/footer.php"); ?>-->
             <footer class="footer py-lg bg-black">
                 <div class="container">

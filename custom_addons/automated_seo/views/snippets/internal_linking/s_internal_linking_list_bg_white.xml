@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_internal_linking_list_bg_white" name="Internal Linking List White">
-        <section class="container">
+        <section class="container o_automated_seo_php_variable">
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
             </div>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_side_img_cards_bg_white" name="Side Img Cards BG White">
-        <section class="o_automated_seo_snippet container text-center">
+        <section class="o_automated_seo_snippet container text-center o_automated_seo_php_variable">
             <h2 class="cont-padding">Header Header Header Header</h2>
             <div class="grid lg:grid-cols-2 gap-6">
                 <div>

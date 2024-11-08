@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_vertical_tab_bg_white" name="Vertical Tab White">
-        <section class="tabs tabbibg-sec side-tab">
+        <section class="tabs tabbibg-sec side-tab o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

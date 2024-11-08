@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_case_study_bg_gray" name="Case Study Gray">
 
-        <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col" id="case-study">
+        <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col o_automated_seo_php_variable" id="case-study">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading </h2>

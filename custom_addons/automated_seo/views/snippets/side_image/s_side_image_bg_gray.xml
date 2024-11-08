@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_side_image_bg_gray" name="Side Image BG Gray">
-        <section class="bg-gray-light">
+        <section class="bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="grid lg:grid-cols-2 gap-6">
                     <div>

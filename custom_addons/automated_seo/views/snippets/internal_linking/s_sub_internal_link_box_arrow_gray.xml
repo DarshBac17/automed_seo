@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_sub_internal_link_box_arrow_gray" name="Sub Internal Link Box Arrow Gray">
-        <section class="remove" style="margin: 0; padding: 0;">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
              <div class="boxed bg-gray-light">
                         <!--                    <a href="<?php echo BASE_URL; ?>ai-in-fintech" class="w-full flex items-center"><h3 class="text-base mb-0 text-primary">AI in Fintech</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
                         <a href="#" class="w-full flex items-center">

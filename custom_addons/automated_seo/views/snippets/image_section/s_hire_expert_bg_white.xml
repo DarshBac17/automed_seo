@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_hire_expert_bg_white" name="Hire Expert White">
-        <section class="container text-center">
+        <section class="container text-center o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

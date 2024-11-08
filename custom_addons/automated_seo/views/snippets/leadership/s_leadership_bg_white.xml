@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_leadership_bg_white" name="Leadership White">
-        <section class="text-center">
+        <section class="text-center  o_automated_seo_php_variable">
             <div class="container">
                 <h2 class="cont-padding">Header Header Header Header Header Header</h2>
                 <div class="banner-post relative boxed">
