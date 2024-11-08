@@ -10,6 +10,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         events: _.extend({}, options.Class.prototype.events || {}, {
             'click [data-select-var]': '_onVariableSelect',
             'mouseup .o_editable': '_onSelectionChange',
+            'change .o_au_php_var_const': '_onConstTypeChange',
         }),
 
         init: function () {
@@ -98,6 +99,30 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             return null;
         },
 
+
+
+//        _update_value_for_var_type: function((selection){
+//            if (!selection.rangeCount) return;
+//            const range = selection.getRangeAt(0);
+//            let selectedText = '';
+//
+//            // Get the complete text content
+//            const container = range.commonAncestorContainer;
+//            if (container.nodeType === Node.TEXT_NODE) {
+//                selectedText = range.toString().trim();
+//            } else {
+//                const div = document.createElement('div');
+//                div.appendChild(range.cloneContents());
+//                selectedText = div.textContent.trim();
+//            }
+//
+//            if (!selectedText) {
+//                return;
+//            }
+//
+//
+//        }
+
         /**
          * Apply PHP variable formatting to the selected text
          */
@@ -128,6 +153,16 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const span = document.createElement('span');
             span.className = variable.class;
             span.setAttribute('data-php-var', variable.name);
+
+            const $button = this.$el.find('we-button[data-select-class="o_au_php_var_type"]');
+            console.log($button)
+            if ($button.hasClass('active')) {
+                // Checkbox is active
+                span.setAttribute('data-php-const-var', '1');
+            }
+            else{
+                span.setAttribute('data-php-const-var', '0');
+            }
             span.textContent = selectedText;
 
             // Remove any existing content and insert the new span
@@ -228,7 +263,14 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 alert('An error occurred while applying the variable. Please try again.');
             }
         },
-
+        _onConstTypeChange: function(ev) {
+            const $checkbox = $(ev.currentTarget);
+            if ($checkbox.is(':checked')) {
+                $checkbox.addClass('o_au_php_var_const');
+            } else {
+                $checkbox.removeClass('o_au_php_var_const');
+            }
+        },
         _onSelectionChange: function() {
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;

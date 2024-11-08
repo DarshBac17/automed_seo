@@ -600,36 +600,34 @@
         </xpath>
 
         <xpath expr="." position="inside">
-            <div data-exclude="[data-oe-xpath]">
-                <t t-call="automated_seo.s_php_variable_options">
-                </t>
-            </div>
+            <t t-call="automated_seo.s_php_variable_options">
+            </t>
 
         </xpath>
     </template>
 
 
-    <template id="s_php_variable_options">
-        <div data-js="PhpVariable" data-selector=".o_automated_seo_php_variable">
-            <we-select string="Select const var" data-state-to-first-class="true">
-                <we-button data-select-class="float-start" title="Align Left">PHP_VAR_1</we-button>
-                <we-button data-select-class="float-start" title="Align Center">PHP_VAR_2</we-button>
-                <we-button data-select-class="float-start" title="Align Right">PHP_VAR_3</we-button>
-                <we-button data-select-class="float-start" title="Align top">PHP_VAR_4</we-button>
-<!--                                <we-button data-select-class="float-start">PHP_VAR_1</we-button>
-                <we-button data-select-class="">PHP_VAR_2</we-button>
-                <we-button data-select-class="">PHP_VAR_3</we-button>
-                <we-button data-select-class="float-end">PHP_VAR_3</we-button>-->
-            </we-select>
+<!--    <template id="s_php_variable_options">-->
+<!--        <div data-js="PhpVariable" data-selector=".o_automated_seo_php_variable">-->
+<!--            <we-select string="Select const var" data-state-to-first-class="true">-->
+<!--                <we-button data-select-class="float-start" title="Align Left">PHP_VAR_1</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align Center">PHP_VAR_2</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align Right">PHP_VAR_3</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align top">PHP_VAR_4</we-button>-->
+<!--                &lt;!&ndash;                                <we-button data-select-class="float-start">PHP_VAR_1</we-button>-->
+<!--                                <we-button data-select-class="">PHP_VAR_2</we-button>-->
+<!--                                <we-button data-select-class="">PHP_VAR_3</we-button>-->
+<!--                                <we-button data-select-class="float-end">PHP_VAR_3</we-button>&ndash;&gt;-->
+<!--            </we-select>-->
 
-            <!--            <we-select string="Select const var" data-state-to-first-class="true">
-                                <we-button data-select-var="PHP_VAR_1" data-variable-class="php-var-1" >PHP_VAR_1</we-button>
-                                    <we-button data-select-var="PHP_VAR_2" data-variable-class="php-var-2">PHP_VAR_2</we-button>
-                                    <we-button data-select-var="PHP_VAR_3" data-variable-class="php-var-3">PHP_VAR_3</we-button>
-                                    <we-button data-select-var="PHP_VAR_4" data-variable-class="php-var-4">PHP_VAR_4</we-button>
-                            </we-select>-->
-        </div>
-    </template>
+<!--            &lt;!&ndash;            <we-select string="Select const var" data-state-to-first-class="true">-->
+<!--                                <we-button data-select-var="PHP_VAR_1" data-variable-class="php-var-1" >PHP_VAR_1</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_2" data-variable-class="php-var-2">PHP_VAR_2</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_3" data-variable-class="php-var-3">PHP_VAR_3</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_4" data-variable-class="php-var-4">PHP_VAR_4</we-button>-->
+<!--                            </we-select>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </template>-->
 
 
     <!--    <template id="test_module.offers_dynamic_snippet_options_template">

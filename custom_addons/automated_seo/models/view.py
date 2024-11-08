@@ -341,7 +341,7 @@ class View(models.Model):
 
             for section in sections:
                 snippet_id = section.get('data-snippet')
-                # breakpoint()
+
                 orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
 
@@ -587,8 +587,9 @@ class View(models.Model):
             snippet_ids.append(section.get('data-snippet'))
 
         for section in sections:
+            updated_section = BeautifulSoup(self.replace_php_var_tag(str(section.prettify())),'html.parser')
             snippet_records = self.env['automated_seo.snippet_mapper'].search(
-                [('snippet_id', '=', section.get('data-snippet'))])
+                [('snippet_id', '=', updated_section.get('data-snippet'))])
 
             if snippet_records:
                 for snippet_record in snippet_records:
@@ -601,26 +602,104 @@ class View(models.Model):
                             php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
                             old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
+            section.replace_with(updated_section)
+
 
         for tag in soup.find_all('t'):
             tag.unwrap()
         wrap_tag = soup.find(id="wrap")
         wrap_tag.unwrap()
+
+
         return str(soup)
+
+
+    def replace_php_var_tag(self, section):
+
+        updated_section = BeautifulSoup(self.replace_strong_el_u_tag(section), "html.parser")
+
+        for tag in updated_section.find_all(class_="o_au_php_var"):
+
+            var_name = tag.get('data-php-var')
+            var_type = tag.get("data-php-const-var")
+
+            if var_name:
+                if len(tag.find_all(class_="font-bold")) > 0:
+                    tag["class"].append("font-bold")
+                if "font-bold" in tag["class"]:
+                    tag.string = ""
+                    php_tag = BeautifulSoup(
+                        f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
+                        'html.parser')
+                    tag.append(php_tag)
+                else:
+                    php_tag = BeautifulSoup(f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>", 'html.parser')
+                    tag.replace_with(php_tag)
+
+        return str(updated_section.prettify())
+
+
+    def replace_strong_el_u_tag(self, section):
+
+
+        section = BeautifulSoup(section, "html.parser")
+        for strong_tag in section.find_all('strong'):
+
+            # parent_tag = strong_tag.find_parent()  # Get the parent tag
+            # parent_tag_content = parent_tag.string
+            #
+            # # if not parent_tag_content:
+            # #     if parent_tag:
+            # #         # Add the 'font-bold' class to the parent and remove the <strong>
+            # #         parent_tag['class'] = parent_tag.get('class', []) + ['font-bold']
+            # #         parent_tag.contents = strong_tag.contents if strong_tag.contents else ""
+            # #         strong_tag.decompose()
+            # #         continue
+            span_tag = section.new_tag('span')
+            span_tag["class"] = ['font-bold']
+            span_tag.extend(strong_tag.contents)
+            strong_tag.replace_with(span_tag)
+
+            # if strong_tag.string and len(strong_tag.find_all()) > 0:
+            #     span_tag = section.new_tag("span", **{"class": "font-bold"})
+            #
+            #     # Move all contents from <strong> to the new <span> tag
+            #     span_tag.extend(strong_tag.contents)
+            #
+            #     # Replace the <strong> tag with the new <span> tag
+            #     # strong_tag.replace_with(span_tag)
+            #
+            # # Case 1: If the 'strong' tag is inside any parent and the parent has other content
+            # if parent_tag_content:
+            #     # Create a new <span> tag with the class 'font-bold'
+            #
+            #     span_tag = section.new_tag('span')
+            #     span_tag["class"] = ['font-bolt']
+            #     span_tag.string = strong_tag.string  # Move the string content into the <span> tag
+            #     strong_tag.replace_with(span_tag)  # Replace <strong> with <span>
+            #
+            # # Case 2: If the 'strong' tag is the only child (or directly inside a parent like <span>)
+            # else:
+            #     if parent_tag:
+            #         # Add the 'font-bold' class to the parent and remove the <strong>
+            #         parent_tag['class'] = parent_tag.get('class', []) + ['font-bold']
+            #         parent_tag.string = strong_tag.string if strong_tag.string else ""
+            #         strong_tag.decompose()  # Remove the <strong> tag
+
+
+
+
+        return str(section.prettify())
+
 
     def replace_php_var_value(self,old_tag_soup,php_var_tags):
         for sub_tag in php_var_tags:
             tag_content = str(sub_tag.get_text(strip=True)).strip()
-            print(tag_content)
             var_name = next((cls for cls in sub_tag['class'] if cls.startswith("o_au_php_var_tag_")), None)[len("o_au_php_var_tag_"):]
-
-            print(var_name)
             if var_name:
                 pattern = rf'\${var_name}\s*=\s*".*?";'
                 new_php_var = f'${var_name} = "{tag_content}";'
-                # Search for the variable assignment and replace it with the new one
                 old_tag_soup = re.sub(pattern, new_php_var, old_tag_soup)
-
         return BeautifulSoup(old_tag_soup, 'html.parser').prettify()
 
 
@@ -650,7 +729,7 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
-            for attr in ['data-bs-original-title', 'title','aria-describedby']:
+            for attr in ['data-bs-original-title', 'title','aria-describedby', 'data-php-const-var','data-php-var']:
                 if tag.has_attr(attr):
                     del tag[attr]
 
