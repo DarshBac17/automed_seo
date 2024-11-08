@@ -31,6 +31,14 @@ class View(models.Model):
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
     version = fields.One2many('website.page.version','view_id',string="Version")
+    stage = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_progress', 'In Progress'),
+        ('in_review', 'In Review'),
+        ('done', 'Done'),
+        ('publish', 'Publish'),
+
+    ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
         'res.users',
         'seo_view_contributor_rel',
@@ -138,6 +146,98 @@ class View(models.Model):
             'target': 'self',
         }
 
+    def action_send_for_review(self):
+        self.write({'stage': 'in_review'})
+        self.message_post(body="Record sent for preview", message_type="comment")
+    def action_set_to_in_preview(self):
+        # Set status to 'draft' or 'quotation'
+        self.stage = 'in_preview'
+        self.message_post(body="Record sent for preview", message_type="comment")
+        # Send email to admin here
+        template = self.env.ref('automated_seo.email_template_preview')
+        template.send_mail(self.id, force_send=True)
+
+    def action_done_button(self):
+        self.write({'stage': 'done'})
+        self.message_post(body="Record approved", message_type="comment")
+
+    def action_publish_button(self):
+        self.write({'stage': 'publish'})
+        self.message_post(body="Record approved", message_type="comment")
+
+    def action_reject(self):
+        self.write({'stage': 'in_progress'})
+        self.message_post(body="Record rejected", message_type="comment")
+
+
+    def send_email_action(self):
+        # Logic to send email using Odoo's email system
+        mail_values = {
+            'subject': self.subject,
+            'body_html': self.body,
+            'email_to': self.email_to,
+            'email_from': self.env.user.email,
+        }
+        self.env['mail.mail'].create(mail_values).send()
+    def action_approve(self):
+        self.write({'stage': 'approved'})
+        self.message_post(body="Record approved", message_type="comment")
+
+    @api.model
+    def get_view(self, view_id=None, view_type='form', **options):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'My Form',
+            'res_model': 'automated_seo.view',
+            'view_mode': 'form',
+            'view_id': self.env.ref('automated_seo.view_form').id,
+            'context': {'uid': self.env.user.id},
+        }
+    def action_edit_website_page(self):
+        """Opens the related website page in edit mode."""
+        self.ensure_one()
+
+        for record in self:
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
+                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
+        if not self.page_id:
+            raise UserError("No website page associated with this record.")
+        self.write({'stage': 'in_progress'})
+        base_url = self.website_page_id.url
+        base_url = base_url.rstrip('/')
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'{base_url}?enable_editor=1',
+            'target': 'self',
+        }
+
+    def get_approve_url(self):
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        return f"{base_url}/web#id={self.id}&model={self._name}&view_type=form&action=approve"
+    def unlink(self):
+
+        for record in self:
+            try:
+                if self.env.user.id != record.create_uid.id and not self.env.user.has_group('base.group_system'):
+                    raise UserError("You do not have permission to delete this page. Only the owner can edit it.")
+                versions = self.env['website.page.version'].search([('view_id', '=', record.id)])
+                if versions:
+                    versions.unlink()
+                # Delete associated website page
+                if record.page_id:
+                    website_page = self.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
+                    if website_page:
+                        website_page.unlink()
+                seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
+                if seo_page:
+                    seo_page.unlink()
+
+            except Exception as e:
+                print(f"Error while deleting associated records for view {record.name}: {str(e)}")
+                raise
+
+        return super(View, self).unlink()
     def process_image_with_params(self, attachment, img_tag):
         """
         Process image with cropping parameters and CSS transforms before uploading to S3
@@ -251,50 +351,6 @@ class View(models.Model):
         except Exception as e:
             print(f"Error processing image: {str(e)}")
             return None
-
-    def action_edit_website_page(self):
-        """Opens the related website page in edit mode."""
-        self.ensure_one()
-
-        for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
-                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
-        if not self.page_id:
-            raise UserError("No website page associated with this record.")
-
-        base_url = self.website_page_id.url
-        base_url = base_url.rstrip('/')
-
-        return {
-            'type': 'ir.actions.act_url',
-            'url': f'{base_url}?enable_editor=1',
-            'target': 'self',
-        }
-
-    def unlink(self):
-
-        for record in self:
-            try:
-                if self.env.user.id != record.create_uid.id and not self.env.user.has_group('base.group_system'):
-                    raise UserError("You do not have permission to delete this page. Only the owner can edit it.")
-                versions = self.env['website.page.version'].search([('view_id', '=', record.id)])
-                if versions:
-                    versions.unlink()
-                # Delete associated website page
-                if record.page_id:
-                    website_page = self.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
-                    if website_page:
-                        website_page.unlink()
-                seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
-                if seo_page:
-                    seo_page.unlink()
-
-            except Exception as e:
-                print(f"Error while deleting associated records for view {record.name}: {str(e)}")
-                raise
-
-        return super(View, self).unlink()
-
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))

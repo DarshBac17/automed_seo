@@ -15,6 +15,16 @@
         </field>
     </record>
 
+    <record id="action_seo_send_email_wizard" model="ir.actions.act_window">
+        <field name="name">Send SEO Preview</field>
+        <field name="res_model">seo.send.email.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_automated_seo_view"/>
+    </record>
+
+    <!-- Add Send Email button to the main view -->
+
     <!-- Form View -->
     <record id="automated_seo.view_form" model="ir.ui.view">
         <field name="name">automated_seo.view.form</field>
@@ -23,10 +33,14 @@
             <form string="SEO View Management">
                 <header>
                     <!-- Edit Button -->
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,done,publish"
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'done': 'grey'}"/>
+
 
                     <button name="action_edit_website_page"
                             type="object"
                             string="Edit"
+                            attrs="{'invisible': [('stage', 'not in', ['draft', 'in_progress'])]}"
                             class="btn oe_highlight"/>
 
 
@@ -36,29 +50,75 @@
                             string="Preview"
                             class="btn oe_highlight"/>
                     <!-- Compile Button -->
-
-                      <button name="action_custom_button"
+                    <button name="action_custom_button"
                             type="object"
                             string="Compile"
+                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"
                             class="btn oe_highlight"
                             context="{'view_name': name}"/>
 
+                     <button name="action_send_for_review"
+                            string="Send For preview"
+                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"
+                            type="object"
+                            class="btn btn-primary"/>
+
+                    <!-- Send Email Button -->
+<!--                    <button name="%(action_seo_send_email_wizard)d"-->
+<!--                            string="Send Email"-->
+<!--                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"-->
+<!--                            type="action"-->
+<!--                            class="btn btn-primary"/>-->
+
+                    <!-- Done Button (Only visible to owner in review stage) -->
+                    <button name="action_done_button"
+                            type="object"
+                            string="Done"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': [
+                            ('stage', '!=', 'in_review')]}"
+                            context="{'view_name': name}"/>
+
+                    <!-- Reject Button -->
+                    <button name="%(action_seo_send_email_wizard)d"
+                            type="action"
+                            string="Feedback"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': [('stage', '!=', 'in_review')]}"
+                            context="{'view_name': name}"/>
+
+                    <!-- Publish Button -->
+                    <button name="action_publish_button"
+                            type="object"
+                            string="Publish"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': [('stage', '!=', 'done')]}"
+                            context="{'view_name': name}"/>
+
+                     <button name="action_publish_button"
+                            type="object"
+                            string="Unpublish"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': [('stage', '!=', 'publish')]}"
+                            context="{'view_name': name}"/>
 
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <div class="o_col" style="width:250px">
-                                 <div class="o_row">
-                                   <h1><field name="name" required="1"/></h1>
+                                <div class="o_row">
+                                    <h1>
+                                        <field name="name" required="1"/>
+                                    </h1>
                                 </div>
 
-                                 <div class="o_row">
+                                <div class="o_row">
                                     Page Id
                                     <p style="margin-left:5px">:</p>
 
                                     <field name="unique_page_id" readonly="1"
-                                       attrs="{'invisible': [('id', '=', False)]}"/>
+                                           attrs="{'invisible': [('id', '=', False)]}"/>
                                 </div>
 
                                 <div class="o_row">
@@ -75,7 +135,7 @@
                         </group>
                         <group>
                             <div class="o_col" style="width:250px">
-                                 <div class="o_row">
+                                <div class="o_row">
                                     Created At
                                     <p style="margin-left:5px">:</p>
                                     <field name="create_date" style="margin-left:5px"/>
@@ -85,7 +145,7 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="write_date" style="margin-left:5px"/>
                                 </div>
-                                    <field name="is_owner" invisible="1"/>
+                                <field name="is_owner" invisible="1"/>
 
                                 <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
                                     Contributors
@@ -102,7 +162,7 @@
                     <notebook>
                         <page string="Page Versions"
                               attrs="{'invisible': [('version', 'in', [False, ''])]}">
-                            <field name="version" />
+                            <field name="version"/>
                         </page>
                         <page string="Compile Output"
                               attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
