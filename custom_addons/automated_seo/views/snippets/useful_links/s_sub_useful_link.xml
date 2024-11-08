@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_sub_useful_link" name="Sub Useful Link">
-        <section class="remove" style="margin: 0; padding: 0;">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed banner-post">
                 <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="Upgrading AngularJS to Angular: A Comprehensive Guide" class="banner-post-img" loading="lazy" width="352" height="226"/>
                 <div class="content">

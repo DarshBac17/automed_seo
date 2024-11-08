@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_single_form" name="Single Form">
 
-        <section class="bg-dark py-0">
+        <section class="bg-dark py-0 o_automated_seo_php_variable">
             <div class="container o_au_php_form_single-form">
                 <!--               <?php-->
                 <!--            $formType = 'tech-dark-form';-->

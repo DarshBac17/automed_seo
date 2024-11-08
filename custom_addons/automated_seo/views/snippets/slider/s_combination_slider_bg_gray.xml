@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_combination_slider_bg_gray" name="Combination Slider Gray">
 
-        <section class="o_automated_seo_snippet overflow-hidden bg-gray-light">
+        <section class="o_automated_seo_snippet overflow-hidden bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading </h2>

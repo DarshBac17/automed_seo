@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_useful_links_bg_gray" name="Useful Links Gray">
-         <section class="o_automated_seo_snippet bg-gray-light">
+         <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
              <div class="container">
                  <h2 class="text-center cont-padding">Header Header Header</h2>
                  <div class="grid gap-6 lg:grid-cols-3 md:grid-cols-2 [&amp;_h3]:text-white [&amp;_h3]:text-base o_sub_items_container">

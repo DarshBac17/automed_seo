@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_vertical_tab_bg_gray" name="Vertical Tab Gray">
-        <section class="tabs tabbibg-sec side-tab bg-gray-light">
+        <section class="tabs tabbibg-sec side-tab bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

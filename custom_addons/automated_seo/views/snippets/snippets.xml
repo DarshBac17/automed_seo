@@ -572,10 +572,16 @@
             </div>
 
         </xpath>
+
+        <xpath expr="//div[@id='snippet_options']/t" position="attributes">
+            <attribute name="t-call">automated_seo.snippet_options</attribute>
+        </xpath>
+
+
     </template>
 
 
-    <template id="s_sub_sections_options" inherit_id="website.snippet_options">
+    <template id="snippet_options" inherit_id="website.snippet_options" primary="True">
         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
                 <we-row string="Content">
@@ -584,11 +590,6 @@
                     </we-button>
                 </we-row>
             </div>
-        </xpath>
-    </template>
-
-    <template id="s_technical_stack_options" inherit_id="website.snippet_options">
-        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
             <div data-js="MultipleItems" data-selector=".tech-stack">
                 <we-row string="Content">
                     <we-button data-add-item="" data-item=".o_sub_items_container > tr:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
@@ -596,6 +597,12 @@
                     </we-button>
                 </we-row>
             </div>
+        </xpath>
+
+        <xpath expr="." position="inside">
+            <t t-call="automated_seo.s_php_variable_options">
+            </t>
+
         </xpath>
     </template>
 
@@ -605,6 +612,28 @@
 
     </template>
 
+
+<!--    <template id="s_php_variable_options">-->
+<!--        <div data-js="PhpVariable" data-selector=".o_automated_seo_php_variable">-->
+<!--            <we-select string="Select const var" data-state-to-first-class="true">-->
+<!--                <we-button data-select-class="float-start" title="Align Left">PHP_VAR_1</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align Center">PHP_VAR_2</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align Right">PHP_VAR_3</we-button>-->
+<!--                <we-button data-select-class="float-start" title="Align top">PHP_VAR_4</we-button>-->
+<!--                &lt;!&ndash;                                <we-button data-select-class="float-start">PHP_VAR_1</we-button>-->
+<!--                                <we-button data-select-class="">PHP_VAR_2</we-button>-->
+<!--                                <we-button data-select-class="">PHP_VAR_3</we-button>-->
+<!--                                <we-button data-select-class="float-end">PHP_VAR_3</we-button>&ndash;&gt;-->
+<!--            </we-select>-->
+
+<!--            &lt;!&ndash;            <we-select string="Select const var" data-state-to-first-class="true">-->
+<!--                                <we-button data-select-var="PHP_VAR_1" data-variable-class="php-var-1" >PHP_VAR_1</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_2" data-variable-class="php-var-2">PHP_VAR_2</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_3" data-variable-class="php-var-3">PHP_VAR_3</we-button>-->
+<!--                                    <we-button data-select-var="PHP_VAR_4" data-variable-class="php-var-4">PHP_VAR_4</we-button>-->
+<!--                            </we-select>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </template>-->
 
 
     <!--    <template id="test_module.offers_dynamic_snippet_options_template">
@@ -627,21 +656,21 @@
                 </t>
             </xpath>
         </template>-->
-    <!--    <template id="automated_seo.salesforce_offers_static_options" inherit_id="website.snippet_options">-->
-    <!--        <xpath expr="//div[@data-js='Box']" position="after">-->
-    <!--            <div data-selector=".s_offer">-->
-    <!--                <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">-->
-    <!--                    <we-select string="Image border">-->
-    <!--                        <we-button data-select-class="border-small">small</we-button>-->
-    <!--                        <we-button data-select-class="border-medium">medium</we-button>-->
-    <!--                        <we-button data-select-class="border-large">large</we-button>-->
-    <!--                        <we-button data-select-class="border-extra-large" data-name="so_width_100">extra large</we-button>-->
-    <!--                        <we-button data-select-class="border-extra-large" data-name="so_width_100">request.env.user.has_group('automated_seo.group_automated_seo_admins')</we-button>-->
-    <!--                    </we-select>-->
-    <!--                </t>-->
-    <!--            </div>-->
+    <!--    <template id="automated_seo.salesforce_offers_static_options" inherit_id="website.snippet_options">
+            <xpath expr="//div[@data-js='Box']" position="after">
+                <div data-selector=".s_offer">
+                    <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">
+                        <we-select string="Image border">
+                            <we-button data-select-class="border-small">small</we-button>
+                            <we-button data-select-class="border-medium">medium</we-button>
+                            <we-button data-select-class="border-large">large</we-button>
+                            <we-button data-select-class="border-extra-large" data-name="so_width_100">extra large</we-button>
+                            <we-button data-select-class="border-extra-large" data-name="so_width_100">request.env.user.has_group('automated_seo.group_automated_seo_admins')</we-button>
+                        </we-select>
+                    </t>
+                </div>
 
-    <!--        </xpath>-->
-    <!--    </template>-->
+            </xpath>
+        </template>-->
 
 </odoo>

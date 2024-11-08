@@ -71,12 +71,6 @@
     color: #dc3545; /* Red */
 }
 
-
-
-.php-var-1,
-.php-var-2,
-.php-var-3,
-.php-var-4 {
-    font-weight: bold;
-
+.o_text-php-var-info {
+    color: #17a2b8; /* Cyan */
 }

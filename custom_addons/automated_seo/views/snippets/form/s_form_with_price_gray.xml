@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_form_with_price_gray" name="Form with Price Gray">
-        <section class="bg-gray-light form-dark">
+        <section class="bg-gray-light form-dark o_automated_seo_php_variable">
 
             <div class="container">
                 <div class="text-center cont-padding">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </section>
-        <section class="pt-0 form-sec">
+        <section class="pt-0 form-sec o_automated_seo_php_variable">
             <div class="container o_au_php_form_center-form">
 <!--               <?php-->
 <!--            $formType = 'tech-dark-form';-->

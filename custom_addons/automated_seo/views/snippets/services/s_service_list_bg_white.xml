@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_service_list_bg_white" name="Service list White">
-        <section class="container grid md:grid-cols-2 gap-6">
+        <section class="container grid md:grid-cols-2 gap-6 o_automated_seo_php_variable">
             <div>
                 <div class="side-sticky">
                     <div class="md:cont-padding">

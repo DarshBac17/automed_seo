@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_banner_side_image_with_button" name="Banner Side Image with Button">
-        <section class="banner banner-post header-top banner-after">
+        <section class="banner banner-post header-top banner-after o_automated_seo_php_variable">
 
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"
                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"

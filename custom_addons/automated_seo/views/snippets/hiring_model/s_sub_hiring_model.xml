@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_sub_hiring_model" name="Sub Hiring Model">
-        <section class="remove" style="margin: 0; padding: 0;">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
             <div class="o_sub_card boxed bg-primary">
                 <div class="svg-icon mb-sm">
                     <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/remote-dev/icon-04.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/remote-dev/icon-04.svg" alt="Fixed Price" width="48" height="48" loading="lazy" class="mx-auto">-->

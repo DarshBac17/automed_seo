@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_php_variable_options">
+        <div data-js="PhpVariableTextSelector" data-selector=".o_automated_seo_php_variable">
+            <we-checkbox string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
+            <we-select string="PHP Variables" data-no-preview="true">
+                <we-button data-select-var="none" data-variable-class="" class="o_we_destroy_btn">None</we-button>
+                <we-button data-select-var="PHP_VAR_1" data-variable-class="o_au_php_var">PHP_VAR_1</we-button>
+                <we-button data-select-var="PHP_VAR_2" data-variable-class="o_au_php_var">PHP_VAR_2</we-button>
+                <we-button data-select-var="PHP_VAR_3" data-variable-class="o_au_php_var">PHP_VAR_3</we-button>
+                <we-button data-select-var="PHP_VAR_4" data-variable-class="o_au_php_var">PHP_VAR_4</we-button>
+            </we-select>
+        </div>
+    </template>
+</odoo>

@@ -3,7 +3,7 @@
 <odoo>
     <template id="s_steps_bg_gray" name="Steps Gray">
 
-        <section class="o_automated_seo_snippet bg-gray-light">
+        <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <h2 class="text-center cont-padding">Header Header Header Header</h2>
                 <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 o_sub_items_container">

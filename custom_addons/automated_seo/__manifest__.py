@@ -19,7 +19,6 @@
         "views/php_mapper_view.xml",
         "views/website/header.xml",
         "views/website/footer.xml",
-        'views/snippet_options.xml',
         "views/snippets/steps/s_steps_bg_white.xml",
         "views/snippets/steps/s_steps_bg_gray.xml",
         "views/snippets/steps/s_sub_step_white.xml",
@@ -149,6 +148,7 @@
 
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
+        'views/snippets/snippet_options.xml',
         'views/snippets/snippets.xml',
         # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",

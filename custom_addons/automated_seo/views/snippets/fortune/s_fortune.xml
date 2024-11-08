@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_fortune" name="Fortune">
-        <section class="fortune">
+        <section class="fortune o_automated_seo_php_variable">
             <section class="pb-0 bg-gray-light">
                 <div class="container">
                     <h2>Heading Heading</h2>

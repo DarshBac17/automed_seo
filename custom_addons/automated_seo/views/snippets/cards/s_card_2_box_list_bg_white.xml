@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_card_2_box_list_bg_white" name="2 Box List Card White">
-        <section class="o_automated_seo_snippet container">
+        <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
 
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
