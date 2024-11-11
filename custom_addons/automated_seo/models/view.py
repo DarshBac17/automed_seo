@@ -148,7 +148,7 @@ class View(models.Model):
 
     def action_send_for_review(self):
         self.write({'stage': 'in_review'})
-        self.message_post(body="Record sent for preview", message_type="comment")
+        self.message_post(body="Record sent for review", message_type="comment")
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
         self.stage = 'in_preview'

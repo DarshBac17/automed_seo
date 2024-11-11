@@ -58,7 +58,7 @@
                             context="{'view_name': name}"/>
 
                      <button name="action_send_for_review"
-                            string="Send For preview"
+                            string="Send For review"
                             attrs="{'invisible': [('stage', '!=', 'in_progress')]}"
                             type="object"
                             class="btn btn-primary"/>
