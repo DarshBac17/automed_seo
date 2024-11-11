@@ -11,6 +11,12 @@
                 <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
+                <field name="stage" widget="badge"
+                   decoration-info="stage == 'draft'"
+                   decoration-muted="stage == 'in_progress'"
+                   decoration-warning="stage == 'in_review'"
+                   decoration-primary="stage == 'done'"
+                   decoration-success="stage == 'publish'"/>
             </tree>
         </field>
     </record>
