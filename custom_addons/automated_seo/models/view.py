@@ -731,18 +731,18 @@ class View(models.Model):
         for strong_tag in section.find_all('strong'):
             span_tag = section.new_tag('span')
             span_tag["class"] = ['font-bold']
-            span_tag.contents = strong_tag.contents
+            span_tag.extend(strong_tag.contents)
             strong_tag.replace_with(span_tag)
 
         for em_tag in section.find_all('em'):
             i_tag = section.new_tag('i')
-            i_tag.contents = i_tag.contents
+            i_tag.extend(em_tag.contents)
             em_tag.replace_with(i_tag)
 
         for u_tag in section.find_all('u'):
             span_tag = section.new_tag('span')
             span_tag["class"] = ['text-underline']
-            span_tag.contents = u_tag.contents
+            span_tag.extend(u_tag.contents)
             u_tag.replace_with(span_tag)
 
         return str(section.prettify())
@@ -962,31 +962,4 @@ class WebsitePage(models.Model):
             record.view_id.page_id = seo_view.id
 
         return record
-
-
-
-if __name__ == '__main__':
-    html = """
-            <span class="text-underline">
-     <?php echo $PHP_VAR_3 ?>
-    </span>
-    """
-
-    soup = BeautifulSoup(html, 'html.parser')
-
-    all_tags = soup.find_all()
-
-    for tag in all_tags:
-        tag_string = str(tag)
-
-        pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
-
-        # Check if it's an empty tag
-        if re.match(pattern, tag_string):
-            tag.decompose()
-        pattern = f'<{tag.name}></{tag.name}>'
-        if re.match(pattern, tag_string):
-            tag.decompose()
-
-    print(soup.prettify())
 
