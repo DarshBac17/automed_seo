@@ -479,9 +479,9 @@ class View(models.Model):
                             self.env['automated_seo.snippet_mapper'].create({
                                 'snippet_id': new_data_snippet_id,
                                 'php_tag': snippet_record.get('php_tag'),
-                                    'element_class': new_php_tag_class,
+                                'element_class': new_php_tag_class,
                                 'image_name': snippet_record.get('image_name'),
-                            'version_id':version.id,
+                                'version_id':version.id,
                                 'page': page.id
 
                             })
@@ -731,18 +731,18 @@ class View(models.Model):
         for strong_tag in section.find_all('strong'):
             span_tag = section.new_tag('span')
             span_tag["class"] = ['font-bold']
-            span_tag.extend(strong_tag.contents)
+            span_tag.contents = strong_tag.contents
             strong_tag.replace_with(span_tag)
 
         for em_tag in section.find_all('em'):
             i_tag = section.new_tag('i')
-            i_tag.extend(em_tag.contents)
+            i_tag.contents = i_tag.contents
             em_tag.replace_with(i_tag)
 
         for u_tag in section.find_all('u'):
             span_tag = section.new_tag('span')
             span_tag["class"] = ['text-underline']
-            span_tag.extend(u_tag.contents)
+            span_tag.contents = u_tag.contents
             u_tag.replace_with(span_tag)
 
         return str(section.prettify())
@@ -795,7 +795,7 @@ class View(models.Model):
             # for tag in soup.find_all(class_=class_to_remove):
             #     # Replace the tag with its contents
             #     tag.replace_with(*tag.contents)
-                # tag.replace_with( tag.decode_contents())
+            # tag.replace_with( tag.decode_contents())
 
 
         for tag in soup.find_all(True):
@@ -962,4 +962,31 @@ class WebsitePage(models.Model):
             record.view_id.page_id = seo_view.id
 
         return record
+
+
+
+if __name__ == '__main__':
+    html = """
+            <span class="text-underline">
+     <?php echo $PHP_VAR_3 ?>
+    </span>
+    """
+
+    soup = BeautifulSoup(html, 'html.parser')
+
+    all_tags = soup.find_all()
+
+    for tag in all_tags:
+        tag_string = str(tag)
+
+        pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
+
+        # Check if it's an empty tag
+        if re.match(pattern, tag_string):
+            tag.decompose()
+        pattern = f'<{tag.name}></{tag.name}>'
+        if re.match(pattern, tag_string):
+            tag.decompose()
+
+    print(soup.prettify())
 
