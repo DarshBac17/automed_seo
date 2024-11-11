@@ -740,7 +740,7 @@ class View(models.Model):
             em_tag.replace_with(i_tag)
 
         for u_tag in section.find_all('u'):
-            span_tag = section.new_tag('u')
+            span_tag = section.new_tag('span')
             span_tag["class"] = ['text-underline']
             span_tag.extend(u_tag.contents)
             u_tag.replace_with(span_tag)
