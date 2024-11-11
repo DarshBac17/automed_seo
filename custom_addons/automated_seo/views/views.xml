@@ -95,7 +95,7 @@
                             attrs="{'invisible': [('stage', '!=', 'done')]}"
                             context="{'view_name': name}"/>
 
-                     <button name="action_publish_button"
+                     <button name="action_unpublish_button"
                             type="object"
                             string="Unpublish"
                             class="btn oe_highlight"

@@ -163,7 +163,11 @@ class View(models.Model):
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
-        self.message_post(body="Record approved", message_type="comment")
+        self.message_post(body="Record publish", message_type="comment")
+
+    def action_unpublish_button(self):
+        self.write({'stage': 'in_progress'})
+        self.message_post(body="Record in progress", message_type="comment")
 
     def action_reject(self):
         self.write({'stage': 'in_progress'})
