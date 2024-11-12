@@ -53,6 +53,7 @@
         <field name="name">Version</field>
         <field name="res_model">website.page.version</field>
         <field name="view_mode">form</field>
+        <field name="target">new</field>
     </record>
     <!-- Add Send Email button to the main view -->
 
