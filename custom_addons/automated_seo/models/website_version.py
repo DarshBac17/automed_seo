@@ -25,7 +25,8 @@ class WebsitePageVersion(models.Model):
     def action_version(self):
 
         id =self.env.context.get('id', 'Unknown')
-        current_version  = self.env['website.page.version'].search([('status','=',True)],limit=1)
+        view_id = self.env.context.get('view_id')
+        current_version  = self.env['website.page.version'].search(['&',('status','=',True),('view_id','=',view_id)],limit=1)
         if current_version:
             current_version.status = False
         active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
