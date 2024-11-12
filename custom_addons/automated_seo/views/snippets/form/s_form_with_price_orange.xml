@@ -14,7 +14,7 @@
                     <a href="#form">
                         <div class="shadow-form bg-white">
                             <div class="boxed">
-                                <p class="text-h1 text-primary font-bold mb-0 hourly-price"><!--<?php echo constant("ANGULAR_USA_HOURLY") ?>-->
+                                <p class="text-h1 text-primary font-bold mb-0"><!--<?php echo constant("ANGULAR_USA_HOURLY") ?>-->
                                     $100
                                 </p>
                                 <p class="font-bold text-dark">Hourly (USD)</p>
@@ -36,7 +36,7 @@
                                      width="164" class="mx-auto" loading="lazy"/>
                             </div>
                             <div class="boxed">
-                                <p class="text-h1 text-primary font-bold mb-0 monthly-price"> <!--<?php echo constant("ANGULAR_USA_MONTHLY") ?>-->
+                                <p class="text-h1 text-primary font-bold mb-0"> <!--<?php echo constant("ANGULAR_USA_MONTHLY") ?>-->
                                     $2000
                                 </p>
                                 <p class="font-bold text-dark">Monthly (USD)</p>
@@ -52,7 +52,7 @@
                     <a href="#form">
                         <div class="shadow-form bg-white">
                             <div class="boxed">
-                                <p class="text-h1 text-primary font-bold mb-0 no-developer"><!--<?php echo constant("ANGULAR_USA_MONTHLY_5") ?>-->
+                                <p class="text-h1 text-primary font-bold mb-0"><!--<?php echo constant("ANGULAR_USA_MONTHLY_5") ?>-->
                                     $1000
                                 </p>
                                 <p class="font-bold text-dark">Yearly (USD)</p>
