@@ -431,7 +431,6 @@ class View(models.Model):
                 section['data-snippet'] = new_data_snippet_id
 
 
-
             for section in sections:
                 snippet_id = section.get('data-snippet')
 
@@ -440,7 +439,7 @@ class View(models.Model):
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
-                    php_tags = soup.find_all(class_=php_class)
+                    php_tags = section.find_all(class_=php_class)
                     if len(php_tags)!=1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
@@ -679,17 +678,24 @@ class View(models.Model):
         for section in sections:
             snippet_ids.append(section.get('data-snippet'))
 
-        for section in sections:
 
+        for section in sections:
+            print(section)
+            print("==============================")
             updated_section = BeautifulSoup(self.replace_php_var_tag(str(section.prettify())),'html.parser')
+            print(updated_section)
+            print("==============================")
+            section.replace_with(updated_section)
+            print(section)
+
             snippet_records = self.env['automated_seo.snippet_mapper'].search(
-                [('snippet_id', '=', updated_section.find_all('section', {'data-snippet': True})[0].get('data-snippet'))])
+                [('snippet_id', '=', section.get('data-snippet'))])
 
             if snippet_records:
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
                     element_class = element.get('element_class')
-                    tags = updated_section.find_all(class_=element_class)
+                    tags = soup.find_all(class_=element_class)
                     for tag in tags:
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if element_class.startswith("o_au_php_form_"):
@@ -701,14 +707,17 @@ class View(models.Model):
                             php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
                             old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
-            section.replace_with(updated_section)
+            # section.replace_with(updated_section)
 
 
         for tag in soup.find_all('t'):
             tag.unwrap()
         wrap_tag = soup.find(id="wrap")
         wrap_tag.unwrap()
-
+        sections = soup.find_all(class_="ou_section")
+        for section in sections:
+        # if section:
+            section.unwrap()
 
         return str(soup)
 
