@@ -12,7 +12,7 @@
             <div class="grid grid-cols-subgrid gap-6 sm:grid-cols-2 md:grid-cols-3 md:[&amp;>div:not(:last-child)]:border-r md:[&amp;>div:not(:last-child)]:pr-2">
                 <div>
 <!--                    <p class="text-h3 font-bold text-primary mb-0"><?php echo $companyYears ?> Years</p>-->
-                    <p class="text-h3 font-bold text-primary mb-0 companyYears">10 Years</p>
+                    <p class="text-h3 font-bold text-primary mb-0">10 Years</p>
                     <p>Text Text Text</p>
                 </div>
                 <div>
