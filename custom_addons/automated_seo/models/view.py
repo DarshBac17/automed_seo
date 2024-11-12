@@ -52,9 +52,18 @@ class View(models.Model):
         string='Is Owner',
         store=False
     )
+    publish = fields.Boolean('Publish', default=False)
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
+
+    # @api.depends('version.publish')
+    # def _compute_publish_status(self):
+    #     for record in self:
+    #         active_version = record.version.filtered(lambda r: r.status == True)[:1]
+    #         record.publish = active_version.publish if active_version else False
 
     @api.depends('create_uid')
     def _compute_is_owner(self):
@@ -147,6 +156,7 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
+        self.action_custom_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
     def action_set_to_in_preview(self):
@@ -350,7 +360,9 @@ class View(models.Model):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
-        view_name = self.env.context.get('view_name', 'Unknown')
+        view_name = self.env.context.get('view_name')
+        if view_name == None:
+            view_name = self.name
         self.update_snippet_ids(view_name)
         html_parser  = self.handle_img_change(view_name=view_name)
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
@@ -363,6 +375,8 @@ class View(models.Model):
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = html.unescape(html_parser)
+            html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
+
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.html"
