@@ -52,9 +52,18 @@ class View(models.Model):
         string='Is Owner',
         store=False
     )
+    publish = fields.Boolean('Publish', default=False)
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
+
+    # @api.depends('version.publish')
+    # def _compute_publish_status(self):
+    #     for record in self:
+    #         active_version = record.version.filtered(lambda r: r.status == True)[:1]
+    #         record.publish = active_version.publish if active_version else False
 
     @api.depends('create_uid')
     def _compute_is_owner(self):

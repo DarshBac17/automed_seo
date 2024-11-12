@@ -12,10 +12,10 @@
                 <field name="create_date"/>
                 <field name="write_date"/>
                 <field name="stage" widget="badge"
-                   decoration-muted="stage == 'draft'"
-                   decoration-info="stage == 'in_progress'"
-                   decoration-warning="stage == 'in_review'"
-                   decoration-success="stage in ('done', 'publish')"/>
+                       decoration-muted="stage == 'draft'"
+                       decoration-info="stage == 'in_progress'"
+                       decoration-warning="stage == 'in_review'"
+                       decoration-success="stage in ('done', 'publish')"/>
             </tree>
         </field>
     </record>
@@ -27,7 +27,33 @@
         <field name="target">new</field>
         <field name="binding_model_id" ref="model_automated_seo_view"/>
     </record>
+    <record id="automated_seo_version_form" model="ir.ui.view">
+        <field name="name">automated_seo.version.form</field>
+        <field name="model">website.page.version</field>
+        <field name="arch" type="xml">
+            <form string="Version">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="view_id" invisible="1"/>
 
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button string="save" name="action_create_version" type="object" class="btn-primary"
+                            context="{'view_id':view_id,'description':description,'name':name}"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="automated_seo_version" model="ir.actions.act_window">
+        <field name="name">Version</field>
+        <field name="res_model">website.page.version</field>
+        <field name="view_mode">form</field>
+    </record>
     <!-- Add Send Email button to the main view -->
 
     <!-- Form View -->
@@ -41,12 +67,13 @@
                     <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,done,publish"
                            statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'done': 'grey'}"/>
 
+                    <field name="publish" invisible="1"/>
 
-                    <button name="action_edit_website_page"
-                            type="object"
-                            string="Edit"
-                            attrs="{'invisible': [('stage', 'not in', ['draft', 'in_progress'])]}"
-                            class="btn oe_highlight"/>
+                        <button name="action_edit_website_page"
+                                type="object"
+                                string="Edit"
+                                  attrs="{'invisible': ['|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress'])]}"
+                                class="btn oe_highlight"/>
 
 
                     <!-- Preview Button -->
@@ -58,29 +85,29 @@
                     <button name="action_custom_button"
                             type="object"
                             string="Compile"
-                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"
                             class="btn oe_highlight"
                             context="{'view_name': name}"/>
 
-                     <button name="action_send_for_review"
+                    <button name="action_send_for_review"
                             string="Send For review"
-                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"
                             type="object"
                             class="btn btn-primary"/>
 
                     <!-- Send Email Button -->
-<!--                    <button name="%(action_seo_send_email_wizard)d"-->
-<!--                            string="Send Email"-->
-<!--                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"-->
-<!--                            type="action"-->
-<!--                            class="btn btn-primary"/>-->
+                    <!--                    <button name="%(action_seo_send_email_wizard)d"-->
+                    <!--                            string="Send Email"-->
+                    <!--                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"-->
+                    <!--                            type="action"-->
+                    <!--                            class="btn btn-primary"/>-->
 
                     <!-- Done Button (Only visible to owner in review stage) -->
                     <button name="action_done_button"
                             type="object"
                             string="Done"
                             class="btn oe_highlight"
-                            attrs="{'invisible': [
+                            attrs="{'invisible': ['|', ('publish', '=', True),
                             ('stage', '!=', 'in_review')]}"
                             context="{'view_name': name}"/>
 
@@ -89,7 +116,7 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': [('stage', '!=', 'in_review')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review')]}"
                             context="{'view_name': name}"/>
 
                     <!-- Publish Button -->
@@ -97,15 +124,18 @@
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': [('stage', '!=', 'done')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'done')]}"
                             context="{'view_name': name}"/>
 
-                     <button name="action_unpublish_button"
-                            type="object"
+                    <button name="%(automated_seo_version)d"
+                            type="action"
                             string="Unpublish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': [('stage', '!=', 'publish')]}"
-                            context="{'view_name': name}"/>
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'publish')]}"
+                            context="{
+                            'default_view_id': id,
+                            'form_view_ref': 'automated_seo.automated_seo_version_form'
+                        }"/>
 
                 </header>
                 <sheet>

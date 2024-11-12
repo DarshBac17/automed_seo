@@ -15,8 +15,7 @@
         "views/views.xml",
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
-        # "views/manage_users.xml",
-        'views/templates.xml',
+        # 'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_mapper_view.xml",
@@ -196,8 +195,8 @@
         ],
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
-            'automated_seo/static/src/js/website_version.js',
-            'automated_seo/static/src/js/website_save.js',
+            # 'automated_seo/static/src/js/website_version.js',
+            # 'automated_seo/static/src/js/website_save.js',
             'automated_seo/static/src/js/snippet_options.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
