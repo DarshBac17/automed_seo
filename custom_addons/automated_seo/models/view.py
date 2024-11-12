@@ -682,10 +682,11 @@ class View(models.Model):
         for section in sections:
             print(section)
             print("==============================")
-            updated_section = BeautifulSoup(self.replace_php_var_tag(str(section.prettify())),'html.parser')
+            updated_section = self.replace_php_var_tag(section)
             print(updated_section)
             print("==============================")
-            section.replace_with(updated_section)
+            section = updated_section
+            # section.replace_with(updated_section)
             print(section)
 
             snippet_records = self.env['automated_seo.snippet_mapper'].search(
@@ -695,7 +696,7 @@ class View(models.Model):
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
                     element_class = element.get('element_class')
-                    tags = soup.find_all(class_=element_class)
+                    tags = section.find_all(class_=element_class)
                     for tag in tags:
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if element_class.startswith("o_au_php_form_"):
@@ -707,6 +708,7 @@ class View(models.Model):
                             php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
                             old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
+                        print(tag)
             # section.replace_with(updated_section)
 
 
@@ -736,7 +738,8 @@ class View(models.Model):
 
     def replace_php_var_tag(self, section):
 
-        updated_section = BeautifulSoup(self.replace_strong_em_u_tag(section), "html.parser")
+        updated_section = self.replace_strong_em_u_tag(section)
+        soup = BeautifulSoup(str(section.prettify()), "html.parser")
 
         for tag in updated_section.find_all(class_="o_au_php_var"):
 
@@ -751,7 +754,7 @@ class View(models.Model):
 
                 for i_tag in tag.find_all("i"):
                     i_tag.unwrap()
-                    tag.wrap(updated_section.new_tag('i'))
+                    tag.wrap(soup.new_tag('i'))
                     break
 
                 if "font-bold" in tag["class"] or "text-underline" in tag["class"]:
@@ -764,29 +767,29 @@ class View(models.Model):
                     php_tag = BeautifulSoup(f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>", 'html.parser')
                     tag.replace_with(php_tag)
 
-        return str(updated_section.prettify())
+        return updated_section
 
 
     def replace_strong_em_u_tag(self, section):
-        section = BeautifulSoup(section, "html.parser")
+        soup = BeautifulSoup(str(section.prettify()), "html.parser")
         for strong_tag in section.find_all('strong'):
-            span_tag = section.new_tag('span')
+            span_tag = soup.new_tag('span')
             span_tag["class"] = ['font-bold']
             span_tag.extend(strong_tag.contents)
             strong_tag.replace_with(span_tag)
 
         for em_tag in section.find_all('em'):
-            i_tag = section.new_tag('i')
+            i_tag = soup.new_tag('i')
             i_tag.extend(em_tag.contents)
             em_tag.replace_with(i_tag)
 
         for u_tag in section.find_all('u'):
-            span_tag = section.new_tag('span')
+            span_tag = soup.new_tag('span')
             span_tag["class"] = ['text-underline']
             span_tag.extend(u_tag.contents)
             u_tag.replace_with(span_tag)
 
-        return str(section.prettify())
+        return section
 
 
 
