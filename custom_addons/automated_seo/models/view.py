@@ -693,6 +693,11 @@ class View(models.Model):
                     for tag in tags:
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if element_class.startswith("o_au_php_form_"):
+                            contact_btn = tag.find('button', attrs={'name': 'contactBtn'})
+                            if contact_btn:
+                                if not len(contact_btn.find_all(
+                                        class_=lambda x: x and x.startswith("o_au_php_var_tag_"))) > 0:
+                                    contact_btn["class"].append("o_au_php_var_tag_btn_name")
                             php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
                             old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
@@ -706,6 +711,18 @@ class View(models.Model):
 
 
         return str(soup)
+
+
+    def replace_php_var_value(self,old_tag_soup,php_var_tags):
+
+        for sub_tag in php_var_tags:
+            tag_content = str(sub_tag.get_text(strip=True)).strip()
+            var_name = next((cls for cls in sub_tag['class'] if cls.startswith("o_au_php_var_tag_")), None)[len("o_au_php_var_tag_"):]
+            if var_name:
+                pattern = rf'\${var_name}\s*=\s*(?:".*?"|null);'
+                new_php_var = f'${var_name} = "{tag_content}";'
+                old_tag_soup = re.sub(pattern, new_php_var, old_tag_soup)
+        return BeautifulSoup(old_tag_soup, 'html.parser').prettify()
 
 
     def replace_php_var_tag(self, section):
@@ -763,15 +780,6 @@ class View(models.Model):
         return str(section.prettify())
 
 
-    def replace_php_var_value(self,old_tag_soup,php_var_tags):
-        for sub_tag in php_var_tags:
-            tag_content = str(sub_tag.get_text(strip=True)).strip()
-            var_name = next((cls for cls in sub_tag['class'] if cls.startswith("o_au_php_var_tag_")), None)[len("o_au_php_var_tag_"):]
-            if var_name:
-                pattern = rf'\${var_name}\s*=\s*".*?";'
-                new_php_var = f'${var_name} = "{tag_content}";'
-                old_tag_soup = re.sub(pattern, new_php_var, old_tag_soup)
-        return BeautifulSoup(old_tag_soup, 'html.parser').prettify()
 
 
     def remove_odoo_classes_from_tag(self, html_parser):

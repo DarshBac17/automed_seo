@@ -42,7 +42,7 @@
                                     HIRE <?php echo $bannerDevName ?> Developer NOW
                                 </button>
                                 <?php endif ?>-->
-                                <button class="btn btn-primary h-full contactBtn" name="contactBtn">Hire <span class="o_au_php_var_tag_bannerDevName o_au_php_tag_val_color"># Change Text #</span>
+                                <button class="btn btn-primary h-full" name="contactBtn">Hire <span class="o_au_php_var_tag_bannerDevName o_au_php_tag_val_color"># Change Text #</span>
                                     <!--HIRE &lt;!&ndash;<?php echo $bannerDevName ?>&ndash;&gt; Developer NOW--> Developer NOW
                                 </button>
                             </div>
