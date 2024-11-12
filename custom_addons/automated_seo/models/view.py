@@ -666,15 +666,16 @@ class View(models.Model):
             snippet_ids.append(section.get('data-snippet'))
 
         for section in sections:
+
             updated_section = BeautifulSoup(self.replace_php_var_tag(str(section.prettify())),'html.parser')
             snippet_records = self.env['automated_seo.snippet_mapper'].search(
-                [('snippet_id', '=', updated_section.get('data-snippet'))])
+                [('snippet_id', '=', updated_section.find_all('section', {'data-snippet': True})[0].get('data-snippet'))])
 
             if snippet_records:
                 for snippet_record in snippet_records:
                     element = snippet_record.read(['element_class', 'php_tag', 'image_name'])[0]
                     element_class = element.get('element_class')
-                    tags = soup.find_all(class_=element_class)
+                    tags = updated_section.find_all(class_=element_class)
                     for tag in tags:
                         old_tag_soup = BeautifulSoup(element.get('php_tag'), 'html.parser')
                         if element_class.startswith("o_au_php_form_"):
