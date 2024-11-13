@@ -12,6 +12,7 @@ import random
 from PIL import Image
 from pathlib import Path
 import mimetypes
+from html import escape, unescape
 
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
@@ -53,12 +54,14 @@ class View(models.Model):
         store=False
     )
     publish = fields.Boolean('Publish', default=False)
+    upload_file = fields.Binary(string="Upload File", attachment=True)
+    upload_filename = fields.Char(string="Upload Filename")
 
-    _sql_constraints = [
-        ('unique_name', 'unique(name)', 'The name must be unique!')
-    ]
-
-
+    @api.onchange('upload_file')
+    def _onchange_upload_file(self):
+        if self.upload_file:
+            if self.env.context.get('upload_filename'):
+                self.upload_filename = self.env.context.get('upload_filename')
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -215,6 +218,78 @@ class View(models.Model):
             'url': f'{base_url}?enable_editor=1',
             'target': 'self',
         }
+
+    def action_parse_uploaded_file(self):
+        file_content = base64.b64decode(self.upload_file)
+        file_text = file_content.decode('utf-8')
+        soup = BeautifulSoup(self.convert_php_tags(content=file_text), 'html.parser')
+        print(soup.prettify())
+
+    def convert_php_tags(self,content):
+        # Parse the content with BeautifulSoup
+
+        # Create a BeautifulSoup object
+        soup = BeautifulSoup(content, 'html.parser')
+        base_url_php = "https://assets.bacancytechnology.com/"
+        for img in soup.select('img'):
+            url = img.get('src')
+
+            img['src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
+            img['data-src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
+
+        atags = soup.find_all('a')
+        for atag in atags:
+            print(atag)
+        # text = unescape(soup.prettify())
+        #
+        # def process_attributes(tag):
+        #     """Process PHP tags in tag attributes"""
+        #     for attr in tag.attrs:
+        #         if isinstance(tag[attr], str) and '<?php' in tag[attr]:
+        #             tag[attr] = re.sub(
+        #                 r'(<\?php.*?\?>)',
+        #                 lambda m: escape(m.group(0)),
+        #                 tag[attr]
+        #             )
+        #
+        # # Process all tags
+        # for tag in soup.find_all(True):  # True finds all tags
+        #     # Process attributes
+        #     process_attributes(tag)
+        #
+        #     # Process direct text content
+        #     if tag.string and '<?php' in tag.string:
+        #         tag.string = re.sub(
+        #             r'(<\?php.*?\?>)',
+        #             lambda m: escape(m.group(0)),
+        #             tag.string
+        #         )
+        #
+        # # Convert back to string
+        # processed_html = str(soup)
+        #
+        # # Find all top-level PHP tags (outside any HTML tags)
+        # parts = []
+        # last_end = 0
+        #
+        # # Pattern to match top-level PHP tags
+        # pattern = r'<\?php.*?\?>'
+        #
+        # for match in re.finditer(pattern, text):
+        #     start, end = match.span()
+        #     # Check if this PHP tag is in the original unprocessed text and not inside any HTML tag
+        #     if all(c not in text[last_end:start].lower() for c in ['<img', '<div', '<span', '<p', '<a']):
+        #         # Add the text before this PHP tag
+        #         parts.append(processed_html[last_end:start])
+        #         # Add the original unescaped PHP tag
+        #         parts.append(match.group(0))
+        #         last_end = end
+        #
+        # # Add the remaining text
+        # parts.append(processed_html[last_end:])
+        #
+        return soup.prettify()
+
 
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
