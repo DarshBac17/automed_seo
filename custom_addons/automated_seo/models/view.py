@@ -680,15 +680,8 @@ class View(models.Model):
 
 
         for section in sections:
-            print(section)
-            print("==============================")
             updated_section = self.replace_php_var_tag(section)
-            print(updated_section)
-            print("==============================")
             section = updated_section
-            # section.replace_with(updated_section)
-            print(section)
-
             snippet_records = self.env['automated_seo.snippet_mapper'].search(
                 [('snippet_id', '=', section.get('data-snippet'))])
 
@@ -708,8 +701,6 @@ class View(models.Model):
                             php_var_tags = tag.find_all(class_=lambda x: x and x.startswith("o_au_php_var_tag_"))
                             old_tag_soup = self.replace_php_var_value(str(old_tag_soup),php_var_tags)
                         tag.replace_with(old_tag_soup)
-                        print(tag)
-            # section.replace_with(updated_section)
 
 
         for tag in soup.find_all('t'):
