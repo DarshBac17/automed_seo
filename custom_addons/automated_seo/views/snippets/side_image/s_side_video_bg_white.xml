@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_side_video_bg_white" name="Side video White">
+    <template id="s_side_video_bg_white" name="Side Video White">
 
-        <section class="container">
+        <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
             <div class="cont-padding">
                      <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
@@ -29,21 +29,21 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-h4 small-heading">Heading Heading</h3>
-                        <div class="grid grid-cols-subgrid sm:grid-cols-2 gap-6">
-                            <div class="boxed bg-white">
+                        <h3 class="text-h4 small-heading">Heading Heading Heading</h3>
+                        <div class="grid grid-cols-subgrid sm:grid-cols-2 gap-6 o_sub_items_container">
+                            <div class="boxed bg-gray-light o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">100%</h4>
                                 <p>Text Text Text</p>
                             </div>
-                            <div class="boxed bg-white">
+                            <div class="boxed bg-gray-light o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">50%</h4>
                                 <p>Text Text Text</p>
                             </div>
-                            <div class="boxed bg-white">
+                            <div class="boxed bg-gray-light o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">99%</h4>
                                 <p>Text Text Text</p>
                             </div>
-                            <div class="boxed bg-white">
+                            <div class="boxed bg-gray-light o_replace_section_div">
                                 <h4 class="text-h5 mb-0 text-dark">100%</h4>
                                 <p>Text Text Text</p>
                             </div>

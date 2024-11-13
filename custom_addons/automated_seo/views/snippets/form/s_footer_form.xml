@@ -2,8 +2,8 @@
 <odoo>
     <template id="s_footer_form" name="Footer Form">
 
-        <section class="bg-gray-light" id="footer-form-id">
-            <div class="footer-form-condition footer-form">
+        <section class="bg-gray-light o_automated_seo_php_variable" id="footer-form-id">
+            <div class="footer-form-condition o_au_php_form_footer-form">
                 <!--<?php
                         $formType = 'footer';
                         include("tailwind/template/form.php");

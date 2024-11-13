@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_combination_slider_bg_white" name="Combination slider bg white">
-        <section class="overflow-hidden">
-        <div class="container">
-            <div class="cont-padding text-center">
-                <h2>Heading Heading Heading Heading Heading Heading Heading </h2>
-                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description </p>
-            </div>
-            <div class="center-slide">
-                    <div class="item bg-gray-light boxed">
+    <template id="s_combination_slider_bg_white" name="Combination Slider BG White">
+        <section class="o_automated_seo_snippet overflow-hidden o_automated_seo_php_variable">
+            <div class="container">
+                <div class="cont-padding text-center">
+                    <h2>Heading Heading Heading Heading Heading Heading Heading </h2>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description  Description Description </p>
+                </div>
+                <div class="center-slide o_sub_items_container">
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon angular" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon angular" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/aws.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/aws.svg" alt="aws icon" loading="lazy" height="60" width="60"/>-->
-                            <img src="automated_seo/static/src/img/aws.svg" data-src="automated_seo/static/src/img/aws.svg" alt="aws icon" loading="lazy" height="60" width="60" class="aws"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg" alt="aws icon" loading="lazy" height="60" width="60" class="aws"/>
                         </div>
-                        <h3 class="text-h4 small-heading">Title Title Title Title Title Title</h3>
+                        <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/docker.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/docker.svg" alt="docker icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/docker.svg" data-src="automated_seo/static/src/img/docker.svg" alt="docker icon" loading="lazy" height="60" width="60" class="docker"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/docker.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/docker.svg" alt="docker icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/ror.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/ror.svg" alt="ror icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/ror.svg" data-src="automated_seo/static/src/img/ror.svg" alt="ror icon" loading="lazy" height="60" width="60" class="ror"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg" alt="ror icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/dotnet.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/dotnet.svg" data-src="automated_seo/static/src/img/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60" class="dotnet"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg" alt="dotnet icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/node.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/node.svg" alt="node icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/node.svg" data-src="automated_seo/static/src/img/node.svg" alt="node icon" loading="lazy" height="60" width="60" class="node"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/node.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/node.svg" alt="node icon" loading="lazy" height="60" width="60" />
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/laravel.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/laravel.svg" data-src="automated_seo/static/src/img/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60" class="laravel"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg" alt="laravel icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/java.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/java.svg" alt="java icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/java.svg" data-src="automated_seo/static/src/img/java.svg" alt="java icon" loading="lazy" height="60" width="60" class="java"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg" alt="java icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    </div>
-                    <div class="item bg-gray-light boxed">
+                    </section>
+                    <section class="item bg-gray-light boxed o_replace_section_div">
                         <div class="flex svg-icon mb-sm">
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/angular.svg" data-src="automated_seo/static/src/img/angular.svg" alt="angular icon" class="mr-sm angular" loading="lazy" height="60" width="60"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg" alt="angular icon" class="mr-sm" loading="lazy" height="60" width="60"/>
                             <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/golang.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/golang.svg" alt="golang icon" loading="lazy" height="60" width="60">-->
-                            <img src="automated_seo/static/src/img/golang.svg" data-src="automated_seo/static/src/img/golang.svg" alt="golang icon" loading="lazy" height="60" width="60" class="golang"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg" alt="golang icon" loading="lazy" height="60" width="60"/>
                         </div>
                         <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description
                         </p>
-                    </div>
+                    </section>
                 </div>
-        </div>
-    </section>
+            </div>
+        </section>
 
     </template>
 </odoo>

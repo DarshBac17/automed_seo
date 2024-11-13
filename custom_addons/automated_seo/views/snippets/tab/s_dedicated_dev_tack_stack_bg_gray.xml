@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--    TODO add php tag-->
-    <template id="s_dedicated_dev_tack_stack_bg_gray" name="Dedicated Dev tech stack Gray">
 
-        <section class="bg-gray-light tabs tabbibg-sec hover-box">
+    <template id="s_dedicated_dev_tack_stack_bg_gray" name="Dedicated Dev Tech Stack Gray">
+
+        <section class="bg-gray-light tabs tabbibg-sec hover-box o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading

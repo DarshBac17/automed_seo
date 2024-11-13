@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_with_button_bg_white" name="Card with Button white">
-        <section class="container text-center">
+    <template id="s_card_bg_white" name="Card White">
+        <section class="o_automated_seo_snippet container text-center o_automated_seo_php_variable">
             <div class="cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading</h2>
                 <p>Description Description Description Description Description Description Description Description
                     Description Description Description
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="boxed bg-gray-light">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 o_sub_items_container">
+                <section class="boxed bg-gray-light o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
 
                     <h3 class="text-h4 small-heading text-primary">Heading Heading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description
                         Description Description Description Description Description
                     </p>
-                </div>
+                </section>
             </div>
             <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button Text Button Text</a>
+                <a href="#form" class="btn btn-outline-primary">Button Text</a>
             </div>
         </section>
     </template>

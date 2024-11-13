@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_service_sub_tab_gray" name="Service Sub Tab Gray">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <div class="accordion-item accordian-tab bg-gray-light">
+                <div class="faq-heading">
+                    <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
+                </div>
+                <div class="accordian-text">
+                    <p>subtitle subtitle subtitle subtitle subtitle subtitle subtitle </p>
+                    <ul>
+                        <li>descriptions descriptions descriptions descriptions descriptions</li>
+                        <li>descriptions descriptions descriptions descriptions descriptions</li>
+                        <li>descriptions descriptions descriptions descriptions descriptions</li>
+                        <li>descriptions descriptions descriptions descriptions descriptions</li>
+                        <li>descriptions descriptions descriptions descriptions descriptions</li>
+
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </template>
+</odoo>

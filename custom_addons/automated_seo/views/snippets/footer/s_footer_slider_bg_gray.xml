@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_footer_slider_bg_gray" name="Footer slider Gray">
-        <section class="bg-gray-light ">
+    <template id="s_footer_slider_bg_gray" name="Footer Slider Gray">
+        <section class="bg-gray-light o_automated_seo_php_variable">
             <div class="container footer-slider">
                 <div class="footer-slider slick-slider slick-dotted">
                     <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
@@ -20,7 +20,7 @@
                                     <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                 a                   </div>-->
                                     <div class="top-tier">
-                                        <img src="/automated_seo/static/src/img/insight-slide-1.jpg"
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-1.jpg"
                                              alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
@@ -47,7 +47,7 @@
                                     <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                                    </div>-->
                                     <div class="time-zone">
-                                        <img src="/automated_seo/static/src/img/insight-slide-2.jpg"
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-2.jpg"
                                              alt="Time Zone Aligned" title="Time Zone Aligned" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>
@@ -73,7 +73,7 @@
                                     <!--                                             width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                                    </div>-->
                                     <div class="experience-team">
-                                        <img src="/automated_seo/static/src/img/insight-slide-3.jpg"
+                                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-3.jpg"
                                              alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"
                                              width="365" class="m-auto w-[max(365px,4.932vw)]"/>
                                     </div>

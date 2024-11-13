@@ -558,12 +558,12 @@ p:not(:last-child, .mb-0) {
 }
 
 .hover-box .boxed:hover {
-    --tw-bg-opacity: 1;
+    --tw-bg-opacity: 1!important;
     background-color: rgb(245 130 32/var(--tw-bg-opacity))
 }
 
 .hover-box .boxed:hover>* {
-    --tw-text-opacity: 1;
+    --tw-text-opacity: 1!important;
     color: rgb(255 255 255/var(--tw-text-opacity))
 }
 
@@ -1012,7 +1012,7 @@ p:not(:last-child, .mb-0) {
 }
 
 .items-center {
-    align-items: center
+    align-items: center!important
 }
 
 .justify-end {
@@ -1046,6 +1046,11 @@ p:not(:last-child, .mb-0) {
 .gap-y-6 {
     row-gap: max(24px, 1.25vw)
 }
+
+/*.custom-gap {
+    row-gap: max(24px, 1.25vw);
+    display: grid;
+}*/
 
 .overflow-hidden {
     overflow: hidden
@@ -1225,8 +1230,8 @@ p:not(:last-child, .mb-0) {
 }
 
 .text-base {
-    font-size: max(16px, 1.25vw);
-    line-height: max(28px, 2.083vw)
+    font-size: max(16px, 1.25vw)!important;
+    line-height: max(28px, 2.083vw)!important
 }
 
 .text-h1 {
@@ -1777,7 +1782,7 @@ button.close {
     }
 
     .lg\:items-center {
-        align-items: center
+        align-items: center!important
     }
 
     .lg\:justify-between {
@@ -1913,8 +1918,8 @@ button.close {
 }
 
 .\[\&_h3\]\:text-base h3 {
-    font-size: max(16px, 1.25vw);
-    line-height: max(28px, 2.083vw)
+    font-size: max(16px, 1.25vw)!important;
+    line-height: max(28px, 2.083vw)!important
 }
 
 .\[\&_h3\]\:text-white h3 {

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_service_list_bg_white" name="Service list White">
-        <section class="container grid md:grid-cols-2 gap-6">
-            <div class="order-1 md:order-1">
+        <section class="container grid md:grid-cols-2 gap-6 o_automated_seo_php_variable">
+            <div>
                 <div class="side-sticky">
                     <div class="md:cont-padding">
                         <h2>Header Header Header Header Header Header Header Header Header Header Header Header</h2>
                         <p><b>descriptions descriptions</b> descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions </p>
                     </div>
                     <div class="resp-btn">
-                        <a href="#form" class="btn btn-outline-primary">descriptions descriptions descriptions </a>
+                        <a href="#form" class="btn btn-outline-primary">Button Text</a>
                     </div>
                 </div>
             </div>
-            <div class="order-2 md:order-2 overflow-y-auto max-h-96">
+
                 <div class="boxed border border-secondary pb-0 resp-btn-outer style-check">
                     <p class="text-primary font-bold">The expertise of our Vue.js Developers</p>
                     <ul>
@@ -28,12 +28,9 @@
                     </ul>
                     <div class="svg-icon float-right">
                         <!--                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/vue.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/vue.svg" alt="Vue icon" height="60" width="60" loading="lazy">-->
-                        <img src="automated_seo/static/src/img/tech-icon-svg/vue.svg" data-src="automated_seo/static/src/img/tech-icon-svg/vue.svg" alt="Vue icon" height="60" width="60" loading="lazy" class="vue-icon"/>
-
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" alt="Vue icon" height="60" width="60" loading="lazy"/>
                     </div>
-                </div>
             </div>
         </section>
     </template>
 </odoo>
-

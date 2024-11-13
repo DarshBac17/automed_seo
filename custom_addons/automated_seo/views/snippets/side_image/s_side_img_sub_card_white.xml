@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_side_img_sub_card_white" name="Side Img Sub Card White">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <div class="boxed bg-white">
+                <h3 class="text-primary text-h4">21%</h3>
+                <p class="small-heading">Text Text Text Text Text</p>
+            </div>
+        </section>
+
+    </template>
+</odoo>

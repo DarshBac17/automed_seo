@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_dedicated_dev_tack_stack_bg_white" name="Dedicated Dev tech stack White">
+    <template id="s_dedicated_dev_tack_stack_bg_white" name="Dedicated Dev Tech Stack White">
 
-    <section class="container tabs tabbibg-sec hover-box">
+    <section class="container tabs tabbibg-sec hover-box o_automated_seo_php_variable">
         <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
                         Heading

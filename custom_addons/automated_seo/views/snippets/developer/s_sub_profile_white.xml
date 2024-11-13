@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_profile_white" name="Sub Profile White">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <div class="o_sub_card boxed bg-white">
+                    <div class="flex items-center mb-sm small-heading-three">
+                        <div class="size-60 mr-sm">
+                            <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                alt=".Net Developer Alpesh" title=".Net Developer Alpesh" width="60" height="60"
+                                loading="lazy"/>-->
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
+                                 alt=".Net Developer Alpesh" title=".Net Developer Alpesh" width="60" height="60"
+                                 loading="lazy" class="alpesh-net"/>
+                        </div>
+                        <div>
+                            <h3 class="text-h4 mb-0">Person Name</h3>
+                            <p>Text Text Text Text</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-sm gap-6 small-heading-four">
+                        <div>
+                            <p class="mb-0 font-bold">Text Text</p>
+                            <p>Text</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">Text Text</p>
+                            <p>Text</p>
+                        </div>
+                        <div>
+                            <p class="mb-0 font-bold">Text Text</p>
+                            <p>Text</p>
+                        </div>
+                    </div>
+                    <p class="small-heading">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
+                    <div class="svg-icon">
+                        <!--<img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-python/expert-in.svg"
+                            alt="Expert in" width="102" height="48" loading="lazy">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
+                             alt="Expert in" width="102" height="48" loading="lazy" class="expert-in"/>
+                    </div>
+                    <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
+                        <span class="border border-primary bg-light-orange px-2"><!--<a
+                            href="<?php echo BASE_URL;?>hire-c-sharp-developer"
+                            class="text-primary font-bold">C#</a>--><a
+                                href="#"
+                                class="text-primary font-bold hire-c-sharp-developer">Span</a></span>
+                        <span class="border border-primary bg-light-orange px-2">Span</span>
+                        <span class="border border-primary bg-light-orange px-2">Span</span>
+                        <span class="border border-primary bg-light-orange px-2">Span</span>
+                        <span class="border border-primary bg-light-orange px-2">Span</span>
+                        <span class="border border-primary bg-light-orange px-2"> Span</span>
+                        <span class="border border-primary bg-light-orange px-2">Span</span>
+                    </div>
+                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                </div>
+        </section>
+
+    </template>
+</odoo>

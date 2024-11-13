@@ -1,50 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_side_matrix_with_button_and_icon" name="Banner side matrix with Button and icon">
-        <section class="banner banner-post header-top bg-dark">
+    <template id="s_banner_side_matrix_with_button_and_icon" name="Banner Side Matrix with Button and Icon">
+        <section class="banner banner-post header-top bg-dark o_automated_seo_php_variable">
             <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
             <?php endif; ?>-->
-            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="ruby-on-rails-development_banner-3 banner-post-img"/>
-
+            <div class="phone-tablet_if"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img"/>
+            <div class="phone-tablet_endif"/>
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
-            <div class="lg:col-span-3">
-                <p class="border-b border-primary inline-block">subheading subheading subheading subheading subheading subheading </p>
+                <div class="lg:col-span-3">
+                    <p class="border-b border-primary inline-block">subheading subheading subheading subheading subheading subheading </p>
                     <h1>Heading Heading Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                <p class="text-primary font-bold">Description Description Description Description Description</p>
-                <a href="#price-sec" class="btn btn-primary">Button Name</a>
+                    <p class="text-primary font-bold">Description Description Description Description Description</p>
+                    <a href="#price-sec" class="btn btn-primary">Button Text</a>
+                </div>
+                <div class="lg:col-span-2 flex flex-wrap text-center">
+                    <div class="boxed w-1/2 border-r border-b border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" alt="Flexibility with Agile Methodology" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+                    </div>
+                    <div class="boxed w-1/2 border-b border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" alt="High-Privacy with NDA" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+
+                    </div>
+                    <div class="boxed w-1/2 border-r border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" alt="Time-Zone Aligned Development" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+
+                    </div>
+                    <div class="boxed w-1/2">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" alt="Quick Onboarding within 48 hours" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+
+                    </div>
+                </div>
             </div>
-            <div class="lg:col-span-2 flex flex-wrap text-center">
-                <div class="boxed w-1/2 border-r border-b border-secondary">
-                    <div class="svg-icon mb-sm">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" alt="Flexibility with Agile Methodology" width="48" height="48" loading="lazy" class="mx-auto banner-svg-icon-1"/>
-                    </div>
-                    <p>Description Description Description Description</p>
-                </div>
-                <div class="boxed w-1/2 border-b border-secondary">
-                    <div class="svg-icon mb-sm">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" alt="High-Privacy with NDA" width="48" height="48" loading="lazy" class="mx-auto banner-svg-icon-2"/>
-                    </div>
-                                       <p>Description Description Description Description</p>
-
-                </div>
-                <div class="boxed w-1/2 border-r border-secondary">
-                    <div class="svg-icon mb-sm">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" alt="Time-Zone Aligned Development" width="48" height="48" loading="lazy" class="mx-auto banner-svg-icon-3"/>
-                    </div>
-                                        <p>Description Description Description Description</p>
-
-                </div>
-                <div class="boxed w-1/2">
-                    <div class="svg-icon mb-sm">
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" alt="Quick Onboarding within 48 hours" width="48" height="48" loading="lazy" class="mx-auto banner-svg-icon-4"/>
-                    </div>
-                                       <p>Description Description Description Description</p>
-
-                </div>
-            </div>
-        </div>
         </section>
     </template>
 </odoo>

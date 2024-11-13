@@ -23,5 +23,6 @@
               name="Mapper"
               parent="menu_automated_seo_root"
               action="automated_seo.mapper_action"
+              groups="automated_seo.group_automated_seo_admin"
               sequence="20"/>
 </odoo>

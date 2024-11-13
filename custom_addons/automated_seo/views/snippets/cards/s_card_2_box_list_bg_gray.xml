@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_card_2_box_list_bg_gray" name="2 Box list Card Gray">
-        <section class="bg-gray-light">
+    <template id="s_card_2_box_list_bg_gray" name="2 Box List Card Gray">
+        <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="text-center cont-padding">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check">
-                    <div class="boxed bg-white">
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 style-check o_sub_items_container">
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                         <ul class="small-heading-two">
                             <li>List Item Text</li>
@@ -22,8 +22,8 @@
                             <li>List Item Text</li>
 
                         </ul>
-                    </div>
-                    <div class="boxed bg-white">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-primary text-h4 small-heading">Title Title Title Title</h3>
                         <ul class="small-heading-two">
                             <li>List Item Text</li>
@@ -36,7 +36,7 @@
                             <li>List Item Text</li>
                             <li>List Item Text</li>
                         </ul>
-                    </div>
+                    </section>
                 </div>
                 <div class="text-center mt-md">
                     <a href="#form" class="btn btn-outline-primary">Button Text</a>
