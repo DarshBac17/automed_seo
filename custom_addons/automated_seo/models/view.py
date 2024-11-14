@@ -311,6 +311,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
+                # self.delete_img_folder_from_s3(view_name=self.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -424,7 +425,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-
+            img_tag['height'] = height
+            img_tag['width'] = width
             return output
 
         except Exception as e:
@@ -654,14 +656,17 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name}/{new_image_name}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name.replace(' ','')}/{new_image_name}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
-            img['height'] = img.get('data-height', img.get('height'))
-            img['width'] = img.get('data-width', img.get('width'))
 
-            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
+
+            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"
+                         "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
+                         "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
+
                 if img.has_attr(attr):
                     del img[attr]
 
@@ -863,7 +868,7 @@ class View(models.Model):
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
-                           'custom-left-section', 'custom-right-section']
+                           'custom-left-section', 'custom-right-section','float-start', 'rounded-circle', 'rounded','img', "img-fluid", "me-auto"]
 
 
         tech_stack_cells = soup.find_all('td', class_='o_tech_stack')
@@ -886,7 +891,7 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
-            for attr in ['data-bs-original-title', 'title','aria-describedby', 'data-php-const-var','data-php-var']:
+            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var']:
                 if tag.has_attr(attr):
                     del tag[attr]
 
@@ -943,7 +948,7 @@ class View(models.Model):
                           )
         try:
             if view_name:
-                s3_key = f'Inhouse/{view_name}/{s3_filename}'
+                s3_key = f'Inhouse/{view_name.replace(" ","")}/{s3_filename}'
             else:
                 s3_key = f'Inhouse/{s3_filename}'
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
@@ -959,6 +964,13 @@ class View(models.Model):
                 print(f"An error occurred: {e}")
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
+
+    def delete_img_folder_from_s3(self,view_name):
+        s3 = boto3.client('s3',
+                          aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                          )
+        s3.delete_object(Bucket='Inhouse', Key=f'{view_name.replace(" ","")}')
 
     def remove_br_tags(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
