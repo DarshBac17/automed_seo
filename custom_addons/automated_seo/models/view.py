@@ -349,7 +349,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-
+            img_tag['height'] = height
+            img_tag['width'] = width
             return output
 
         except Exception as e:
@@ -583,10 +584,13 @@ class View(models.Model):
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
-            img['height'] = img.get('data-height', img.get('height'))
-            img['width'] = img.get('data-width', img.get('width'))
 
-            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width","data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"]:
+
+            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"
+                         "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
+                         "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
+
                 if img.has_attr(attr):
                     del img[attr]
 
@@ -788,7 +792,7 @@ class View(models.Model):
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
-                           'custom-left-section', 'custom-right-section']
+                           'custom-left-section', 'custom-right-section','float-start', 'rounded-circle', 'rounded','img', "img-fluid", "me-auto"]
 
 
         tech_stack_cells = soup.find_all('td', class_='o_tech_stack')
@@ -811,7 +815,7 @@ class View(models.Model):
             if not tag['class']:
                 del tag['class']
 
-            for attr in ['data-bs-original-title', 'title','aria-describedby', 'data-php-const-var','data-php-var']:
+            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var']:
                 if tag.has_attr(attr):
                     del tag[attr]
 
