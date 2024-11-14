@@ -222,8 +222,25 @@ class View(models.Model):
     def action_parse_uploaded_file(self):
         file_content = base64.b64decode(self.upload_file)
         file_text = file_content.decode('utf-8')
-        soup = BeautifulSoup(self.convert_php_tags(content=file_text), 'html.parser')
-        print(soup.prettify())
+        content = self.convert_php_tags(content=file_text)
+        template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
+        formatted_arch = f'''<t t-name="{template_name}">
+                                <t t-call="website.layout">
+                                <div id="wrap" class="oe_structure oe_empty">
+                                    {content}
+                                </div>
+                                </t>
+                            </t>'''
+        soup = BeautifulSoup(formatted_arch,'html.parser')
+        self.env['website.page.version'].create({
+            'name': 'v5.0.0',
+            'description': 'upload file Version',
+            'view_id': self.id,
+            'page_id': self.page_id,
+            'view_arch':soup.prettify(),
+            'user_id': self.env.user.id,
+            'status': False
+        })
 
     def convert_php_tags(self,content):
         # Parse the content with BeautifulSoup
@@ -236,59 +253,11 @@ class View(models.Model):
 
             img['src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
             img['data-src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
-
-        atags = soup.find_all('a')
-        for atag in atags:
-            print(atag)
-        # text = unescape(soup.prettify())
-        #
-        # def process_attributes(tag):
-        #     """Process PHP tags in tag attributes"""
-        #     for attr in tag.attrs:
-        #         if isinstance(tag[attr], str) and '<?php' in tag[attr]:
-        #             tag[attr] = re.sub(
-        #                 r'(<\?php.*?\?>)',
-        #                 lambda m: escape(m.group(0)),
-        #                 tag[attr]
-        #             )
-        #
-        # # Process all tags
-        # for tag in soup.find_all(True):  # True finds all tags
-        #     # Process attributes
-        #     process_attributes(tag)
-        #
-        #     # Process direct text content
-        #     if tag.string and '<?php' in tag.string:
-        #         tag.string = re.sub(
-        #             r'(<\?php.*?\?>)',
-        #             lambda m: escape(m.group(0)),
-        #             tag.string
-        #         )
-        #
-        # # Convert back to string
-        # processed_html = str(soup)
-        #
-        # # Find all top-level PHP tags (outside any HTML tags)
-        # parts = []
-        # last_end = 0
-        #
-        # # Pattern to match top-level PHP tags
-        # pattern = r'<\?php.*?\?>'
-        #
-        # for match in re.finditer(pattern, text):
-        #     start, end = match.span()
-        #     # Check if this PHP tag is in the original unprocessed text and not inside any HTML tag
-        #     if all(c not in text[last_end:start].lower() for c in ['<img', '<div', '<span', '<p', '<a']):
-        #         # Add the text before this PHP tag
-        #         parts.append(processed_html[last_end:start])
-        #         # Add the original unescaped PHP tag
-        #         parts.append(match.group(0))
-        #         last_end = end
-        #
-        # # Add the remaining text
-        # parts.append(processed_html[last_end:])
-        #
-        return soup.prettify()
+        sections =  soup.find_all('section')
+        # content =""
+        # for section in sections:
+        #     content+=str(section)
+        return soup.find('body')
 
 
     def get_approve_url(self):
@@ -791,7 +760,9 @@ class View(models.Model):
         for section in sections:
         # if section:
             section.unwrap()
-
+        body = soup.find("body")
+        if body:
+            body.unwrap()
         return str(soup)
 
 

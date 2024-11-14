@@ -141,7 +141,7 @@
                         type="object"
                         string="Parse File"
                         class="btn btn-primary"
-                        attrs="{'invisible': [('uploaded_file', '=', False)]}"/>
+                        attrs="{'invisible': [('upload_file', '=', False)]}"/>
 
                 </header>
                 <sheet>

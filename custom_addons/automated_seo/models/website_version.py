@@ -1,4 +1,5 @@
 from email.policy import default
+from multiprocessing.managers import view_type
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
@@ -72,9 +73,13 @@ class WebsitePageVersion(models.Model):
         previous_version.write({
             'publish':True
         })
+        if vals.get('view_arch'):
+            view_arch = vals.get('view_arch')
+        else:
+            view_arch = seo_view.website_page_id.arch_db if seo_view.website_page_id else False,
         vals.update({
             'page_id': seo_view.website_page_id.id,
-            'view_arch': seo_view.website_page_id.arch_db if seo_view.website_page_id else False,
+            'view_arch': view_arch,
             'user_id': self.env.user.id,
         })
 
