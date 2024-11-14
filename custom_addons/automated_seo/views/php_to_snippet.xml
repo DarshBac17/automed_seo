@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.php_to_snippet_tree">
+        <field name="name">Php to Snippet</field>
+        <field name="model">automated_seo.php_to_snippet</field>
+        <field name="arch" type="xml">
+            <tree string="Mapper" editable="top">
+                <field name="php"/>
+                <field name="snippet"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.php_to_snippet_action">
+        <field name="name"> Mapper </field>
+        <field name="res_model">automated_seo.php_to_snippet</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_automated_seo_php_to_snippet"
+              name="Php to Snippet"
+              parent="menu_automated_seo_root"
+              action="automated_seo.php_to_snippet_action"
+              groups="automated_seo.group_automated_seo_admin"
+              sequence="20"/>
+</odoo>

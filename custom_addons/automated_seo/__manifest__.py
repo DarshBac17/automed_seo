@@ -19,6 +19,7 @@
         # 'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
+        "views/php_to_snippet.xml",
         "views/php_mapper_view.xml",
         "views/website/header.xml",
         "views/website/footer.xml",

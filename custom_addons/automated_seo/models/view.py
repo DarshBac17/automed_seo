@@ -244,6 +244,9 @@ class View(models.Model):
 
     def convert_php_tags(self,content):
         # Parse the content with BeautifulSoup
+        tags = self.env['automated_seo.php_to_snippet'].search([],).read(['php', 'snippet'])
+        for tag in tags:
+            content.replace(tag.get('php'),tag.get('snippet'))
 
         # Create a BeautifulSoup object
         soup = BeautifulSoup(content, 'html.parser')
@@ -257,7 +260,10 @@ class View(models.Model):
         # content =""
         # for section in sections:
         #     content+=str(section)
-        return soup.find('body')
+        content = soup.find('body')
+        return content
+
+        # return soup.find('body')
 
 
     def get_approve_url(self):
@@ -439,7 +445,7 @@ class View(models.Model):
             })
 
     def remove_extra_spaces(self,html_parser):
-        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img']
+        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
             pattern = f'<{tag}([^>]*)>\s*([^<]*)\s*</{tag}>'
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
@@ -935,13 +941,6 @@ class View(models.Model):
                 print(f"An error occurred: {e}")
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-
-    def delete_img_folder_from_s3(self,view_name):
-        s3 = boto3.client('s3',
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                          )
-        s3.delete_object(Bucket='Inhouse', Key=f'{view_name.replace(" ","")}')
 
     def remove_br_tags(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
