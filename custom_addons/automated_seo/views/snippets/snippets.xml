@@ -144,6 +144,13 @@
                     <!--<t t-snippet="automated_seo.s_sub_combination_slider_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>combination, slider, white</keywords>
                     </t>-->
+                    <t t-snippet="automated_seo.s_slider_list_bg_white" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>combination, card ,slider, gray</keywords>
+                    </t>
+
+                    <t t-snippet="automated_seo.s_slider_list_bg_gray" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>combination, card ,slider, gray</keywords>
+                    </t>
 
                 </div>
             </div>
