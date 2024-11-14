@@ -580,7 +580,7 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name.replace(' ','')}/{new_image_name}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
@@ -872,9 +872,9 @@ class View(models.Model):
                           )
         try:
             if view_name:
-                s3_key = f'Inhouse/{view_name.replace(" ","")}/{s3_filename}'
+                s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
             else:
-                s3_key = f'Inhouse/{s3_filename}'
+                s3_key = f'inhouse/{s3_filename}'
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
                 'ContentType': content_type})
 
