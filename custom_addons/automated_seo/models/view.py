@@ -394,7 +394,7 @@ class View(models.Model):
             })
 
     def remove_extra_spaces(self,html_parser):
-        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img']
+        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
             pattern = f'<{tag}([^>]*)>\s*([^<]*)\s*</{tag}>'
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
