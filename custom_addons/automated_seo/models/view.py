@@ -349,8 +349,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-            img_tag['height'] = height
-            img_tag['width'] = width
+            img_tag['height'] = int(height)
+            img_tag['width'] = int(width)
             return output
 
         except Exception as e:
@@ -587,7 +587,7 @@ class View(models.Model):
 
 
             for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
-                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width",
                          "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
                          "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
 
