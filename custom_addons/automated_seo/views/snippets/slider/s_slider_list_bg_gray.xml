@@ -1,44 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_slider_list_bg_gray" name="Slider List gray">
-        <section class="o_automated_seo_snippet overflow-hidden bg-gray-light o_automated_seo_php_variable">
-
+    <template id="s_slider_list_bg_gray" name="Slider List Gray">
+       <section class="o_automated_seo_snippet overflow-hidden bg-gray-light o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
-                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading</h2>
+                    <h2>Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description</p>
                 </div>
-                <div class="center-slide o_sub_items_container">
-                    <section class="item boxed bg-white style-check o_replace_section_div">
+                <div class="center-slide">
+                    <div class="item boxed bg-white style-check">
                         <div class="svg-icon mb-sm">
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-1.svg" alt="Machine Learning"/>
                         </div>
-                        <a href="#"><h3 class="text-h4 small-heading text-primary">Title Title Title</h3></a>
+                        <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <ul class="small-heading-two">
-                            <li>List Item List Item List Item</li>
+                            <li>List Item List Item List Item List Item</li>
+                            <li>List Item List Item List Item List Item</li>
                         </ul>
-                    </section>
-                    <section class="item boxed bg-white style-check o_replace_section_div">
+                    </div>
+                    <div class="item boxed bg-white style-check">
                         <div class="svg-icon mb-sm">
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-2.svg" alt="Natural Language Processing (NLP)"/>
                         </div>
-                        <a href="#"><h3 class="text-h4 small-heading text-primary">Title Title Title</h3></a>
+                        <h3 class="text-h4 small-heading">Title Title Title</h3>
                         <ul class="small-heading-two">
-                            <li>List Item List Item List Item</li>
-                            <li>List Item List Item List Item</li>
+                            <li>List Item List Item List Item List Item</li>
+                            <li>List Item List Item List Item List Item</li>
                         </ul>
-                    </section>
-                    <section class="item boxed bg-white style-check o_replace_section_div">
-                        <div class="svg-icon mb-sm">
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-3.svg" alt="Computer Vision"/>
-                        </div>
-                        <a href="#"><h3 class="text-h4 small-heading text-primary">Title Title Title</h3></a>
-                        <ul class="small-heading-two">
-                            <li>List Item List Item List Item</li>
-                        </ul>
-                    </section>
+                    </div>
+                </div>
+                <div class="text-center mt-md">
+                    <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
                 </div>
             </div>
         </section>
+
     </template>
 </odoo>
