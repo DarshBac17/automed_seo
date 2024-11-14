@@ -819,8 +819,9 @@ class View(models.Model):
                 if tag.has_attr(attr):
                     del tag[attr]
 
-            for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
-                tag.attrs.pop(attr, None)
+            for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:
+                if tag.name!='img':
+                    tag.attrs.pop(attr, None)
 
             # for tag in soup.find_all(class_=class_to_remove):
             #     # Replace the tag with its contents
