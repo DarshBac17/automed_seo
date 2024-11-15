@@ -138,6 +138,8 @@
         "views/snippets/case_study/s_sub_case_study.xml",
         "views/snippets/slider/s_combination_slider_bg_white.xml",
         "views/snippets/slider/s_combination_slider_bg_gray.xml",
+        "views/snippets/slider/s_slider_list_bg_gray.xml",
+        "views/snippets/slider/s_slider_list_bg_white.xml",
         "views/snippets/slider/s_sub_combination_slider_white.xml",
         "views/snippets/slider/s_sub_combination_slider_gray.xml",
         "views/snippets/developer/s_profile_bg_gray.xml",
