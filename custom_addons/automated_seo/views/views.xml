@@ -138,10 +138,10 @@
                             'form_view_ref': 'automated_seo.automated_seo_version_form'
                         }"/>
                     <button name="action_parse_uploaded_file"
-                        type="object"
-                        string="Parse File"
-                        class="btn btn-primary"
-                        attrs="{'invisible': [('upload_file', '=', False)]}"/>
+                            type="object"
+                            string="Parse File"
+                            class="btn btn-primary"
+                            attrs="{'invisible': [('upload_file', '=', False)]}"/>
 
                 </header>
                 <sheet>
@@ -264,4 +264,3 @@
               action="automated_seo.view_action"
               sequence="10"/>
 </odoo>
-

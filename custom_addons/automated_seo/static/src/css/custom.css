@@ -82,3 +82,35 @@
 .o_text-php-var-info {
     color: #17a2b8; /* Cyan */
 }
+
+.o_snippet_preview_popup {
+    position: fixed;
+    display: none;
+    z-index: 1999; /* Increased z-index to ensure visibility */
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
+    .o_preview_frame {
+        .preview-header {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: 500;
+            font-size: 13px;
+            color: #212529;
+        }
+
+        .preview-content {
+            padding: 8px;
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 2px;
+            }
+        }
+    }
+}

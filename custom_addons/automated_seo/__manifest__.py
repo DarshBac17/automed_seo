@@ -202,6 +202,7 @@
             # 'automated_seo/static/src/js/website_version.js',
             # 'automated_seo/static/src/js/website_save.js',
             'automated_seo/static/src/js/snippet_options.js',
+            'automated_seo/static/src/js/snippet_preview.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [

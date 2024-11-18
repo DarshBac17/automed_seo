@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup,Comment
 import  html
 import base64
 import boto3
@@ -233,7 +233,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'name': 'v6.0.0',
+            'name': 'v50.0.0',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
@@ -267,13 +267,24 @@ class View(models.Model):
         content = ""
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
         for section in sections:
+            classes = section.get('class')
             if not section.find_parent('section'):
+                section.attrs['data-snippet'] = "s_banner"
                 new_section = self.normalize_text(section)
                 for tag in tags:
                     new_php = self.normalize_text(tag.get('php'))
+                    snippet = tag.get('snippet')
                     if new_section.find(new_php)!=-1:
-                        # breakpoint()
-                        new_section=new_section.replace(new_php,tag.get('snippet'))
+                        if classes and 'banner' in classes:
+                            if new_php =='<?php $formType = "banner";':
+                                match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
+                                snippet_soup = BeautifulSoup(snippet,'html.parser')
+                                span_tag = snippet_soup.find("span")
+                                if span_tag:
+                                    span_tag.string = match.group(1)
+                                    new_php = new_php+f' $bannerDevName = "{match.group(1)}"; include("tailwind/template/form.php"); ?>'
+                                snippet = snippet_soup.prettify()
+                        new_section=new_section.replace(new_php,snippet)
                 content+=new_section
         soup = BeautifulSoup(content, 'html.parser')
         sections = soup.find_all('section')
@@ -298,6 +309,8 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
+
+
                 #         print("+======================+++++++++++++++++")
                 #     content += str(section)
                 #
@@ -551,14 +564,12 @@ class View(models.Model):
 
             for section in sections:
                 snippet_id = section.get('data-snippet')
-
                 orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
-
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
                     php_tags = section.find_all(class_=php_class)
-                    if len(php_tags)!=1:
+                    if len(php_tags)>1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
                             php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
