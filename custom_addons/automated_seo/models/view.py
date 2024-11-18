@@ -233,7 +233,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'name': 'v5.0.0',
+            'name': 'v6.0.0',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
@@ -242,12 +242,18 @@ class View(models.Model):
             'status': False
         })
 
-    def convert_php_tags(self,content):
-        # Parse the content with BeautifulSoup
-        tags = self.env['automated_seo.php_to_snippet'].search([],).read(['php', 'snippet'])
-        for tag in tags:
-            content.replace(tag.get('php'),tag.get('snippet'))
+    def normalize_text(self,text):
+        return ' '.join(str(text).split())
 
+
+    def convert_php_tags(self,content):
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
+        content = self.normalize_text(text=content)
+        for tag in tags:
+            # print(content)
+            content = content.replace(self.normalize_text(tag.get('php')),tag.get('snippet'))
+            # print(content)
+        # breakpoint()
         # Create a BeautifulSoup object
         soup = BeautifulSoup(content, 'html.parser')
         base_url_php = "https://assets.bacancytechnology.com/"
@@ -256,14 +262,74 @@ class View(models.Model):
 
             img['src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
             img['data-src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
+        # breakpoint()
         sections =  soup.find_all('section')
+        content = ""
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
+        for section in sections:
+            if not section.find_parent('section'):
+                new_section = self.normalize_text(section)
+                for tag in tags:
+                    new_php = self.normalize_text(tag.get('php'))
+                    if new_section.find(new_php)!=-1:
+                        # breakpoint()
+                        new_section=new_section.replace(new_php,tag.get('snippet'))
+                content+=new_section
+        soup = BeautifulSoup(content, 'html.parser')
+        sections = soup.find_all('section')
+        content =""
+        for section in sections:
+
+            if not section.find_parent('section'):
+                classes = section.get('class')
+                if classes and 'tech-stack' in classes:
+                    tbody = section.find('tbody')
+                    tbody['class'] = ['o_sub_items_container']
+
+                #     # Transform table rows
+                    rows = tbody.find_all('tr')
+                    for row in rows:
+                        # Update content cell class
+                        content_cell = row.find_all('td')[1]
+                        content_cell['class'] = ['o_tech_stack']
+                #
+                        # Convert spans to pipe-separated text
+                        spans = content_cell.find_all('span')
+                        content_span = '|'.join(span.string for span in spans if span.string)
+                        [span.decompose() for span in spans]
+                        content_cell.string = content_span
+                #         print("+======================+++++++++++++++++")
+                #     content += str(section)
+                #
+                # else:
+                content += str(section)
+                # print("start===========================")
+                #
+                # print(section)
+                # print("end===========================")
+
+            # for tag in tags:
+            #     # if section.find(string = tag.get('snippet')):
+            #     #     print("++++++++++++++++++++++++++++++++++++++++++++++++++")
+            #     #     print("find the test")
+            #     new_section = self.normalize_text(str(section))
+            #     new_php = self.normalize_text(tag.get('php'))
+            #     print("===============================",new_section)
+            #     print("===============================",new_php)
+            #     print(new_section.find(new_php))
+            #     print("===============end============================")
+            #     section=new_section.replace(new_php,tag.get('snippet'))
+        # soup = BeautifulSoup(content, 'html.parser')
+        # content = soup.prettify()
+        # for tag in tags:
+        #     content = content.replace(tag.get('php'),tag.get('snippet'))
         # content =""
         # for section in sections:
         #     content+=str(section)
-        content = soup.find('body')
-        return content
+        # content = soup.find('body')
+        # return soup
 
-        # return soup.find('body')
+        return content
 
 
     def get_approve_url(self):
