@@ -233,7 +233,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'name': 'v7.0.0',
+            'name': 'v14.0.0',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
@@ -300,7 +300,7 @@ class View(models.Model):
         for section in sections:
 
             if not section.find_parent('section'):
-                classes = section.get('class')
+                classes = section.get('class',[])
 
                 if classes and 'tech-stack' in classes:
                     tbody = section.find('tbody')
@@ -318,12 +318,29 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
-                sub_snippets = section.find_all('div',class_='boxed')
+
+                sub_snippets = None
+
+                if section.find_all('div', class_='boxed'):
+                    sub_snippets =section.find_all('div', class_='boxed')
+                elif section.find_all('div',class_='accordian-tab'):
+                     sub_snippets =section.find_all('div', class_='accordian-tab')
+                elif section.find_all('div',class_='ind-box'):
+                     sub_snippets =section.find_all('div', class_='ind-box')
+
                 if sub_snippets:
                     container_tag = sub_snippets[0].find_parent()
-                    parent_tag = container_tag.find_parent()
-                    print(container_tag)
-                    print(parent_tag)
+                    container_classes = container_tag.get("class", [])
+                    classes.append("o_automated_seo_snippet")
+                    container_classes.append("o_sub_items_container")
+                    container_tag["class"] = container_classes
+                    section['class'] =classes
+                    for sub_snippet in sub_snippets:
+                        if sub_snippet:
+                            sub_snippet_classes = sub_snippet.get("class", [])
+                            sub_snippet_classes.append("o_replace_section_div")
+                            sub_snippet["class"] = sub_snippet_classes
+                            sub_snippet.name = "section"
 
                     # for sub_snippet in sub_snippets:
 

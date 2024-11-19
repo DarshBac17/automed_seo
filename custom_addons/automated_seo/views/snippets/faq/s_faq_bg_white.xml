@@ -14,7 +14,7 @@
             </div>
 
             <div class="o_tab_custom-right-section md:col-span-8 faq-head-outer">
-                <div class="accordian-outer o_sub_items_container" itemscope="itemscope" itemtype="https://schema.org/FAQPage">
+                <div class="accordian-outer o_sub_items_container" itemscope="acceptedAnswer" itemtype="https://schema.org/FAQPage">
                     <section class="accordion-item accordian-tab bg-gray-light o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                         <div class="faq-heading active">
                             <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
