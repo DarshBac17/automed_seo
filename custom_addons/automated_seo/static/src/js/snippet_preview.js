@@ -1,3 +1,116 @@
+odoo.define('website.custom.editor', function (require) {
+    'use strict';
+
+    const websiteSnippetEditor = require('website.snippet.editor');
+    const ajax = require('web.ajax');
+    const Wysiwyg = require('web_editor.wysiwyg');
+
+    const snippetPreview = websiteSnippetEditor.SnippetsMenu.include({
+        events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
+            'mouseenter .ui-draggable': '_onSnippetHover',
+            'mouseleave .ui-draggable': '_onSnippetLeave',
+
+        }),
+
+        init: function () {
+            this._super.apply(this, arguments);
+            this.previewPopup = null;
+        },
+
+        start: function () {
+            this._super.apply(this, arguments);
+            this._createPreviewPopup();
+            return this._super.apply(this, arguments);
+        },
+
+        _createPreviewPopup: function () {
+            if (!this.previewPopup) {
+                this.previewPopup = $('<div/>', {
+                    class: 'o_snippet_preview_popup',
+                    css: {
+                        'position': 'fixed',
+                        'z-index': 1050,
+                        'display': 'none',
+                        'background': 'white',
+                        'border': '1px solid #ccc',
+                        'border-radius': '4px',
+                        'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
+                        'padding': '10px'
+                    }
+                }).appendTo('body');
+            }
+        },
+
+       _onSnippetHover: function (ev) {
+            clearTimeout(this.hoverTimeout);
+            const $snippet = $(ev.currentTarget);
+
+            const thumbnailUrl = $snippet.data('oe-thumbnail') ||
+                                 $snippet.find('img').first().attr('src') ||
+                                 $snippet.find('.oe_snippet_thumbnail img').first().attr('src') ||
+                                 '/website/static/src/img/snippets_thumbs/' + $snippet.data('snippet') + '.svg';
+            const snippetName = $snippet.attr('name') || 'Unnamed Snippet';
+
+            const snippetTitle =$snippet.attr('name')||
+                                 'Snippet Preview';
+            const snippetOffset = $snippet.offset();
+            const previewWidth = 300;
+            const viewportWidth = $(window).width();
+            let left = snippetOffset.left + $snippet.outerWidth() + 10;
+
+            if (left + previewWidth > viewportWidth) {
+                left = snippetOffset.left - previewWidth - 10;
+            }
+
+            // Debounced preview display
+            this.hoverTimeout = setTimeout(() => {
+                // Update popup content
+                this.previewPopup.html(`
+                    <div class="preview-header" style="margin-bottom: 10px; font-weight: bold;">
+                        ${snippetTitle}
+                    </div>
+                    <div class="preview-content">
+                        <img src="${thumbnailUrl}"
+                             alt="${snippetTitle}"
+                             style="max-width: 100%; height: auto;"
+                             onload="console.log('✅ Preview image loaded successfully')"
+                             onerror="console.error('❌ Preview image failed to load:', this.src); this.src='/web/static/src/img/placeholder.png'"/>
+                    </div>
+                `);
+
+                this.previewPopup.css({
+                    top: snippetOffset.top,
+                    left: left,
+                    width: previewWidth
+                }).fadeIn(200);
+
+                console.log('✨ Preview popup displayed');
+            }, 150); // Add a small delay to debounce rapid hover actions
+        },
+
+        _onSnippetLeave: function () {
+            clearTimeout(this.hoverTimeout);
+
+            if (this.previewPopup) {
+                this.previewPopup.stop(true).fadeOut(200, function () {
+                });
+            }
+        },
+
+
+         destroy: function () {
+            if (this.previewPopup) {
+                this.previewPopup.remove();
+            }
+            this._super.apply(this, arguments);
+        },
+
+    });
+
+    return {
+        SnippetsMenu: snippetPreview,
+    };
+});
 /*odoo.define('website.snippet.preview', function (require) {
     'use strict';
 
@@ -172,54 +285,34 @@
     return SnippetPreview;
 });*/
 //console.log("======================save===============call")
-console.log("============sfsfsf==========preview===============call")
-odoo.define('website.custom.editor', function (require) {
+
+
+//code that represent thumbnail code as preview
+/*odoo.define('website.custom.editor', function (require) {
     'use strict';
 
     const websiteSnippetEditor = require('website.snippet.editor');
     const ajax = require('web.ajax');
     const Wysiwyg = require('web_editor.wysiwyg');
 
-    const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
+    const snippetPreview = websiteSnippetEditor.SnippetsMenu.include({
         events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
             'mouseenter .ui-draggable': '_onSnippetHover',
             'mouseleave .ui-draggable': '_onSnippetLeave',
-
         }),
 
-//        start: function () {
-//            this._super.apply(this, arguments);
-//            console.log("Snippet editor of preview started");
-//        },
         init: function () {
-            console.log('📌 Init: Initializing Snippet Preview Widget');
             this._super.apply(this, arguments);
             this.previewPopup = null;
         },
 
         start: function () {
             this._super.apply(this, arguments);
-
-            console.log('🎯 Start: Widget Starting...');
-            console.log($('.oe_snippet_thumbnail, [data-oe-type="snippet"], .oe_snippet.ui-draggable'));
-            console.log('🔍 Found Elements:', {
-                'Total Snippets': this.$el.length,
-                'Elements': this.$el.toArray().map(el => ({
-                    'classes': el.className,
-                    'data-attrs': {
-                        'oe-type': $(el).data('oe-type'),
-                        'snippet-id': $(el).data('snippet-id'),
-                        'thumbnail': $(el).data('oe-thumbnail')
-                    }
-                }))
-            });
-
             this._createPreviewPopup();
             return this._super.apply(this, arguments);
         },
 
         _createPreviewPopup: function () {
-            console.log('🎨 Creating Preview Popup');
             if (!this.previewPopup) {
                 this.previewPopup = $('<div/>', {
                     class: 'o_snippet_preview_popup',
@@ -231,122 +324,93 @@ odoo.define('website.custom.editor', function (require) {
                         'border': '1px solid #ccc',
                         'border-radius': '4px',
                         'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
-                        'padding': '10px'
+                        'padding': '10px',
+                        'max-width': '600px',
+                        'max-height': '400px',
+                        'overflow': 'hidden'
                     }
                 }).appendTo('body');
-                console.log('✅ Preview Popup Created');
-            } else {
-                console.log('ℹ️ Preview Popup already exists');
             }
         },
 
-       _onSnippetHover: function (ev) {
-    clearTimeout(this.hoverTimeout); // Clear any previous timeout to prevent overlapping actions
+        _onSnippetHover: function (ev) {
+            clearTimeout(this.hoverTimeout);
 
-    console.log('🖱️ Snippet Hover:', {
-        'Event Target': ev.currentTarget,
-        'Target Classes': ev.currentTarget.className,
-        'Target ID': ev.currentTarget.id
-    });
+            const $snippet = $(ev.currentTarget);
+            const $snippetBody = $snippet.siblings('.oe_snippet_body');
 
-    const $snippet = $(ev.currentTarget);
+            // Get the actual snippet content
+            const snippetContent = $snippet.html();
+            const snippetName = $snippet.find('.oe_snippet_thumbnail_title').text() || 'Preview';
+            console.log("==============================")
+            console.log(snippetContent)
+            console.log($snippetBody)
+            console.log($snippet.html())
 
-    // Log all relevant data attributes
-    console.log('📄 Snippet Data:', {
-        'data-oe-thumbnail': $snippet.data('oe-thumbnail'),
-        'data-snippet': $snippet.data('snippet'),
-        'data-name': $snippet.data('name'),
-        'title': $snippet.attr('title'),
-        'data-bs-original-title': $snippet.attr('data-bs-original-title')
-    });
+            // Calculate position
+            const snippetOffset = $snippet.offset();
+            const previewWidth = 600;
+            const previewHeight = 400;
+            const viewportWidth = $(window).width();
+            const viewportHeight = $(window).height();
 
-    const thumbnailUrl = $snippet.data('oe-thumbnail') ||
-                         $snippet.find('img').first().attr('src') ||
-                         $snippet.find('.oe_snippet_thumbnail img').first().attr('src') ||
-                         '/website/static/src/img/snippets_thumbs/' + $snippet.data('snippet') + '.svg';
+            let left = snippetOffset.left + $snippet.outerWidth() + 10;
+            let top = snippetOffset.top;
 
-    console.log('🖼️ Thumbnail URL:', thumbnailUrl);
-    const snippetName = $snippet.attr('name') || 'Unnamed Snippet';
+            // Adjust position if preview would go off screen
+            if (left + previewWidth > viewportWidth) {
+                left = snippetOffset.left - previewWidth - 10;
+            }
+            if (top + previewHeight > viewportHeight) {
+                top = viewportHeight - previewHeight - 10;
+            }
 
-    const snippetTitle = $snippet.attr('data-bs-original-title') ||
-                         $snippet.attr('title') ||
-                         $snippet.data('name') ||
-                         'Snippet Preview';
+            // Debounced preview display
+            this.hoverTimeout = setTimeout(() => {
+                // Create a container for the visual preview
+                const previewHTML = `
+                    <div class="preview-header" style="margin-bottom: 10px; font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+                        ${snippetName}
+                    </div>
+                    <div class="preview-content" style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%;">
+                        ${snippetContent}
+                    </div>
+                `;
 
-    console.log('📝 Snippet Title:', snippetTitle);
+                this.previewPopup.html(previewHTML);
 
-    // Calculate position
-    const snippetOffset = $snippet.offset();
-    const previewWidth = 300;
-    const viewportWidth = $(window).width();
-    let left = snippetOffset.left + $snippet.outerWidth() + 10;
+                // Apply necessary styles and show the popup
+                this.previewPopup.css({
+                    top: top,
+                    left: left,
+                }).fadeIn(200);
 
-    if (left + previewWidth > viewportWidth) {
-        left = snippetOffset.left - previewWidth - 10;
-    }
+                // Initialize any dynamic components or widgets within the preview
+                this.trigger_up('widgets_start_request', {
+                    $target: this.previewPopup.find('.preview-content'),
+                });
+            }, 150);
+        },
 
-    // Debounced preview display
-    this.hoverTimeout = setTimeout(() => {
-        // Update popup content
-        this.previewPopup.html(`
-            <div class="preview-header" style="margin-bottom: 10px; font-weight: bold;">
-                ${snippetName}
-            </div>
-            <div class="preview-content">
-                <img src="${thumbnailUrl}"
-                     alt="${snippetTitle}"
-                     style="max-width: 100%; height: auto;"
-                     onload="console.log('✅ Preview image loaded successfully')"
-                     onerror="console.error('❌ Preview image failed to load:', this.src); this.src='/web/static/src/img/placeholder.png'"/>
-            </div>
-        `);
+        _onSnippetLeave: function () {
+            clearTimeout(this.hoverTimeout);
+            if (this.previewPopup) {
+                this.previewPopup.stop(true).fadeOut(200);
+            }
+        },
 
-        this.previewPopup.css({
-            top: snippetOffset.top,
-            left: left,
-            width: previewWidth
-        }).fadeIn(200);
-
-        console.log('✨ Preview popup displayed');
-    }, 150); // Add a small delay to debounce rapid hover actions
-},
-
-_onSnippetLeave: function () {
-    clearTimeout(this.hoverTimeout); // Clear the hover timeout to avoid displaying the popup
-    console.log('🚶 Snippet Mouse Leave');
-
-    if (this.previewPopup) {
-        this.previewPopup.stop(true).fadeOut(200, function () {
-            console.log('👋 Preview popup hidden');
-        });
-    }
-},
-
-
-//        _onSnippetLeave: function () {
-//            if (this.previewPopup) {
-//        this.previewPopup.fadeOut(200, function () {
-//            console.log('👋 Preview popup hidden');
-//        });
-//    } else {
-//        console.log('ℹ️ No preview popup to hide');
-//    }
-//        },
-
-         destroy: function () {
-            console.log('🗑️ Destroying Snippet Preview Widget');
+        destroy: function () {
             if (this.previewPopup) {
                 this.previewPopup.remove();
             }
             this._super.apply(this, arguments);
         },
-
     });
 
     return {
-        SnippetsMenu: aSnippetMenu,
+        SnippetsMenu: snippetPreview,
     };
-});
+});*/
 //odoo.define('website.snippet.preview', function (require) {
 //    'use strict';
 //     const websiteSnippetEditor = require('website.snippet.editor');
