@@ -262,6 +262,13 @@ class View(models.Model):
 
             img['src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
             img['data-src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
+
+        anchor_base_url_php="https://www.bacancytechnology.com/"
+        for a in soup.select('a:not(.btn)'):
+            url = a.get('href')
+            if url and url.startswith("<?php echo BASE_URL; ?>"):
+                a['href'] = url.replace("<?php echo BASE_URL; ?>", anchor_base_url_php)
+
         # breakpoint()
         sections =  soup.find_all('section')
         content = ""
@@ -293,6 +300,7 @@ class View(models.Model):
 
             if not section.find_parent('section'):
                 classes = section.get('class')
+
                 if classes and 'tech-stack' in classes:
                     tbody = section.find('tbody')
                     tbody['class'] = ['o_sub_items_container']
@@ -309,6 +317,15 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
+                sub_snippets = section.find_all('div',class_='boxed')
+                if sub_snippets:
+                    container_tag = sub_snippets[0].find_parent()
+                    parent_tag = container_tag.find_parent()
+                    print(container_tag)
+                    print(parent_tag)
+
+                    # for sub_snippet in sub_snippets:
+
 
 
                 #         print("+======================+++++++++++++++++")
