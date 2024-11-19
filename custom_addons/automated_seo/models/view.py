@@ -233,7 +233,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'name': 'v50.0.0',
+            'name': 'v7.0.0',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
@@ -265,9 +265,10 @@ class View(models.Model):
 
         anchor_base_url_php="https://www.bacancytechnology.com/"
         for a in soup.select('a:not(.btn)'):
-            url = a.get('href')
-            if url and url.startswith("<?php echo BASE_URL; ?>"):
-                a['href'] = url.replace("<?php echo BASE_URL; ?>", anchor_base_url_php)
+            url = re.sub('\s','',a.get('href'))
+            base = re.sub('\s','',"<?php echo BASE_URL; ?>")
+            if url and url.startswith(base):
+                a['href'] = url.replace(base, anchor_base_url_php)
 
         # breakpoint()
         sections =  soup.find_all('section')
