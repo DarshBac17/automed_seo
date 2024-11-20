@@ -34,7 +34,7 @@
             <form string="Version">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <field name="change" widget="radio"/>
                         <field name="description"/>
                         <field name="view_id" invisible="1"/>
 
@@ -43,7 +43,7 @@
                 </sheet>
                 <footer>
                     <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'name':name}"/>
+                            context="{'view_id':view_id,'description':description,'change':change}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

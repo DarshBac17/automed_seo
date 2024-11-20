@@ -108,7 +108,6 @@ class View(models.Model):
                 vals['website_page_id'] = website_page.id
         record  = super(View, self).create(vals)
         self.env['website.page.version'].create({
-            'name' : 'v1.0.0',
             'description' : 'First Version',
             'view_id':record.id,
             'page_id':website_page.id,
@@ -233,7 +232,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'name': 'v14.0.0',
+            'change':'major_version',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
@@ -1094,26 +1093,23 @@ class View(models.Model):
         return str(soup.prettify())
 
     def remove_empty_tags(self, html_parser):
-
         soup = BeautifulSoup(html_parser, 'html.parser')
 
+        def is_empty_tag(tag):
+            """Checks if a tag is empty."""
+            return not tag.contents or (len(tag.contents) == 1 and tag.contents[0].strip() == "")
+
+        def remove_empty_tags_recursively(tag):
+            """Recursively removes a tag if it and its parent are empty."""
+            if is_empty_tag(tag):
+                parent = tag.find_parent()
+                tag.decompose()  # Remove the tag
+                if parent and is_empty_tag(parent):  # Check if the parent is now empty
+                    remove_empty_tags_recursively(parent)
+
         all_tags = soup.find_all()
-
         for tag in all_tags:
-            tag_string = str(tag)
-
-
-            pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
-
-            # Check if it's an empty tag
-            if re.match(pattern, tag_string):
-                tag.decompose()
-            pattern = f'<{tag.name}></{tag.name}>'
-            if re.match(pattern, tag_string):
-                tag.decompose()
-
-
-        return soup.prettify()
+            remove_empty_tags_recursively(tag)
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
