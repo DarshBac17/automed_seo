@@ -142,7 +142,7 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
-                    vals['unique_page_id'] = formatted_name + str(random.randint(10000, 99999))
+
         return super(View, self).write(vals)
 
     def action_view_website_page(self):
