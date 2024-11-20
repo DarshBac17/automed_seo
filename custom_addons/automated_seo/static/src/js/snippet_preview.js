@@ -54,14 +54,17 @@ odoo.define('website.custom.editor', function (require) {
             const snippetTitle =$snippet.attr('name')||
                                  'Snippet Preview';
             const snippetOffset = $snippet.offset();
-            const previewWidth = 300;
+            const previewWidth = 550;
+            const previewHeight = 400;
             const viewportWidth = $(window).width();
             let left = snippetOffset.left + $snippet.outerWidth() + 10;
-
+            const viewportHeight = $(window).height()
             if (left + previewWidth > viewportWidth) {
                 left = snippetOffset.left - previewWidth - 10;
             }
-
+            if (top + previewHeight > viewportHeight) {
+                top = viewportHeight - previewHeight - 10;
+            }
             // Debounced preview display
             this.hoverTimeout = setTimeout(() => {
                 // Update popup content

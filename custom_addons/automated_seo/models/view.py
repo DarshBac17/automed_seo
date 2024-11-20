@@ -232,7 +232,7 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'change':'major_version',
+            'change':'major_change',
             'description': 'upload file Version',
             'view_id': self.id,
             'page_id': self.page_id,
