@@ -57,6 +57,10 @@ class View(models.Model):
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
 
+    _sql_constraints = [
+        ('unique_name', 'unique(name)', 'The name must be unique!')
+    ]
+
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
         if self.upload_file:
@@ -74,9 +78,6 @@ class View(models.Model):
         current_user = self.env.user
         for record in self:
             record.is_owner = current_user.id == record.create_uid.id
-
-
-
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -144,7 +145,6 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
-                    vals['unique_page_id'] = formatted_name + str(random.randint(10000, 99999))
         return super(View, self).write(vals)
 
     def action_view_website_page(self):
@@ -1093,25 +1093,24 @@ class View(models.Model):
         return str(soup.prettify())
 
     def remove_empty_tags(self, html_parser):
+
         soup = BeautifulSoup(html_parser, 'html.parser')
 
-        def is_empty_tag(tag):
-            """Checks if a tag is empty."""
-            return not tag.contents or (len(tag.contents) == 1 and tag.contents[0].strip() == "")
-
-        def remove_empty_tags_recursively(tag):
-            """Recursively removes a tag if it and its parent are empty."""
-            if is_empty_tag(tag):
-                parent = tag.find_parent()
-                tag.decompose()  # Remove the tag
-                if parent and is_empty_tag(parent):  # Check if the parent is now empty
-                    remove_empty_tags_recursively(parent)
-
         all_tags = soup.find_all()
-        for tag in all_tags:
-            remove_empty_tags_recursively(tag)
 
-        return  soup.prettify()
+        for tag in all_tags:
+            tag_string = str(tag)
+
+
+            pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
+
+            # Check if it's an empty tag
+            if re.match(pattern, tag_string):
+                tag.decompose()
+            pattern = f'<{tag.name}></{tag.name}>'
+            if re.match(pattern, tag_string):
+                tag.decompose()
+        return soup.prettify()
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
