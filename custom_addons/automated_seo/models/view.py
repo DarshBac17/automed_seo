@@ -231,6 +231,7 @@ class View(models.Model):
                                 </t>
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
+        print(str(soup.prettify()))
         self.env['website.page.version'].create({
             'change':'major_change',
             'description': 'upload file Version',
@@ -244,32 +245,39 @@ class View(models.Model):
     def normalize_text(self,text):
         return ' '.join(str(text).split())
 
+    def minify_php_tags(self,content):
+        # Regex to match text starting with '<?php' and ending with '?>'
+        pattern = r"<\?php.*?\?>"
 
+        # Function to remove spaces within the match
+        def remove_spaces(match):
+            return re.sub(r"\s+", "", match.group(0))
+
+        # Apply the regex substitution
+        return re.sub(pattern, remove_spaces, content, flags=re.DOTALL)
     def convert_php_tags(self,content):
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
-        content = self.normalize_text(text=content)
-        for tag in tags:
-            # print(content)
-            content = content.replace(self.normalize_text(tag.get('php')),tag.get('snippet'))
-            # print(content)
-        # breakpoint()
-        # Create a BeautifulSoup object
         soup = BeautifulSoup(content, 'html.parser')
         base_url_php = "https://assets.bacancytechnology.com/"
         for img in soup.select('img'):
-            url = img.get('src')
+            url = re.sub(r'\s', '', img.get('src'))
+            image_base = re.sub(r'\s', '', "<?php echo BASE_URL_IMAGE; ?>")
 
-            img['src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
-            img['data-src'] = url.replace("<?php echo BASE_URL_IMAGE; ?>", base_url_php)
+            img['src'] = url.replace(image_base, base_url_php)
+            img['data-src'] = url.replace(image_base, base_url_php)
 
-        anchor_base_url_php="https://www.bacancytechnology.com/"
+        anchor_base_url_php = "https://www.bacancytechnology.com/"
         for a in soup.select('a:not(.btn)'):
-            url = re.sub('\s','',a.get('href'))
-            base = re.sub('\s','',"<?php echo BASE_URL; ?>")
+            url = re.sub(r'\s', '', a.get('href'))
+            base = re.sub(r'\s', '', "<?php echo BASE_URL; ?>")
             if url and url.startswith(base):
                 a['href'] = url.replace(base, anchor_base_url_php)
+        content = self.minify_php_tags(self.normalize_text(soup.prettify()))
 
-        # breakpoint()
+        for tag in tags:
+            content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
+        soup = BeautifulSoup(content, 'html.parser')
+
         sections =  soup.find_all('section')
         content = ""
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
@@ -279,17 +287,17 @@ class View(models.Model):
                 section.attrs['data-snippet'] = "s_banner"
                 new_section = self.normalize_text(section)
                 for tag in tags:
-                    new_php = self.normalize_text(tag.get('php'))
+                    new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
                     snippet = tag.get('snippet')
                     if new_section.find(new_php)!=-1:
                         if classes and 'banner' in classes:
-                            if new_php =='<?php $formType = "banner";':
+                            if new_php =='<?php$formType="banner";':
                                 match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
                                 snippet_soup = BeautifulSoup(snippet,'html.parser')
                                 span_tag = snippet_soup.find("span")
                                 if span_tag:
                                     span_tag.string = match.group(1)
-                                    new_php = new_php+f' $bannerDevName = "{match.group(1)}"; include("tailwind/template/form.php"); ?>'
+                                    new_php = new_php+f'$bannerDevName="{match.group(1)}";include("tailwind/template/form.php");?>'
                                 snippet = snippet_soup.prettify()
                         new_section=new_section.replace(new_php,snippet)
                 content+=new_section
@@ -973,17 +981,17 @@ class View(models.Model):
                 span = soup.new_tag('span')
                 span.string = description.strip()  # Trim whitespace
                 cell.append(span)
-        for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class']
-                            if not cls.startswith('o_') and cls not in class_to_remove]
+        for tag in soup.find_all():
+            if tag.get('class'):
+                tag['class'] = [cls for cls in tag['class']
+                                if not cls.startswith('o_') and cls not in class_to_remove]
 
-            if not tag['class']:
-                del tag['class']
+                if not tag['class']:
+                    del tag['class']
 
             for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var']:
                 if tag.has_attr(attr):
                     del tag[attr]
-
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:
                 if tag.name!='img':
                     tag.attrs.pop(attr, None)
