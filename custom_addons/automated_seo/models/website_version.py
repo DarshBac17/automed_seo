@@ -62,28 +62,27 @@ class WebsitePageVersion(models.Model):
         }
 
     @api.model
-    def create(self,vals):
+    def create(self, vals):
         print("======================================")
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
         seo_view = self.env['automated_seo.view'].browse(vals['view_id'])
-        if self.env['website.page.version'].search(['&', ('name', '=', vals.get('name')), ('view_id', '=', seo_view.id)]):
+        if self.env['website.page.version'].search(
+                ['&', ('name', '=', vals.get('name')), ('view_id', '=', seo_view.id)]):
             raise UserError("The version name is already present. Change the name of the version")
-        previous_version = self.env['website.page.version'].search(['&',('status','=',True),('view_id','=',seo_view.id)])
+        previous_version = self.env['website.page.version'].search(
+            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
         previous_version.write({
-            'publish':True
+            'publish': True
         })
-        if vals.get('view_arch'):
-            view_arch = vals.get('view_arch')
-        else:
-            view_arch = seo_view.website_page_id.arch_db if seo_view.website_page_id else False,
         vals.update({
             'page_id': seo_view.website_page_id.id,
-            'view_arch': view_arch,
+            'view_arch': seo_view.website_page_id.arch_db if seo_view.website_page_id else False,
             'user_id': self.env.user.id,
         })
 
         return super(WebsitePageVersion, self).create(vals)
+
     def action_create_version(self):
         # self.write({'stage': 'in_progress'})
         self.ensure_one()
