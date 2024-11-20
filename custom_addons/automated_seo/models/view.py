@@ -277,8 +277,8 @@ class View(models.Model):
         for tag in tags:
             content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
 
-        if content.find("phpechoconstant"):
-            content = content.replace("phpechoconstant","php echo constant")
+        if content.find("phpecho"):
+            content = content.replace("phpecho","php echo ")
         soup = BeautifulSoup(content, 'html.parser')
 
         sections =  soup.find_all('section')
