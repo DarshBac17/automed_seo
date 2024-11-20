@@ -1111,6 +1111,8 @@ class View(models.Model):
         for tag in all_tags:
             remove_empty_tags_recursively(tag)
 
+        return  soup.prettify()
+
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
     page_id = fields.Many2one('automated_seo.view', string="View Record",ondelete='cascade')
