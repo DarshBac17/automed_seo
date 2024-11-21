@@ -82,3 +82,22 @@
 .o_text-php-var-info {
     color: #17a2b8; /* Cyan */
 }
+
+.icon-wrapper {
+    position: relative !important; /* Make this container a positioned element */
+    display: inline-block !important; /* Ensure proper alignment */
+}
+
+.icon-wrapper .fa-cloud {
+    font-size: 1.5rem !important; /* Adjust the size of the cloud */
+    color: #6c757d !important; /* Default color for the cloud icon */
+}
+
+.icon-wrapper .check-icon {
+    position: absolute !important; /* Position relative to the wrapper */
+    top: 50% !important; /* Center vertically */
+    left: 50% !important; /* Center horizontally */
+    transform: translate(-50%, -50%) !important; /* Adjust to center perfectly */
+    font-size: 0.8rem !important; /* Size of the check icon */
+    color: #000000 !important; /* Black color for the check icon */
+}

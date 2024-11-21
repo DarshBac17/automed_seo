@@ -4,7 +4,13 @@
     <template id="automed_snippets" inherit_id="website.snippets" name="Automed snippets">
 
 
-
+        <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='mobile']" position="before">
+            <button type="button" class="btn btn-secondary" data-action="autosave" title="Auto saved" accesskey="x">
+                <span class="icon-wrapper">
+                    <i class="fa fa-cloud"></i>
+                </span>
+            </button>
+        </xpath>
         <!--<xpath expr="//div[@id='snippets_menu']/button[span[contains(text(), 'Customize')]]" position="replace">
             <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">
                 <button type="button" tabindex="2" class="o_we_customize_snippet_btn text-uppercase">
@@ -19,7 +25,7 @@
             <div id="snippets_header" class="o_panel">
                 <div class="o_panel_header">Header</div>
                 <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_header" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_header" data-no-preview="false" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg" >
                         <keywords>header</keywords>
                     </t>
                 </div>
@@ -33,15 +39,22 @@
                     </t>
                     <t t-snippet="automated_seo.s_banner_side_image_with_form_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, side image, form</keywords>
-                    </t><t t-snippet="automated_seo.s_banner_side_image_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                    <keywords>banner, side image, button</keywords>
-                </t><t t-snippet="automated_seo.s_banner_side_image_with_2_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                    <keywords>banner, side image, button</keywords>
-                </t><t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                    <keywords>banner, side image, button</keywords>
-                </t><t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                    <keywords>banner, side, matrix, button</keywords>
-                </t>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_image_with_icons" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side image, icons</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_image_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side image, button</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side image, button</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side image, button</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                        <keywords>banner, side, matrix, button</keywords>
+                    </t>
                     <t t-snippet="automated_seo.s_banner_side_matrix_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, side, matrix, button</keywords>
                     </t>
@@ -620,27 +633,27 @@
     </template>
 
 
-<!--    <template id="s_php_variable_options">-->
-<!--        <div data-js="PhpVariable" data-selector=".o_automated_seo_php_variable">-->
-<!--            <we-select string="Select const var" data-state-to-first-class="true">-->
-<!--                <we-button data-select-class="float-start" title="Align Left">PHP_VAR_1</we-button>-->
-<!--                <we-button data-select-class="float-start" title="Align Center">PHP_VAR_2</we-button>-->
-<!--                <we-button data-select-class="float-start" title="Align Right">PHP_VAR_3</we-button>-->
-<!--                <we-button data-select-class="float-start" title="Align top">PHP_VAR_4</we-button>-->
-<!--                &lt;!&ndash;                                <we-button data-select-class="float-start">PHP_VAR_1</we-button>-->
-<!--                                <we-button data-select-class="">PHP_VAR_2</we-button>-->
-<!--                                <we-button data-select-class="">PHP_VAR_3</we-button>-->
-<!--                                <we-button data-select-class="float-end">PHP_VAR_3</we-button>&ndash;&gt;-->
-<!--            </we-select>-->
+    <!--    <template id="s_php_variable_options">-->
+    <!--        <div data-js="PhpVariable" data-selector=".o_automated_seo_php_variable">-->
+    <!--            <we-select string="Select const var" data-state-to-first-class="true">-->
+    <!--                <we-button data-select-class="float-start" title="Align Left">PHP_VAR_1</we-button>-->
+    <!--                <we-button data-select-class="float-start" title="Align Center">PHP_VAR_2</we-button>-->
+    <!--                <we-button data-select-class="float-start" title="Align Right">PHP_VAR_3</we-button>-->
+    <!--                <we-button data-select-class="float-start" title="Align top">PHP_VAR_4</we-button>-->
+    <!--                &lt;!&ndash;                                <we-button data-select-class="float-start">PHP_VAR_1</we-button>-->
+    <!--                                <we-button data-select-class="">PHP_VAR_2</we-button>-->
+    <!--                                <we-button data-select-class="">PHP_VAR_3</we-button>-->
+    <!--                                <we-button data-select-class="float-end">PHP_VAR_3</we-button>&ndash;&gt;-->
+    <!--            </we-select>-->
 
-<!--            &lt;!&ndash;            <we-select string="Select const var" data-state-to-first-class="true">-->
-<!--                                <we-button data-select-var="PHP_VAR_1" data-variable-class="php-var-1" >PHP_VAR_1</we-button>-->
-<!--                                    <we-button data-select-var="PHP_VAR_2" data-variable-class="php-var-2">PHP_VAR_2</we-button>-->
-<!--                                    <we-button data-select-var="PHP_VAR_3" data-variable-class="php-var-3">PHP_VAR_3</we-button>-->
-<!--                                    <we-button data-select-var="PHP_VAR_4" data-variable-class="php-var-4">PHP_VAR_4</we-button>-->
-<!--                            </we-select>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </template>-->
+    <!--            &lt;!&ndash;            <we-select string="Select const var" data-state-to-first-class="true">-->
+    <!--                                <we-button data-select-var="PHP_VAR_1" data-variable-class="php-var-1" >PHP_VAR_1</we-button>-->
+    <!--                                    <we-button data-select-var="PHP_VAR_2" data-variable-class="php-var-2">PHP_VAR_2</we-button>-->
+    <!--                                    <we-button data-select-var="PHP_VAR_3" data-variable-class="php-var-3">PHP_VAR_3</we-button>-->
+    <!--                                    <we-button data-select-var="PHP_VAR_4" data-variable-class="php-var-4">PHP_VAR_4</we-button>-->
+    <!--                            </we-select>&ndash;&gt;-->
+    <!--        </div>-->
+    <!--    </template>-->
 
 
     <!--    <template id="test_module.offers_dynamic_snippet_options_template">

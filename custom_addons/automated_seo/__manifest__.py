@@ -70,6 +70,7 @@
         "views/snippets/banner/s_banner_side_image_with_2_button_and_bg.xml",
         "views/snippets/banner/s_banner_side_image_with_button.xml",
         "views/snippets/banner/s_banner_side_image_with_form_and_bg.xml",
+        "views/snippets/banner/s_banner_side_image_with_icons.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button_and_icon.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button.xml",
         "views/snippets/services/s_service_card_bg_gray.xml",
@@ -201,6 +202,7 @@
             # 'automated_seo/static/src/js/website_version.js',
             # 'automated_seo/static/src/js/website_save.js',
             'automated_seo/static/src/js/snippet_options.js',
+            'automated_seo/static/src/js/website_autosave.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
             'web.assets_backend': [

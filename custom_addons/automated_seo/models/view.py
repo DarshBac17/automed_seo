@@ -375,6 +375,7 @@ class View(models.Model):
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = html.unescape(html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
 
@@ -733,15 +734,19 @@ class View(models.Model):
 
     def replace_php_var_tag(self, section):
 
-        updated_section = self.replace_strong_em_u_tag(section)
+        # updated_section = self.replace_strong_em_u_tag(section)
         soup = BeautifulSoup(str(section.prettify()), "html.parser")
 
-        for tag in updated_section.find_all(class_="o_au_php_var"):
+        for tag in section.find_all(class_="o_au_php_var"):
 
             var_name = tag.get('data-php-var')
             var_type = tag.get("data-php-const-var")
 
             if var_name:
+                if len(tag.find_all("strong")) > 0:
+                    tag["class"].append("o_strong")
+                if len(tag.find_all("b")) > 0:
+                    tag["class"].append("o_b")
                 if len(tag.find_all(class_="font-bold")) > 0:
                     tag["class"].append("font-bold")
                 if len(tag.find_all(class_="text-underline")) > 0:
@@ -752,26 +757,46 @@ class View(models.Model):
                     tag.wrap(soup.new_tag('i'))
                     break
 
+                php_tag = BeautifulSoup(
+                    f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
+                    'html.parser')
+
                 if "font-bold" in tag["class"] or "text-underline" in tag["class"]:
                     tag.string = ""
-                    php_tag = BeautifulSoup(
-                        f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
-                        'html.parser')
                     tag.append(php_tag)
+                elif "o_strong" in tag["class"]:
+                    # breakpoint()
+                    new_strong_tag = soup.new_tag("strong")
+                    new_strong_tag.append(php_tag)
+                    tag.replace_with(new_strong_tag)
+                elif "o_b" in tag["class"]:
+                    # breakpoint()
+                    new_b_tag = soup.new_tag("b")
+                    new_b_tag.append(php_tag)
+                    tag.replace_with(new_b_tag)
                 else:
-                    php_tag = BeautifulSoup(f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>", 'html.parser')
                     tag.replace_with(php_tag)
 
-        return updated_section
+        return section
 
 
     def replace_strong_em_u_tag(self, section):
         soup = BeautifulSoup(str(section.prettify()), "html.parser")
-        for strong_tag in section.find_all('strong'):
-            span_tag = soup.new_tag('span')
-            span_tag["class"] = ['font-bold']
-            span_tag.extend(strong_tag.contents)
-            strong_tag.replace_with(span_tag)
+        for tag in section.find_all(['strong', 'b']) + section.find_all(class_="font-bold"):
+            new_tag_name = ""
+            new_tag_class_name = ""
+            if tag.name == "strong":
+                new_tag_name = "strong"
+            elif tag.name == "b":
+                new_tag_name = "b"
+            else:
+                new_tag_name = "span"
+                new_tag_class_name = "font-bold"
+
+            new_tag = soup.new_tag(f'{new_tag_name}')
+            new_tag["class"] = [f'{new_tag_class_name}']
+            new_tag.extend(tag.contents)
+            tag.replace_with(new_tag)
 
         for em_tag in section.find_all('em'):
             i_tag = soup.new_tag('i')
@@ -947,6 +972,18 @@ class View(models.Model):
 
 
         return soup.prettify()
+
+
+    # Function to remove BOM characters from all text elements
+    def remove_bom(self,html_parser):
+        soup = BeautifulSoup(html_parser, "html.parser")
+        for element in soup.find_all(string=True):  # Iterate over all strings
+            if "\ufeff" in element:  # Check if BOM character exists
+                cleaned_text = element.replace("\ufeff", "")  # Remove BOM
+                element.replace_with(cleaned_text)  # Replace with cleaned text
+
+
+        return str(soup.prettify())
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'

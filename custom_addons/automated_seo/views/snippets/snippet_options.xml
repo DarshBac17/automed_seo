@@ -2,14 +2,119 @@
 <odoo>
     <template id="s_php_variable_options">
         <div data-js="PhpVariableTextSelector" data-selector=".o_automated_seo_php_variable">
-            <we-checkbox string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
-            <we-select string="PHP Variables" data-no-preview="true">
-                <we-button data-select-var="none" data-variable-class="" class="o_we_destroy_btn">None</we-button>
-                <we-button data-select-var="PHP_VAR_1" data-variable-class="o_au_php_var">PHP_VAR_1</we-button>
-                <we-button data-select-var="PHP_VAR_2" data-variable-class="o_au_php_var">PHP_VAR_2</we-button>
-                <we-button data-select-var="PHP_VAR_3" data-variable-class="o_au_php_var">PHP_VAR_3</we-button>
-                <we-button data-select-var="PHP_VAR_4" data-variable-class="o_au_php_var">PHP_VAR_4</we-button>
-            </we-select>
+            <div class="mt-4 php-var-input-sec">
+            <label class="mb-2 font-weight-bold fw-bold">Php variable</label>
+            <we-checkbox class="mt-2" string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
+            <div class="form-group mb-2 d-flex align-items-center">
+                <!-- Input Field -->
+                <input type="text"
+                       class="form-control form-control-sm data-variable-input text-white"
+                       placeholder="Enter php variable" />
+
+                <!-- Cancel Button -->
+                <we-button class="btn btn-sm btn-outline-danger ms-2 d-flex data-remove-php-var align-items-center d-none"
+                           title="Remove PHP Variable">
+                    <i class="fa fa-times"></i> <!-- Cancel Icon -->
+                </we-button>
+            </div>
+        </div>
+
+            <div class="mt-4">
+                <label class="mb-2 font-weight-bold fw-bold">Text Editing</label>
+
+                <div class="d-flex align-items-center gap-2">
+                    <we-button
+                            data-variable-class="strong-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Strong">
+                        <i class="fa fa-bold"></i> Strong Tag
+                    </we-button>
+                    <we-button
+                            data-variable-class="b-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="B Tag">
+                        <i class="fa fa-text-height"></i> B Tag
+                    </we-button>
+                    <we-button
+                            data-variable-class="font-bold"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Font-Bold">
+                        <i class="fa fa-font"></i> Font-Bold
+                    </we-button>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <we-button
+                            data-variable-class="italic-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Strong">
+                        <i class="fa fa-italic fa-fw"></i>
+                    </we-button>
+                    <we-button
+                            data-variable-class="underline-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="B Tag">
+                        <i class="fa fa-underline fa-fw"></i>
+                    </we-button>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="mb-2 font-weight-bold fw-bold">Link Editing</label>
+                <div class="d-flex flex-column gap-2">
+                    <!-- Link Management Section -->
+                    <div class="d-flex align-items-center gap-2">
+                        <we-button
+                                data-variable-class="a-tag"
+                                data-no-preview="true"
+                                class="btn btn-sm btn-primary"
+                                title="Add/Edit Link">
+                            <i class="fa fa-link"></i>
+                        </we-button>
+                    </div>
+
+                    <!-- URL Input Section - Initially Hidden -->
+                    <div class="url-input-section d-none">
+                        <div class="form-group mb-2">
+                            <input type="text"
+                                   class="form-control form-control-sm link-url-input text-white"
+                                   placeholder="Enter URL (e.g., https://...)"
+                                   />
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <we-checkbox
+                                    string="Open in new tab"
+                                    data-select-class="o_au_link_target"
+                                    data-open-in-new-tab="true"
+                                    data-no-preview="true"/>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <we-button
+                                    data-save-url="true"
+                                    class="btn btn-sm btn-primary">
+                                Save Link
+                            </we-button>
+                            <we-button
+                                    data-remove-url="true"
+                                    class="btn btn-sm btn-danger d-none">
+                                Remove Link
+                            </we-button>
+                            <we-button
+                                    data-cancel-url="true"
+                                    class="btn btn-sm btn-secondary">
+                                Cancel
+                            </we-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </template>
 </odoo>
+

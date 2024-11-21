@@ -2,7 +2,7 @@
 <odoo>
     <!-- Website Version Button Template -->
     <template id="website_version_button" inherit_id="website.snippets">
-        <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='save']" position="before">
+        <xpath expr="//form[@class='ms-auto d-flex']/data-action='save']" position="before">
             <button type="button" class="btn btn-primary" data-action="version" title="Version record" accesskey="s">Version</button>
         </xpath>
     </template>
