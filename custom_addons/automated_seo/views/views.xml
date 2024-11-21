@@ -43,7 +43,7 @@
                 </sheet>
                 <footer>
                     <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'change':change}"/>
+                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

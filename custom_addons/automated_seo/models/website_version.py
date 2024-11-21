@@ -23,7 +23,7 @@ class WebsitePageVersion(models.Model):
     status = fields.Boolean('Status',default=False)
     publish = fields.Boolean('Publish',default=False)
     change = fields.Selection([
-        ('major_change', 'Major Changes'),
+        # ('major_change', 'Major Changes'),
         ('minor_change', 'Minor Changes'),
         ('patch_change', 'Patch Changes'),
     ], string="Change")
@@ -77,7 +77,6 @@ class WebsitePageVersion(models.Model):
 
     @api.model
     def create(self, vals):
-        print("======================================")
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
         seo_view = self.env['automated_seo.view'].browse(vals['view_id'])
@@ -87,7 +86,8 @@ class WebsitePageVersion(models.Model):
         latest_version = self.env['website.page.version'].search([
             ('view_id', '=', seo_view.id)
         ], order='create_date DESC', limit=1)
-
+        previous_version = self.env['website.page.version'].search(
+            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
         # Set initial version numbers
         if not latest_version:
             # First version: v1.0.0
@@ -98,32 +98,40 @@ class WebsitePageVersion(models.Model):
             })
         else:
 
-            change_type = vals.get('change', 'minor_change')
-            if change_type == 'major_change':
+            change_type = vals.get('change')
+            if not change_type:
+                max_major_version = self.env['website.page.version'].search([], order='major_version desc', limit=1)
+
                 vals.update({
-                    'major_version': latest_version.major_version + 1,
+                    'major_version': max_major_version.major_version + 1,
                     'minor_version': 0,
                     'patch_version': 0
                 })
-            elif change_type == 'minor_change':
-                vals.update({
-                    'major_version': latest_version.major_version,
-                    'minor_version': latest_version.minor_version + 1,
-                    'patch_version': 0
-                })
-
             else:
-                # Regular minor change
-                vals.update({
-                    'major_version': latest_version.major_version,
-                    'minor_version': latest_version.minor_version,
-                    'patch_version': latest_version.patch_version + 1
-                })
-        previous_version = self.env['website.page.version'].search(
-            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
-        previous_version.write({
-            'publish': True
-        })
+                if change_type == 'minor_change':
+                    vals.update({
+                        'major_version': previous_version.major_version,
+                        'minor_version': previous_version.minor_version + 1,
+                        'patch_version': 0
+                    })
+
+                else:
+                    # Regular minor change
+                    vals.update({
+                        'major_version': previous_version.major_version,
+                        'minor_version': previous_version.minor_version,
+                        'patch_version': previous_version.patch_version + 1
+                    })
+        if vals.get('status'):
+
+            previous_version.write({
+                'status': False
+            })
+
+
+        # if vals.get("unpublish"):
+        #
+
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
         vals.update({
             'page_id': seo_view.website_page_id.id,
@@ -135,18 +143,23 @@ class WebsitePageVersion(models.Model):
 
     def action_create_version(self):
         # self.write({'stage': 'in_progress'})
+        unpublish =self.env.context.get('unpublish')
         self.ensure_one()
         if not self.view_id:
             raise UserError('View ID is required to create a version')
-
         # Deactivate current active version
         current_version = self.search([
             ('status', '=', True),
             ('view_id', '=', self.view_id.id)
         ], limit=1)
 
-        if current_version:
+        # if current_version:
+        # breakpoint()
+        if unpublish:
+            # breakpoint()
             current_version.status = False
+
+            current_version.publish = True
 
         # Set this as the active version
         self.status = True

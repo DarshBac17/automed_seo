@@ -235,7 +235,6 @@ class View(models.Model):
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
         self.env['website.page.version'].create({
-            'change':'major_change',
             'description': f'{self.upload_filename} File is uploaded',
             'view_id': self.id,
             'page_id': self.page_id,
