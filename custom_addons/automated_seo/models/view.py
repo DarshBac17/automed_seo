@@ -142,7 +142,7 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
-                    vals['unique_page_id'] = formatted_name + str(random.randint(10000, 99999))
+
         return super(View, self).write(vals)
 
     def action_view_website_page(self):
@@ -236,6 +236,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
+                # self.delete_img_folder_from_s3(view_name=self.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -349,8 +350,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-            img_tag['height'] = height
-            img_tag['width'] = width
+            img_tag['height'] = int(height)
+            img_tag['width'] = int(width)
             return output
 
         except Exception as e:
@@ -395,7 +396,7 @@ class View(models.Model):
             })
 
     def remove_extra_spaces(self,html_parser):
-        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img']
+        inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
             pattern = f'<{tag}([^>]*)>\s*([^<]*)\s*</{tag}>'
             html_parser = re.sub(pattern, lambda m: f'<{tag}{m.group(1)}>{m.group(2).strip()}</{tag}>', html_parser)
@@ -581,14 +582,14 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/Inhouse/{view_name.replace(' ','')}/{new_image_name}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
 
 
             for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
-                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width"
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width",
                          "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
                          "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
 
@@ -606,7 +607,8 @@ class View(models.Model):
 
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-
+            img['height'] = int(float(img.get('height')))
+            img['width'] = int(float(img.get('width')))
 
         return str(soup.prettify())
 
@@ -844,8 +846,9 @@ class View(models.Model):
                 if tag.has_attr(attr):
                     del tag[attr]
 
-            for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1']:
-                tag.attrs.pop(attr, None)
+            for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:
+                if tag.name!='img':
+                    tag.attrs.pop(attr, None)
 
             # for tag in soup.find_all(class_=class_to_remove):
             #     # Replace the tag with its contents
@@ -897,9 +900,9 @@ class View(models.Model):
                           )
         try:
             if view_name:
-                s3_key = f'Inhouse/{view_name.replace(" ","")}/{s3_filename}'
+                s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
             else:
-                s3_key = f'Inhouse/{s3_filename}'
+                s3_key = f'inhouse/{s3_filename}'
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
                 'ContentType': content_type})
 
@@ -913,6 +916,13 @@ class View(models.Model):
                 print(f"An error occurred: {e}")
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
+
+    def delete_img_folder_from_s3(self,view_name):
+        s3 = boto3.client('s3',
+                          aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                          )
+        s3.delete_object(Bucket='Inhouse', Key=f'{view_name.replace(" ","")}')
 
     def remove_br_tags(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
