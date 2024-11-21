@@ -53,22 +53,6 @@
                     <t t-snippet="automated_seo.s_banner_side_image_with_icons" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
                         <keywords>banner, side image, icons</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, side, matrix, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
-                        <keywords>banner, side, matrix, button</keywords>
-                    </t>
-
                 </div>
             </div>
 
