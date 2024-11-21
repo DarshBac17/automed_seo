@@ -9,7 +9,7 @@ odoo.define('website.autosave', function (require) {
          */
         init: function () {
             this._super.apply(this, arguments);
-            this.autoSaveInterval = 10000; // Auto-save interval in milliseconds
+            this.autoSaveInterval = 60000; // Auto-save interval in milliseconds
             this.contentChanged = false;
             this.lastContent = null;
             this.autoSaveTimer = null;
@@ -42,11 +42,7 @@ odoo.define('website.autosave', function (require) {
 
                 // Start auto-save timer
                 this.autoSaveTimer = setInterval(() => {
-                    this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
-                    console.log(this.$autoSaveIcon)
-                    if (this.$autoSaveIcon.length) {
-                        this.$autoSaveIcon.hide();
-                    }
+
                     this.performAutoSave();
                 }, this.autoSaveInterval);
             } catch (error) {
@@ -79,9 +75,15 @@ odoo.define('website.autosave', function (require) {
                 this.contentChanged = false;
                 this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
                 console.log(this.$autoSaveIcon)
-                    if (this.$autoSaveIcon.length) {
-                        this.$autoSaveIcon.show();
+                if (this.$autoSaveIcon.length) {
+                    const $icon = this.$autoSaveIcon.find('i');
+                    // Check if the current icon is fa-cloud, and change to fa-check if true
+                    if ($icon.hasClass('fa-spinner')) {
+                        $icon.removeClass('fa-spinner').addClass('fa-cloud');
+                    } else {
+                        $icon.addClass('fa-cloud');
                     }
+                }
 //                this._showAutoSaveNotification()
                 console.log('[Website Editor] Content saved successfully');
             }).catch((error) => {
@@ -112,6 +114,17 @@ odoo.define('website.autosave', function (require) {
             }
 
             $editableContent.on('input change keyup mouseup', () => {
+                this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
+                console.log(this.$autoSaveIcon)
+                if (this.$autoSaveIcon.length) {
+                    const $icon = this.$autoSaveIcon.find('i');
+                    // Check if the current icon is fa-cloud, and change to fa-check if true
+                     if ($icon.hasClass('fa-cloud')) {
+                        $icon.removeClass('fa-cloud').addClass('fa-spinner');
+                    } else {
+                        $icon.addClass('fa-spinner');
+                    }
+                }
                 const currentContent = this._getPageContent();
                 if (currentContent !== this.lastContent) {
                     this.contentChanged = true;
