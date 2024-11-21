@@ -114,3 +114,51 @@
         }
     }
 }
+
+/* Style for the container div */
+.o_col {
+    width: 350px; /* Adjust the width as per your design */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for rows inside the container */
+.o_row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Ensure filenames adjust dynamically */
+.o_row field[name="upload_filename"] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust this value to control how much space filenames can occupy */
+    display: inline-block;
+}
+
+/* Add margin and alignment for labels */
+.o_row p {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+/* Style for buttons */
+.o_row .btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+    .o_col {
+        width: 100%; /* Full-width on smaller screens */
+    }
+    .o_row field[name="upload_filename"] {
+        max-width: 100%; /* Allow full width for filenames on smaller screens */
+    }
+}

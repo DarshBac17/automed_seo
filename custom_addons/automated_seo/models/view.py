@@ -219,6 +219,9 @@ class View(models.Model):
         }
 
     def action_parse_uploaded_file(self):
+        name, ext = self.upload_filename.rsplit('.', 1)
+        if ext not in ['php','html']:
+            raise UserError("Upload php or html file.")
         file_content = base64.b64decode(self.upload_file)
         file_text = file_content.decode('utf-8')
         content = self.convert_php_tags(content=file_text)
@@ -231,10 +234,9 @@ class View(models.Model):
                                 </t>
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
-        print(str(soup.prettify()))
         self.env['website.page.version'].create({
             'change':'major_change',
-            'description': 'upload file Version',
+            'description': f'{self.upload_filename} File is uploaded',
             'view_id': self.id,
             'page_id': self.page_id,
             'view_arch':soup.prettify(),
@@ -409,42 +411,7 @@ class View(models.Model):
                             sub_snippet_classes.append("o_replace_section_div")
                             sub_snippet["class"] = sub_snippet_classes
                             sub_snippet.name = "section"
-
-                    # for sub_snippet in sub_snippets:
-
-
-
-                #         print("+======================+++++++++++++++++")
-                #     content += str(section)
-                #
-                # else:
                 content += str(section)
-                # print("start===========================")
-                #
-                # print(section)
-                # print("end===========================")
-
-            # for tag in tags:
-            #     # if section.find(string = tag.get('snippet')):
-            #     #     print("++++++++++++++++++++++++++++++++++++++++++++++++++")
-            #     #     print("find the test")
-            #     new_section = self.normalize_text(str(section))
-            #     new_php = self.normalize_text(tag.get('php'))
-            #     print("===============================",new_section)
-            #     print("===============================",new_php)
-            #     print(new_section.find(new_php))
-            #     print("===============end============================")
-            #     section=new_section.replace(new_php,tag.get('snippet'))
-        # soup = BeautifulSoup(content, 'html.parser')
-        # content = soup.prettify()
-        # for tag in tags:
-        #     content = content.replace(tag.get('php'),tag.get('snippet'))
-        # content =""
-        # for section in sections:
-        #     content+=str(section)
-        # content = soup.find('body')
-        # return soup
-
         return content
 
 
