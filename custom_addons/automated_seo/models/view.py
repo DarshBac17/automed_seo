@@ -255,7 +255,55 @@ class View(models.Model):
 
         # Apply the regex substitution
         return re.sub(pattern, remove_spaces, content, flags=re.DOTALL)
+
+    def replace_php_variables(self,content):
+        # Regex pattern to match <?phpecho$variable?>
+        pattern = r"<\?phpecho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+
+        # Function to generate the replacement text
+        def replacer(match):
+            variable_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
+    def replace_php_const_variables(self,content):
+        # Regex pattern to match <?phpecho$variable?>
+        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+
+
+        # Function to generate the replacement text
+        def replacer(match):
+            variable_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
+    def replace_php_constants(self,content):
+        # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
+        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+
+        # Function to generate the replacement text
+        def replacer(match):
+            constant_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{constant_name}" data-php-const-var="1">Description</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
     def convert_php_tags(self,content):
+
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
         soup = BeautifulSoup(content, 'html.parser')
         base_url_php = "https://assets.bacancytechnology.com/"
@@ -277,17 +325,23 @@ class View(models.Model):
         for tag in tags:
             content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
 
+        content = self.replace_php_variables(content=content)
+        content = self.replace_php_const_variables(content=content)
         if content.find("phpecho"):
             content = content.replace("phpecho","php echo ")
+
+
         soup = BeautifulSoup(content, 'html.parser')
 
         sections =  soup.find_all('section')
         content = ""
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
         for section in sections:
-            classes = section.get('class')
+            classes = section.get('class',[])
             if not section.find_parent('section'):
                 section.attrs['data-snippet'] = "s_banner"
+                classes.append('o_automated_seo_php_variable')
+                section['class']=classes
                 new_section = self.normalize_text(section)
                 for tag in tags:
                     new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
@@ -311,7 +365,7 @@ class View(models.Model):
 
             if not section.find_parent('section'):
                 classes = section.get('class',[])
-
+                ids = section.get('id',[])
                 if classes and 'tech-stack' in classes:
                     tbody = section.find('tbody')
                     tbody['class'] = ['o_sub_items_container']
@@ -328,7 +382,11 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
+                if 'price-sec' in ids:
+                    spans = section.find_all(class_='o_au_php_var')
 
+                    for span in spans:
+                        span.string="2***"
                 sub_snippets = None
 
                 if section.find_all('div', class_='boxed'):
