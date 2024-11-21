@@ -241,7 +241,7 @@ class View(models.Model):
             'page_id': self.page_id,
             'view_arch':soup.prettify(),
             'user_id': self.env.user.id,
-            'status': False
+            'status': True
         })
 
     def normalize_text(self,text):
@@ -283,7 +283,7 @@ class View(models.Model):
             variable_name = match.group(1)
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="1">{variable_name}</span>'
             )
 
         # Replace all matches in the content
