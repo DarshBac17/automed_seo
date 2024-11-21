@@ -83,21 +83,82 @@
     color: #17a2b8; /* Cyan */
 }
 
-.icon-wrapper {
-    position: relative !important; /* Make this container a positioned element */
-    display: inline-block !important; /* Ensure proper alignment */
+.o_snippet_preview_popup {
+    position: fixed;
+    display: none;
+    z-index: 1999; /* Increased z-index to ensure visibility */
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
+    .o_preview_frame {
+        .preview-header {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: 500;
+            font-size: 13px;
+            color: #212529;
+        }
+
+        .preview-content {
+            padding: 8px;
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 2px;
+            }
+        }
+    }
 }
 
-.icon-wrapper .fa-cloud {
-    font-size: 1.5rem !important; /* Adjust the size of the cloud */
-    color: #6c757d !important; /* Default color for the cloud icon */
+/* Style for the container div */
+.o_col {
+    width: 350px; /* Adjust the width as per your design */
+    display: flex;
+    flex-direction: column;
 }
 
-.icon-wrapper .check-icon {
-    position: absolute !important; /* Position relative to the wrapper */
-    top: 50% !important; /* Center vertically */
-    left: 50% !important; /* Center horizontally */
-    transform: translate(-50%, -50%) !important; /* Adjust to center perfectly */
-    font-size: 0.8rem !important; /* Size of the check icon */
-    color: #000000 !important; /* Black color for the check icon */
+/* Style for rows inside the container */
+.o_row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Ensure filenames adjust dynamically */
+.o_row field[name="upload_filename"] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust this value to control how much space filenames can occupy */
+    display: inline-block;
+}
+
+/* Add margin and alignment for labels */
+.o_row p {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+/* Style for buttons */
+.o_row .btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+    .o_col {
+        width: 100%; /* Full-width on smaller screens */
+    }
+    .o_row field[name="upload_filename"] {
+        max-width: 100%; /* Allow full width for filenames on smaller screens */
+    }
 }

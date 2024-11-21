@@ -53,7 +53,7 @@
             </div>
         </section>
         <section class="pt-0 form-sec o_automated_seo_php_variable">
-            <div class="container o_au_php_form_center-form">
+            <div class="container o_au_php_form_single-form">
 <!--               <?php-->
 <!--            $formType = 'tech-dark-form';-->
 <!--            include("tailwind/template/form.php");-->
