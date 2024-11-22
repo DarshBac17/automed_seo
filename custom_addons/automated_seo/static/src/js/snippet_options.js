@@ -9,9 +9,9 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
     options.registry.PhpVariableTextSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
-            'click [data-select-var]': '_onVariableSelect',
+
             'mouseup .o_editable': '_onSelectionChange',
-            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
+
             'click [data-variable-class="strong-tag"]': '_onStrongTagClick',
             'click [data-variable-class="b-tag"]': '_onBTagClick',
             'click [data-variable-class="font-bold"]': '_onFontBoldClick',
@@ -25,11 +25,10 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             'click [data-remove-url]': '_onRemoveUrl',
             'click [data-cancel-url]': '_onCancelUrl',
 
-            //            'click [data-apply-custom-var]': '_onApplyVariable',
             'click .data-remove-php-var': '_onRemovePhpVariable',
-            'input .data-variable-input': '_onInputChange',
-            'keydown .data-variable-input': '_onKeyDown',
-            //            'input input[data-variable-input]': '_onVariableInput',
+            'input .data-variable-input': '_onVariableInputChange',
+            'keydown .data-variable-input': '_onVariableKeyDown',
+            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
         }),
 
 
@@ -47,6 +46,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this.typing = false;
         },
 
+
         /**
          * @override
          */
@@ -57,9 +57,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             }
         },
 
-        _onVariableInput: function (ev) {
-            this.currentValue = ev.target.value;
-        },
+
 
         start: function () {
             var self = this;
@@ -68,27 +66,160 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                     self.wysiwyg = self.options.wysiwyg;
                 }
 
-                $(document).on('selectionchange', _.debounce(() => {
-                    self._onSelectionChange();
-                }, 100));
+                // $(document).on('selectionchange', _.debounce(() => {
+                //     self._onSelectionChange();
+                // }, 100));
             });
         },
 
 
+        destroy: function () {
+            $(document).off('selectionchange');
+            this._super.apply(this, arguments);
+        },
+
+
         /**
-         * Called when the input value changes (e.g., typing, deleting).
+        * Get the current Wysiwyg instance safely
+        * @private
+        */
+        _getWysiwygInstance: function () {
+            return this.wysiwyg || (this.options && this.options.wysiwyg);
+        },
+
+
+        /**
+        * Get the current selection instance safely
+        * @private
+        */
+        _getCurrentSelection: function () {
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg || !wysiwyg.odooEditor) {
+                return null;
+            }
+
+            const selection = wysiwyg.odooEditor.document.getSelection();
+            const currentElement = selection.rangeCount > 0
+                ? selection.getRangeAt(0).commonAncestorContainer.parentElement
+                : null;
+            return {
+                selection: selection,
+                element: currentElement
+            }
+        },
+
+
+        /**
+         * Binds selectionChange event
+         * @returns 
+         */
+        _bindSelectionChangeEvent() {
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+            // wysiwyg.odooEditor.document.addEventListener('selectionchange', (event) => {
+            //     const selection = wysiwyg.odooEditor.document.getSelection();
+            //     console.log(selection);
+            //     if (selection && selection.rangeCount > 0) {
+            //         const range = selection.getRangeAt(0);
+            //         const container = range.commonAncestorContainer;
+
+            //         // Check if selection is within any element having o_editable class
+            //         const isWithinEditable = container.nodeType === Node.TEXT_NODE
+            //             ? container.parentElement?.closest('.o_editable')
+            //             : container.closest('.o_editable');
+
+            //         if (isWithinEditable) {
+            //             this._onSelectionChange.bind(this)(event);
+            //         }
+            //     }
+            // });
+
+            // Optional: Also handle clicks within editable areas
+            wysiwyg.odooEditor.document.addEventListener('click', _.debounce((event) => {
+                const clickedElement = event.target;
+                if (clickedElement.closest('.o_editable')) {
+                    this._onSelectionChange.bind(this)(event);
+                }
+                console.log(clickedElement);
+            }, 100));
+        },
+
+
+        /**
+         * hide unnecessary toolbar's features
+         */
+
+        _hideUnnecessaryElements: function () {
+            const $editor_toolbar_container = $('#o_we_editor_toolbar_container');
+            $editor_toolbar_container.remove();
+            const $imageToolsElement = $('.snippet-option-ImageTools');
+
+
+            if ($imageToolsElement.length) {
+                $imageToolsElement.parent().children().slice($imageToolsElement.index() + 1).each(function () {
+                    $(this).hide().css({
+                        'visibility': 'hidden',
+                        'opacity': '0',
+                        'display': 'none !important'
+                    });
+                });
+            }
+        },
+
+
+        /**
+         * Called on selection change
+         * @returns 
+         */
+        _onSelectionChange: function (ev) {
+            ev.preventDefault();
+
+            this._hideUnnecessaryElements();
+            const selection = this._getCurrentSelection();
+
+            if (!selection.selection || !selection.selection.rangeCount) return;
+
+            const range = selection.selection.getRangeAt(0);
+            const $target = $(document.activeElement);
+
+            // Check if the active element is an input field being edited
+            if ($target.is('input') || $target.is('textarea')) {
+                return; // Ignore selection change when typing in input
+            }
+
+            const $editable = $(range.commonAncestorContainer).closest('.o_we_customize_panel');
+
+            // Run existing selection change handlers
+            this._onBoldSelectionChange(ev);
+            this._onLinkSelectionChange(ev);
+            this._updateButtonState(ev, selection);
+
+            this._onPhpVariableChange(ev);
+
+            this.typing = false;
+
+            /* if (!$editable.length) {
+            } */
+        },
+
+
+
+
+
+        /**
+         * Called when the php var input value changes (e.g., typing, deleting).
          * @param {Event} event
          */
-        _onInputChange: function (event) {
+        _onVariableInputChange: function (event) {
             this.typing = true
 
         },
 
         /**
-         * Called when a key is pressed in the input field.
+         * Called when a key is pressed in the php var input field.
          * @param {Event} event
          */
-        _onKeyDown: function (event) {
+        _onVariableKeyDown: function (event) {
             this.typing = true
 
             if (event.key === "Enter") {
@@ -99,94 +230,13 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
         /**
-         * Handler for wysiwyg ready event
-         * @private
+         * Event function to apply php variable.
+         * @param {Event} event
          */
-        _onWysiwygReady: function (ev) {
-            this.wysiwyg = ev.data;
-            this._bindWysiwygEvents();
-        },
-        /**
-         * Bind necessary wysiwyg events
-         * @private
-         */
-        _bindWysiwygEvents: function () {
-            if (this.wysiwyg && this.wysiwyg.odooEditor) {
-                this.wysiwyg.odooEditor.addEventListener('keyup', () => {
-                    this._onSelectionChange();
-                });
-                this.wysiwyg.odooEditor.addEventListener('click', () => {
-                    this._onSelectionChange();
-                });
-            }
-        },
-        /**
-        * Get the current Wysiwyg instance safely
-        * @private
-        */
-        _getWysiwygInstance: function () {
-            return this.wysiwyg || (this.options && this.options.wysiwyg);
-        },
-
-        /**
-         * Get current selection from Wysiwyg
-         * @private
-         */
-        //        _getCurrentSelection: function () {
-        //            const wysiwyg = this._getWysiwygInstance();
-        //            if (!wysiwyg || !wysiwyg.odooEditor) {
-        //                return null;
-        //            }
-        //
-        //            const selection = wysiwyg.odooEditor.document.getSelection();
-        //
-        //            // Check if the selection is inside an element with the `.o_editable` class
-        //            if (selection.rangeCount) {
-        //                const range = selection.getRangeAt(0);
-        //                const editableContainer = range.commonAncestorContainer.closest
-        //                    ? range.commonAncestorContainer.closest('.o_editable')
-        //                    : null;
-        //
-        //                if (editableContainer) {
-        //                    return selection; // Return the actual selection if valid
-        //                }
-        //
-        //            }
-        //
-        //            return null; // Return a string if not within a `.o_editable` div
-        //        },
-
-        _getCurrentSelection: function () {
-            const wysiwyg = this._getWysiwygInstance();
-            if (!wysiwyg || !wysiwyg.odooEditor) {
-                return null;
-            }
-            return wysiwyg.odooEditor.document.getSelection();
-
-        },
-
-
-        _cleanupEmptySpans: function (element) {
-            const emptySpans = $(element).find('span[data-php-var]:empty');
-            emptySpans.each(function () {
-                $(this).remove();
-            });
-        },
-
-        _cleanupNestedFormatting: function (element) {
-            // Remove nested formatting of the same type
-            const formatTags = ['strong', 'b', 'span'];
-            $(element).find(formatTags.join(',')).each(function () {
-                const $this = $(this);
-                if ($this.hasClass('font-bold') || formatTags.includes(this.tagName.toLowerCase())) {
-                    $this.contents().unwrap();
-                }
-            });
-        },
-
-
         _onApplyVariable: function (ev) {
             ev.preventDefault();
+
+            this.typing = false;
 
             // Locate the <we-input> element and get the value
             var inputField = this.$el.find('.data-variable-input');
@@ -201,14 +251,14 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 return;
             }
 
-            const wysiwyg = this.options.wysiwyg;
+            const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) {
                 console.error('Wysiwyg instance not found');
                 return;
             }
 
-            const selection = wysiwyg.odooEditor.document.getSelection();
-            if (!selection || !selection.toString().trim()) {
+            const selection = this._getCurrentSelection();
+            if (!selection.selection || !selection.selection.toString().trim()) {
                 alert('Please select some text first');
                 return;
             }
@@ -250,25 +300,32 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 // Clean up empty spans and update history
                 this._cleanupEmptySpans($editable[0]);
                 wysiwyg.odooEditor.historyStep();
-                this._onSelectionChange();
-                this.typing = false;
+                // this._onSelectionChange();
 
             } catch (error) {
                 console.error('Error applying variable:', error);
                 alert('An error occurred while applying the variable. Please try again.');
             }
+
         },
 
-        // Add new handler for removing PHP variable
+
+        /**
+         * Event function to remove php variable.
+         * @param {Event} event
+         */
+
         _onRemovePhpVariable: function (ev) {
+
+
             ev.preventDefault();
             ev.stopPropagation();
-
+            this.type = false
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) return;
 
             const selection = this._getCurrentSelection();
-            if (!selection || !selection.toString().trim()) {
+            if (!selection.selection || !selection.selection.toString().trim()) {
                 return;
             }
 
@@ -277,7 +334,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 if (currentVar) {
                     this._removePhpVariable(selection);
                     wysiwyg.odooEditor.historyStep();
-                    this._onSelectionChange();
+                    // this._onSelectionChange();
                     const $varInput = this.$el.find('.data-variable-input');
                     $varInput.val('');
                     const $cancelButton = this.$el.find('.data-remove-php-var');
@@ -287,9 +344,50 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 console.error('Error removing PHP variable:', error);
                 alert('An error occurred while removing the PHP variable. Please try again.');
             }
-            this.type = false
+
         },
 
+
+        /**
+         * Event handler for php variable constant type toggle button
+         * @param {Event} ev 
+         * @returns 
+         */
+        _onConstButtonClick: function (ev) {
+            const $button = $(ev.currentTarget);
+            $button.toggleClass('active');
+            this.isConstVar = $button.hasClass('active');
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+            const selection = this._getCurrentSelection();
+            if (!selection.selection) return;
+
+            const currentVar = this._hasPhpVariable(selection);
+            if (currentVar && currentVar.element) {
+                // Simply update the constant attribute on the existing span
+                $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
+                wysiwyg.odooEditor.historyStep();
+            }
+        },
+
+        /**
+         * Clean up empty spans
+         * @param {*} element 
+         */
+        _cleanupEmptySpans: function (element) {
+            const emptySpans = $(element).find('span[data-php-var]:empty');
+            emptySpans.each(function () {
+                $(this).remove();
+            });
+        },
+
+        /**
+         * Check existing php variables
+         * @param {*} selection 
+         * @returns 
+         */
         _hasPhpVariable: function (selection) {
             if (!selection || !selection.rangeCount) return false;
 
@@ -308,10 +406,20 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             return false;
         },
 
+        /**
+         * Return text content from node
+         * @param {*} node 
+         * @returns 
+         */
         _getAllTextContent: function (node) {
             return node.textContent || node.innerText || '';
         },
 
+        /**
+         * Removes php variables from selections
+         * @param {*} selection 
+         * @returns 
+         */
         _removePhpVariable: function (selection) {
             if (!selection.rangeCount) return;
 
@@ -343,6 +451,13 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             return null;
         },
 
+
+        /**
+         * Apply php variable on selection
+         * @param {*} selection 
+         * @param {*} variable 
+         * @returns 
+         */
         _applyPhpVariable: function (selection, variable) {
             if (!selection.rangeCount) return;
             if (variable.name === 'none') {
@@ -400,30 +515,91 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             return span;
         },
 
-        _onConstButtonClick: function (ev) {
-            const $button = $(ev.currentTarget);
-            $button.toggleClass('active');
-            this.isConstVar = $button.hasClass('active');
 
-            const wysiwyg = this.options.wysiwyg;
-            if (!wysiwyg) return;
 
-            const selection = wysiwyg.odooEditor.document.getSelection();
-            if (!selection) return;
+        /**
+         * Handle php variable changes
+         * @param {Event} ev 
+         */
+        _onPhpVariableChange: function (ev) {
+            const selection = this._getCurrentSelection();
+            const currentVar = this._hasPhpVariable(selection.selection);
+            const $removeButton = this.$el.find('.data-remove-php-var');
+            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+            const $varInput = this.$el.find('.data-variable-input');
 
-            const currentVar = this._hasPhpVariable(selection);
-            if (currentVar && currentVar.element) {
-                // Simply update the constant attribute on the existing span
-                $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
-                wysiwyg.odooEditor.historyStep();
+
+            if (currentVar) {
+                $removeButton.removeClass('d-none');
+                $constButton.toggleClass('active', currentVar.isConst);
+                this.isConstVar = currentVar.isConst;
+
+                // Only update input if it's empty or different from current variable name
+                if ($varInput.length && (!$varInput.val() || $varInput.val() !== currentVar.name)) {
+                    $varInput.val(currentVar.name);
+                }
+            } else {
+                $varInput.val('');
+                $removeButton.addClass('d-none');
+                $constButton.removeClass('active');
+                this.isConstVar = false;
             }
         },
 
 
+        /**
+         * Event handler for Strong button click
+         * @param {Event} ev 
+         */
+        _onStrongTagClick: function (ev) {
+            ev.preventDefault();
+            this._applyTextFormatting('strong-tag');
+        },
 
+        /**
+         * Event handler for BTag button click
+         * @param {Event} ev 
+         */
+        _onBTagClick: function (ev) {
+            ev.preventDefault();
+            this._applyTextFormatting('b-tag');
+        },
+
+        /**
+         * Event handler for Font-bold button click
+         * @param {Event} ev 
+         */
+        _onFontBoldClick: function (ev) {
+            ev.preventDefault();
+            this._applyTextFormatting('font-bold');
+        },
+
+        /**
+         * Event handler for Italic button click
+         * @param {Event} ev 
+         */
+        _onItalicTagClick: function (ev) {
+            ev.preventDefault();
+            this._applyTextFormatting('italic-tag');
+        },
+
+        /**
+         * Event handler for Underline button click
+         * @param {Event} ev 
+         */
+        _onUnderlineTagClick: function (ev) {
+            ev.preventDefault();
+            this._applyTextFormatting('underline-tag');
+        },
+
+        /**
+         * Text formatting function for bold variants, italic, underline and links
+         * @param {*} formatType 
+         * @returns 
+         */
         _applyTextFormatting: function (formatType) {
             const selection = this._getCurrentSelection();
-            if (!selection || !selection.rangeCount) {
+            if (!selection.selection || !selection.selection.rangeCount) {
                 alert('Please select some text first');
                 return;
             }
@@ -507,58 +683,48 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             }
         },
 
-        _createFormattingElement: function (formatType) {
-            switch (formatType) {
-                case 'strong-tag':
-                    return document.createElement('strong');
-                case 'b-tag':
-                    return document.createElement('b');
-                case 'font-bold':
-                    const element = document.createElement('span');
-                    element.className = 'font-bold';
-                    return element;
-                case 'italic-tag':
-                    return document.createElement('i');
-                case 'underline-tag':
-                    return document.createElement('u');
-                default:
-                    throw new Error('Unknown formatting type');
-            }
-        },
 
-        _getCurrentFormatting: function (selection) {
-            if (!selection || !selection.rangeCount) return null;
+        /**
+         * Checks existing formatting in selection
+         * @param {*} selection 
+         * @param {*} formatType 
+         * @returns 
+         */
+        _hasFormatting: function (selection, formatType) {
+            if (!selection || !selection.rangeCount) return false;
 
-            const formatTypes = ['strong-tag', 'b-tag', 'font-bold', 'italic-tag', 'underline-tag'];
             const range = selection.getRangeAt(0);
             const container = range.commonAncestorContainer;
+            let $element;
 
-            for (const type of formatTypes) {
-                let selector;
-                switch (type) {
-                    case 'strong-tag':
-                        selector = 'strong';
-                        break;
-                    case 'b-tag':
-                        selector = 'b';
-                        break;
-                    case 'font-bold':
-                        selector = 'span.font-bold';
-                        break;
-                    case 'italic-tag':
-                        selector = 'i';
-                        break;
-                    case 'underline-tag':
-                        selector = 'u';
-                        break;
-                }
-                if ($(container).closest(selector).length) {
-                    return type;
-                }
+            switch (formatType) {
+                case 'strong-tag':
+                    $element = $(container).closest('strong');
+                    break;
+                case 'b-tag':
+                    $element = $(container).closest('b');
+                    break;
+                case 'font-bold':
+                    $element = $(container).closest('span.font-bold');
+                    break;
+                case 'italic-tag':
+                    $element = $(container).closest('i');
+                    break;
+                case 'underline-tag':
+                    $element = $(container).closest('u');
+                    break;
             }
-            return null;
+
+            return $element.length > 0;
         },
 
+
+        /**
+         * Remove spacific formatting from selection
+         * @param {*} selection 
+         * @param {*} formatType 
+         * @returns 
+         */
         _removeSpecificFormatting: function (selection, formatType) {
             if (!selection.rangeCount) return;
 
@@ -600,7 +766,66 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             }
         },
 
-        _removeAllFormatting: function (selection) {
+
+        /**
+         * Returns a element based on formatType
+         * @param {*} formatType 
+         * @returns 
+         */
+        _createFormattingElement: function (formatType) {
+            switch (formatType) {
+                case 'strong-tag':
+                    return document.createElement('strong');
+                case 'b-tag':
+                    return document.createElement('b');
+                case 'font-bold':
+                    const element = document.createElement('span');
+                    element.className = 'font-bold';
+                    return element;
+                case 'italic-tag':
+                    return document.createElement('i');
+                case 'underline-tag':
+                    return document.createElement('u');
+                default:
+                    throw new Error('Unknown formatting type');
+            }
+        },
+
+
+        /* _getCurrentFormatting: function (selection) {
+            if (!selection || !selection.rangeCount) return null;
+
+            const formatTypes = ['strong-tag', 'b-tag', 'font-bold', 'italic-tag', 'underline-tag'];
+            const range = selection.getRangeAt(0);
+            const container = range.commonAncestorContainer;
+
+            for (const type of formatTypes) {
+                let selector;
+                switch (type) {
+                    case 'strong-tag':
+                        selector = 'strong';
+                        break;
+                    case 'b-tag':
+                        selector = 'b';
+                        break;
+                    case 'font-bold':
+                        selector = 'span.font-bold';
+                        break;
+                    case 'italic-tag':
+                        selector = 'i';
+                        break;
+                    case 'underline-tag':
+                        selector = 'u';
+                        break;
+                }
+                if ($(container).closest(selector).length) {
+                    return type;
+                }
+            }
+            return null;
+        }, */
+
+        /* _removeAllFormatting: function (selection) {
             if (!selection.rangeCount) return;
 
             const range = selection.getRangeAt(0);
@@ -630,37 +855,19 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 selection.removeAllRanges();
                 selection.addRange(newRange);
             }
-        },
+        }, */
 
-        _hasFormatting: function (selection, formatType) {
-            if (!selection || !selection.rangeCount) return false;
 
-            const range = selection.getRangeAt(0);
-            const container = range.commonAncestorContainer;
-            let $element;
+        /**
+         * Updae button state [arrange classes] on selection change
+         * @param {*} selection 
+         * @returns 
+         * 
+         */
+        _updateButtonState: function (ev, selection) {
 
-            switch (formatType) {
-                case 'strong-tag':
-                    $element = $(container).closest('strong');
-                    break;
-                case 'b-tag':
-                    $element = $(container).closest('b');
-                    break;
-                case 'font-bold':
-                    $element = $(container).closest('span.font-bold');
-                    break;
-                case 'italic-tag':
-                    $element = $(container).closest('i');
-                    break;
-                case 'underline-tag':
-                    $element = $(container).closest('u');
-                    break;
-            }
+            //TODO add link button
 
-            return $element.length > 0;
-        },
-
-        _updateButtonState: function (selection) {
             if (!selection || !selection.rangeCount) {
                 this.$el.find('[data-variable-class]').removeClass('active btn-success').addClass('btn-primary');
                 return;
@@ -700,115 +907,239 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             }
         },
 
+        /**
+         * Handles changes in bold varients
+         * @param {Event} ev 
+         * @returns 
+         */
+        _onBoldSelectionChange: function (ev) {
 
-        // Update click handlers
-        _onStrongTagClick: function (ev) {
-            ev.preventDefault();
-            this._applyTextFormatting('strong-tag');
-        },
+            const selection = this._getCurrentSelection();
+            if (!selection.selection) return;
 
-        _onBTagClick: function (ev) {
-            ev.preventDefault();
-            this._applyTextFormatting('b-tag');
-        },
+            // Update the state of each formatting button based on current selection
+            ['strong-tag', 'b-tag', 'font-bold'].forEach(formatType => {
+                const hasFormat = this._hasFormatting(selection, formatType);
+                const $button = this.$el.find(`[data-variable-class="${formatType}"]`);
 
-        _onFontBoldClick: function (ev) {
-            ev.preventDefault();
-            this._applyTextFormatting('font-bold');
-        },
-
-        _onItalicTagClick: function (ev) {
-            ev.preventDefault();
-            this._applyTextFormatting('italic-tag');
-        },
-
-        _onUnderlineTagClick: function (ev) {
-            ev.preventDefault();
-            this._applyTextFormatting('underline-tag');
-        },
-
-
-        _onVariableSelect: function (ev) {
-            const $target = $(ev.currentTarget);
-            const variableName = $target.data('select-var');
-            const variableClass = $target.data('variable-class');
-
-            const wysiwyg = this.options.wysiwyg;
-            if (!wysiwyg) return;
-
-            const selection = wysiwyg.odooEditor.document.getSelection();
-            if (!selection || !selection.toString().trim()) {
-                alert('Please select some text first');
-                return;
-            }
-
-            const range = selection.getRangeAt(0);
-            const $editable = $(range.commonAncestorContainer).closest('.o_editable');
-            if (!$editable.length) {
-                alert('Please select text within the editable area');
-                return;
-            }
-
-            try {
-                const currentVar = this._hasPhpVariable(selection);
-
-                if (variableName === 'none') {
-                    if (currentVar) {
-                        this._removePhpVariable(selection);
-                    }
-                    this.$el.find('[data-select-var]').removeClass('active');
-                    $target.addClass('active');
+                if (hasFormat) {
+                    $button.removeClass('btn-primary').addClass('active btn-success');
                 } else {
-                    if (currentVar && currentVar.name === variableName) {
-                        this._removePhpVariable(selection);
-                        $target.removeClass('active');
-                    } else {
-                        if (currentVar) {
-                            this._removePhpVariable(selection);
-                        }
-
-                        const span = this._applyPhpVariable(selection, {
-                            name: variableName,
-                            class: "o_au_php_var"
-                        });
-
-                        //                        if (span) {
-                        //                            this.$el.find('[data-select-var]').removeClass('active');
-                        //                            $target.addClass('active');
-                        //                        }
-                    }
+                    $button.removeClass('active btn-success').addClass('btn-primary');
                 }
+            });
+        },
 
-                this._cleanupEmptySpans($editable[0]);
-                wysiwyg.odooEditor.historyStep();
-                this._onSelectionChange();
 
-            } catch (error) {
-                console.error('Error applying variable:', error);
-                alert('An error occurred while applying the variable. Please try again.');
+
+
+
+
+
+        /**
+         * Handles link button click event
+         * @param {Event} ev 
+         * @returns 
+         */
+        _onLinkButtonClick: function (ev) {
+            ev.preventDefault();
+
+            const $linkButton = this.$el.find('[data-variable-class="a-tag"]');
+            const $urlSection = this.$el.find('.url-input-section');
+            const $urlInput = $urlSection.find('.link-url-input');
+            const $removeBtn = $urlSection.find('[data-remove-url="true"]');
+            const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
+
+            // Toggle button state
+            this._resetUrlInputSection();
+            $linkButton.toggleClass('active');
+
+            // Show/hide URL section based on button state
+            if ($linkButton.hasClass('active')) {
+                $urlSection.removeClass('d-none');
+
+                // If clicked element is a link in the editable area  
+                const existingLink = this._getExistingLink(ev.target);
+
+                if (existingLink) {
+
+                    // Update input with clicked link's URL
+                    $urlInput.val(existingLink.href);
+                    $removeBtn.removeClass('d-none');
+
+                    const isNewTab = existingLink.target === '_blank';
+                    $newTabCheckbox.toggleClass('active', isNewTab);
+                    this.isTargetNewTab = isNewTab;
+
+                    this.currentLink = existingLink.href;
+
+                }
+                $urlInput.focus();
+            }
+
+        },
+
+
+
+        /**
+         * Event handler to remove link 
+         * @param {Event} ev 
+         */
+        _onRemoveUrl: function (ev) {
+            ev.preventDefault();
+
+            const selection = this._getCurrentSelection();
+            if (selection.selection) {
+                console.log("[[[[[[[[[[[[[[[[[[[[[[[remoing url]]]]]]]]]]]]]]]]]]]]]]]")
+                this._removeLink(ev, selection);
+
+                const wysiwyg = this._getWysiwygInstance();
+                if (wysiwyg) {
+                    wysiwyg.odooEditor.historyStep();
+                }
             }
         },
 
+        /**
+         * Remove link formatting
+         * @private
+         */
+        _removeLink: function (ev, selection) {
+            // if (!selection.rangeCount) return;
+
+            const link = this._getExistingLink(selection.element);
+
+            console.log(selection.element);
+            if (link) {
+                console.log("[[[[[[[[[[[[[[[[[[[[[[[remoing url]]]]]]]]]]]]]]]]]]]]]]]")
+                const textNode = document.createTextNode(link.element.textContent);
+                link.element.parentNode.replaceChild(textNode, link.element);
+
+                // Reselect the text
+                const newRange = document.createRange();
+                newRange.selectNodeContents(textNode);
+                selection.selection.removeAllRanges();
+                selection.selection.addRange(newRange);
+
+
+                this._resetUrlInputSection();
+                // Prevent default click behavior
+                ev.preventDefault();
+                ev.stopPropagation();
+            }
+        },
 
 
         /**
          * Get existing link from selection if it exists
          * @private
          */
-        _getExistingLink: function (selection) {
-            if (!selection || !selection.rangeCount) return null;
+        _getExistingLink: function (clickedElement) {
+            // If element itself is <a> tag
+            if (clickedElement.tagName === 'A') {
+                return {
+                    element: clickedElement,
+                    href: clickedElement.getAttribute('href') ? clickedElement.getAttribute('href').toString().trim() : null,
+                    target: clickedElement.getAttribute('target') ? clickedElement.getAttribute('target').toString().trim() : null
+                };
+            }
 
-            const range = selection.getRangeAt(0);
-            const container = range.commonAncestorContainer;
-            const $link = $(container).closest('a');
+            // If element is inside an <a> tag
+            /* const parentLink = clickedElement.closest('a');
+            if (parentLink) {
+                return {
+                    element: parentLink,
+                    href: parentLink.getAttribute('href'),
+                    target: parentLink.getAttribute('target')
+                };
+            } */
 
-
-
-            return $link.length ? $link[0] : null;
+            return null;
         },
 
 
-        // Add this new helper method to reset URL input section
+
+        /**
+         * Event handler for link target toogler button click
+         * @param {*} ev 
+         */
+        _onLinkTargetButtonClick: function (ev) {
+            ev.preventDefault();
+            const $button = $(ev.currentTarget);
+
+            // Toggle active state
+            $button.toggleClass('active');
+
+            // Update isTargetNewTab variable
+            this.isTargetNewTab = $button.hasClass('active');
+        },
+
+
+        /**
+         * Event handler for save url
+         * @param {Event} ev 
+         * @returns 
+         */
+        _onSaveUrl: function (ev) {
+            ev.preventDefault();
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+            const url = this.$el.find('.link-url-input').val();
+
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            const selection = this._getCurrentSelection();
+            const existingLink = this._getExistingLink(selection.element);
+
+            // Handle link update/creation
+            if (existingLink) {
+                existingLink.element.attr('href', url);
+
+                if (this.isTargetNewTab) {
+                    existingLink.element.attr('target', '_blank');
+                } else {
+                    existingLink.element.removeAttr('target');
+                }
+            } else {
+                const selection = this._getCurrentSelection();
+                const range = selection.selection.getRangeAt(0);
+                const selectedText = range.toString();
+
+                const link = document.createElement('a');
+                link.href = url;
+                link.textContent = selectedText;
+
+                if (this.isTargetNewTab) {
+                    link.target = '_blank';
+                }
+
+                range.deleteContents();
+                range.insertNode(link);
+            }
+
+            wysiwyg.odooEditor.historyStep();
+            this._resetUrlInputSection();
+        },
+
+
+
+
+
+        /**
+         * Event handler to close url input section
+         * @param {Event} ev 
+         */
+        _onCancelUrl: function (ev) {
+            this._resetUrlInputSection();
+        },
+
+        /**
+         * reset default url input section
+         */
         _resetUrlInputSection: function () {
             const $urlSection = this.$el.find('.url-input-section');
             const $urlInput = $urlSection.find('.link-url-input');
@@ -827,265 +1158,15 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         },
 
 
-        _onLinkButtonClick: function (ev) {
-            ev.preventDefault();
 
-            const $linkButton = this.$el.find('[data-variable-class="a-tag"]');
-            const $urlSection = this.$el.find('.url-input-section');
-            const $urlInput = $urlSection.find('.link-url-input');
-            const $removeBtn = $urlSection.find('[data-remove-url="true"]');
-            const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
 
-            // Always reset previous state first
-            this._resetUrlInputSection();
-
-            // If clicked element is a link in the editable area
-            if ($(ev.currentTarget).is('a')) {
-                const $clickedLink = $(ev.currentTarget);
-
-                // Show URL section with fresh details
-                $urlSection.removeClass('d-none');
-                $linkButton.addClass('active');
-
-                // Update input with clicked link's URL
-                $urlInput.val($clickedLink.attr('href') || '');
-                $removeBtn.removeClass('d-none');
-
-                // Update new tab checkbox
-                const isNewTab = $clickedLink.attr('target') === '_blank';
-                $newTabCheckbox.toggleClass('active', isNewTab);
-                this.isTargetNewTab = isNewTab;
-
-                // Store reference to current link
-                this.currentLink = $clickedLink;
-
-                // Focus the input
-                $urlInput.focus();
-                return;
-            }
-
-            // Handle regular button click for text selection
-            const selection = this._getCurrentSelection();
-            if (!selection || !selection.toString().trim()) {
-                alert('Please select some text first');
-                return;
-            }
-
-            // Toggle button state
-            $linkButton.toggleClass('active');
-
-            // Handle existing link in selection
-            const existingLink = this._getExistingLink(selection);
-            if (existingLink) {
-                $urlInput.val(existingLink.href || '');
-                $removeBtn.removeClass('d-none');
-
-                // Update new tab checkbox based on existing link
-                const isNewTab = existingLink.target === '_blank';
-                $newTabCheckbox.toggleClass('active', isNewTab);
-                this.isTargetNewTab = isNewTab;
-
-                this.currentLink = $(existingLink);
-            }
-
-            // Show/hide URL section based on button state
-            if ($linkButton.hasClass('active')) {
-                $urlSection.removeClass('d-none');
-                $urlInput.focus();
-            } else {
-                this._resetUrlInputSection();
-            }
-        },
 
 
         /**
-         * Remove link formatting
-         * @private
+         * Handle link editing block on selection change
+         * @param {Event} ev 
          */
-        _removeLink: function (selection) {
-            if (!selection.rangeCount) return;
-
-            const link = this._getExistingLink(selection);
-            if (link) {
-                const textNode = document.createTextNode(link.textContent);
-                link.parentNode.replaceChild(textNode, link);
-
-                // Reselect the text
-                const newRange = document.createRange();
-                newRange.selectNodeContents(textNode);
-                selection.removeAllRanges();
-                selection.addRange(newRange);
-            }
-        },
-
-        _onLinkTargetButtonClick: function (ev) {
-            const $button = $(ev.currentTarget);
-
-            // Toggle active state
-            $button.toggleClass('active');
-
-            // Update isTargetNewTab variable
-            this.isTargetNewTab = $button.hasClass('active');
-        },
-
-        // Update URL save handler
-        _onSaveUrl: function (ev) {
-            const wysiwyg = this._getWysiwygInstance();
-            if (!wysiwyg) return;
-
-            const url = this.$el.find('.link-url-input').val();
-
-            if (!url) {
-                alert('Please enter a URL');
-                return;
-            }
-
-            // Handle link update/creation
-            if (this.currentLink && this.currentLink.length) {
-                this.currentLink.attr('href', url);
-
-                if (this.isTargetNewTab) {
-                    this.currentLink.attr('target', '_blank');
-                } else {
-                    this.currentLink.removeAttr('target');
-                }
-            } else {
-                const selection = this._getCurrentSelection();
-                const range = selection.getRangeAt(0);
-                const selectedText = range.toString();
-                const existingLink = this._getExistingLink(selection);
-
-                if (existingLink) {
-                    $(existingLink).attr('href', url);
-
-                    if (this.isTargetNewTab) {
-                        $(existingLink).attr('target', '_blank');
-                    } else {
-                        $(existingLink).removeAttr('target');
-                    }
-                } else {
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.textContent = selectedText;
-
-                    if (this.isTargetNewTab) {
-                        link.target = '_blank';
-                    }
-
-                    range.deleteContents();
-                    range.insertNode(link);
-                }
-            }
-
-            wysiwyg.odooEditor.historyStep();
-            this._resetUrlInputSection();
-        },
-
-
-
-
-        // Update remove URL handler
-        _onRemoveUrl: function (ev) {
-            const selection = this._getCurrentSelection();
-            if (selection) {
-                this._removeLink(selection);
-                this._resetUrlInputSection();
-
-                const wysiwyg = this._getWysiwygInstance();
-                if (wysiwyg) {
-                    wysiwyg.odooEditor.historyStep();
-                }
-            }
-        },
-
-        // Modify the cancel method to reset currentLink
-        _onCancelUrl: function (ev) {
-            this._resetUrlInputSection();
-        },
-
-
-        _bindSelectionChangeEvent() {
-            const wysiwyg = this._getWysiwygInstance();
-            if (!wysiwyg) return;
-            wysiwyg.odooEditor.document.addEventListener('selectionchange', this._onSelectionChange.bind(this));
-        },
-
-
-        _onSelectionChange: function () {
-
-            const $editor_toolbar_container = $('#o_we_editor_toolbar_container');
-            $editor_toolbar_container.remove();
-            const $imageToolsElement = $('.snippet-option-ImageTools');
-
-
-            if ($imageToolsElement.length) {
-                $imageToolsElement.parent().children().slice($imageToolsElement.index() + 1).each(function() {
-                    $(this).hide().css({
-                        'visibility': 'hidden',
-                        'opacity': '0',
-                        'display': 'none !important'
-                    });
-                });
-            }
-
-            const selection = this._getCurrentSelection();
-
-            if (!selection || !selection.rangeCount) return;
-
-
-
-
-            const range = selection.getRangeAt(0);
-            const $target = $(document.activeElement);
-
-            // Check if the active element is an input field being edited
-            if ($target.is('input') || $target.is('textarea')) {
-                return; // Ignore selection change when typing in input
-            }
-
-            const $editable = $(range.commonAncestorContainer).closest('.o_we_customize_panel');
-
-            if (!$editable.length) {
-                this.typing = false;
-
-                // Run existing selection change handlers
-                this._onBoldSelectionChange();
-                this._onLinkSelectionChange();
-                this._updateButtonState(selection);
-
-                this._onPhpVariableChange();
-            }
-        },
-
-        _onPhpVariableChange: function () {
-            const selection = this._getCurrentSelection();
-            const currentVar = this._hasPhpVariable(selection);
-            const $removeButton = this.$el.find('.data-remove-php-var');
-            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
-            const $varInput = this.$el.find('.data-variable-input');
-
-            if (currentVar) {
-                $removeButton.removeClass('d-none');
-                //                $removeButton.find('.var-name').text(currentVar.name);
-
-                $constButton.toggleClass('active', currentVar.isConst);
-                this.isConstVar = currentVar.isConst;
-
-                // Only update input if it's empty or different from current variable name
-                if ($varInput.length && (!$varInput.val() || $varInput.val() !== currentVar.name)) {
-                    $varInput.val(currentVar.name);
-                }
-            } else {
-                $removeButton.addClass('d-none');
-                $constButton.removeClass('active');
-                this.isConstVar = false;
-            }
-        },
-
-        /**
-         * Override _onSelectionChange to include link button state
-         */
-        _onLinkSelectionChange: function () {
+        _onLinkSelectionChange: function (ev) {
             const $linkButton = this.$el.find('[data-variable-class="a-tag"]');
             const $urlSection = this.$el.find('.url-input-section');
             const $removeBtn = $urlSection.find('[data-remove-url="true"]');
@@ -1095,66 +1176,58 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             // Get the current selection
             const selection = this._getCurrentSelection();
 
-            // Check if there's text selected or if we're updating an existing link
-            if ((selection && selection.toString().trim()) || this.currentLink) {
-                // Check if there's an existing link in the selection
-                const existingLink = this._getExistingLink(selection);
+            const existingLink = this._getExistingLink(selection.element);
 
-                if (existingLink) {
-                    // Update link button state
-                    $urlSection.removeClass('d-none');
-                    $linkButton.addClass('active');
-                    $urlInput.val(existingLink.href);
-                    $removeBtn.removeClass('d-none');
+            // if ((selection && selection.toString().trim()) || this.currentLink) {
+            if (existingLink) {
 
-                    // Update new tab checkbox state based on the link's target attribute
-                    if (existingLink.target === '_blank') {
-                        $newTabCheckbox.addClass('active');
-                        this.isTargetNewTab = true;
-                    } else {
-                        $newTabCheckbox.removeClass('active');
-                        this.isTargetNewTab = false;
-                    }
+                $urlSection.removeClass('d-none');
+                $linkButton.addClass('active');
+                $urlInput.val(existingLink.href);
+                $removeBtn.removeClass('d-none');
 
-                    // Track the currently selected link for further modifications
-                    this.currentLink = $(existingLink);
+                // Update new tab checkbox state based on the link's target attribute
+                if (existingLink.target === '_blank') {
+                    $newTabCheckbox.addClass('active');
+                    this.isTargetNewTab = true;
                 } else {
-                    this.currentLink = null
-                    // Only reset if we're not currently editing a link
-                    $linkButton.removeClass('active');
-                    $urlInput.val('');
-                    $removeBtn.addClass('d-none');
-                    $urlSection.addClass('d-none');
                     $newTabCheckbox.removeClass('active');
                     this.isTargetNewTab = false;
                 }
+
+                // Track the currently selected link for further modifications
+                this.currentLink = $(existingLink);
+
+            } else {
+                this.currentLink = null
+                // Only reset if we're not currently editing a link
+                $linkButton.removeClass('active');
+                $urlInput.val('');
+                $removeBtn.addClass('d-none');
+                $urlSection.addClass('d-none');
+                $newTabCheckbox.removeClass('active');
+                this.isTargetNewTab = false;
             }
 
 
         },
 
 
-        _onBoldSelectionChange: function () {
 
-            const selection = this._getCurrentSelection();
-            if (!selection) return;
 
-            // Update the state of each formatting button based on current selection
-            ['strong-tag', 'b-tag', 'font-bold'].forEach(formatType => {
-                const hasFormat = this._hasFormatting(selection, formatType);
-                const $button = this.$el.find(`[data-variable-class="${formatType}"]`);
 
-                if (hasFormat) {
-                    $button.removeClass('btn-primary').addClass('active btn-success');
-                } else {
-                    $button.removeClass('active btn-success').addClass('btn-primary');
-                }
-            });
-        },
+        /* _getExistingLink: function (selection) {
+            if (!selection || !selection.rangeCount) return null;
 
-        destroy: function () {
-            $(document).off('selectionchange');
-            this._super.apply(this, arguments);
-        }
+            const range = selection.getRangeAt(0);
+            const container = range.commonAncestorContainer;
+            const $link = $(container).closest('a');
+
+
+
+            return $link.length ? $link[0] : null;
+        }, */
+
+
     });
 });
