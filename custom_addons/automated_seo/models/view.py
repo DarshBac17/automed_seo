@@ -571,10 +571,10 @@ class View(models.Model):
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
+            html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
-            html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = html.unescape(html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
 
