@@ -1,80 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Website Version Button Template -->
-    <template id="website_version_button" inherit_id="website.snippets">
-        <xpath expr="//form[@class='ms-auto d-flex']/data-action='save']" position="before">
-            <button type="button" class="btn btn-primary" data-action="version" title="Version record" accesskey="s">Version</button>
-        </xpath>
-    </template>
+
+<!--    <templates id="template" xml:space="preserve">-->
+<!--        <t t-extend="web_editor.toolbar">-->
+<!--            <t t-jquery="#toolbar .oe-toolbar" t-operation="replace"/>-->
+<!--        </t>-->
+<!--    </templates>-->
+    <!--    <template id="website_version_button" inherit_id="website.snippets">-->
+    <!--        <xpath expr="//form[@class='ms-auto d-flex']/data-action='save']" position="before">-->
+    <!--            <button type="button" class="btn btn-primary" data-action="version" title="Version record" accesskey="s">Version</button>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
 
     <!-- Version Modal Template -->
 
     <!-- Add template to editor assets -->
-<!--    <template id="webclient_templates" inherit_id="web.assets_backend">-->
-<!--        <xpath expr="." position="inside">-->
-<!--            <script type="text/xml" name="website_version_modal">-->
-<!--                <t t-name="website_version_modal">-->
-<!--                    <t t-call="automated_seo.version_modal_template"/>-->
-<!--                </t>-->
-<!--            </script>-->
-<!--        </xpath>-->
-<!--    </template>-->
+    <!--    <template id="webclient_templates" inherit_id="web.assets_backend">-->
+    <!--        <xpath expr="." position="inside">-->
+    <!--            <script type="text/xml" name="website_version_modal">-->
+    <!--                <t t-name="website_version_modal">-->
+    <!--                    <t t-call="automated_seo.version_modal_template"/>-->
+    <!--                </t>-->
+    <!--            </script>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
 </odoo>
 
-    <!-- Version Modal Template -->
-<!--    <template id="version_modal_template" name="Version Modal">-->
-<!--        <div role="dialog" class="modal fade" id="versionModal">-->
-<!--            <div class="modal-dialog">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title">Save Version</h5>-->
-<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <div class="form-group mb-3">-->
-<!--                            <label for="versionName" class="form-label">Version Name</label>-->
-<!--                            <input type="text" class="form-control" id="versionName" required="required"/>-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="versionDescription" class="form-label">Description</label>-->
-<!--                            <textarea class="form-control" id="versionDescription" rows="3"></textarea>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
-<!--                        <button type="button" class="btn btn-primary" id="saveVersion">Save Version</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </template>-->
+        <!-- Version Modal Template -->
+        <!--    <template id="version_modal_template" name="Version Modal">-->
+        <!--        <div role="dialog" class="modal fade" id="versionModal">-->
+        <!--            <div class="modal-dialog">-->
+        <!--                <div class="modal-content">-->
+        <!--                    <div class="modal-header">-->
+        <!--                        <h5 class="modal-title">Save Version</h5>-->
+        <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+        <!--                    </div>-->
+        <!--                    <div class="modal-body">-->
+        <!--                        <div class="form-group mb-3">-->
+        <!--                            <label for="versionName" class="form-label">Version Name</label>-->
+        <!--                            <input type="text" class="form-control" id="versionName" required="required"/>-->
+        <!--                        </div>-->
+        <!--                        <div class="form-group">-->
+        <!--                            <label for="versionDescription" class="form-label">Description</label>-->
+        <!--                            <textarea class="form-control" id="versionDescription" rows="3"></textarea>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="modal-footer">-->
+        <!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
+        <!--                        <button type="button" class="btn btn-primary" id="saveVersion">Save Version</button>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </template>-->
 
-<!--<template id="version_modal" inherit_id="website.layout">-->
-<!--        <xpath expr="//body" position="inside">-->
-<!--            <div class="modal fade" id="versionModal" tabindex="-1" role="dialog">-->
-<!--                <div class="modal-dialog" role="document">-->
-<!--                    <div class="modal-content">-->
-<!--                        <div class="modal-header">-->
-<!--                            <h5 class="modal-title">Save Version</h5>-->
-<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                        </div>-->
-<!--                        <div class="modal-body">-->
-<!--                            <div class="mb-3">-->
-<!--                                <label for="versionName" class="form-label">Version Name</label>-->
-<!--                                <input type="text" class="form-control" id="versionName" required="required"/>-->
-<!--                            </div>-->
-<!--                            <div class="mb-3">-->
-<!--                                <label for="versionDescription" class="form-label">Description</label>-->
-<!--                                <textarea class="form-control" id="versionDescription" rows="3"></textarea>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="modal-footer">-->
-<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
-<!--                            <button type="button" class="btn btn-primary" id="saveVersion">Save Version</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </xpath>-->
-<!--    </template>-->
-<!--</odoo>-->
+        <!--<template id="version_modal" inherit_id="website.layout">-->
+        <!--        <xpath expr="//body" position="inside">-->
+        <!--            <div class="modal fade" id="versionModal" tabindex="-1" role="dialog">-->
+        <!--                <div class="modal-dialog" role="document">-->
+        <!--                    <div class="modal-content">-->
+        <!--                        <div class="modal-header">-->
+        <!--                            <h5 class="modal-title">Save Version</h5>-->
+        <!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+        <!--                        </div>-->
+        <!--                        <div class="modal-body">-->
+        <!--                            <div class="mb-3">-->
+        <!--                                <label for="versionName" class="form-label">Version Name</label>-->
+        <!--                                <input type="text" class="form-control" id="versionName" required="required"/>-->
+        <!--                            </div>-->
+        <!--                            <div class="mb-3">-->
+        <!--                                <label for="versionDescription" class="form-label">Description</label>-->
+        <!--                                <textarea class="form-control" id="versionDescription" rows="3"></textarea>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="modal-footer">-->
+        <!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
+        <!--                            <button type="button" class="btn btn-primary" id="saveVersion">Save Version</button>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </xpath>-->
+        <!--    </template>-->
+        <!--</odoo>-->

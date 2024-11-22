@@ -81,7 +81,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          */
         _onInputChange: function (event) {
             this.typing = true
-            console.log("Text added or modified: ", event.target.value);
+
         },
 
         /**
@@ -90,9 +90,9 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          */
         _onKeyDown: function (event) {
             this.typing = true
-            console.log("Key pressed: ", event.key);
+
             if (event.key === "Enter") {
-                console.log("User pressed Enter.");
+
                 this._onApplyVariable(event);
             }
         },
@@ -802,7 +802,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const container = range.commonAncestorContainer;
             const $link = $(container).closest('a');
 
-            //            console.log("#################   o_link_in_selection   ##################33")
+
 
             return $link.length ? $link[0] : null;
         },
@@ -1012,10 +1012,28 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
         _onSelectionChange: function () {
+
+            const $editor_toolbar_container = $('#o_we_editor_toolbar_container');
+            $editor_toolbar_container.remove();
+            const $imageToolsElement = $('.snippet-option-ImageTools');
+
+
+            if ($imageToolsElement.length) {
+                $imageToolsElement.parent().children().slice($imageToolsElement.index() + 1).each(function() {
+                    $(this).hide().css({
+                        'visibility': 'hidden',
+                        'opacity': '0',
+                        'display': 'none !important'
+                    });
+                });
+            }
+
             const selection = this._getCurrentSelection();
-            console.log("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[selection]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]")
-            console.log(selection)
+
             if (!selection || !selection.rangeCount) return;
+
+
+
 
             const range = selection.getRangeAt(0);
             const $target = $(document.activeElement);
@@ -1077,13 +1095,6 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             // Get the current selection
             const selection = this._getCurrentSelection();
 
-            // console.log(" SELECTION ")
-            // console.log(selection)
-
-            // Don't hide URL section if it's actively being edited
-            // if ($urlSection.hasClass('editing')) {
-            //     return;
-            // }
             // Check if there's text selected or if we're updating an existing link
             if ((selection && selection.toString().trim()) || this.currentLink) {
                 // Check if there's an existing link in the selection
@@ -1119,15 +1130,12 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 }
             }
 
-            // Keep URL section visible if link button is active
-            //            if ($linkButton.hasClass('active')) {
-            //                $urlSection.removeClass('d-none');
-            //            }
+
         },
 
 
         _onBoldSelectionChange: function () {
-            //            console.log("qwswqwqwqwqwqwqwqwqwqw")
+
             const selection = this._getCurrentSelection();
             if (!selection) return;
 

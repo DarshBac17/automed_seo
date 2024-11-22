@@ -16,7 +16,7 @@
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
         # "views/manage_users.xml",
-        # 'views/templates.xml',
+        'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_to_snippet.xml",

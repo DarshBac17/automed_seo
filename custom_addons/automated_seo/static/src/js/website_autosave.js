@@ -74,7 +74,6 @@ odoo.define('website.autosave', function (require) {
             }).then(() => {
                 this.contentChanged = false;
                 this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
-                console.log(this.$autoSaveIcon)
                 if (this.$autoSaveIcon.length) {
                     const $icon = this.$autoSaveIcon.find('i');
                     // Check if the current icon is fa-cloud, and change to fa-check if true
@@ -84,23 +83,11 @@ odoo.define('website.autosave', function (require) {
                         $icon.addClass('fa-cloud');
                     }
                 }
-//                this._showAutoSaveNotification()
-                console.log('[Website Editor] Content saved successfully');
             }).catch((error) => {
                 console.error('[Website Editor] Save failed:', error);
             });
         },
 
-//        _showAutoSaveNotification: function () {
-//            const notification = new Notification(this, {
-//                type: 'success',
-//                title: 'Content Auto-Saved',
-//                message: 'Your changes have been auto-saved.',
-//                sticky: false,
-//                duration: 3000,  // Time in ms
-//            });
-//            notification.mount($('#wrapwrap')[0]); // Append to the body or any specific container
-//        },
         /**
          * Detect content changes
          * @private
@@ -115,7 +102,6 @@ odoo.define('website.autosave', function (require) {
 
             $editableContent.on('input change keyup mouseup', () => {
                 this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
-                console.log(this.$autoSaveIcon)
                 if (this.$autoSaveIcon.length) {
                     const $icon = this.$autoSaveIcon.find('i');
                     // Check if the current icon is fa-cloud, and change to fa-check if true
@@ -170,15 +156,6 @@ odoo.define('website.autosave', function (require) {
             }
 
             const $clone = $editableContent.clone();
-
-//            $clone.find('*').each(function () {
-//                $(this).removeAttr('contenteditable')
-//                    .removeAttr('data-oe-model')
-//                    .removeAttr('data-oe-id')
-//                    .removeAttr('data-oe-field')
-//                    .removeAttr('data-oe-xpath')
-//                    .removeAttr('data-oe-source-id');
-//            });
 
             const content = $clone.html();
             return content ? content.trim() : '';
