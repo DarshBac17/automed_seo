@@ -240,7 +240,8 @@ class View(models.Model):
             'page_id': self.page_id,
             'view_arch':soup.prettify(),
             'user_id': self.env.user.id,
-            'status': True
+            'status': True,
+
         })
 
     def normalize_text(self,text):
