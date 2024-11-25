@@ -103,6 +103,9 @@ class WebsitePageVersion(models.Model):
                 seo_view.page_id.arch_db = view_arch if view_arch else None
                 seo_view.stage = 'in_progress'
                 seo_view.publish = False
+                seo_view.parse_html_filename = None
+                seo_view.parse_html_binary = None
+                seo_view.parse_html = None
 
             change_type = vals.get('change')
             if not change_type:

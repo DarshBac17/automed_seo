@@ -569,15 +569,15 @@ class View(models.Model):
         html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
+            html_parser = self.remove_bom(html_parser=html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.remove_bom(html_parser=html_parser)
-            html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = self.format_paragraphs(html_content=html_parser)
+            html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
-            html_parser = html.unescape(html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
-
+            html_parser = html.unescape(html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.html"
