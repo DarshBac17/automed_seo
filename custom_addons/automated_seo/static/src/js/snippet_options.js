@@ -29,6 +29,9 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             'input .data-variable-input': '_onVariableInputChange',
             'keydown .data-variable-input': '_onVariableKeyDown',
             'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
+
+
+            'click .o_we_edit_link': '_onLinkButtonClick',
         }),
 
 
@@ -335,6 +338,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          * @returns 
          */
         _onConstButtonClick: function (ev) {
+
             const $button = $(ev.currentTarget);
             $button.toggleClass('active');
             this.isConstVar = $button.hasClass('active');
@@ -925,6 +929,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         _onLinkButtonClick: function (ev) {
             ev.preventDefault();
 
+            console.log("called")
             const $linkButton = this.$el.find('[data-variable-class="a-tag"]');
             const $urlSection = this.$el.find('.url-input-section');
             const $urlInput = $urlSection.find('.link-url-input');
@@ -992,16 +997,20 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
             if (link) {
+                if ($(link.element).hasClass("btn")) {
+                    $(link.element).attr("href", "#")
+                    $(link.element).removeAttr('target');
+                }
+                else {
+                    const textNode = document.createTextNode(link.element.textContent);
+                    link.element.parentNode.replaceChild(textNode, link.element);
 
-                const textNode = document.createTextNode(link.element.textContent);
-                link.element.parentNode.replaceChild(textNode, link.element);
-
-                // Reselect the text
-                const newRange = document.createRange();
-                newRange.selectNodeContents(textNode);
-                selection.removeAllRanges();
-                selection.addRange(newRange);
-
+                    // Reselect the text
+                    const newRange = document.createRange();
+                    newRange.selectNodeContents(textNode);
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
+                }
 
                 this._resetUrlInputSection();
                 // Prevent default click behavior
@@ -1032,10 +1041,11 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
         /**
          * Event handler for link target toogler button click
-         * @param {*} ev 
+         * @param {Event} ev 
          */
         _onLinkTargetButtonClick: function (ev) {
             ev.preventDefault();
+            ev.stopPropagation();
             const $button = $(ev.currentTarget);
 
             // Toggle active state
@@ -1097,10 +1107,6 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this._resetUrlInputSection();
         },
 
-
-
-
-
         /**
          * Event handler to close url input section
          * @param {Event} ev 
@@ -1152,13 +1158,13 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 $linkButton.addClass('active');
                 $urlInput.val(existingLink.href);
 
-                if ($(existingLink.element).hasClass("btn")) {
+                /* if ($(existingLink.element).hasClass("btn")) {
 
                     $removeBtn.addClass('d-none');
                 }
                 else {
                     $removeBtn.removeClass('d-none');
-                }
+                } */
 
                 // Update new tab checkbox state based on the link's target attribute
                 if (existingLink.target === '_blank') {
