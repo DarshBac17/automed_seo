@@ -44,6 +44,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this.currentLink = null; // Store reference to current link being edited
             this.isTargetNewTab = false;
             this.typing = false;
+            this.currentTarget = null;
         },
 
 
@@ -98,14 +99,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 return null;
             }
 
-            const selection = wysiwyg.odooEditor.document.getSelection();
-            const currentElement = selection.rangeCount > 0
-                ? selection.getRangeAt(0).commonAncestorContainer.parentElement
-                : null;
-            return {
-                selection: selection,
-                element: currentElement
-            }
+            return wysiwyg.odooEditor.document.getSelection();
         },
 
 
@@ -174,20 +168,26 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         _onSelectionChange: function (ev) {
             ev.preventDefault();
 
+            console.log("[[[[[[[[[[[[[[[[[[[SELECTION CHANGE]]]]]]]]]]]]]]]]]]]");
+
             this._hideUnnecessaryElements();
             const selection = this._getCurrentSelection();
 
-            if (!selection.selection || !selection.selection.rangeCount) return;
+            if (!selection || !selection.rangeCount) return;
 
-            const range = selection.selection.getRangeAt(0);
+            const range = selection.getRangeAt(0);
             const $target = $(document.activeElement);
+
+            this.currentTarget = ev.target
+
+            console.log(this.currentTarget)
 
             // Check if the active element is an input field being edited
             if ($target.is('input') || $target.is('textarea')) {
                 return; // Ignore selection change when typing in input
             }
 
-            const $editable = $(range.commonAncestorContainer).closest('.o_we_customize_panel');
+
 
             // Run existing selection change handlers
             this._onBoldSelectionChange(ev);
@@ -258,7 +258,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             }
 
             const selection = this._getCurrentSelection();
-            if (!selection.selection || !selection.selection.toString().trim()) {
+            if (!selection || !selection.toString().trim()) {
                 alert('Please select some text first');
                 return;
             }
@@ -325,7 +325,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             if (!wysiwyg) return;
 
             const selection = this._getCurrentSelection();
-            if (!selection.selection || !selection.selection.toString().trim()) {
+            if (!selection || !selection.toString().trim()) {
                 return;
             }
 
@@ -362,7 +362,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             if (!wysiwyg) return;
 
             const selection = this._getCurrentSelection();
-            if (!selection.selection) return;
+            if (!selection) return;
 
             const currentVar = this._hasPhpVariable(selection);
             if (currentVar && currentVar.element) {
@@ -523,7 +523,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          */
         _onPhpVariableChange: function (ev) {
             const selection = this._getCurrentSelection();
-            const currentVar = this._hasPhpVariable(selection.selection);
+            const currentVar = this._hasPhpVariable(selection);
             const $removeButton = this.$el.find('.data-remove-php-var');
             const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
             const $varInput = this.$el.find('.data-variable-input');
@@ -599,7 +599,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          */
         _applyTextFormatting: function (formatType) {
             const selection = this._getCurrentSelection();
-            if (!selection.selection || !selection.selection.rangeCount) {
+            if (!selection || !selection.rangeCount) {
                 alert('Please select some text first');
                 return;
             }
@@ -915,7 +915,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         _onBoldSelectionChange: function (ev) {
 
             const selection = this._getCurrentSelection();
-            if (!selection.selection) return;
+            if (!selection) return;
 
             // Update the state of each formatting button based on current selection
             ['strong-tag', 'b-tag', 'font-bold'].forEach(formatType => {
@@ -959,7 +959,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 $urlSection.removeClass('d-none');
 
                 // If clicked element is a link in the editable area  
-                const existingLink = this._getExistingLink(ev.target);
+                const existingLink = this._getExistingLink(this.currentTarget);
 
                 if (existingLink) {
 
@@ -989,8 +989,8 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             ev.preventDefault();
 
             const selection = this._getCurrentSelection();
-            if (selection.selection) {
-                console.log("[[[[[[[[[[[[[[[[[[[[[[[remoing url]]]]]]]]]]]]]]]]]]]]]]]")
+            if (selection) {
+
                 this._removeLink(ev, selection);
 
                 const wysiwyg = this._getWysiwygInstance();
@@ -1007,19 +1007,19 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         _removeLink: function (ev, selection) {
             // if (!selection.rangeCount) return;
 
-            const link = this._getExistingLink(selection.element);
+            const link = this._getExistingLink(this.currentTarget);
 
-            console.log(selection.element);
+
             if (link) {
-                console.log("[[[[[[[[[[[[[[[[[[[[[[[remoing url]]]]]]]]]]]]]]]]]]]]]]]")
+
                 const textNode = document.createTextNode(link.element.textContent);
                 link.element.parentNode.replaceChild(textNode, link.element);
 
                 // Reselect the text
                 const newRange = document.createRange();
                 newRange.selectNodeContents(textNode);
-                selection.selection.removeAllRanges();
-                selection.selection.addRange(newRange);
+                selection.removeAllRanges();
+                selection.addRange(newRange);
 
 
                 this._resetUrlInputSection();
@@ -1036,7 +1036,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
          */
         _getExistingLink: function (clickedElement) {
             // If element itself is <a> tag
-            if (clickedElement.tagName === 'A') {
+            if (clickedElement && clickedElement.tagName === 'A') {
                 return {
                     element: clickedElement,
                     href: clickedElement.getAttribute('href') ? clickedElement.getAttribute('href').toString().trim() : null,
@@ -1092,21 +1092,23 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 return;
             }
 
-            const selection = this._getCurrentSelection();
-            const existingLink = this._getExistingLink(selection.element);
+
+            const existingLink = this._getExistingLink(this.currentTarget);
 
             // Handle link update/creation
             if (existingLink) {
-                existingLink.element.attr('href', url);
+                console.log('Updating existing link');
+                console.log(existingLink.element);
+                $(existingLink.element).attr('href', url);
 
                 if (this.isTargetNewTab) {
-                    existingLink.element.attr('target', '_blank');
+                    $(existingLink.element).attr('target', '_blank');
                 } else {
-                    existingLink.element.removeAttr('target');
+                    $(existingLink.element).removeAttr('target');
                 }
             } else {
                 const selection = this._getCurrentSelection();
-                const range = selection.selection.getRangeAt(0);
+                const range = selection.getRangeAt(0);
                 const selectedText = range.toString();
 
                 const link = document.createElement('a');
@@ -1174,9 +1176,12 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
 
             // Get the current selection
-            const selection = this._getCurrentSelection();
+            // const selection = this._getCurrentSelection();
 
-            const existingLink = this._getExistingLink(selection.element);
+            const existingLink = this._getExistingLink(this.currentTarget);
+
+            console.log("link selection change");
+            console.log(existingLink);
 
             // if ((selection && selection.toString().trim()) || this.currentLink) {
             if (existingLink) {
@@ -1211,22 +1216,6 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
         },
-
-
-
-
-
-        /* _getExistingLink: function (selection) {
-            if (!selection || !selection.rangeCount) return null;
-
-            const range = selection.getRangeAt(0);
-            const container = range.commonAncestorContainer;
-            const $link = $(container).closest('a');
-
-
-
-            return $link.length ? $link[0] : null;
-        }, */
 
 
     });
