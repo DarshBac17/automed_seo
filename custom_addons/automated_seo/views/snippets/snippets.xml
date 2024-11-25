@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <odoo>
-    <template id="automed_snippets" inherit_id="website.snippets" name="Automed snippets">
+    <template id="automed_snippets" inherit_id="website.snippets" name="Automated snippets">
 
 
         <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='mobile']" position="before">
@@ -596,7 +596,7 @@
 
 
     <template id="snippet_options" inherit_id="website.snippet_options" primary="True">
-        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
+        <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="replace">
             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
                 <we-row string="Content">
                     <we-button data-add-item="" data-item=".o_sub_items_container > section:last" data-select-item="" data-no-preview="true" class="o_we_bg_brand_primary">
@@ -614,7 +614,7 @@
         </xpath>
 
         <xpath expr="." position="inside">
-            <t t-call="automated_seo.s_php_variable_options">
+            <t t-call="automated_seo.s_seo_options">
             </t>
 
         </xpath>
@@ -625,6 +625,11 @@
         <xpath expr="//a[@class='o_frontend_to_backend_edit_btn px-3 d-flex align-items-center justify-content-center text-decoration-none']" position="replace"/>
 
     </template>
+
+</odoo>
+
+
+
 
 
     <!--    <template id="s_php_variable_options">-->
@@ -686,5 +691,3 @@
 
             </xpath>
         </template>-->
-
-</odoo>

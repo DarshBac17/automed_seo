@@ -222,7 +222,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             // Locate the <we-input> element and get the value
             var inputField = this.$el.find('.data-variable-input');
             if (!inputField) {
-                console.error('Input field not found');
+
                 return;
             }
 
@@ -234,7 +234,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) {
-                console.error('Wysiwyg instance not found');
+
                 return;
             }
 
@@ -950,7 +950,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
                     const isNewTab = existingLink.target === '_blank';
                     $newTabCheckbox.toggleClass('active', isNewTab);
-                    this.isTargetNewTab = isNewTab;
+                    // this.isTargetNewTab = isNewTab;
 
                     this.currentLink = existingLink.href;
 
@@ -1042,7 +1042,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             $button.toggleClass('active');
 
             // Update isTargetNewTab variable
-            this.isTargetNewTab = $button.hasClass('active');
+            // this.isTargetNewTab = $button.hasClass('active');
         },
 
 
@@ -1057,6 +1057,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             if (!wysiwyg) return;
 
             const url = this.$el.find('.link-url-input').val();
+            const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
 
             if (!url) {
                 alert('Please enter a URL');
@@ -1070,7 +1071,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             if (existingLink) {
                 $(existingLink.element).attr('href', url);
 
-                if (this.isTargetNewTab) {
+                if ($newTabCheckbox.hasClass('active')) {
                     $(existingLink.element).attr('target', '_blank');
                 } else {
                     $(existingLink.element).removeAttr('target');
@@ -1084,7 +1085,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 link.href = url;
                 link.textContent = selectedText;
 
-                if (this.isTargetNewTab) {
+                if ($newTabCheckbox.hasClass('active')) {
                     link.target = '_blank';
                 }
 
@@ -1115,23 +1116,18 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const $urlSection = this.$el.find('.url-input-section');
             const $urlInput = $urlSection.find('.link-url-input');
             const $removeBtn = $urlSection.find('[data-remove-url="true"]');
-            const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
+            const $newTabCheckbox = $urlSection.find('[data-select-class="o_au_link_target"]');
 
             // Reset all input values and states
             $urlInput.val('');
             $removeBtn.addClass('d-none');
             $newTabCheckbox.removeClass('active');
-            this.isTargetNewTab = false;
+            // this.isTargetNewTab = false;
             this.currentLink = null;
 
             // Hide the section and remove editing state
             $urlSection.addClass('d-none');
         },
-
-
-
-
-
 
         /**
          * Handle link editing block on selection change
@@ -1142,7 +1138,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const $urlSection = this.$el.find('.url-input-section');
             const $removeBtn = $urlSection.find('[data-remove-url="true"]');
             const $urlInput = $urlSection.find('.link-url-input');
-            const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
+            const $newTabCheckbox = $urlSection.find('[data-select-class="o_au_link_target"]');
 
             // Get the current selection
             // const selection = this._getCurrentSelection();
@@ -1155,15 +1151,22 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 $urlSection.removeClass('d-none');
                 $linkButton.addClass('active');
                 $urlInput.val(existingLink.href);
-                $removeBtn.removeClass('d-none');
+
+                if ($(existingLink.element).hasClass("btn")) {
+
+                    $removeBtn.addClass('d-none');
+                }
+                else {
+                    $removeBtn.removeClass('d-none');
+                }
 
                 // Update new tab checkbox state based on the link's target attribute
                 if (existingLink.target === '_blank') {
                     $newTabCheckbox.addClass('active');
-                    this.isTargetNewTab = true;
+                    // this.isTargetNewTab = true;
                 } else {
                     $newTabCheckbox.removeClass('active');
-                    this.isTargetNewTab = false;
+                    // this.isTargetNewTab = false;
                 }
 
                 // Track the currently selected link for further modifications
@@ -1177,7 +1180,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 $removeBtn.addClass('d-none');
                 $urlSection.addClass('d-none');
                 $newTabCheckbox.removeClass('active');
-                this.isTargetNewTab = false;
+                // this.isTargetNewTab = false;
             }
 
 

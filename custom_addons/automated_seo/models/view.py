@@ -572,7 +572,7 @@ class View(models.Model):
             html_parser = self.remove_bom(html_parser=html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.format_paragraphs(html_content=html_parser)
+            # html_parser = self.format_paragraphs(html_content=html_parser)
             html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)

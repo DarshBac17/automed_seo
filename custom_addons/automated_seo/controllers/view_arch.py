@@ -24,26 +24,26 @@ class WebsiteAutoSaveController(http.Controller):
 
             # Extract the view ID
             view_id = int(editable['data-oe-id'])
-            print(f"Extracted View ID: {view_id}")
+
 
             # Fetch the view record from the database
             view_record = request.env['ir.ui.view'].sudo().browse(view_id)
             if not view_record.exists():
                 return {'status': 'error', 'message': f'View with ID {view_id} does not exist'}
 
-            print(editable.attrs)
+
 
             attrs_to_delete = [attr for attr in editable.attrs if attr not in ['class', 'id']]
 
             # Now safely delete the attributes
             for attr in attrs_to_delete:
-                print("deleting..", attr)
+
                 del editable[attr]
 
             editable['class'].remove('o_editable')
 
             # Log the `arch` field of the view
-            print(editable)
+
             arch_soup = BeautifulSoup(view_record.arch, 'html.parser')
 
             t_call_layout = arch_soup.find('t', {'t-call': 'website.layout'})
@@ -52,7 +52,7 @@ class WebsiteAutoSaveController(http.Controller):
 
             div_inside_t.replace_with(editable)
 
-            print(f"View Arch Field:\n{arch_soup}")
+
 
             # Convert the updated BeautifulSoup object back to a string
             updated_arch = str(arch_soup.prettify())
