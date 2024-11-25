@@ -965,7 +965,7 @@ class View(models.Model):
 
                 if len(tag.find_all("a")) > 0:
                     a_tag = tag.find_all("a")[0]
-                    tag["class"].append("o_child_a")
+                    # tag["class"].append("o_child_a")
                     a_tag.append(php_tag)
                     tag.replace_with(a_tag)
                 elif "font-bold" in tag["class"] or "text-underline" in tag["class"]:
