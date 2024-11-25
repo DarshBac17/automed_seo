@@ -1,4 +1,5 @@
 from email.policy import default
+from multiprocessing.managers import view_type
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
@@ -10,7 +11,7 @@ class WebsitePageVersion(models.Model):
     _description = 'Website Page Version'
     _order = 'create_date desc'
 
-    name = fields.Char('Version Name', required=True)
+    name = fields.Char('Version Name',compute='_compute_version_number', store=True)
     description = fields.Text('Description')
     view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
@@ -21,6 +22,20 @@ class WebsitePageVersion(models.Model):
     user_id = fields.Many2one('res.users', string='Created by')
     status = fields.Boolean('Status',default=False)
     publish = fields.Boolean('Publish',default=False)
+    change = fields.Selection([
+        # ('major_change', 'Major Changes'),
+        ('minor_change', 'Minor Changes'),
+        ('patch_change', 'Patch Changes'),
+    ], string="Change")
+
+    major_version = fields.Integer('Major Version', default=1)
+    minor_version = fields.Integer('Minor Version', default=0)
+    patch_version = fields.Integer('Patch Version', default=0)
+
+    @api.depends('major_version', 'minor_version', 'patch_version')
+    def _compute_version_number(self):
+        for record in self:
+            record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
 
@@ -61,43 +76,93 @@ class WebsitePageVersion(models.Model):
         }
 
     @api.model
-    def create(self,vals):
-        print("======================================")
+    def create(self, vals):
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
-        seo_view = self.env['automated_seo.view'].browse(vals['view_id'])
-        if self.env['website.page.version'].search(['&', ('name', '=', vals.get('name')), ('view_id', '=', seo_view.id)]):
-            raise UserError("The version name is already present. Change the name of the version")
-        previous_version = self.env['website.page.version'].search(['&',('status','=',True),('view_id','=',seo_view.id)])
-        previous_version.write({
-            'publish':True
-        })
+        seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
+        latest_version = self.env['website.page.version'].search([
+            ('view_id', '=', seo_view.id)
+        ], order='create_date DESC', limit=1)
+        previous_version = self.env['website.page.version'].search(
+            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
+        view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
+
+        # Set initial version numbers
+        if not latest_version:
+            # First version: v1.0.0
+            vals.update({
+                'major_version': 1,
+                'minor_version': 0,
+                'patch_version': 0
+            })
+        else:
+            if vals.get('status'):
+                previous_version.write({
+                    'status': False
+                })
+                seo_view.page_id.arch_db = view_arch if view_arch else None
+                seo_view.stage = 'in_progress'
+                seo_view.publish = False
+                seo_view.parse_html_filename = None
+                seo_view.parse_html_binary = None
+                seo_view.parse_html = None
+
+            change_type = vals.get('change')
+            if not change_type:
+                max_major_version = self.env['website.page.version'].search([('view_id','=',seo_view.id)], order='major_version desc', limit=1)
+                vals.update({
+                    'major_version': max_major_version.major_version + 1,
+                    'minor_version': 0,
+                    'patch_version': 0
+                })
+
+            else:
+                if change_type == 'minor_change':
+                    vals.update({
+                        'major_version': previous_version.major_version,
+                        'minor_version': previous_version.minor_version + 1,
+                        'patch_version': 0
+                    })
+
+                else:
+                    # Regular minor change
+                    vals.update({
+                        'major_version': previous_version.major_version,
+                        'minor_version': previous_version.minor_version,
+                        'patch_version': previous_version.patch_version + 1
+                    })
+
+
+
+
+        # if vals.get("unpublish"):
+        #
+
         vals.update({
             'page_id': seo_view.website_page_id.id,
-            'view_arch': seo_view.website_page_id.arch_db if seo_view.website_page_id else False,
+            'view_arch': view_arch,
             'user_id': self.env.user.id,
         })
 
         return super(WebsitePageVersion, self).create(vals)
+
     def action_create_version(self):
-        # self.write({'stage': 'in_progress'})
+
+        unpublish =self.env.context.get('unpublish')
         self.ensure_one()
         if not self.view_id:
             raise UserError('View ID is required to create a version')
 
-        # Deactivate current active version
         current_version = self.search([
             ('status', '=', True),
             ('view_id', '=', self.view_id.id)
         ], limit=1)
 
-        if current_version:
+        if unpublish:
             current_version.status = False
+            current_version.publish = True
 
-        # Set this as the active version
         self.status = True
-
-        # Update the view with version data
         if self.view_id:
             self.view_id.write({
                 'parse_html': self.parse_html,

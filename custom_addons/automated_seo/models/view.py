@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup,Comment
 import  html
 import base64
 import boto3
@@ -12,6 +12,7 @@ import random
 from PIL import Image
 from pathlib import Path
 import mimetypes
+from html import escape, unescape
 
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
@@ -53,12 +54,18 @@ class View(models.Model):
         store=False
     )
     publish = fields.Boolean('Publish', default=False)
+    upload_file = fields.Binary(string="Upload File", attachment=True)
+    upload_filename = fields.Char(string="Upload Filename")
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
-
+    @api.onchange('upload_file')
+    def _onchange_upload_file(self):
+        if self.upload_file:
+            if self.env.context.get('upload_filename'):
+                self.upload_filename = self.env.context.get('upload_filename')
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -71,9 +78,6 @@ class View(models.Model):
         current_user = self.env.user
         for record in self:
             record.is_owner = current_user.id == record.create_uid.id
-
-
-
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -105,7 +109,6 @@ class View(models.Model):
                 vals['website_page_id'] = website_page.id
         record  = super(View, self).create(vals)
         self.env['website.page.version'].create({
-            'name' : 'v1.0.0',
             'description' : 'First Version',
             'view_id':record.id,
             'page_id':website_page.id,
@@ -142,7 +145,6 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
-
         return super(View, self).write(vals)
 
     def action_view_website_page(self):
@@ -215,6 +217,202 @@ class View(models.Model):
             'url': f'{base_url}?enable_editor=1',
             'target': 'self',
         }
+
+    def action_parse_uploaded_file(self):
+        name, ext = self.upload_filename.rsplit('.', 1)
+        if ext not in ['php','html']:
+            raise UserError("Upload php or html file.")
+        file_content = base64.b64decode(self.upload_file)
+        file_text = file_content.decode('utf-8')
+        content = self.convert_php_tags(content=file_text)
+        template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
+        formatted_arch = f'''<t t-name="{template_name}">
+                                <t t-call="website.layout">
+                                <div id="wrap" class="oe_structure oe_empty">
+                                    {content}
+                                </div>
+                                </t>
+                            </t>'''
+        soup = BeautifulSoup(formatted_arch,'html.parser')
+        self.env['website.page.version'].create({
+            'description': f'{self.upload_filename} File is uploaded',
+            'view_id': self.id,
+            'page_id': self.page_id,
+            'view_arch':soup.prettify(),
+            'user_id': self.env.user.id,
+            'status': True,
+
+        })
+
+    def normalize_text(self,text):
+        return ' '.join(str(text).split())
+
+    def minify_php_tags(self,content):
+        # Regex to match text starting with '<?php' and ending with '?>'
+        pattern = r"<\?php.*?\?>"
+
+        # Function to remove spaces within the match
+        def remove_spaces(match):
+            return re.sub(r"\s+", "", match.group(0))
+
+        # Apply the regex substitution
+        return re.sub(pattern, remove_spaces, content, flags=re.DOTALL)
+
+    def replace_php_variables(self,content):
+        # Regex pattern to match <?phpecho$variable?>
+        pattern = r"<\?phpecho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+
+        # Function to generate the replacement text
+        def replacer(match):
+            variable_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
+    def replace_php_const_variables(self,content):
+        # Regex pattern to match <?phpecho$variable?>
+        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+
+
+        # Function to generate the replacement text
+        def replacer(match):
+            variable_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{variable_name}" data-php-const-var="1">{variable_name}</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
+    def replace_php_constants(self,content):
+        # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
+        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+
+        # Function to generate the replacement text
+        def replacer(match):
+            constant_name = match.group(1)
+            return (
+                f'<span class="o_au_php_var o_text-php-var-info" '
+                f'data-php-var="{constant_name}" data-php-const-var="1">Description</span>'
+            )
+
+        # Replace all matches in the content
+        return re.sub(pattern, replacer, content)
+
+    def convert_php_tags(self,content):
+
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
+        soup = BeautifulSoup(content, 'html.parser')
+        base_url_php = "https://assets.bacancytechnology.com/"
+        for img in soup.select('img'):
+            url = re.sub(r'\s', '', img.get('src'))
+            image_base = re.sub(r'\s', '', "<?php echo BASE_URL_IMAGE; ?>")
+
+            img['src'] = url.replace(image_base, base_url_php)
+            img['data-src'] = url.replace(image_base, base_url_php)
+
+        anchor_base_url_php = "https://www.bacancytechnology.com/"
+        for a in soup.select('a:not(.btn)'):
+            url = re.sub(r'\s', '', a.get('href'))
+            base = re.sub(r'\s', '', "<?php echo BASE_URL; ?>")
+            if url and url.startswith(base):
+                a['href'] = url.replace(base, anchor_base_url_php)
+        content = self.minify_php_tags(self.normalize_text(soup.prettify()))
+        for tag in tags:
+            content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
+
+        content = self.replace_php_variables(content=content)
+        content = self.replace_php_const_variables(content=content)
+        if content.find("phpecho"):
+            content = content.replace("phpecho","php echo ")
+
+
+        soup = BeautifulSoup(content, 'html.parser')
+
+        sections =  soup.find_all('section')
+        content = ""
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
+        for section in sections:
+            classes = section.get('class',[])
+            if not section.find_parent('section'):
+                section.attrs['data-snippet'] = "s_banner"
+                classes.append('o_automated_seo_php_variable')
+                section['class']=classes
+                new_section = self.normalize_text(section)
+                for tag in tags:
+                    new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
+                    snippet = tag.get('snippet')
+                    if new_section.find(new_php)!=-1:
+                        if classes and 'banner' in classes:
+                            if new_php =='<?php$formType="banner";':
+                                match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
+                                snippet_soup = BeautifulSoup(snippet,'html.parser')
+                                span_tag = snippet_soup.find("span")
+                                if span_tag:
+                                    span_tag.string = match.group(1)
+                                    new_php = new_php+f'$bannerDevName="{match.group(1)}";include("tailwind/template/form.php");?>'
+                                snippet = snippet_soup.prettify()
+                        new_section=new_section.replace(new_php,snippet)
+                content+=new_section
+        soup = BeautifulSoup(content, 'html.parser')
+        sections = soup.find_all('section')
+        content =""
+        for section in sections:
+
+            if not section.find_parent('section'):
+                classes = section.get('class',[])
+                ids = section.get('id',[])
+                if classes and 'tech-stack' in classes:
+                    tbody = section.find('tbody')
+                    tbody['class'] = ['o_sub_items_container']
+
+                #     # Transform table rows
+                    rows = tbody.find_all('tr')
+                    for row in rows:
+                        # Update content cell class
+                        content_cell = row.find_all('td')[1]
+                        content_cell['class'] = ['o_tech_stack']
+                #
+                        # Convert spans to pipe-separated text
+                        spans = content_cell.find_all('span')
+                        content_span = '|'.join(span.string for span in spans if span.string)
+                        [span.decompose() for span in spans]
+                        content_cell.string = content_span
+                if 'price-sec' in ids:
+                    spans = section.find_all(class_='o_au_php_var')
+
+                    for span in spans:
+                        span.string="2***"
+                sub_snippets = None
+
+                if section.find_all('div', class_='boxed'):
+                    sub_snippets =section.find_all('div', class_='boxed')
+                elif section.find_all('div',class_='accordian-tab'):
+                     sub_snippets =section.find_all('div', class_='accordian-tab')
+                elif section.find_all('div',class_='ind-box'):
+                     sub_snippets =section.find_all('div', class_='ind-box')
+
+                if sub_snippets:
+                    container_tag = sub_snippets[0].find_parent()
+                    container_classes = container_tag.get("class", [])
+                    classes.append("o_automated_seo_snippet")
+                    container_classes.append("o_sub_items_container")
+                    container_tag["class"] = container_classes
+                    section['class'] =classes
+                    for sub_snippet in sub_snippets:
+                        if sub_snippet:
+                            sub_snippet_classes = sub_snippet.get("class", [])
+                            sub_snippet_classes.append("o_replace_section_div")
+                            sub_snippet["class"] = sub_snippet_classes
+                            sub_snippet.name = "section"
+                content += str(section)
+        return content
+
 
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -371,14 +569,15 @@ class View(models.Model):
         html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
+            html_parser = self.remove_bom(html_parser=html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            # html_parser = self.format_paragraphs(html_content=html_parser)
+            html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
-            html_parser = html.unescape(html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
-
+            html_parser = html.unescape(html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.html"
@@ -435,14 +634,12 @@ class View(models.Model):
 
             for section in sections:
                 snippet_id = section.get('data-snippet')
-
                 orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
-
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
                     php_tags = section.find_all(class_=php_class)
-                    if len(php_tags)!=1:
+                    if len(php_tags)>1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
                             php_tag['class'] = [new_php_tag_class if cls == php_class else cls for cls in php_tag['class']]
@@ -717,7 +914,9 @@ class View(models.Model):
         for section in sections:
         # if section:
             section.unwrap()
-
+        body = soup.find("body")
+        if body:
+            body.unwrap()
         return str(soup)
 
 
@@ -735,15 +934,19 @@ class View(models.Model):
 
     def replace_php_var_tag(self, section):
 
-        updated_section = self.replace_strong_em_u_tag(section)
+        # updated_section = self.replace_strong_em_u_tag(section)
         soup = BeautifulSoup(str(section.prettify()), "html.parser")
 
-        for tag in updated_section.find_all(class_="o_au_php_var"):
+        for tag in section.find_all(class_="o_au_php_var"):
 
             var_name = tag.get('data-php-var')
             var_type = tag.get("data-php-const-var")
 
             if var_name:
+                if len(tag.find_all("strong")) > 0:
+                    tag["class"].append("o_strong")
+                if len(tag.find_all("b")) > 0:
+                    tag["class"].append("o_b")
                 if len(tag.find_all(class_="font-bold")) > 0:
                     tag["class"].append("font-bold")
                 if len(tag.find_all(class_="text-underline")) > 0:
@@ -754,26 +957,46 @@ class View(models.Model):
                     tag.wrap(soup.new_tag('i'))
                     break
 
+                php_tag = BeautifulSoup(
+                    f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
+                    'html.parser')
+
                 if "font-bold" in tag["class"] or "text-underline" in tag["class"]:
                     tag.string = ""
-                    php_tag = BeautifulSoup(
-                        f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
-                        'html.parser')
                     tag.append(php_tag)
+                elif "o_strong" in tag["class"]:
+                    # breakpoint()
+                    new_strong_tag = soup.new_tag("strong")
+                    new_strong_tag.append(php_tag)
+                    tag.replace_with(new_strong_tag)
+                elif "o_b" in tag["class"]:
+                    # breakpoint()
+                    new_b_tag = soup.new_tag("b")
+                    new_b_tag.append(php_tag)
+                    tag.replace_with(new_b_tag)
                 else:
-                    php_tag = BeautifulSoup(f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>", 'html.parser')
                     tag.replace_with(php_tag)
 
-        return updated_section
+        return section
 
 
     def replace_strong_em_u_tag(self, section):
         soup = BeautifulSoup(str(section.prettify()), "html.parser")
-        for strong_tag in section.find_all('strong'):
-            span_tag = soup.new_tag('span')
-            span_tag["class"] = ['font-bold']
-            span_tag.extend(strong_tag.contents)
-            strong_tag.replace_with(span_tag)
+        for tag in section.find_all(['strong', 'b']) + section.find_all(class_="font-bold"):
+            new_tag_name = ""
+            new_tag_class_name = ""
+            if tag.name == "strong":
+                new_tag_name = "strong"
+            elif tag.name == "b":
+                new_tag_name = "b"
+            else:
+                new_tag_name = "span"
+                new_tag_class_name = "font-bold"
+
+            new_tag = soup.new_tag(f'{new_tag_name}')
+            new_tag["class"] = [f'{new_tag_class_name}']
+            new_tag.extend(tag.contents)
+            tag.replace_with(new_tag)
 
         for em_tag in section.find_all('em'):
             i_tag = soup.new_tag('i')
@@ -810,17 +1033,17 @@ class View(models.Model):
                 span = soup.new_tag('span')
                 span.string = description.strip()  # Trim whitespace
                 cell.append(span)
-        for tag in soup.find_all(class_=True):
-            tag['class'] = [cls for cls in tag['class']
-                            if not cls.startswith('o_') and cls not in class_to_remove]
+        for tag in soup.find_all():
+            if tag.get('class'):
+                tag['class'] = [cls for cls in tag['class']
+                                if not cls.startswith('o_') and cls not in class_to_remove]
 
-            if not tag['class']:
-                del tag['class']
+                if not tag['class']:
+                    del tag['class']
 
             for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var']:
                 if tag.has_attr(attr):
                     del tag[attr]
-
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:
                 if tag.name!='img':
                     tag.attrs.pop(attr, None)
@@ -878,8 +1101,8 @@ class View(models.Model):
                 s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
             else:
                 s3_key = f'inhouse/{s3_filename}'
-            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
-                'ContentType': content_type})
+            # s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
+            #     'ContentType': content_type})
 
 
         except ClientError as e:
@@ -954,9 +1177,19 @@ class View(models.Model):
             pattern = f'<{tag.name}></{tag.name}>'
             if re.match(pattern, tag_string):
                 tag.decompose()
-
-
         return soup.prettify()
+
+
+    # Function to remove BOM characters from all text elements
+    def remove_bom(self,html_parser):
+        soup = BeautifulSoup(html_parser, "html.parser")
+        for element in soup.find_all(string=True):  # Iterate over all strings
+            if "\ufeff" in element:  # Check if BOM character exists
+                cleaned_text = element.replace("\ufeff", "")  # Remove BOM
+                element.replace_with(cleaned_text)  # Replace with cleaned text
+
+
+        return str(soup.prettify())
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'

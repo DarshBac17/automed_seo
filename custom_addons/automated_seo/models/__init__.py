@@ -5,4 +5,4 @@ from . import  page
 from . import snippet_mapper
 from . import  website_version
 from  . import seo_email_wizard
-# from . import manage_users
+from . import php_to_snippet

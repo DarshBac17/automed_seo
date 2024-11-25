@@ -3,12 +3,8 @@
     <template id="s_footer_form" name="Footer Form">
 
         <section class="bg-gray-light o_automated_seo_php_variable" id="footer-form-id">
-            <div class="footer-form-condition o_au_php_form_footer-form">
-                <!--<?php
-                        $formType = 'footer';
-                        include("tailwind/template/form.php");
-                        ?>-->
-                <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11">
+            <div class="container">
+                <div class="o_au_php_form_footer-form grid md:gap-6 grid-cols-1 md:grid-cols-11">
                     <div class="col-span-1 md:col-span-3 cont-padding">
                         <h2 class="mb-0">Header Header Header</h2>
                     </div>
@@ -53,7 +49,9 @@
                         </form>
                     </div>
                 </div>
+
             </div>
+
         </section>
     </template>
 </odoo>

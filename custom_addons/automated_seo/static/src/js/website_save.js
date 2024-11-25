@@ -1,4 +1,4 @@
-console.log("======================save===============call")
+console.log("============sfsfsf==========save===============call")
 odoo.define('website.custom.editor', function (require) {
     'use strict';
 

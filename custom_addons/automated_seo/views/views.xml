@@ -34,7 +34,7 @@
             <form string="Version">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <field name="change" widget="radio"/>
                         <field name="description"/>
                         <field name="view_id" invisible="1"/>
 
@@ -43,7 +43,7 @@
                 </sheet>
                 <footer>
                     <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'name':name}"/>
+                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
@@ -70,11 +70,11 @@
 
                     <field name="publish" invisible="1"/>
 
-                        <button name="action_edit_website_page"
-                                type="object"
-                                string="Edit"
-                                  attrs="{'invisible': ['|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress'])]}"
-                                class="btn oe_highlight"/>
+                    <button name="action_edit_website_page"
+                            type="object"
+                            string="Edit"
+                            attrs="{'invisible': ['|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress'])]}"
+                            class="btn oe_highlight"/>
 
 
                     <!-- Preview Button -->
@@ -138,11 +138,12 @@
                             'form_view_ref': 'automated_seo.automated_seo_version_form'
                         }"/>
 
+
                 </header>
                 <sheet>
                     <group>
                         <group>
-                            <div class="o_col" style="width:250px">
+                            <div class="o_col" style="width:350px">
                                 <div class="o_row">
                                     <h1>
                                         <field name="name" required="1"/>
@@ -165,8 +166,33 @@
                                            style="margin-left:5px"
                                            nolabel="1"/>
                                 </div>
+                                <div class="o_row">
+                                    Upload File
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="upload_file" widget="binary" filename="upload_filename"
+                                           style="margin-left:5px"/>
+                                    <field name="upload_filename" invisible="1"/>
+                                    <button name="action_parse_uploaded_file"
+                                            type="object"
+                                            string="Submit"
+                                            class="btn btn-primary"
+                                            attrs="{'invisible': [('upload_file', '=', False)]}"/>
+                                </div>
+                                <!--                                <div class="o_row">-->
+                                <!--                                    Upload File-->
+                                <!--                                    <p style="margin-left:5px">:</p>-->
+                                <!--                                    <field name="upload_file" filename="upload_filename"/>-->
+                                <!--                                    <field name="upload_filename"-->
+                                <!--                                           style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;"/>-->
+                                <!--                                    <field name="upload_file" filename="upload_filename" invisible="1"/>-->
+                                <!--                                    <label for="upload_file" string="Upload File:"-->
+                                <!--                                           attrs="{'invisible': [('upload_file', '=', False)]}"/>-->
+                                <!--                                    <div class="d-flex align-items-center">-->
+                                <!--                                        <field name="upload_filename" readonly="1" nolabel="1"-->
+                                <!--                                               attrs="{'invisible': [('upload_file', '=', False)]}"/>-->
 
-
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                             </div>
                         </group>
                         <group>
@@ -239,4 +265,3 @@
               action="automated_seo.view_action"
               sequence="10"/>
 </odoo>
-
