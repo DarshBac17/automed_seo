@@ -9,10 +9,12 @@ odoo.define('website.autosave', function (require) {
          */
         init: function () {
             this._super.apply(this, arguments);
-            this.autoSaveInterval = 60000; // Auto-save interval in milliseconds
+            this.autoSaveInterval = 5000; // Auto-save interval in milliseconds
+            this.contentCheckInterval = 1000; // Content check interval in milliseconds
             this.contentChanged = false;
             this.lastContent = null;
             this.autoSaveTimer = null;
+            this.contentCheckTimer = null;
         },
 
         /**
@@ -21,6 +23,8 @@ odoo.define('website.autosave', function (require) {
         start: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
+                self.lastContent = self._getPageContent();
+                self._setupContentChangeDetection();
                 self.setupAutoSave();
                 return Promise.resolve();
             });
@@ -34,21 +38,22 @@ odoo.define('website.autosave', function (require) {
                 clearInterval(this.autoSaveTimer);
             }
 
-            try {
-                this.lastContent = this._getPageContent();
+            // Start auto-save timer
+            this.autoSaveTimer = setInterval(() => {
+                this.performAutoSave();
+            }, this.autoSaveInterval);
+        },
 
-                // Setup content change detection
-                this._setupContentChangeDetection();
-
-                // Start auto-save timer
-                this.autoSaveTimer = setInterval(() => {
-
-                    this.performAutoSave();
-                }, this.autoSaveInterval);
-            } catch (error) {
-                console.warn('[Website Editor] Setup postponed:', error);
-                // Retry setup after a short delay
-                setTimeout(() => this.setupAutoSave(), 1000);
+        /**
+         * Update icon state
+         * @private
+         * @param {string} iconClass - The icon class to set ('fa-spinner' or 'fa-cloud')
+         */
+        _updateIcon: function(iconClass) {
+            this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
+            if (this.$autoSaveIcon.length) {
+                const $icon = this.$autoSaveIcon.find('i');
+                $icon.removeClass('fa-spinner fa-cloud').addClass(iconClass);
             }
         },
 
@@ -57,7 +62,6 @@ odoo.define('website.autosave', function (require) {
          */
         performAutoSave: function () {
             if (!this.contentChanged) {
-
                 return Promise.resolve();
             }
 
@@ -73,18 +77,11 @@ odoo.define('website.autosave', function (require) {
                 },
             }).then(() => {
                 this.contentChanged = false;
-                this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
-                if (this.$autoSaveIcon.length) {
-                    const $icon = this.$autoSaveIcon.find('i');
-                    // Check if the current icon is fa-cloud, and change to fa-check if true
-                    if ($icon.hasClass('fa-spinner')) {
-                        $icon.removeClass('fa-spinner').addClass('fa-cloud');
-                    } else {
-                        $icon.addClass('fa-cloud');
-                    }
-                }
+                this._updateIcon('fa-cloud');
             }).catch((error) => {
                 console.error('[Website Editor] Save failed:', error);
+                // Keep content changed flag true on error
+                this.contentChanged = true;
             });
         },
 
@@ -93,30 +90,25 @@ odoo.define('website.autosave', function (require) {
          * @private
          */
         _setupContentChangeDetection: function () {
-            const $editableContent = this._findEditableContent();
-
-            if (!$editableContent.length) {
-                console.warn('[Website Editor] No editable content found');
-                return;
+            if (this.contentCheckTimer) {
+                clearInterval(this.contentCheckTimer);
             }
 
-            $editableContent.on('input change keyup mouseup', () => {
-                this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
-                if (this.$autoSaveIcon.length) {
-                    const $icon = this.$autoSaveIcon.find('i');
-                    // Check if the current icon is fa-cloud, and change to fa-check if true
-                     if ($icon.hasClass('fa-cloud')) {
-                        $icon.removeClass('fa-cloud').addClass('fa-spinner');
-                    } else {
-                        $icon.addClass('fa-spinner');
+            this.contentCheckTimer = setInterval(() => {
+                const $editableContent = this._findEditableContent();
+
+                if ($editableContent.length) {
+                    const currentContent = this._getPageContent();
+
+                    if (currentContent !== this.lastContent) {
+                        this.contentChanged = true;
+                        this.lastContent = currentContent;
+                        this._updateIcon('fa-spinner');
+                    } else if (!this.contentChanged) {
+                        this._updateIcon('fa-cloud');
                     }
                 }
-                const currentContent = this._getPageContent();
-                if (currentContent !== this.lastContent) {
-                    this.contentChanged = true;
-                    this.lastContent = currentContent;
-                }
-            });
+            }, this.contentCheckInterval);
         },
 
         /**
@@ -133,10 +125,6 @@ odoo.define('website.autosave', function (require) {
 
             if (!$editableContent.length) {
                 $editableContent = $('#wrapwrap .oe_structure.oe_empty, #wrapwrap .oe_structure').first();
-            }
-
-            if (!$editableContent.length) {
-                console.warn('[Website Editor] No editable content found');
             }
 
             return $editableContent;
@@ -156,7 +144,6 @@ odoo.define('website.autosave', function (require) {
             }
 
             const $clone = $editableContent.clone();
-
             const content = $clone.html();
             return content ? content.trim() : '';
         },
@@ -168,10 +155,8 @@ odoo.define('website.autosave', function (require) {
             if (this.autoSaveTimer) {
                 clearInterval(this.autoSaveTimer);
             }
-
-            const $editableContent = this._findEditableContent();
-            if ($editableContent.length) {
-                $editableContent.off('input change keyup mouseup');
+            if (this.contentCheckTimer) {
+                clearInterval(this.contentCheckTimer);
             }
 
             this._super.apply(this, arguments);
