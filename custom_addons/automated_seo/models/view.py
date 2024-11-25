@@ -943,6 +943,9 @@ class View(models.Model):
             var_type = tag.get("data-php-const-var")
 
             if var_name:
+                if len(tag.find_all("a")) > 0:
+
+                    tag["class"].append("o_child_a")
                 if len(tag.find_all("strong")) > 0:
                     tag["class"].append("o_strong")
                 if len(tag.find_all("b")) > 0:
@@ -961,16 +964,18 @@ class View(models.Model):
                     f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
                     'html.parser')
 
-                if "font-bold" in tag["class"] or "text-underline" in tag["class"]:
+                if "o_child_a" in tag["class"]:
+                    new_a_tag = soup.new_tag("a")
+                    new_a_tag.append(php_tag)
+                    tag.replace_with(new_a_tag)
+                elif "font-bold" in tag["class"] or "text-underline" in tag["class"]:
                     tag.string = ""
                     tag.append(php_tag)
                 elif "o_strong" in tag["class"]:
-                    # breakpoint()
                     new_strong_tag = soup.new_tag("strong")
                     new_strong_tag.append(php_tag)
                     tag.replace_with(new_strong_tag)
                 elif "o_b" in tag["class"]:
-                    # breakpoint()
                     new_b_tag = soup.new_tag("b")
                     new_b_tag.append(php_tag)
                     tag.replace_with(new_b_tag)
