@@ -45,7 +45,7 @@ class SEOSendEmailWizard(models.Model):
         active_id = self.env.context.get('active_id')
         view = self.env['automated_seo.view'].browse(active_id)
         view.message_post(
-            body=self.feedback,
+            body=f'Feedback : {self.feedback}',
             # partner_ids=self.recipient_ids.mapped('partner_id').ids,
         )
         view.stage = 'in_progress'

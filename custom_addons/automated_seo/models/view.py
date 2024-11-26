@@ -56,10 +56,12 @@ class View(models.Model):
     publish = fields.Boolean('Publish', default=False)
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
+    file_uploaded = fields.Boolean(string="File Uploaded", compute='_compute_file_uploaded', store=True)
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
 
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
@@ -219,6 +221,9 @@ class View(models.Model):
         }
 
     def action_parse_uploaded_file(self):
+
+        self.file_uploaded = bool(self.upload_file)
+        self.message_post(body=f'{self.upload_filename} File is uploaded', message_type="comment")
         name, ext = self.upload_filename.rsplit('.', 1)
         if ext not in ['php','html']:
             raise UserError("Upload php or html file.")
