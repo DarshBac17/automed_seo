@@ -9,7 +9,7 @@ odoo.define('website.autosave', function (require) {
          */
         init: function () {
             this._super.apply(this, arguments);
-            this.autoSaveInterval = 5000; // Auto-save interval in milliseconds
+            this.autoSaveInterval = 60000; // Auto-save interval in milliseconds
             this.contentCheckInterval = 1000; // Content check interval in milliseconds
             this.contentChanged = false;
             this.lastContent = null;
