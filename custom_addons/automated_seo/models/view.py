@@ -56,7 +56,7 @@ class View(models.Model):
     publish = fields.Boolean('Publish', default=False)
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
-    file_uploaded = fields.Boolean(string="File Uploaded", compute='_compute_file_uploaded', store=True)
+    file_uploaded = fields.Boolean(string="File Uploaded",default=False)
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
