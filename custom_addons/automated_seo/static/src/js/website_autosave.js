@@ -49,11 +49,12 @@ odoo.define('website.autosave', function (require) {
          * @private
          * @param {string} iconClass - The icon class to set ('fa-spinner' or 'fa-cloud')
          */
-        _updateIcon: function(iconClass) {
+        _updateIcon: function(iconClass,title) {
             this.$autoSaveIcon = $('.o_we_website_top_actions button[data-action=autosave]');
             if (this.$autoSaveIcon.length) {
+                this.$autoSaveIcon.attr("title",title)
                 const $icon = this.$autoSaveIcon.find('i');
-                $icon.removeClass('fa-spinner fa-cloud').addClass(iconClass);
+                $icon.removeClass('fa-spinner fa-spin fa-2x fa-lg fa-check-circle').addClass(iconClass);
             }
         },
 
@@ -77,7 +78,7 @@ odoo.define('website.autosave', function (require) {
                 },
             }).then(() => {
                 this.contentChanged = false;
-                this._updateIcon('fa-cloud');
+                this._updateIcon('fa-check-circle fa-lg','Auto Saved');
             }).catch((error) => {
                 console.error('[Website Editor] Save failed:', error);
                 // Keep content changed flag true on error
@@ -103,9 +104,9 @@ odoo.define('website.autosave', function (require) {
                     if (currentContent !== this.lastContent) {
                         this.contentChanged = true;
                         this.lastContent = currentContent;
-                        this._updateIcon('fa-spinner');
+                        this._updateIcon('fa-spinner fa-spin fa-2x','Saving..');
                     } else if (!this.contentChanged) {
-                        this._updateIcon('fa-cloud');
+                        this._updateIcon('fa-check-circle fa-lg','Auto Saved');
                     }
                 }
             }, this.contentCheckInterval);

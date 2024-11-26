@@ -7,7 +7,7 @@
         <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='mobile']" position="before">
             <button type="button" class="btn btn-secondary" data-action="autosave" title="Auto saved" accesskey="x">
                 <span class="icon-wrapper">
-                    <i class="fa fa-cloud"></i>
+                    <i class="fa fa-check-circle fa-lg"></i>
                 </span>
             </button>
         </xpath>
