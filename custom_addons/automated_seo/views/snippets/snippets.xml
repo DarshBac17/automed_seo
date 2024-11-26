@@ -50,7 +50,7 @@
                 </t>
                     <t t-snippet="automated_seo.s_banner_side_matrix_with_button" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button.png">
                     </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_icons" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+                    <t t-snippet="automated_seo.s_banner_side_image_with_icons" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_icons.png">
                         <keywords>banner, side image, icons</keywords>
                     </t>
                 </div>
