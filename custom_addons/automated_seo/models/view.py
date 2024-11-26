@@ -962,12 +962,14 @@ class View(models.Model):
                     f'<?php echo constant("{var_name}") ?>' if var_type == "1" else f"<?php echo ${var_name} ?>",
                     'html.parser')
 
-
                 if len(tag.find_all("a")) > 0:
-                    a_tag = tag.find_all("a")[0]
-                    # tag["class"].append("o_child_a")
-                    a_tag.append(php_tag)
-                    tag.replace_with(a_tag)
+                    new_a_tag = soup.new_tag('a')
+
+                    new_a_tag['href'] = tag.find_all("a")[0]['href']
+                    if tag.find_all("a")[0].get('target'):
+                        new_a_tag['target'] = tag.find_all("a")[0].get('target')
+                    new_a_tag.append(php_tag)
+                    tag.replace_with(new_a_tag)
                 elif "font-bold" in tag["class"] or "text-underline" in tag["class"]:
                     tag.string = ""
                     tag.append(php_tag)
