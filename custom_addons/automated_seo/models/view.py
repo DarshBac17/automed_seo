@@ -317,11 +317,19 @@ class View(models.Model):
             img['data-src'] = url.replace(image_base, base_url_php)
 
         anchor_base_url_php = "https://www.bacancytechnology.com/"
-        for a in soup.select('a:not(.btn)'):
+        for a in soup.select('a'):
             url = re.sub(r'\s', '', a.get('href'))
             base = re.sub(r'\s', '', "<?php echo BASE_URL; ?>")
             if url and url.startswith(base):
                 a['href'] = url.replace(base, anchor_base_url_php)
+
+        anchor_blog_url_php = "https://www.bacancytechnology.com/blog/"
+        for a in soup.select('a.btn'):
+            url = re.sub(r'\s', '', a.get('href'))
+            base = re.sub(r'\s', '', "<?php echo BLOG_URL; ?>")
+            if url and url.startswith(base):
+                a['href'] = url.replace(base, anchor_blog_url_php)
+
         content = self.minify_php_tags(self.normalize_text(soup.prettify()))
         for tag in tags:
             content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
