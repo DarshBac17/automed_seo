@@ -1121,8 +1121,8 @@ class View(models.Model):
                 s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
             else:
                 s3_key = f'inhouse/{s3_filename}'
-            # s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
-            #     'ContentType': content_type})
+            s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
+                'ContentType': content_type})
 
 
         except ClientError as e:
