@@ -34,7 +34,7 @@
             <form string="Version">
                 <sheet>
                     <group>
-                        <field name="change" widget="radio"/>
+                        <field name="change" widget="radio" required="1"/>
                         <field name="description"/>
                         <field name="view_id" invisible="1"/>
 
@@ -104,6 +104,15 @@
                     <!--                            class="btn btn-primary"/>-->
 
                     <!-- Done Button (Only visible to owner in review stage) -->
+
+
+                    <!-- Reject Button -->
+                    <button name="%(action_seo_send_email_wizard)d"
+                            type="action"
+                            string="Feedback"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'done')]}"
+                            context="{'view_name': name}"/>
                     <button name="action_done_button"
                             type="object"
                             string="Done"
@@ -111,15 +120,6 @@
                             attrs="{'invisible': ['|', ('publish', '=', True),
                             ('stage', '!=', 'in_review')]}"
                             context="{'view_name': name}"/>
-
-                    <!-- Reject Button -->
-                    <button name="%(action_seo_send_email_wizard)d"
-                            type="action"
-                            string="Feedback"
-                            class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review')]}"
-                            context="{'view_name': name}"/>
-
                     <!-- Publish Button -->
                     <button name="action_publish_button"
                             type="object"
