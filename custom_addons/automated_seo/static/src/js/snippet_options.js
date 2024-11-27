@@ -78,7 +78,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
         destroy: function () {
-            $(document).off('selectionchange');
+
             this._super.apply(this, arguments);
         },
 
