@@ -1126,7 +1126,6 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
             // Reset all input values and states
             $urlInput.val('');
-            $removeBtn.addClass('d-none');
             $newTabCheckbox.removeClass('active');
             // this.isTargetNewTab = false;
             this.currentLink = null;
@@ -1155,6 +1154,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             if (existingLink) {
 
                 $urlSection.removeClass('d-none');
+                $removeBtn.removeClass('d-none');
                 $linkButton.addClass('active');
                 $urlInput.val(existingLink.href);
 
