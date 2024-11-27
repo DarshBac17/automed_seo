@@ -447,7 +447,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=self.name)
+                self.delete_img_folder_from_s3(view_name=self.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -1136,11 +1136,21 @@ class View(models.Model):
             print(f"An unexpected error occurred: {e}")
 
     def delete_img_folder_from_s3(self,view_name):
+        folder_name = view_name.replace(" ", "").lower()
         s3 = boto3.client('s3',
                           aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                          )
-        s3.delete_object(Bucket='Inhouse', Key=f'{view_name.replace(" ","")}')
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+        try:
+            response = s3.list_objects_v2(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=f'inhouse/{folder_name}/')
+
+            if 'Contents' in response:
+                objects_to_delete = [{'Key': obj['Key']} for obj in response['Contents']]
+                s3.delete_objects(
+                    Bucket=AWS_STORAGE_BUCKET_NAME,
+                    Delete={'Objects': objects_to_delete}
+                )
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     def remove_br_tags(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
