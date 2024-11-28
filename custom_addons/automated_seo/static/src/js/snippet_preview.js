@@ -89,8 +89,6 @@ odoo.define('website.custom.editor', function (require) {
                     left: left,
                     width: previewWidth
                 }).fadeIn(200);
-
-                console.log('✨ Preview popup displayed');
             }, 150); // Add a small delay to debounce rapid hover actions
         },
 

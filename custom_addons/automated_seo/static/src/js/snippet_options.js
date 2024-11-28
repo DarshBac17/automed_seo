@@ -73,17 +73,12 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 // $(document).on('selectionchange', _.debounce(() => {
                 //     self._onSelectionChange();
                 // }, 100));
-
-                $(document).on('click', '.o_we_edit_link', function(ev) {
-                    self._onLinkButtonClick.call(self, ev);
-                });
             });
         },
 
 
         destroy: function () {
-           // $(document).off('selectionchange');
-           $(document).off('click', '.o_we_edit_link');
+
             this._super.apply(this, arguments);
         },
 

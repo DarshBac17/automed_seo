@@ -447,7 +447,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=self.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -585,7 +585,7 @@ class View(models.Model):
             html_parser = self.remove_bom(html_parser=html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            # html_parser = self.format_paragraphs(html_content=html_parser)
+            html_parser = self.format_paragraphs(html_content=html_parser)
             html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
@@ -605,7 +605,36 @@ class View(models.Model):
                 'parse_html_binary':file,
                 'parse_html_filename' : file_name
             })
+    def format_paragraphs(self,html_content):
+        soup = BeautifulSoup(html_content, 'html.parser')
+        paragraphs = soup.find_all('p')
 
+        for p in paragraphs:
+            contents = str(p)
+            replacements = {
+                '&amp;': '&',
+                '&lt;': '<',
+                '&gt;': '>',
+                '&quot;': '"',
+                '&apos;': "'",
+                '&#39;': "'",
+                '&nbsp;': ' '
+            }
+            for entity, char in replacements.items():
+                contents = contents.replace(entity, char)
+
+            opening_tag = re.match(r'<p[^>]*>', contents).group(0)
+            closing_tag = '</p>'
+
+            inner_content = contents[len(opening_tag):-len(closing_tag)]
+
+            cleaned_content = ' '.join(inner_content.split())
+            new_p = soup.new_tag('p')
+            new_p.attrs = p.attrs
+            new_p.append(cleaned_content)
+            p.replace_with(new_p)
+
+        return str(soup)
     def remove_extra_spaces(self,html_parser):
         inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
