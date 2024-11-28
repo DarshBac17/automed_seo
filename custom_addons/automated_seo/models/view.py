@@ -1219,24 +1219,55 @@ class View(models.Model):
         return str(soup.prettify())
 
     def remove_empty_tags(self, html_parser):
-
         soup = BeautifulSoup(html_parser, 'html.parser')
 
+        self_closing_tags = {"img", "input", "hr", "meta", "link"}
+
+        def is_empty_tag(tag):
+
+            if tag.name in self_closing_tags:
+                return False
+
+            tag = self.normalize_text(tag)
+            pattern = r'^<([a-zA-Z][a-zA-Z0-9]*)[^>]*>\s*</\1>$'
+
+            if re.match(pattern, tag):
+                return True
+
+        def remove_empty_tags_recursively(tag):
+
+            """Recursively removes a tag if it and its parent are empty."""
+            if is_empty_tag(tag):
+                tag.decompose()
+                parent = tag.find_parent()
+                if parent and is_empty_tag(parent):
+                    remove_empty_tags_recursively(parent)
+
         all_tags = soup.find_all()
-
         for tag in all_tags:
-            tag_string = str(tag)
+            remove_empty_tags_recursively(tag)
 
-
-            pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
-
-            # Check if it's an empty tag
-            if re.match(pattern, tag_string):
-                tag.decompose()
-            pattern = f'<{tag.name}></{tag.name}>'
-            if re.match(pattern, tag_string):
-                tag.decompose()
         return soup.prettify()
+
+    # def remove_empty_tags(self, html_parser):
+    #
+    #     soup = BeautifulSoup(html_parser, 'html.parser')
+    #
+    #     all_tags = soup.find_all()
+    #
+    #     for tag in all_tags:
+    #         tag_string = str(tag)
+    #
+    #
+    #         pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
+    #
+    #         # Check if it's an empty tag
+    #         if re.match(pattern, tag_string):
+    #             tag.decompose()
+    #         pattern = f'<{tag.name}></{tag.name}>'
+    #         if re.match(pattern, tag_string):
+    #             tag.decompose()
+    #     return soup.prettify()
 
 
     # Function to remove BOM characters from all text elements
