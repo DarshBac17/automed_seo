@@ -3,7 +3,7 @@
     <template id="s_trusted_bg_gray" name="Trusted Gray">
         <section class="ou_section">
             <section class=" trusted bg-gray-light py-md o_automated_seo_php_variable">
-                <div class="container">
+                <div class="container" contenteditable="false">
                     <div class="grid gap-6 grid-cols-3 md:grid-cols-6 lg:grid-cols-7 items-center justify-center [&amp;_div]:m-auto">
                         <p class="mb-0 text-h5 text-dark col-span-full text-center lg:col-span-1">Trusted By</p>
                         <div>
