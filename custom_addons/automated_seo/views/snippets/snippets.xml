@@ -334,14 +334,14 @@
                     <t t-snippet="automated_seo.s_sub_faq_tab_gray" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/png">
                         <keywords>ask, sub, faq tabs, questions, faq, gray</keywords>
                     </t>-->
-                    <t t-snippet="automated_seo.s_faq_with_button_bg_white"
+                    <!--<t t-snippet="automated_seo.s_faq_with_button_bg_white"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_with_button_bg_white.png">
                         <keywords>ask, questions, faq, white</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_faq_with_button_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_with_button_bg_gray.png">
                         <keywords>ask, questions, faq, gray</keywords>
-                    </t>
+                    </t>-->
                 </div>
             </div>
 
