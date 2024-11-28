@@ -1218,36 +1218,62 @@ class View(models.Model):
 
         return str(soup.prettify())
 
-    def remove_empty_tags(self, html_parser):
+    def remove_empty_tags(self,html_parser):
         soup = BeautifulSoup(html_parser, 'html.parser')
-
         self_closing_tags = {"img", "input", "hr", "meta", "link"}
 
-        def is_empty_tag(tag):
-
+        def remove_empty(tag):
+            # If the tag has no content or only whitespace, remove it
             if tag.name in self_closing_tags:
-                return False
+                return
 
-            tag = self.normalize_text(tag)
-            pattern = r'^<([a-zA-Z][a-zA-Z0-9]*)[^>]*>\s*</\1>$'
-
-            if re.match(pattern, tag):
-                return True
-
-        def remove_empty_tags_recursively(tag):
-
-            """Recursively removes a tag if it and its parent are empty."""
-            if is_empty_tag(tag):
-                tag.decompose()
-                parent = tag.find_parent()
-                if parent and is_empty_tag(parent):
-                    remove_empty_tags_recursively(parent)
+            if not tag.contents or all(
+                    isinstance(content, str) and content.strip() == "" for content in tag.contents
+            ):
+                parent = tag.parent
+                tag.decompose()  # Remove the tag
+                if parent:  # Recursively check the parent
+                    remove_empty(parent)
 
         all_tags = soup.find_all()
         for tag in all_tags:
-            remove_empty_tags_recursively(tag)
+            remove_empty(tag)
 
         return soup.prettify()
+    # def remove_empty_tags(self, html_parser):
+    #     soup = BeautifulSoup(html_parser, 'html.parser')
+    #
+    #     self_closing_tags = {"img", "input", "hr", "meta", "link"}
+    #
+    #     def is_empty_tag(tag):
+    #
+    #         if tag.name in self_closing_tags:
+    #             return False
+    #         pattern = f'<{tag.name}[^>]*?></\s*{tag.name}>'
+    #         tag = self.normalize_text(tag)
+    #         print("================")
+    #         print(tag)
+    #         print("================")
+    #
+    #         # pattern = r'^<([a-zA-Z][a-zA-Z0-9]*)[^>]*>\s*</\1>$'
+    #
+    #         if re.match(pattern, tag):
+    #             return True
+    #
+    #     def remove_empty_tags_recursively(tag):
+    #
+    #         """Recursively removes a tag if it and its parent are empty."""
+    #         if is_empty_tag(tag):
+    #             parent = tag.find_parent()
+    #             tag.decompose()
+    #             if parent and is_empty_tag(parent):
+    #                 remove_empty_tags_recursively(parent)
+    #
+    #     all_tags = soup.find_all()
+    #     for tag in all_tags:
+    #         remove_empty_tags_recursively(tag)
+    #
+    #     return soup.prettify()
 
     # def remove_empty_tags(self, html_parser):
     #
