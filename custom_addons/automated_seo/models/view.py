@@ -447,7 +447,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=self.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
