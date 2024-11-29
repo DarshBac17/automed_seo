@@ -862,8 +862,11 @@ class View(models.Model):
 
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            img['height'] = int(float(img.get('height')))
-            img['width'] = int(float(img.get('width')))
+            if img.get('height') :
+                img['height'] = int(float(img.get('height')))
+
+            if img.get('width'):
+                img['width'] = int(float(img.get('width')))
 
         return str(soup.prettify())
 
