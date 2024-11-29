@@ -22,7 +22,7 @@
 
 /* Flex container for the entire layout */
 .o_tab_custom-flex-layout {
-    display: flex;
+    display: flex !important;
     justify-content: space-between; /* Ensures no extra space on the right side */
     gap: 20px; /* Space between left and right sections */
     max-width: 1200px; /* Set a maximum width for the layout */
