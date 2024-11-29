@@ -4,7 +4,7 @@
 
         <section class="o_automated_seo_snippet grid md:gap-6 grid-cols-1 md:grid-cols-11 o_tab_custom-flex-layout o_automated_seo_php_variable">
 
-            <div class="o_tab_custom-left-section md:col-span-3">
+            <div class="o_tab_custom-left-section md:col-span-3" contenteditable="false">
                 <div class="side-sticky">
                     <h2 class="cont-padding">Frequently Asked Questions</h2>
                     <a href="#footer-form-id" class="text-h5 faq-head max-md:mt-sm">Still have questions?

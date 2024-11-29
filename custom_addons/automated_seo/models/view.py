@@ -588,6 +588,7 @@ class View(models.Model):
             html_parser = self.remove_bom(html_parser=html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
+            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             html_parser = self.format_paragraphs(html_content=html_parser)
             html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
             html_parser = self.remove_empty_tags(html_parser = html_parser)
@@ -608,6 +609,22 @@ class View(models.Model):
                 'parse_html_binary':file,
                 'parse_html_filename' : file_name
             })
+
+
+
+    def handle_itemprop_in_faq(self,html_content):
+
+        soup = BeautifulSoup(html_content,"html.parser")
+
+        for main_entity in soup.find_all(attrs={'itemprop': 'mainEntity'}):
+            text_entity = main_entity.find_all(attrs={'itemprop':'text'})[1:]
+
+            for text in text_entity:
+                del text['itemprop']
+
+
+        return str(soup)
+
     def format_paragraphs(self,html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
         paragraphs = soup.find_all('p')
@@ -874,18 +891,14 @@ class View(models.Model):
         base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
         for img in soup.select('img'):
             url = img.get('src')
-            try:
-                img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-                img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-                if img.get('height'):
-                    img['height'] = int(float(img.get('height')))
 
-                if img.get('width'):
-                    img['width'] = int(float(img.get('width')))
-            except Exception as e:
+            img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            if img.get('height') :
+                img['height'] = int(float(img.get('height')))
 
-                print(e)
-
+            if img.get('width'):
+                img['width'] = int(float(img.get('width')))
 
         return str(soup.prettify())
 
@@ -1129,7 +1142,7 @@ class View(models.Model):
                 if not tag['class']:
                     del tag['class']
 
-            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var']:
+            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var','contenteditable']:
                 if tag.has_attr(attr):
                     del tag[attr]
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:
