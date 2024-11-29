@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_faq_with_list_bg_white" name="Faq with List bg White">
+    <template id="s_faq_with_list_bg_white" name="Faq bg White">
         <section class="o_automated_seo_snippet o_automated_seo_php_variable o_tab_custom-flex-layout container grid md:gap-6 grid-cols-1 md:grid-cols-11">
             <div class="o_tab_custom-left-section md:col-span-3" contenteditable="false">
                 <div class="side-sticky">
