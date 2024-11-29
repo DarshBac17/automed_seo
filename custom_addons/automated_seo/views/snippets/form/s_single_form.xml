@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_single_form" name="Single Form">
 
-        <section class="pt-0 form-sec o_automated_seo_php_variable">
+        <section class="bg-dark py-0 form-sec o_automated_seo_php_variable">
             <div class="container">
                 <!--               <?php-->
                 <!--            $formType = 'tech-dark-form';-->
@@ -10,7 +10,7 @@
                 <!--            ?>-->
 
                 <!--        <div class="<?php echo $mtRemove ? 'px-0 py-lg' : 'form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark'; ?>" id="form">-->
-                <div class="o_au_php_form_single-form form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark" id="form">
+                <div class="o_au_php_form_single-form px-0 py-lg" id="form">
                     <div class="text-center cont-padding" id="schedule-interview">
                         <!--<?php if ($tech_dark_form_heading) : ?>
                             <h2 class="text-white">
