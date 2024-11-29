@@ -9,11 +9,11 @@ from odoo.exceptions import UserError
 from botocore.exceptions import ClientError
 import re
 import random
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from pathlib import Path
 import mimetypes
 from html import escape, unescape
-
+import xml.etree.ElementTree as ET
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -567,7 +567,10 @@ class View(models.Model):
 
         except Exception as e:
             print(f"Error processing image: {str(e)}")
-            return None
+            new_image_data = attachment.datas
+            new_image = base64.b64decode(new_image_data)
+            image_file = io.BytesIO(new_image)
+            return image_file
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
@@ -786,8 +789,37 @@ class View(models.Model):
                 image_name = url.split('/')[-1]
                 image_id = int(url.split('/')[-2].split('-')[0])
                 attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
-                hash_suffix = self.generate_hash()
+                image_data = base64.b64decode(attachment.datas) if attachment.datas else None
                 name, ext = image_name.rsplit('.', 1)
+                if ext != 'svg':
+                    try:
+                        # Try to open the image directly with Pillow
+                        image = Image.open(io.BytesIO(image_data))
+                        width, height = image.size
+                    except UnidentifiedImageError as e:
+                        UserError(f"Error :- {e}")
+                else:
+                    try:
+                        svg_content = image_data.decode("utf-8")
+                        root = ET.fromstring(svg_content)
+
+                        width = root.attrib.get("width")
+                        height = root.attrib.get("height")
+
+                        if not width or not height:
+                            view_box = root.attrib.get("viewBox")
+                            if view_box:
+                                _, _, width, height = view_box.split()
+
+                    except Exception as e:
+                        UserError(f"Error :- {e}")
+                if height:
+                    img['heigth'] = int(float(height))
+
+                if width:
+                    img['width'] = int(float(width))
+
+                hash_suffix = self.generate_hash()
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
                     img['class'] = [cls for cls in img['class'] if
