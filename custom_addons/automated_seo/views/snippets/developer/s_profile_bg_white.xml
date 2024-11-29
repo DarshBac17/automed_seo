@@ -17,7 +17,7 @@
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/alpesh-net.png"
                                  alt=".Net Developer Alpesh" title=".Net Developer Alpesh" width="60" height="60"
-                                 loading="lazy" class="alpesh-net"/>
+                                 loading="lazy"/>
                         </div>
                         <div>
                             <h3 class="text-h4 mb-0">Person Name</h3>
@@ -45,14 +45,14 @@
                             alt="Expert in" width="102" height="48" loading="lazy">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
-                             alt="Expert in" width="102" height="48" loading="lazy" class="expert-in"/>
+                             alt="Expert in" width="102" height="48" loading="lazy"/>
                     </div>
                     <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
                         <span class="border border-primary bg-light-orange px-2"><!--<a
                             href="<?php echo BASE_URL;?>hire-c-sharp-developer"
                             class="text-primary font-bold">C#</a>--><a
                                 href="#"
-                                class="text-primary font-bold hire-c-sharp-developer">Span</a></span>
+                                class="text-primary font-bold">Span</a></span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
@@ -72,7 +72,7 @@
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/hemant-net.png"
                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/hemant-net.png"
                                  alt=".Net Developer Hemant" title=".Net Developer Hemant" width="60" height="60"
-                                 loading="lazy" class="hemant-net"/>
+                                 loading="lazy"/>
                         </div>
                         <div>
                             <h3 class="text-h4 mb-0">Person Name</h3>
@@ -100,7 +100,7 @@
                                                          alt="Expert in" width="102" height="48" loading="lazy">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
-                             alt="Expert in" width="102" height="48" loading="lazy" class="expert-in"/>
+                             alt="Expert in" width="102" height="48" loading="lazy"/>
                     </div>
                     <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
                         <span class="border border-primary bg-light-orange px-2">Span</span>
@@ -108,7 +108,7 @@
                             href="<?php echo BASE_URL;?>mvc-asp-net-development"
                             class="text-primary font-bold">Span</a>--><a
                                 href="#"
-                                class="text-primary font-bold mvc-asp-net-development">Span</a></span>
+                                class="text-primary font-bold">Span</a></span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
@@ -126,7 +126,7 @@
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-dot-net-developer/jignesh-net.png"
                                  alt=".Net Developer Jignesh" title=".Net Developer Jignesh" width="60" height="60"
-                                 loading="lazy" class="jignesh-net"/>
+                                 loading="lazy"/>
                         </div>
                         <div>
                             <h3 class="text-h4 mb-0">Person Name</h3>
@@ -154,7 +154,7 @@
                                                 alt="Expert in" width="102" height="48" loading="lazy">-->
                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
                              data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/expert-in.svg"
-                             alt="Expert in" width="102" height="48" class="expert-in" loading="lazy"/>
+                             alt="Expert in" width="102" height="48" loading="lazy"/>
                     </div>
                     <div class="mb-sm flex flex-wrap gap-2 small-heading-two items-start">
                         <span class="border border-primary bg-light-orange px-2">span</span>
@@ -164,7 +164,7 @@
                         <span class="border border-primary bg-light-orange px-2">span</span>
                         <span class="border border-primary bg-light-orange px-2"><!--<a
                             href="<?php echo BASE_URL;?>dot-net-core-developer" class="text-primary font-bold">span</a>--><a
-                                href="#" class="text-primary font-bold dot-net-core-developer">span</a></span>
+                                href="#" class="text-primary font-bold">span</a></span>
                     </div>
                     <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
                 </section>

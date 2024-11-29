@@ -26,7 +26,7 @@
                             <!--                        <a href="<?php echo BASE_URL; ?>language-processing-development" class="text-primary">Natural-->
                             <!--                            Language Processing (NLP)-->
                             <!--                        </a>-->
-                            <a href="#" class="text-primary language-processing-development">
+                            <a href="#" class="text-primary">
                                 Title Title Title Title Title Title
                             </a>
                         </h3>
@@ -69,7 +69,7 @@
                     <section class="boxed bg-white o_replace_section_div">
                         <h3 class="text-h4 small-heading">
                             <!--                        <a href="<?php echo BASE_URL; ?>ai-integration-services" class="text-primary">AI Integration</a>-->
-                            <a href="#" class="text-primary ai-integration-services">Title Title Title Title Title Title</a>
+                            <a href="#" class="text-primary">Title Title Title Title Title Title</a>
                         </h3>
                         <ul>
                             <li>Item Item Item Item</li>
@@ -83,7 +83,7 @@
 <!--                                                    <a href="<?php echo BASE_URL; ?>rpa-consulting-services" class="text-primary">Robotic Process-->
 <!--                                                        Automation-->
 <!--                                                    </a>-->
-                            <a href="#" class="text-primary rpa-consulting-services">Title Title Title Title Title Title
+                            <a href="#" class="text-primary">Title Title Title Title Title Title
                             </a>
                         </h3>
                         <ul>
