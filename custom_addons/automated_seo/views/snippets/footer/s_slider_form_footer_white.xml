@@ -19,7 +19,7 @@
                                     <!--                                             alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"-->
                                     <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                 a                   </div>-->
-                                    <div class="top-tier">
+                                    <div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-1.jpg"
                                              alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
@@ -72,7 +72,7 @@
                                     <!--                                             alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"-->
                                     <!--                                             width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                                    </div>-->
-                                    <div class="experience-team">
+                                    <div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-3.jpg"
                                              alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"
                                              width="365" class="m-auto w-[max(365px,4.932vw)]"/>

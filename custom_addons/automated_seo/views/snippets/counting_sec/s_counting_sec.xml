@@ -45,14 +45,14 @@
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-1.svg" alt="Work at Your Time Zone" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" alt="Work at Your Time Zone" loading="lazy" height="48" width="48" class="county-1"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" alt="Work at Your Time Zone" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-2.svg" alt="Easy Communication" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" alt="Easy Communication" loading="lazy" height="48" width="48" class="county-2"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" alt="Easy Communication" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
@@ -66,14 +66,14 @@
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-4.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-4.svg" alt="In Business Since 2011" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" alt="In Business Since 2011" loading="lazy" height="48" width="48" class="county-4"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" alt="In Business Since 2011" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-5.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-5.svg" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48" class="county-5"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
