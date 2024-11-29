@@ -789,36 +789,7 @@ class View(models.Model):
                 image_name = url.split('/')[-1]
                 image_id = int(url.split('/')[-2].split('-')[0])
                 attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
-                image_data = base64.b64decode(attachment.datas) if attachment.datas else None
                 name, ext = image_name.rsplit('.', 1)
-                if ext != 'svg':
-                    try:
-                        # Try to open the image directly with Pillow
-                        image = Image.open(io.BytesIO(image_data))
-                        width, height = image.size
-                    except UnidentifiedImageError as e:
-                        UserError(f"Error :- {e}")
-                else:
-                    try:
-                        svg_content = image_data.decode("utf-8")
-                        root = ET.fromstring(svg_content)
-
-                        width = root.attrib.get("width")
-                        height = root.attrib.get("height")
-
-                        if not width or not height:
-                            view_box = root.attrib.get("viewBox")
-                            if view_box:
-                                _, _, width, height = view_box.split()
-
-                    except Exception as e:
-                        UserError(f"Error :- {e}")
-                if height:
-                    img['heigth'] = int(float(height))
-
-                if width:
-                    img['width'] = int(float(width))
-
                 hash_suffix = self.generate_hash()
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
@@ -864,6 +835,41 @@ class View(models.Model):
         for img in soup.select('img'):
             url = img.get('src')
             if url and url.startswith("/web/image/"):
+                image_name = url.split('/')[-1]
+                image_id = int(url.split('/')[-2].split('-')[0])
+                attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
+                image_data = base64.b64decode(attachment.datas) if attachment.datas else None
+                name, ext = image_name.rsplit('.', 1)
+                height = None
+                width = None
+                if ext != 'svg':
+                    try:
+                        # Try to open the image directly with Pillow
+                        image = Image.open(io.BytesIO(image_data))
+                        width, height = image.size
+                    except UnidentifiedImageError as e:
+                        UserError(f"Error :- {e}")
+                else:
+                    try:
+                        svg_content = image_data.decode("utf-8")
+                        root = ET.fromstring(svg_content)
+
+                        width = root.attrib.get("width")
+                        height = root.attrib.get("height")
+
+                        if not width or not height:
+                            view_box = root.attrib.get("viewBox")
+                            if view_box:
+                                _, _, width, height = view_box.split()
+
+                    except Exception as e:
+                        UserError(f"Error :- {e}")
+                if height:
+                    img['heigth'] = int(float(height))
+
+                if width:
+                    img['width'] = int(float(width))
+
                 img_tag_classes = img.get("class", [])
                 element = next((cls for cls in img_tag_classes if cls.startswith('o_imagename')), None)
 
