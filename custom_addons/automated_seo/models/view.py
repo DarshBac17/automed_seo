@@ -597,7 +597,7 @@ class View(models.Model):
             html_parser = html.unescape(html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
-            file_name = f"{view_name}_{version.name}.html"
+            file_name = f"{view_name}_{version.name}.php"
             self.write({
                 'parse_html': html_parser,
                 'parse_html_binary': file ,

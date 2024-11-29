@@ -53,14 +53,15 @@
             </div>
         </section>
         <section class="pt-0 form-sec o_automated_seo_php_variable">
-            <div class="container o_au_php_form_single-form">
+            <div class="container">
+
 <!--               <?php-->
 <!--            $formType = 'tech-dark-form';-->
 <!--            include("tailwind/template/form.php");-->
 <!--            ?>-->
 
                 <!--        <div class="<?php echo $mtRemove ? 'px-0 py-lg' : 'form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark'; ?>" id="form">-->
-                <div class="form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark" id="form">
+                <div class="o_au_php_form_single-form form-sec max-md:px-7 md:px-12 lg:px-lg py-lg bg-dark" id="form">
                     <div class="text-center cont-padding" id="schedule-interview">
                         <!--<?php if ($tech_dark_form_heading) : ?>
                             <h2 class="text-white">
@@ -117,6 +118,7 @@
                         </div>
                     </form>
                 </div>
+
 
             </div>
         </section>
