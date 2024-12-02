@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_footer_bg_white" name="Footer White">
         <section class="ou_section">
-            <section class="footer-php o_automated_seo_php_variable" contenteditable="false">
+            <section class="footer-php o_automated_seo_php_variable o_not_editable">
             <!--<?php include("tailwind/template/footer.php"); ?>-->
             <footer class="footer py-lg bg-white">
                 <div class="container">
