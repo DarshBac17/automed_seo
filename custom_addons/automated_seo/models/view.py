@@ -658,6 +658,7 @@ class View(models.Model):
         inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
         self_closing_tags = {'img', 'br', 'hr', 'input', 'meta', 'link'}
         structural_tags = {'div', 'section', 'nav', 'header', 'footer', 'main'}
+        table_tags = {'table', 'tr', 'td', 'th', 'thead', 'tbody', 'tfoot'}
 
         # Store PHP blocks
         php_blocks = {}
@@ -690,6 +691,18 @@ class View(models.Model):
                                 for child in elem.children)
             return not has_structural and has_only_text
 
+        def format_span_cell(elem, indent):
+            """Special formatter for td elements containing spans"""
+            spans = elem.find_all('span', recursive=False)
+            if spans:
+                # Join spans without newlines, preserving their text content
+                span_contents = []
+                for span in spans:
+                    text = ' '.join(span.stripped_strings)
+                    span_contents.append(f'<span>{text}</span>')
+                return f"{indent}<td>{' '.join(span_contents)}</td>"
+            return None
+
         def format_element(elem, level=0):
             if isinstance(elem, NavigableString):
                 text = str(elem).strip()
@@ -698,10 +711,12 @@ class View(models.Model):
             indent = ' ' * (level * indent_size)
             attrs = format_attributes(elem)
 
-            if elem.name == 'td' and elem.find_all('span', recursive=False):
-                spans = elem.find_all('span')
-                span_content = ''.join(f"<span>{span.string}</span>" for span in spans)
-                return f"{indent}<td>{span_content}</td>"
+            if elem.name == 'td':
+                if elem.find_all('span', recursive=False):
+                    return format_span_cell(elem, indent)
+                else:
+                    text = ' '.join(elem.stripped_strings)
+                    return f"{indent}<td>{text}</td>"
 
             # Handle self-closing tags
             if elem.name in self_closing_tags:
@@ -738,6 +753,35 @@ class View(models.Model):
                 content = ' '.join(content_parts)
                 content = re.sub(r'\s+', ' ', content)  # Normalize whitespace
                 return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+
+            # Handle table row elements
+            if elem.name == 'tr':
+                lines = [f"{indent}<{elem.name}{attrs}>"]
+                for child in elem.children:
+                    if isinstance(child, NavigableString):
+                        continue
+                    if child.name == 'td':
+                        cell_content = format_span_cell(child, indent + ' ' * indent_size)
+                        if cell_content:
+                            lines.append(cell_content)
+                        else:
+                            lines.append(format_element(child, level + 1))
+                lines.append(f"{indent}</{elem.name}>")
+                return '\n'.join(line for line in lines if line.strip())
+
+            if elem.name == 'tr':
+                lines = [f"{indent}<{elem.name}{attrs}>"]
+                for child in elem.children:
+                    if isinstance(child, NavigableString):
+                        continue
+                    if child.name == 'td':
+                        cell_content = format_span_cell(child, indent + ' ' * indent_size)
+                        if cell_content:
+                            lines.append(cell_content)
+                        else:
+                            lines.append(format_element(child, level + 1))
+                lines.append(f"{indent}</{elem.name}>")
+                return '\n'.join(line for line in lines if line.strip())
 
             # Handle structural elements
             lines = [f"{indent}<{elem.name}{attrs}>"]
