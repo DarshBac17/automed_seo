@@ -594,8 +594,6 @@ class View(models.Model):
             html_parser = soup.prettify()
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             # html_parser = self.format_paragraphs(html_content=html_parser)
-
-            html_parser = self.remove_empty_tags(html_parser = html_parser)
             # html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.format_html_php(html_content=html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
@@ -685,6 +683,13 @@ class View(models.Model):
                     attrs.append(f'{key}="{value}"')
             return ' ' + ' '.join(attrs) if attrs else ''
 
+        def should_inline_content(elem):
+            # Check if element should be inlined
+            has_structural = any(child.name in structural_tags for child in elem.children)
+            has_only_text = all(isinstance(child, NavigableString) or child.name in inline_content_tags
+                                for child in elem.children)
+            return not has_structural and has_only_text
+
         def format_element(elem, level=0):
             if isinstance(elem, NavigableString):
                 text = str(elem).strip()
@@ -696,6 +701,22 @@ class View(models.Model):
             # Handle self-closing tags
             if elem.name in self_closing_tags:
                 return f"{indent}<{elem.name}{attrs}/>"
+            if elem.name == 'a':
+                if should_inline_content(elem):
+                    content = ' '.join(elem.stripped_strings)
+                    return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+                else:
+                    # Handle structural content inside anchor
+                    lines = [f"{indent}<{elem.name}{attrs}>"]
+                    for child in elem.children:
+                        if isinstance(child, NavigableString):
+                            text = child.strip()
+                            if text:
+                                lines.append(f"{indent}{' ' * indent_size}{text}")
+                        else:
+                            lines.append(format_element(child, level + 1))
+                    lines.append(f"{indent}</{elem.name}>")
+                    return '\n'.join(line for line in lines if line.strip())
 
             # Handle inline content tags
             if elem.name in inline_content_tags:
