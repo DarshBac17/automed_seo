@@ -698,6 +698,11 @@ class View(models.Model):
             indent = ' ' * (level * indent_size)
             attrs = format_attributes(elem)
 
+            if elem.name == 'td' and elem.find_all('span', recursive=False):
+                spans = elem.find_all('span')
+                span_content = ''.join(f"<span>{span.string}</span>" for span in spans)
+                return f"{indent}<td>{span_content}</td>"
+
             # Handle self-closing tags
             if elem.name in self_closing_tags:
                 return f"{indent}<{elem.name}{attrs}/>"
