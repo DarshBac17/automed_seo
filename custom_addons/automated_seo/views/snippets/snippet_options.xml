@@ -90,6 +90,13 @@
                                    placeholder="Enter URL (e.g., https://...)"
                                    />
                         </div>
+                        <div class="form-group mb-2">
+                            <we-select string="Style" class="link-style-dropdown" data-no-preview="true">
+                                <we-button class="link-style-option active" data-style-class="" data-display="none">none</we-button>
+                                <we-button class="link-style-option" data-style-class="text-primary font-bold" data-display="Text Primary">Text Primary</we-button>
+                            </we-select>
+                        </div>
+
 
                         <div class="form-group mb-2">
                             <we-checkbox

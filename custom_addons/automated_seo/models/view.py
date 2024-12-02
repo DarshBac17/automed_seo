@@ -1257,15 +1257,15 @@ class View(models.Model):
         base_url_php = "<?php echo BASE_URL; ?>"
         for a in soup.select('a:not(.btn)'):
             # Get current classes on the <a> tag or initialize with an empty list
-            current_classes = a.get('class', [])
-
-            # Add each class from link_css_classes if it’s not already present
-            for css_class in link_css_classes:
-                if css_class not in current_classes:
-                    current_classes.append(css_class)
-
-            # Update the class attribute on the <a> tag
-            a['class'] = current_classes
+            # current_classes = a.get('class', [])
+            #
+            # # Add each class from link_css_classes if it’s not already present
+            # for css_class in link_css_classes:
+            #     if css_class not in current_classes:
+            #         current_classes.append(css_class)
+            #
+            # # Update the class attribute on the <a> tag
+            # a['class'] = current_classes
 
             url = a.get('href')
             if url and url.startswith("https://www.bacancytechnology.com/"):
