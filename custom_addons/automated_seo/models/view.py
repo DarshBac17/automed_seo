@@ -762,7 +762,7 @@ class View(models.Model):
 
         # Restore PHP blocks
         for placeholder, php_code in php_blocks.items():
-            formatted = formatted.replace(placeholder, php_code)
+            formatted = formatted.replace(placeholder, php_code,1)
 
         return formatted
     # def format_html_php(self,html_content, indent_size=4):
