@@ -163,6 +163,8 @@ class View(models.Model):
         self.action_custom_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
+
+
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
         self.stage = 'in_preview'
@@ -584,14 +586,14 @@ class View(models.Model):
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
         html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
-            html_parser = self.remove_odoo_classes_from_tag(html_parser)
             html_parser = self.remove_bom(html_parser=html_parser)
+            html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             html_parser = self.format_paragraphs(html_content=html_parser)
             html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
-            html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
@@ -615,15 +617,10 @@ class View(models.Model):
     def handle_itemprop_in_faq(self,html_content):
 
         soup = BeautifulSoup(html_content,"html.parser")
+        for main_entity in soup.find_all(class_='o_answer_itemprop'):
+            main_entity.find_all()[0]["itemprop"] = "text"
 
-        for main_entity in soup.find_all(attrs={'itemprop': 'mainEntity'}):
-            text_entity = main_entity.find_all(attrs={'itemprop':'text'})[1:]
-
-            for text in text_entity:
-                del text['itemprop']
-
-
-        return str(soup)
+        return str(soup.prettify())
 
     def format_paragraphs(self,html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
@@ -654,7 +651,7 @@ class View(models.Model):
             new_p.append(cleaned_content)
             p.replace_with(new_p)
 
-        return str(soup)
+        return soup.prettify()
     def remove_extra_spaces(self,html_parser):
         inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
@@ -1281,8 +1278,7 @@ class View(models.Model):
         self_closing_tags = {"img", "input", "hr", "meta", "link"}
 
         def remove_empty(tag):
-            # If the tag has no content or only whitespace, remove it
-            if tag.name in self_closing_tags:
+            if tag.name == "section" or tag.name in self_closing_tags:
                 return
 
             if not tag.contents or all(
@@ -1356,14 +1352,18 @@ class View(models.Model):
 
     # Function to remove BOM characters from all text elements
     def remove_bom(self,html_parser):
+
         soup = BeautifulSoup(html_parser, "html.parser")
         for element in soup.find_all(string=True):  # Iterate over all strings
             if "\ufeff" in element:  # Check if BOM character exists
                 cleaned_text = element.replace("\ufeff", "")  # Remove BOM
                 element.replace_with(cleaned_text)  # Replace with cleaned text
+            elif "\u200b" in element:
+                cleaned_text = element.replace("\u200b", "")  # Remove BOM
+                element.replace_with(cleaned_text)
 
 
-        return str(soup.prettify())
+        return soup.prettify()
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'

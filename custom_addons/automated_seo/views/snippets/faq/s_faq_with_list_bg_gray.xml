@@ -15,27 +15,27 @@
                             <div class="faq-heading active">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
                             </div>
-                            <div class="accordian-text active" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <p itemprop="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <ul itemprop="text"><li>List Item</li><li>List Item</li></ul>
+                            <div class="accordian-text active o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
                             </div>
                         </section>
                         <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <div class="faq-heading">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
                             </div>
-                            <div class="accordian-text" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <p itemprop="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <ul itemprop="text"><li>List Item</li><li>List Item</li></ul>
+                            <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
                             </div>
                         </section>
                         <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <div class="faq-heading">
                                 <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
                             </div>
-                            <div class="accordian-text" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <p itemprop="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <ul itemprop="text"><li>List Item</li><li>List Item</li></ul>
+                            <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
                             </div>
                         </section>
                     </div>

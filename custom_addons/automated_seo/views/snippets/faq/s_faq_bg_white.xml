@@ -21,8 +21,8 @@
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text active" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                        <div class="accordian-text o_answer_itemprop active" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                            <p>answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
@@ -34,8 +34,8 @@
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                        <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                            <p>answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
@@ -46,8 +46,8 @@
                                 questions ?
                             </h3>
                         </div>
-                        <div class="accordian-text " itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
-                            <p itemprop="text">answer answer answer answer answer answer answer answer answer answer
+                        <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Answer">
+                            <p>answer answer answer answer answer answer answer answer answer answer
                                 answer answer answer answer
                             </p>
                         </div>
