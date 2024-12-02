@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_header" name="Header">
         <section class="ou_section">
-            <section class="border-b border-secondary s_header" contenteditable="false">
+            <section class="border-b border-secondary s_header o_not_editable">
                 <a href="https://www.bacancytechnology.com/" class="logo">
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/bacancy-logo-black.svg" alt="Bacancy" height="44" width="200" loading="lazy" class=""/>
                     <img src="https://assets.bacancytechnology.com/main-boot-5/images/bacancy-logo-white.svg" alt="Bacancy" height="44" width="200" loading="lazy" class="hidden"/>
