@@ -13,12 +13,12 @@
     </record>
 
     <record model="ir.actions.act_window" id="automated_seo.php_variable_action">
-        <field name="name"> PHP Variable</field>
+        <field name="name">PHP Variable</field>
         <field name="res_model">automated_seo.php_variables</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_automated_seo_php_mapper"
+    <menuitem id="menu_automated_seo_php_variables"
               name="PHP Variables"
               parent="menu_automated_seo_root"
               action="automated_seo.php_variable_action"
