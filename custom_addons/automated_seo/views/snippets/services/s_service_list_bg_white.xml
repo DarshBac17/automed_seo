@@ -28,7 +28,7 @@
                     </ul>
                     <div class="svg-icon float-right">
                         <!--                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/vue.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/tech-icon-svg/vue.svg" alt="Vue icon" height="60" width="60" loading="lazy">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" alt="Vue icon" height="60" width="60" loading="lazy"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg" alt="" height="60" width="60" loading="lazy"/>
                     </div>
             </div>
         </section>
