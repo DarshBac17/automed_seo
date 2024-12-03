@@ -6,7 +6,7 @@
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
             <?php endif; ?>-->
             <div class="phone-tablet_if"/>
-            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="" title="" width="1900" height="900" loading="eager" class="banner-post-img"/>
             <div class="phone-tablet_endif"/>
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
             <div class="lg:col-span-3">

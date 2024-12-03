@@ -14,7 +14,7 @@
                     <!--                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" title="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" class="mx-auto lg:w-1/2 mb-sm" loading="lazy" width="600" height="106">-->
 
 
-                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" title="Hire Vue.js and Nuxt.js Experts to Build Production-Ready Universal App" class="mx-auto lg:w-1/2 mb-sm" loading="lazy" width="600" height="106"/>
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-vuejs-developer/vue-nuxtjs.png" alt="" title="" class="mx-auto lg:w-1/2 mb-sm" loading="lazy" width="600" height="106"/>
                 </div>
                 <a href="#form" class="btn btn-outline-primary">Button text</a>
             </div>
