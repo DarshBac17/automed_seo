@@ -162,3 +162,72 @@
         max-width: 100%; /* Allow full width for filenames on smaller screens */
     }
 }
+.php-var-1,
+.php-var-2,
+.php-var-3,
+.php-var-4 {
+    font-weight: bold;
+}
+
+
+.o_we_php_dropdown {
+                position: relative;
+                margin: 8px 0;
+            }
+
+            .o_we_php_dropdown_toggle {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 12px;
+                background: white;
+                border: 1px solid #dee2e6;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .o_we_php_dropdown_menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                border: 1px solid #dee2e6;
+                border-radius: 3px;
+                margin-top: 4px;
+                z-index: 1000;
+            }
+
+            .o_we_php_dropdown_menu.show {
+                display: block;
+            }
+
+            .o_we_php_search_wrapper {
+                padding: 8px;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .o_we_php_search {
+                width: 100%;
+                padding: 4px 8px;
+                border: 1px solid #dee2e6;
+                border-radius: 3px;
+            }
+
+            .o_we_php_variables_list {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .o_we_php_variables_list we-button {
+                display: block;
+                width: 100%;
+                padding: 6px 12px;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .o_we_php_variables_list we-button:hover {
+                background: #f8f9fa;
+            }

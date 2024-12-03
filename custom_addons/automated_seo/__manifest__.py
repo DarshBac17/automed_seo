@@ -15,7 +15,7 @@
         "views/views.xml",
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
-        # "views/manage_users.xml",
+        "views/php_variable_option.xml",
         'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
@@ -158,7 +158,7 @@
 
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
-        'views/snippets/snippet_options.xml',
+        # 'views/snippets/snippet_options.xml',
         'views/snippets/snippets.xml',
         # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",
@@ -205,10 +205,10 @@
             ('include', 'web._assets_helpers'),
             # 'automated_seo/static/src/js/website_version.js',
             # 'automated_seo/static/src/js/website_save.js',
-            'automated_seo/static/src/js/snippet_options.js',
+            # 'automated_seo/static/src/js/snippet_options.js',
             'automated_seo/static/src/js/website_autosave.js',
             'automated_seo/static/src/js/snippet_preview.js',
-            # 'automated_seo/static/src/js/angular_offer.js'
+            'automated_seo/static/src/js/php_variable.js'
         ],
             'web.assets_backend': [
                 # 'automated_seo/static/src/js/website_version.js',

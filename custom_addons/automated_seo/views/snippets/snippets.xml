@@ -697,9 +697,9 @@
 
         </xpath>
 
-        <xpath expr="//div[@id='snippet_options']/t" position="attributes">
-            <attribute name="t-call">automated_seo.snippet_options</attribute>
-        </xpath>
+<!--        <xpath expr="//div[@id='snippet_options']/t" position="attributes">-->
+<!--            <attribute name="t-call">automated_seo.snippet_options</attribute>-->
+<!--        </xpath>-->
 
 
     </template>
@@ -725,11 +725,11 @@
             </div>
         </xpath>
 
-        <xpath expr="." position="inside">
-            <t t-call="automated_seo.s_seo_options">
-            </t>
+<!--        <xpath expr="." position="inside">-->
+<!--            <t t-call="automated_seo.s_seo_options">-->
+<!--            </t>-->
 
-        </xpath>
+<!--        </xpath>-->
     </template>
 
     <template id="website_layout" inherit_id="website.layout">
