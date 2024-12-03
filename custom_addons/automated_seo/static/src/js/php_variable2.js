@@ -1,40 +1,106 @@
 console.log("============snippet_optioncall================================")
-odoo.define('website.snippets.php_variable_text_selector2', function (require) {
+odoo.define('website.snippets.php_variable_text_selector3', function (require) {
     'use strict';
     var options = require('web_editor.snippets.options');
     var core = require('web.core');
     const Wysiwyg = require('web_editor.wysiwyg');
-
-         options.registry.PhpVariableTextSelector = options.Class.extend({
-//        xmlDependencies: ['/website/static/src/snippets/s_php_variable/options.xml'],
-        
+    options.registry.PhpVariableTextSelector2 = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
             'click .o_we_php_dropdown_toggle': '_onToggleDropdown',
-            'input .o_we_php_search': '_onSearch',
-            'click .o_we_php_variables_list we-button': '_onVariableSelect',
+               'input .o_we_php_search': '_onSearch',
+//            'click [data-select-var]': '_onVariableSelect',
+//            'click .o_we_php_variables_list we-button': '_onVariableSelect',
             'click [data-select-var]': '_onVariableSelect',
             'mouseup .o_editable': '_onSelectionChange',
         }),
-
         init: function () {
             this._super.apply(this, arguments);
             this.selectedVariable = null;
             this.isDropdownOpen = false;
-        },
+            this._bindSelectionChangeEvent()
 
+        },
         start: function () {
             var self = this;
+
+//            return this._super.apply(this, arguments);
             return this._super.apply(this, arguments).then(function() {
                 self._createDropdown();
+                self._fetchVariables();
                 // Handle click outside
                 $(document).on('click.php_dropdown', function(e) {
                     if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
                         self._closeDropdown();
                     }
                 });
+
+                $(document).on('click.php_dropdown', function(e) {
+                    if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
+                        self._closeDropdown();
+                    }
+                });
+//            $(document).on('selectionchange', _.debounce(function() {
+//                self.1();
+//            }, 100));
             });
         },
+        _getWysiwygInstance: function () {
+    return this.wysiwyg || (this.options && this.options.wysiwyg);
+},
+        _bindSelectionChangeEvent() {
+    const wysiwyg = this._getWysiwygInstance();
+    if (!wysiwyg) return;
 
+    // Optional: Also handle clicks within editable areas
+    wysiwyg.odooEditor.document.addEventListener('click', _.debounce((event) => {
+        const clickedElement = event.target;
+        if (clickedElement.closest('.o_editable')) {
+            this._onSelectionChange.bind(this)(event);
+        }
+
+    }, 100));
+},
+
+        _fetchVariables: function(search = '') {
+    var self = this;
+    return $.get('/php-variables/', {
+        offset: this.currentOffset,
+        limit: this.limit,
+        search: search
+    }).then(function(result) {
+        if (result.error) {
+            console.error('Error fetching variables:', result.error);
+            return;
+        }
+        self.variables = result.variable_names;
+        self._updateVariablesList();
+//        self._setValue();
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Failed to fetch variables:', textStatus, errorThrown);
+    });
+},
+        _updateVariablesList: function() {
+            var self = this;
+            this.$variablesList.empty();
+
+            // Add "None" option
+            this.$variablesList.append(
+                $('<we-button/>', {
+                    'data-select-var': 'none',
+                    class: 'o_we_destroy_btn'
+                }).text('None')
+            );
+
+            // Add variables from server
+            _.each(this.variables, function(varName) {
+                self.$variablesList.append(
+                    $('<we-button/>', {
+                        'data-select-var': varName,
+                        'data-variable-class': varName.toLowerCase()
+                    }).text(varName)
+                );
+            });
+        },
         _createDropdown: function() {
             console.log('Creating dropdown...');
 
@@ -71,21 +137,7 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             );
 
             // Add variables
-            this.$variablesList.append(
-                $('<we-button/>', {
-                    'data-select-var': 'none',
 
-                    class: 'o_we_destroy_btn'
-                }).text('None'),
-                $('<we-button/>', {
-                    'data-select-var': 'VAR_1',
-                    'data-variable-class':"VAR_1",
-                }).text('Variable 1'),
-                $('<we-button/>', {
-                    'data-select-var': 'VAR_2',
-                    'data-variable-class':"VAR_2",
-                }).text('Variable 2')
-            );
 
             // Assemble dropdown
             this.$dropdown
@@ -116,11 +168,11 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             if (this.isDropdownOpen) {
                 this._closeDropdown();
             } else {
-                this._openDropdown();
+                this._openDropdown(ev);
             }
         },
 
-        _openDropdown: function () {
+        _openDropdown: function (ev) {
             if (!this.$menu.length) {
                 console.error('Menu element not found');
                 return;
@@ -128,6 +180,8 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             this.isDropdownOpen = true;
             this.$menu.addClass('show');
             this.$search.val('').focus();
+            this._fetchVariables();
+
         },
 
         _closeDropdown: function () {
@@ -139,29 +193,32 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             this.$menu.removeClass('show');
         },
 
-        _onSearch: function (ev) {
-            const searchTerm = $(ev.currentTarget).val().toLowerCase();
-            this.$variablesList.each(function() {
-                const $btn = $(this);
-                const text = $btn.text().toLowerCase();
-                $btn.toggle(text.includes(searchTerm));
+        _phpVariables: function(){
+                   return this._rpc({
+                route: '/website/autosave_content',
+                params: {
+                    html_content: content,
+                },
+            }).then(() => {
+                this.contentChanged = false;
+                this._updateIcon('fa-check-circle fa-lg','Auto Saved');
+            }).catch((error) => {
+                console.error('[Website Editor] Save failed:', error);
+                // Keep content changed flag true on error
+                this.contentChanged = true;
             });
         },
-        _updateVariablesList: function (searchTerm = '') {
-            this.$variablesList.find('we-button').each(function() {
-                const $btn = $(this);
-                const text = $btn.text().toLowerCase();
-                $btn.toggle(text.includes(searchTerm));
-            });
-        },
-
-        _onClickAway: function (ev) {
-            if (this.isDropdownOpen && 
+        _onSearch: _.debounce(function(ev) {
+            var searchTerm = $(ev.currentTarget).val().trim();
+            this.currentOffset = 0; // Reset offset on new search
+            this._fetchVariables(searchTerm);
+        }, 300),
+         _onClickAway: function (ev) {
+            if (this.isDropdownOpen &&
                 !$(ev.target).closest('.o_we_php_dropdown').length) {
                 this._closeDropdown();
             }
         },
-
         /**
          * Helper to check if selection has a specific PHP variable
          */
@@ -171,11 +228,11 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
                 $(this).remove();
             });
         },
+
         /**
          * Helper to check if selection has a specific PHP variable
          */
         _hasPhpVariable: function(selection) {
-            console.log("_hasPhpVariable call......")
             if (!selection || !selection.rangeCount) return false;
             const range = selection.getRangeAt(0);
             const container = range.commonAncestorContainer;
@@ -228,13 +285,11 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
          * Apply PHP variable formatting to the selected text
          */
         _applyPhpVariable: function(selection, variable) {
-            console.log("_applyPhpVariable.................")
             if (!selection.rangeCount) return;
             if (variable.name === 'none') {
                 return this._removePhpVariable(selection);
             }
             const range = selection.getRangeAt(0);
-            console.log("selection================",selection)
             let selectedText = '';
             // Get the complete text content
             const container = range.commonAncestorContainer;
@@ -250,7 +305,7 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             }
             // Create span element
             const span = document.createElement('span');
-            span.className = variable.class;
+            span.className = `${variable.class} o_text-php-var-info`;
             span.setAttribute('data-php-var', variable.name);
             span.textContent = selectedText;
             // Remove any existing content and insert the new span
@@ -272,20 +327,15 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             const newRange = document.createRange();
             newRange.selectNodeContents(span);
             selection.addRange(newRange);
-            console.log("=================",selection)
             return span;
         },
         /**
          * Handle variable selection
          */
         _onVariableSelect: function(ev) {
-            console.log("_onVariableSelect call...............")
             const $target = $(ev.currentTarget);
             const variableName = $target.data('select-var');
-            console.log("variableName:",variableName)
             const variableClass = $target.data('variable-class');
-            console.log("variableClass:",variableClass)
-
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;
             const selection = wysiwyg.odooEditor.document.getSelection();
@@ -302,7 +352,6 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
             }
             try {
                 const currentVar = this._hasPhpVariable(selection);
-                console.log("currnetvar",currentVar)
                 if (variableName === 'none') {
                     // Always remove formatting when 'None' is selected
                     if (currentVar) {
@@ -311,8 +360,6 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
                     this.$el.find('[data-select-var]').removeClass('active');
                     $target.addClass('active');
                 } else {
-                        console.log("else===================")
-
                     // Handle toggle off same variable
                     if (currentVar && currentVar.name === variableName) {
                         this._removePhpVariable(selection);
@@ -322,32 +369,29 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
                         if (currentVar) {
                             this._removePhpVariable(selection);
                         }
-                        console.log("inside span===================")
                         // Apply new variable
                         const span = this._applyPhpVariable(selection, {
                             name: variableName,
                             class: variableClass
                         });
-//                        if (span) {
-//                            console.log("span=================inside",span)
-//                            console.log("target=================inside",$target)
-//                            // Update button state
-//                            this.$el.find('[data-select-var]').removeClass('active');
-//                            $target.addClass('active');
-//                        }
+                        if (span) {
+                            // Update button state
+                            this.$el.find('[data-select-var]').removeClass('active');
+                            $target.addClass('active');
+                        }
                     }
                 }
                 // Clean up any empty spans in the editable area
-//                this._cleanupEmptySpans($editable[0]);
+                this._cleanupEmptySpans($editable[0]);
                 // Ensure proper cleanup and update
                 wysiwyg.odooEditor.historyStep();
-//                this._onSelectionChange();
+                this._onSelectionChange(ev);
             } catch (error) {
                 console.error('Error applying variable:', error);
                 alert('An error occurred while applying the variable. Please try again.');
             }
         },
-       _onSelectionChange: function(event) {
+        _onSelectionChange: function(event) {
 //            this._closeDropdown()
             console.log("Selection change called");
             const wysiwyg = this.options.wysiwyg;
@@ -383,9 +427,43 @@ odoo.define('website.snippets.php_variable_text_selector2', function (require) {
                 }
             });
         },
+        _setValue() : function(){
+        console.log("Selection change called");
+            const wysiwyg = this.options.wysiwyg;
+            if (!wysiwyg) return;
+
+            const selection = wysiwyg.odooEditor.document.getSelection();
+            if (!selection) return;
+
+            // Get current PHP variable if any
+            const currentVar = this._hasPhpVariable(selection);
+            console.log("Current variable:", currentVar);
+
+            // Update dropdown toggle text
+            const $toggle = this.$('.o_we_php_dropdown_toggle span');
+            if (currentVar && currentVar.name) {
+                $toggle.text(currentVar.name);
+                $(this).closest('we-select').find('we-toggler').text(currentVar.name);
+            } else {
+                $toggle.text('PHP Variables');
+            }
+
+            // Update button states
+            this.$variablesList.find('[data-select-var]').each(function() {
+                const $btn = $(this);
+                const varName = $btn.data('select-var');
+                const isActive = currentVar && currentVar.name === varName;
+
+                // Handle active states
+                if (varName === 'none') {
+                    $btn.toggleClass('active', !currentVar);
+                } else {
+                    $btn.toggleClass('active', isActive);
+                }
+            });
+
+        },
         destroy: function () {
-            // this.$toggle.off('click');
-            $(document).off('click.php_dropdown');
             $(document).off('selectionchange');
             this._super.apply(this, arguments);
         }

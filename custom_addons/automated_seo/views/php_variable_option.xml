@@ -76,9 +76,9 @@
 <odoo>
     <template id="s_php_variable_options" inherit_id="website.snippet_options">
         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
-            <div data-js="PhpVariableTextSelector" data-selector=".o_automated_seo_php_variable">
+            <div data-js="PhpVariableTextSelector2" data-selector=".o_automated_seo_php_variable">
 <!--                <div class="o_we_php_dropdown">-->
-                    <!-- Dropdown Toggle -->
+<!--                     Dropdown Toggle -->
 <!--                    <div class="o_we_php_dropdown_toggle" data-name="php_var_select">-->
 <!--                        <span>PHP Variables</span>-->
 <!--                        <i class="fa fa-chevron-down"/>-->
@@ -86,12 +86,12 @@
 
 <!--                    &lt;!&ndash; Dropdown Content &ndash;&gt;-->
 <!--                    <div class="o_we_php_dropdown_menu">-->
-                        <!-- Search Input -->
+<!--                         Search Input -->
 <!--                        <div class="o_we_php_search_wrapper">-->
 <!--                            <input type="text" class="o_we_php_search" placeholder="Search variables..."/>-->
 <!--                        </div>-->
 
-<!--                        &lt;!&ndash; Variables List &ndash;&gt;-->
+                        <!-- Variables List -->
 <!--                        <div class="o_we_php_variables_list">-->
 <!--                            <we-button data-select-var="none" data-variable-class="" class="o_we_destroy_btn">None</we-button>-->
 <!--                            <we-button data-select-var="VAR_1" data-variable-class="php-var-1">Variable 1</we-button>-->

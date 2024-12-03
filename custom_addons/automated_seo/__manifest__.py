@@ -208,7 +208,7 @@
             # 'automated_seo/static/src/js/snippet_options.js',
             'automated_seo/static/src/js/website_autosave.js',
             'automated_seo/static/src/js/snippet_preview.js',
-            'automated_seo/static/src/js/php_variable.js'
+            'automated_seo/static/src/js/php_variable2.js'
         ],
             'web.assets_backend': [
                 # 'automated_seo/static/src/js/website_version.js',
