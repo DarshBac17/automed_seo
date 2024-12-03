@@ -1,5 +1,4 @@
 from odoo import api,models,fields
-# from reportlab.graphics.renderbase import inverse
 
 
 class PhpToSnippet(models.Model):

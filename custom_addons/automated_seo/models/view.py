@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from bs4 import BeautifulSoup,Comment
+from bs4 import BeautifulSoup,Comment,NavigableString
 import  html
 import base64
 import boto3
@@ -163,6 +163,8 @@ class View(models.Model):
         self.action_custom_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
+
+
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
         self.stage = 'in_preview'
@@ -584,15 +586,16 @@ class View(models.Model):
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
         html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
-            html_parser = self.remove_odoo_classes_from_tag(html_parser)
             html_parser = self.remove_bom(html_parser=html_parser)
+            html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
-            html_parser = self.format_paragraphs(html_content=html_parser)
-            html_parser = self.remove_extra_spaces(html_parser = str(html_parser))
-            html_parser = self.remove_empty_tags(html_parser = html_parser)
-            html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            # html_parser = self.format_paragraphs(html_content=html_parser)
+            # html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = self.format_html_php(html_content=html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
             file = base64.b64encode(html_parser.encode('utf-8'))
@@ -615,15 +618,10 @@ class View(models.Model):
     def handle_itemprop_in_faq(self,html_content):
 
         soup = BeautifulSoup(html_content,"html.parser")
+        for main_entity in soup.find_all(class_='o_answer_itemprop'):
+            main_entity.find_all()[0]["itemprop"] = "text"
 
-        for main_entity in soup.find_all(attrs={'itemprop': 'mainEntity'}):
-            text_entity = main_entity.find_all(attrs={'itemprop':'text'})[1:]
-
-            for text in text_entity:
-                del text['itemprop']
-
-
-        return str(soup)
+        return str(soup.prettify())
 
     def format_paragraphs(self,html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
@@ -655,6 +653,276 @@ class View(models.Model):
             p.replace_with(new_p)
 
         return str(soup)
+
+    def format_html_php(self,html_content, indent_size=4):        # Define tag sets
+        inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+        self_closing_tags = {'img', 'br', 'hr', 'input', 'meta', 'link'}
+        structural_tags = {'div', 'section', 'nav', 'header', 'footer', 'main'}
+        table_tags = {'table', 'tr', 'td', 'th', 'thead', 'tbody', 'tfoot'}
+
+        # Store PHP blocks
+        php_blocks = {}
+        php_counter = 0
+
+        def save_php(match):
+            nonlocal php_counter
+            placeholder = f"PHP_PLACEHOLDER_{php_counter}"
+            php_blocks[placeholder] = match.group(0)
+            php_counter += 1
+            return placeholder
+
+        def format_attributes(tag):
+            if not tag.attrs:
+                return ''
+            attrs = []
+            for key, value in tag.attrs.items():
+                if isinstance(value, list):
+                    value = ' '.join(value)
+                if value is True:
+                    attrs.append(key)
+                else:
+                    attrs.append(f'{key}="{value}"')
+            return ' ' + ' '.join(attrs) if attrs else ''
+
+        def should_inline_content(elem):
+            # Check if element should be inlined
+            has_structural = any(child.name in structural_tags for child in elem.children)
+            has_only_text = all(isinstance(child, NavigableString) or child.name in inline_content_tags
+                                for child in elem.children)
+            return not has_structural and has_only_text
+
+        def format_span_cell(elem, indent):
+            """Special formatter for td elements containing spans"""
+            spans = elem.find_all('span', recursive=False)
+            if spans:
+                # Join spans without newlines, preserving their text content
+                span_contents = []
+                for span in spans:
+                    text = ' '.join(span.stripped_strings)
+                    span_contents.append(f'<span>{text}</span>')
+                return f"{indent}<td>{' '.join(span_contents)}</td>"
+            return None
+
+        def format_element(elem, level=0):
+            if isinstance(elem, NavigableString):
+                text = str(elem).strip()
+                return text if text else ''
+
+            indent = ' ' * (level * indent_size)
+            attrs = format_attributes(elem)
+
+            if elem.name == 'td':
+                if elem.find_all('span', recursive=False):
+                    return format_span_cell(elem, indent)
+                else:
+                    text = ' '.join(elem.stripped_strings)
+                    return f"{indent}<td>{text}</td>"
+
+            # Handle self-closing tags
+            if elem.name in self_closing_tags:
+                return f"{indent}<{elem.name}{attrs}/>"
+            if elem.name == 'a':
+                if should_inline_content(elem):
+                    content = ' '.join(elem.stripped_strings)
+                    return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+                else:
+                    # Handle structural content inside anchor
+                    lines = [f"{indent}<{elem.name}{attrs}>"]
+                    for child in elem.children:
+                        if isinstance(child, NavigableString):
+                            text = child.strip()
+                            if text:
+                                lines.append(f"{indent}{' ' * indent_size}{text}")
+                        else:
+                            lines.append(format_element(child, level + 1))
+                    lines.append(f"{indent}</{elem.name}>")
+                    return '\n'.join(line for line in lines if line.strip())
+
+            # Handle inline content tags
+            if elem.name in inline_content_tags:
+                # Collect all content including PHP blocks
+                content_parts = []
+                for child in elem.children:
+                    if isinstance(child, NavigableString):
+                        text = str(child).strip()
+                        if text:
+                            content_parts.append(text)
+                    else:
+                        # Preserve PHP blocks
+                        content_parts.append(str(child))
+                content = ' '.join(content_parts)
+                content = re.sub(r'\s+', ' ', content)  # Normalize whitespace
+                return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+
+            # Handle table row elements
+            if elem.name == 'tr':
+                lines = [f"{indent}<{elem.name}{attrs}>"]
+                for child in elem.children:
+                    if isinstance(child, NavigableString):
+                        continue
+                    if child.name == 'td':
+                        cell_content = format_span_cell(child, indent + ' ' * indent_size)
+                        if cell_content:
+                            lines.append(cell_content)
+                        else:
+                            lines.append(format_element(child, level + 1))
+                lines.append(f"{indent}</{elem.name}>")
+                return '\n'.join(line for line in lines if line.strip())
+
+            if elem.name == 'tr':
+                lines = [f"{indent}<{elem.name}{attrs}>"]
+                for child in elem.children:
+                    if isinstance(child, NavigableString):
+                        continue
+                    if child.name == 'td':
+                        cell_content = format_span_cell(child, indent + ' ' * indent_size)
+                        if cell_content:
+                            lines.append(cell_content)
+                        else:
+                            lines.append(format_element(child, level + 1))
+                lines.append(f"{indent}</{elem.name}>")
+                return '\n'.join(line for line in lines if line.strip())
+
+            # Handle structural elements
+            lines = [f"{indent}<{elem.name}{attrs}>"]
+            for child in elem.children:
+                if isinstance(child, NavigableString):
+                    text = child.strip()
+                    if text:
+                        lines.append(f"{indent}{' ' * indent_size}{text}")
+                else:
+                    lines.append(format_element(child, level + 1))
+            lines.append(f"{indent}</{elem.name}>")
+
+            return '\n'.join(line for line in lines if line.strip())
+
+        # Save PHP code
+        html_with_placeholders = re.sub(r'<\?php.*?\?>', save_php, html_content, flags=re.DOTALL)
+
+        # Parse HTML
+        soup = BeautifulSoup(html_with_placeholders, 'html.parser')
+
+        # Format HTML
+        formatted = '\n'.join(
+            format_element(child, 0)
+            for child in soup.children
+            if not isinstance(child, NavigableString) or child.strip()
+        )
+
+        # Restore PHP blocks
+        for placeholder, php_code in php_blocks.items():
+            formatted = formatted.replace(placeholder, php_code,1)
+
+        return formatted
+    # def format_html_php(self,html_content, indent_size=4):
+    #
+    # # Define tag sets
+    #     inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+    #     self_closing_tags = {'img', 'br', 'hr', 'input', 'meta', 'link'}
+    #     structural_tags = {'div', 'section', 'nav', 'header', 'footer', 'main'}
+    #
+    #     def format_attributes(tag):
+    #         if not tag.attrs:
+    #             return ''
+    #         attrs = []
+    #         for key, value in tag.attrs.items():
+    #             if isinstance(value, list):
+    #                 value = ' '.join(value)
+    #             if value is True:
+    #                 attrs.append(key)
+    #             else:
+    #                 attrs.append(f'{key}="{value}"')
+    #         return ' ' + ' '.join(attrs) if attrs else ''
+    #
+    #     def should_inline_content(elem):
+    #         # Check if element should be inlined
+    #         has_structural = any(child.name in structural_tags for child in elem.children)
+    #         has_only_text = all(isinstance(child, NavigableString) or child.name in inline_content_tags
+    #                           for child in elem.children)
+    #         return not has_structural and has_only_text
+    #
+    #     def format_element(elem, level=0):
+    #         if isinstance(elem, NavigableString):
+    #             text = str(elem).strip()
+    #             return text if text else ''
+    #
+    #         indent = ' ' * (level * indent_size)
+    #         attrs = format_attributes(elem)
+    #
+    #         # Handle self-closing tags
+    #         if elem.name in self_closing_tags:
+    #             return f"{indent}<{elem.name}{attrs}/>"
+    #
+    #         # Handle anchor tags
+    #         if elem.name == 'a':
+    #             if should_inline_content(elem):
+    #                 content = ' '.join(elem.stripped_strings)
+    #                 return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+    #             else:
+    #                 # Handle structural content inside anchor
+    #                 lines = [f"{indent}<{elem.name}{attrs}>"]
+    #                 for child in elem.children:
+    #                     if isinstance(child, NavigableString):
+    #                         text = child.strip()
+    #                         if text:
+    #                             lines.append(f"{indent}{' ' * indent_size}{text}")
+    #                     else:
+    #                         lines.append(format_element(child, level + 1))
+    #                 lines.append(f"{indent}</{elem.name}>")
+    #                 return '\n'.join(line for line in lines if line.strip())
+    #
+    #         # Handle inline content tags
+    #         if elem.name in inline_content_tags:
+    #             content = ' '.join(elem.stripped_strings)
+    #             return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
+    #
+    #         # Handle structural and nested elements
+    #         lines = [f"{indent}<{elem.name}{attrs}>"]
+    #         for child in elem.children:
+    #             if isinstance(child, NavigableString):
+    #                 text = child.strip()
+    #                 if text:
+    #                     lines.append(f"{indent}{' ' * indent_size}{text}")
+    #             else:
+    #                 lines.append(format_element(child, level + 1))
+    #         lines.append(f"{indent}</{elem.name}>")
+    #
+    #         return '\n'.join(line for line in lines if line.strip())
+    #
+    #     # Store PHP blocks
+    #     php_blocks = {}
+    #     php_counter = 0
+    #
+    #     def save_php(match):
+    #         nonlocal php_counter
+    #         placeholder = f"PHP_PLACEHOLDER_{php_counter}"
+    #         php_blocks[placeholder] = match.group(0)
+    #         php_counter += 1
+    #         return placeholder
+    #
+    #     # Save PHP code
+    #     html_with_placeholders = re.sub(r'<\?php.*?\?>', save_php, html_content, flags=re.DOTALL)
+    #
+    #     # Parse HTML
+    #     soup = BeautifulSoup(html_with_placeholders, 'html.parser')
+    #
+    #     # Format HTML
+    #     formatted = '\n'.join(
+    #         format_element(child, 0)
+    #         for child in soup.children
+    #         if not isinstance(child, NavigableString) or child.strip()
+    #     )
+    #
+    #     # Restore PHP code
+    #     for placeholder, php_code in php_blocks.items():
+    #         formatted = formatted.replace(placeholder, php_code)
+    #
+    #     # Fix PHP tags
+    #     formatted = formatted.replace("&lt;?php", "<?php")
+    #     formatted = formatted.replace("?&gt;", "?>")
+    #
+    #     return formatted
+
     def remove_extra_spaces(self,html_parser):
         inline_tags = ['a', 'span', 'button', 'div', 'td', 'p','h3','h1','h2','h4','h5','h6','li','img','b']
         for tag in inline_tags:
@@ -1260,15 +1528,15 @@ class View(models.Model):
         base_url_php = "<?php echo BASE_URL; ?>"
         for a in soup.select('a:not(.btn)'):
             # Get current classes on the <a> tag or initialize with an empty list
-            current_classes = a.get('class', [])
-
-            # Add each class from link_css_classes if it’s not already present
-            for css_class in link_css_classes:
-                if css_class not in current_classes:
-                    current_classes.append(css_class)
-
-            # Update the class attribute on the <a> tag
-            a['class'] = current_classes
+            # current_classes = a.get('class', [])
+            #
+            # # Add each class from link_css_classes if it’s not already present
+            # for css_class in link_css_classes:
+            #     if css_class not in current_classes:
+            #         current_classes.append(css_class)
+            #
+            # # Update the class attribute on the <a> tag
+            # a['class'] = current_classes
 
             url = a.get('href')
             if url and url.startswith("https://www.bacancytechnology.com/"):
@@ -1281,8 +1549,7 @@ class View(models.Model):
         self_closing_tags = {"img", "input", "hr", "meta", "link"}
 
         def remove_empty(tag):
-            # If the tag has no content or only whitespace, remove it
-            if tag.name in self_closing_tags:
+            if tag.name == "section" or tag.name in self_closing_tags:
                 return
 
             if not tag.contents or all(
@@ -1356,14 +1623,18 @@ class View(models.Model):
 
     # Function to remove BOM characters from all text elements
     def remove_bom(self,html_parser):
+
         soup = BeautifulSoup(html_parser, "html.parser")
         for element in soup.find_all(string=True):  # Iterate over all strings
             if "\ufeff" in element:  # Check if BOM character exists
                 cleaned_text = element.replace("\ufeff", "")  # Remove BOM
                 element.replace_with(cleaned_text)  # Replace with cleaned text
+            elif "\u200b" in element:
+                cleaned_text = element.replace("\u200b", "")  # Remove BOM
+                element.replace_with(cleaned_text)
 
 
-        return str(soup.prettify())
+        return soup.prettify()
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
