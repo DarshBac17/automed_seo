@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.php_variable_tree">
+        <field name="name">PHP Variable</field>
+        <field name="model">automated_seo.php_variables</field>
+        <field name="arch" type="xml">
+            <tree string="PHP Variables" editable="top">
+                <field name="name"/>
+                <field name="type"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.php_variable_action">
+        <field name="name">PHP Variable</field>
+        <field name="res_model">automated_seo.php_variables</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_automated_seo_php_variables"
+              name="PHP Variables"
+              parent="menu_automated_seo_root"
+              action="automated_seo.php_variable_action"
+              groups="automated_seo.group_automated_seo_admin"
+              sequence="10"/>
+</odoo>

@@ -3,27 +3,13 @@
     <template id="s_seo_options">
 
 
-        <div data-js="PhpVariableTextSelector" data-selector=".o_automated_seo_php_variable">
+        <div data-js="SeoOptionsSelector" data-selector=".o_automated_seo_php_variable">
             <we-title data-bs-original-title="" title="" style="" class="mt-4 mb-4">
                 <span>Seo options</span>
             </we-title>
             <div class="mt-4 php-var-input-sec">
 
-            <label class="mb-2 font-weight-bold fw-bold">Php variable</label>
-            <we-checkbox class="mt-2" string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
-            <div class="form-group mb-2 d-flex align-items-center">
-                <!-- Input Field -->
-                <input type="text"
-                       class="form-control form-control-sm data-variable-input text-white"
-                       placeholder="Enter php variable" />
-
-                <!-- Cancel Button -->
-                <we-button class="btn btn-sm btn-outline-danger ms-2 d-flex data-remove-php-var align-items-center d-none"
-                           title="Remove PHP Variable">
-                    <i class="fa fa-times"></i> <!-- Cancel Icon -->
-                </we-button>
             </div>
-        </div>
 
             <div class="mt-4">
                 <label class="mb-2 font-weight-bold fw-bold">Seo Related</label>
@@ -88,7 +74,7 @@
                             <input type="text"
                                    class="form-control form-control-sm link-url-input text-white"
                                    placeholder="Enter URL (e.g., https://...)"
-                                   />
+                            />
                         </div>
                         <div class="form-group mb-2">
                             <we-select string="Style" class="link-style-dropdown" data-no-preview="true">
