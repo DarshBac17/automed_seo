@@ -77,6 +77,7 @@
         "views/snippets/banner/s_banner_side_image_with_icons.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button_and_icon.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button.xml",
+        "views/snippets/banner/s_banner_side_matirx_with_form.xml",
         "views/snippets/services/s_service_card_bg_gray.xml",
         "views/snippets/services/s_service_sub_card_gray.xml",
         "views/snippets/services/s_service_card_bg_white.xml",
