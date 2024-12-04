@@ -158,7 +158,7 @@
 
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
-        # 'views/snippets/snippet_options.xml',
+        'views/snippets/snippet_options.xml',
         'views/snippets/snippets.xml',
         # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",
@@ -205,7 +205,7 @@
             ('include', 'web._assets_helpers'),
             # 'automated_seo/static/src/js/website_version.js',
             # 'automated_seo/static/src/js/website_save.js',
-            # 'automated_seo/static/src/js/snippet_options.js',
+            'automated_seo/static/src/js/snippet_options.js',
             'automated_seo/static/src/js/website_autosave.js',
             'automated_seo/static/src/js/snippet_preview.js',
             'automated_seo/static/src/js/php_variable2.js'

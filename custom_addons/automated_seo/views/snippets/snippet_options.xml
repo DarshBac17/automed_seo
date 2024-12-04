@@ -7,23 +7,23 @@
             <we-title data-bs-original-title="" title="" style="" class="mt-4 mb-4">
                 <span>Seo options</span>
             </we-title>
-            <div class="mt-4 php-var-input-sec">
+<!--            <div class="mt-4 php-var-input-sec">-->
 
-            <label class="mb-2 font-weight-bold fw-bold">Php variable</label>
-            <we-checkbox class="mt-2" string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
-            <div class="form-group mb-2 d-flex align-items-center">
-                <!-- Input Field -->
-                <input type="text"
-                       class="form-control form-control-sm data-variable-input text-white"
-                       placeholder="Enter php variable" />
+<!--            <label class="mb-2 font-weight-bold fw-bold">Php variable</label>-->
+<!--            <we-checkbox class="mt-2" string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>-->
+<!--            <div class="form-group mb-2 d-flex align-items-center">-->
+<!--                &lt;!&ndash; Input Field &ndash;&gt;-->
+<!--                <input type="text"-->
+<!--                       class="form-control form-control-sm data-variable-input text-white"-->
+<!--                       placeholder="Enter php variable" />-->
 
-                <!-- Cancel Button -->
-                <we-button class="btn btn-sm btn-outline-danger ms-2 d-flex data-remove-php-var align-items-center d-none"
-                           title="Remove PHP Variable">
-                    <i class="fa fa-times"></i> <!-- Cancel Icon -->
-                </we-button>
-            </div>
-        </div>
+<!--                &lt;!&ndash; Cancel Button &ndash;&gt;-->
+<!--                <we-button class="btn btn-sm btn-outline-danger ms-2 d-flex data-remove-php-var align-items-center d-none"-->
+<!--                           title="Remove PHP Variable">-->
+<!--                    <i class="fa fa-times"></i> &lt;!&ndash; Cancel Icon &ndash;&gt;-->
+<!--                </we-button>-->
+<!--            </div>-->
+<!--        </div>-->
 
             <div class="mt-4">
                 <label class="mb-2 font-weight-bold fw-bold">Seo Related</label>
