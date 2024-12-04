@@ -6,8 +6,6 @@
         <field name="arch" type="xml">
             <tree string="PHP Variables" editable="top">
                 <field name="name"/>
-                <field name="type"/>
-
             </tree>
         </field>
     </record>
