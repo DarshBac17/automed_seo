@@ -9,6 +9,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             'input .o_we_php_search': '_onSearch',
             'click [data-select-var]': '_onVariableSelect',
             'mouseup .o_editable': '_onSelectionChange',
+            'click .o_au_php_var_type': '_onConstButtonClick',
         }),
         init: function () {
             this._super.apply(this, arguments);
@@ -19,6 +20,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this.isLoading = false;
             this.hasMore = true; 
             this._bindSelectionChangeEvent()
+            this.isConstVar = false;
 
         },
         start: function () {
@@ -85,7 +87,37 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 console.error('Failed to fetch variables:', textStatus);
             });
         },
-        
+
+        _onConstButtonClick: function (ev) {
+            console.log("_onConstButtonClick=========================")
+
+            const $button = $(ev.currentTarget);
+            console.log("_onConstButtonClick=========================",$button)
+
+            $button.toggleClass('active');
+            this.isConstVar = $button.hasClass('active');
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+            const selection = this._getCurrentSelection();
+            if (!selection) return;
+
+            const currentVar = this._hasPhpVariable(selection);
+            if (currentVar && currentVar.element) {
+                // Simply update the constant attribute on the existing span
+                $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
+                wysiwyg.odooEditor.historyStep();
+            }
+        },
+        _getCurrentSelection: function () {
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg || !wysiwyg.odooEditor) {
+                return null;
+            }
+
+            return wysiwyg.odooEditor.document.getSelection();
+        },
         _updateVariablesList: function() {
             console.log('Updating variables list, offset:', this.currentOffset);
             
@@ -111,36 +143,50 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
         // Update the _createDropdown function
         _createDropdown: function () {
+            // Create checkbox
+            this.$constButton = $('<div/>', {
+                class: 'mt-2'
+            }).append(
+                $('<label/>', {
+                    class: 'o_we_checkbox_wrapper'
+                }).append(
+                    $('<input/>', {
+                        type: 'checkbox',
+                        class: 'o_au_php_var_type',
+                        'data-no-preview': 'true'
+                    }),
+                    $('<span/>', {
+                        class: 'o_we_checkbox_label'
+                    }).text('Constant var?')
+                )
+            );
+            
+            // Create dropdown
             this.$dropdown = $('<div/>', {
                 class: 'o_we_php_dropdown'
             });
-
+        
             this.$toggle = $('<div/>', {
                 class: 'o_we_php_dropdown_toggle'
             }).append(
                 $('<span/>').text('PHP Variables'),
                 $('<i/>', { class: 'fa fa-chevron-down' })
             );
-
+        
             this.$menu = $('<div/>', {
                 class: 'o_we_php_dropdown_menu'
             });
-
+        
             this.$search = $('<input/>', {
                 type: 'text',
                 class: 'o_we_php_search',
                 placeholder: 'Search variables...'
             });
-
+        
             this.$variablesList = $('<div/>', {
                 class: 'o_we_php_variables_list'
             });
-            console.log('Variables list created:', {
-                element: this.$variablesList[0],
-                height: this.$variablesList.height(),
-                scrollHeight: this.$variablesList[0]?.scrollHeight
-            });
-
+        
             this.$loadingIndicator = $('<div/>', {
                 class: 'o_we_php_loading_indicator',
                 text: 'Loading...'
@@ -149,25 +195,26 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 'padding': '8px',
                 'display': 'none'
             });
-
+        
             // Build structure
             this.$menu.append(
                 $('<div/>', { class: 'o_we_php_search_wrapper' }).append(this.$search),
                 this.$variablesList,
                 this.$loadingIndicator
             );
-
+        
             // Add scroll handler
             this.$variablesList.on('scroll', _.throttle(() => {
                 this._onScroll();
             }, 200));
-
+        
             // Assemble dropdown
             this.$dropdown
                 .append(this.$toggle)
                 .append(this.$menu);
-
+        
             // Add to DOM
+            this.$el.append(this.$constButton);
             this.$el.append(this.$dropdown);
         },
 
@@ -286,20 +333,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this.hasMore = true;
             this.$menu.removeClass('show');
         },
-
-        _phpVariables: function () {
-            return this._rpc({
-                route: '/website/autosave_content',
-                params: {
-                    html_content: content,
-                },
-            }).then(() => {
-                this.contentChanged = false;
-                this._updateIcon('fa-check-circle fa-lg', 'Auto Saved');
-            }).catch((error) => {
-                this.contentChanged = true;
-            });
-        },
         _onSearch: _.debounce(function (ev) {
             var searchTerm = $(ev.currentTarget).val().trim();
 
@@ -358,7 +391,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 return {
                     name: $span.attr('data-php-var'),
                     class: $span.attr('class'),
-                    element: $span[0]
+                    element: $span[0],
+                    isConst: $span.attr('data-php-const-var') === '1'
                 };
             }
             return false;
@@ -424,6 +458,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             const span = document.createElement('span');
             span.className = `${variable.class} o_text-php-var-info`;
             span.setAttribute('data-php-var', variable.name);
+            span.setAttribute('data-php-const-var', this.$constButton.hasClass('active') ? '1' : '0');
             span.textContent = selectedText;
             // Remove any existing content and insert the new span
             range.deleteContents();
@@ -508,6 +543,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             }
         },
         _onSelectionChange: function (event) {
+            this._closeDropdown();
+
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;
 
@@ -522,8 +559,13 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             if (currentVar && currentVar.name) {
                 this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar);
+                this.$constButton.toggleClass('active', currentVar.isConst);
+                this.isConstVar = currentVar.isConst;
             } else {
                 this.$toggle.text('PHP Variables');
+                this.$constButton.removeClass('active');
+                this.isConstVar = false;
+
             }
 
             // Update button states
@@ -552,8 +594,12 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             if (currentVar && currentVar.name) {
                 this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar.name);
+                 this.$constButton.toggleClass('active', currentVar.isConst);
+                this.isConstVar = currentVar.isConst;
             } else {
                 this.$toggle.text('PHP Variables');
+                     this.$constButton.removeClass('active');
+
             }
 
             // Update button states
