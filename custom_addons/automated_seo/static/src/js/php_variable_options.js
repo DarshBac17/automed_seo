@@ -3,7 +3,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
     var options = require('web_editor.snippets.options');
     var core = require('web.core');
     const Wysiwyg = require('web_editor.wysiwyg');
-    options.registry.PhpVariableTextSelector2 = options.Class.extend({
+    options.registry.PhpVariableTextSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
             'click .o_we_php_dropdown_toggle': '_onToggleDropdown',
             'input .o_we_php_search': '_onSearch',
