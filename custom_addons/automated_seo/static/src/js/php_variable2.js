@@ -10,6 +10,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             'click [data-select-var]': '_onVariableSelect',
             'mouseup .o_editable': '_onSelectionChange',
             'click .o_au_php_var_type': '_onConstButtonClick',
+            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
         }),
         init: function () {
             this._super.apply(this, arguments);
@@ -144,22 +145,23 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         // Update the _createDropdown function
         _createDropdown: function () {
             // Create checkbox
-            this.$constButton = $('<div/>', {
-                class: 'mt-2'
-            }).append(
-                $('<label/>', {
-                    class: 'o_we_checkbox_wrapper'
-                }).append(
-                    $('<input/>', {
-                        type: 'checkbox',
-                        class: 'o_au_php_var_type',
-                        'data-no-preview': 'true'
-                    }),
-                    $('<span/>', {
-                        class: 'o_we_checkbox_label'
-                    }).text('Constant var?')
-                )
-            );
+            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+//             $('<div/>', {
+//                class: 'mt-2'
+//            }).append(
+//                $('<label/>', {
+//                    class: 'o_we_checkbox_wrapper'
+//                }).append(
+//                    $('<input/>', {
+//                        type: 'checkbox',
+//                        class: 'o_au_php_var_type',
+//                        'data-no-preview': 'true'
+//                    }),
+//                    $('<span/>', {
+//                        class: 'o_we_checkbox_label'
+//                    }).text('Constant var?')
+//                )
+//            );
             
             // Create dropdown
             this.$dropdown = $('<div/>', {
@@ -214,7 +216,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 .append(this.$menu);
         
             // Add to DOM
-            this.$el.append(this.$constButton);
+//            this.$el.append(this.$constButton);
             this.$el.append(this.$dropdown);
         },
 
@@ -458,7 +460,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             const span = document.createElement('span');
             span.className = `${variable.class} o_text-php-var-info`;
             span.setAttribute('data-php-var', variable.name);
-            span.setAttribute('data-php-const-var', this.$constButton.hasClass('active') ? '1' : '0');
+            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+            span.setAttribute('data-php-const-var', $constButton.hasClass('active') ? '1' : '0');
             span.textContent = selectedText;
             // Remove any existing content and insert the new span
             range.deleteContents();
@@ -553,17 +556,17 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             // Get current PHP variable if any
             const currentVar = this._hasPhpVariable(selection);
-
+            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
             // Update dropdown toggle text
             //            const $toggle = this.$('.o_we_php_dropdown_toggle span');
             if (currentVar && currentVar.name) {
                 this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar);
-                this.$constButton.toggleClass('active', currentVar.isConst);
+                $constButton.toggleClass('active', currentVar.isConst);
                 this.isConstVar = currentVar.isConst;
             } else {
                 this.$toggle.text('PHP Variables');
-                this.$constButton.removeClass('active');
+                $constButton.removeClass('active');
                 this.isConstVar = false;
 
             }
@@ -591,14 +594,16 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             // Get current PHP variable if any
             const currentVar = this._hasPhpVariable(selection);
+            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+
             if (currentVar && currentVar.name) {
                 this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar.name);
-                 this.$constButton.toggleClass('active', currentVar.isConst);
+                 $constButton.toggleClass('active', currentVar.isConst);
                 this.isConstVar = currentVar.isConst;
             } else {
                 this.$toggle.text('PHP Variables');
-                     this.$constButton.removeClass('active');
+                     $constButton.removeClass('active');
 
             }
 

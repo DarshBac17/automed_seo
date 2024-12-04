@@ -77,6 +77,7 @@
     <template id="s_php_variable_options" inherit_id="website.snippet_options">
         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="before">
             <div data-js="PhpVariableTextSelector2" data-selector=".o_automated_seo_php_variable">
+                <we-checkbox class="mt-2" string="Constant var?" data-select-class="o_au_php_var_type" data-no-preview="true"/>
 <!--                <div class="o_we_php_dropdown">-->
 <!--                     Dropdown Toggle -->
 <!--                    <div class="o_we_php_dropdown_toggle" data-name="php_var_select">-->
