@@ -1,4 +1,3 @@
-console.log("============snippet_optioncall================================")
 odoo.define('website.snippets.php_variable_text_selector3', function (require) {
     'use strict';
     var options = require('web_editor.snippets.options');
@@ -7,9 +6,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
     options.registry.PhpVariableTextSelector2 = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
             'click .o_we_php_dropdown_toggle': '_onToggleDropdown',
-               'input .o_we_php_search': '_onSearch',
-//            'click [data-select-var]': '_onVariableSelect',
-//            'click .o_we_php_variables_list we-button': '_onVariableSelect',
+            'input .o_we_php_search': '_onSearch',
             'click [data-select-var]': '_onVariableSelect',
             'mouseup .o_editable': '_onSelectionChange',
         }),
@@ -17,72 +14,83 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this._super.apply(this, arguments);
             this.selectedVariable = null;
             this.isDropdownOpen = false;
+            this.currentOffset = 0;
+            this.limit = 5;
+            this.isLoading = false;
+            this.hasMore = true; 
             this._bindSelectionChangeEvent()
 
         },
         start: function () {
             var self = this;
-
-//            return this._super.apply(this, arguments);
-            return this._super.apply(this, arguments).then(function() {
+            return this._super.apply(this, arguments).then(function () {
+                console.log("start method call================")
                 self._createDropdown();
-                self._fetchVariables();
-                // Handle click outside
-                $(document).on('click.php_dropdown', function(e) {
+//                self._fetchVariables();
+                $(document).on('click.php_dropdown', function (e) {
                     if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
                         self._closeDropdown();
                     }
                 });
 
-                $(document).on('click.php_dropdown', function(e) {
+                $(document).on('click.php_dropdown', function (e) {
                     if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
                         self._closeDropdown();
                     }
                 });
-//            $(document).on('selectionchange', _.debounce(function() {
-//                self.1();
-//            }, 100));
             });
         },
         _getWysiwygInstance: function () {
-    return this.wysiwyg || (this.options && this.options.wysiwyg);
-},
+            return this.wysiwyg || (this.options && this.options.wysiwyg);
+        },
         _bindSelectionChangeEvent() {
-    const wysiwyg = this._getWysiwygInstance();
-    if (!wysiwyg) return;
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+            wysiwyg.odooEditor.document.addEventListener('click', _.debounce((event) => {
+                const clickedElement = event.target;
+                if (clickedElement.closest('.o_editable')) {
+                    this._onSelectionChange.bind(this)(event);
+                }
 
-    // Optional: Also handle clicks within editable areas
-    wysiwyg.odooEditor.document.addEventListener('click', _.debounce((event) => {
-        const clickedElement = event.target;
-        if (clickedElement.closest('.o_editable')) {
-            this._onSelectionChange.bind(this)(event);
-        }
-
-    }, 100));
-},
-
+            }, 100));
+        },
         _fetchVariables: function(search = '') {
-    var self = this;
-    return $.get('/php-variables/', {
-        offset: this.currentOffset,
-        limit: this.limit,
-        search: search
-    }).then(function(result) {
-        if (result.error) {
-            console.error('Error fetching variables:', result.error);
-            return;
-        }
-        self.variables = result.variable_names;
-        self._updateVariablesList();
-//        self._setValue();
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Failed to fetch variables:', textStatus, errorThrown);
-    });
-},
-        _updateVariablesList: function() {
             var self = this;
+            console.log('Fetching variables, current offset:', this.currentOffset);
+            
+            return $.get('/php-variables/', {
+                offset: this.currentOffset,
+                limit: this.limit,
+                search: search
+            }).then((result) => {  // Use arrow function to preserve 'this'
+                if (result.error) {
+                    console.error('Error fetching variables:', result.error);
+                    return;
+                }
+                
+                console.log('Received variables:', result.variable_names.length);
+                
+                // Update offset and variables
+                self.variables = result.variable_names;
+                self.currentOffset += result.variable_names.length;
+                self.hasMore = result.variable_names.length >= self.limit;
+                
+                console.log('Updated offset:', self.currentOffset);
+                
+                // Update UI
+                self._updateVariablesList();
+                self._setValue();
+                
+            }).fail((jqXHR, textStatus, errorThrown) => {
+                console.error('Failed to fetch variables:', textStatus);
+            });
+        },
+        
+        _updateVariablesList: function() {
+            console.log('Updating variables list, offset:', this.currentOffset);
+            
             this.$variablesList.empty();
-
+        
             // Add "None" option
             this.$variablesList.append(
                 $('<we-button/>', {
@@ -90,10 +98,10 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                     class: 'o_we_destroy_btn'
                 }).text('None')
             );
-
+        
             // Add variables from server
-            _.each(this.variables, function(varName) {
-                self.$variablesList.append(
+            _.each(this.variables, (varName) => {
+                this.$variablesList.append(
                     $('<we-button/>', {
                         'data-select-var': varName,
                         'data-variable-class': varName.toLowerCase()
@@ -101,10 +109,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 );
             });
         },
-        _createDropdown: function() {
-            console.log('Creating dropdown...');
-
-            // Create elements using jQuery
+        // Update the _createDropdown function
+        _createDropdown: function () {
             this.$dropdown = $('<div/>', {
                 class: 'o_we_php_dropdown'
             });
@@ -113,7 +119,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 class: 'o_we_php_dropdown_toggle'
             }).append(
                 $('<span/>').text('PHP Variables'),
-                $('<i/>', {class: 'fa fa-chevron-down'})
+                $('<i/>', { class: 'fa fa-chevron-down' })
             );
 
             this.$menu = $('<div/>', {
@@ -129,15 +135,32 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this.$variablesList = $('<div/>', {
                 class: 'o_we_php_variables_list'
             });
+            console.log('Variables list created:', {
+                element: this.$variablesList[0],
+                height: this.$variablesList.height(),
+                scrollHeight: this.$variablesList[0]?.scrollHeight
+            });
+
+            this.$loadingIndicator = $('<div/>', {
+                class: 'o_we_php_loading_indicator',
+                text: 'Loading...'
+            }).css({
+                'text-align': 'center',
+                'padding': '8px',
+                'display': 'none'
+            });
 
             // Build structure
             this.$menu.append(
-                $('<div/>', {class: 'o_we_php_search_wrapper'}).append(this.$search),
-                this.$variablesList
+                $('<div/>', { class: 'o_we_php_search_wrapper' }).append(this.$search),
+                this.$variablesList,
+                this.$loadingIndicator
             );
 
-            // Add variables
-
+            // Add scroll handler
+            this.$variablesList.on('scroll', _.throttle(() => {
+                this._onScroll();
+            }, 200));
 
             // Assemble dropdown
             this.$dropdown
@@ -146,25 +169,92 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             // Add to DOM
             this.$el.append(this.$dropdown);
+        },
 
-            console.log('Dropdown elements:', {
-                dropdown: this.$dropdown.length,
-                toggle: this.$toggle.length,
-                menu: this.$menu.length,
-                search: this.$search.length,
-                list: this.$variablesList.length
+        // Add scroll handler
+        _onScroll: function() {
+            console.log('Scroll event fired');
+            
+            if (!this.$variablesList || !this.$variablesList[0]) {
+                console.log('Variables list not initialized');
+                return;
+            }
+        
+            const $list = this.$variablesList;
+            const scrollTop = $list.scrollTop();
+            const scrollHeight = $list[0].scrollHeight;
+            const clientHeight = $list.height();
+            const threshold = 30;
+        
+            console.log('Scroll metrics:', {
+                scrollTop,
+                scrollHeight,
+                clientHeight,
+                remaining: scrollHeight - scrollTop - clientHeight,
+                isLoading: this.isLoading,
+                hasMore: this.hasMore
+            });
+        
+            if (!this.isLoading && this.hasMore && (scrollHeight - scrollTop - clientHeight) < threshold) {
+                console.log('Triggering load more');
+                this._loadMoreVariables();
+            }
+        },
+
+
+        _loadMoreVariables: function() {
+            if (this.isLoading || !this.hasMore) {
+                console.log('Skipping load - already loading or no more items');
+                return;
+            }
+        
+            console.log('Loading more variables from offset:', this.currentOffset);
+            this.isLoading = true;
+            this.$loadingIndicator.show();
+        
+            $.get('/php-variables/', {
+                offset: this.currentOffset,
+                limit: this.limit,
+                search: this.$search.val().trim()
+            }).then((response) => {
+                console.log('Received response:', response);
+                
+                if (response.variable_names && response.variable_names.length) {
+                    this._appendVariables(response.variable_names);
+                     this.currentOffset += response.variable_names.length;
+                    this.hasMore = response.variable_names.length >= this.limit;
+                } else {
+                    this.hasMore = false;
+                }
+        
+                console.log('Updated state:', {
+                    offset: this.currentOffset,
+                    hasMore: this.hasMore
+                });
+            }).fail((error) => {
+                console.error('Failed to load variables:', error);
+            }).always(() => {
+                this.isLoading = false;
+                this.$loadingIndicator.hide();
+            });
+        },
+
+        _appendVariables: function (variables) {
+            console.log("_appendVariables call================")
+
+            variables.forEach(varName => {
+                this.$variablesList.append(
+                    $('<we-button/>', {
+                        'data-select-var': varName,
+                        'data-variable-class': varName.toLowerCase()
+                    }).text(varName)
+                );
             });
         },
 
         _onToggleDropdown: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
-
-            console.log('Toggle clicked', {
-                isOpen: this.isDropdownOpen,
-                hasMenu: this.$menu.length
-            });
-
             if (this.isDropdownOpen) {
                 this._closeDropdown();
             } else {
@@ -174,9 +264,10 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
         _openDropdown: function (ev) {
             if (!this.$menu.length) {
-                console.error('Menu element not found');
                 return;
             }
+            console.log("_openDropdown method call================")
+
             this.isDropdownOpen = true;
             this.$menu.addClass('show');
             this.$search.val('').focus();
@@ -186,34 +277,60 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
         _closeDropdown: function () {
             if (!this.$menu.length) {
-                console.error('Menu element not found');
                 return;
             }
             this.isDropdownOpen = false;
+            this.currentOffset = 0;
+            this.limit = 5;
+            this.isLoading = false;
+            this.hasMore = true;
             this.$menu.removeClass('show');
         },
 
-        _phpVariables: function(){
-                   return this._rpc({
+        _phpVariables: function () {
+            return this._rpc({
                 route: '/website/autosave_content',
                 params: {
                     html_content: content,
                 },
             }).then(() => {
                 this.contentChanged = false;
-                this._updateIcon('fa-check-circle fa-lg','Auto Saved');
+                this._updateIcon('fa-check-circle fa-lg', 'Auto Saved');
             }).catch((error) => {
-                console.error('[Website Editor] Save failed:', error);
-                // Keep content changed flag true on error
                 this.contentChanged = true;
             });
         },
-        _onSearch: _.debounce(function(ev) {
+        _onSearch: _.debounce(function (ev) {
             var searchTerm = $(ev.currentTarget).val().trim();
-            this.currentOffset = 0; // Reset offset on new search
-            this._fetchVariables(searchTerm);
+
+            // Reset pagination
+            this.currentOffset = 0;
+            this.hasMore = true;
+            this.isLoading = false;
+
+            // Clear existing list
+            this.$variablesList.empty();
+            this.$variablesList.scrollTop(0);
+
+            // Show loading
+            this.$loadingIndicator.show();
+
+            // Fetch new results
+            this._fetchVariables(searchTerm).then(() => {
+                this.$loadingIndicator.hide();
+
+                // Show no results message if needed
+                if (!this.$variablesList.children().length) {
+                    this.$variablesList.append(
+                        $('<div/>', {
+                            class: 'o_we_php_no_results',
+                            text: 'No variables found'
+                        })
+                    );
+                }
+            });
         }, 300),
-         _onClickAway: function (ev) {
+        _onClickAway: function (ev) {
             if (this.isDropdownOpen &&
                 !$(ev.target).closest('.o_we_php_dropdown').length) {
                 this._closeDropdown();
@@ -222,9 +339,9 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         /**
          * Helper to check if selection has a specific PHP variable
          */
-         _cleanupEmptySpans: function(element) {
+        _cleanupEmptySpans: function (element) {
             const emptySpans = $(element).find('span[data-php-var]:empty');
-            emptySpans.each(function() {
+            emptySpans.each(function () {
                 $(this).remove();
             });
         },
@@ -232,7 +349,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         /**
          * Helper to check if selection has a specific PHP variable
          */
-        _hasPhpVariable: function(selection) {
+        _hasPhpVariable: function (selection) {
             if (!selection || !selection.rangeCount) return false;
             const range = selection.getRangeAt(0);
             const container = range.commonAncestorContainer;
@@ -249,13 +366,13 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         /**
          * Helper to get all text content from a node
          */
-        _getAllTextContent: function(node) {
+        _getAllTextContent: function (node) {
             return node.textContent || node.innerText || '';
         },
         /**
          * Remove PHP variable formatting from the selected text
          */
-        _removePhpVariable: function(selection) {
+        _removePhpVariable: function (selection) {
             if (!selection.rangeCount) return;
             const range = selection.getRangeAt(0);
             const $span = $(range.commonAncestorContainer).closest('span[data-php-var]');
@@ -284,7 +401,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         /**
          * Apply PHP variable formatting to the selected text
          */
-        _applyPhpVariable: function(selection, variable) {
+        _applyPhpVariable: function (selection, variable) {
             if (!selection.rangeCount) return;
             if (variable.name === 'none') {
                 return this._removePhpVariable(selection);
@@ -332,7 +449,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         /**
          * Handle variable selection
          */
-        _onVariableSelect: function(ev) {
+        _onVariableSelect: function (ev) {
             const $target = $(ev.currentTarget);
             const variableName = $target.data('select-var');
             const variableClass = $target.data('variable-class');
@@ -387,13 +504,10 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 wysiwyg.odooEditor.historyStep();
                 this._onSelectionChange(ev);
             } catch (error) {
-                console.error('Error applying variable:', error);
                 alert('An error occurred while applying the variable. Please try again.');
             }
         },
-        _onSelectionChange: function(event) {
-//            this._closeDropdown()
-            console.log("Selection change called");
+        _onSelectionChange: function (event) {
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;
 
@@ -402,19 +516,18 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             // Get current PHP variable if any
             const currentVar = this._hasPhpVariable(selection);
-            console.log("Current variable:", currentVar);
 
             // Update dropdown toggle text
-            const $toggle = this.$('.o_we_php_dropdown_toggle span');
+            //            const $toggle = this.$('.o_we_php_dropdown_toggle span');
             if (currentVar && currentVar.name) {
-                $toggle.text(currentVar.name);
+                this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar);
             } else {
-                $toggle.text('PHP Variables');
+                this.$toggle.text('PHP Variables');
             }
 
             // Update button states
-            this.$variablesList.find('[data-select-var]').each(function() {
+            this.$variablesList.find('[data-select-var]').each(function () {
                 const $btn = $(this);
                 const varName = $btn.data('select-var');
                 const isActive = currentVar && currentVar.name === varName;
@@ -427,8 +540,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 }
             });
         },
-        _setValue() : function(){
-        console.log("Selection change called");
+        _setValue: function () {
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;
 
@@ -437,19 +549,15 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             // Get current PHP variable if any
             const currentVar = this._hasPhpVariable(selection);
-            console.log("Current variable:", currentVar);
-
-            // Update dropdown toggle text
-            const $toggle = this.$('.o_we_php_dropdown_toggle span');
             if (currentVar && currentVar.name) {
-                $toggle.text(currentVar.name);
+                this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar.name);
             } else {
-                $toggle.text('PHP Variables');
+                this.$toggle.text('PHP Variables');
             }
 
             // Update button states
-            this.$variablesList.find('[data-select-var]').each(function() {
+            this.$variablesList.find('[data-select-var]').each(function () {
                 const $btn = $(this);
                 const varName = $btn.data('select-var');
                 const isActive = currentVar && currentVar.name === varName;
@@ -463,6 +571,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             });
 
         },
+
         destroy: function () {
             $(document).off('selectionchange');
             this._super.apply(this, arguments);
