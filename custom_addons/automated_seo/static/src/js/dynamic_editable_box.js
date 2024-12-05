@@ -6,7 +6,7 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
     const Wysiwyg = require('web_editor.wysiwyg');
 
     options.registry.PhpVariableTextSelector = options.Class.extend({
-        events: _.extend({}, options.Class.prototype.events || {}, {
+        events: _.extend({}, options.Class.extend.prototype.events || {}, {
 
         }),
 
@@ -76,19 +76,20 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
 
             this.currentTarget = ev.target;
 
-
-            console.log("selection changed")
-            console.log(this.currentTarget)
-
-            this._createEditableBox();
-        },
-
-        _createEditableBox: function () {
-            // Remove any existing editable box
+            // Find all existing editable boxes
             if (this.$editableBox) {
+                console.log("found existing editableBox")
+                this.$editableBox.parent().html(this.$editableBox.html());
+                // Remove the editable box
                 this.$editableBox.remove();
             }
 
+
+            // Create the new editable box inside the currently selected element
+            this._createEditableBox(ev.target);
+        },
+
+        _createEditableBox: function (currentElement) {
             // Create the new editable box
             this.$editableBox = $('<div class="editable-box"></div>');
             this.$editableBox.css({
@@ -99,10 +100,11 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 'z-index': '9999',
             });
 
+
+
             // Add the content to the new div
             this.$editableBox.html($(this.currentTarget).html());
             // Append the editable box inside the selected element
-
             $(this.currentTarget).empty();
             $(this.currentTarget).append(this.$editableBox);
 
