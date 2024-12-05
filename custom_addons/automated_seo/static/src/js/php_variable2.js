@@ -27,20 +27,15 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         start: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
-                console.log("start method call================")
+
                 self._createDropdown();
-//                self._fetchVariables();
                 $(document).on('click.php_dropdown', function (e) {
                     if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
                         self._closeDropdown();
                     }
                 });
 
-                $(document).on('click.php_dropdown', function (e) {
-                    if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
-                        self._closeDropdown();
-                    }
-                });
+
             });
         },
         _getWysiwygInstance: function () {
@@ -59,7 +54,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
         _fetchVariables: function(search = '') {
             var self = this;
-            console.log('Fetching variables, current offset:', this.currentOffset);
             
             return $.get('/php-variables/', {
                 offset: this.currentOffset,
@@ -67,33 +61,25 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 search: search
             }).then((result) => {  // Use arrow function to preserve 'this'
                 if (result.error) {
-                    console.error('Error fetching variables:', result.error);
                     return;
                 }
-                
-                console.log('Received variables:', result.variable_names.length);
                 
                 // Update offset and variables
                 self.variables = result.variable_names;
                 self.currentOffset += result.variable_names.length;
                 self.hasMore = result.variable_names.length >= self.limit;
                 
-                console.log('Updated offset:', self.currentOffset);
-                
                 // Update UI
                 self._updateVariablesList();
                 self._setValue();
                 
             }).fail((jqXHR, textStatus, errorThrown) => {
-                console.error('Failed to fetch variables:', textStatus);
             });
         },
 
         _onConstButtonClick: function (ev) {
-            console.log("_onConstButtonClick=========================")
 
             const $button = $(ev.currentTarget);
-            console.log("_onConstButtonClick=========================",$button)
 
             $button.toggleClass('active');
             this.isConstVar = $button.hasClass('active');
@@ -120,7 +106,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             return wysiwyg.odooEditor.document.getSelection();
         },
         _updateVariablesList: function() {
-            console.log('Updating variables list, offset:', this.currentOffset);
             
             this.$variablesList.empty();
         
@@ -222,10 +207,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
         // Add scroll handler
         _onScroll: function() {
-            console.log('Scroll event fired');
             
             if (!this.$variablesList || !this.$variablesList[0]) {
-                console.log('Variables list not initialized');
                 return;
             }
         
@@ -235,17 +218,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             const clientHeight = $list.height();
             const threshold = 30;
         
-            console.log('Scroll metrics:', {
-                scrollTop,
-                scrollHeight,
-                clientHeight,
-                remaining: scrollHeight - scrollTop - clientHeight,
-                isLoading: this.isLoading,
-                hasMore: this.hasMore
-            });
-        
             if (!this.isLoading && this.hasMore && (scrollHeight - scrollTop - clientHeight) < threshold) {
-                console.log('Triggering load more');
                 this._loadMoreVariables();
             }
         },
@@ -253,11 +226,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
         _loadMoreVariables: function() {
             if (this.isLoading || !this.hasMore) {
-                console.log('Skipping load - already loading or no more items');
                 return;
             }
-        
-            console.log('Loading more variables from offset:', this.currentOffset);
             this.isLoading = true;
             this.$loadingIndicator.show();
         
@@ -266,7 +236,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 limit: this.limit,
                 search: this.$search.val().trim()
             }).then((response) => {
-                console.log('Received response:', response);
                 
                 if (response.variable_names && response.variable_names.length) {
                     this._appendVariables(response.variable_names);
@@ -275,13 +244,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 } else {
                     this.hasMore = false;
                 }
-        
-                console.log('Updated state:', {
-                    offset: this.currentOffset,
-                    hasMore: this.hasMore
-                });
             }).fail((error) => {
-                console.error('Failed to load variables:', error);
             }).always(() => {
                 this.isLoading = false;
                 this.$loadingIndicator.hide();
@@ -289,8 +252,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
 
         _appendVariables: function (variables) {
-            console.log("_appendVariables call================")
-
             variables.forEach(varName => {
                 this.$variablesList.append(
                     $('<we-button/>', {
@@ -315,7 +276,6 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             if (!this.$menu.length) {
                 return;
             }
-            console.log("_openDropdown method call================")
 
             this.isDropdownOpen = true;
             this.$menu.addClass('show');
