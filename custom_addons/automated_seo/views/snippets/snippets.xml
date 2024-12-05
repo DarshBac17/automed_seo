@@ -11,6 +11,10 @@
                 </span>
             </button>
         </xpath>
+
+        <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='cancel']" position="replace">
+
+        </xpath>
         <!--<xpath expr="//div[@id='snippets_menu']/button[span[contains(text(), 'Customize')]]" position="replace">
             <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">
                 <button type="button" tabindex="2" class="o_we_customize_snippet_btn text-uppercase">
