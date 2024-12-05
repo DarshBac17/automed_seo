@@ -79,3 +79,7 @@ odoo-bin
 /custom_addons/automated_seo/controller
 /custom_addons/automated_seo/views/test.xml
 /temp
+
+/custom_addons/automated_seo/static/src/js/php_variable_copy.js
+/custom_addons/automated_seo/static/src/js/snippet_options copy.js
+/custom_addons/automated_seo/static/src/js/techstack_tems.js

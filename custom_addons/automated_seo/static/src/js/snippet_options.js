@@ -7,7 +7,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
 
-    options.registry.PhpVariableTextSelector = options.Class.extend({
+    options.registry.SeoOptionsSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
 
             'mouseup .o_editable': '_onSelectionChange',
