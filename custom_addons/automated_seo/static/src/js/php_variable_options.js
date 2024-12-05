@@ -19,7 +19,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this.currentOffset = 0;
             this.limit = 5;
             this.isLoading = false;
-            this.hasMore = true; 
+            this.hasMore = true;
             this._bindSelectionChangeEvent()
             this.isConstVar = false;
 
@@ -29,7 +29,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             return this._super.apply(this, arguments).then(function () {
                 console.log("start method call================")
                 self._createDropdown();
-//                self._fetchVariables();
+                //                self._fetchVariables();
                 $(document).on('click.php_dropdown', function (e) {
                     if (!$(e.target).closest('.o_we_php_dropdown').length && self.isDropdownOpen) {
                         self._closeDropdown();
@@ -57,10 +57,10 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             }, 100));
         },
-        _fetchVariables: function(search = '') {
+        _fetchVariables: function (search = '') {
             var self = this;
             console.log('Fetching variables, current offset:', this.currentOffset);
-            
+
             return $.get('/php-variables/', {
                 offset: this.currentOffset,
                 limit: this.limit,
@@ -70,20 +70,20 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                     console.error('Error fetching variables:', result.error);
                     return;
                 }
-                
+
                 console.log('Received variables:', result.variable_names.length);
-                
+
                 // Update offset and variables
                 self.variables = result.variable_names;
                 self.currentOffset += result.variable_names.length;
                 self.hasMore = result.variable_names.length >= self.limit;
-                
+
                 console.log('Updated offset:', self.currentOffset);
-                
+
                 // Update UI
                 self._updateVariablesList();
                 self._setValue();
-                
+
             }).fail((jqXHR, textStatus, errorThrown) => {
                 console.error('Failed to fetch variables:', textStatus);
             });
@@ -93,7 +93,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             console.log("_onConstButtonClick=========================")
 
             const $button = $(ev.currentTarget);
-            console.log("_onConstButtonClick=========================",$button)
+            console.log("_onConstButtonClick=========================", $button)
 
             $button.toggleClass('active');
             this.isConstVar = $button.hasClass('active');
@@ -119,11 +119,11 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             return wysiwyg.odooEditor.document.getSelection();
         },
-        _updateVariablesList: function() {
+        _updateVariablesList: function () {
             console.log('Updating variables list, offset:', this.currentOffset);
-            
+
             this.$variablesList.empty();
-        
+
             // Add "None" option
             this.$variablesList.append(
                 $('<we-button/>', {
@@ -131,7 +131,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                     class: 'o_we_destroy_btn'
                 }).text('None')
             );
-        
+
             // Add variables from server
             _.each(this.variables, (varName) => {
                 this.$variablesList.append(
@@ -145,50 +145,50 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         // Update the _createDropdown function
         _createDropdown: function () {
             // Create checkbox
-            const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
-//             $('<div/>', {
-//                class: 'mt-2'
-//            }).append(
-//                $('<label/>', {
-//                    class: 'o_we_checkbox_wrapper'
-//                }).append(
-//                    $('<input/>', {
-//                        type: 'checkbox',
-//                        class: 'o_au_php_var_type',
-//                        'data-no-preview': 'true'
-//                    }),
-//                    $('<span/>', {
-//                        class: 'o_we_checkbox_label'
-//                    }).text('Constant var?')
-//                )
-//            );
-            
+
+            //             $('<div/>', {
+            //                class: 'mt-2'
+            //            }).append(
+            //                $('<label/>', {
+            //                    class: 'o_we_checkbox_wrapper'
+            //                }).append(
+            //                    $('<input/>', {
+            //                        type: 'checkbox',
+            //                        class: 'o_au_php_var_type',
+            //                        'data-no-preview': 'true'
+            //                    }),
+            //                    $('<span/>', {
+            //                        class: 'o_we_checkbox_label'
+            //                    }).text('Constant var?')
+            //                )
+            //            );
+
             // Create dropdown
             this.$dropdown = $('<div/>', {
                 class: 'o_we_php_dropdown'
             });
-        
+
             this.$toggle = $('<div/>', {
                 class: 'o_we_php_dropdown_toggle'
             }).append(
                 $('<span/>').text('PHP Variables'),
                 $('<i/>', { class: 'fa fa-chevron-down' })
             );
-        
+
             this.$menu = $('<div/>', {
                 class: 'o_we_php_dropdown_menu'
             });
-        
+
             this.$search = $('<input/>', {
                 type: 'text',
                 class: 'o_we_php_search',
                 placeholder: 'Search variables...'
             });
-        
+
             this.$variablesList = $('<div/>', {
                 class: 'o_we_php_variables_list'
             });
-        
+
             this.$loadingIndicator = $('<div/>', {
                 class: 'o_we_php_loading_indicator',
                 text: 'Loading...'
@@ -197,44 +197,44 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 'padding': '8px',
                 'display': 'none'
             });
-        
+
             // Build structure
             this.$menu.append(
                 $('<div/>', { class: 'o_we_php_search_wrapper' }).append(this.$search),
                 this.$variablesList,
                 this.$loadingIndicator
             );
-        
+
             // Add scroll handler
             this.$variablesList.on('scroll', _.throttle(() => {
                 this._onScroll();
             }, 200));
-        
+
             // Assemble dropdown
             this.$dropdown
                 .append(this.$toggle)
                 .append(this.$menu);
-        
+
             // Add to DOM
-//            this.$el.append(this.$constButton);
+            //            this.$el.append(this.$constButton);
             this.$el.append(this.$dropdown);
         },
 
         // Add scroll handler
-        _onScroll: function() {
+        _onScroll: function () {
             console.log('Scroll event fired');
-            
+
             if (!this.$variablesList || !this.$variablesList[0]) {
                 console.log('Variables list not initialized');
                 return;
             }
-        
+
             const $list = this.$variablesList;
             const scrollTop = $list.scrollTop();
             const scrollHeight = $list[0].scrollHeight;
             const clientHeight = $list.height();
             const threshold = 30;
-        
+
             console.log('Scroll metrics:', {
                 scrollTop,
                 scrollHeight,
@@ -243,7 +243,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 isLoading: this.isLoading,
                 hasMore: this.hasMore
             });
-        
+
             if (!this.isLoading && this.hasMore && (scrollHeight - scrollTop - clientHeight) < threshold) {
                 console.log('Triggering load more');
                 this._loadMoreVariables();
@@ -251,31 +251,31 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
 
 
-        _loadMoreVariables: function() {
+        _loadMoreVariables: function () {
             if (this.isLoading || !this.hasMore) {
                 console.log('Skipping load - already loading or no more items');
                 return;
             }
-        
+
             console.log('Loading more variables from offset:', this.currentOffset);
             this.isLoading = true;
             this.$loadingIndicator.show();
-        
+
             $.get('/php-variables/', {
                 offset: this.currentOffset,
                 limit: this.limit,
                 search: this.$search.val().trim()
             }).then((response) => {
                 console.log('Received response:', response);
-                
+
                 if (response.variable_names && response.variable_names.length) {
                     this._appendVariables(response.variable_names);
-                     this.currentOffset += response.variable_names.length;
+                    this.currentOffset += response.variable_names.length;
                     this.hasMore = response.variable_names.length >= this.limit;
                 } else {
                     this.hasMore = false;
                 }
-        
+
                 console.log('Updated state:', {
                     offset: this.currentOffset,
                     hasMore: this.hasMore
@@ -599,11 +599,11 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             if (currentVar && currentVar.name) {
                 this.$toggle.text(currentVar.name);
                 $(this).closest('we-select').find('we-toggler').text(currentVar.name);
-                 $constButton.toggleClass('active', currentVar.isConst);
+                $constButton.toggleClass('active', currentVar.isConst);
                 this.isConstVar = currentVar.isConst;
             } else {
                 this.$toggle.text('PHP Variables');
-                     $constButton.removeClass('active');
+                $constButton.removeClass('active');
 
             }
 

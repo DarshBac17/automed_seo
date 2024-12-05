@@ -26,10 +26,10 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             'click [data-remove-url]': '_onRemoveUrl',
             'click [data-cancel-url]': '_onCancelUrl',
 
-//            'click .data-remove-php-var': '_onRemovePhpVariable',
-//            'input .data-variable-input': '_onVariableInputChange',
-//            'keydown .data-variable-input': '_onVariableKeyDown',
-//            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
+            //            'click .data-remove-php-var': '_onRemovePhpVariable',
+            //            'input .data-variable-input': '_onVariableInputChange',
+            //            'keydown .data-variable-input': '_onVariableKeyDown',
+            //            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
 
 
             'click .o_we_edit_link': '_onLinkButtonClick',
@@ -179,7 +179,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this._onLinkSelectionChange(ev);
             this._updateButtonState(ev, selection);
 
-            this._onPhpVariableChange(ev);
+            // this._onPhpVariableChange(ev);
 
             this.typing = false;
 
