@@ -35,6 +35,11 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                     }
                 });
 
+                var $constButton = self.$el.find('[data-select-class="o_au_php_var_type"]');
+                self._originalConstVarState = $constButton.hasClass('active');
+
+                self._preventExternalStateChange();
+
 
             });
         },
@@ -78,9 +83,13 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
 
         _onConstButtonClick: function (ev) {
-
             const $button = $(ev.currentTarget);
 
+            // Prevent other widgets from changing the state
+            ev.stopPropagation();
+            ev.preventDefault();
+
+            // Toggle the state
             $button.toggleClass('active');
             this.isConstVar = $button.hasClass('active');
 
@@ -92,11 +101,14 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             const currentVar = this._hasPhpVariable(selection);
             if (currentVar && currentVar.element) {
-                // Simply update the constant attribute on the existing span
+                // Update the constant attribute on the existing span
                 $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
                 wysiwyg.odooEditor.historyStep();
             }
         },
+
+
+
         _getCurrentSelection: function () {
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg || !wysiwyg.odooEditor) {
@@ -584,8 +596,39 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
 
         destroy: function () {
-            $(document).off('selectionchange');
+            var $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+
+            // Ensure the button is in its original state when the snippet is destroyed
+            $constButton.toggleClass('active', this._originalConstVarState);
+
             this._super.apply(this, arguments);
-        }
+        },
+
+
+        // Add a method to prevent external state changes
+        _preventExternalStateChange: function () {
+            var $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
+
+            // Implement a mutation observer to revert unwanted changes
+            this._stateObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        // Check if the state has been changed unexpectedly
+                        const currentState = $constButton.hasClass('active');
+                        if (currentState !== this.isConstVar) {
+                            // Revert to the known state
+                            $constButton.toggleClass('active', this.isConstVar);
+                        }
+                    }
+                });
+            });
+
+            // Start observing the button for class changes
+            this._stateObserver.observe($constButton[0], {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        },
+
     });
 });
