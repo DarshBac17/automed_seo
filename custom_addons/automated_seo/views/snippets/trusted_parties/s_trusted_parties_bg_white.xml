@@ -9,24 +9,24 @@
             <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div class="boxed bg-gray-light pt-0">
                     <div class="size-60 -mt-5 mb-sm">
-<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-3.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-3.png" alt="John Burke" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-3.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-3.png" alt="" loading="lazy" height="60px" width="60px"/>
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-3.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-3.png" alt="John Burke" loading="lazy" height="60" width="60">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-3.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-3.png" alt="" loading="lazy" height="60" width="60"/>
                     </div>
                     <p class="text-primary small-heading">Small Heading</p>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
                 <div class="boxed bg-gray-light pt-0">
                     <div class="size-60 -mt-5 mb-sm">
-<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/staff-ppc/test-2.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/staff-ppc/test-2.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/staff-ppc/test-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/staff-ppc/test-2.png" alt="" loading="lazy" height="60px" width="60px"/>
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/staff-ppc/test-2.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/staff-ppc/test-2.png" alt="Gerry Dunne" loading="lazy" height="60" width="60">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/staff-ppc/test-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/staff-ppc/test-2.png" alt="" loading="lazy" height="60" width="60"/>
                     </div>
                     <p class="text-primary small-heading">Small Heading</p>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
                 <div class="boxed bg-gray-light pt-0">
                     <div class="size-60 -mt-5 mb-sm">
-<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-2.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-2.png" alt="Iyad Horani" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-2.png" alt="" loading="lazy" height="60px" width="60px"/>
+<!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-2.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-development/testi-2.png" alt="Iyad Horani" loading="lazy" height="60" width="60">-->
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/testi-2.png" alt="" loading="lazy" height="60" width="60"/>
                     </div>
                     <p class="text-primary small-heading">Small Heading</p>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
