@@ -499,7 +499,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                         // Apply new variable
                         const span = this._applyPhpVariable(selection, {
                             name: variableName,
-                            class: variableClass
+                            class: 'o_au_php_var'
                         });
                         if (span) {
                             // Update button state
