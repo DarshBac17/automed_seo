@@ -5,7 +5,7 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
     var core = require('web.core');
     const Wysiwyg = require('web_editor.wysiwyg');
 
-    options.registry.PhpVariableTextSelector = options.Class.extend({
+    options.registry.EditableBoxSelector = options.Class.extend({
         events: _.extend({}, options.Class.extend.prototype.events || {}, {
 
         }),
@@ -36,6 +36,12 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
 
         destroy: function () {
             this._super.apply(this, arguments);
+            if (this.$editableBox) {
+                console.log("found existing editableBox")
+                this.$editableBox.parent().html(this.$editableBox.html());
+                // Remove the editable box
+                this.$editableBox.remove();
+            }
         },
 
         _getWysiwygInstance: function () {
