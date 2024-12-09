@@ -159,8 +159,8 @@
 
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
-        "views/snippets/php_variable_option.xml",
         'views/snippets/snippet_options.xml',
+        "views/snippets/php_variable_option.xml",
         'views/snippets/snippets.xml',
         # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",
