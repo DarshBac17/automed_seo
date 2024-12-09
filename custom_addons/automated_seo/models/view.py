@@ -578,6 +578,7 @@ class View(models.Model):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
+        print("Custom button")
         view_name = self.env.context.get('view_name')
         if view_name == None:
             view_name = self.name
