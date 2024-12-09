@@ -16,6 +16,6 @@ jobs:
     - name: Run shell script or make an API call
       run: |
         # Run your shell script or call an API here
-        curl -X POST https://21db-103-241-232-74.ngrok-free.app
+        curl -X POST https://21db-103-241-232-74.ngrok-free.app/webhook-handler
         # Example to run the update script
         # bash /path/to/your/script.sh
