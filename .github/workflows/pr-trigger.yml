@@ -4,7 +4,7 @@ on:
   push:
     types: [opened]  # Trigger only when a PR is opened (can also use 'synchronize' to trigger on updates)
     branches:
-      - dev         # Target branch should be 'dev' in your case (or adjust as needed)
+      - master         # Target branch should be 'dev' in your case (or adjust as needed)
 
 jobs:
   run-script:
