@@ -5,7 +5,6 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
     var core = require('web.core');
     const Wysiwyg = require('web_editor.wysiwyg');
 
-
     options.registry.LengthConstraintSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
             'mouseup .o_editable': '_onSelectionChange',
@@ -75,8 +74,6 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
 
             this.currentTarget = ev.target
 
-            /*console.log('selection change:', this.currentTarget)*/
-
             this._applyConstraints(ev.target)
         },
 
@@ -118,32 +115,133 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
         },
 
         _handleConstrainedElementChange: function (element) {
-            // Custom logic for handling changes in constrained elements
             console.log('Handling change in constrained element');
 
-            // Example: Validate content length
-            const maxLength = element.getAttribute('data-max-length') || 100;
-            const currentLength = element.textContent.trim().length;
+            // Get the max length from the attribute
+            const maxLength = parseInt(element.getAttribute('data-max-length') || '100', 10);
 
+            // Function to calculate text length while preserving HTML structure, ignoring whitespace
+            const calculateTextLength = (node) => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    return node.textContent.replace(/\s+/g, '').length;
+                }
+
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    return Array.from(node.childNodes)
+                        .reduce((total, childNode) => total + calculateTextLength(childNode), 0);
+                }
+
+                return 0;
+            };
+
+            // Function to truncate content while preserving HTML structure
+            const truncateContent = (node, remainingLength) => {
+                if (remainingLength <= 0) {
+                    return null;
+                }
+
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const textWithoutWhitespace = node.textContent.replace(/\s+/g, '');
+
+                    if (textWithoutWhitespace.length <= remainingLength) {
+                        return {
+                            node: node.cloneNode(false),
+                            remainingLength: remainingLength - textWithoutWhitespace.length
+                        };
+                    }
+
+                    const truncatedNode = node.cloneNode(false);
+                    let truncatedText = '';
+                    let currentLength = 0;
+
+                    for (let char of node.textContent) {
+                        if (char.match(/\s/)) {
+                            truncatedText += char;
+                        } else {
+                            if (currentLength < remainingLength) {
+                                truncatedText += char;
+                                currentLength++;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+
+                    truncatedNode.textContent = truncatedText;
+                    return {
+                        node: truncatedNode,
+                        remainingLength: Math.max(0, remainingLength - currentLength)
+                    };
+                }
+
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    const truncatedElement = node.cloneNode(false);
+                    let currentRemainingLength = remainingLength;
+
+                    for (let childNode of node.childNodes) {
+                        const result = truncateContent(childNode, currentRemainingLength);
+
+                        if (result) {
+                            truncatedElement.appendChild(result.node);
+                            currentRemainingLength = result.remainingLength;
+                        }
+
+                        if (currentRemainingLength <= 0) {
+                            break;
+                        }
+                    }
+
+                    return {
+                        node: truncatedElement,
+                        remainingLength: currentRemainingLength
+                    };
+                }
+
+                return null;
+            };
+
+            // Calculate current content length (ignoring whitespace)
+            let currentLength = calculateTextLength(element);
+
+            // If content exceeds max length
             if (currentLength > maxLength) {
                 console.warn(`Content exceeds maximum length of ${maxLength} characters`);
-                alert(`The content you've entered exceeds the maximum length of ${maxLength} characters. Please shorten your text.`);
+                alert(`The content you've entered exceeds the maximum length of ${maxLength} characters (excluding spaces). Please shorten your text.`);
+
+                // Get the Wysiwyg instance
+                const wysiwyg = this._getWysiwygInstance();
+
+                // Undo the last input operation
 
 
-                // Truncate the content to the maximum length
-                element.textContent = element.textContent.trim().slice(0, maxLength);
-
-                // Move the cursor to the end of the text
-                const selection = this._getCurrentSelection();
-                if (selection && selection.rangeCount) {
-                    const range = selection.getRangeAt(0);
-                    range.selectNodeContents(element);
-                    range.collapse(false);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
+                while (currentLength > maxLength) {
+                    console.log("+")
+                    if (wysiwyg && wysiwyg.odooEditor) {
+                        wysiwyg.odooEditor.historyUndo();
+                    }
+                    currentLength = calculateTextLength(element);
                 }
+
+
+
+                // Optionally, you can also truncate and set the content
+                // const truncationResult = truncateContent(element, maxLength);
+
+                // if (truncationResult) {
+                //     element.innerHTML = truncationResult.node.innerHTML;
+
+                //     // Move the cursor to the end of the text
+                //     const selection = this._getCurrentSelection();
+                //     if (selection && selection.rangeCount) {
+                //         const range = selection.getRangeAt(0);
+                //         range.selectNodeContents(element);
+                //         range.collapse(false);
+                //         selection.removeAllRanges();
+                //         selection.addRange(range);
+                //     }
+                // }
             }
         },
-
     });
 });
+
