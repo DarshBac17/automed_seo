@@ -6,7 +6,7 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
     const Wysiwyg = require('web_editor.wysiwyg');
 
 
-    options.registry.PhpVariableTextSelector = options.Class.extend({
+    options.registry.LengthConstraintSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
             'mouseup .o_editable': '_onSelectionChange',
         }),
@@ -75,7 +75,7 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
 
             this.currentTarget = ev.target
 
-            console.log('selection change:', this.currentTarget)
+            /*console.log('selection change:', this.currentTarget)*/
 
             this._applyConstraints(ev.target)
         },

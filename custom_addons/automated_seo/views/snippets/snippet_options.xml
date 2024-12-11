@@ -2,6 +2,9 @@
 <odoo>
     <template id="s_seo_options">
 
+        <div data-js="LengthConstraintSelector" data-selector=".o_automated_seo_php_variable">
+
+        </div>
 
         <div data-js="SeoOptionsSelector" data-selector=".o_automated_seo_php_variable">
             <we-title data-bs-original-title="" title="" style="" class="mt-4 mb-4">
