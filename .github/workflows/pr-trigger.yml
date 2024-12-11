@@ -1,21 +1,28 @@
 name: Pull Request Trigger
 
 on:
-  pull_request:
+  push:
     types: [opened]  # Trigger only when a PR is opened (can also use 'synchronize' to trigger on updates)
     branches:
-      - master         # Target branch should be 'dev' in your case (or adjust as needed)
+      - dev         # Target branch should be 'dev' in your case (or adjust as needed)
 
 jobs:
   run-script:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      
-    - name: Run shell script or make an API call
-      run: |
-        # Run your shell script or call an API here
-        curl -X POST https://21db-103-241-232-74.ngrok-free.app/webhook-handler
-        # Example to run the update script
-        # bash /path/to/your/script.sh
+
+    - name: Run Script on EC2
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/
+            ./update_server.sh
+#    - name: Run shell script or make an API call
+#      run: |
+#        # Run your shell script or call an API here
+#         curl -X POST http://65.0.83.186:8069/webhook-handler
