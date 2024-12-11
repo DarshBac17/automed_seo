@@ -563,8 +563,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-            img_tag['height'] = int(height)
-            img_tag['width'] = int(width)
+            # img_tag['height'] = int(height)
+            # img_tag['width'] = int(width)
             return output
 
         except Exception as e:
