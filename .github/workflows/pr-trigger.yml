@@ -4,15 +4,12 @@ on:
   push:
     # types: [opened]  # Trigger only when a PR is opened (can also use 'synchronize' to trigger on updates)
     branches:
-      - master         # Target branch should be 'dev' in your case (or adjust as needed)
+      - dev         # Target branch should be 'dev' in your case (or adjust as needed)
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
     - name: Run Script on EC2
       uses: appleboy/ssh-action@v0.1.8
       with:
