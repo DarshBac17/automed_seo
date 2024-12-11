@@ -43,7 +43,7 @@
                                               placeholder="Describe Your Requirements" name="contactMessage"/>
                                 </div>
                                 <div class="col-span-full text-right">
-                                    <button class="btn btn-outline-primary" name="contactBtn">Button Text</button>
+                                    <button class="btn btn-outline-primary" name="contactBtn">INQUIRE NOW</button>
                                 </div>
                             </div>
                         </form>
