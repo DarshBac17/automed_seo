@@ -122,7 +122,7 @@ odoo.define('website.snippets.p_tag_constraints', function (require) {
             console.log('Handling change in constrained element');
 
             // Example: Validate content length
-            const maxLength = element.getAttribute('data-max-length') || 10;
+            const maxLength = element.getAttribute('data-max-length') || 100;
             const currentLength = element.textContent.trim().length;
 
             if (currentLength > maxLength) {
