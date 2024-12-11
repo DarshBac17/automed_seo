@@ -15,12 +15,13 @@
         "views/views.xml",
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
-        # "views/manage_users.xml",
+
         'views/templates.xml',
         'views/version.xml',
         "views/mapper_view.xml",
         "views/php_to_snippet.xml",
         "views/php_mapper_view.xml",
+        "views/php_variables_view.xml",
         "views/website/header.xml",
         "views/website/footer.xml",
         "views/snippets/steps/s_steps_bg_white.xml",
@@ -76,6 +77,7 @@
         "views/snippets/banner/s_banner_side_image_with_icons.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button_and_icon.xml",
         "views/snippets/banner/s_banner_side_matrix_with_button.xml",
+        "views/snippets/banner/s_banner_side_matirx_with_form.xml",
         "views/snippets/services/s_service_card_bg_gray.xml",
         "views/snippets/services/s_service_sub_card_gray.xml",
         "views/snippets/services/s_service_card_bg_white.xml",
@@ -158,6 +160,7 @@
         "views/snippets/trusted_parties/s_trusted_parties_bg_gray.xml",
         "views/snippets/trusted_parties/s_trusted_parties_bg_white.xml",
         'views/snippets/snippet_options.xml',
+        "views/snippets/php_variable_option.xml",
         'views/snippets/snippets.xml',
         # "views/assets.xml"
         # "views/snippets/s_angular_offer.xml",
@@ -207,6 +210,7 @@
             'automated_seo/static/src/js/snippet_options.js',
             'automated_seo/static/src/js/website_autosave.js',
             'automated_seo/static/src/js/snippet_preview.js',
+            'automated_seo/static/src/js/php_variable_options.js'
             'automated_seo/static/src/js/p_tag_len_constraints.js',
             # 'automated_seo/static/src/js/dynamic_editable_box.js',
             # 'automated_seo/static/src/js/angular_offer.js'

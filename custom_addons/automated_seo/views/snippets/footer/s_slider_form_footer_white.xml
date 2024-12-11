@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_slider_form_footer_bg_white" name="Slider Form Footer White">
-        <section class="o_automated_seo_php_variable" contenteditable="false">
+        <section class="o_automated_seo_php_variable o_not_editable">
             <div class="container footer-slider">
                 <div class="footer-slider slick-slider slick-dotted">
                     <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
@@ -329,7 +329,7 @@
                         <div class="lg:col-span-7">
                             <div class="flex max-md:flex-wrap items-center max-md:justify-center gap-6 lg:[&amp;>div:not(:last-child)]:border-r lg:[&amp;>div:not(:last-child)]:border-light mt-sm">
                                 <div class="w-1/5">
-                                    <a href="https://www.google.com/search?q=bacancytechnology&amp;oq=bacancytechnology&amp;aqs=chrome..69i57j69i60l3j0l2.7015j1j4&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x395e9b596be1e50d:0x9b14edd4c5fa8634,1,,," target="_blank" rel="nofollow">
+                                    <a href="#" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.6</p>
@@ -338,7 +338,7 @@
                                     </a>
                                 </div>
                                 <div class="w-1/5">
-                                    <a href="https://clutch.co/profile/bacancy" target="_blank" rel="nofollow">
+                                    <a href="#" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.8</p>
@@ -347,7 +347,7 @@
                                     </a>
                                 </div>
                                 <div class="w-1/5">
-                                    <a href="https://www.goodfirms.co/company/bacancy-technology" target="_blank" rel="nofollow">
+                                    <a href="#" target="_blank" rel="nofollow">
                                         <div class="flex items-center">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/star.svg" alt="icon" width="15" height="15" loading="lazy" class="h-4 w-4"/>
                                             <p class="text-black font-bold ml-1.5">4.8</p>

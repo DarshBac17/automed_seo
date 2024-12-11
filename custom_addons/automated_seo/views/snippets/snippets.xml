@@ -11,6 +11,10 @@
                 </span>
             </button>
         </xpath>
+
+        <xpath expr="//form[@class='ms-auto d-flex']/button[@data-action='cancel']" position="replace">
+
+        </xpath>
         <!--<xpath expr="//div[@id='snippets_menu']/button[span[contains(text(), 'Customize')]]" position="replace">
             <t t-if="request.env.user.has_group('automated_seo.group_automated_seo_admins')">
                 <button type="button" tabindex="2" class="o_we_customize_snippet_btn text-uppercase">
@@ -64,13 +68,18 @@
                     </t>
                     <t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button_and_icon.png">
-                        <keywords>banner, side, matrix, button</keywords>
+                        <keywords>banner, side, matrix, button, icon</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_banner_side_matrix_with_button"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button.png">
+                        <keywords>banner, side, matrix, button</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_banner_side_matrix_with_form"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button.png">
+                        <keywords>banner, side, matrix, button, form</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_banner_side_image_with_icons"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_icons.png">
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_form.png">
                         <keywords>banner, side image, icons</keywords>
                     </t>
                 </div>
@@ -329,11 +338,11 @@
                         <keywords>ask, questions, faq, gray</keywords>
                     </t>-->
                     <t t-snippet="automated_seo.s_faq_with_list_bg_gray"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_gray.png">
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_with_form_bg_gray.png">
                         <keywords>ask, questions, list,faq, gray</keywords>
                     </t>
                     <t t-snippet="automated_seo.s_faq_with_list_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_gray.png">
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_with_form_bg_white.png">
                         <keywords>ask, questions, list,faq, gray</keywords>
                     </t>
                     <!--<t t-snippet="automated_seo.s_sub_faq_tab_white" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/png">

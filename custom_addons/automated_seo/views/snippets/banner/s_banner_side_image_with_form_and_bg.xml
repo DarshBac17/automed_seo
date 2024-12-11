@@ -7,7 +7,7 @@
             <?php endif; ?>-->
 
             <div class="phone-tablet_if"/>
-            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="" title="" width="1900" height="900" loading="eager" class="banner-post-img"/>
             <div class="phone-tablet_endif"/>
 
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
@@ -17,7 +17,7 @@
                 </div>
                 <?php endif; ?>-->
                 <p class="device-type-if"/>
-                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Title" width="785" height="754" loading="lazy" class="w-full"/>
+                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="" title="" width="785" height="754" loading="lazy" class="w-full"/>
                 <p class="device-type-endif"/>
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>

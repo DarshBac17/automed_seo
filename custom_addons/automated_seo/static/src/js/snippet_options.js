@@ -7,7 +7,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
 
-    options.registry.PhpVariableTextSelector = options.Class.extend({
+    options.registry.SeoOptionsSelector = options.Class.extend({
         events: _.extend({}, options.Class.prototype.events || {}, {
 
             'mouseup .o_editable': '_onSelectionChange',
@@ -22,13 +22,14 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             'click [data-variable-class="a-tag"]': '_onLinkButtonClick',
             'click [data-save-url]': '_onSaveUrl',
             'click [data-select-class="o_au_link_target"]': '_onLinkTargetButtonClick',
+            'click .link-style-option': '_onLinkStyleChange',
             'click [data-remove-url]': '_onRemoveUrl',
             'click [data-cancel-url]': '_onCancelUrl',
 
-            'click .data-remove-php-var': '_onRemovePhpVariable',
-            'input .data-variable-input': '_onVariableInputChange',
-            'keydown .data-variable-input': '_onVariableKeyDown',
-            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
+            //            'click .data-remove-php-var': '_onRemovePhpVariable',
+            //            'input .data-variable-input': '_onVariableInputChange',
+            //            'keydown .data-variable-input': '_onVariableKeyDown',
+            //            'click [data-select-class="o_au_php_var_type"]': '_onConstButtonClick',
 
 
             'click .o_we_edit_link': '_onLinkButtonClick',
@@ -178,7 +179,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this._onLinkSelectionChange(ev);
             this._updateButtonState(ev, selection);
 
-            this._onPhpVariableChange(ev);
+            // this._onPhpVariableChange(ev);
 
             this.typing = false;
 
@@ -929,7 +930,7 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
         _onLinkButtonClick: function (ev) {
             ev.preventDefault();
 
-            console.log("called")
+
             const $linkButton = this.$el.find('[data-variable-class="a-tag"]');
             const $urlSection = this.$el.find('.url-input-section');
             const $urlInput = $urlSection.find('.link-url-input');
@@ -1057,6 +1058,31 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
 
 
         /**
+         * Event handler for link style selection
+         * @param {Event} ev 
+         */
+        _onLinkStyleChange: function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            const $button = $(ev.currentTarget);
+
+            // Remove active class from all buttons in the same we-select
+            $button.siblings('.link-style-option').removeClass('active');
+
+            // Toggle active state on the clicked button
+            $button.addClass('active');
+
+            // Get the style class and display value of the selected button
+            const styleClass = $button.data('style-class') || '';
+            const displayValue = $button.data('display') || 'none';
+
+            // Update the Style field display
+
+            console.log(displayValue);
+            this.$el.find('.link-style-dropdown we-toggler').text(displayValue);
+        },
+
+        /**
          * Event handler for save url
          * @param {Event} ev 
          * @returns 
@@ -1069,17 +1095,28 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const url = this.$el.find('.link-url-input').val();
             const $newTabCheckbox = this.$el.find('[data-select-class="o_au_link_target"]');
 
+            // Find the active style class from the link style dropdown
+            const $activeStyleButton = this.$el.find('.link-style-option.active');
+            const activeStyleClass = $activeStyleButton.data('style-class') || '';
+
             if (!url) {
                 alert('Please enter a URL');
                 return;
             }
 
-
             const existingLink = this._getExistingLink(this.currentTarget);
 
             // Handle link update/creation
             if (existingLink) {
-                $(existingLink.element).attr('href', url);
+                // Remove any previous style classes
+                $(existingLink.element)
+                    .removeClass('text-primary font-bold')
+                    .attr('href', url);
+
+                // Add new style class
+                if (activeStyleClass) {
+                    $(existingLink.element).addClass(activeStyleClass);
+                }
 
                 if ($newTabCheckbox.hasClass('active')) {
                     $(existingLink.element).attr('target', '_blank');
@@ -1091,16 +1128,21 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
                 const range = selection.getRangeAt(0);
                 const selectedText = range.toString();
 
-                const link = document.createElement('a');
-                link.href = url;
-                link.textContent = selectedText;
+                const $link = $('<a>')
+                    .attr('href', url)
+                    .text(selectedText);
+
+                // Add style class
+                if (activeStyleClass) {
+                    $link.addClass(activeStyleClass);
+                }
 
                 if ($newTabCheckbox.hasClass('active')) {
-                    link.target = '_blank';
+                    $link.attr('target', '_blank');
                 }
 
                 range.deleteContents();
-                range.insertNode(link);
+                range.insertNode($link.get(0));
             }
 
             wysiwyg.odooEditor.historyStep();
@@ -1115,6 +1157,9 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             this._resetUrlInputSection();
         },
 
+
+
+
         /**
          * reset default url input section
          */
@@ -1123,16 +1168,22 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const $urlInput = $urlSection.find('.link-url-input');
             const $removeBtn = $urlSection.find('[data-remove-url="true"]');
             const $newTabCheckbox = $urlSection.find('[data-select-class="o_au_link_target"]');
+            const $linkStyleDropdown = this.$el.find('.link-style-dropdown we-toggler');
 
             // Reset all input values and states
             $urlInput.val('');
             $newTabCheckbox.removeClass('active');
-            // this.isTargetNewTab = false;
             this.currentLink = null;
+
+            // Reset link style dropdown to default 'none'
+            $linkStyleDropdown.text('none');
+            this.$el.find('.link-style-option').removeClass('active');
+            this.$el.find('.link-style-option[data-display="none"]').addClass('active');
 
             // Hide the section and remove editing state
             $urlSection.addClass('d-none');
         },
+
 
         /**
          * Handle link editing block on selection change
@@ -1144,53 +1195,55 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             const $removeBtn = $urlSection.find('[data-remove-url="true"]');
             const $urlInput = $urlSection.find('.link-url-input');
             const $newTabCheckbox = $urlSection.find('[data-select-class="o_au_link_target"]');
-
-            // Get the current selection
-            // const selection = this._getCurrentSelection();
+            const $linkStyleDropdown = this.$el.find('.link-style-dropdown we-toggler');
 
             const existingLink = this._getExistingLink(this.currentTarget);
 
-            // if ((selection && selection.toString().trim()) || this.currentLink) {
             if (existingLink) {
-
                 $urlSection.removeClass('d-none');
                 $removeBtn.removeClass('d-none');
                 $linkButton.addClass('active');
                 $urlInput.val(existingLink.href);
 
-                /* if ($(existingLink.element).hasClass("btn")) {
+                // Reset style dropdown
+                $linkStyleDropdown.text('none');
+                this.$el.find('.link-style-option').removeClass('active');
+                this.$el.find('.link-style-option[data-display="none"]').addClass('active');
 
-                    $removeBtn.addClass('d-none');
-                }
-                else {
-                    $removeBtn.removeClass('d-none');
-                } */
+                // Check for existing style classes and update dropdown
+                const $linkElement = $(existingLink.element);
+                this.$el.find('.link-style-option').each(function () {
+                    const styleClass = $(this).data('style-class');
+                    if (styleClass && $linkElement.hasClass(styleClass)) {
+                        $linkStyleDropdown.text($(this).data('display'));
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }
+                });
 
-                // Update new tab checkbox state based on the link's target attribute
+                // Update new tab checkbox state
                 if (existingLink.target === '_blank') {
                     $newTabCheckbox.addClass('active');
-                    // this.isTargetNewTab = true;
                 } else {
                     $newTabCheckbox.removeClass('active');
-                    // this.isTargetNewTab = false;
                 }
 
                 // Track the currently selected link for further modifications
                 this.currentLink = $(existingLink);
-
             } else {
-                this.currentLink = null
-                // Only reset if we're not currently editing a link
+                this.currentLink = null;
                 $linkButton.removeClass('active');
                 $urlInput.val('');
                 $removeBtn.addClass('d-none');
                 $urlSection.addClass('d-none');
                 $newTabCheckbox.removeClass('active');
-                // this.isTargetNewTab = false;
+
+                // Reset style dropdown to default
+                $linkStyleDropdown.text('none');
+                this.$el.find('.link-style-option').removeClass('active');
+                this.$el.find('.link-style-option[data-display="none"]').addClass('active');
             }
-
-
         },
+
 
 
     });

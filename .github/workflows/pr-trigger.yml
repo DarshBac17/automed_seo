@@ -1,0 +1,21 @@
+name: Pull Request Trigger
+
+on:
+  pull_request:
+    types: [opened]  # Trigger only when a PR is opened (can also use 'synchronize' to trigger on updates)
+    branches:
+      - master         # Target branch should be 'dev' in your case (or adjust as needed)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Run shell script or make an API call
+      run: |
+        # Run your shell script or call an API here
+        curl -X POST https://21db-103-241-232-74.ngrok-free.app/webhook-handler
+        # Example to run the update script
+        # bash /path/to/your/script.sh
