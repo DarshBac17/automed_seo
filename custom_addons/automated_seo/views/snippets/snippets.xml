@@ -687,10 +687,10 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_gray.png">
                         <keywords>footer</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_footer_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">
-                        <keywords>footer</keywords>
-                    </t>
+<!--                    <t t-snippet="automated_seo.s_footer_bg_white"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">-->
+<!--                        <keywords>footer</keywords>-->
+<!--                    </t>-->
 
                     <t t-snippet="automated_seo.s_footer_slider_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_slider_bg_gray.png">
