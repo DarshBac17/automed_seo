@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_profile_bg_white" name="Profile White">
+    <template id="s_profile_bg_white" name="Expert White">
         <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
             <div class="text-center cont-padding">
                 <h2>Header Header Header Header</h2>

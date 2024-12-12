@@ -92,10 +92,10 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_gray.png">
                         <keywords>trusted, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_trusted_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_white.png">
-                        <keywords>trusted, white</keywords>
-                    </t>
+<!--                    <t t-snippet="automated_seo.s_trusted_bg_white"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_white.png">-->
+<!--                        <keywords>trusted, white</keywords>-->
+<!--                    </t>-->
                 </div>
             </div>
 
@@ -551,19 +551,19 @@
                 </div>
             </div>
 
-            <div id="snippets_trusted_parties" class="o_panel">
-                <div class="o_panel_header">Trusted Parties</div>
-                <div class="o_panel_body">
-                    <t t-snippet="automated_seo.s_trusted_parties_bg_gray"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_gray.png">
-                        <keywords>trusted, parties</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_trusted_parties_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_white.png">
-                        <keywords>trusted, parties</keywords>
-                    </t>
-                </div>
-            </div>
+<!--            <div id="snippets_trusted_parties" class="o_panel">-->
+<!--                <div class="o_panel_header">Trusted Parties</div>-->
+<!--                <div class="o_panel_body">-->
+<!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_gray"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_gray.png">-->
+<!--                        <keywords>trusted, parties</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_white"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_white.png">-->
+<!--                        <keywords>trusted, parties</keywords>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div id="snippets_counting_sec" class="o_panel">
                 <div class="o_panel_header">Counting sec</div>
@@ -656,18 +656,18 @@
             </div>
 
             <div id="snippets_profile" class="o_panel">
-                <div class="o_panel_header">Profile</div>
+                <div class="o_panel_header">Expert</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_profile_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/profile_bg_gray.png">
-                        <keywords>profile, gray</keywords>
+                        <keywords>expert, gray</keywords>
                     </t>
                     <!--<t t-snippet="automated_seo.s_sub_profile_gray" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/png">
                         <keywords>profile, gray</keywords>
                     </t>-->
                     <t t-snippet="automated_seo.s_profile_bg_white"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/profile_bg_white.png">
-                        <keywords>profile, white</keywords>
+                        <keywords>expert, white</keywords>
                     </t>
                     <!--<t t-snippet="automated_seo.s_sub_profile_white" t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/png">
                         <keywords>profile, white</keywords>
@@ -687,10 +687,10 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_gray.png">
                         <keywords>footer</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_footer_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">
-                        <keywords>footer</keywords>
-                    </t>
+<!--                    <t t-snippet="automated_seo.s_footer_bg_white"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">-->
+<!--                        <keywords>footer</keywords>-->
+<!--                    </t>-->
 
                     <t t-snippet="automated_seo.s_footer_slider_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_slider_bg_gray.png">

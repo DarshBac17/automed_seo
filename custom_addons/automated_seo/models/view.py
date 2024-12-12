@@ -564,8 +564,8 @@ class View(models.Model):
             output = io.BytesIO()
             image.save(output, format='JPEG', quality=quality)
             output.seek(0)
-            img_tag['height'] = int(height)
-            img_tag['width'] = int(width)
+            # img_tag['height'] = int(height)
+            # img_tag['width'] = int(width)
             return output
 
         except Exception as e:
@@ -579,7 +579,6 @@ class View(models.Model):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def action_custom_button(self):
-        print("Custom button =======3")
         view_name = self.env.context.get('view_name')
         if view_name == None:
             view_name = self.name
