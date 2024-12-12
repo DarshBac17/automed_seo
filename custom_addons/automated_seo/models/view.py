@@ -432,6 +432,7 @@ class View(models.Model):
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         return f"{base_url}/web#id={self.id}&model={self._name}&view_type=form&action=approve"
+
     def unlink(self):
 
         for record in self:
@@ -1416,7 +1417,7 @@ class View(models.Model):
                 if not tag['class']:
                     del tag['class']
 
-            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var','contenteditable']:
+            for attr in ['data-bs-original-title','aria-describedby', 'data-php-const-var','data-php-var','contenteditable', 'data-max-length']:
                 if tag.has_attr(attr):
                     del tag[attr]
             for attr in ['data-name', 'data-snippet', 'style', 'order-1', 'md:order-1','title']:

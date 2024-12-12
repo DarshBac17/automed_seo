@@ -5,8 +5,8 @@
         <section class="o_automated_seo_snippet bg-gray-light casestudy-merge-col o_automated_seo_php_variable" id="case-study">
             <div class="container">
                 <div class="cont-padding text-center">
-                    <h2>Heading Heading Heading Heading Heading Heading </h2>
-                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                    <h2>Heading Heading Heading Heading Heading Heading</h2>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
                 <div class="bg-dark boxed single-item-slider o_sub_items_container">
                     <section class="o_replace_section_div">
@@ -15,7 +15,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text</span> Text</p>
-                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                                 <a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
@@ -30,7 +30,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
-                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                                 <a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
@@ -45,7 +45,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
-                                <p>TDescription Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                                 <a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
