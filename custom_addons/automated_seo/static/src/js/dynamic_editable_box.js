@@ -12,10 +12,17 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
 
         init: function () {
             this._super.apply(this, arguments);
-            this._bindSelectionChangeEvent();
             this.wysiwyg = null;
             this.currentTarget = null;
-            this.$editableBox = null;
+            this.editableBoxes = [];
+
+            // Unique identifier for event listener to ensure proper removal
+            this._selectionChangeEventId = 'selection-change-' + _.uniqueId();
+            this._selectAllEventId = 'select-all-' + _.uniqueId();
+
+
+
+            console.log("dynamic_editable_box.js initialized")
         },
 
         async willStart() {
@@ -31,17 +38,37 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 if (!self.wysiwyg && self.options.wysiwyg) {
                     self.wysiwyg = self.options.wysiwyg;
                 }
+                // Setup the selection change event listener
+                self._bindSelectionChangeEvent();
+
+                // Setup the global Ctrl+A select all event listener
+                self._bindSelectAllEvent();
+
+                self._bindPasteEvent();
             });
         },
 
         destroy: function () {
+            // Remove event listener to prevent multiple bindings
+            this._unbindSelectionChangeEvent();
+
+            // Setup the global Ctrl+A select all event listener
+            this._unbindSelectAllEvent();
+
+            this._unbindPasteEvent();
+
+            // Remove all editable boxes when the option is destroyed
+            this.$('.o_editable').off('click');
+            console.log("dynamic_editable_box.js destroyed")
+            this.editableBoxes.forEach($editableBox => {
+                $editableBox.parent().html($editableBox.html());
+                $editableBox.remove();
+            });
+
+            // Clear the array
+            this.editableBoxes = [];
+
             this._super.apply(this, arguments);
-            if (this.$editableBox) {
-                console.log("found existing editableBox")
-                this.$editableBox.parent().html(this.$editableBox.html());
-                // Remove the editable box
-                this.$editableBox.remove();
-            }
         },
 
         _getWysiwygInstance: function () {
@@ -57,76 +84,205 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
             return wysiwyg.odooEditor.document.getSelection();
         },
 
+        _bindSelectAllEvent: function () {
+            const self = this;
+
+            this._selectAllHandler = function (event) {
+                if (event.ctrlKey && event.key === 'a') {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    console.log("ctrl+a pressed")
+
+                    // Ensure there's an editable box in focus
+                    const $focusedEditableBox = self.editableBoxes && self.editableBoxes.length ? self.editableBoxes[0] : null;
+
+                    if ($focusedEditableBox) {
+                        console.log("Found editable-box");
+
+                        const selection = window.getSelection();
+                        const range = document.createRange();
+
+                        // Select only the contents of the focused editable-box
+                        range.selectNodeContents($focusedEditableBox[0]);
+
+                        // Clear any existing selections and apply the new range
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        // Optional: Log the selected text
+                        console.log("Selected text:", selection.toString());
+                    }
+                }
+            };
+
+            document.addEventListener('keydown', this._selectAllHandler);
+        },
+
+
+        _bindPasteEvent: function () {
+            const self = this;
+
+            this._pasteHandler = function (event) {
+                const $focusedEditableBox = self.editableBoxes && self.editableBoxes.length ? self.editableBoxes[0] : null;
+
+                if ($focusedEditableBox) {
+                    event.preventDefault(); // Prevent default paste behavior
+
+                    // Get pasted text from the clipboard
+                    const clipboardData = (event.clipboardData || window.clipboardData);
+                    const pastedText = clipboardData.getData('text'); // Extract plain text
+
+                    // Insert the pasted text while preserving the parent tag
+                    document.execCommand('insertText', false, pastedText);
+
+                    // Optional: Log the inserted text for debugging
+                    console.log("Pasted text:", pastedText);
+                }
+            };
+
+            document.addEventListener('paste', this._pasteHandler);
+        },
+
+
+        _unbindPasteEvent: function () {
+            if (this._pasteHandler) {
+                document.removeEventListener('keydown', this._pasteHandler);
+            }
+        },
+
+        _unbindSelectAllEvent: function () {
+            // Remove the global Ctrl+A event listener
+            if (this._selectAllHandler) {
+                document.removeEventListener('keydown', this._selectAllHandler);
+            }
+        },
+
+        _unbindSelectionChangeEvent: function () {
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+            // Remove the specific event listener
+            wysiwyg.odooEditor.document.removeEventListener('click', this._selectionChangeHandler);
+        },
+
         _bindSelectionChangeEvent() {
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) return;
 
-            wysiwyg.odooEditor.document.addEventListener('click', _.debounce((event) => {
+            // Create a bound handler to ensure we can remove it later
+            this._selectionChangeHandler = _.debounce((event) => {
                 const clickedElement = event.target;
                 if (clickedElement.closest('.o_editable')) {
                     this._onSelectionChange.bind(this)(event);
                 }
-            }, 100));
+            }, 100);
+
+            // Add the event listener
+            wysiwyg.odooEditor.document.addEventListener('click', this._selectionChangeHandler);
         },
 
         _onSelectionChange: function (ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
 
-            const selection = this._getCurrentSelection();
+            try {
 
-            if (!selection || !selection.rangeCount) return;
+                ev.preventDefault();
+                ev.stopPropagation();
 
-            const range = selection.getRangeAt(0);
-            const $target = $(document.activeElement);
+                console.log('Selection changed')
 
-            this.currentTarget = ev.target;
+                const selection = this._getCurrentSelection();
 
-            // Find all existing editable boxes
-            if (this.$editableBox) {
-                console.log("found existing editableBox")
-                this.$editableBox.parent().html(this.$editableBox.html());
-                // Remove the editable box
-                this.$editableBox.remove();
+                if (!selection || !selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                const $target = $(document.activeElement);
+
+                this.currentTarget = ev.target;
+
+                // Remove all existing editable boxes
+                this._clearEditableBoxes();
+
+                // Create editable boxes for all valid child elements
+                // Create the new editable box inside the currently selected element
+                const $newEditableBox = this._createEditableBox(ev.target);
+
+                // Store the new editable box in the array
+                if ($newEditableBox) {
+                    this.editableBoxes.push($newEditableBox);
+                    range.selectNodeContents($newEditableBox[0]);
+                    range.collapse(false);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            }
+            catch (error) {
+                console.error('Error in selection change handler:', error);
+            }
+
+        },
+
+        _clearEditableBoxes: function () {
+            // Remove all existing editable boxes
+            this.editableBoxes.forEach($editableBox => {
+                $editableBox.parent().html($editableBox.html());
+                $editableBox.remove();
+            });
+
+            // Clear the array
+            this.editableBoxes = [];
+        },
+
+
+        _createEditableBox: function (currentElement) {
+
+
+            if ($(this.currentTarget).is('section') ||
+                $(this.currentTarget).is('img') ||
+                $(this.currentTarget).is('svg') ||
+                $(this.currentTarget).is('.o_snippet_editor') ||
+                $(this.currentTarget).is('.oe_structure') ||
+                $(this.currentTarget).is('[data-oe-type]') ||
+                $(this.currentTarget).is('[data-snippet]') ||
+                $(this.currentTarget).is('.container') ||
+                $(this.currentTarget).is('.o_not_editable')) {
+                console.log('(this.currentTarget) not editable');
+                return null;
             }
 
 
-            // Create the new editable box inside the currently selected element
-            this._createEditableBox(ev.target);
-        },
-
-        _createEditableBox: function (currentElement) {
             // Create the new editable box
-            this.$editableBox = $('<div class="editable-box"></div>');
-            this.$editableBox.css({
+            const $editableBox = $('<div class="editable-box" contenteditable="true"></div>');
+            $editableBox.css({
                 'position': 'relative',
                 'border': '2px solid blue',
                 'padding': '5px',
-                'background-color': 'rgba(255, 255, 255, 0.8)',
                 'z-index': '9999',
             });
 
-
-
             // Add the content to the new div
-            this.$editableBox.html($(this.currentTarget).html());
+            $editableBox.html($(this.currentTarget).html());
+
             // Append the editable box inside the selected element
             $(this.currentTarget).empty();
-            $(this.currentTarget).append(this.$editableBox);
+            $(this.currentTarget).append($editableBox);
 
             // Add event listeners to the editable box
-            this.$editableBox.on('click', (event) => {
+            $editableBox.on('click', (event) => {
                 event.stopPropagation();
             });
 
-            this.$editableBox.on('mouseup', (event) => {
+            $editableBox.on('mouseup', (event) => {
                 event.stopPropagation();
             });
 
-            this.$editableBox.on('keyup', (event) => {
+            $editableBox.on('keyup', (event) => {
                 // Handle keyboard events inside the editable box
-                console.log('Editable box content:', this.$editableBox.text());
+                console.log('Editable box content:', $editableBox.text());
             });
+
+            $editableBox.focus();
+            return $editableBox;
         },
     });
 });
