@@ -231,3 +231,10 @@
             .o_we_php_variables_list we-button:hover {
                 background: #f8f9fa;
             }
+
+            .o_editable_box {
+                position: relative;
+                border: 2px solid blue;
+                padding: 5px;
+                z-index: 9999;
+            }
