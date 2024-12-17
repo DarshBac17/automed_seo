@@ -32,19 +32,16 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 }
                 self._bindSelectionChangeEvent();
                 self._bindSelectAllEvent();
+                // self._bindPastEvent();
             });
         },
 
         destroy: function () {
             this._unbindSelectionChangeEvent();
             this._unbindSelectAllEvent();
-
-            this.$('.o_editable_box').each(function () {
-                console.log("***********")
-                $(this).removeClass('o_editable_box');
-                $(this).removeAttr('contenteditable');
-            });
-
+            // this._unbindPastEvent();
+            this._removeEventsOnTarget();
+            this._removeEditableBoxes();
             this._super.apply(this, arguments);
         },
 
@@ -61,7 +58,12 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
             return wysiwyg.odooEditor.document.getSelection();
         },
 
+
         _bindSelectAllEvent: function () {
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
             const self = this;
 
             this._selectAllHandler = function (event) {
@@ -92,29 +94,99 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 }
             };
 
-            document.addEventListener('keydown', this._selectAllHandler);
+            wysiwyg.odooEditor.document.addEventListener('keydown', this._selectAllHandler);
         },
 
         _unbindSelectAllEvent: function () {
             // Remove the global Ctrl+A event listener
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
             if (this._selectAllHandler) {
-                document.removeEventListener('keydown', this._selectAllHandler);
+                wysiwyg.odooEditor.document.removeEventListener('keydown', this._selectAllHandler);
             }
         },
 
-        _unbindSelectionChangeEvent: function () {
+        _bindPastEvent: function () {
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) return;
 
-            // Remove the specific event listener
-            wysiwyg.odooEditor.document.removeEventListener('click', this._selectionChangeHandler);
+            const self = this;
+
+            this._handlePasteEvent = function (event) {
+                console.log("Paste event triggered");
+
+                // Prevent default paste behavior
+                event.preventDefault();
+                event.stopPropagation();
+
+                const $focusedEditableBox = self.currentTarget;
+                console.log("Target element:", $focusedEditableBox);
+
+                if (!$focusedEditableBox) {
+                    console.error("No focused editable box found");
+                    return;
+                }
+
+                $focusedEditableBox.focus();
+
+                if (!$focusedEditableBox.isContentEditable) {
+                    console.error("The target element is not editable.");
+                    return;
+                }
+
+                // Use multiple methods to get clipboard data
+                const clipboardData =
+                    event.clipboardData ||
+                    event.originalEvent?.clipboardData ||
+                    window.clipboardData;
+
+                if (!clipboardData) {
+                    console.error("Could not access clipboard data");
+                    return;
+                }
+
+                const pastedText = clipboardData.getData('text/plain') || clipboardData.getData('text');
+
+                const selection = self._getCurrentSelection();
+
+                if (!selection || !selection.rangeCount) {
+                    console.error("No selection range found. Ensure the element is focused.");
+                    return;
+                }
+
+                const range = selection.getRangeAt(0);
+                range.deleteContents(); // Remove the selected content
+
+                const textNode = wysiwyg.odooEditor.document.createTextNode(pastedText); // Insert as plain text
+                range.insertNode(textNode);
+
+                // Move cursor after the inserted text
+                range.setEndAfter(textNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                console.log("Pasted text:", pastedText);
+            };
+
+            wysiwyg.odooEditor.document.addEventListener('paste', this._handlePasteEvent);
+        },
+
+        _unbindPastEvent: function () {
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+
+            if (this._handlePasteEvent) {
+                wysiwyg.odooEditor.document.removeEventListener('paste', this._handlePasteEvent);
+            }
         },
 
         _bindSelectionChangeEvent() {
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) return;
 
-            // Create a bound handler to ensure we can remove it later
             this._selectionChangeHandler = _.debounce((event) => {
                 const clickedElement = event.target;
                 if (clickedElement.closest('.o_editable')) {
@@ -122,9 +194,18 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 }
             }, 100);
 
-            // Add the event listener
             wysiwyg.odooEditor.document.addEventListener('click', this._selectionChangeHandler);
         },
+
+
+        _unbindSelectionChangeEvent: function () {
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
+
+            wysiwyg.odooEditor.document.removeEventListener('click', this._selectionChangeHandler);
+        },
+
+
 
         _onSelectionChange: function (ev) {
 
@@ -142,17 +223,11 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 const range = selection.getRangeAt(0);
                 const $target = $(document.activeElement);
 
-
-                $(this.currentTarget).removeAttr('contenteditable');
-                $(this.currentTarget).removeClass('o_editable_box');
-
-                this.$('.o_editable_box').each(function () {
-                    console.log("***********")
-                    $(this).removeClass('o_editable_box');
-                    $(this).removeAttr('contenteditable');
-                });
+                this._removeEventsOnTarget();
+                this._removeEditableBoxes();
 
                 this.currentTarget = ev.target;
+
 
                 this._createEditableTarget(this.currentTarget);
 
@@ -188,26 +263,67 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
         },
 
         _addEventsOntarget: function (target) {
-            $(target).on('paste', this._handlePasteEvent.bind(this));
+
+            this._boundPasteHandler = this._handlePasteEvent.bind(this);
+
+            $(target).on('paste', this._boundPasteHandler);
+
+            target.addEventListener('paste', this._boundPasteHandler);
         },
 
 
+        _removeEventsOnTarget: function () {
+            if (!this.currentTarget) return;
+
+            try {
+                $(this.currentTarget).off('paste', this._boundPasteHandler);
+
+                this.currentTarget.removeEventListener('paste', this._boundPasteHandler);
+            } catch (error) {
+                console.error('Error removing paste event:', error);
+            }
+
+            this.currentTarget = null;
+            this._boundPasteHandler = null;
+        },
+
         _handlePasteEvent: function (event) {
+
+            const wysiwyg = this._getWysiwygInstance();
+            if (!wysiwyg) return;
             console.log("Paste event triggered");
+
+            wysiwyg.odooEditor.historyStep();
 
             event.preventDefault();
             event.stopPropagation();
 
-            const target = event.target;
-            console.log("Target element:", target);
-            target.focus();
-            if (!target.isContentEditable) {
+            const $focusedEditableBox = event.target;
+            console.log("Target element:", $focusedEditableBox);
+
+            if (!$focusedEditableBox) {
+                console.error("No focused editable box found");
+                return;
+            }
+
+            $focusedEditableBox.focus();
+
+            if (!$focusedEditableBox.isContentEditable) {
                 console.error("The target element is not editable.");
                 return;
             }
 
-            const clipboardData = event.originalEvent.clipboardData || window.clipboardData;
-            const pastedText = clipboardData.getData('text'); // Get plain text
+            const clipboardData =
+                event.clipboardData ||
+                event.originalEvent?.clipboardData ||
+                window.clipboardData;
+
+            if (!clipboardData) {
+                console.error("Could not access clipboard data");
+                return;
+            }
+
+            const pastedText = clipboardData.getData('text/plain') || clipboardData.getData('text');
 
             const selection = this._getCurrentSelection();
 
@@ -217,12 +333,11 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
             }
 
             const range = selection.getRangeAt(0);
-            range.deleteContents(); // Remove the selected content
+            range.deleteContents();
 
-            const textNode = document.createTextNode(pastedText); // Insert as plain text
+            const textNode = wysiwyg.odooEditor.document.createTextNode(pastedText);
             range.insertNode(textNode);
 
-            range.setStartAfter(textNode);
             range.setEndAfter(textNode);
             selection.removeAllRanges();
             selection.addRange(range);
@@ -230,5 +345,14 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
             console.log("Pasted text:", pastedText);
         },
 
+        _removeEditableBoxes: function () {
+            $(this.currentTarget).removeAttr('contenteditable');
+            $(this.currentTarget).removeClass('o_editable_box');
+
+            this.$('.o_editable_box').each(function () {
+                $(this).removeClass('o_editable_box');
+                $(this).removeAttr('contenteditable');
+            });
+        },
     });
 });
