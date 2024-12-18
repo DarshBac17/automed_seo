@@ -5,6 +5,7 @@
         <field name="model">automated_seo.php_to_snippet</field>
         <field name="arch" type="xml">
             <tree string="Mapper" editable="top">
+                <field name="name"/>
                 <field name="php"/>
                 <field name="snippet"/>
                 <field name="php_tag"/>
