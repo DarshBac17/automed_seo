@@ -40,6 +40,7 @@
         "views/snippets/tech_stack/s_sub_tech_stack.xml",
         "views/snippets/trusted/s_trusted_bg_gray.xml",
         "views/snippets/trusted/s_trusted_bg_white.xml",
+        "views/snippets/breadcrumb/s_breadcrumb.xml",
         "views/snippets/useful_links/s_useful_links_bg_gray.xml",
         "views/snippets/useful_links/s_useful_links_bg_white.xml",
         "views/snippets/useful_links/s_sub_useful_link.xml",
