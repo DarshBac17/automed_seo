@@ -589,11 +589,11 @@ class View(models.Model):
         if html_parser:
             html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.handle_breadcrumbs(html_content=html_parser)
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             # html_parser = self.format_paragraphs(html_content=html_parser)
             # html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.format_html_php(html_content=html_parser)
@@ -614,6 +614,18 @@ class View(models.Model):
                 'parse_html_filename' : file_name
             })
 
+    def handle_breadcrumbs(self, html_content):
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        for main_entity in soup.find_all(class_='breadcrumb'):
+            active_item = main_entity.find_all(class_='breadcrumb-item')[-1]
+            active_item["class"].append("active")
+            active_item["aria-current"]="page"
+            text_content = active_item.get_text()
+            active_item.clear()
+            active_item.append(text_content)
+
+        return str(soup.prettify())
 
 
     def handle_itemprop_in_faq(self,html_content):
