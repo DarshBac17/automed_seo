@@ -58,6 +58,15 @@ class View(models.Model):
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
 
+    page_header_id = fields.Many2one(
+        'automated_seo.page_header',  # The model being related to
+        string='Page Header',  # Label for the field
+        required=False,  # Optional, depending on your business rules
+        unique=True,  # Ensure this is a One-to-One relationship
+        ondelete='cascade'  # Ensure the page header is deleted if the related view is deleted
+    )
+
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
