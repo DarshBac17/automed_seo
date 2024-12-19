@@ -7,14 +7,6 @@ class PageHeader(models.Model):
 
     page = fields.Char(string="Page", required=True)
     # name = fields.Char(string="Name")
-    title = fields.Text(string="Title")
-
-    # One-to-Many relationship: A page can have multiple metadata entries
-    metadata_ids = fields.One2many(
-        'automated_seo.header_metadata',  # Target model
-        'page_header_id',  # Field in the target model pointing to PageHeader
-        string="Metadata"
-    )
 
 
     def action_save(self):

@@ -26,7 +26,7 @@
         <field name="name">automated_seo.page_header.embedded.form</field>
         <field name="model">automated_seo.page_header</field>
         <field name="arch" type="xml">
-            <form string="Page Header" edit="false" create="false">
+            <form string="Page Header">
                 <sheet>
                     <group class="o_half_width" style="margin-bottom: 20px;">
                         <field name="page" string="Page" />

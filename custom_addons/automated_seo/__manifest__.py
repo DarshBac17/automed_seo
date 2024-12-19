@@ -12,7 +12,7 @@
         'security/ir.model.access.csv',
         "views/website/footer.xml",
         "views/website/header.xml",
-        "views/page_header_metadata.xml",
+        # "views/page_header_metadata.xml",
         "views/views.xml",
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
