@@ -417,11 +417,11 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
-                if 'price-sec' in ids:
-                    spans = section.find_all(class_='o_au_php_var')
+                # if 'price-sec' in ids:
+                #     spans = section.find_all(class_='o_au_php_var')
 
-                    for span in spans:
-                        span.string="2***"
+                #     for span in spans:
+                #         span.string="2***"
                 sub_snippets = None
 
                 if section.find_all('div', class_='boxed'):
@@ -1200,11 +1200,16 @@ class View(models.Model):
 
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            if img.get('height') :
-                img['height'] = int(float(img.get('height')))
-
-            if img.get('width'):
-                img['width'] = int(float(img.get('width')))
+            try:
+                if img.get('height') :
+                    img['height'] = int(float(img.get('height')))
+            except ValueError as e:
+                    img['height'] = img.get('height')
+            try:
+                if img.get('height') :
+                    img['width'] = int(float(img.get('width')))
+            except ValueError as e:
+                    img['width'] = img.get('width')
 
         return str(soup.prettify())
 
