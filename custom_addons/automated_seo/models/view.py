@@ -273,12 +273,12 @@ class View(models.Model):
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="0">{{{variable_value}}}</span>'
             )
-
-        # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
     def replace_php_const_variables(self,content):
@@ -291,28 +291,30 @@ class View(models.Model):
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="1">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="1">{{{variable_value}}}</span>'
             )
 
         # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
-    def replace_php_constants(self,content):
-        # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
-        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
-
-        # Function to generate the replacement text
-        def replacer(match):
-            constant_name = match.group(1)
-            return (
-                f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{constant_name}" data-php-const-var="1">Description</span>'
-            )
-
-        # Replace all matches in the content
-        return re.sub(pattern, replacer, content)
+    # def replace_php_constants(self,content):
+    #     # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
+    #     pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+    #
+    #     # Function to generate the replacement text
+    #     def replacer(match):
+    #         constant_name = match.group(1)
+    #         return (
+    #             f'<span class="o_au_php_var o_text-php-var-info" '
+    #             f'data-php-var="{constant_name}" data-php-const-var="1">{constant_name}</span>'
+    #         )
+    #
+    #     # Replace all matches in the content
+    #     return re.sub(pattern, replacer, content)
 
     def convert_php_tags(self,content):
 
@@ -364,7 +366,7 @@ class View(models.Model):
                 section['class']=classes
                 new_section = str(section)
                 for tag in tags:
-                    new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
+                    new_php =self.normalize_text(tag.get('php'))
                     snippet = tag.get('snippet')
                     if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
