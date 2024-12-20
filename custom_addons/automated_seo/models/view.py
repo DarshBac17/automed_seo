@@ -77,10 +77,38 @@ class View(models.Model):
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
 
+    active_version_id = fields.Many2one(
+        'website.page.version',
+        compute='_compute_active_version_id',
+        string="Active Version",
+        store=False  # Set to True if you want to store the value persistently
+    )
+
+    # New computed field for filtered metadata
+    filtered_header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',
+        compute='_compute_filtered_header_metadata',
+        string="Version Specific Metadata",
+        store = False
+    )
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
+    @api.depends('header_metadata_ids', 'active_version_id')
+    def _compute_filtered_header_metadata(self):
+        for record in self:
+            record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
+                lambda x: x.page_version_id == record.active_version_id
+
+            )
+
+    @api.depends('version.status')
+    def _compute_active_version_id(self):
+        for record in self:
+            active_version = record.version.filtered(lambda v: v.status)
+            record.active_version_id = active_version[0].id if active_version else None
 
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
@@ -753,7 +781,7 @@ class View(models.Model):
         description_meta['name'] = 'description'
         description_meta['content'] = self.header_description
         head_tag.append(description_meta)
-        for metadata in self.header_metadata_ids:
+        for metadata in self.filtered_header_metadata_ids:
             meta_tag = soup.new_tag('meta')
             if metadata.property:
                 meta_tag['property'] = metadata.property
@@ -1900,22 +1928,6 @@ class View(models.Model):
         return soup.prettify()
 
 
-class PageHeaderMeta(models.Model):
-    _name = 'automated_seo.page_header_metadata'
-
-    property = fields.Char(string="Property")
-    content = fields.Text(string="Content")
-
-    # Many-to-One relationship: Metadata belongs to a page header
-    page_id = fields.Many2one(
-        'automated_seo.view',
-        string="Page id"
-    )
-
-    page_version_id =  fields.Many2one(
-        'website.page.version',
-        string="Page version id"
-    )
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
