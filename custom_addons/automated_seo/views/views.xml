@@ -83,7 +83,7 @@
                             string="Preview"
                             class="btn oe_highlight"/>
                     <!-- Compile Button -->
-                    <button name="action_custom_button"
+                    <button name="action_compile_button"
                             type="object"
                             string="Compile"
                             attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"

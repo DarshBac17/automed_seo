@@ -58,21 +58,15 @@ class View(models.Model):
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
 
-    page_header_id = fields.Many2one(
-        'automated_seo.page_header',  # The model being related to
-        string='Page Header',  # Label for the field
-        required=False,  # Optional, depending on your business rules
-        unique=True,  # Ensure this is a One-to-One relationship
-        ondelete='cascade'  # Ensure the page header is deleted if the related view is deleted
-    )
-
-    header_title = fields.Text(string="Title")
+    header_title = fields.Char(string="Title")
+    # header_description = fields.Text(string="Title")
 
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
-        'automated_seo.page_header_metadata',  # Target model
-        'page_id',  # Field in the target model pointing to PageHeader
-        string="Metadata"
+        'automated_seo.page_header_metadata',
+        'page_id',
+        string="Metadata",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
 
 
@@ -134,8 +128,7 @@ class View(models.Model):
 
         record  = super(View, self).create(vals)
 
-
-        record.create_default_metadata(vals)
+        record.create_default_metadata(record)
         self.env['website.page.version'].create({
             'description' : 'First Version',
             'view_id':record.id,
@@ -146,32 +139,32 @@ class View(models.Model):
         })
         return record
 
-    def create_default_metadata(self,vals):
+    def create_default_metadata(self,record):
         default_metadata = [
             {
                 'name': 'description',
                 'content': 'Default page description',
-                'page_id': vals['website_page_id']
+                'page_id': record.id
             },
             {
                 'property': 'og:title',
-                'content': f'{vals["header_title"]}',
-                'page_id': vals['website_page_id']
+                'content': f'{record.header_title}',
+                'page_id': record.id
             },
             {
                 'property': 'og:description',
                 'content': 'Default page description',
-                'page_id': vals['website_page_id']
+                'page_id': record.id
             },
             {
                 'property': 'og:image',
                 'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
-                'page_id': vals['website_page_id']
+                'page_id': record.id
             },
             {
                 'property': 'og:url',
-                'content': f'<?php echo BASE_URL; ?>{vals["name"]}',
-                'page_id': vals['website_page_id']
+                'content': f'<?php echo BASE_URL; ?>{record.name}',
+                'page_id': record.id
             }
         ]
 
@@ -457,13 +450,13 @@ class View(models.Model):
                     tbody = section.find('tbody')
                     tbody['class'] = ['o_sub_items_container']
 
-                #     # Transform table rows
+                    #     # Transform table rows
                     rows = tbody.find_all('tr')
                     for row in rows:
                         # Update content cell class
                         content_cell = row.find_all('td')[1]
                         content_cell['class'] = ['o_tech_stack']
-                #
+                        #
                         # Convert spans to pipe-separated text
                         spans = content_cell.find_all('span')
                         content_span = '|'.join(span.string for span in spans if span.string)
@@ -479,9 +472,9 @@ class View(models.Model):
                 if section.find_all('div', class_='boxed'):
                     sub_snippets =section.find_all('div', class_='boxed')
                 elif section.find_all('div',class_='accordian-tab'):
-                     sub_snippets =section.find_all('div', class_='accordian-tab')
+                    sub_snippets =section.find_all('div', class_='accordian-tab')
                 elif section.find_all('div',class_='ind-box'):
-                     sub_snippets =section.find_all('div', class_='ind-box')
+                    sub_snippets =section.find_all('div', class_='ind-box')
 
                 if sub_snippets:
                     container_tag = sub_snippets[0].find_parent()
@@ -521,13 +514,14 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
                 raise
 
         return super(View, self).unlink()
+
     def process_image_with_params(self, attachment, img_tag):
         """
         Process image with cropping parameters and CSS transforms before uploading to S3
@@ -645,11 +639,13 @@ class View(models.Model):
             new_image = base64.b64decode(new_image_data)
             image_file = io.BytesIO(new_image)
             return image_file
+
+
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-    def action_custom_button(self):
+    def action_compile_button(self):
         view_name = self.env.context.get('view_name')
         if view_name == None:
             view_name = self.name
@@ -662,6 +658,7 @@ class View(models.Model):
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.handle_breadcrumbs(html_content=html_parser)
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.add_head(html_parser)
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
@@ -670,6 +667,7 @@ class View(models.Model):
             html_parser = self.format_html_php(html_content=html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
+
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.php"
@@ -684,6 +682,151 @@ class View(models.Model):
                 'parse_html_binary':file,
                 'parse_html_filename' : file_name
             })
+
+    # def add_head(self, html_parser):
+    #     # Add the title with proper indentation
+    #     html_head = f"        <title>{self.header_title or 'Default Title'}</title>"
+    #
+    #     # Generate meta tags for all metadata entries with consistent indentation
+    #     meta_tags = ""
+    #     for metadata in self.header_metadata_ids:
+    #         if metadata.name:  # For standard meta tags like description
+    #             meta_tags += f"\n        <meta name=\"{metadata.name}\" content=\"{metadata.content or ''}\">"
+    #         elif metadata.property:  # For Open Graph meta tags
+    #             meta_tags += f"\n        <meta property=\"{metadata.property}\" content=\"{metadata.content or ''}\">"
+    #
+    #     # Combine everything into the final HTML structure with consistent indentation
+    #     complete_html = f"""
+    #     <!DOCTYPE html>
+    #     <html lang="en">
+    #         <head>
+    #     {html_head}{meta_tags}
+    #         </head>
+    #         <body>
+    #             {html_parser or ''}
+    #         </body>
+    #     </html>
+    #     """
+    #
+    #     return complete_html
+
+    from bs4 import BeautifulSoup
+
+    def add_head(self, html_parser):
+        # Create a new BeautifulSoup object with base HTML structure
+        soup = BeautifulSoup('<!DOCTYPE html><html lang="en"><head></head><body></body></html>', 'html.parser')
+        # Get the head tag
+
+
+        new_head = BeautifulSoup("""
+            <head>
+    <title>Hire Golang Developers | 80+ Go Developers</title>
+    <meta name="description" content="Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more.">
+    <?php include("tailwind/template/common-meta.php"); ?>
+    <meta property="og:title" content="Hire Golang Developers | 80+ Go Developers">
+    <meta property="og:description" content="Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more." >
+    <meta property="og:image" content="<?php echo BASE_URL_IMAGE; ?>main/img/og/golang.jpg">
+    <meta property="og:url" content="<?php echo BASE_URL; ?>hire-golang-developer">
+    <link rel="canonical" href="<?php echo BASE_URL; ?>hire-golang-developer">
+    <?php include("tailwind/template/link-css.php"); ?>
+    <link rel="preload" href="tailwind/css/casestudy.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="tailwind/css/faq.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="tailwind/css/tech-stack.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="tailwind/css/footer-slider.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- WebPage -->
+    <script type="application/ld+json">
+        {"@context":"https://schema.org",
+        "@graph": [
+        {
+        "@type":"WebSite",
+        "@id":"<?php echo BASE_URL; ?>#website",
+        "url":"<?php echo BASE_URL; ?>",
+        "name":"Bacancy",
+        "description":"Top product development company with Agile methodology. Hire software developers to get complete product development solution from the best agile software development company.",
+        "potentialAction":[{"@type":"SearchAction",
+        "target":{"@type":"EntryPoint",
+        "urlTemplate":"<?php echo BASE_URL; ?>?s={search_term_string}"},
+        "query-input":"required name=search_term_string"}],
+        "inLanguage":"en-US"},
+        {"@type":"WebPage",
+        "@id":"<?php echo BASE_URL; ?>hire-golang-developer/#webpage",
+        "url":"<?php echo BASE_URL; ?>hire-golang-developer/",
+        "name":"Hire Golang Developers | 80+ Go Developers",
+        "isPartOf":{"@id":"<?php echo BASE_URL; ?>#website"},
+        "datePublished":"2013-04-15T13:23:16+00:00",
+        "dateModified":"2024-07-17T14:31:52+00:00",
+        "description":"Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more." 
+        }]}]}
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "<?php echo BASE_URL; ?>",
+                        "name": "Home"
+                    }
+                }, 
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": "<?php echo BASE_URL; ?>hire-dedicated-developers-india/",
+                        "url": "<?php echo BASE_URL; ?>hire-dedicated-developers-india",
+                        "name": "Hire Developers"
+                        }
+                }, 
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": "<?php echo BASE_URL; ?>hire-golang-developer/",
+                        "url": "<?php echo BASE_URL; ?>hire-golang-developer",
+                        "name": "Golang Developer"
+                    }
+                }
+            ]
+        }
+    </script>
+</head>""","html.parser")
+        head_tag = soup.head
+
+        # Add title
+        title_tag = soup.new_tag('title')
+        title_tag.string = self.header_title or 'Default Title'
+        head_tag.append(title_tag)
+
+        # Add meta tags from header_metadata_ids
+        for metadata in self.header_metadata_ids:
+            meta_tag = soup.new_tag('meta')
+            if metadata.name:
+                meta_tag['name'] = metadata.name
+                meta_tag['content'] = metadata.content or ''
+            elif metadata.property:
+                meta_tag['property'] = metadata.property
+                meta_tag['content'] = metadata.content or ''
+            head_tag.append(meta_tag)
+
+        link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        head_tag.append(link_css_php)
+        head_tag.replace_with(new_head)
+        # Add the parsed content to body if it exists
+        if html_parser:
+            # Parse the html_parser content
+            parsed_content = BeautifulSoup(html_parser, 'html.parser')
+            soup.body.append(parsed_content)
+
+        # Return the formatted HTML with proper indentation
+        return soup.prettify()
+
 
     def handle_breadcrumbs(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
@@ -739,7 +882,7 @@ class View(models.Model):
         return str(soup)
 
     def format_html_php(self,html_content, indent_size=4):        # Define tag sets
-        inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+        inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','title'}
         self_closing_tags = {'img', 'br', 'hr', 'input', 'meta', 'link'}
         structural_tags = {'div', 'section', 'nav', 'header', 'footer', 'main'}
         table_tags = {'table', 'tr', 'td', 'th', 'thead', 'tbody', 'tfoot'}
@@ -1364,7 +1507,7 @@ class View(models.Model):
         wrap_tag.unwrap()
         sections = soup.find_all(class_="ou_section")
         for section in sections:
-        # if section:
+            # if section:
             section.unwrap()
         body = soup.find("body")
         if body:
@@ -1719,8 +1862,6 @@ class View(models.Model):
 
 
         return soup.prettify()
-
-
 
 
 class PageHeaderMeta(models.Model):
