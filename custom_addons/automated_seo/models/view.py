@@ -737,85 +737,7 @@ class View(models.Model):
         # Get the head tag
 
 
-        new_head = BeautifulSoup("""
-            <head>
-    <title>Hire Golang Developers | 80+ Go Developers</title>
-    <meta name="description" content="Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more.">
-    <?php include("tailwind/template/common-meta.php"); ?>
-    <meta property="og:title" content="Hire Golang Developers | 80+ Go Developers">
-    <meta property="og:description" content="Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more." >
-    <meta property="og:image" content="<?php echo BASE_URL_IMAGE; ?>main/img/og/golang.jpg">
-    <meta property="og:url" content="<?php echo BASE_URL; ?>hire-golang-developer">
-    <link rel="canonical" href="<?php echo BASE_URL; ?>hire-golang-developer">
-    <?php include("tailwind/template/link-css.php"); ?>
-    <link rel="preload" href="tailwind/css/casestudy.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="tailwind/css/faq.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="tailwind/css/tech-stack.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="tailwind/css/footer-slider.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- WebPage -->
-    <script type="application/ld+json">
-        {"@context":"https://schema.org",
-        "@graph": [
-        {
-        "@type":"WebSite",
-        "@id":"<?php echo BASE_URL; ?>#website",
-        "url":"<?php echo BASE_URL; ?>",
-        "name":"Bacancy",
-        "description":"Top product development company with Agile methodology. Hire software developers to get complete product development solution from the best agile software development company.",
-        "potentialAction":[{"@type":"SearchAction",
-        "target":{"@type":"EntryPoint",
-        "urlTemplate":"<?php echo BASE_URL; ?>?s={search_term_string}"},
-        "query-input":"required name=search_term_string"}],
-        "inLanguage":"en-US"},
-        {"@type":"WebPage",
-        "@id":"<?php echo BASE_URL; ?>hire-golang-developer/#webpage",
-        "url":"<?php echo BASE_URL; ?>hire-golang-developer/",
-        "name":"Hire Golang Developers | 80+ Go Developers",
-        "isPartOf":{"@id":"<?php echo BASE_URL; ?>#website"},
-        "datePublished":"2013-04-15T13:23:16+00:00",
-        "dateModified":"2024-07-17T14:31:52+00:00",
-        "description":"Hire Golang developer with 4+ years of experience. Get Industry's top Golang developers with expertise in Go frameworks, Go toolkits, databases, tools and more." 
-        }]}]}
-    </script>
 
-    <!-- BreadcrumbList -->
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item": {
-                        "@id": "<?php echo BASE_URL; ?>",
-                        "name": "Home"
-                    }
-                }, 
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item": {
-                        "@type": "WebPage",
-                        "@id": "<?php echo BASE_URL; ?>hire-dedicated-developers-india/",
-                        "url": "<?php echo BASE_URL; ?>hire-dedicated-developers-india",
-                        "name": "Hire Developers"
-                        }
-                }, 
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item": {
-                        "@type": "WebPage",
-                        "@id": "<?php echo BASE_URL; ?>hire-golang-developer/",
-                        "url": "<?php echo BASE_URL; ?>hire-golang-developer",
-                        "name": "Golang Developer"
-                    }
-                }
-            ]
-        }
-    </script>
-</head>""","html.parser")
         head_tag = soup.head
 
         # Add title
@@ -836,7 +758,6 @@ class View(models.Model):
 
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
-        head_tag.replace_with(new_head)
         # Add the parsed content to body if it exists
         if html_parser:
             # Parse the html_parser content
