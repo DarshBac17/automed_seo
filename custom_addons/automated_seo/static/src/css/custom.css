@@ -1,57 +1,3 @@
-.o_custom-flex-layout {
-    display: flex;  /* Switch from grid to flex */
-    flex-direction: row;  /* Ensure it's a row layout */
-    justify-content: space-between;
-    gap: 20px;  /* Add some spacing between left and right sections */
-}
-
-.o_custom-left-section {
-    order: 1;  /* Keep the left section in the first place */
-    flex-basis: 30%;  /* Set the desired width */
-    position: sticky;
-    top: 20px;
-    align-self: flex-start;
-}
-
-.o_custom-right-section {
-    order: 2;  /* Keep the right section in the second place */
-    flex-basis: 65%;  /* Set the desired width */
-    flex-grow: 1;  /* Allow it to grow if needed */
-}
-
-
-/* Flex container for the entire layout */
-.o_tab_custom-flex-layout {
-    display: flex !important;
-    justify-content: space-between; /* Ensures no extra space on the right side */
-    gap: 20px; /* Space between left and right sections */
-    max-width: 1200px; /* Set a maximum width for the layout */
-    width: 100%; /* Ensure it takes the full width of the container */
-    margin: 0 auto; /* Center-aligns the layout */
-    padding-left: 0; /* Remove left padding */
-    padding-right: 0; /* Remove right padding */
-    box-sizing: border-box; /* Include padding within width */
-}
-
-/* Left section styling */
-.o_tab_custom-left-section {
-    flex: 1;
-
-    margin: 0; /* Remove any extra margin */
-    padding: 0; /* Remove any extra padding */
-    box-sizing: border-box; /* Include padding within width */
-}
-
-/* Right section styling */
-.o_tab_custom-right-section {
-    flex: 2;
-
-    margin: 0; /* Remove any extra margin */
-    padding: 0; /* Remove any extra padding */
-    box-sizing: border-box; /* Include padding within width */
-}
-
-
 .o_replace_section_div {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -76,17 +22,20 @@
 
 
 .o_au_php_tag_val_color {
-    color: #dc3545; /* Red */
+    color: #dc3545;
+    /* Red */
 }
 
 .o_text-php-var-info {
-    color: #17a2b8; /* Cyan */
+    color: #17a2b8;
+    /* Cyan */
 }
 
 .o_snippet_preview_popup {
     position: fixed;
     display: none;
-    z-index: 1999; /* Increased z-index to ensure visibility */
+    z-index: 1999;
+    /* Increased z-index to ensure visibility */
     background: white;
     border-radius: 4px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
@@ -117,7 +66,8 @@
 
 /* Style for the container div */
 .o_col {
-    width: 350px; /* Adjust the width as per your design */
+    width: 350px;
+    /* Adjust the width as per your design */
     display: flex;
     flex-direction: column;
 }
@@ -134,7 +84,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px; /* Adjust this value to control how much space filenames can occupy */
+    max-width: 200px;
+    /* Adjust this value to control how much space filenames can occupy */
     display: inline-block;
 }
 
@@ -156,12 +107,16 @@
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
     .o_col {
-        width: 100%; /* Full-width on smaller screens */
+        width: 100%;
+        /* Full-width on smaller screens */
     }
+
     .o_row field[name="upload_filename"] {
-        max-width: 100%; /* Allow full width for filenames on smaller screens */
+        max-width: 100%;
+        /* Allow full width for filenames on smaller screens */
     }
 }
+
 .php-var-1,
 .php-var-2,
 .php-var-3,
@@ -171,63 +126,82 @@
 
 
 .o_we_php_dropdown {
-                position: relative;
-                margin: 8px 0;
-            }
+    position: relative;
+    margin: 8px 0;
+}
 
-            .o_we_php_dropdown_toggle {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 8px 12px;
-                background: white;
-                border: 1px solid #dee2e6;
-                border-radius: 3px;
-                cursor: pointer;
-            }
+.o_we_php_dropdown_toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    cursor: pointer;
+}
 
-            .o_we_php_dropdown_menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                border: 1px solid #dee2e6;
-                border-radius: 3px;
-                margin-top: 4px;
-                z-index: 1000;
-            }
+.o_we_php_dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    margin-top: 4px;
+    z-index: 1000;
+}
 
-            .o_we_php_dropdown_menu.show {
-                display: block;
-            }
+.o_we_php_dropdown_menu.show {
+    display: block;
+}
 
-            .o_we_php_search_wrapper {
-                padding: 8px;
-                border-bottom: 1px solid #dee2e6;
-            }
+.o_we_php_search_wrapper {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
 
-            .o_we_php_search {
-                width: 100%;
-                padding: 4px 8px;
-                border: 1px solid #dee2e6;
-                border-radius: 3px;
-            }
+.o_we_php_search {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
 
-            .o_we_php_variables_list {
-                max-height: 200px;
-                overflow-y: auto;
-            }
+.o_we_php_variables_list {
+    max-height: 200px;
+    overflow-y: auto;
+}
 
-            .o_we_php_variables_list we-button {
-                display: block;
-                width: 100%;
-                padding: 6px 12px;
-                text-align: left;
-                cursor: pointer;
-            }
+.o_we_php_variables_list we-button {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    text-align: left;
+    cursor: pointer;
+}
 
-            .o_we_php_variables_list we-button:hover {
-                background: #f8f9fa;
-            }
+.o_we_php_variables_list we-button:hover {
+    background: #f8f9fa;
+}
+
+#wrap .container::before,
+#wrap .o_container_small::before,
+#wrap .container::after,
+#wrap .o_container_small::after,
+#wrap .container-fluid::before,
+#wrap .container-sm::before,
+#wrap .container-md::before,
+#wrap .container-lg::before,
+#wrap .container-xl::before,
+#wrap .container-xxl::before,
+#wrap .container-fluid::after,
+#wrap .container-sm::after,
+#wrap .container-md::after,
+#wrap .container-lg::after,
+#wrap .container-xl::after,
+#wrap .container-xxl::after{
+    display: none;
+}
