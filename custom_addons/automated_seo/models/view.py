@@ -58,6 +58,24 @@ class View(models.Model):
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
 
+    page_header_id = fields.Many2one(
+        'automated_seo.page_header',  # The model being related to
+        string='Page Header',  # Label for the field
+        required=False,  # Optional, depending on your business rules
+        unique=True,  # Ensure this is a One-to-One relationship
+        ondelete='cascade'  # Ensure the page header is deleted if the related view is deleted
+    )
+
+    header_title = fields.Text(string="Title")
+
+    # One-to-Many relationship: A page can have multiple metadata entries
+    header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',  # Target model
+        'page_id',  # Field in the target model pointing to PageHeader
+        string="Metadata"
+    )
+
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
@@ -109,7 +127,15 @@ class View(models.Model):
             website_page = self.env['website.page'].search([('view_id', '=', new_page['view_id'])], limit=1)
             if website_page:
                 vals['website_page_id'] = website_page.id
+
+            if page_name:
+                vals["header_title"] = page_name
+
+
         record  = super(View, self).create(vals)
+
+
+        record.create_default_metadata(vals)
         self.env['website.page.version'].create({
             'description' : 'First Version',
             'view_id':record.id,
@@ -119,6 +145,37 @@ class View(models.Model):
             'status':True
         })
         return record
+
+    def create_default_metadata(self,vals):
+        default_metadata = [
+            {
+                'name': 'description',
+                'content': 'Default page description',
+                'page_id': vals['website_page_id']
+            },
+            {
+                'property': 'og:title',
+                'content': f'{vals["header_title"]}',
+                'page_id': vals['website_page_id']
+            },
+            {
+                'property': 'og:description',
+                'content': 'Default page description',
+                'page_id': vals['website_page_id']
+            },
+            {
+                'property': 'og:image',
+                'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
+                'page_id': vals['website_page_id']
+            },
+            {
+                'property': 'og:url',
+                'content': f'<?php echo BASE_URL; ?>{vals["name"]}',
+                'page_id': vals['website_page_id']
+            }
+        ]
+
+        self.env['automated_seo.page_header_metadata'].create(default_metadata)
 
     def write(self, vals):
         for record in self:
@@ -250,6 +307,20 @@ class View(models.Model):
             'status': True,
 
         })
+
+    # def action_open_page_header(self):
+    #
+    #     return {
+    #         'name': 'Page Header',
+    #         'view_mode': 'form',
+    #         'res_model': 'automated_seo.page_header',
+    #         'view_id': self.env.ref('automated_seo.page_header_embedded_form').id,
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new',  # This will open in a popup
+    #         'context': {
+    #             'default_page': self.name,  # If you want to pass any default values
+    #         }
+    #     }
 
     def normalize_text(self,text):
         return ' '.join(str(text).split())
@@ -469,7 +540,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -1672,6 +1743,22 @@ class View(models.Model):
 
 
         return soup.prettify()
+
+
+
+
+class PageHeaderMeta(models.Model):
+    _name = 'automated_seo.page_header_metadata'
+
+    name = fields.Char(string="Name")
+    property = fields.Char(string="Property")
+    content = fields.Text(string="Content")
+
+    # Many-to-One relationship: Metadata belongs to a page header
+    page_id = fields.Many2one(
+        'automated_seo.view',
+        string="page_id"
+    )
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
