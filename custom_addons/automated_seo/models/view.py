@@ -331,49 +331,54 @@ class View(models.Model):
 
     def replace_php_variables(self,content):
         # Regex pattern to match <?phpecho$variable?>
-        pattern = r"<\?phpecho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+        # pattern = r"<\?php*\secho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+        pattern = r'<\?php\s*echo\s*\$?([a-zA-Z_][a-zA-Z0-9_]*)\s*\?>'
 
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="0">{{{variable_value}}}</span>'
             )
-
-        # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
     def replace_php_const_variables(self,content):
         # Regex pattern to match <?phpecho$variable?>
-        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+        # pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+        #  pattern = r'<\?php\s*echo\s*\$?([a-zA-Z_][a-zA-Z0-9_]*)\s*\?>'
+        pattern = r'<\?php\s*echo\s*constant\s*\(\s*[\'"]([a-zA-Z_][a-zA-Z0-9_]*)[\'"]?\s*\)\s*\?>'
 
 
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="1">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="1">{{{variable_value}}}</span>'
             )
 
         # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
-    def replace_php_constants(self,content):
-        # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
-        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
-
-        # Function to generate the replacement text
-        def replacer(match):
-            constant_name = match.group(1)
-            return (
-                f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{constant_name}" data-php-const-var="1">Description</span>'
-            )
-
-        # Replace all matches in the content
-        return re.sub(pattern, replacer, content)
+    # def replace_php_constants(self,content):
+    #     # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
+    #     pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+    #
+    #     # Function to generate the replacement text
+    #     def replacer(match):
+    #         constant_name = match.group(1)
+    #         return (
+    #             f'<span class="o_au_php_var o_text-php-var-info" '
+    #             f'data-php-var="{constant_name}" data-php-const-var="1">{constant_name}</span>'
+    #         )
+    #
+    #     # Replace all matches in the content
+    #     return re.sub(pattern, replacer, content)
 
     def convert_php_tags(self,content):
 
@@ -401,9 +406,10 @@ class View(models.Model):
             if url and url.startswith(base):
                 a['href'] = url.replace(base, anchor_blog_url_php)
 
-        content = self.minify_php_tags(self.normalize_text(soup.prettify()))
+        content = self.normalize_text(soup.prettify())
         for tag in tags:
-            content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
+            content = re.sub(pattern=tag.get('php'),repl=tag.get('snippet'),string=content)
+            # content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
 
         content = self.replace_php_variables(content=content)
         content = self.replace_php_const_variables(content=content)
@@ -415,28 +421,41 @@ class View(models.Model):
 
         sections =  soup.find_all('section')
         content = ""
-        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet','name'])
         for section in sections:
             classes = section.get('class',[])
             if not section.find_parent('section'):
                 section.attrs['data-snippet'] = "s_banner"
                 classes.append('o_automated_seo_php_variable')
                 section['class']=classes
-                new_section = self.normalize_text(section)
+                new_section = str(section)
                 for tag in tags:
-                    new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
+                    new_php =self.normalize_text(tag.get('php'))
                     snippet = tag.get('snippet')
-                    if new_section.find(new_php)!=-1:
+                    if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
-                            if new_php =='<?php$formType="banner";':
                                 match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
-                                snippet_soup = BeautifulSoup(snippet,'html.parser')
-                                span_tag = snippet_soup.find("span")
-                                if span_tag:
-                                    span_tag.string = match.group(1)
-                                    new_php = new_php+f'$bannerDevName="{match.group(1)}";include("tailwind/template/form.php");?>'
-                                snippet = snippet_soup.prettify()
-                        new_section=new_section.replace(new_php,snippet)
+                                if match:
+                                    snippet_soup = BeautifulSoup(snippet,'html.parser')
+                                    span_tag = snippet_soup.find("span")
+                                    if span_tag:
+                                        span_tag.string = match.group(1)
+                                    snippet = snippet_soup.prettify()
+                        elif tag.get('name')=='form':
+                            tech_dark_form_heading = re.search(r'\$tech_dark_form_heading\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
+                            short_desc = re.search(r'\$short_desc\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
+                            snippet_soup = BeautifulSoup(snippet, 'html.parser')
+                            h2_tag = snippet_soup.find(class_="o_au_php_var_tag_tech_dark_form_heading")
+                            p_tag = snippet_soup.find(class_="o_au_php_var_tag_short_desc")
+                            if tech_dark_form_heading and h2_tag:
+                                h2_tag.string = tech_dark_form_heading.group(1)
+                            if short_desc and p_tag:
+                                p_tag.string = short_desc.group(1)
+                            snippet = snippet_soup.prettify()
+
+                        new_section = re.sub(tag.get('php'), snippet, new_section)
+                        # else:
+                        #     new_section=new_section.replace(new_php,snippet)
                 content+=new_section
         soup = BeautifulSoup(content, 'html.parser')
         sections = soup.find_all('section')
@@ -462,11 +481,11 @@ class View(models.Model):
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
-                if 'price-sec' in ids:
-                    spans = section.find_all(class_='o_au_php_var')
+                # if 'price-sec' in ids:
+                #     spans = section.find_all(class_='o_au_php_var')
 
-                    for span in spans:
-                        span.string="2***"
+                #     for span in spans:
+                #         span.string="2***"
                 sub_snippets = None
 
                 if section.find_all('div', class_='boxed'):
@@ -1395,11 +1414,16 @@ class View(models.Model):
 
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            if img.get('height') :
-                img['height'] = int(float(img.get('height')))
-
-            if img.get('width'):
-                img['width'] = int(float(img.get('width')))
+            try:
+                if img.get('height') :
+                    img['height'] = int(float(img.get('height')))
+            except ValueError as e:
+                    img['height'] = img.get('height')
+            try:
+                if img.get('height') :
+                    img['width'] = int(float(img.get('width')))
+            except ValueError as e:
+                    img['width'] = img.get('width')
 
         return str(soup.prettify())
 
