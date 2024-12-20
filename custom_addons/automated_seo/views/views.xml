@@ -246,12 +246,12 @@
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
                                     <field name="header_title" string="Header Title" />
+                                    <field name="header_description" string="Page Description" />
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;" attrs="{'invisible': [('header_metadata_ids', 'in', [False, ''])]}">
                                         <field name="header_metadata_ids">
                                             <tree editable="bottom" class="o_list_view">
-                                                <field name="name" string="Name" />
                                                 <field name="property" string="Property" />
                                                 <field name="content" string="Content" />
                                             </tree>
