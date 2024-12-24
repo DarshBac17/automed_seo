@@ -92,6 +92,12 @@ class View(models.Model):
         string="Version Specific Metadata",
         store=False
     )
+    filtered_header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        compute='_compute_filtered_header_link',
+        string="Version Specific Link",
+        store=False
+    )
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
@@ -101,6 +107,13 @@ class View(models.Model):
     def _compute_filtered_header_metadata(self):
         for record in self:
             record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+            )
+
+    @api.depends('header_metadata_ids', 'active_version_id')
+    def _compute_filtered_header_link(self):
+        for record in self:
+            record.filtered_header_link_ids = record.header_link_ids.filtered(
                 lambda x: x.view_version_id == record.active_version_id
             )
 
@@ -340,6 +353,7 @@ class View(models.Model):
             'user_id': self.env.user.id,
             'status': True,
         })
+        self.create_php_header(header=file_text)
 
     # def action_open_page_header(self):
     #
@@ -424,24 +438,27 @@ class View(models.Model):
     #     return re.sub(pattern, replacer, content)
 
     def create_php_header(self,header):
+        header = BeautifulSoup(header,'html.parser').head
         meta_tags = header.find_all('meta')
+        breakpoint()
         for meta_tag in meta_tags:
-            if not meta_tag.name:
-                self.env['automated_seo.page_header_metadata'].create({
-                    'view_version_id': self.active_version_id,
-                    'view_id':self.id,
-                    'property': meta_tag.property,
-                    'content' :meta_tag.content
-                })
+            # if not meta_tag.name:
+            self.env['automated_seo.page_header_metadata'].create({
+                'view_version_id': self.active_version_id,
+                'view_id':self.id,
+                'property': meta_tag.property,
+                'content' :meta_tag.content
+            })
         link_tags = header.find_all('link')
         for link_tag in link_tags:
             css_link = link_tag.href
+            breakpoint()
             if not self.env['automated_seo.page_header_link'].search(
                     [('css_link', '=', css_link),
-                     ('view_version_id', '=', self.active_version_id),
+                     ('view_version_id', '=', self.active_version_id.id),
                      ('view_id', '=', self.id)]):
                 self.env['automated_seo.page_header_link'].create({
-                    'view_version_id': self.active_version_id,
+                    'view_version_id': self.active_version_id.id,
                     'css_link': css_link,
                     'view_id': self.id
                 })
@@ -451,7 +468,6 @@ class View(models.Model):
 
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
         soup = BeautifulSoup(content, 'html.parser')
-        self.create_php_header(soup.head)
         base_url_php = "https://assets.bacancytechnology.com/"
         for img in soup.select('img'):
             url = re.sub(r'\s', '', img.get('src'))
