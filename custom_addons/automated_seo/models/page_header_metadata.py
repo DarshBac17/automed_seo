@@ -10,20 +10,20 @@ class PageHeaderMeta(models.Model):
     content = fields.Text(string="Content")
 
     # Many-to-One relationship: Metadata belongs to a page header
-    page_id = fields.Many2one(
+    view_id = fields.Many2one(
         'automated_seo.view',
-        string="Page id"
+        string="View id"
     )
 
-    page_version_id =  fields.Many2one(
+    view_version_id =  fields.Many2one(
         'website.page.version',
-        string="Page version id"
+        string="View version id"
     )
 
     @api.model
     def create(self, vals):
-        if 'page_id' in vals:
-            page = self.env['automated_seo.view'].search([('id','=',vals['page_id'])],limit=1)
-            vals['page_version_id'] = page.active_version_id[0].id
+        if 'view_id' in vals:
+            page = self.env['automated_seo.view'].search([('id','=',vals['view_id'])],limit=1)
+            vals['view_version_id'] = page.active_version_id[0].id
         record = super(PageHeaderMeta, self).create(vals)
         return record

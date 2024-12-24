@@ -39,7 +39,7 @@ class WebsitePageVersion(models.Model):
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
-        'page_version_id',
+        'view_version_id',
         string="Metadata",
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
@@ -170,26 +170,26 @@ class WebsitePageVersion(models.Model):
                 {
                     'property': 'og:title',
                     'content': f'{record.header_title}',
-                    'page_id': record.view_id.id,
-                    'page_version_id': record.id
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
                 },
                 {
                     'property': 'og:description',
                     'content': 'Default page description',
-                    'page_id': record.view_id.id,
-                    'page_version_id': record.id
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
                 },
                 {
                     'property': 'og:image',
                     'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
-                    'page_id': record.view_id.id,
-                    'page_version_id': record.id
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
                 },
                 {
                     'property': 'og:url',
                     'content': f'<?php echo BASE_URL; ?>{record.view_id.name}',
-                    'page_id': record.view_id.id,
-                    'page_version_id': record.id
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
                 }
             ]
 

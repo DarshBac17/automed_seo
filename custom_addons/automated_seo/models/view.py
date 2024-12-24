@@ -72,7 +72,7 @@ class View(models.Model):
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
-        'page_id',
+        'view_id',
         string="Metadata",
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
@@ -100,8 +100,7 @@ class View(models.Model):
     def _compute_filtered_header_metadata(self):
         for record in self:
             record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
-                lambda x: x.page_version_id == record.active_version_id
-
+                lambda x: x.view_version_id == record.active_version_id
             )
 
     @api.depends('version.status')
@@ -253,7 +252,6 @@ class View(models.Model):
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
 
-
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
         self.stage = 'in_preview'
@@ -277,7 +275,6 @@ class View(models.Model):
     def action_reject(self):
         self.write({'stage': 'in_progress'})
         self.message_post(body="Record rejected", message_type="comment")
-
 
     def send_email_action(self):
         # Logic to send email using Odoo's email system
@@ -338,7 +335,6 @@ class View(models.Model):
             'view_arch':soup.prettify(),
             'user_id': self.env.user.id,
             'status': True,
-
         })
 
     # def action_open_page_header(self):
@@ -551,7 +547,6 @@ class View(models.Model):
                 content += str(section)
         return content
 
-
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         return f"{base_url}/web#id={self.id}&model={self._name}&view_type=form&action=approve"
@@ -573,7 +568,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -698,7 +693,6 @@ class View(models.Model):
             new_image = base64.b64decode(new_image_data)
             image_file = io.BytesIO(new_image)
             return image_file
-
 
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
@@ -832,6 +826,7 @@ class View(models.Model):
             </script>
 
         """
+
         webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
 
         head_tag.append(webpage_script_soup)
@@ -870,7 +865,9 @@ class View(models.Model):
             breadcrumb_items.append(item)
 
 
-        breadcrumb_items_json = json.dumps(breadcrumb_items, indent=4)
+        breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
+
+
 
         # Generate the final script
         breadcrumb_script = f"""
@@ -889,6 +886,13 @@ class View(models.Model):
         head_tag.append(breadcrumb_script_soup)
         return str(soup)
 
+    def format_json_with_tabs(self, data, indent_tabs=20):
+        """
+        Format JSON with specified tab spaces per indentation level.
+        """
+        json_string = json.dumps(data, indent=4)  # Convert to JSON with default 4 spaces
+        tabbed_json = "\n".join(" " * indent_tabs + line for line in json_string.splitlines())
+        return tabbed_json
 
     def handle_breadcrumbs(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
@@ -1382,7 +1386,6 @@ class View(models.Model):
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
         return str(self.handle_dynamic_img_tag(view_name=view_name))
-
 
     def handle_dynamic_img_tag(self,view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
