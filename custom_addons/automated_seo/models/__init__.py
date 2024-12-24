@@ -7,5 +7,5 @@ from . import  website_version
 from  . import seo_email_wizard
 from . import php_to_snippet
 from . import php_variables
-# from . import page_header_metadata
+from . import page_header_metadata
 from . import style_mapper

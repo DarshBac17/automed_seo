@@ -73,7 +73,7 @@ class View(models.Model):
     )
     header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
-        'version_id',
+        'view_id',
         string="Link",
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
@@ -354,6 +354,9 @@ class View(models.Model):
     #             'default_page': self.name,  # If you want to pass any default values
     #         }
     #     }
+
+    def extract_header_data(self):
+        pass
 
     def normalize_text(self,text):
         return ' '.join(str(text).split())
@@ -864,14 +867,11 @@ class View(models.Model):
                 ]
             }}
             </script>
-
         """
 
         webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
 
         head_tag.append(webpage_script_soup)
-
-
 
 
         if html_parser:
@@ -910,18 +910,16 @@ class View(models.Model):
 
         breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
 
-
-
         # Generate the final script
         breadcrumb_script = f"""
-                <!-- BreadcrumbList -->
-                <script type="application/ld+json">
-                {{
-                    "@context": "http://schema.org",
-                    "@type": "BreadcrumbList",
-                    "itemListElement": {breadcrumb_items_json}
-                }}
-                </script>
+            <!-- BreadcrumbList -->
+            <script type="application/ld+json">
+            {{
+                "@context": "http://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": {breadcrumb_items_json}
+            }}
+            </script>
         """
         from pprint import  pprint
         pprint(breadcrumb_script)
@@ -929,12 +927,15 @@ class View(models.Model):
         head_tag.append(breadcrumb_script_soup)
         return str(soup)
 
-    def format_json_with_tabs(self, data, indent_tabs=20):
+    def format_json_with_tabs(self, data, indent_tabs=16):
         """
-        Format JSON with specified tab spaces per indentation level.
+        Format JSON with specified tab spaces per indentation level,
+        ignoring the first line for indentation.
         """
         json_string = json.dumps(data, indent=4)  # Convert to JSON with default 4 spaces
-        tabbed_json = "\n".join(" " * indent_tabs + line for line in json_string.splitlines())
+        lines = json_string.splitlines()  # Split into individual lines
+        # Add indentation only from the second line onward
+        tabbed_json = "\n".join(lines[:1] + [" " * indent_tabs + line for line in lines[1:]])
         return tabbed_json
 
     def handle_breadcrumbs(self, html_content):

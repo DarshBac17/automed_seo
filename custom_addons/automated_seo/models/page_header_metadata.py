@@ -32,7 +32,7 @@ class PageHeaderMeta(models.Model):
 
 class PageHeaderLink(models.Model):
     _name = 'automated_seo.page_header_link'
-    view_id = fields.Many2one('automated_seo.view',string="View id",)
+    view_id = fields.Many2one('automated_seo.view',string="View id")
 
     css_link = fields.Text(string="Css Link")
     view_version_id = fields.Many2one(
