@@ -14,6 +14,8 @@ from pathlib import Path
 import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
+from datetime import datetime
+from .git_script import push_changes_to_git
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -173,9 +175,27 @@ class View(models.Model):
         template = self.env.ref('automated_seo.email_template_preview')
         template.send_mail(self.id, force_send=True)
 
+    # def action_done_button(self):
+    #     self.write({'stage': 'done'})
+    #     self.message_post(body="Record in the stage", message_type="comment")
     def action_done_button(self):
         self.write({'stage': 'done'})
-        self.message_post(body="Record approved", message_type="comment")
+        self.message_post(body="Record moved to the done stage", message_type="comment")
+
+        # Get Git details
+        page_name = self.name
+        page_version = self.version
+        last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        user_id = self.env.user.id
+        base_branch = "git-commit"
+        feature_branch = "git-commit-merge-branch"
+
+        # Push changes to Git
+        success = push_changes_to_git(page_name, page_version, last_updated, user_id, base_branch, feature_branch)
+        if success:
+            self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
+        else:
+            self.message_post(body="Failed to push changes to Git.", message_type="comment")
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
