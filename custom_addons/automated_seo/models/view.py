@@ -439,20 +439,23 @@ class View(models.Model):
 
     def create_php_header(self,header):
         header = BeautifulSoup(header,'html.parser').head
+        self.header_title = header.title.text
         meta_tags = header.find_all('meta')
-        breakpoint()
-        for meta_tag in meta_tags:
-            # if not meta_tag.name:
-            self.env['automated_seo.page_header_metadata'].create({
-                'view_version_id': self.active_version_id,
-                'view_id':self.id,
-                'property': meta_tag.property,
-                'content' :meta_tag.content
-            })
+        for meta_tag in meta_tags :
+            # try:
+                if meta_tag.get('name'):
+                    self.header_description = meta_tag.get('content')
+                else:
+                    self.env['automated_seo.page_header_metadata'].create({
+                        'view_version_id': self.active_version_id,
+                        'view_id': self.id,
+                        'property': meta_tag.get('property') if meta_tag.get('property') else None,
+                        'content': meta_tag.get('content')
+                    })
+
         link_tags = header.find_all('link')
         for link_tag in link_tags:
-            css_link = link_tag.href
-            breakpoint()
+            css_link = link_tag['href']
             if not self.env['automated_seo.page_header_link'].search(
                     [('css_link', '=', css_link),
                      ('view_version_id', '=', self.active_version_id.id),
@@ -835,7 +838,7 @@ class View(models.Model):
         # head_tag.append(link_css_php)
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
-        for link in self.header_link_ids:
+        for link in self.filtered_header_link_ids:
             tag = soup.new_tag('link')
             tag['rel'] = "preload"
             tag['link'] = link.css_link
