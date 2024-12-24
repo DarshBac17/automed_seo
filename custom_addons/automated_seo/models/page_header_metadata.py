@@ -27,3 +27,15 @@ class PageHeaderMeta(models.Model):
             vals['view_version_id'] = page.active_version_id[0].id
         record = super(PageHeaderMeta, self).create(vals)
         return record
+
+
+
+class PageHeaderLink(models.Model):
+    _name = 'automated_seo.page_header_link'
+    view_id = fields.Many2one('automated_seo.view',string="View id",)
+
+    css_link = fields.Text(string="Css Link")
+    view_version_id = fields.Many2one(
+        'website.page.version',
+        string="View version id"
+    )

@@ -1995,15 +1995,7 @@ class View(models.Model):
 
         return soup.prettify()
 
-class PageHeaderLink(models.Model):
-    _name = 'automated_seo.page_header_link'
-    view_id = fields.Many2one('automated_seo.view',string="View id",)
 
-    css_link = fields.Text(string="Css Link")
-    view_version_id = fields.Many2one(
-        'website.page.version',
-        string="View version id"
-    )
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
