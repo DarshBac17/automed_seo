@@ -195,6 +195,11 @@ class WebsitePageVersion(models.Model):
 
             self.env['automated_seo.page_header_metadata'].create(default_metadata)
 
+            self.env['automated_seo.page_header_link'].create({
+                'view_id' : record.view_id.id,
+                'css_link' : "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
+                'view_version_id': record.id
+            })
 
     def action_create_version(self):
 

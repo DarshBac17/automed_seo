@@ -1,4 +1,5 @@
 import json
+from importlib.metadata import metadata
 
 from odoo import models, fields, api
 from bs4 import BeautifulSoup,Comment,NavigableString
@@ -16,6 +17,9 @@ from pathlib import Path
 import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
+
+from odoo.tools.view_validation import validate
+
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -278,8 +282,38 @@ class View(models.Model):
         template.send_mail(self.id, force_send=True)
 
     def action_done_button(self):
-        self.write({'stage': 'done'})
-        self.message_post(body="Record approved", message_type="comment")
+
+        if self.validate_header():
+            self.write({'stage': 'done'})
+            self.message_post(body="Record approved", message_type="comment")
+
+    def validate_header(self):
+
+        if not self.header_title:
+            UserError("Set Header Title")
+            return False
+        if not self.header_description:
+            UserError("Set Header Description")
+            return False
+        if self.filtered_header_metadata_ids:
+
+            required_metadata = ["og:description","og:title","og:image","og:url"]
+
+            # Collect properties from metadata where content is not empty
+            header_metadata = {
+                metadata.property
+                for metadata in self.filtered_header_metadata_ids
+                if metadata.property and metadata.content
+            }
+
+            # Check if all required metadata fields are a subset of header_metadata
+            result = required_metadata.issubset(header_metadata)
+            if not result:
+                UserError(f"Header metadata must include all listed properties:\n{required_metadata}")
+            return result
+        else:
+            UserError("Set Header metadata")
+            return False
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
@@ -443,15 +477,15 @@ class View(models.Model):
         meta_tags = header.find_all('meta')
         for meta_tag in meta_tags :
             # try:
-                if meta_tag.get('name'):
-                    self.header_description = meta_tag.get('content')
-                else:
-                    self.env['automated_seo.page_header_metadata'].create({
-                        'view_version_id': self.active_version_id,
-                        'view_id': self.id,
-                        'property': meta_tag.get('property') if meta_tag.get('property') else None,
-                        'content': meta_tag.get('content')
-                    })
+            if meta_tag.get('name'):
+                self.header_description = meta_tag.get('content')
+            else:
+                self.env['automated_seo.page_header_metadata'].create({
+                    'view_version_id': self.active_version_id,
+                    'view_id': self.id,
+                    'property': meta_tag.get('property') if meta_tag.get('property') else None,
+                    'content': meta_tag.get('content')
+                })
 
         link_tags = header.find_all('link')
         for link_tag in link_tags:
@@ -521,13 +555,13 @@ class View(models.Model):
                     snippet = tag.get('snippet')
                     if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
-                                match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
-                                if match:
-                                    snippet_soup = BeautifulSoup(snippet,'html.parser')
-                                    span_tag = snippet_soup.find("span")
-                                    if span_tag:
-                                        span_tag.string = match.group(1)
-                                    snippet = snippet_soup.prettify()
+                            match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
+                            if match:
+                                snippet_soup = BeautifulSoup(snippet,'html.parser')
+                                span_tag = snippet_soup.find("span")
+                                if span_tag:
+                                    span_tag.string = match.group(1)
+                                snippet = snippet_soup.prettify()
                         elif tag.get('name')=='form':
                             tech_dark_form_heading = re.search(r'\$tech_dark_form_heading\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
                             short_desc = re.search(r'\$short_desc\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
@@ -764,6 +798,7 @@ class View(models.Model):
             html_parser = self.handle_breadcrumbs(html_content=html_parser)
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             html_parser = self.add_head(html_parser)
+            html_parser = self.add_js_scripts(html_parser)
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
@@ -814,6 +849,22 @@ class View(models.Model):
     #     """
     #
     #     return complete_html
+
+    def add_js_scripts(self,html_parser):
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        js_scripts = """
+        <?php include("template/common_js-tailwind.php"); ?>
+        <?php include("tailwind/template/link-js.php"); ?>
+        <?php include("main-boot-5/templates/localbusiness-schema.php"); ?>
+        <?php include("main-boot-5/templates/chat-script.php"); ?>
+        <script src="<?php echo BASE_URL; ?>tailwind/js/slider-one-item.js?V-7" defer></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
+        """
+
+        js_scripts = BeautifulSoup(js_scripts,'html.parser')
+        soup.body.append(js_scripts)
+        return soup.prettify()
 
     def add_head(self, html_parser):
         soup = BeautifulSoup('<!DOCTYPE html><html lang="en"><head></head><body></body></html>', 'html.parser')
@@ -913,13 +964,13 @@ class View(models.Model):
             id = url + '/'
             name = breadcrumb.text.strip()
             item = {
-                    "@type": "ListItem",
-                    "position": position,
-                    "item": {
-                        "@type": "WebPage",
-                        "@id": id
-                    }
+                "@type": "ListItem",
+                "position": position,
+                "item": {
+                    "@type": "WebPage",
+                    "@id": id
                 }
+            }
             if index > 0:
                 item["item"]["url"] = url
             item["item"]["name"] = name
@@ -944,7 +995,7 @@ class View(models.Model):
         pprint(breadcrumb_script)
         breadcrumb_script_soup = BeautifulSoup(breadcrumb_script, 'html.parser')
         head_tag.append(breadcrumb_script_soup)
-        return str(soup)
+        return soup.prettify()
 
     def format_json_with_tabs(self, data, indent_tabs=16):
         """
@@ -1549,12 +1600,12 @@ class View(models.Model):
                 if img.get('height') :
                     img['height'] = int(float(img.get('height')))
             except ValueError as e:
-                    img['height'] = img.get('height')
+                img['height'] = img.get('height')
             try:
                 if img.get('height') :
                     img['width'] = int(float(img.get('width')))
             except ValueError as e:
-                    img['width'] = img.get('width')
+                img['width'] = img.get('width')
 
         return str(soup.prettify())
 
