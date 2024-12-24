@@ -1,3 +1,5 @@
+import json
+
 from odoo import models, fields, api
 from bs4 import BeautifulSoup,Comment,NavigableString
 import  html
@@ -57,14 +59,15 @@ class View(models.Model):
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
-
     header_title = fields.Char(string="Title")
+
+    header_description = fields.Text(string="page description")
     # header_description = fields.Text(string="Title")
 
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
-        'version_id',
+        'view_id',
         string="Metadata",
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
@@ -90,29 +93,26 @@ class View(models.Model):
         store=False
     )
 
-
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
-
-    @api.depends('version.status')
-    def _compute_active_version_id(self):
-        for record in self:
-            active_version = record.version.filtered(lambda v: v.status)
-            record.active_version_id = active_version[0].id if active_version else None
 
     @api.depends('header_metadata_ids', 'active_version_id')
     def _compute_filtered_header_metadata(self):
         for record in self:
             record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
                 lambda x: x.view_version_id == record.active_version_id
-
             )
+
+    @api.depends('version.status')
+    def _compute_active_version_id(self):
+        for record in self:
+            active_version = record.version.filtered(lambda v: v.status)
+            record.active_version_id = active_version[0].id if active_version else None
             record.filtered_header_link_ids = record.header_link_ids.filtered(
                 lambda x: x.view_version_id == record.active_version_id
 
             )
-
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
         if self.upload_file:
@@ -162,11 +162,10 @@ class View(models.Model):
 
             if page_name:
                 vals["header_title"] = page_name
-
+                vals["header_description"] = "Default page description"
 
         record  = super(View, self).create(vals)
 
-        record.create_default_metadata(record)
         self.env['website.page.version'].create({
             'description' : 'First Version',
             'view_id':record.id,
@@ -176,37 +175,6 @@ class View(models.Model):
             'status':True
         })
         return record
-
-    def create_default_metadata(self,record):
-        default_metadata = [
-            {
-                'property': 'og:title',
-                'content': f'{record.header_title}',
-                'version_id': record.version.id
-            },
-            {
-                'property': 'og:description',
-                'content': 'Default page description',
-                'page_id': record.version.id
-            },
-            {
-                'property': 'og:image',
-                'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
-                'page_id': record.version.id
-            },
-            {
-                'property': 'og:url',
-                'content': f'<?php echo BASE_URL; ?>{record.name}',
-                'page_id': record.version.id
-            },
-
-        ]
-
-        self.env['automated_seo.page_header_metadata'].create(default_metadata)
-        self.env['automated_seo.page_header_link'].create({
-                'css_link':'//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
-                'page_id': record.version.id
-            })
 
     def write(self, vals):
         for record in self:
@@ -235,6 +203,42 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
+
+            current_version = self.env['website.page.version'].search(
+                ['&', ('status', '=', True), ('view_id', '=', record.id)], limit=1)
+
+            if current_version:
+
+                updated_version = {}
+                if 'header_title' in vals:
+                    updated_version["header_title"] = vals["header_title"]
+                if 'header_description' in vals:
+                    updated_version["header_description"] = vals["header_description"]
+
+                current_version.write(updated_version)
+
+                # if 'header_metadata_ids' in vals:
+                #     # Update existing metadata values
+                #     for metadata, new_metadata in zip(
+                #             current_version.header_metadata_ids,
+                #             record.header_metadata_ids
+                #     ):
+                #         metadata.write({
+                #             'property': new_metadata.property,
+                #             'content': new_metadata.content,
+                #         })
+                #
+                #     # Add additional metadata if `record.header_metadata_ids` has more items
+                #     if len(record.header_metadata_ids) > len(current_version.header_metadata_ids):
+                #         extra_metadata = record.header_metadata_ids[len(current_version.header_metadata_ids):]
+                #         for meta in extra_metadata:
+                #             self.env['automated_seo.page_header_metadata'].create({
+                #                 'property': meta.property,
+                #                 'content': meta.content,
+                #                 'page_id': meta.page_id.id if meta.page_id else False,
+                #                 'page_version_id': current_version.id,
+                #             })
+
         return super(View, self).write(vals)
 
     def action_view_website_page(self):
@@ -251,7 +255,6 @@ class View(models.Model):
         self.action_compile_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
-
 
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
@@ -277,7 +280,6 @@ class View(models.Model):
         self.write({'stage': 'in_progress'})
         self.message_post(body="Record rejected", message_type="comment")
 
-
     def send_email_action(self):
         # Logic to send email using Odoo's email system
         mail_values = {
@@ -287,6 +289,7 @@ class View(models.Model):
             'email_from': self.env.user.email,
         }
         self.env['mail.mail'].create(mail_values).send()
+
     def action_approve(self):
         self.write({'stage': 'approved'})
         self.message_post(body="Record approved", message_type="comment")
@@ -336,7 +339,6 @@ class View(models.Model):
             'view_arch':soup.prettify(),
             'user_id': self.env.user.id,
             'status': True,
-
         })
 
     # def action_open_page_header(self):
@@ -722,7 +724,6 @@ class View(models.Model):
             image_file = io.BytesIO(new_image)
             return image_file
 
-
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
@@ -792,31 +793,27 @@ class View(models.Model):
     #
     #     return complete_html
 
-    from bs4 import BeautifulSoup
-
     def add_head(self, html_parser):
-        # Create a new BeautifulSoup object with base HTML structure
         soup = BeautifulSoup('<!DOCTYPE html><html lang="en"><head></head><body></body></html>', 'html.parser')
-        # Get the head tag
-
-
-
         head_tag = soup.head
-
-        # Add title
+        page_name = self.name.strip().lower().replace(" ", "-")
         title_tag = soup.new_tag('title')
         title_tag.string = self.header_title or 'Default Title'
         head_tag.append(title_tag)
 
-        # Add meta tags from header_metadata_ids
-        for metadata in self.header_metadata_ids:
-            tag =  soup.new_tag('meta')
-            tag['property'] = metadata.property
-            tag['content'] = metadata.content or ''
+        description_meta = soup.new_tag('meta')
+        description_meta['name'] = 'description'
+        description_meta['content'] = self.header_description
+        head_tag.append(description_meta)
+        for metadata in self.filtered_header_metadata_ids:
+            meta_tag = soup.new_tag('meta')
+            if metadata.property:
+                meta_tag['property'] = metadata.property
+                meta_tag['content'] = metadata.content or ''
+            head_tag.append(meta_tag)
 
-
-            head_tag.append(tag)
-
+        # link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        # head_tag.append(link_css_php)
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
         for link in self.header_link_ids:
@@ -827,15 +824,118 @@ class View(models.Model):
             tag['onload'] = "this.onload=null;this.rel='stylesheet'"
             head_tag.append(tag)
 
-        # Add the parsed content to body if it exists
+
+        webpage_script = f"""
+            <!-- WebPage -->
+            <script type="application/ld+json">
+            {{
+                "@context": "https://schema.org",
+                "@graph": [
+                    {{
+                        "@type": "WebSite",
+                        "@id": "<?php echo BASE_URL; ?>#website",
+                        "url": "<?php echo BASE_URL; ?>",
+                        "name": "Bacancy",
+                        "description": "Top product development company with Agile methodology. Hire software developers to get complete product development solution from the best agile software development company.",
+                        "potentialAction": [
+                            {{
+                                "@type": "SearchAction",
+                                "target": {{
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "<?php echo BASE_URL; ?>?s={{search_term_string}}"
+                                }},
+                                "query-input": "required name=search_term_string"
+                            }}
+                        ],
+                        "inLanguage": "en-US"
+                    }},
+                    {{
+                        "@type": "WebPage",
+                        "@id": "<?php echo BASE_URL; ?>{page_name}/#webpage",
+                        "url": "<?php echo BASE_URL; ?>{page_name}/",
+                        "name": "{self.header_title}",
+                        "isPartOf": {{
+                            "@id": "<?php echo BASE_URL; ?>#website"
+                        }},
+                        "datePublished": "2013-04-15T13:23:16+00:00",
+                        "dateModified": "2024-07-17T14:31:52+00:00",
+                        "description": "{self.header_description}"
+                    }}
+                ]
+            }}
+            </script>
+
+        """
+
+        webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
+
+        head_tag.append(webpage_script_soup)
+
+
+
+
         if html_parser:
-            # Parse the html_parser content
             parsed_content = BeautifulSoup(html_parser, 'html.parser')
             soup.body.append(parsed_content)
 
-        # Return the formatted HTML with proper indentation
-        return soup.prettify()
+        breadcrumb_items_tags = soup.find_all(class_="breadcrumb-item")
 
+        breadcrumb_items = []
+
+        for index, breadcrumb in enumerate(breadcrumb_items_tags):
+
+            link = breadcrumb.find('a')
+            position = index + 1
+
+            url = link['href'] if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+
+            if isinstance(url,ValueError):
+                raise url
+            id = url + '/'
+            name = breadcrumb.text.strip()
+            item = {
+                    "@type": "ListItem",
+                    "position": position,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": id
+                    }
+                }
+            if index > 0:
+                item["item"]["url"] = url
+            item["item"]["name"] = name
+
+            breadcrumb_items.append(item)
+
+
+        breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
+
+
+
+        # Generate the final script
+        breadcrumb_script = f"""
+                <!-- BreadcrumbList -->
+                <script type="application/ld+json">
+                {{
+                    "@context": "http://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": {breadcrumb_items_json}
+                }}
+                </script>
+        """
+        from pprint import  pprint
+        pprint(breadcrumb_script)
+        breadcrumb_script_soup = BeautifulSoup(breadcrumb_script, 'html.parser')
+        head_tag.append(breadcrumb_script_soup)
+        return str(soup)
+
+    def format_json_with_tabs(self, data, indent_tabs=20):
+        """
+        Format JSON with specified tab spaces per indentation level.
+        """
+        json_string = json.dumps(data, indent=4)  # Convert to JSON with default 4 spaces
+        tabbed_json = "\n".join(" " * indent_tabs + line for line in json_string.splitlines())
+        return tabbed_json
 
     def handle_breadcrumbs(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
@@ -1352,7 +1452,6 @@ class View(models.Model):
                         website_page.view_id.arch = soup.prettify()
         return str(self.handle_dynamic_img_tag(view_name=view_name))
 
-
     def handle_dynamic_img_tag(self,view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -1649,9 +1748,6 @@ class View(models.Model):
 
         return section
 
-
-
-
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
@@ -1899,20 +1995,6 @@ class View(models.Model):
 
         return soup.prettify()
 
-
-class PageHeaderMeta(models.Model):
-    _name = 'automated_seo.page_header_metadata'
-
-    # name = fields.Char(string="Name")
-    property = fields.Char(string="Property")
-    content = fields.Text(string="Content")
-    view_id = fields.Many2one('automated_seo.view',string="View id")
-    # Many-to-One relationship: Metadata belongs to a page header
-    view_version_id = fields.Many2one(
-        'website.page.version',
-        string="View version id"
-    )
-
 class PageHeaderLink(models.Model):
     _name = 'automated_seo.page_header_link'
     view_id = fields.Many2one('automated_seo.view',string="View id",)
@@ -1922,8 +2004,6 @@ class PageHeaderLink(models.Model):
         'website.page.version',
         string="View version id"
     )
-
-
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
