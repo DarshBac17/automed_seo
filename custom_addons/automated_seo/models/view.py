@@ -64,9 +64,30 @@ class View(models.Model):
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
-        'page_id',
+        'version_id',
         string="Metadata",
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
+    header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        'version_id',
+        string="Link",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
+
+    active_version_id = fields.Many2one(
+        'website.page.version',
+        compute='_compute_active_version_id',
+        string="Active Version",
+        store=False  # Set to True if you want to store the value persistently
+    )
+
+    # New computed field for filtered metadata
+    filtered_header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',
+        compute='_compute_filtered_header_metadata',
+        string="Version Specific Metadata",
+        store=False
     )
 
 
@@ -74,6 +95,23 @@ class View(models.Model):
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
+    @api.depends('version.status')
+    def _compute_active_version_id(self):
+        for record in self:
+            active_version = record.version.filtered(lambda v: v.status)
+            record.active_version_id = active_version[0].id if active_version else None
+
+    @api.depends('header_metadata_ids', 'active_version_id')
+    def _compute_filtered_header_metadata(self):
+        for record in self:
+            record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+
+            )
+            record.filtered_header_link_ids = record.header_link_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+
+            )
 
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
@@ -142,33 +180,33 @@ class View(models.Model):
     def create_default_metadata(self,record):
         default_metadata = [
             {
-                'name': 'description',
-                'content': 'Default page description',
-                'page_id': record.id
-            },
-            {
                 'property': 'og:title',
                 'content': f'{record.header_title}',
-                'page_id': record.id
+                'version_id': record.version.id
             },
             {
                 'property': 'og:description',
                 'content': 'Default page description',
-                'page_id': record.id
+                'page_id': record.version.id
             },
             {
                 'property': 'og:image',
                 'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
-                'page_id': record.id
+                'page_id': record.version.id
             },
             {
                 'property': 'og:url',
                 'content': f'<?php echo BASE_URL; ?>{record.name}',
-                'page_id': record.id
-            }
+                'page_id': record.version.id
+            },
+
         ]
 
         self.env['automated_seo.page_header_metadata'].create(default_metadata)
+        self.env['automated_seo.page_header_link'].create({
+                'css_link':'//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
+                'page_id': record.version.id
+            })
 
     def write(self, vals):
         for record in self:
@@ -210,7 +248,7 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
-        self.action_custom_button()
+        self.action_compile_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
 
@@ -380,10 +418,35 @@ class View(models.Model):
     #     # Replace all matches in the content
     #     return re.sub(pattern, replacer, content)
 
+    def create_php_header(self,header):
+        meta_tags = header.find_all('meta')
+        for meta_tag in meta_tags:
+            if not meta_tag.name:
+                self.env['automated_seo.page_header_metadata'].create({
+                    'view_version_id': self.active_version_id,
+                    'view_id':self.id,
+                    'property': meta_tag.property,
+                    'content' :meta_tag.content
+                })
+        link_tags = header.find_all('link')
+        for link_tag in link_tags:
+            css_link = link_tag.href
+            if not self.env['automated_seo.page_header_link'].search(
+                    [('css_link', '=', css_link),
+                     ('view_version_id', '=', self.active_version_id),
+                     ('view_id', '=', self.id)]):
+                self.env['automated_seo.page_header_link'].create({
+                    'view_version_id': self.active_version_id,
+                    'css_link': css_link,
+                    'view_id': self.id
+                })
+
+
     def convert_php_tags(self,content):
 
         tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",True)]).read(['php', 'snippet'])
         soup = BeautifulSoup(content, 'html.parser')
+        self.create_php_header(soup.head)
         base_url_php = "https://assets.bacancytechnology.com/"
         for img in soup.select('img'):
             url = re.sub(r'\s', '', img.get('src'))
@@ -533,7 +596,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -747,17 +810,23 @@ class View(models.Model):
 
         # Add meta tags from header_metadata_ids
         for metadata in self.header_metadata_ids:
-            meta_tag = soup.new_tag('meta')
-            if metadata.name:
-                meta_tag['name'] = metadata.name
-                meta_tag['content'] = metadata.content or ''
-            elif metadata.property:
-                meta_tag['property'] = metadata.property
-                meta_tag['content'] = metadata.content or ''
-            head_tag.append(meta_tag)
+            tag =  soup.new_tag('meta')
+            tag['property'] = metadata.property
+            tag['content'] = metadata.content or ''
+
+
+            head_tag.append(tag)
 
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
+        for link in self.header_link_ids:
+            tag = soup.new_tag('link')
+            tag['rel'] = "preload"
+            tag['link'] = link.css_link
+            tag['as'] = 'style'
+            tag['onload'] = "this.onload=null;this.rel='stylesheet'"
+            head_tag.append(tag)
+
         # Add the parsed content to body if it exists
         if html_parser:
             # Parse the html_parser content
@@ -1133,6 +1202,15 @@ class View(models.Model):
                 snippet_id = section.get('data-snippet')
                 orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
+                snippet_style_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).style.read(['name', 'link'])
+                for snippet_style_record in snippet_style_records:
+                    css_link = snippet_style_record.get('link')
+                    if not self.env['automated_seo.page_header_link'].search([('css_link','=',css_link),('view_version_id','=',version.id),('view_id','=',seo_view.id)]):
+                        self.env['automated_seo.page_header_link'].create({
+                            'view_version_id':version.id,
+                            'css_link':css_link,
+                            'view_id':seo_view.id
+                        })
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
                     php_tags = section.find_all(class_=php_class)
@@ -1177,6 +1255,19 @@ class View(models.Model):
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
                                                                           limit=1).php_tags.read(
                     ['element_class', 'php_tag', 'image_name'])
+                snippet_style_records = self.env['automated_seo.mapper'].search(
+                    [('snippet_id', '=', orginal_snippet_id)], limit=1).style.read(['name', 'link'])
+                for snippet_style_record in snippet_style_records:
+                    css_link = snippet_style_record.get('link')
+                    if not self.env['automated_seo.page_header_link'].search(
+                            [('css_link', '=', css_link),
+                             ('view_version_id', '=', version.id),
+                             ('view_id', '=', seo_view.id)]):
+                        self.env['automated_seo.page_header_link'].create({
+                            'view_version_id': version.id,
+                            'css_link': css_link,
+                            'view_id': seo_view.id
+                        })
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
@@ -1812,15 +1903,27 @@ class View(models.Model):
 class PageHeaderMeta(models.Model):
     _name = 'automated_seo.page_header_metadata'
 
-    name = fields.Char(string="Name")
+    # name = fields.Char(string="Name")
     property = fields.Char(string="Property")
     content = fields.Text(string="Content")
-
+    view_id = fields.Many2one('automated_seo.view',string="View id")
     # Many-to-One relationship: Metadata belongs to a page header
-    page_id = fields.Many2one(
-        'automated_seo.view',
-        string="page_id"
+    view_version_id = fields.Many2one(
+        'website.page.version',
+        string="View version id"
     )
+
+class PageHeaderLink(models.Model):
+    _name = 'automated_seo.page_header_link'
+    view_id = fields.Many2one('automated_seo.view',string="View id",)
+
+    css_link = fields.Text(string="Css Link")
+    view_version_id = fields.Many2one(
+        'website.page.version',
+        string="View version id"
+    )
+
+
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
