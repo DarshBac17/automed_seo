@@ -17,7 +17,7 @@ from pathlib import Path
 import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
-
+from urllib.parse import urlparse
 from odoo.tools.view_validation import validate
 
 # from dotenv import load_dotenv
@@ -31,6 +31,7 @@ class View(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True)
+    url = fields.Char(string='Page URL', help="Page URL")
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
     unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
@@ -44,7 +45,6 @@ class View(models.Model):
         ('in_review', 'In Review'),
         ('done', 'Done'),
         ('publish', 'Publish'),
-
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
         'res.users',
@@ -54,11 +54,13 @@ class View(models.Model):
         string='Contributors',
         tracking=True
     )
+
     is_owner = fields.Boolean(
         compute='_compute_is_owner',
         string='Is Owner',
         store=False
     )
+
     publish = fields.Boolean('Publish', default=False)
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
@@ -72,9 +74,9 @@ class View(models.Model):
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
         'view_id',
-        string="Metadata",
-        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+        string="Metadata"
     )
+
     header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
         'view_id',
@@ -96,6 +98,7 @@ class View(models.Model):
         string="Version Specific Metadata",
         store=False
     )
+
     filtered_header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
         compute='_compute_filtered_header_link',
@@ -258,6 +261,24 @@ class View(models.Model):
 
         return super(View, self).write(vals)
 
+    # @api.constrains('url')
+    # def _check_url_valid(self):
+    #     for record in self:
+    #         if record.url:
+    #             # Basic URL pattern validation
+    #             url_pattern = "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
+    #             if not re.match(url_pattern, record.url):
+    #                 raise UserError('Please enter a valid URL starting with http:// or https://')
+    #
+    #             # Check if URL is reachable (optional)
+    #             try:
+    #                 result = urlparse(record.url)
+    #                 if not all([result.scheme, result.netloc]):
+    #                     raise UserError('Invalid URL format')
+    #             except Exception:
+    #                 raise UserError('Invalid URL format')
+
+
     def action_view_website_page(self):
         self.ensure_one()
         if not self.page_id:
@@ -290,30 +311,22 @@ class View(models.Model):
     def validate_header(self):
 
         if not self.header_title:
-            UserError("Set Header Title")
-            return False
+            raise UserError("Set Head Title")
         if not self.header_description:
-            UserError("Set Header Description")
-            return False
-        if self.filtered_header_metadata_ids:
-
-            required_metadata = ["og:description","og:title","og:image","og:url"]
-
-            # Collect properties from metadata where content is not empty
+            raise UserError("Set Head Description")
+        if self.header_metadata_ids:
+            required_metadata = {"og:description","og:title","og:image","og:url"}
             header_metadata = {
                 metadata.property
-                for metadata in self.filtered_header_metadata_ids
+                for metadata in self.header_metadata_ids
                 if metadata.property and metadata.content
             }
-
-            # Check if all required metadata fields are a subset of header_metadata
             result = required_metadata.issubset(header_metadata)
             if not result:
-                UserError(f"Header metadata must include all listed properties:\n{required_metadata}")
-            return result
+                raise UserError(f"Head metadata must include all listed properties:\n{required_metadata}")
         else:
-            UserError("Set Header metadata")
-            return False
+            raise UserError("Set Head metadata")
+        return True
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
@@ -878,7 +891,7 @@ class View(models.Model):
         description_meta['name'] = 'description'
         description_meta['content'] = self.header_description
         head_tag.append(description_meta)
-        for metadata in self.filtered_header_metadata_ids:
+        for metadata in self.header_metadata_ids:
             meta_tag = soup.new_tag('meta')
             if metadata.property:
                 meta_tag['property'] = metadata.property

@@ -1,5 +1,5 @@
 from email.policy import default
-from multiprocessing.managers import view_type
+# from multiprocessing.managers import view_type
 
 from odoo import models, fields, api
 from odoo.addons.test_convert.tests.test_env import record
@@ -78,6 +78,16 @@ class WebsitePageVersion(models.Model):
 
             view.header_description = active_version.header_description
 
+            # Unlink header_metadata_ids from view without deleting them
+            if view.header_metadata_ids:
+                view.header_metadata_ids.write({'view_id': False})
+
+            # Update header_metadata_ids in active_version to point to the current view
+            if active_version.header_metadata_ids:
+                active_version.header_metadata_ids.write({'view_id': view.id})
+
+
+
     def action_download_html(self):
         """Download the parsed HTML file"""
         self.ensure_one()
@@ -103,7 +113,6 @@ class WebsitePageVersion(models.Model):
         previous_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
-
 
         # Set initial version numbers
         if not latest_version:
@@ -161,7 +170,11 @@ class WebsitePageVersion(models.Model):
 
         record = super(WebsitePageVersion, self).create(vals)
 
-        record.create_default_version_metadata(record)
+        if not record.view_id.header_metadata_ids:
+            record.create_default_version_metadata(record)
+
+        previous_version.header_metadata_ids.write({'view_id': False})
+
         return record
 
     def create_default_version_metadata(self, record):
@@ -200,6 +213,9 @@ class WebsitePageVersion(models.Model):
                 'css_link' : "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
                 'view_version_id': record.id
             })
+
+
+
 
     def action_create_version(self):
 

@@ -9,6 +9,7 @@
                 <field name="unique_page_id" readonly="1"/>
                 <field name="name"/>
                 <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
+                <field name="url" widget="url"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
                 <field name="stage" widget="badge"
@@ -168,6 +169,13 @@
                                            style="margin-left:5px"
                                            nolabel="1"/>
                                 </div>
+
+                                <div class="o_row">
+                                    Page Url
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"/>
+                                </div>
+
                                 <div class="o_row" attrs="{'invisible': [('file_uploaded', '=', True)]}">
                                     Upload File
                                     <p style="margin-left:5px">:</p>
@@ -228,7 +236,6 @@
                                            widget="many2many_tags_avatar"
                                            options="{'color_field': 'color', 'no_create_edit': True}"
                                            placeholder="Add contributors..."/>
-
                                 </div>
                             </div>
                         </group>
@@ -246,8 +253,8 @@
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
-                                        <field name="filtered_header_metadata_ids">
-                                            <tree class="o_list_view">
+                                        <field name="header_metadata_ids">
+                                            <tree editable="bottom" class="o_list_view">
                                                 <field name="property" string="Property"/>
                                                 <field name="content" string="Content"/>
                                             </tree>
