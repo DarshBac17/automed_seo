@@ -162,18 +162,18 @@
                                 </div>
 
                                 <div class="o_row">
+                                    Page Url
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"/>
+                                </div>
+
+                                <div class="o_row">
                                     Owner
                                     <p style="margin-left:5px">:</p>
 
                                     <field name="create_uid" widget="many2one_avatar" options="{'size': [250, 250]}"
                                            style="margin-left:5px"
                                            nolabel="1"/>
-                                </div>
-
-                                <div class="o_row">
-                                    Page Url
-                                    <p style="margin-left:5px">:</p>
-                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"/>
                                 </div>
 
                                 <div class="o_row" attrs="{'invisible': [('file_uploaded', '=', True)]}">
