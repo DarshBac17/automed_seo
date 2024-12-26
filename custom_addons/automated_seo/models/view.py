@@ -880,7 +880,7 @@ class View(models.Model):
         return soup.prettify()
 
     def add_head(self, html_parser):
-        soup = BeautifulSoup('<!DOCTYPE html><html lang="en"><head></head><body></body></html>', 'html.parser')
+        soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
         head_tag = soup.head
         page_name = self.name.strip().lower().replace(" ", "-")
         title_tag = soup.new_tag('title')
@@ -1004,8 +1004,6 @@ class View(models.Model):
             }}
             </script>
         """
-        from pprint import  pprint
-        pprint(breadcrumb_script)
         breadcrumb_script_soup = BeautifulSoup(breadcrumb_script, 'html.parser')
         head_tag.append(breadcrumb_script_soup)
         return soup.prettify()
@@ -1233,7 +1231,7 @@ class View(models.Model):
         for placeholder, php_code in php_blocks.items():
             formatted = formatted.replace(placeholder, php_code,1)
 
-        return formatted
+        return '<!DOCTYPE html>\n'+formatted
     # def format_html_php(self,html_content, indent_size=4):
     #
     # # Define tag sets
