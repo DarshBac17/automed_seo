@@ -29,6 +29,14 @@ class WebsitePageVersion(models.Model):
         ('patch_change', 'Patch Changes'),
     ], string="Change")
 
+    stage = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_progress', 'In Progress'),
+        ('in_review', 'In Review'),
+        ('done', 'Done'),
+        ('publish', 'Publish'),
+    ], string="Stage", default="draft", tracking=True)
+
     major_version = fields.Integer('Major Version', default=1)
     minor_version = fields.Integer('Minor Version', default=0)
     patch_version = fields.Integer('Patch Version', default=0)
@@ -54,15 +62,16 @@ class WebsitePageVersion(models.Model):
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', view_id)], limit=1)
+        view = self.env['automated_seo.view'].search([('id','=',current_version.view_id.id)])
 
         if current_version:
             current_version.status = False
+            current_version.stage = view.stage
 
         active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
 
         if active_version:
             active_version.status = True
-            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id.id)])
 
             view.parse_html = active_version.parse_html if active_version.parse_html else None
 
@@ -78,6 +87,7 @@ class WebsitePageVersion(models.Model):
 
             view.header_description = active_version.header_description
 
+            view.stage = active_version.stage
             # Unlink header_metadata_ids from view without deleting them
             if view.header_metadata_ids:
                 view.header_metadata_ids.write({'view_id': False})
@@ -164,7 +174,8 @@ class WebsitePageVersion(models.Model):
             'view_arch': view_arch,
             'user_id': self.env.user.id,
             'header_title' : seo_view.header_title,
-            'header_description' : seo_view.header_description
+            'header_description' : seo_view.header_description,
+            'stage' : seo_view.stage
         })
 
 
