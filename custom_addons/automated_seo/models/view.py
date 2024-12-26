@@ -181,7 +181,7 @@ class View(models.Model):
                 vals['website_page_id'] = website_page.id
 
             if page_name:
-                vals["header_title"] = page_name
+                vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
 
         record  = super(View, self).create(vals)
@@ -231,9 +231,9 @@ class View(models.Model):
 
                 updated_version = {}
                 if 'header_title' in vals:
-                    updated_version["header_title"] = vals["header_title"]
+                    updated_version["header_title"] = vals["header_title"].strip()
                 if 'header_description' in vals:
-                    updated_version["header_description"] = vals["header_description"]
+                    updated_version["header_description"] = vals["header_description"].strip()
 
                 current_version.write(updated_version)
 
@@ -928,14 +928,13 @@ class View(models.Model):
         for link in self.filtered_header_link_ids:
             tag = soup.new_tag('link')
             tag['rel'] = "preload"
-            tag['link'] = link.css_link
+            tag['href'] = link.css_link
             tag['as'] = 'style'
             tag['onload'] = "this.onload=null;this.rel='stylesheet'"
             head_tag.append(tag)
 
 
         webpage_script = f"""
-            <!-- WebPage -->
             <script type="application/ld+json">
             {{
                 "@context": "https://schema.org",
@@ -1018,7 +1017,6 @@ class View(models.Model):
 
         # Generate the final script
         breadcrumb_script = f"""
-            <!-- BreadcrumbList -->
             <script type="application/ld+json">
             {{
                 "@context": "http://schema.org",

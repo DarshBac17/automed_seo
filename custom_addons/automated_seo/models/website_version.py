@@ -113,7 +113,6 @@ class WebsitePageVersion(models.Model):
 
     @api.model
     def create(self, vals):
-        print("create call=======================")
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
         seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
