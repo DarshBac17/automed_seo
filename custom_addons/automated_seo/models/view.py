@@ -187,8 +187,8 @@ class View(models.Model):
         page_version = self.version
         last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         user_id = self.env.user.id
-        base_branch = "git-commit"
-        feature_branch = "git-commit-merge-branch"
+        base_branch = "main"
+        feature_branch = "git-commit"
 
         # Push changes to Git
         success = push_changes_to_git(page_name, page_version, last_updated, user_id, base_branch, feature_branch)
