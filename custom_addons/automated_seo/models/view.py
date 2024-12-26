@@ -43,7 +43,7 @@ class View(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('done', 'Done'),
+        ('stage', 'Stage'),
         ('publish', 'Publish'),
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
@@ -304,7 +304,7 @@ class View(models.Model):
 
     def action_done_button(self):
         if self.validate_header():
-            self.write({'stage': 'done'})
+            self.write({'stage': 'stage'})
             self.message_post(body="Record moved to the done stage", message_type="comment")
 
             # Get Git details
