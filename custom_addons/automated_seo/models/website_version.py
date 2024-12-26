@@ -1,7 +1,8 @@
 from email.policy import default
-from multiprocessing.managers import view_type
+# from multiprocessing.managers import view_type
 
 from odoo import models, fields, api
+from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import UserError
 import json
 
@@ -28,9 +29,28 @@ class WebsitePageVersion(models.Model):
         ('patch_change', 'Patch Changes'),
     ], string="Change")
 
+    stage = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_progress', 'In Progress'),
+        ('in_review', 'In Review'),
+        ('stage', 'Stage'),
+        ('publish', 'Publish'),
+    ], string="Stage", default="draft", tracking=True)
+
     major_version = fields.Integer('Major Version', default=1)
     minor_version = fields.Integer('Minor Version', default=0)
     patch_version = fields.Integer('Patch Version', default=0)
+    header_title = fields.Char(string="Title")
+    header_description = fields.Text(string="page description")
+    # header_description = fields.Text(string="Title")
+
+    # One-to-Many relationship: A page can have multiple metadata entries
+    header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',
+        'view_version_id',
+        string="Metadata",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
 
     @api.depends('major_version', 'minor_version', 'patch_version')
     def _compute_version_number(self):
@@ -38,19 +58,20 @@ class WebsitePageVersion(models.Model):
             record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
-
         id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', view_id)], limit=1)
+        view = self.env['automated_seo.view'].search([('id','=',current_version.view_id.id)])
 
         if current_version:
             current_version.status = False
+            current_version.stage = view.stage
+
         active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
+
         if active_version:
             active_version.status = True
-            view = self.env['automated_seo.view'].search([('id','=',active_version.view_id.id)])
-
 
             view.parse_html = active_version.parse_html if active_version.parse_html else None
 
@@ -61,6 +82,21 @@ class WebsitePageVersion(models.Model):
             view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
             view.publish = active_version.publish if active_version.publish else False
+
+            view.header_title = active_version.header_title
+
+            view.header_description = active_version.header_description
+
+            view.stage = active_version.stage
+            # Unlink header_metadata_ids from view without deleting them
+            if view.header_metadata_ids:
+                view.header_metadata_ids.write({'view_id': False})
+
+            # Update header_metadata_ids in active_version to point to the current view
+            if active_version.header_metadata_ids:
+                active_version.header_metadata_ids.write({'view_id': view.id})
+
+
 
     def action_download_html(self):
         """Download the parsed HTML file"""
@@ -132,19 +168,64 @@ class WebsitePageVersion(models.Model):
                         'patch_version': previous_version.patch_version + 1
                     })
 
-
-
-
-        # if vals.get("unpublish"):
-        #
-
         vals.update({
             'page_id': seo_view.website_page_id.id,
             'view_arch': view_arch,
             'user_id': self.env.user.id,
+            'header_title' : seo_view.header_title,
+            'header_description' : seo_view.header_description,
+            'stage' : seo_view.stage
         })
 
-        return super(WebsitePageVersion, self).create(vals)
+
+        record = super(WebsitePageVersion, self).create(vals)
+
+        if not record.view_id.header_metadata_ids:
+            record.create_default_version_metadata(record)
+
+        previous_version.header_metadata_ids.write({'view_id': False})
+
+        return record
+
+    def create_default_version_metadata(self, record):
+        if not record.view_id.header_metadata_ids:
+            default_metadata = [
+                {
+                    'property': 'og:title',
+                    'content': f'{record.header_title}',
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
+                },
+                {
+                    'property': 'og:description',
+                    'content': 'Default page description',
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
+                },
+                {
+                    'property': 'og:image',
+                    'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
+                },
+                {
+                    'property': 'og:url',
+                    'content': f'<?php echo BASE_URL; ?>{record.view_id.name}',
+                    'view_id': record.view_id.id,
+                    'view_version_id': record.id
+                }
+            ]
+
+            self.env['automated_seo.page_header_metadata'].create(default_metadata)
+
+            self.env['automated_seo.page_header_link'].create({
+                'view_id' : record.view_id.id,
+                'css_link' : "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
+                'view_version_id': record.id
+            })
+
+
+
 
     def action_create_version(self):
 
