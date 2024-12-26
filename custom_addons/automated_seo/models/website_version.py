@@ -33,7 +33,7 @@ class WebsitePageVersion(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('done', 'Done'),
+        ('stage', 'Stage'),
         ('publish', 'Publish'),
     ], string="Stage", default="draft", tracking=True)
 

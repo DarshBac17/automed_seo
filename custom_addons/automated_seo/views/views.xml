@@ -16,7 +16,7 @@
                        decoration-muted="stage == 'draft'"
                        decoration-info="stage == 'in_progress'"
                        decoration-warning="stage == 'in_review'"
-                       decoration-success="stage in ('done', 'publish')"/>
+                       decoration-success="stage in ('stage', 'publish')"/>
             </tree>
         </field>
     </record>
@@ -66,8 +66,8 @@
             <form string="SEO View Management">
                 <header>
                     <!-- Edit Button -->
-                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,done,publish"
-                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'done': 'grey'}"/>
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"/>
 
                     <field name="publish" invisible="1"/>
 
@@ -112,7 +112,7 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'done')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'stage')]}"
                             context="{'view_name': name}"/>
                     <button name="action_done_button"
                             type="object"
@@ -126,7 +126,7 @@
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'done')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'stage')]}"
                             context="{'view_name': name}"/>
 
                     <button name="%(automated_seo_version)d"
