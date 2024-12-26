@@ -59,10 +59,24 @@ class View(models.Model):
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
-
+    active_version_id = fields.Many2one(
+        'website.page.version',
+        compute='_compute_active_version_id',
+        string="Active Version",
+        store=False  # Set to True if you want to store the value persistently
+    )
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+    @api.depends('version.status')
+    def _compute_active_version_id(self):
+        for record in self:
+            active_version = record.version.filtered(lambda v: v.status)
+            record.active_version_id = active_version[0].id if active_version else None
+            # record.filtered_header_link_ids = record.header_link_ids.filtered(
+            #     lambda x: x.view_version_id == record.active_version_id
+            #
+            # )
 
 
     @api.onchange('upload_file')
@@ -184,14 +198,23 @@ class View(models.Model):
 
         # Get Git details
         page_name = self.name
-        page_version = self.version
+
         last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         user_id = self.env.user.id
         base_branch = "main"
         feature_branch = "git-commit"
 
         # Push changes to Git
-        success = push_changes_to_git(page_name, page_version, last_updated, user_id, base_branch, feature_branch)
+        success = push_changes_to_git(
+            page_name=page_name,
+            page_version=self.active_version_id.name,
+            last_updated=last_updated,
+            user_id=user_id,
+            user_name=self.env.user.name,  # Include `user_name`
+            base_branch=base_branch,
+            feature_branch=feature_branch,
+            file_data=self.parse_html_binary
+        )
         if success:
             self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
         else:

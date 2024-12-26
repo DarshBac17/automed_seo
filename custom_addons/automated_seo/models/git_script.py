@@ -1,8 +1,10 @@
+import traceback
+import base64
 from git import Repo
 from pathlib import Path
 
-def push_changes_to_git(page_name, page_version, last_updated, user_id, user_name,
-                        base_branch="main", feature_branch="feature-branch",
+def push_changes_to_git(page_name, page_version, last_updated, user_id, user_name,file_data,
+                        base_branch="main", feature_branch="git-commit",
                         target_file_dir="/home/bacancy/PycharmProjects/Git-Project/"):
     try:
         # Initialize the repository
@@ -15,18 +17,26 @@ def push_changes_to_git(page_name, page_version, last_updated, user_id, user_nam
         print(f"Pulled latest changes from {base_branch}.")
 
         # Construct the target file path
-        target_file = f"{page_name}_v{page_version}.php"  # Example: MyPage_v1.0.php
+        target_file = f"{page_name}_{page_version}.php"
         target_file_path = Path(target_file_dir) / target_file
 
-        # Ensure the target file exists
-        if not target_file_path.exists():
-            print(f"Target file {target_file} does not exist. Creating it now.")
-            with open(target_file_path, "w") as file:
-                file.write(f"<?php\n// {page_name} v{page_version} generated on {last_updated}\n")
-            print(f"Created new file: {target_file_path}")
-
         # Stage the file for commit
-        repo.index.add([str(target_file_path)])
+        if file_data:
+            try:
+                decoded_data=None
+                if isinstance(file_data, bytes):
+                    decoded_data = base64.b64decode(file_data)
+
+                if decoded_data:
+                    with open(target_file_path, 'wb') as file:
+                        file.write(decoded_data)
+                else:
+                    return False
+            except Exception as e:
+                print(f"Error writing file: {str(e)}")
+                return False
+
+        repo.index.add(str(target_file_path))
         print(f"Staged file: {target_file_path}")
 
         # Format the commit message with user details and file name
@@ -41,21 +51,13 @@ def push_changes_to_git(page_name, page_version, last_updated, user_id, user_nam
         print(f"Committed changes with message:\n{commit_message}")
         print(f"Commit ID: {commit.hexsha}")
 
-        # Switch to feature branch or create it if it doesn't exist
-        if feature_branch not in repo.heads:
-            print(f"Feature branch '{feature_branch}' does not exist. Creating it.")
-            repo.git.checkout(b=feature_branch)
-        else:
-            repo.git.checkout(feature_branch)
-        print(f"Checked out to feature branch: {feature_branch}")
-
-        # Push changes to the remote feature branch
-        origin.push(refspec=f"{feature_branch}:{feature_branch}")
-        print(f"Successfully pushed changes to {feature_branch}.")
+        origin.push()
+        print(f"Successfully pushed changes to {base_branch}.")
 
         return True
     except Exception as e:
         print(f"An error occurred: {str(e)}")
+        traceback.print_exc()
         return False
 
 # from git import Repo
