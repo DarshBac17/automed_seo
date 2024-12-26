@@ -116,7 +116,7 @@
                             context="{'view_name': name}"/>
                     <button name="action_done_button"
                             type="object"
-                            string="Done"
+                            string="Stage"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', ('publish', '=', True),
                             ('stage', '!=', 'in_review')]}"

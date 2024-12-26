@@ -1,6 +1,4 @@
 import json
-from importlib.metadata import metadata
-
 from odoo import models, fields, api
 from bs4 import BeautifulSoup,Comment,NavigableString
 import  html
@@ -17,6 +15,8 @@ from pathlib import Path
 import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
+from datetime import datetime
+from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 from odoo.tools.view_validation import validate
 
@@ -303,10 +303,33 @@ class View(models.Model):
         template.send_mail(self.id, force_send=True)
 
     def action_done_button(self):
-
         if self.validate_header():
             self.write({'stage': 'done'})
-            self.message_post(body="Record approved", message_type="comment")
+            self.message_post(body="Record moved to the done stage", message_type="comment")
+
+            # Get Git details
+            page_name = self.name
+
+            last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            user_id = self.env.user.id
+            base_branch = "main"
+            feature_branch = "git-commit"
+
+            # Push changes to Git
+            success = push_changes_to_git(
+                page_name=page_name,
+                page_version=self.active_version_id.name,
+                last_updated=last_updated,
+                user_id=user_id,
+                user_name=self.env.user.name,  # Include `user_name`
+                base_branch=base_branch,
+                feature_branch=feature_branch,
+                file_data=self.parse_html_binary
+            )
+            if success:
+                self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
+            else:
+                self.message_post(body="Failed to push changes to Git.", message_type="comment")
 
     def validate_header(self):
 
