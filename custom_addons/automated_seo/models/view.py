@@ -307,29 +307,29 @@ class View(models.Model):
             self.write({'stage': 'stage'})
             self.message_post(body="Record moved to the done stage", message_type="comment")
 
-            # Get Git details
-            page_name = self.name
-
-            last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            user_id = self.env.user.id
-            base_branch = "main"
-            feature_branch = "git-commit"
-
-            # Push changes to Git
-            success = push_changes_to_git(
-                page_name=page_name,
-                page_version=self.active_version_id.name,
-                last_updated=last_updated,
-                user_id=user_id,
-                user_name=self.env.user.name,  # Include `user_name`
-                base_branch=base_branch,
-                feature_branch=feature_branch,
-                file_data=self.parse_html_binary
-            )
-            if success:
-                self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
-            else:
-                self.message_post(body="Failed to push changes to Git.", message_type="comment")
+            # # Get Git details
+            # page_name = self.name
+            #
+            # last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # user_id = self.env.user.id
+            # base_branch = "master"
+            # feature_branch = "git-commit"
+            #
+            # # Push changes to Git
+            # success = push_changes_to_git(
+            #     page_name=page_name,
+            #     page_version=self.active_version_id.name,
+            #     last_updated=last_updated,
+            #     user_id=user_id,
+            #     user_name=self.env.user.name,  # Include `user_name`
+            #     base_branch=base_branch,
+            #     feature_branch=feature_branch,
+            #     file_data=self.parse_html_binary
+            # )
+            # if success:
+            #     self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
+            # else:
+            #     self.message_post(body="Failed to push changes to Git.", message_type="comment")
 
     def validate_header(self):
 
