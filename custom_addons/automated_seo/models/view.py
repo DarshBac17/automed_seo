@@ -1474,7 +1474,7 @@ class View(models.Model):
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
-                    php_tags = soup.find_all(class_=php_class)
+                    php_tags = section.find_all(class_=php_class)
                     if len(php_tags)!=1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
