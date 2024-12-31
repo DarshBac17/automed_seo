@@ -265,7 +265,7 @@
                         </page>
                         <page string="Compile Output"
                               attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
-                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
+                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}" readonly="1"/>
                         </page>
 
                     </notebook>
