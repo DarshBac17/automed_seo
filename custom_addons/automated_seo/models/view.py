@@ -997,7 +997,7 @@ class View(models.Model):
             if isinstance(url,ValueError):
                 raise url
             id = url + '/'
-            name = breadcrumb.text.strip()
+            name = link.text.strip() if link else breadcrumb.text.strip()
             item = {
                 "@type": "ListItem",
                 "position": position,
