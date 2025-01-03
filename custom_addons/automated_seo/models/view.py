@@ -16,6 +16,9 @@ import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from ftplib import FTP
+import os
+from .ftp_setup import push_changes_to_ftp
 from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 from odoo.tools.view_validation import validate
@@ -306,6 +309,26 @@ class View(models.Model):
         if self.validate_header():
             self.write({'stage': 'stage'})
             self.message_post(body="Record moved to the done stage", message_type="comment")
+
+            page_name = self.name
+            page_version = self.active_version_id[0].name
+            last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            user_id = self.env.user.id
+
+            # Step 3: Call the push_changes_to_ftp function to upload the file to the FTP server
+            upload_success = push_changes_to_ftp(
+                page_name=page_name,
+                page_version=page_version,
+                last_updated=last_updated,
+                user_id=user_id,
+                user_name=self.env.user.name,
+                file_data= self.parse_html_binary
+            )
+
+            if upload_success:
+                print("File successfully uploaded to FTP server.")
+            else:
+                print("File upload failed.")
 
             # # Get Git details
             # page_name = self.name
