@@ -16,7 +16,7 @@ import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from .git_script import push_changes_to_git
+# from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 from odoo.tools.view_validation import validate
 
@@ -989,8 +989,10 @@ class View(models.Model):
 
             link = breadcrumb.find('a')
             position = index + 1
+            if link and not link.get('href'):
+                link['href']="#"
 
-            url = link['href'] if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+            url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
             if isinstance(url,ValueError):
                 raise url
