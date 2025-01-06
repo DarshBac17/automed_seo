@@ -354,6 +354,7 @@ class View(models.Model):
     def action_publish_button(self):
         self.write({'stage': 'publish'})
         self.message_post(body="Record publish", message_type="comment")
+        self.active_version_id.publish_at = datetime.now()
 
     def action_unpublish_button(self):
         self.write({'stage': 'in_progress'})

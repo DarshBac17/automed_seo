@@ -23,6 +23,7 @@ class WebsitePageVersion(models.Model):
     user_id = fields.Many2one('res.users', string='Created by')
     status = fields.Boolean('Status',default=False)
     publish = fields.Boolean('Publish',default=False)
+    publish_at = fields.Datetime('Publish At')
     change = fields.Selection([
         # ('major_change', 'Major Changes'),
         ('minor_change', 'Minor Changes'),
