@@ -80,8 +80,8 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                     if ($focusedEditableBox) {
                         console.log("Found editable-box", $focusedEditableBox);
 
-                        const selection = window.getSelection();
-                        const range = document.createRange();
+                        const selection = self._getCurrentSelection();
+                        const range = wysiwyg.odooEditor.document.createRange();
 
                         range.selectNodeContents($focusedEditableBox);
 
@@ -94,7 +94,33 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
                 }
             };
 
+            // Handle triple-click event
+            this._tripleClickHandler = function (event) {
+                if (event.detail === 3) { // Triple-click event
+                    console.log("Triple-click detected");
+
+                    const $focusedEditableBox = self.currentTarget;
+
+                    if ($focusedEditableBox) {
+                        console.log("Found editable-box", $focusedEditableBox);
+
+                        const selection = self._getCurrentSelection();
+                        const range = wysiwyg.odooEditor.document.createRange();
+
+                        range.selectNodeContents($focusedEditableBox);
+
+                        console.log(range);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        console.log("Selected text:", selection.toString());
+                    }
+                }
+            };
+
+            // Bind events
             wysiwyg.odooEditor.document.addEventListener('keydown', this._selectAllHandler);
+            wysiwyg.odooEditor.document.addEventListener('click', this._tripleClickHandler);
         },
 
         _unbindSelectAllEvent: function () {
@@ -104,10 +130,13 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
             if (!wysiwyg) return;
             if (this._selectAllHandler) {
                 wysiwyg.odooEditor.document.removeEventListener('keydown', this._selectAllHandler);
+                wysiwyg.odooEditor.document.removeEventListener('click', this._tripleClickHandler);
             }
         },
 
         _bindPastEvent: function () {
+
+            // unused
             const wysiwyg = this._getWysiwygInstance();
             if (!wysiwyg) return;
 
@@ -216,12 +245,15 @@ odoo.define('website.snippets.dynamic_editable_box', function (require) {
 
                 console.log('Selection changed', ev.target)
 
+                const wysiwyg = this._getWysiwygInstance();
+                if (!wysiwyg) return;
+
                 const selection = this._getCurrentSelection();
 
                 if (!selection || !selection.rangeCount) return;
 
                 const range = selection.getRangeAt(0);
-                const $target = $(document.activeElement);
+                const $target = $(wysiwyg.odooEditor.document.activeElement);
 
                 this._removeEventsOnTarget();
                 this._removeEditableBoxes();
