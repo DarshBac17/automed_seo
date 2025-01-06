@@ -218,9 +218,12 @@
             # 'automated_seo/static/src/js/dynamic_editable_box.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
-            'web.assets_backend': [
-                # 'automated_seo/static/src/js/website_version.js',
-                # 'automated_seo/static/src/js/toggle.js',
+        'web.assets_backend': [
+            # 'automated_seo/static/src/js/website_version.js',
+            # 'automated_seo/static/src/js/toggle.js',
+        ],
+        'website.assets_editor': [
+            'automated_seo/static/src/systray_items/*',
         ],
     },
 }

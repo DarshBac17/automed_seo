@@ -44,7 +44,7 @@
                 </sheet>
                 <footer>
                     <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True}"/>
+                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True,'prev_version':context.get('prev_version')}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
@@ -129,6 +129,8 @@
                             attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'stage')]}"
                             context="{'view_name': name}"/>
 
+                    <field name="active_version_id" invisible="1"/>
+
                     <button name="%(automated_seo_version)d"
                             type="action"
                             string="Unpublish"
@@ -136,12 +138,9 @@
                             attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'publish')]}"
                             context="{
                             'default_view_id': id,
+                            'prev_version':active_version_id,
                             'form_view_ref': 'automated_seo.automated_seo_version_form'
                         }"/>
-
-
-
-
                 </header>
                 <sheet>
                     <group>

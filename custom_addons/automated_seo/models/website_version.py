@@ -134,7 +134,8 @@ class WebsitePageVersion(models.Model):
         else:
             if vals.get('status'):
                 previous_version.write({
-                    'status': False
+                    'status': False,
+                    'stage': seo_view.stage
                 })
                 seo_view.page_id.arch_db = view_arch if view_arch else None
                 seo_view.stage = 'in_progress'
@@ -228,7 +229,7 @@ class WebsitePageVersion(models.Model):
 
 
     def action_create_version(self):
-
+        prev_version = self.env.context.get('prev_version')
         unpublish =self.env.context.get('unpublish')
         self.ensure_one()
         if not self.view_id:
@@ -249,9 +250,23 @@ class WebsitePageVersion(models.Model):
                 'parse_html': self.parse_html,
                 'parse_html_filename': self.parse_html_filename,
                 'parse_html_binary': self.parse_html_binary,
-                'stage': 'draft' ,
+                'stage': 'draft',
                 'publish':False# Reset to draft after unpublishing
             })
+
+            # Create replicas of header metadata from previous version
+            if prev_version:
+                prev_version_record = self.browse(int(prev_version))
+                if prev_version_record.header_metadata_ids:
+                    for metadata in prev_version_record.header_metadata_ids:
+                        self.env['automated_seo.page_header_metadata'].create({
+                            # Add any other fields that need to be copied
+                            'property': metadata.property,
+                            'content': metadata.content,
+                            'view_id': self.view_id.id,
+                            'view_version_id': self.id
+                        }
+                        )
 
             if self.view_id.website_page_id and self.view_arch:
                 self.view_id.website_page_id.arch_db = self.view_arch

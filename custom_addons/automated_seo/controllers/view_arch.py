@@ -1,5 +1,7 @@
 from odoo import http
-from odoo.http import request
+from odoo.http import request, Response
+import logging
+_logger = logging.getLogger(__name__)
 from bs4 import BeautifulSoup
 
 
@@ -71,3 +73,26 @@ class WebsiteAutoSaveController(http.Controller):
             # Handle any unexpected errors
             request.env.cr.rollback()
             return {'status': 'error', 'message': str(e)}
+
+
+class ViewController(http.Controller):
+    @http.route('/automated_seo/get_page_view_id', type='json', auth="user", website=True)
+    def get_page_view_id(self, path=None, **kwargs):
+        try:
+            if not path:
+                return {'view_id': False, 'error': 'No path provided'}
+
+            domain = [('url', '=', path)]
+            page = request.env['website.page'].sudo().search(domain, limit=1)
+
+            if page:
+                view_id = page.view_id.page_id.id
+                _logger.info(f"Found view_id: {view_id} for path: {path}")
+                return {'view_id': view_id}
+            else:
+                _logger.warning(f"No page found for path: {path}")
+                return {'view_id': False, 'error': 'Page not found'}
+
+        except Exception as e:
+            _logger.error(f"Error getting page view_id: {str(e)}")
+            return {'view_id': False, 'error': str(e)}
