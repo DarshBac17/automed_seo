@@ -2,9 +2,9 @@
 <odoo>
     <template id="s_faq_with_button_bg_gray" name="FAQ with Button gray">
         <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
-            <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11 o_tab_custom-flex-layout">
+            <div class="grid md:gap-6 grid-cols-1 md:grid-cols-11">
 
-                <div class="o_tab_custom-left-section md:col-span-3 o_not_editable">
+                <div class="md:col-span-3 o_not_editable">
                     <div class="side-sticky">
                         <h2 class="cont-padding">Frequently Asked Questions</h2>
                         <a href="#footer-form-id" class="text-h5 faq-head max-md:mt-sm">Still have questions?
@@ -15,7 +15,7 @@
                     </div>
                 </div>
 
-                <div class="o_tab_custom-right-section md:col-span-8 faq-head-outer">
+                <div class="md:col-span-8 faq-head-outer">
                     <div class="accordian-outer o_sub_items_container" itemscope="acceptedAnswer" itemtype="https://schema.org/FAQPage">
                         <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <div class="faq-heading active">

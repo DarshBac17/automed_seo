@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="s_breadcrumb" name="Breadcrumbs">
+        <section class="pt-md pb-0 container o_automated_seo_snippet o_automated_seo_php_variable">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a>Item</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Item</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Item</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Item</a>
+                    </li>
+                </ol>
+            </nav>
+        </section>
+    </template>
+</odoo>

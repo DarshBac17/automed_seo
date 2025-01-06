@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Mapper" editable="bottom">
                 <field name="name"/>
-                <field name="style_tag"/>
+                <field name="link"/>
             </tree>
         </field>
     </record>

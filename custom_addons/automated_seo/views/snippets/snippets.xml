@@ -26,12 +26,12 @@
 
         </xpath>
 
-        <xpath expr="//div[@id='snippet_effect']" position="replace">
-            <div display="none"/>
-        </xpath>
-        <xpath expr="//div[@id='snippet_content']" position="replace">
-            <div display="none"/>
-        </xpath>
+<!--        <xpath expr="//div[@id='snippet_effect']" position="replace">-->
+<!--            <div display="none"/>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[@id='snippet_content']" position="replace">-->
+<!--            <div display="none"/>-->
+<!--        </xpath>-->
         <xpath expr="//div[@id='snippet_structure']" position="replace">
 
             <div id="snippets_header" class="o_panel">
@@ -96,6 +96,16 @@
 <!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_white.png">-->
 <!--                        <keywords>trusted, white</keywords>-->
 <!--                    </t>-->
+                </div>
+            </div>
+
+             <div id="snippets_breadcrumbs" class="o_panel">
+                <div class="o_panel_header">Breadcrumbs</div>
+                <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_breadcrumb"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_gray.png">
+                        <keywords>breadcrumb</keywords>
+                    </t>
                 </div>
             </div>
 

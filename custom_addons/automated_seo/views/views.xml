@@ -9,13 +9,14 @@
                 <field name="unique_page_id" readonly="1"/>
                 <field name="name"/>
                 <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
+                <field name="url" widget="url"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
                 <field name="stage" widget="badge"
                        decoration-muted="stage == 'draft'"
                        decoration-info="stage == 'in_progress'"
                        decoration-warning="stage == 'in_review'"
-                       decoration-success="stage in ('done', 'publish')"/>
+                       decoration-success="stage in ('stage', 'publish')"/>
             </tree>
         </field>
     </record>
@@ -43,7 +44,7 @@
                 </sheet>
                 <footer>
                     <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True}"/>
+                            context="{'view_id':view_id,'description':description,'change':change,'unpublish':True,'prev_version':context.get('prev_version')}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
@@ -65,8 +66,8 @@
             <form string="SEO View Management">
                 <header>
                     <!-- Edit Button -->
-                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,done,publish"
-                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'done': 'grey'}"/>
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"/>
 
                     <field name="publish" invisible="1"/>
 
@@ -83,7 +84,7 @@
                             string="Preview"
                             class="btn oe_highlight"/>
                     <!-- Compile Button -->
-                    <button name="action_custom_button"
+                    <button name="action_compile_button"
                             type="object"
                             string="Compile"
                             attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"
@@ -111,11 +112,11 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'done')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'stage')]}"
                             context="{'view_name': name}"/>
                     <button name="action_done_button"
                             type="object"
-                            string="Done"
+                            string="Stage"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', ('publish', '=', True),
                             ('stage', '!=', 'in_review')]}"
@@ -125,8 +126,10 @@
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'done')]}"
+                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'stage')]}"
                             context="{'view_name': name}"/>
+
+                    <field name="active_version_id" invisible="1"/>
 
                     <button name="%(automated_seo_version)d"
                             type="action"
@@ -135,10 +138,9 @@
                             attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'publish')]}"
                             context="{
                             'default_view_id': id,
+                            'prev_version':active_version_id,
                             'form_view_ref': 'automated_seo.automated_seo_version_form'
                         }"/>
-
-
                 </header>
                 <sheet>
                     <group>
@@ -159,6 +161,12 @@
                                 </div>
 
                                 <div class="o_row">
+                                    Page Url
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"/>
+                                </div>
+
+                                <div class="o_row">
                                     Owner
                                     <p style="margin-left:5px">:</p>
 
@@ -166,13 +174,14 @@
                                            style="margin-left:5px"
                                            nolabel="1"/>
                                 </div>
+
                                 <div class="o_row" attrs="{'invisible': [('file_uploaded', '=', True)]}">
                                     Upload File
                                     <p style="margin-left:5px">:</p>
                                     <field name="file_uploaded" invisible="1"/>
                                     <field name="upload_file" widget="binary" filename="upload_filename"
                                            style="margin-left:5px"
-                                            attrs="{'readonly': [('file_uploaded', '=', True)]}"
+                                           attrs="{'readonly': [('file_uploaded', '=', True)]}"
                                     />
                                     <field name="upload_filename" invisible="1"/>
                                     <button name="action_parse_uploaded_file"
@@ -212,6 +221,13 @@
                                 </div>
                                 <field name="is_owner" invisible="1"/>
 
+                                <!--<div style="margin: 0 0 16px 0">  &lt;!&ndash; top right bottom left &ndash;&gt;
+                                    <button name="action_open_page_header"
+                                            type="object"
+                                            string="OPEN PAGE HEADER"
+                                            class="oe_highlight"/>
+                                </div>-->
+
                                 <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
                                     Contributors
                                     <p style="margin-left:5px">:</p>
@@ -219,7 +235,6 @@
                                            widget="many2many_tags_avatar"
                                            options="{'color_field': 'color', 'no_create_edit': True}"
                                            placeholder="Add contributors..."/>
-
                                 </div>
                             </div>
                         </group>
@@ -229,10 +244,29 @@
                               attrs="{'invisible': [('version', 'in', [False, ''])]}">
                             <field name="version"/>
                         </page>
+                        <page string="Header Management">
+                            <sheet>
+                                <group class="o_half_width" style="margin-bottom: 20px;">
+                                    <field name="header_title" string="Header Title" />
+                                    <field name="header_description" string="Page Description" />
+                                </group>
+                                <notebook>
+                                    <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
+                                        <field name="header_metadata_ids">
+                                            <tree editable="bottom" class="o_list_view">
+                                                <field name="property" string="Property"/>
+                                                <field name="content" string="Content"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </page>
                         <page string="Compile Output"
                               attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
-                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
+                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}" readonly="1"/>
                         </page>
+
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

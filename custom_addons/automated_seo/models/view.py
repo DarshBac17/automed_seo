@@ -1,3 +1,4 @@
+import json
 from odoo import models, fields, api
 from bs4 import BeautifulSoup,Comment,NavigableString
 import  html
@@ -14,6 +15,11 @@ from pathlib import Path
 import mimetypes
 from html import escape, unescape
 import xml.etree.ElementTree as ET
+from datetime import datetime
+# from .git_script import push_changes_to_git
+from urllib.parse import urlparse
+from odoo.tools.view_validation import validate
+
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -25,6 +31,7 @@ class View(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True)
+    url = fields.Char(string='Page URL', help="Page URL")
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
     unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
@@ -36,9 +43,8 @@ class View(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('done', 'Done'),
+        ('stage', 'Stage'),
         ('publish', 'Publish'),
-
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
         'res.users',
@@ -48,21 +54,85 @@ class View(models.Model):
         string='Contributors',
         tracking=True
     )
+
     is_owner = fields.Boolean(
         compute='_compute_is_owner',
         string='Is Owner',
         store=False
     )
+
     publish = fields.Boolean('Publish', default=False)
     upload_file = fields.Binary(string="Upload File", attachment=True)
     upload_filename = fields.Char(string="Upload Filename")
     file_uploaded = fields.Boolean(string="File Uploaded",default=False)
+    header_title = fields.Char(string="Title")
+
+    header_description = fields.Text(string="page description")
+    # header_description = fields.Text(string="Title")
+
+    # One-to-Many relationship: A page can have multiple metadata entries
+    header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',
+        'view_id',
+        string="Metadata"
+    )
+
+    header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        'view_id',
+        string="Link",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
+
+    active_version_id = fields.Many2one(
+        'website.page.version',
+        compute='_compute_active_version_id',
+        string="Active Version",
+        store=False  # Set to True if you want to store the value persistently
+    )
+
+    # New computed field for filtered metadata
+    filtered_header_metadata_ids = fields.One2many(
+        'automated_seo.page_header_metadata',
+        compute='_compute_filtered_header_metadata',
+        string="Version Specific Metadata",
+        store=False
+    )
+
+    filtered_header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        compute='_compute_filtered_header_link',
+        string="Version Specific Link",
+        store=False
+    )
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
+    @api.depends('header_metadata_ids', 'active_version_id')
+    def _compute_filtered_header_metadata(self):
+        for record in self:
+            record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+            )
 
+    @api.depends('header_metadata_ids', 'active_version_id')
+    def _compute_filtered_header_link(self):
+        for record in self:
+            record.filtered_header_link_ids = record.header_link_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+            )
+
+    @api.depends('version.status')
+    def _compute_active_version_id(self):
+        for record in self:
+            active_version = record.version.filtered(lambda v: v.status)
+            record.active_version_id = active_version[0].id if active_version else None
+            record.filtered_header_link_ids = record.header_link_ids.filtered(
+                lambda x: x.view_version_id == record.active_version_id
+
+            )
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
         if self.upload_file:
@@ -109,7 +179,13 @@ class View(models.Model):
             website_page = self.env['website.page'].search([('view_id', '=', new_page['view_id'])], limit=1)
             if website_page:
                 vals['website_page_id'] = website_page.id
+
+            if page_name:
+                vals["header_title"] = page_name.strip()
+                vals["header_description"] = "Default page description"
+
         record  = super(View, self).create(vals)
+
         self.env['website.page.version'].create({
             'description' : 'First Version',
             'view_id':record.id,
@@ -147,7 +223,61 @@ class View(models.Model):
 
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
+
+            current_version = self.env['website.page.version'].search(
+                ['&', ('status', '=', True), ('view_id', '=', record.id)], limit=1)
+
+            if current_version:
+
+                updated_version = {}
+                if 'header_title' in vals:
+                    updated_version["header_title"] = vals["header_title"].strip()
+                if 'header_description' in vals:
+                    updated_version["header_description"] = vals["header_description"].strip()
+
+                current_version.write(updated_version)
+
+                # if 'header_metadata_ids' in vals:
+                #     # Update existing metadata values
+                #     for metadata, new_metadata in zip(
+                #             current_version.header_metadata_ids,
+                #             record.header_metadata_ids
+                #     ):
+                #         metadata.write({
+                #             'property': new_metadata.property,
+                #             'content': new_metadata.content,
+                #         })
+                #
+                #     # Add additional metadata if `record.header_metadata_ids` has more items
+                #     if len(record.header_metadata_ids) > len(current_version.header_metadata_ids):
+                #         extra_metadata = record.header_metadata_ids[len(current_version.header_metadata_ids):]
+                #         for meta in extra_metadata:
+                #             self.env['automated_seo.page_header_metadata'].create({
+                #                 'property': meta.property,
+                #                 'content': meta.content,
+                #                 'page_id': meta.page_id.id if meta.page_id else False,
+                #                 'page_version_id': current_version.id,
+                #             })
+
         return super(View, self).write(vals)
+
+    # @api.constrains('url')
+    # def _check_url_valid(self):
+    #     for record in self:
+    #         if record.url:
+    #             # Basic URL pattern validation
+    #             url_pattern = "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
+    #             if not re.match(url_pattern, record.url):
+    #                 raise UserError('Please enter a valid URL starting with http:// or https://')
+    #
+    #             # Check if URL is reachable (optional)
+    #             try:
+    #                 result = urlparse(record.url)
+    #                 if not all([result.scheme, result.netloc]):
+    #                     raise UserError('Invalid URL format')
+    #             except Exception:
+    #                 raise UserError('Invalid URL format')
+
 
     def action_view_website_page(self):
         self.ensure_one()
@@ -160,10 +290,9 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
-        self.action_custom_button()
+        self.action_compile_button()
         self.write({'stage': 'in_review'})
         self.message_post(body="Record sent for review", message_type="comment")
-
 
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
@@ -174,8 +303,53 @@ class View(models.Model):
         template.send_mail(self.id, force_send=True)
 
     def action_done_button(self):
-        self.write({'stage': 'done'})
-        self.message_post(body="Record approved", message_type="comment")
+        if self.validate_header():
+            self.write({'stage': 'stage'})
+            self.message_post(body="Record moved to the done stage", message_type="comment")
+
+            # # Get Git details
+            # page_name = self.name
+            #
+            # last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # user_id = self.env.user.id
+            # base_branch = "master"
+            # feature_branch = "git-commit"
+            #
+            # # Push changes to Git
+            # success = push_changes_to_git(
+            #     page_name=page_name,
+            #     page_version=self.active_version_id.name,
+            #     last_updated=last_updated,
+            #     user_id=user_id,
+            #     user_name=self.env.user.name,  # Include `user_name`
+            #     base_branch=base_branch,
+            #     feature_branch=feature_branch,
+            #     file_data=self.parse_html_binary
+            # )
+            # if success:
+            #     self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
+            # else:
+            #     self.message_post(body="Failed to push changes to Git.", message_type="comment")
+
+    def validate_header(self):
+
+        if not self.header_title:
+            raise UserError("Set Head Title")
+        if not self.header_description:
+            raise UserError("Set Head Description")
+        if self.header_metadata_ids:
+            required_metadata = {"og:description","og:title","og:image","og:url"}
+            header_metadata = {
+                metadata.property
+                for metadata in self.header_metadata_ids
+                if metadata.property and metadata.content
+            }
+            result = required_metadata.issubset(header_metadata)
+            if not result:
+                raise UserError(f"Head metadata must include all listed properties:\n{required_metadata}")
+        else:
+            raise UserError("Set Head metadata")
+        return True
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
@@ -189,7 +363,6 @@ class View(models.Model):
         self.write({'stage': 'in_progress'})
         self.message_post(body="Record rejected", message_type="comment")
 
-
     def send_email_action(self):
         # Logic to send email using Odoo's email system
         mail_values = {
@@ -199,6 +372,7 @@ class View(models.Model):
             'email_from': self.env.user.email,
         }
         self.env['mail.mail'].create(mail_values).send()
+
     def action_approve(self):
         self.write({'stage': 'approved'})
         self.message_post(body="Record approved", message_type="comment")
@@ -248,8 +422,23 @@ class View(models.Model):
             'view_arch':soup.prettify(),
             'user_id': self.env.user.id,
             'status': True,
-
         })
+        self.create_php_header(header=file_text)
+
+    # def action_open_page_header(self):
+    #
+    #     return {
+    #         'name': 'Page Header',
+    #         'view_mode': 'form',
+    #         'res_model': 'automated_seo.page_header',
+    #         'view_id': self.env.ref('automated_seo.page_header_embedded_form').id,
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new',  # This will open in a popup
+    #         'context': {
+    #             'default_page': self.name,  # If you want to pass any default values
+    #         }
+    #     }
+
 
     def normalize_text(self,text):
         return ' '.join(str(text).split())
@@ -267,49 +456,84 @@ class View(models.Model):
 
     def replace_php_variables(self,content):
         # Regex pattern to match <?phpecho$variable?>
-        pattern = r"<\?phpecho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+        # pattern = r"<\?php*\secho\$([a-zA-Z_][a-zA-Z0-9_]*)\?>"
+        pattern = r'<\?php\s*echo\s*\$?([a-zA-Z_][a-zA-Z0-9_]*)\s*\?>'
 
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="0">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="0">{{{variable_value}}}</span>'
             )
-
-        # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
     def replace_php_const_variables(self,content):
         # Regex pattern to match <?phpecho$variable?>
-        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+        # pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\?>"
+        #  pattern = r'<\?php\s*echo\s*\$?([a-zA-Z_][a-zA-Z0-9_]*)\s*\?>'
+        pattern = r'<\?php\s*echo\s*constant\s*\(\s*[\'"]([a-zA-Z_][a-zA-Z0-9_]*)[\'"]?\s*\)\s*\?>'
 
 
         # Function to generate the replacement text
         def replacer(match):
             variable_name = match.group(1)
+            value = self.env['automated_seo.php_variables'].search([('name', '=', variable_name)], limit=1).read(['value'])[0]
+            variable_value = value.get('value') if value.get('value') else variable_name
             return (
                 f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{variable_name}" data-php-const-var="1">{variable_name}</span>'
+                f'data-php-var="{variable_name}" data-php-const-var="1">{{{variable_value}}}</span>'
             )
 
         # Replace all matches in the content
         return re.sub(pattern, replacer, content)
 
-    def replace_php_constants(self,content):
-        # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
-        pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+    # def replace_php_constants(self,content):
+    #     # Regex pattern to match <?php echo constant("CONSTANT_NAME")?>
+    #     pattern = r"<\?phpechoconstant\(\s*\"([a-zA-Z_][a-zA-Z0-9_]*)\"\s*\)\s*\?>"
+    #
+    #     # Function to generate the replacement text
+    #     def replacer(match):
+    #         constant_name = match.group(1)
+    #         return (
+    #             f'<span class="o_au_php_var o_text-php-var-info" '
+    #             f'data-php-var="{constant_name}" data-php-const-var="1">{constant_name}</span>'
+    #         )
+    #
+    #     # Replace all matches in the content
+    #     return re.sub(pattern, replacer, content)
 
-        # Function to generate the replacement text
-        def replacer(match):
-            constant_name = match.group(1)
-            return (
-                f'<span class="o_au_php_var o_text-php-var-info" '
-                f'data-php-var="{constant_name}" data-php-const-var="1">Description</span>'
-            )
+    def create_php_header(self,header):
+        header = BeautifulSoup(header,'html.parser').head
+        self.header_title = header.title.text
+        meta_tags = header.find_all('meta')
+        for meta_tag in meta_tags :
+            # try:
+            if meta_tag.get('name'):
+                self.header_description = meta_tag.get('content')
+            else:
+                self.env['automated_seo.page_header_metadata'].create({
+                    'view_version_id': self.active_version_id,
+                    'view_id': self.id,
+                    'property': meta_tag.get('property') if meta_tag.get('property') else None,
+                    'content': meta_tag.get('content')
+                })
 
-        # Replace all matches in the content
-        return re.sub(pattern, replacer, content)
+        link_tags = header.find_all('link')
+        for link_tag in link_tags:
+            css_link = link_tag['href']
+            if not self.env['automated_seo.page_header_link'].search(
+                    [('css_link', '=', css_link),
+                     ('view_version_id', '=', self.active_version_id.id),
+                     ('view_id', '=', self.id)]):
+                self.env['automated_seo.page_header_link'].create({
+                    'view_version_id': self.active_version_id.id,
+                    'css_link': css_link,
+                    'view_id': self.id
+                })
+
 
     def convert_php_tags(self,content):
 
@@ -337,9 +561,10 @@ class View(models.Model):
             if url and url.startswith(base):
                 a['href'] = url.replace(base, anchor_blog_url_php)
 
-        content = self.minify_php_tags(self.normalize_text(soup.prettify()))
+        content = self.normalize_text(soup.prettify())
         for tag in tags:
-            content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
+            content = re.sub(pattern=tag.get('php'),repl=tag.get('snippet'),string=content)
+            # content = content.replace(self.minify_php_tags(self.normalize_text(tag.get('php'))),tag.get('snippet'))
 
         content = self.replace_php_variables(content=content)
         content = self.replace_php_const_variables(content=content)
@@ -351,28 +576,41 @@ class View(models.Model):
 
         sections =  soup.find_all('section')
         content = ""
-        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet'])
+        tags = self.env['automated_seo.php_to_snippet'].search([("php_tag","=",False)]).read(['php', 'snippet','name'])
         for section in sections:
             classes = section.get('class',[])
             if not section.find_parent('section'):
                 section.attrs['data-snippet'] = "s_banner"
                 classes.append('o_automated_seo_php_variable')
                 section['class']=classes
-                new_section = self.normalize_text(section)
+                new_section = str(section)
                 for tag in tags:
-                    new_php = re.sub('\s','',self.normalize_text(tag.get('php')))
+                    new_php =self.normalize_text(tag.get('php'))
                     snippet = tag.get('snippet')
-                    if new_section.find(new_php)!=-1:
+                    if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
-                            if new_php =='<?php$formType="banner";':
-                                match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
+                            match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
+                            if match:
                                 snippet_soup = BeautifulSoup(snippet,'html.parser')
                                 span_tag = snippet_soup.find("span")
                                 if span_tag:
                                     span_tag.string = match.group(1)
-                                    new_php = new_php+f'$bannerDevName="{match.group(1)}";include("tailwind/template/form.php");?>'
                                 snippet = snippet_soup.prettify()
-                        new_section=new_section.replace(new_php,snippet)
+                        elif tag.get('name')=='form':
+                            tech_dark_form_heading = re.search(r'\$tech_dark_form_heading\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
+                            short_desc = re.search(r'\$short_desc\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
+                            snippet_soup = BeautifulSoup(snippet, 'html.parser')
+                            h2_tag = snippet_soup.find(class_="o_au_php_var_tag_tech_dark_form_heading")
+                            p_tag = snippet_soup.find(class_="o_au_php_var_tag_short_desc")
+                            if tech_dark_form_heading and h2_tag:
+                                h2_tag.string = tech_dark_form_heading.group(1)
+                            if short_desc and p_tag:
+                                p_tag.string = short_desc.group(1)
+                            snippet = snippet_soup.prettify()
+
+                        new_section = re.sub(tag.get('php'), snippet, new_section)
+                        # else:
+                        #     new_section=new_section.replace(new_php,snippet)
                 content+=new_section
         soup = BeautifulSoup(content, 'html.parser')
         sections = soup.find_all('section')
@@ -386,31 +624,31 @@ class View(models.Model):
                     tbody = section.find('tbody')
                     tbody['class'] = ['o_sub_items_container']
 
-                #     # Transform table rows
+                    #     # Transform table rows
                     rows = tbody.find_all('tr')
                     for row in rows:
                         # Update content cell class
                         content_cell = row.find_all('td')[1]
                         content_cell['class'] = ['o_tech_stack']
-                #
+                        #
                         # Convert spans to pipe-separated text
                         spans = content_cell.find_all('span')
                         content_span = '|'.join(span.string for span in spans if span.string)
                         [span.decompose() for span in spans]
                         content_cell.string = content_span
-                if 'price-sec' in ids:
-                    spans = section.find_all(class_='o_au_php_var')
+                # if 'price-sec' in ids:
+                #     spans = section.find_all(class_='o_au_php_var')
 
-                    for span in spans:
-                        span.string="2***"
+                #     for span in spans:
+                #         span.string="2***"
                 sub_snippets = None
 
                 if section.find_all('div', class_='boxed'):
                     sub_snippets =section.find_all('div', class_='boxed')
                 elif section.find_all('div',class_='accordian-tab'):
-                     sub_snippets =section.find_all('div', class_='accordian-tab')
+                    sub_snippets =section.find_all('div', class_='accordian-tab')
                 elif section.find_all('div',class_='ind-box'):
-                     sub_snippets =section.find_all('div', class_='ind-box')
+                    sub_snippets =section.find_all('div', class_='ind-box')
 
                 if sub_snippets:
                     container_tag = sub_snippets[0].find_parent()
@@ -450,13 +688,14 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
                 raise
 
         return super(View, self).unlink()
+
     def process_image_with_params(self, attachment, img_tag):
         """
         Process image with cropping parameters and CSS transforms before uploading to S3
@@ -574,11 +813,12 @@ class View(models.Model):
             new_image = base64.b64decode(new_image_data)
             image_file = io.BytesIO(new_image)
             return image_file
+
     def generate_hash(self,length=6):
         """Generate a random string of fixed length."""
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-    def action_custom_button(self):
+    def action_compile_button(self):
         view_name = self.env.context.get('view_name')
         if view_name == None:
             view_name = self.name
@@ -589,16 +829,19 @@ class View(models.Model):
         if html_parser:
             html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.handle_breadcrumbs(html_content=html_parser)
             html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.add_head(html_parser)
+            html_parser = self.add_js_scripts(html_parser)
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
-            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             # html_parser = self.format_paragraphs(html_content=html_parser)
             # html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.format_html_php(html_content=html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
+
             file = base64.b64encode(html_parser.encode('utf-8'))
             version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             file_name = f"{view_name}_{version.name}.php"
@@ -614,6 +857,201 @@ class View(models.Model):
                 'parse_html_filename' : file_name
             })
 
+    # def add_head(self, html_parser):
+    #     # Add the title with proper indentation
+    #     html_head = f"        <title>{self.header_title or 'Default Title'}</title>"
+    #
+    #     # Generate meta tags for all metadata entries with consistent indentation
+    #     meta_tags = ""
+    #     for metadata in self.header_metadata_ids:
+    #         if metadata.name:  # For standard meta tags like description
+    #             meta_tags += f"\n        <meta name=\"{metadata.name}\" content=\"{metadata.content or ''}\">"
+    #         elif metadata.property:  # For Open Graph meta tags
+    #             meta_tags += f"\n        <meta property=\"{metadata.property}\" content=\"{metadata.content or ''}\">"
+    #
+    #     # Combine everything into the final HTML structure with consistent indentation
+    #     complete_html = f"""
+    #     <!DOCTYPE html>
+    #     <html lang="en">
+    #         <head>
+    #     {html_head}{meta_tags}
+    #         </head>
+    #         <body>
+    #             {html_parser or ''}
+    #         </body>
+    #     </html>
+    #     """
+    #
+    #     return complete_html
+
+    def add_js_scripts(self,html_parser):
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        js_scripts = """
+        <?php include("template/common_js-tailwind.php"); ?>
+        <?php include("tailwind/template/link-js.php"); ?>
+        <?php include("main-boot-5/templates/localbusiness-schema.php"); ?>
+        <?php include("main-boot-5/templates/chat-script.php"); ?>
+        <script src="<?php echo BASE_URL; ?>tailwind/js/slider-one-item.js?V-7" defer></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
+        """
+
+        js_scripts = BeautifulSoup(js_scripts,'html.parser')
+        soup.body.append(js_scripts)
+        return soup.prettify()
+
+    def add_head(self, html_parser):
+        soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
+        head_tag = soup.head
+        page_name = self.name.strip().lower().replace(" ", "-")
+        title_tag = soup.new_tag('title')
+        title_tag.string = self.header_title or 'Default Title'
+        head_tag.append(title_tag)
+
+        description_meta = soup.new_tag('meta')
+        description_meta['name'] = 'description'
+        description_meta['content'] = self.header_description
+        head_tag.append(description_meta)
+        for metadata in self.header_metadata_ids:
+            meta_tag = soup.new_tag('meta')
+            if metadata.property:
+                meta_tag['property'] = metadata.property
+                meta_tag['content'] = metadata.content or ''
+            head_tag.append(meta_tag)
+
+        # link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        # head_tag.append(link_css_php)
+        link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        head_tag.append(link_css_php)
+        for link in self.filtered_header_link_ids:
+            tag = soup.new_tag('link')
+            tag['rel'] = "preload"
+            tag['href'] = link.css_link
+            tag['as'] = 'style'
+            tag['onload'] = "this.onload=null;this.rel='stylesheet'"
+            head_tag.append(tag)
+
+
+        webpage_script = f"""
+            <script type="application/ld+json">
+            {{
+                "@context": "https://schema.org",
+                "@graph": [
+                    {{
+                        "@type": "WebSite",
+                        "@id": "<?php echo BASE_URL; ?>#website",
+                        "url": "<?php echo BASE_URL; ?>",
+                        "name": "Bacancy",
+                        "description": "Top product development company with Agile methodology. Hire software developers to get complete product development solution from the best agile software development company.",
+                        "potentialAction": [
+                            {{
+                                "@type": "SearchAction",
+                                "target": {{
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "<?php echo BASE_URL; ?>?s={{search_term_string}}"
+                                }},
+                                "query-input": "required name=search_term_string"
+                            }}
+                        ],
+                        "inLanguage": "en-US"
+                    }},
+                    {{
+                        "@type": "WebPage",
+                        "@id": "<?php echo BASE_URL; ?>{page_name}/#webpage",
+                        "url": "<?php echo BASE_URL; ?>{page_name}/",
+                        "name": "{self.header_title}",
+                        "isPartOf": {{
+                            "@id": "<?php echo BASE_URL; ?>#website"
+                        }},
+                        "datePublished": "2013-04-15T13:23:16+00:00",
+                        "dateModified": "2024-07-17T14:31:52+00:00",
+                        "description": "{self.header_description}"
+                    }}
+                ]
+            }}
+            </script>
+        """
+
+        webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
+
+        head_tag.append(webpage_script_soup)
+
+
+        if html_parser:
+            parsed_content = BeautifulSoup(html_parser, 'html.parser')
+            soup.body.append(parsed_content)
+
+        breadcrumb_items_tags = soup.find_all(class_="breadcrumb-item")
+
+        breadcrumb_items = []
+
+        for index, breadcrumb in enumerate(breadcrumb_items_tags):
+
+            link = breadcrumb.find('a')
+            position = index + 1
+            if link and not link.get('href'):
+                link['href']="#"
+
+            url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+
+            if isinstance(url,ValueError):
+                raise url
+            id = url + '/'
+            name = link.text.strip() if link else breadcrumb.text.strip()
+            item = {
+                "@type": "ListItem",
+                "position": position,
+                "item": {
+                    "@type": "WebPage",
+                    "@id": id
+                }
+            }
+            if index > 0:
+                item["item"]["url"] = url
+            item["item"]["name"] = name
+
+            breadcrumb_items.append(item)
+
+
+        breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
+
+        # Generate the final script
+        breadcrumb_script = f"""
+            <script type="application/ld+json">
+            {{
+                "@context": "http://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": {breadcrumb_items_json}
+            }}
+            </script>
+        """
+        breadcrumb_script_soup = BeautifulSoup(breadcrumb_script, 'html.parser')
+        head_tag.append(breadcrumb_script_soup)
+        return soup.prettify()
+
+    def format_json_with_tabs(self, data, indent_tabs=16):
+        """
+        Format JSON with specified tab spaces per indentation level,
+        ignoring the first line for indentation.
+        """
+        json_string = json.dumps(data, indent=4)  # Convert to JSON with default 4 spaces
+        lines = json_string.splitlines()  # Split into individual lines
+        # Add indentation only from the second line onward
+        tabbed_json = "\n".join(lines[:1] + [" " * indent_tabs + line for line in lines[1:]])
+        return tabbed_json
+
+    def handle_breadcrumbs(self, html_content):
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        for main_entity in soup.find_all(class_='breadcrumb'):
+            active_item = main_entity.find_all(class_='breadcrumb-item')[-1]
+            active_item["class"].append("active")
+            active_item["aria-current"]="page"
+            text_content = active_item.get_text()
+            active_item.clear()
+            active_item.append(text_content)
+
+        return str(soup.prettify())
 
 
     def handle_itemprop_in_faq(self,html_content):
@@ -656,7 +1094,7 @@ class View(models.Model):
         return str(soup)
 
     def format_html_php(self,html_content, indent_size=4):        # Define tag sets
-        inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+        inline_content_tags = {'p', 'span', 'li', 'b', 'i', 'strong', 'em', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','title'}
         self_closing_tags = {'img', 'br', 'hr', 'input', 'meta', 'link'}
         structural_tags = {'div', 'section', 'nav', 'header', 'footer', 'main'}
         table_tags = {'table', 'tr', 'td', 'th', 'thead', 'tbody', 'tfoot'}
@@ -814,7 +1252,7 @@ class View(models.Model):
         for placeholder, php_code in php_blocks.items():
             formatted = formatted.replace(placeholder, php_code,1)
 
-        return formatted
+        return '<!DOCTYPE html>\n'+formatted
     # def format_html_php(self,html_content, indent_size=4):
     #
     # # Define tag sets
@@ -967,6 +1405,15 @@ class View(models.Model):
                 snippet_id = section.get('data-snippet')
                 orginal_snippet_id = snippet_id.split('-')[0]
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
+                snippet_style_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).style.read(['name', 'link'])
+                for snippet_style_record in snippet_style_records:
+                    css_link = snippet_style_record.get('link')
+                    if not self.env['automated_seo.page_header_link'].search([('css_link','=',css_link),('view_version_id','=',version.id),('view_id','=',seo_view.id)]):
+                        self.env['automated_seo.page_header_link'].create({
+                            'view_version_id':version.id,
+                            'css_link':css_link,
+                            'view_id':seo_view.id
+                        })
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
                     php_tags = section.find_all(class_=php_class)
@@ -1011,10 +1458,23 @@ class View(models.Model):
                 snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
                                                                           limit=1).php_tags.read(
                     ['element_class', 'php_tag', 'image_name'])
+                snippet_style_records = self.env['automated_seo.mapper'].search(
+                    [('snippet_id', '=', orginal_snippet_id)], limit=1).style.read(['name', 'link'])
+                for snippet_style_record in snippet_style_records:
+                    css_link = snippet_style_record.get('link')
+                    if not self.env['automated_seo.page_header_link'].search(
+                            [('css_link', '=', css_link),
+                             ('view_version_id', '=', version.id),
+                             ('view_id', '=', seo_view.id)]):
+                        self.env['automated_seo.page_header_link'].create({
+                            'view_version_id': version.id,
+                            'css_link': css_link,
+                            'view_id': seo_view.id
+                        })
 
                 for snippet_record in snippet_records:
                     php_class = snippet_record.get('element_class')
-                    php_tags = soup.find_all(class_=php_class)
+                    php_tags = section.find_all(class_=php_class)
                     if len(php_tags)!=1:
                         for php_tag in php_tags:
                             new_php_tag_class = php_class + self.generate_hash(length=6)
@@ -1095,7 +1555,6 @@ class View(models.Model):
                         website_page.view_id.arch = soup.prettify()
         return str(self.handle_dynamic_img_tag(view_name=view_name))
 
-
     def handle_dynamic_img_tag(self,view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -1169,11 +1628,16 @@ class View(models.Model):
 
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
-            if img.get('height') :
-                img['height'] = int(float(img.get('height')))
-
-            if img.get('width'):
-                img['width'] = int(float(img.get('width')))
+            try:
+                if img.get('height') :
+                    img['height'] = int(float(img.get('height')))
+            except ValueError as e:
+                img['height'] = img.get('height')
+            try:
+                if img.get('height') :
+                    img['width'] = int(float(img.get('width')))
+            except ValueError as e:
+                img['width'] = img.get('width')
 
         return str(soup.prettify())
 
@@ -1281,7 +1745,7 @@ class View(models.Model):
         wrap_tag.unwrap()
         sections = soup.find_all(class_="ou_section")
         for section in sections:
-        # if section:
+            # if section:
             section.unwrap()
         body = soup.find("body")
         if body:
@@ -1386,9 +1850,6 @@ class View(models.Model):
             u_tag.replace_with(span_tag)
 
         return section
-
-
-
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
@@ -1636,6 +2097,8 @@ class View(models.Model):
 
 
         return soup.prettify()
+
+
 
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'

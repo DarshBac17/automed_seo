@@ -12,6 +12,7 @@
         'security/ir.model.access.csv',
         "views/website/footer.xml",
         "views/website/header.xml",
+        # "views/page_header_metadata.xml",
         "views/views.xml",
         # "views/mail_template.xml",
         "views/email_wizard_view.xml",
@@ -22,6 +23,7 @@
         "views/php_to_snippet.xml",
         "views/php_mapper_view.xml",
         "views/php_variables_view.xml",
+        "views/style_view.xml",
         "views/website/header.xml",
         "views/website/footer.xml",
         "views/snippets/steps/s_steps_bg_white.xml",
@@ -40,6 +42,7 @@
         "views/snippets/tech_stack/s_sub_tech_stack.xml",
         "views/snippets/trusted/s_trusted_bg_gray.xml",
         "views/snippets/trusted/s_trusted_bg_white.xml",
+        "views/snippets/breadcrumb/s_breadcrumb.xml",
         "views/snippets/useful_links/s_useful_links_bg_gray.xml",
         "views/snippets/useful_links/s_useful_links_bg_white.xml",
         "views/snippets/useful_links/s_sub_useful_link.xml",
@@ -215,9 +218,12 @@
             'automated_seo/static/src/js/dynamic_editable_box.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
-            'web.assets_backend': [
-                # 'automated_seo/static/src/js/website_version.js',
-                # 'automated_seo/static/src/js/toggle.js',
+        'web.assets_backend': [
+            # 'automated_seo/static/src/js/website_version.js',
+            # 'automated_seo/static/src/js/toggle.js',
+        ],
+        'website.assets_editor': [
+            'automated_seo/static/src/systray_items/*',
         ],
     },
 }

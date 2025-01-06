@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.page_header_tree">
+        <field name="name">automated_seo.page_header.tree</field>
+        <field name="model">automated_seo.page_header</field>
+        <field name="arch" type="xml">
+            <tree string="Page Header">
+                <field name="page"/>
+                <!--                <field name="name"/>-->
+                <field name="title"/>
+                <field name="metadata_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="automated_seo.header_metadata_action">
+        <field name="name">Create Metadata</field>
+        <field name="res_model">automated_seo.header_metadata</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="automated_seo.page_header_embedded_form">
+        <field name="name">automated_seo.page_header.embedded.form</field>
+        <field name="model">automated_seo.page_header</field>
+        <field name="arch" type="xml">
+            <form string="Page Header">
+                <sheet>
+                    <group class="o_half_width" style="margin-bottom: 20px;">
+                        <field name="page" string="Page" />
+                        <field name="title" string="Title" />
+                    </group>
+                    <notebook>
+                        <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;" attrs="{'invisible': [('metadata_ids', 'in', [False, ''])]}">
+                            <field name="metadata_ids">
+                                <tree editable="bottom" class="o_list_view">
+                                    <field name="name" string="Name" />
+                                    <field name="property" string="Property" />
+                                    <field name="content" string="Content" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.page_header_action">
+        <field name="name"> Page Header </field>
+        <field name="res_model">automated_seo.page_header</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_automated_seo_page_header"
+              name="Page headers"
+              parent="menu_automated_seo_root"
+              action="automated_seo.page_header_action"
+              groups="automated_seo.group_automated_seo_admin"
+              sequence="20"/>
+
+
+</odoo>
