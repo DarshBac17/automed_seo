@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<t t-name="automated_seo.SeoSystray" owl="1">
+    <div class="o_seo_menu d-none d-md-block" t-att-class="{ o_translatable: translatable }">
+        <a href="#" accesskey="w" t-on-click="redirectPageSeoMenu" t-att-class="{ 'text-reset': !translatable }">
+            <t t-esc="label"/>
+        </a>
+    </div>
+</t>
+</templates>
+
+
