@@ -186,14 +186,15 @@ class View(models.Model):
 
         record  = super(View, self).create(vals)
 
-        self.env['website.page.version'].create({
-            'description' : 'First Version',
-            'view_id':record.id,
-            'page_id':website_page.id,
-            'view_arch':website_page.view_id.arch_db,
-            'user_id':self.env.user.id,
-            'status':True
-        })
+        if not vals["upload_file"]:
+            self.env['website.page.version'].create({
+                'description' : 'First Version',
+                'view_id':record.id,
+                'page_id':website_page.id,
+                'view_arch':website_page.view_id.arch_db,
+                'user_id':self.env.user.id,
+                'status':True
+            })
         return record
 
     def write(self, vals):
@@ -415,6 +416,11 @@ class View(models.Model):
                                 </t>
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
+        active_version = self.env['website.page.version'].search([('status', '=', True)])
+        if active_version:
+            active_version.header_metadata_ids.unlink()
+            active_version.unlink()
+
         self.env['website.page.version'].create({
             'description': f'{self.upload_filename} File is uploaded',
             'view_id': self.id,
@@ -423,7 +429,10 @@ class View(models.Model):
             'user_id': self.env.user.id,
             'status': True,
         })
+
         self.create_php_header(header=file_text)
+
+
 
     # def action_open_page_header(self):
     #
