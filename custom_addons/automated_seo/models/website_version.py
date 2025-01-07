@@ -124,7 +124,7 @@ class WebsitePageVersion(models.Model):
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
         # Set initial version numbers
-        if not latest_version:
+        if not seo_view.upload_file and not latest_version:
             # First version: v1.0.0
             vals.update({
                 'major_version': 1,
@@ -181,7 +181,7 @@ class WebsitePageVersion(models.Model):
 
         record = super(WebsitePageVersion, self).create(vals)
 
-        if not record.view_id.header_metadata_ids:
+        if not record.view_id.upload_file and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 
         previous_version.header_metadata_ids.write({'view_id': False})
