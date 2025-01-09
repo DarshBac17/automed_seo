@@ -188,18 +188,19 @@
                                 <field name="has_edit_permission" invisible="1"/>
 
                                 <!-- File upload only visible to owner -->
-                                <div class="o_row" attrs="{'invisible': ['|', '|', ('file_uploaded', '=', True), ('stage', 'not in', ['draft']), ('has_edit_permission', '=', False)]}">
+                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')],'readonly': [('has_edit_permission', '=', False)]}">
                                     Upload File
                                     <p style="margin-left:5px">:</p>
                                     <field name="selected_filename"
                                         widget="many2one"
                                         options="{'no_create': True, 'no_create_edit': True}"
+                                       attrs="{'readonly': [('has_edit_permission', '=', False)]}"
                                         style="margin-left:5px"/>
                                     <button name="action_parse_uploaded_file"
                                             type="object"
                                             string="Process"
                                             class="btn btn-primary"
-                                            attrs="{'invisible': ['|', '|', ('upload_file', '=', False), ('file_uploaded', '=', True), ('has_edit_permission', '=', False)]}"/>
+                                            attrs="{'invisible': [('selected_filename', '=', False)],'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
                                 <!--                                <div class="o_row">-->
                                 <!--                                    Upload File-->
@@ -216,6 +217,7 @@
 
                                 <!--                                    </div>-->
                                 <!--                                </div>-->
+                            </div>
                             </div>
                         </group>
                         <group>

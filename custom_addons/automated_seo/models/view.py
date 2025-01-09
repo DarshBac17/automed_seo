@@ -19,7 +19,7 @@ from datetime import datetime
 from ftplib import FTP
 import os
 # from .ftp_setup import push_changes_to_ftp
-from .git_script import push_changes_to_git
+# from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 import subprocess
 # from dotenv import load_dotenv
