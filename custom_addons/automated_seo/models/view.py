@@ -199,6 +199,8 @@ class View(models.Model):
 
     def write(self, vals):
         for record in self:
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+                raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
             if 'name' in vals and record.website_page_id:
                 new_name = vals['name']
                 current_website = self.env['website'].get_current_website()
@@ -383,8 +385,8 @@ class View(models.Model):
         self.ensure_one()
 
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
-                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+                raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
         self.write({'stage': 'in_progress'})
@@ -697,7 +699,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -2117,7 +2119,7 @@ class IrUiView(models.Model):
     def create(self, vals):
         return super(IrUiView, self).create(vals)
 
-    def write(self,vals):
+
         record = super(IrUiView, self).write(vals)
         seo_view = self.env['automated_seo.view'].search([('page_id','=',self.id)])
         version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)])
