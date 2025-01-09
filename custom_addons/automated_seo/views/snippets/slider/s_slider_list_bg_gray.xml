@@ -7,8 +7,8 @@
                     <h2>Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description</p>
                 </div>
-                <div class="center-slide">
-                    <div class="item boxed bg-white style-check">
+                <div class="center-slide o_sub_items_container">
+                    <section class="item boxed bg-white style-check o_replace_section_div">
                         <div class="svg-icon mb-sm">
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-1.svg" alt=""/>
                         </div>
@@ -17,8 +17,8 @@
                             <li>List Item List Item List Item List Item</li>
                             <li>List Item List Item List Item List Item</li>
                         </ul>
-                    </div>
-                    <div class="item boxed bg-white style-check">
+                    </section>
+                    <section class="item boxed bg-white style-check o_replace_section_div">
                         <div class="svg-icon mb-sm">
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ai-software/ais-ico-2.svg" alt=""/>
                         </div>
@@ -27,7 +27,7 @@
                             <li>List Item List Item List Item List Item</li>
                             <li>List Item List Item List Item List Item</li>
                         </ul>
-                    </div>
+                    </section>
                 </div>
                 <div class="text-center mt-md">
                     <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
