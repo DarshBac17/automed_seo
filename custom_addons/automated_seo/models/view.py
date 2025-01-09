@@ -169,8 +169,9 @@ class View(models.Model):
         for record in self:
             # Convert Many2many field to list of IDs
             contributor_ids = record.contributor_ids.ids
+            is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
             record.has_edit_permission = (
-                current_user.id == record.create_uid.id or current_user.id in contributor_ids
+                is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
             )
 
 
