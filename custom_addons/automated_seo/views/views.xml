@@ -175,7 +175,7 @@
                                            nolabel="1"/>
                                 </div>
 
-                                <div class="o_row" attrs="{'invisible': [('file_uploaded', '=', True)]}">
+                                <div class="o_row" attrs="{'invisible': ['|', ('file_uploaded', '=', True), ('stage', 'not in', ['draft'])]}">
                                     Upload File
                                     <p style="margin-left:5px">:</p>
                                     <field name="file_uploaded" invisible="1"/>
