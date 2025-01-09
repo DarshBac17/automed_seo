@@ -6,9 +6,9 @@
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
             <?php endif; ?>-->
 
-            <div class="phone-tablet_if"/>
+            <div class="phone-tablet-if"/>
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="" title="" width="1900" height="900" loading="eager" class="banner-post-img"/>
-            <div class="phone-tablet_endif"/>
+            <div class="phone-tablet-endif"/>
 
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
                 <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
@@ -16,9 +16,11 @@
                     <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
                 </div>
                 <?php endif; ?>-->
-                <p class="device-type-if"/>
-                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="" title="" width="785" height="754" loading="lazy" class="w-full"/>
-                <p class="device-type-endif"/>
+                <p class="phone-tablet-if" style="display:none"/>
+                <div class="lg:col-span-2 lg:order-2">
+                    <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-side-4.png" alt="" title="" width="785" height="754" loading="lazy" class="w-full"/>
+                </div>
+                <p class="phone-tablet-endif" style="display:none"/>
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
@@ -48,7 +50,7 @@
                             </div>
                         </div>
                     </form>
-<!--                    <div class="form-php"/>-->
+                    <!--                    <div class="form-php"/>-->
                     <div class="grid grid-cols-subgrid gap-6 sm:grid-cols-2 md:grid-cols-3 md:[&amp;>div:not(:last-child)]:border-r md:[&amp;>div:not(:last-child)]:pr-2 mt-sm">
                         <div class="flex items-center">
                             <div class="w-28 md:w-1/5 mr-sm">
