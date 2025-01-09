@@ -43,7 +43,7 @@ class WebsitePageVersion(models.Model):
     header_title = fields.Char(string="Title")
     header_description = fields.Text(string="page description")
     # header_description = fields.Text(string="Title")
-
+    selected_filename = fields.Char(string="Selected file name")
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
@@ -52,6 +52,14 @@ class WebsitePageVersion(models.Model):
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
 
+    header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        'view_version_id',
+        string="Links",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
+    prev_version = fields.Many2one('website.page.version', string='Previous Version')
+    
     @api.depends('major_version', 'minor_version', 'patch_version')
     def _compute_version_number(self):
         for record in self:
@@ -89,12 +97,18 @@ class WebsitePageVersion(models.Model):
 
             view.stage = active_version.stage
             # Unlink header_metadata_ids from view without deleting them
-            if view.header_metadata_ids:
+            if view.header_metadata_ids :
                 view.header_metadata_ids.write({'view_id': False})
+            if view.header_link_ids:
+                view.header_link_ids.write({'view_id': False})
 
             # Update header_metadata_ids in active_version to point to the current view
             if active_version.header_metadata_ids:
                 active_version.header_metadata_ids.write({'view_id': view.id})
+
+            if view.header_link_ids:
+                view.header_link_ids.write({'view_id': view.id})
+
 
 
 
@@ -124,7 +138,7 @@ class WebsitePageVersion(models.Model):
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
         # Set initial version numbers
-        if not latest_version:
+        if not latest_version and not vals.get('selected_filename'):
             # First version: v1.0.0
             vals.update({
                 'major_version': 1,
@@ -133,9 +147,11 @@ class WebsitePageVersion(models.Model):
             })
         else:
             if vals.get('status'):
-                previous_version.write({
-                    'status': False
-                })
+                if previous_version:
+                    previous_version.write({
+                        'status': False,
+                        'stage': seo_view.stage
+                    })
                 seo_view.page_id.arch_db = view_arch if view_arch else None
                 seo_view.stage = 'in_progress'
                 seo_view.publish = False
@@ -179,13 +195,14 @@ class WebsitePageVersion(models.Model):
 
 
         record = super(WebsitePageVersion, self).create(vals)
-
-        if not record.view_id.header_metadata_ids:
+        if not record.view_id.selected_filename and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 
         previous_version.header_metadata_ids.write({'view_id': False})
+        previous_version.header_link_ids.write({'view_id': False})
 
         return record
+
 
     def create_default_version_metadata(self, record):
         if not record.view_id.header_metadata_ids:

@@ -18,11 +18,10 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from ftplib import FTP
 import os
-from .ftp_setup import push_changes_to_ftp
+# from .ftp_setup import push_changes_to_ftp
 from .git_script import push_changes_to_git
 from urllib.parse import urlparse
-from odoo.tools.view_validation import validate
-
+import subprocess
 # from dotenv import load_dotenv
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -66,8 +65,9 @@ class View(models.Model):
 
     publish = fields.Boolean('Publish', default=False)
     upload_file = fields.Binary(string="Upload File", attachment=True)
-    upload_filename = fields.Char(string="Upload Filename")
-    file_uploaded = fields.Boolean(string="File Uploaded",default=False)
+    is_new_page = fields.Boolean(default=True)
+    is_processed = fields.Boolean(default=False)
+
     header_title = fields.Char(string="Title")
 
     header_description = fields.Text(string="page description")
@@ -109,10 +109,29 @@ class View(models.Model):
         store=False
     )
 
+    file_source = fields.Selection([
+        ('draft', 'Draft'),
+        ('remote', 'Select Remote File')
+    ], string="File Source", default='draft')
+
+    selected_filename = fields.Many2one(
+        'automated_seo.remote_files',
+        string="Remote Files",
+        domain=[('is_processed', '=', False)]
+    )
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
+    @api.model
+    def _get_remote_files(self):
+        domain = [('is_processed', '=', False)]
+        if self._context.get('search_term'):
+            domain.append(('name', 'ilike', self._context['search_term']))
+        files = self.env['automated_seo.remote_files'].search(domain)
+        return [(f.name, f.name) for f in files]
+
+        
     @api.depends('header_metadata_ids', 'active_version_id')
     def _compute_filtered_header_metadata(self):
         for record in self:
@@ -165,6 +184,7 @@ class View(models.Model):
     @api.model
     def create(self, vals):
         website_page = False
+        new_page = None
         if not self.env.context.get('from_ir_view'):
             page_name = vals['name']
             # new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
@@ -187,16 +207,74 @@ class View(models.Model):
                 vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
 
+        # if vals.get('file_source') == 'remote':
+        #     print("file_source=============================")
+        #
+        #     if not vals.get('selected_filename'):
+        #         raise UserError("Please select a file first.")
+        #
+        #     remote_file = self.env['automated_seo.remote_files'].browse(vals['selected_filename'])
+        #     if not remote_file:
+        #         raise UserError("Selected file not found")
+        #
+        #     try:
+        #         cat_command = ['ssh', 'bacancy@35.202.140.10',
+        #                       f'cat /home/pratik.panchal/temp/html/{remote_file.name}']
+        #         result = subprocess.run(cat_command, capture_output=True, text=True)
+        #
+        #         if result.returncode != 0:
+        #             raise UserError("Failed to read remote file")
+        #
+        #         file_content = result.stdout
+        #         name, ext = remote_file.name.rsplit('.', 1)
+        #
+        #         if ext not in ['php','html']:
+        #             raise UserError("Only PHP or HTML files are allowed.")
+        #
+        #         content = self.convert_php_tags(content=file_content)
+        #         template_name = f"website.{new_page.get('url').split('/')[-1]}" if new_page.get('url') else "website.page"
+        #
+        #         formatted_arch = f'''<t t-name="{template_name}">
+        #                             <t t-call="website.layout">
+        #                             <div id="wrap" class="oe_structure oe_empty">
+        #                                 {content}
+        #                             </div>
+        #                             </t>
+        #                         </t>'''
+        #
+        #         soup = BeautifulSoup(formatted_arch, 'html.parser')
+        #         breakpoint()
+        #         self.env['website.page.version'].create({
+        #             'description': f'{remote_file.name} File is processed',
+        #             'view_id': new_page.get('view_id'),
+        #             'page_id': vals.get('website_page_id'),
+        #             'view_arch': soup.prettify(),
+        #             'user_id': self.env.user.id,
+        #             'status': True,
+        #         })
+        #
+        #         self.create_php_header(header=file_content)
+        #         self.selected_filename.write({'is_processed': True})
+        #         self.message_post(body=f'{self.selected_filename} file processed successfully',
+        #                           message_type="comment")
+        #     except Exception as e:
+        #         raise UserError(f"Error processing file: {str(e)}")
         record  = super(View, self).create(vals)
+        record.is_new_page = False
 
-        self.env['website.page.version'].create({
-            'description' : 'First Version',
-            'view_id':record.id,
-            'page_id':website_page.id,
-            'view_arch':website_page.view_id.arch_db,
-            'user_id':self.env.user.id,
-            'status':True
-        })
+        if not vals.get('selected_filename'):
+            self.env['website.page.version'].create({
+                'description' : 'First Version',
+                'view_id':record.id,
+                'page_id':website_page.id,
+                'view_arch':website_page.view_id.arch_db,
+                'user_id':self.env.user.id,
+                'status':True
+            })
+        print("================================")
+        print(record.is_new_page)
+        print("================================")
+
         return record
 
     def write(self, vals):
@@ -316,19 +394,19 @@ class View(models.Model):
             user_id = self.env.user.id
 
             # Step 3: Call the push_changes_to_ftp function to upload the file to the FTP server
-            upload_success = push_changes_to_ftp(
-                page_name=page_name,
-                page_version=page_version,
-                last_updated=last_updated,
-                user_id=user_id,
-                user_name=self.env.user.name,
-                file_data= self.parse_html_binary
-            )
+            # upload_success = connect_to_aws_ftp(
+            #     page_name=page_name,
+            #     page_version=page_version,
+            #     last_updated=last_updated,
+            #     user_id=user_id,
+            #     user_name=self.env.user.name,
+            #     file_data= self.parse_html_binary
+            # )
 
-            if upload_success:
-                print("File successfully uploaded to FTP server.")
-            else:
-                print("File upload failed.")
+            # if upload_success:
+            #     print("File successfully uploaded to FTP server.")
+            # else:
+            #     print("File upload failed.")
 
             # # Get Git details
             # page_name = self.name
@@ -419,34 +497,118 @@ class View(models.Model):
             'target': 'self',
         }
 
+    def get_remote_file_content(self, filename):
+        try:
+            cat_command = ['ssh', 'bacancy@35.202.140.10', f'cat /home/pratik.panchal/temp/html/{filename}']
+            result = subprocess.run(cat_command, capture_output=True, text=True)
+            if result.returncode == 0:
+                return result.stdout
+            return False
+        except Exception:
+            return False
+    
     def action_parse_uploaded_file(self):
+        self.ensure_one()
+        if not self.selected_filename:
+            raise UserError("Please select a file first.")
+            
+        try:
+            file_name = self.selected_filename.name
+            # Get remote file content
+            cat_command = ['ssh', 'bacancy@35.202.140.10', 
+                          f'cat /home/pratik.panchal/temp/html/{file_name}']
+            result = subprocess.run(cat_command, capture_output=True, text=True)
+            if result.returncode != 0:
+                raise UserError("Failed to read remote file")
+                
+            file_content = result.stdout
+            name, ext = file_name.rsplit('.', 1)
+            
+            if ext not in ['php','html']:
+                raise UserError("Only PHP or HTML files are allowed.")
+                
+            content = self.convert_php_tags(content=file_content)
+            template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
+            
+            formatted_arch = f'''<t t-name="{template_name}">
+                                    <t t-call="website.layout">
+                                    <div id="wrap" class="oe_structure oe_empty">
+                                        {content}
+                                    </div>
+                                    </t>
+                                </t>'''
+                                
+            soup = BeautifulSoup(formatted_arch,'html.parser')
 
-        self.file_uploaded = bool(self.upload_file)
-        self.message_post(body=f'{self.upload_filename} File is uploaded', message_type="comment")
-        name, ext = self.upload_filename.rsplit('.', 1)
-        if ext not in ['php','html']:
-            raise UserError("Upload php or html file.")
-        file_content = base64.b64decode(self.upload_file)
-        file_text = file_content.decode('utf-8')
-        content = self.convert_php_tags(content=file_text)
-        template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
-        formatted_arch = f'''<t t-name="{template_name}">
-                                <t t-call="website.layout">
-                                <div id="wrap" class="oe_structure oe_empty">
-                                    {content}
-                                </div>
-                                </t>
-                            </t>'''
-        soup = BeautifulSoup(formatted_arch,'html.parser')
-        self.env['website.page.version'].create({
-            'description': f'{self.upload_filename} File is uploaded',
+            version = self.env['website.page.version'].create({
+                'description': f'{file_name} File is processed',
+                'view_id': self.id,
+                'page_id': self.page_id,
+                'view_arch': soup.prettify(),
+                'user_id': self.env.user.id,
+                'status': True,
+                'publish': True,
+                'selected_filename':self.selected_filename.name,
+            })
+            self.with_context(view_name=self.name).action_compile_button()
+            version.status = False
+            new_version = self.env['website.page.version'].create({
+            'description': f'{file_name} File is processed',
             'view_id': self.id,
             'page_id': self.page_id,
-            'view_arch':soup.prettify(),
+            'view_arch': soup.prettify(),
             'user_id': self.env.user.id,
-            'status': True,
-        })
-        self.create_php_header(header=file_text)
+            'prev_version': version.id,
+            'publish': False,
+            })
+            
+            # Call action_create_version on new version
+            new_version.with_context(
+                prev_version=version.id,
+                unpublish=True
+            ).action_create_version()
+            
+            self.create_php_header(header=file_content)
+            self.is_processed = True
+            self.selected_filename.write({'is_processed': True})
+
+            
+            self.message_post(body=f'{self.selected_filename} file processed successfully', 
+                            message_type="comment")
+
+
+            
+        except Exception as e:
+            raise UserError(f"Error processing file: {str(e)}")
+
+    # def action_parse_uploaded_file(self):
+
+    #     self.file_uploaded = bool(self.upload_file)
+    #     self.message_post(body=f'{self.upload_filename} File is uploaded', message_type="comment")
+    #     name, ext = self.upload_filename.rsplit('.', 1)
+    #     if ext not in ['php','html']:
+    #         raise UserError("Upload php or html file.")
+    #     file_content = base64.b64decode(self.upload_file)
+    #     file_text = file_content.decode('utf-8')
+    #     content = self.convert_php_tags(content=file_text)
+    #     template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
+    #     formatted_arch = f'''<t t-name="{template_name}">
+    #                             <t t-call="website.layout">
+    #                             <div id="wrap" class="oe_structure oe_empty">
+    #                                 {content}
+    #                             </div>
+    #                             </t>
+    #                         </t>'''
+    #     soup = BeautifulSoup(formatted_arch,'html.parser')
+    #     self.env['website.page.version'].create({
+    #         'description': f'{self.upload_filename} File is uploaded',
+    #         'view_id': self.id,
+    #         'page_id': self.page_id,
+    #         'view_arch':soup.prettify(),
+    #         'user_id': self.env.user.id,
+    #         'status': True,
+    #     })
+    #     self.create_php_header(header=file_text)
 
     # def action_open_page_header(self):
     #
@@ -713,7 +875,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")

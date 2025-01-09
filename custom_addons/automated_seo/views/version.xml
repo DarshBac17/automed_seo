@@ -5,7 +5,7 @@
         <field name="name">website.page.version.tree</field>
         <field name="model">website.page.version</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="false" delete="false">
+            <tree create="false" edit="false" delete="false" default_order="id desc">
                 <field name="id" invisible="1"/>
                 <field name="name"/>
                 <field name="description"/>
