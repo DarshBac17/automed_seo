@@ -245,8 +245,8 @@ class WebsitePageVersion(models.Model):
 
 
     def action_create_version(self):
-
-        unpublish =self.env.context.get('unpublish')
+        prev_version = self.env.context.get('prev_version')
+        publish =self.env.context.get('publish')
         self.ensure_one()
         if not self.view_id:
             raise UserError('View ID is required to create a version')
@@ -256,7 +256,7 @@ class WebsitePageVersion(models.Model):
             ('view_id', '=', self.view_id.id)
         ], limit=1)
 
-        if unpublish:
+        if publish:
             current_version.status = False
             current_version.publish = True
 
@@ -269,6 +269,27 @@ class WebsitePageVersion(models.Model):
                 'stage': 'draft' ,
                 'publish':False# Reset to draft after unpublishing
             })
+            if prev_version:
+                prev_version_record = self.browse(int(prev_version))
+                if prev_version_record.header_metadata_ids:
+                    for metadata in prev_version_record.header_metadata_ids:
+                        self.env['automated_seo.page_header_metadata'].create({
+                            # Add any other fields that need to be copied
+                            'property': metadata.property,
+                            'content': metadata.content,
+                            'view_id': self.view_id.id,
+                            'view_version_id': self.id
+                        }
+                        )
+                if prev_version_record.header_link_ids:
+                    for link in prev_version_record.header_link_ids:
+                        self.env['automated_seo.page_header_link'].create({
+                            # Add any other fields that need to be copied
+                            'css_link': link.css_link,
+                            'view_id': self.view_id.id,
+                            'view_version_id': self.id
+                        }
+                        )
 
             if self.view_id.website_page_id and self.view_arch:
                 self.view_id.website_page_id.arch_db = self.view_arch
