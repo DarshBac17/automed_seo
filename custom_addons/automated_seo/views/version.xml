@@ -19,8 +19,6 @@
                         string="Active"
                         class="btn btn-primary"
                         context="{'id': id,'view_id':view_id}"
-
-
                 />
                 <field name="parse_html_binary" invisible="1"/>
                 <button name="action_download_html"

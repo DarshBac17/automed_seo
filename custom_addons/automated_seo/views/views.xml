@@ -59,44 +59,44 @@
     <!-- Add Send Email button to the main view -->
 
     <!-- Form View -->
-    <record id="automated_seo.view_form" model="ir.ui.view">
+    <record id="automated_seo.view_form" model="ir.ui.view" >
         <field name="name">automated_seo.view.form</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
             <form string="SEO View Management">
                 <header>
-                    <!-- Edit Button -->
+                    <!-- Preserve existing header buttons but add owner check -->
                     <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
-                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"/>
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"
+                           readonly="1"/>
 
                     <field name="publish" invisible="1"/>
+                    <field name="is_owner" invisible="1"/>
 
+                    <!-- All buttons now check for is_owner -->
                     <button name="action_edit_website_page"
                             type="object"
                             string="Edit"
-                            attrs="{'invisible': ['|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress'])]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"/>
 
-
-                    <!-- Preview Button -->
                     <button name="action_view_website_page"
                             type="object"
                             string="Preview"
                             class="btn oe_highlight"/>
-                    <!-- Compile Button -->
+
                     <button name="action_compile_button"
                             type="object"
                             string="Compile"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"
                             context="{'view_name': name}"/>
 
                     <button name="action_send_for_review"
                             string="Send For review"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_progress')]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
                             type="object"
                             class="btn btn-primary"/>
-
                     <!-- Send Email Button -->
                     <!--                    <button name="%(action_seo_send_email_wizard)d"-->
                     <!--                            string="Send Email"-->
@@ -112,52 +112,50 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'in_review'),('stage', '!=', 'stage')]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'stage']), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
+
                     <button name="action_done_button"
                             type="object"
                             string="Stage"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),
-                            ('stage', '!=', 'in_review')]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
-                    <!-- Publish Button -->
+
                     <button name="action_publish_button"
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'stage')]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
+
                     <field name="active_version_id" invisible="1"/>
+
                     <button name="%(automated_seo_version)d"
-                        type="action"
-                        string="Unpublish"
-                        class="btn oe_highlight"
-                        attrs="{'invisible': ['|', ('publish', '=', True),('stage', '!=', 'publish')]}"
-                        context="{
+                            type="action"
+                            string="Unpublish"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'publish'), ('has_edit_permission', '=', False)]}"
+                            context="{
                         'default_view_id': id,
                         'prev_version':active_version_id,
                         'form_view_ref': 'automated_seo.automated_seo_version_form'
                     }"/>
-
-
-
-
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <div class="o_col" style="width:350px">
+                                <!-- Make fields readonly for non-owners -->
                                 <div class="o_row">
                                     <h1>
-                                        <field name="name" required="1"/>
+                                        <field name="name" required="1" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                     </h1>
                                 </div>
 
                                 <div class="o_row">
                                     Page Id
                                     <p style="margin-left:5px">:</p>
-
                                     <field name="unique_page_id" readonly="1"
                                            attrs="{'invisible': [('id', '=', False)]}"/>
                                 </div>
@@ -165,15 +163,15 @@
                                 <div class="o_row">
                                     Page Url
                                     <p style="margin-left:5px">:</p>
-                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"/>
+                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
 
                                 <div class="o_row">
                                     Owner
                                     <p style="margin-left:5px">:</p>
-
                                     <field name="create_uid" widget="many2one_avatar" options="{'size': [250, 250]}"
-                                           style="margin-left:5px"
+                                           style="margin-left:5px" readonly="1"
                                            nolabel="1"/>
                                 </div>
                                 <field name="is_new_page" invisible="1"/>
@@ -183,9 +181,15 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="file_source" widget="radio" options="{'horizontal': true}"/>
                                 </div>
+                                <field name="has_edit_permission" invisible="1"/>
 
                                 <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
                                     <label for="selected_filename" string="Select File"/>
+                                <field name="has_edit_permission" invisible="1"/>
+
+                                <!-- File upload only visible to owner -->
+                                <div class="o_row" attrs="{'invisible': ['|', '|', ('file_uploaded', '=', True), ('stage', 'not in', ['draft']), ('has_edit_permission', '=', False)]}">
+                                    Upload File
                                     <p style="margin-left:5px">:</p>
                                     <field name="selected_filename"
                                         widget="many2one"
@@ -195,7 +199,7 @@
                                             type="object"
                                             string="Process"
                                             class="btn btn-primary"
-                                            attrs="{'invisible': [('selected_filename', '=', False)]}"/>
+                                            attrs="{'invisible': ['|', '|', ('upload_file', '=', False), ('file_uploaded', '=', True), ('has_edit_permission', '=', False)]}"/>
                                 </div>
                                 <!--                                <div class="o_row">-->
                                 <!--                                    Upload File-->
@@ -219,47 +223,46 @@
                                 <div class="o_row">
                                     Created At
                                     <p style="margin-left:5px">:</p>
-                                    <field name="create_date" style="margin-left:5px"/>
+                                    <field name="create_date" style="margin-left:5px" readonly="1"/>
                                 </div>
                                 <div class="o_row">
                                     Updated At
                                     <p style="margin-left:5px">:</p>
-                                    <field name="write_date" style="margin-left:5px"/>
+                                    <field name="write_date" style="margin-left:5px" readonly="1"/>
                                 </div>
                                 <field name="is_owner" invisible="1"/>
 
                                 <!--<div style="margin: 0 0 16px 0">  &lt;!&ndash; top right bottom left &ndash;&gt;
-                                    <button name="action_open_page_header"
-                                            type="object"
-                                            string="OPEN PAGE HEADER"
-                                            class="oe_highlight"/>
-                                </div>-->
-
+        <button name="action_open_page_header"
+                type="object"
+                string="OPEN PAGE HEADER"
+                class="oe_highlight"/>
+    </div>-->
                                 <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
                                     Contributors
                                     <p style="margin-left:5px">:</p>
                                     <field name="contributor_ids"
                                            widget="many2many_tags_avatar"
                                            options="{'color_field': 'color', 'no_create_edit': True}"
-                                           placeholder="Add contributors..."/>
+                                           placeholder="Add contributors..."
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
                             </div>
                         </group>
                     </group>
                     <notebook>
-                        <page string="Page Versions"
-                              attrs="{'invisible': [('version', 'in', [False, ''])]}">
-                            <field name="version"/>
+                        <page string="Page Versions" attrs="{'invisible': [('version', 'in', [False, ''])]}">
+                            <field name="version" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                         </page>
                         <page string="Header Management">
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
-                                    <field name="header_title" string="Header Title" />
-                                    <field name="header_description" string="Page Description" />
+                                    <field name="header_title" string="Header Title" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_description" string="Page Description" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
-                                        <field name="header_metadata_ids">
+                                        <field name="header_metadata_ids" attrs="{'readonly': [('has_edit_permission', '=', False)]}">
                                             <tree editable="bottom" class="o_list_view">
                                                 <field name="property" string="Property"/>
                                                 <field name="content" string="Content"/>
@@ -269,11 +272,9 @@
                                 </notebook>
                             </sheet>
                         </page>
-                        <page string="Compile Output"
-                              attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
+                        <page string="Compile Output" attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
                             <field name="parse_html" widget="ace" options="{'mode': 'xml'}" readonly="1"/>
                         </page>
-
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

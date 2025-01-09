@@ -2,12 +2,12 @@
 <odoo>
     <template id="s_banner_side_matrix_with_form" name="Banner Side Matrix with Form">
         <section class="banner banner-post header-top bg-dark o_automated_seo_php_variable">
-            <div class="phone-tablet_if"/>
+            <div class="phone-tablet-if"/>
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg"
                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg"
                  alt="" title="" width="1900" height="900"
                  loading="eager" class="banner-post-img"/>
-            <div class="phone-tablet_endif"/>
+            <div class="phone-tablet-endif"/>
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
                 <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading</h1>

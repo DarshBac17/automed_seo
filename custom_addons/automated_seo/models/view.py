@@ -109,6 +109,13 @@ class View(models.Model):
         store=False
     )
 
+    has_edit_permission = fields.Boolean(
+        compute='_check_edit_permission',
+        string='Has edit permission',
+        store=False,
+        default=True
+    )
+
     file_source = fields.Selection([
         ('draft', 'Draft'),
         ('remote', 'Select Remote File')
@@ -131,7 +138,7 @@ class View(models.Model):
         files = self.env['automated_seo.remote_files'].search(domain)
         return [(f.name, f.name) for f in files]
 
-        
+
     @api.depends('header_metadata_ids', 'active_version_id')
     def _compute_filtered_header_metadata(self):
         for record in self:
@@ -160,6 +167,8 @@ class View(models.Model):
         if self.upload_file:
             if self.env.context.get('upload_filename'):
                 self.upload_filename = self.env.context.get('upload_filename')
+
+
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -172,6 +181,18 @@ class View(models.Model):
         current_user = self.env.user
         for record in self:
             record.is_owner = current_user.id == record.create_uid.id
+
+    @api.depends('create_uid', 'contributor_ids')
+    def _check_edit_permission(self):
+        """Compute if the current user has edit permissions"""
+        current_user = self.env.user
+        for record in self:
+            # Convert Many2many field to list of IDs
+            contributor_ids = record.contributor_ids.ids
+            record.has_edit_permission = (
+                current_user.id == record.create_uid.id or current_user.id in contributor_ids
+            )
+
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -278,6 +299,7 @@ class View(models.Model):
         return record
 
     def write(self, vals):
+
         for record in self:
             if 'name' in vals and record.website_page_id:
                 new_name = vals['name']
@@ -483,8 +505,8 @@ class View(models.Model):
         self.ensure_one()
 
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
-                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+                raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
         self.write({'stage': 'in_progress'})
@@ -506,30 +528,30 @@ class View(models.Model):
             return False
         except Exception:
             return False
-    
+
     def action_parse_uploaded_file(self):
         self.ensure_one()
         if not self.selected_filename:
             raise UserError("Please select a file first.")
-            
+
         try:
             file_name = self.selected_filename.name
             # Get remote file content
-            cat_command = ['ssh', 'bacancy@35.202.140.10', 
+            cat_command = ['ssh', 'bacancy@35.202.140.10',
                           f'cat /home/pratik.panchal/temp/html/{file_name}']
             result = subprocess.run(cat_command, capture_output=True, text=True)
             if result.returncode != 0:
                 raise UserError("Failed to read remote file")
-                
+
             file_content = result.stdout
             name, ext = file_name.rsplit('.', 1)
-            
+
             if ext not in ['php','html']:
                 raise UserError("Only PHP or HTML files are allowed.")
-                
+
             content = self.convert_php_tags(content=file_content)
             template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
-            
+
             formatted_arch = f'''<t t-name="{template_name}">
                                     <t t-call="website.layout">
                                     <div id="wrap" class="oe_structure oe_empty">
@@ -537,7 +559,7 @@ class View(models.Model):
                                     </div>
                                     </t>
                                 </t>'''
-                                
+
             soup = BeautifulSoup(formatted_arch,'html.parser')
 
             version = self.env['website.page.version'].create({
@@ -561,23 +583,23 @@ class View(models.Model):
             'prev_version': version.id,
             'publish': False,
             })
-            
+
             # Call action_create_version on new version
             new_version.with_context(
                 prev_version=version.id,
                 unpublish=True
             ).action_create_version()
-            
+
             self.create_php_header(header=file_content)
             self.is_processed = True
             self.selected_filename.write({'is_processed': True})
 
-            
-            self.message_post(body=f'{self.selected_filename} file processed successfully', 
+
+            self.message_post(body=f'{self.selected_filename} file processed successfully',
                             message_type="comment")
 
 
-            
+
         except Exception as e:
             raise UserError(f"Error processing file: {str(e)}")
 
@@ -624,8 +646,6 @@ class View(models.Model):
     #         }
     #     }
 
-    def extract_header_data(self):
-        pass
 
     def normalize_text(self,text):
         return ' '.join(str(text).split())
@@ -1176,13 +1196,15 @@ class View(models.Model):
 
             link = breadcrumb.find('a')
             position = index + 1
+            if link and not link.get('href'):
+                link['href']="#"
 
-            url = link['href'] if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+            url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
             if isinstance(url,ValueError):
                 raise url
             id = url + '/'
-            name = breadcrumb.text.strip()
+            name = link.text.strip() if link else breadcrumb.text.strip()
             item = {
                 "@type": "ListItem",
                 "position": position,

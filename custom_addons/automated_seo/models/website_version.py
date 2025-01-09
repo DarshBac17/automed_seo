@@ -59,55 +59,58 @@ class WebsitePageVersion(models.Model):
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
     prev_version = fields.Many2one('website.page.version', string='Previous Version')
-    
+
     @api.depends('major_version', 'minor_version', 'patch_version')
     def _compute_version_number(self):
         for record in self:
             record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
+
+
         id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', view_id)], limit=1)
         view = self.env['automated_seo.view'].search([('id','=',current_version.view_id.id)])
 
-        if current_version:
-            current_version.status = False
-            current_version.stage = view.stage
+        if view.has_edit_permission:
+            if current_version:
+                current_version.status = False
+                current_version.stage = view.stage
 
-        active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
+            active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
 
-        if active_version:
-            active_version.status = True
+            if active_version:
+                active_version.status = True
 
-            view.parse_html = active_version.parse_html if active_version.parse_html else None
+                view.parse_html = active_version.parse_html if active_version.parse_html else None
 
-            view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
+                view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
 
-            view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
+                view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
 
-            view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
+                view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
-            view.publish = active_version.publish if active_version.publish else False
+                view.publish = active_version.publish if active_version.publish else False
 
-            view.header_title = active_version.header_title
+                view.header_title = active_version.header_title
 
-            view.header_description = active_version.header_description
+                view.header_description = active_version.header_description
 
-            view.stage = active_version.stage
-            # Unlink header_metadata_ids from view without deleting them
-            if view.header_metadata_ids :
-                view.header_metadata_ids.write({'view_id': False})
-            if view.header_link_ids:
-                view.header_link_ids.write({'view_id': False})
+                view.stage = active_version.stage
+                # Unlink header_metadata_ids from view without deleting them
+                if view.header_metadata_ids :
+                    view.header_metadata_ids.write({'view_id': False})
+                if view.header_link_ids:
+                    view.header_link_ids.write({'view_id': False})
 
-            # Update header_metadata_ids in active_version to point to the current view
-            if active_version.header_metadata_ids:
-                active_version.header_metadata_ids.write({'view_id': view.id})
+                # Update header_metadata_ids in active_version to point to the current view
+                if active_version.header_metadata_ids:
+                    active_version.header_metadata_ids.write({'view_id': view.id})
 
-            if view.header_link_ids:
-                view.header_link_ids.write({'view_id': view.id})
+                if view.header_link_ids:
+                    view.header_link_ids.write({'view_id': view.id})
 
 
 
