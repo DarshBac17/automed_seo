@@ -106,9 +106,18 @@ class View(models.Model):
         store=False
     )
 
+    has_edit_permission = fields.Boolean(
+        compute='_check_edit_permission',
+        string='Has edit permission',
+        store=False,
+        default=True
+    )
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
+
 
     @api.depends('header_metadata_ids', 'active_version_id')
     def _compute_filtered_header_metadata(self):
@@ -138,6 +147,8 @@ class View(models.Model):
         if self.upload_file:
             if self.env.context.get('upload_filename'):
                 self.upload_filename = self.env.context.get('upload_filename')
+
+
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -150,6 +161,18 @@ class View(models.Model):
         current_user = self.env.user
         for record in self:
             record.is_owner = current_user.id == record.create_uid.id
+
+    @api.depends('create_uid', 'contributor_ids')
+    def _check_edit_permission(self):
+        """Compute if the current user has edit permissions"""
+        current_user = self.env.user
+        for record in self:
+            # Convert Many2many field to list of IDs
+            contributor_ids = record.contributor_ids.ids
+            record.has_edit_permission = (
+                current_user.id == record.create_uid.id or current_user.id in contributor_ids
+            )
+
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -198,9 +221,8 @@ class View(models.Model):
         return record
 
     def write(self, vals):
+
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
-                raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
             if 'name' in vals and record.website_page_id:
                 new_name = vals['name']
                 current_website = self.env['website'].get_current_website()
