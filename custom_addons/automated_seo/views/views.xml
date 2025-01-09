@@ -189,7 +189,6 @@
 
                                 <!-- File upload only visible to owner -->
                                 <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')],'readonly': [('has_edit_permission', '=', False)]}">
-                                    Upload File
                                     <p style="margin-left:5px">:</p>
                                     <field name="selected_filename"
                                         widget="many2one"

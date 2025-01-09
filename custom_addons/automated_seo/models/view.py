@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from ftplib import FTP
 import os
-# from .ftp_setup import push_changes_to_ftp
+from .ftp_setup import transfer_file_via_scp
 # from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 import subprocess
@@ -407,28 +407,25 @@ class View(models.Model):
 
     def action_done_button(self):
         if self.validate_header():
-            self.write({'stage': 'stage'})
-            self.message_post(body="Record moved to the done stage", message_type="comment")
 
-            page_name = self.name
+
+            page_name = self.selected_filename.name  if self.selected_filename else self.name
             page_version = self.active_version_id[0].name
-            last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            user_id = self.env.user.id
 
             # Step 3: Call the push_changes_to_ftp function to upload the file to the FTP server
-            # upload_success = connect_to_aws_ftp(
-            #     page_name=page_name,
-            #     page_version=page_version,
-            #     last_updated=last_updated,
-            #     user_id=user_id,
-            #     user_name=self.env.user.name,
-            #     file_data= self.parse_html_binary
-            # )
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data= self.parse_html_binary
+            )
 
-            # if upload_success:
-            #     print("File successfully uploaded to FTP server.")
-            # else:
-            #     print("File upload failed.")
+            if upload_success:
+                self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
+                self.write({'stage': 'stage'})
+                self.message_post(body="Record moved to the done stage", message_type="comment")
+            else:
+                self.message_post(body=f"{page_name} file upload failed.")
+                raise UserError(f"{page_name} file upload failed.")
+
 
             # # Get Git details
             # page_name = self.name
@@ -573,6 +570,8 @@ class View(models.Model):
                 'publish': True,
                 'selected_filename':self.selected_filename.name,
             })
+            self.message_post(body=f"Version '{self.version.name}' created successfully", message_type="comment")
+
             self.with_context(view_name=self.name).action_compile_button()
             version.status = False
             new_version = self.env['website.page.version'].create({
@@ -595,8 +594,7 @@ class View(models.Model):
             self.is_processed = True
             self.selected_filename.write({'is_processed': True})
 
-
-            self.message_post(body=f'{self.selected_filename} file processed successfully',
+            self.message_post(body=f'{self.selected_filename.name} file processed successfully',
                             message_type="comment")
 
 
