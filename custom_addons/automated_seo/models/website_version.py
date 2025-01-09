@@ -44,7 +44,7 @@ class WebsitePageVersion(models.Model):
     header_title = fields.Char(string="Title")
     header_description = fields.Text(string="page description")
     # header_description = fields.Text(string="Title")
-
+    selected_filename = fields.Char(string="Selected file name")
     # One-to-Many relationship: A page can have multiple metadata entries
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
@@ -53,49 +53,66 @@ class WebsitePageVersion(models.Model):
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
 
+    header_link_ids = fields.One2many(
+        'automated_seo.page_header_link',
+        'view_version_id',
+        string="Links",
+        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+    )
+    prev_version = fields.Many2one('website.page.version', string='Previous Version')
+
     @api.depends('major_version', 'minor_version', 'patch_version')
     def _compute_version_number(self):
         for record in self:
             record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
+
+
         id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', view_id)], limit=1)
         view = self.env['automated_seo.view'].search([('id','=',current_version.view_id.id)])
 
-        if current_version:
-            current_version.status = False
-            current_version.stage = view.stage
+        if view.has_edit_permission:
+            if current_version:
+                current_version.status = False
+                current_version.stage = view.stage
 
-        active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
+            active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
 
-        if active_version:
-            active_version.status = True
+            if active_version:
+                active_version.status = True
 
-            view.parse_html = active_version.parse_html if active_version.parse_html else None
+                view.parse_html = active_version.parse_html if active_version.parse_html else None
 
-            view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
+                view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
 
-            view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
+                view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
 
-            view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
+                view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
 
-            view.publish = active_version.publish if active_version.publish else False
+                view.publish = active_version.publish if active_version.publish else False
 
-            view.header_title = active_version.header_title
+                view.header_title = active_version.header_title
 
-            view.header_description = active_version.header_description
+                view.header_description = active_version.header_description
 
-            view.stage = active_version.stage
-            # Unlink header_metadata_ids from view without deleting them
-            if view.header_metadata_ids:
-                view.header_metadata_ids.write({'view_id': False})
+                view.stage = active_version.stage
+                # Unlink header_metadata_ids from view without deleting them
+                if view.header_metadata_ids :
+                    view.header_metadata_ids.write({'view_id': False})
+                if view.header_link_ids:
+                    view.header_link_ids.write({'view_id': False})
 
-            # Update header_metadata_ids in active_version to point to the current view
-            if active_version.header_metadata_ids:
-                active_version.header_metadata_ids.write({'view_id': view.id})
+                # Update header_metadata_ids in active_version to point to the current view
+                if active_version.header_metadata_ids:
+                    active_version.header_metadata_ids.write({'view_id': view.id})
+
+                if view.header_link_ids:
+                    view.header_link_ids.write({'view_id': view.id})
+
 
 
 
@@ -125,7 +142,7 @@ class WebsitePageVersion(models.Model):
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
         # Set initial version numbers
-        if not latest_version:
+        if not latest_version and not vals.get('selected_filename'):
             # First version: v1.0.0
             vals.update({
                 'major_version': 1,
@@ -134,9 +151,11 @@ class WebsitePageVersion(models.Model):
             })
         else:
             if vals.get('status'):
-                previous_version.write({
-                    'status': False
-                })
+                if previous_version:
+                    previous_version.write({
+                        'status': False,
+                        'stage': seo_view.stage
+                    })
                 seo_view.page_id.arch_db = view_arch if view_arch else None
                 seo_view.stage = 'in_progress'
                 seo_view.publish = False
@@ -180,13 +199,14 @@ class WebsitePageVersion(models.Model):
 
 
         record = super(WebsitePageVersion, self).create(vals)
-
-        if not record.view_id.header_metadata_ids:
+        if not record.view_id.selected_filename and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 
         previous_version.header_metadata_ids.write({'view_id': False})
+        previous_version.header_link_ids.write({'view_id': False})
 
         return record
+
 
     def create_default_version_metadata(self, record):
         if not record.view_id.header_metadata_ids:
@@ -229,8 +249,8 @@ class WebsitePageVersion(models.Model):
 
 
     def action_create_version(self):
-
-        unpublish =self.env.context.get('unpublish')
+        prev_version = self.env.context.get('prev_version')
+        publish =self.env.context.get('publish')
         self.ensure_one()
         if not self.view_id:
             raise UserError('View ID is required to create a version')
@@ -240,7 +260,7 @@ class WebsitePageVersion(models.Model):
             ('view_id', '=', self.view_id.id)
         ], limit=1)
 
-        if unpublish:
+        if publish:
             current_version.status = False
             current_version.publish = True
 
@@ -253,6 +273,27 @@ class WebsitePageVersion(models.Model):
                 'stage': 'draft' ,
                 'publish':False# Reset to draft after unpublishing
             })
+            if prev_version:
+                prev_version_record = self.browse(int(prev_version))
+                if prev_version_record.header_metadata_ids:
+                    for metadata in prev_version_record.header_metadata_ids:
+                        self.env['automated_seo.page_header_metadata'].create({
+                            # Add any other fields that need to be copied
+                            'property': metadata.property,
+                            'content': metadata.content,
+                            'view_id': self.view_id.id,
+                            'view_version_id': self.id
+                        }
+                        )
+                if prev_version_record.header_link_ids:
+                    for link in prev_version_record.header_link_ids:
+                        self.env['automated_seo.page_header_link'].create({
+                            # Add any other fields that need to be copied
+                            'css_link': link.css_link,
+                            'view_id': self.view_id.id,
+                            'view_version_id': self.id
+                        }
+                        )
 
             if self.view_id.website_page_id and self.view_arch:
                 self.view_id.website_page_id.arch_db = self.view_arch

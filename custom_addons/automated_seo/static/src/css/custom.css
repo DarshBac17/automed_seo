@@ -209,3 +209,10 @@
 .o_au_php_form_single-form, .o_au_php_form_center-form{
 margin-top:85px;
 }
+
+.o_editable_box {
+    position: relative;
+    border: 2px solid blue;
+    padding: 5px;
+    z-index: 9999;
+}
