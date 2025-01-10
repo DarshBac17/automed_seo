@@ -408,7 +408,7 @@ class View(models.Model):
         self.ensure_one()
 
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+            if not self.has_edit_permission:
                 raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
