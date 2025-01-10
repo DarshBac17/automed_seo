@@ -1563,28 +1563,27 @@ class View(models.Model):
                     img['class'].append(f'o_au_img_{name}_{image_id}')
                     img['class'].append(f'o_imagename_{new_image_name}')
                     if attachment:
-                        processed_image = self.process_image_with_params(attachment=attachment, img_tag=img)
+                        # processed_image = self.process_image_with_params(attachment=attachment, img_tag=img)
                         # print("uploaded successfully=======================")
-
+                        image_data = base64.b64decode(attachment.datas)
                         # new_image_data = attachment.datas
                         # new_image = base64.b64decode(new_image_data)
-                        # image_file = io.BytesIO(processed_image)
-                        self.upload_file_to_s3(file=processed_image, view_name=view_name, s3_filename=new_image_name)
-
                         # temp_folder_path = Path('./temp')
                         # temp_folder_path.mkdir(parents=True, exist_ok=True)
+                        
+                        # Save temporary file
                         # file_path = temp_folder_path / f"{new_image_name}"
                         # with open(file_path, 'wb') as image_file:
-                        #     # Check if processed_image is BytesIO and get the byte content
-                        #     if isinstance(processed_image, io.BytesIO):
-                        #         processed_image.seek(0)  # Move to the start of the BytesIO stream
-                        #         image_data = processed_image.read()  # Read as bytes
-                        #     else:
-                        #         image_data = processed_image  # Assume it's already in bytes
-                        #     if image_data:
-                        #         image_file.write(image_data)
-                        #     else:
-                        #         raise ValueError("Image data is None after processing.")
+                        #     image_file.write(image_data)
+                        # file_obj = io.BytesIO(image_data)
+                        # print("========================")
+                        # print(type(image_data))
+                        # print("========================")
+                        file_obj = io.BytesIO(image_data)
+
+                        # image_file = io.BytesIO(processed_image)
+                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=new_image_name)
+
 
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
