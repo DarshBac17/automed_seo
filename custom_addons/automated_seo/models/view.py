@@ -106,9 +106,18 @@ class View(models.Model):
         store=False
     )
 
+    has_edit_permission = fields.Boolean(
+        compute='_check_edit_permission',
+        string='Has edit permission',
+        store=False,
+        default=True
+    )
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
+
+
 
     @api.depends('header_metadata_ids', 'active_version_id')
     def _compute_filtered_header_metadata(self):
@@ -138,6 +147,8 @@ class View(models.Model):
         if self.upload_file:
             if self.env.context.get('upload_filename'):
                 self.upload_filename = self.env.context.get('upload_filename')
+
+
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -150,6 +161,19 @@ class View(models.Model):
         current_user = self.env.user
         for record in self:
             record.is_owner = current_user.id == record.create_uid.id
+
+    @api.depends('create_uid', 'contributor_ids')
+    def _check_edit_permission(self):
+        """Compute if the current user has edit permissions"""
+        current_user = self.env.user
+        for record in self:
+            # Convert Many2many field to list of IDs
+            contributor_ids = record.contributor_ids.ids
+            is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
+            record.has_edit_permission = (
+                is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
+            )
+
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -198,6 +222,7 @@ class View(models.Model):
         return record
 
     def write(self, vals):
+
         for record in self:
             if 'name' in vals and record.website_page_id:
                 new_name = vals['name']
@@ -383,8 +408,8 @@ class View(models.Model):
         self.ensure_one()
 
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids and not self.env.user.has_group('base.group_system'):
-                raise UserError("You do not have permission to edit this page. Only the owner can edit it.")
+            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+                raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
         self.write({'stage': 'in_progress'})
@@ -697,7 +722,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -2117,7 +2142,7 @@ class IrUiView(models.Model):
     def create(self, vals):
         return super(IrUiView, self).create(vals)
 
-    def write(self,vals):
+
         record = super(IrUiView, self).write(vals)
         seo_view = self.env['automated_seo.view'].search([('page_id','=',self.id)])
         version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)])
