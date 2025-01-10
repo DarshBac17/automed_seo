@@ -1555,6 +1555,7 @@ class View(models.Model):
                 name, ext = image_name.rsplit('.', 1)
                 hash_suffix = self.generate_hash()
                 new_image_name = f"{name}_{hash_suffix}.{ext}"
+                new_image_name = new_image_name.replace(' ', '-').replace('%20', '-')
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
                     img['class'] = [cls for cls in img['class'] if
                                     not (cls.startswith('o_au_img_') or cls.startswith('o_imagename_'))]
@@ -1637,6 +1638,7 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
+                    new_image_name = new_image_name.replace(' ', '-').replace('%20', '-')
                     odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
