@@ -18,21 +18,22 @@ def transfer_file_via_scp(page_name, file_data, page_version=None):
             except Exception as e:
                 print(f"Error writing file: {str(e)}")
                 return False
-        target_dir = "bacancy@35.202.140.10:/home/pratik.panchal/temp/html"
-        target_file = f"{page_name}.php"
-        target_path = f"{target_dir}/{target_file}"
-        scp_command = ['scp', temp_file.name, target_path]
-        result = subprocess.run(
-            scp_command,
-            capture_output=True,
-            text=True
-        )
-        if result.returncode == 0:
-            print(f"File transferred successfully")
-            return True
-        else:
-            print(f"Transfer failed: {result.stderr}")
-            return False
+        # target_dir = "bacancy@35.202.140.10:/home/pratik.panchal/temp/html"
+        # target_file = f"{page_name}.php"
+        # target_path = f"{target_dir}/{target_file}"
+        # scp_command = ['scp', temp_file.name, target_path]
+        # result = subprocess.run(
+        #     scp_command,
+        #     capture_output=True,
+        #     text=True
+        # )
+        # if result.returncode == 0:
+        #     print(f"File transferred successfully")
+        #     return True
+        # else:
+        #     print(f"Transfer failed: {result.stderr}")
+        #     return False
+        return  True
             
     except Exception as e:
         print(f"Error during transfer: {str(e)}")

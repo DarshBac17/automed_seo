@@ -113,6 +113,8 @@ class WebsitePageVersion(models.Model):
                 if view.header_link_ids:
                     view.header_link_ids.write({'view_id': view.id})
 
+                self.view_id.message_post(body=f"Version '{self.name}' activated", message_type="comment")
+
 
 
 
