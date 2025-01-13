@@ -11,19 +11,22 @@
             <field name="interval_type">hours</field>
             <field name="numbercall">-1</field>
             <field name="active">True</field>
+            <field name="priority">5</field>
+            <field name="doall">False</field>
         </record>
 
         <!-- File Sync Cron -->
         <record id="ir_cron_sync_remote_files" model="ir.cron">
-    <field name="name">Sync Remote Files</field>
-    <field name="model_id" ref="model_automated_seo_remote_files"/>
-    <field name="state">code</field>
-    <field name="code">model.with_context(timeout=30).sync_files()</field>
-    <field name="interval_number">1</field>
-    <field name="interval_type">hours</field>
-    <field name="numbercall">-1</field>
-    <field name="active">True</field>
-    <field name="doall">False</field>
-</record>
+            <field name="name">Sync Remote Files</field>
+            <field name="model_id" ref="model_automated_seo_remote_files"/>
+            <field name="state">code</field>
+            <field name="code">model.with_context(timeout=30).sync_files()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="doall">False</field>
+            <field name="priority">10</field>
+        </record>
     </data>
-</odoo>
+</odoo> 

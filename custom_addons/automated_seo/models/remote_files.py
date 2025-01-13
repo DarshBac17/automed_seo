@@ -29,6 +29,15 @@ class RemoteFolders(models.Model):
         for record in self:
             record.path = f"{base_path}/{record.name}" if record.name != 'html' else base_path
 
+    def _has_php_files(self, folder_path):
+        """Check if folder contains PHP files"""
+        try:
+            ssh_command = ['ssh', 'bacancy@35.202.140.10', f'ls -1 {folder_path}/*.php']
+            result = subprocess.run(ssh_command, capture_output=True, text=True)
+            return result.returncode == 0 and bool(result.stdout.strip())
+        except Exception:
+            return False
+    
     @api.model
     def sync_folders(self):
         base_path = '/home/pratik.panchal/temp/html'
@@ -46,8 +55,11 @@ class RemoteFolders(models.Model):
                 for item in items:
                     if item.startswith('d'):
                         folder_name = item.split()[-1]
+                        folder_path = f"{base_path}/{folder_name}"
+                    
+                    if self._has_php_files(folder_path):
                         if not self.search([('name', '=', folder_name)]):
-                            self.create({'name': folder_name})
+                            self.create({'name': folder_name})      
             return True
         except Exception as e:
             _logger.error(f"Error syncing folders: {str(e)}")
