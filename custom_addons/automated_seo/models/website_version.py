@@ -184,6 +184,8 @@ class WebsitePageVersion(models.Model):
 
         record = super(WebsitePageVersion, self).create(vals)
 
+        seo_view.active_version_id = record.id
+
         if not record.view_id.upload_file and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 

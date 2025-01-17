@@ -86,9 +86,7 @@ class View(models.Model):
 
     active_version_id = fields.Many2one(
         'website.page.version',
-        compute='_compute_active_version_id',
-        string="Active Version",
-        store=False  # Set to True if you want to store the value persistently
+        string="Active Version"
     )
 
     # New computed field for filtered metadata
@@ -133,15 +131,28 @@ class View(models.Model):
                 lambda x: x.view_version_id == record.active_version_id
             )
 
-    @api.depends('version.status')
-    def _compute_active_version_id(self):
-        for record in self:
-            active_version = record.version.filtered(lambda v: v.status)
-            record.active_version_id = active_version[0].id if active_version else None
-            record.filtered_header_link_ids = record.header_link_ids.filtered(
-                lambda x: x.view_version_id == record.active_version_id
+    # @api.depends('version.status')
+    # def _compute_active_version_id(self):
+    #     for record in self:
+    #         active_version = record.version.filtered(lambda v: v.status)
+    #         record.active_version_id = active_version[0].id if active_version else None
+    #         record.filtered_header_link_ids = record.header_link_ids.filtered(
+    #             lambda x: x.view_version_id == record.active_version_id
+    #
+    #         )
 
-            )
+    @api.onchange('active_version_id')
+    def _onchange_active_version_id(self):
+        if self.active_version_id:
+
+            prev_active_version = self.env['website.page.version'].search(
+                ['&', ('status', '=', True), ('view_id', '=', self.id)], limit=1)
+
+            prev_active_version.status = False
+
+            self.active_version_id.status = True
+
+
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
         if self.upload_file:
@@ -208,17 +219,18 @@ class View(models.Model):
                 vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
 
+
         record  = super(View, self).create(vals)
 
-        if not vals["upload_file"]:
-            self.env['website.page.version'].create({
-                'description' : 'First Version',
-                'view_id':record.id,
-                'page_id':website_page.id,
-                'view_arch':website_page.view_id.arch_db,
-                'user_id':self.env.user.id,
-                'status':True
-            })
+        self.env['website.page.version'].create({
+            'description': 'First Version',
+            'view_id': record.id,
+            'page_id': website_page.id,
+            'view_arch': website_page.view_id.arch_db,
+            'user_id': self.env.user.id,
+            'status': True
+        })
+
         return record
 
     def write(self, vals):
@@ -441,10 +453,6 @@ class View(models.Model):
                                 </t>
                             </t>'''
         soup = BeautifulSoup(formatted_arch,'html.parser')
-        active_version = self.env['website.page.version'].search([('status', '=', True)])
-        if active_version:
-            active_version.header_metadata_ids.unlink()
-            active_version.unlink()
 
         self.env['website.page.version'].create({
             'description': f'{self.upload_filename} File is uploaded',
