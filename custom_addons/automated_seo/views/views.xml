@@ -129,7 +129,7 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-                    <field name="active_version_id" invisible="1"/>
+<!--                    <field name="active_version_id" invisible="1"/>-->
 
                     <button name="%(automated_seo_version)d"
                             type="action"
@@ -246,6 +246,20 @@
                                            options="{'color_field': 'color', 'no_create_edit': True}"
                                            placeholder="Add contributors..."
                                            attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                </div>
+                                 <div class="o_row"  attrs="{'invisible': [('id', '=', False)]}">
+                                    <label for="active_version_id" string="Active version"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="active_version_id"
+                                           widget="many2one"
+                                           options="{
+                                                'no_create': True,
+                                                'no_create_edit': True,
+                                                'no_open': True
+                                            }"
+                                           domain="[('view_id', '=', id)]"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           style="margin-left:5px"/>
                                 </div>
                             </div>
                         </group>

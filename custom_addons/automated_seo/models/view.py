@@ -89,9 +89,7 @@ class View(models.Model):
 
     active_version_id = fields.Many2one(
         'website.page.version',
-        compute='_compute_active_version_id',
-        string="Active Version",
-        store=False  # Set to True if you want to store the value persistently
+        string="Active Version"
     )
 
     # New computed field for filtered metadata
@@ -121,10 +119,10 @@ class View(models.Model):
         ('remote', 'Select Remote File')
     ], string="File Source", default='draft')
     folder_id = fields.Many2one(
-        'automated_seo.remote_folders',  
+        'automated_seo.remote_folders',
         string='Folder'
     )
-    
+
     selected_filename = fields.Many2one(
         'automated_seo.remote_files',
         string="Remote Files",
@@ -135,8 +133,8 @@ class View(models.Model):
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
-   
-    @api.onchange('folder_id') 
+
+    @api.onchange('folder_id')
     def _onchange_folder(self):
         """Clear and filter files when folder changes"""
         self.selected_filename = False
@@ -165,15 +163,28 @@ class View(models.Model):
                 lambda x: x.view_version_id == record.active_version_id
             )
 
-    @api.depends('version.status')
-    def _compute_active_version_id(self):
-        for record in self:
-            active_version = record.version.filtered(lambda v: v.status)
-            record.active_version_id = active_version[0].id if active_version else None
-            record.filtered_header_link_ids = record.header_link_ids.filtered(
-                lambda x: x.view_version_id == record.active_version_id
+    # @api.depends('version.status')
+    # def _compute_active_version_id(self):
+    #     for record in self:
+    #         active_version = record.version.filtered(lambda v: v.status)
+    #         record.active_version_id = active_version[0].id if active_version else None
+    #         record.filtered_header_link_ids = record.header_link_ids.filtered(
+    #             lambda x: x.view_version_id == record.active_version_id
+    #
+    #         )
 
-            )
+    @api.onchange('active_version_id')
+    def _onchange_active_version_id(self):
+        if self.active_version_id:
+
+            prev_active_version = self.env['website.page.version'].search(
+                ['&', ('status', '=', True), ('view_id', '=', self.id)], limit=1)
+
+            prev_active_version.status = False
+
+            self.active_version_id.status = True
+
+
     @api.onchange('upload_file')
     def _onchange_upload_file(self):
         if self.upload_file:
@@ -201,8 +212,9 @@ class View(models.Model):
         for record in self:
             # Convert Many2many field to list of IDs
             contributor_ids = record.contributor_ids.ids
+            is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
             record.has_edit_permission = (
-                current_user.id == record.create_uid.id or current_user.id in contributor_ids
+                is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
             )
 
 
@@ -458,7 +470,7 @@ class View(models.Model):
         self.ensure_one()
 
         for record in self:
-            if self.env.user.id != record.create_uid.id and self.env.user.id not in record.contributor_ids.ids:
+            if not self.has_edit_permission:
                 raise UserError("You do not have permission to edit this page. Only the owner and contributors can edit it.")
         if not self.page_id:
             raise UserError("No website page associated with this record.")
@@ -490,11 +502,11 @@ class View(models.Model):
         try:
             file_name = self.selected_filename.name
             folder_path = self.folder_id.path
-            
+
             # Get remote file content
             cat_command = ['ssh', 'bacancy@35.202.140.10', f'cat {folder_path}/{file_name}']
             result = subprocess.run(cat_command, capture_output=True, text=True)
-            
+
             if result.returncode != 0:
                 raise UserError("Failed to read remote file")
 
@@ -507,17 +519,17 @@ class View(models.Model):
             # Process content
             content = self.convert_php_tags(content=file_content)
             template_name = f"website.{self.website_page_id.url.split('/')[-1]}" if self.website_page_id.url else "website.page"
-            
+
             formatted_arch = f'''<t t-name="{template_name}">
-                <t t-call="website.layout">
-                    <div id="wrap" class="oe_structure oe_empty">
-                        {content}
-                    </div>
-                </t>
-            </t>'''
+                   <t t-call="website.layout">
+                       <div id="wrap" class="oe_structure oe_empty">
+                           {content}
+                       </div>
+                   </t>
+               </t>'''
 
             soup = BeautifulSoup(formatted_arch, 'html.parser')
-            
+
             # Create initial version
             version = self.env['website.page.version'].create({
                 'description': f'{file_name} File is processed',
@@ -555,7 +567,7 @@ class View(models.Model):
             ).action_create_version()
 
             # Update file status and create headers
-            
+
             self.is_processed = True
             self.selected_filename.write({'is_processed': True})
 
@@ -597,6 +609,7 @@ class View(models.Model):
     #         'status': True,
     #     })
     #     self.create_php_header(header=file_text)
+
 
     # def action_open_page_header(self):
     #
@@ -864,7 +877,7 @@ class View(models.Model):
                         ('name', '=', record.selected_filename.name),
                         ('folder_id', '=', record.folder_id.id)
                     ], limit=1)
-                    
+
                     if remote_file:
                         try:
                             remote_file.write({
