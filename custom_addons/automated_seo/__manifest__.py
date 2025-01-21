@@ -14,7 +14,7 @@
         "views/website/header.xml",
         # "views/page_header_metadata.xml",
         "views/views.xml",
-        # "views/mail_template.xml",
+        "views/cron_job.xml",
         "views/email_wizard_view.xml",
 
         'views/templates.xml',
@@ -190,7 +190,6 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'automated_seo/static/src/js/toggle.js',
             'automated_seo/static/src/css/custom.css',
             'automated_seo/static/src/css/casestudy.css',
             'automated_seo/static/src/css/faq.css',
