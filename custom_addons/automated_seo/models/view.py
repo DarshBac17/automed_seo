@@ -87,18 +87,18 @@ class View(models.Model):
         ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
     )
 
-    active_version_id = fields.Many2one(
+    active_version = fields.Many2one(
         'website.page.version',
         string="Active Version"
     )
 
-    # New computed field for filtered metadata
-    filtered_header_metadata_ids = fields.One2many(
-        'automated_seo.page_header_metadata',
-        compute='_compute_filtered_header_metadata',
-        string="Version Specific Metadata",
-        store=False
-    )
+
+    # filtered_header_metadata_ids = fields.One2many(
+    #     'automated_seo.page_header_metadata',
+    #     compute='_compute_filtered_header_metadata',
+    #     string="Version Specific Metadata",
+    #     store=False
+    # )
 
     filtered_header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
@@ -150,40 +150,29 @@ class View(models.Model):
             }
         return {'domain': {'selected_filename': []}}
 
-    @api.depends('header_metadata_ids', 'active_version_id')
-    def _compute_filtered_header_metadata(self):
-        for record in self:
-            record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
-                lambda x: x.view_version_id == record.active_version_id
-            )
+    # @api.depends('header_metadata_ids', 'active_version')
+    # def _compute_filtered_header_metadata(self):
+    #     for record in self:
+    #         record.filtered_header_metadata_ids = record.header_metadata_ids.filtered(
+    #             lambda x: x.view_version_id == record.active_version
+    #         )
 
-    @api.depends('header_metadata_ids', 'active_version_id')
+    @api.depends('header_metadata_ids', 'active_version')
     def _compute_filtered_header_link(self):
         for record in self:
             record.filtered_header_link_ids = record.header_link_ids.filtered(
-                lambda x: x.view_version_id == record.active_version_id
+                lambda x: x.view_version_id == record.active_version
             )
 
-    # @api.depends('version.status')
-    # def _compute_active_version_id(self):
-    #     for record in self:
-    #         active_version = record.version.filtered(lambda v: v.status)
-    #         record.active_version_id = active_version[0].id if active_version else None
-    #         record.filtered_header_link_ids = record.header_link_ids.filtered(
-    #             lambda x: x.view_version_id == record.active_version_id
-    #
-    #         )
-
-    @api.onchange('active_version_id')
-    def _onchange_active_version_id(self):
-        if self.active_version_id:
-
-            prev_active_version = self.env['website.page.version'].search(
-                ['&', ('status', '=', True), ('view_id', '=', self.id)], limit=1)
-
-            prev_active_version.status = False
-
-            self.active_version_id.status = True
+    @api.onchange('active_version')
+    def _onchange_active_version(self):
+        self.ensure_one()
+        if self.active_version:
+            self.active_version.with_context(id=self.active_version.id,view_id = self.active_version.view_id.id).action_version()
+            # prev_active_version = self.env['website.page.version'].search(
+            #     ['&', ('status', '=', True), ('view_id', '=', self.id)], limit=1)
+            # prev_active_version.status = False
+            # self.active_version.status = True
 
 
     @api.onchange('upload_file')
@@ -231,6 +220,7 @@ class View(models.Model):
         website_page = False
         new_page = None
         if not self.env.context.get('from_ir_view'):
+            vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
             page_name = vals['name']
             # new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
             new_page = self.env['website'].with_context(
@@ -269,21 +259,21 @@ class View(models.Model):
 
         for record in self:
             if 'name' in vals and record.website_page_id:
+                vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
                 new_name = vals['name']
                 current_website = self.env['website'].get_current_website()
 
-                # Update website page
                 record.website_page_id.write({
                     'name': new_name,
                     'url': '/' + new_name.lower().replace(' ', '-'),
                 })
 
-                # Update view
                 if record.page_id:
                     record.page_id.write({
                         'name': new_name,
                         'key': 'website.' + new_name.lower().replace(' ', '_'),
                     })
+
                 menu_item = self.env['website.menu'].search([
                     ('page_id', '=', record.website_page_id.id),
                     ('website_id', '=', current_website.id)
@@ -294,40 +284,26 @@ class View(models.Model):
                 if not self.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
 
-            current_version = self.env['website.page.version'].search(
-                ['&', ('status', '=', True), ('view_id', '=', record.id)], limit=1)
-
-            if current_version:
+            if self.active_version:
 
                 updated_version = {}
                 if 'header_title' in vals:
                     updated_version["header_title"] = vals["header_title"].strip()
+                    og_title_meta = self.env['automated_seo.page_header_metadata'].search(
+                        ['&', ('view_version_id', '=', self.active_version.id), ('property', '=', 'og:title')],limit = 1)
+                    og_title_meta.content = vals["header_title"].strip()
+
                 if 'header_description' in vals:
                     updated_version["header_description"] = vals["header_description"].strip()
+                    og_description_meta = self.env['automated_seo.page_header_metadata'].search(
+                        ['&', ('view_version_id', '=', self.active_version.id), ('property', '=', 'og:description')],limit = 1)
+                    og_description_meta.content = vals["header_description"].strip()
 
-                current_version.write(updated_version)
+                if 'name' in vals:
+                    og_url_meta = self.env['automated_seo.page_header_metadata'].search(['&',('view_version_id','=',self.active_version.id),('property','=','og:url')],limit = 1)
+                    og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
 
-                # if 'header_metadata_ids' in vals:
-                #     # Update existing metadata values
-                #     for metadata, new_metadata in zip(
-                #             current_version.header_metadata_ids,
-                #             record.header_metadata_ids
-                #     ):
-                #         metadata.write({
-                #             'property': new_metadata.property,
-                #             'content': new_metadata.content,
-                #         })
-                #
-                #     # Add additional metadata if `record.header_metadata_ids` has more items
-                #     if len(record.header_metadata_ids) > len(current_version.header_metadata_ids):
-                #         extra_metadata = record.header_metadata_ids[len(current_version.header_metadata_ids):]
-                #         for meta in extra_metadata:
-                #             self.env['automated_seo.page_header_metadata'].create({
-                #                 'property': meta.property,
-                #                 'content': meta.content,
-                #                 'page_id': meta.page_id.id if meta.page_id else False,
-                #                 'page_version_id': current_version.id,
-                #             })
+                self.active_version.write(updated_version)
 
         return super(View, self).write(vals)
 
@@ -373,7 +349,7 @@ class View(models.Model):
 
     def action_stage_button(self):
         if self.validate_header():
-            page_version = self.active_version_id[0].name
+            page_version = self.active_version[0].name
 
             selected_file_version = None
             if self.selected_filename:
@@ -407,7 +383,7 @@ class View(models.Model):
             # # Push changes to Git
             # success = push_changes_to_git(
             #     page_name=page_name,
-            #     page_version=self.active_version_id.name,
+            #     page_version=self.active_version.name,
             #     last_updated=last_updated,
             #     user_id=user_id,
             #     user_name=self.env.user.name,  # Include `user_name`
@@ -443,7 +419,7 @@ class View(models.Model):
     def action_publish_button(self):
         self.write({'stage': 'publish'})
         self.message_post(body="Record publish", message_type="comment")
-        self.active_version_id.publish_at = datetime.now()
+        self.active_version.publish_at = datetime.now()
 
     def action_unpublish_button(self):
         self.write({'stage': 'in_progress'})
@@ -542,17 +518,17 @@ class View(models.Model):
 
             # Create initial version
             version = self.env['website.page.version'].create({
-                'description': f'{file_name} File is processed',
+                'description': f'Initial version',
                 'view_id': self.id,
                 'page_id': self.page_id,
-                'view_arch': soup.prettify(),
+                # 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
                 'status': True,
-                'publish': True,
-                'selected_filename': self.selected_filename.name,
+                # 'publish': True,
+                # 'selected_filename': self.selected_filename.name,
             })
-            self.create_php_header(header=file_content)
-            self.with_context(view_name=self.name).action_compile_button()
+
+            # self.with_context(view_name=self.name).action_compile_button()
             version.status = False
             self.message_post(
                 body=f"File '{file_name}' processed successfully and new version {version.name} created",
@@ -568,18 +544,21 @@ class View(models.Model):
                 'user_id': self.env.user.id,
                 'prev_version': version.id,
                 'publish': False,
+                'status': True,
+                'selected_filename': self.selected_filename.name
             })
 
             # Activate new version
-            new_version.with_context(
-                prev_version=version.id,
-                unpublish=True
-            ).action_create_version()
+            # new_version.with_context(
+            #     prev_version=version.id,
+            #     unpublish=True
+            # ).action_create_version()
 
+            self.create_php_header(header=file_content)
             # Update file status and create headers
 
             self.is_processed = True
-            self.selected_filename.write({'is_processed': True})
+            # self.selected_filename.write({'is_processed': True})
 
             # Post success message
             self.message_post(
@@ -703,6 +682,7 @@ class View(models.Model):
     #     return re.sub(pattern, replacer, content)
 
     def create_php_header(self,header):
+
         header = BeautifulSoup(header,'html.parser').head
         self.header_title = header.title.text
         meta_tags = header.find_all('meta')
@@ -712,7 +692,7 @@ class View(models.Model):
                 self.header_description = meta_tag.get('content')
             else:
                 self.env['automated_seo.page_header_metadata'].create({
-                    'view_version_id': self.active_version_id,
+                    'view_version_id': self.active_version,
                     'view_id': self.id,
                     'property': meta_tag.get('property') if meta_tag.get('property') else None,
                     'content': meta_tag.get('content')
@@ -723,10 +703,10 @@ class View(models.Model):
             css_link = link_tag['href']
             if not self.env['automated_seo.page_header_link'].search(
                     [('css_link', '=', css_link),
-                     ('view_version_id', '=', self.active_version_id.id),
+                     ('view_version_id', '=', self.active_version.id),
                      ('view_id', '=', self.id)]):
                 self.env['automated_seo.page_header_link'].create({
-                    'view_version_id': self.active_version_id.id,
+                    'view_version_id': self.active_version.id,
                     'css_link': css_link,
                     'view_id': self.id
                 })
@@ -885,8 +865,7 @@ class View(models.Model):
                 seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if record.selected_filename:
                     remote_file = self.env['automated_seo.remote_files'].search([
-                        ('name', '=', record.selected_filename.name),
-                        ('folder_id', '=', record.folder_id.id)
+                        ('name', '=', record.selected_filename.name)
                     ], limit=1)
 
                     if remote_file:
@@ -898,7 +877,7 @@ class View(models.Model):
                             print(f"Error resetting file status: {str(e)}")
                 if seo_page:
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -1053,15 +1032,15 @@ class View(models.Model):
             html_parser = html.unescape(html_parser)
 
             file = base64.b64encode(html_parser.encode('utf-8'))
-            version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
-            file_name = f"{view_name}_{version.name}.php"
+            # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
+            file_name = f"{view_name}_{self.active_version.name}.php"
             self.write({
                 'parse_html': html_parser,
                 'parse_html_binary': file ,
                 'parse_html_filename': file_name,
 
             })
-            version.write({
+            self.active_version.write({
                 'parse_html': html_parser,
                 'parse_html_binary':file,
                 'parse_html_filename' : file_name
@@ -1438,6 +1417,7 @@ class View(models.Model):
             formatted = formatted.replace(placeholder, php_code,1)
 
         return '<!DOCTYPE html>\n'+formatted
+
     # def format_html_php(self,html_content, indent_size=4):
     #
     # # Define tag sets
@@ -1588,9 +1568,9 @@ class View(models.Model):
 
             for section in sections:
                 snippet_id = section.get('data-snippet')
-                orginal_snippet_id = snippet_id.split('-')[0]
-                snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
-                snippet_style_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],limit=1).style.read(['name', 'link'])
+                original_snippet_id = snippet_id.split('-')[0]
+                snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', original_snippet_id)],limit=1).php_tags.read(['element_class', 'php_tag', 'image_name'])
+                snippet_style_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', original_snippet_id)],limit=1).style.read(['name', 'link'])
                 for snippet_style_record in snippet_style_records:
                     css_link = snippet_style_record.get('link')
                     if not self.env['automated_seo.page_header_link'].search([('css_link','=',css_link),('view_version_id','=',version.id),('view_id','=',seo_view.id)]):
@@ -1639,12 +1619,12 @@ class View(models.Model):
                 new_data_snippet_id = section.get('data-snippet') + '-' + self.generate_hash()
                 snippet_ids.append(new_data_snippet_id)
                 section['data-snippet'] = new_data_snippet_id
-                orginal_snippet_id = new_data_snippet_id.split('-')[0]
-                snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', orginal_snippet_id)],
+                original_snippet_id = new_data_snippet_id.split('-')[0]
+                snippet_records = self.env['automated_seo.mapper'].search([('snippet_id', '=', original_snippet_id)],
                                                                           limit=1).php_tags.read(
                     ['element_class', 'php_tag', 'image_name'])
                 snippet_style_records = self.env['automated_seo.mapper'].search(
-                    [('snippet_id', '=', orginal_snippet_id)], limit=1).style.read(['name', 'link'])
+                    [('snippet_id', '=', original_snippet_id)], limit=1).style.read(['name', 'link'])
                 for snippet_style_record in snippet_style_records:
                     css_link = snippet_style_record.get('link')
                     if not self.env['automated_seo.page_header_link'].search(
@@ -2212,6 +2192,7 @@ class View(models.Model):
             remove_empty(tag)
 
         return soup.prettify()
+
     # def remove_empty_tags(self, html_parser):
     #     soup = BeautifulSoup(html_parser, 'html.parser')
     #
@@ -2269,6 +2250,7 @@ class View(models.Model):
 
 
     # Function to remove BOM characters from all text elements
+
     def remove_bom(self,html_parser):
 
         soup = BeautifulSoup(html_parser, "html.parser")

@@ -129,7 +129,7 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-                    <!--                    <field name="active_version_id" invisible="1"/>-->
+                    <!--                    <field name="active_version" invisible="1"/>-->
 
                     <button name="%(automated_seo_version)d"
                             type="action"
@@ -138,7 +138,7 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'publish'), ('has_edit_permission', '=', False)]}"
                             context="{
                         'default_view_id': id,
-                        'prev_version':active_version_id,
+                        'prev_version':active_version,
                         'form_view_ref': 'automated_seo.automated_seo_version_form'
                     }"/>
                 </header>
@@ -233,11 +233,11 @@
                                 <field name="is_owner" invisible="1"/>
 
                                 <!--<div style="margin: 0 0 16px 0">  &lt;!&ndash; top right bottom left &ndash;&gt;
-        <button name="action_open_page_header"
-                type="object"
-                string="OPEN PAGE HEADER"
-                class="oe_highlight"/>
-    </div>-->
+                                        <button name="action_open_page_header"
+                                                type="object"
+                                                string="OPEN PAGE HEADER"
+                                                class="oe_highlight"/>
+                                    </div>-->
                                 <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
                                     Contributors
                                     <p style="margin-left:5px">:</p>
@@ -248,9 +248,9 @@
                                            attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
                                 <div class="o_row"  attrs="{'invisible': [('id', '=', False)]}">
-                                    <label for="active_version_id" string="Active version"/>
+                                    <label for="active_version" string="Active version"/>
                                     <p style="margin-left:5px">:</p>
-                                    <field name="active_version_id"
+                                    <field name="active_version"
                                            widget="many2one"
                                            options="{
                                                 'no_create': True,

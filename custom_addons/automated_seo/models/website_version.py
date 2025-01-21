@@ -67,8 +67,6 @@ class WebsitePageVersion(models.Model):
             record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
-
-
         id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
@@ -199,14 +197,13 @@ class WebsitePageVersion(models.Model):
             'stage' : seo_view.stage
         })
 
-
         record = super(WebsitePageVersion, self).create(vals)
-        seo_view.active_version_id = record.id
-        if not record.view_id.selected_filename and not record.view_id.header_metadata_ids:
+        seo_view.active_version = record.id
+        if not record.selected_filename and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 
-        previous_version.header_metadata_ids.write({'view_id': False})
-        previous_version.header_link_ids.write({'view_id': False})
+        record.prev_version.header_metadata_ids.write({'view_id': False})
+        record.prev_version.header_link_ids.write({'view_id': False})
 
         return record
 

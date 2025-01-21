@@ -24,7 +24,7 @@ class PageHeaderMeta(models.Model):
     def create(self, vals):
         if 'view_id' in vals:
             page = self.env['automated_seo.view'].search([('id','=',vals['view_id'])],limit=1)
-            vals['view_version_id'] = page.active_version_id[0].id
+            vals['view_version_id'] = page.active_version[0].id
         record = super(PageHeaderMeta, self).create(vals)
         return record
 
