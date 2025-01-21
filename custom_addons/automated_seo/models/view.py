@@ -77,14 +77,16 @@ class View(models.Model):
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
         'view_id',
-        string="Metadata"
+        string="Metadata",
+        domain = [('is_active', '=', True)]
     )
 
     header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
         'view_id',
         string="Link",
-        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+        ondelete='cascade',
+        domain = [('is_active', '=', True)]
     )
 
     active_version = fields.Many2one(
@@ -100,12 +102,12 @@ class View(models.Model):
     #     store=False
     # )
 
-    filtered_header_link_ids = fields.One2many(
-        'automated_seo.page_header_link',
-        compute='_compute_filtered_header_link',
-        string="Version Specific Link",
-        store=False
-    )
+    # filtered_header_link_ids = fields.One2many(
+    #     'automated_seo.page_header_link',
+    #     compute='_compute_filtered_header_link',
+    #     string="Version Specific Link",
+    #     store=False
+    # )
 
     has_edit_permission = fields.Boolean(
         compute='_check_edit_permission',
@@ -135,20 +137,20 @@ class View(models.Model):
     ]
 
 
-    @api.onchange('folder_id')
-    def _onchange_folder(self):
-        """Clear and filter files when folder changes"""
-        self.selected_filename = False
-        if self.folder_id:
-            return {
-                'domain': {
-                    'selected_filename': [
-                        ('is_processed', '=', False),
-                        ('folder_id', '=', self.folder_id.id)
-                    ]
-                }
-            }
-        return {'domain': {'selected_filename': []}}
+    # @api.onchange('folder_id')
+    # def _onchange_folder(self):
+    #     """Clear and filter files when folder changes"""
+    #     self.selected_filename = False
+    #     if self.folder_id:
+    #         return {
+    #             'domain': {
+    #                 'selected_filename': [
+    #                     ('is_processed', '=', False),
+    #                     ('folder_id', '=', self.folder_id.id)
+    #                 ]
+    #             }
+    #         }
+    #     return {'domain': {'selected_filename': []}}
 
     # @api.depends('header_metadata_ids', 'active_version')
     # def _compute_filtered_header_metadata(self):
@@ -157,22 +159,18 @@ class View(models.Model):
     #             lambda x: x.view_version_id == record.active_version
     #         )
 
-    @api.depends('header_metadata_ids', 'active_version')
-    def _compute_filtered_header_link(self):
-        for record in self:
-            record.filtered_header_link_ids = record.header_link_ids.filtered(
-                lambda x: x.view_version_id == record.active_version
-            )
+    # @api.depends('header_link_ids', 'active_version')
+    # def _compute_filtered_header_link(self):
+    #     for record in self:
+    #         record.filtered_header_link_ids = record.header_link_ids.filtered(
+    #             lambda x: x.view_version_id == record.active_version
+    #         )
 
     @api.onchange('active_version')
     def _onchange_active_version(self):
         self.ensure_one()
         if self.active_version:
             self.active_version.with_context(id=self.active_version.id,view_id = self.active_version.view_id.id).action_version()
-            # prev_active_version = self.env['website.page.version'].search(
-            #     ['&', ('status', '=', True), ('view_id', '=', self.id)], limit=1)
-            # prev_active_version.status = False
-            # self.active_version.status = True
 
 
     @api.onchange('upload_file')
@@ -261,7 +259,7 @@ class View(models.Model):
             if 'name' in vals and record.website_page_id:
                 vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
                 new_name = vals['name']
-                current_website = self.env['website'].get_current_website()
+                current_website = record.env['website'].get_current_website()
 
                 record.website_page_id.write({
                     'name': new_name,
@@ -274,36 +272,31 @@ class View(models.Model):
                         'key': 'website.' + new_name.lower().replace(' ', '_'),
                     })
 
-                menu_item = self.env['website.menu'].search([
+                menu_item = record.env['website.menu'].search([
                     ('page_id', '=', record.website_page_id.id),
                     ('website_id', '=', current_website.id)
                 ], limit=1)
+
+
                 if menu_item:
                     menu_item.write({'name': new_name})
 
-                if not self.env.context.get('from_ir_view'):
+                if not record.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
 
-            if self.active_version:
+            if 'active_version' in vals and 'header_metadata_ids' in vals:
+                for operation in vals['header_metadata_ids']:
+                    if operation[0] == 2:  # If delete operation
+                        self.env['automated_seo.page_header_metadata'].browse(operation[1]).write({'is_active': False})
+                vals['header_metadata_ids'] = [(4, rec.id, 0) for rec in self.header_metadata_ids]
 
-                updated_version = {}
-                if 'header_title' in vals:
-                    updated_version["header_title"] = vals["header_title"].strip()
-                    og_title_meta = self.env['automated_seo.page_header_metadata'].search(
-                        ['&', ('view_version_id', '=', self.active_version.id), ('property', '=', 'og:title')],limit = 1)
-                    og_title_meta.content = vals["header_title"].strip()
 
-                if 'header_description' in vals:
-                    updated_version["header_description"] = vals["header_description"].strip()
-                    og_description_meta = self.env['automated_seo.page_header_metadata'].search(
-                        ['&', ('view_version_id', '=', self.active_version.id), ('property', '=', 'og:description')],limit = 1)
-                    og_description_meta.content = vals["header_description"].strip()
-
+            if record.active_version:
                 if 'name' in vals:
-                    og_url_meta = self.env['automated_seo.page_header_metadata'].search(['&',('view_version_id','=',self.active_version.id),('property','=','og:url')],limit = 1)
+                    og_url_meta = record.env['automated_seo.page_header_metadata'].search(
+                        ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
                     og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
 
-                self.active_version.write(updated_version)
 
         return super(View, self).write(vals)
 
@@ -358,7 +351,6 @@ class View(models.Model):
 
             page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}.php"
 
-            # Step 3: Call the push_changes_to_ftp function to upload the file to the FTP server
             upload_success = transfer_file_via_scp(
                 page_name=page_name,
                 file_data= self.parse_html_binary
@@ -473,6 +465,7 @@ class View(models.Model):
             return False
 
     def action_parse_uploaded_file(self):
+
         self.ensure_one()
         if not self.selected_filename:
             raise UserError("Please select a file first.")
@@ -521,7 +514,7 @@ class View(models.Model):
                 'description': f'Initial version',
                 'view_id': self.id,
                 'page_id': self.page_id,
-                # 'view_arch': soup.prettify(),
+                # 'view_arch': soup.prettify(),'header_metadata_ids': [[4, 1, False], [4, 2, False], [4, 3, False], [4, 4, False], [2, 5, False], [2, 6, False], [2, 7, False], [2, 8, False]]
                 'user_id': self.env.user.id,
                 'status': True,
                 # 'publish': True,
@@ -682,7 +675,6 @@ class View(models.Model):
     #     return re.sub(pattern, replacer, content)
 
     def create_php_header(self,header):
-
         header = BeautifulSoup(header,'html.parser').head
         self.header_title = header.title.text
         meta_tags = header.find_all('meta')
@@ -692,7 +684,7 @@ class View(models.Model):
                 self.header_description = meta_tag.get('content')
             else:
                 self.env['automated_seo.page_header_metadata'].create({
-                    'view_version_id': self.active_version,
+                    'view_version_id': self.active_version.id,
                     'view_id': self.id,
                     'property': meta_tag.get('property') if meta_tag.get('property') else None,
                     'content': meta_tag.get('content')
@@ -852,19 +844,21 @@ class View(models.Model):
 
         for record in self:
             try:
-                if self.env.user.id != record.create_uid.id and not self.env.user.has_group('base.group_system'):
+                if not record.has_edit_permission:
                     raise UserError("You do not have permission to delete this page. Only the owner can edit it.")
-                versions = self.env['website.page.version'].search([('view_id', '=', record.id)])
+                versions = record.env['website.page.version'].search([('view_id', '=', record.id)])
                 if versions:
+                    versions.header_metadata_ids.unlink()
+                    versions.header_link_ids.unlink()
                     versions.unlink()
                 # Delete associated website page
                 if record.page_id:
-                    website_page = self.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
+                    website_page = record.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
                     if website_page:
                         website_page.unlink()
-                seo_page = self.env['automated_seo.page'].search([('page_name', '=', record.name)])
+                seo_page = record.env['automated_seo.page'].search([('page_name', '=', record.name)])
                 if record.selected_filename:
-                    remote_file = self.env['automated_seo.remote_files'].search([
+                    remote_file = record.env['automated_seo.remote_files'].search([
                         ('name', '=', record.selected_filename.name)
                     ], limit=1)
 
@@ -884,6 +878,58 @@ class View(models.Model):
                 raise
 
         return super(View, self).unlink()
+
+    def action_download_parsed_html(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=automated_seo.view&id={}&field=parse_html_binary&filename_field=parse_html_filename&download=true'.format(
+                self.id),
+            'target': 'self',
+        }
+
+    def action_compile_button(self):
+        view_name = self.env.context.get('view_name')
+        if view_name == None:
+            view_name = self.name
+        self.update_snippet_ids(view_name)
+        html_parser  = self.handle_img_change(view_name=view_name)
+        html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
+        html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
+        if html_parser:
+            html_parser = self.remove_bom(html_parser=html_parser)
+            html_parser = self.remove_empty_tags(html_parser = html_parser)
+            html_parser = self.handle_breadcrumbs(html_content=html_parser)
+            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.add_head(html_parser)
+            html_parser = self.add_js_scripts(html_parser)
+            html_parser = self.remove_odoo_classes_from_tag(html_parser)
+            soup = BeautifulSoup(html_parser, "html.parser")
+            html_parser = soup.prettify()
+            # html_parser = self.format_paragraphs(html_content=html_parser)
+            # html_parser = self.remove_extra_spaces(html_parser = html_parser)
+            html_parser = self.format_html_php(html_content=html_parser)
+            html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
+            html_parser = html.unescape(html_parser)
+
+            file = base64.b64encode(html_parser.encode('utf-8'))
+            # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
+            file_name = f"{view_name}_{self.active_version.name}.php"
+            self.write({
+                'parse_html': html_parser,
+                'parse_html_binary': file ,
+                'parse_html_filename': file_name,
+
+            })
+            self.active_version.write({
+                'parse_html': html_parser,
+                'parse_html_binary':file,
+                'parse_html_filename' : file_name
+            })
+
+    def generate_hash(self,length=6):
+        """Generate a random string of fixed length."""
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def process_image_with_params(self, attachment, img_tag):
         """
@@ -1003,48 +1049,6 @@ class View(models.Model):
             image_file = io.BytesIO(new_image)
             return image_file
 
-    def generate_hash(self,length=6):
-        """Generate a random string of fixed length."""
-        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-
-    def action_compile_button(self):
-        view_name = self.env.context.get('view_name')
-        if view_name == None:
-            view_name = self.name
-        self.update_snippet_ids(view_name)
-        html_parser  = self.handle_img_change(view_name=view_name)
-        html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
-        html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
-        if html_parser:
-            html_parser = self.remove_bom(html_parser=html_parser)
-            html_parser = self.remove_empty_tags(html_parser = html_parser)
-            html_parser = self.handle_breadcrumbs(html_content=html_parser)
-            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
-            html_parser = self.add_head(html_parser)
-            html_parser = self.add_js_scripts(html_parser)
-            html_parser = self.remove_odoo_classes_from_tag(html_parser)
-            soup = BeautifulSoup(html_parser, "html.parser")
-            html_parser = soup.prettify()
-            # html_parser = self.format_paragraphs(html_content=html_parser)
-            # html_parser = self.remove_extra_spaces(html_parser = html_parser)
-            html_parser = self.format_html_php(html_content=html_parser)
-            html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
-            html_parser = html.unescape(html_parser)
-
-            file = base64.b64encode(html_parser.encode('utf-8'))
-            # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
-            file_name = f"{view_name}_{self.active_version.name}.php"
-            self.write({
-                'parse_html': html_parser,
-                'parse_html_binary': file ,
-                'parse_html_filename': file_name,
-
-            })
-            self.active_version.write({
-                'parse_html': html_parser,
-                'parse_html_binary':file,
-                'parse_html_filename' : file_name
-            })
 
     def add_js_scripts(self,html_parser):
         soup = BeautifulSoup(html_parser, 'html.parser')
@@ -1076,6 +1080,7 @@ class View(models.Model):
         head_tag.append(description_meta)
         common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>',"html.parser")
         head_tag.append(common_meta_tag)
+
         for metadata in self.header_metadata_ids:
             meta_tag = soup.new_tag('meta')
             if metadata.property:
@@ -1087,7 +1092,7 @@ class View(models.Model):
         # head_tag.append(link_css_php)
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
-        for link in self.filtered_header_link_ids:
+        for link in self.header_link_ids:
             tag = soup.new_tag('link')
             tag['rel'] = "preload"
             tag['href'] = link.css_link
@@ -2080,15 +2085,6 @@ class View(models.Model):
 
         return html_content
 
-    def action_download_parsed_html(self):
-        self.ensure_one()
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=automated_seo.view&id={}&field=parse_html_binary&filename_field=parse_html_filename&download=true'.format(
-                self.id),
-            'target': 'self',
-        }
-
     def upload_file_to_s3(self, file, s3_filename, view_name=None):
 
         content_type, _ = mimetypes.guess_type(s3_filename)
@@ -2131,6 +2127,7 @@ class View(models.Model):
                     Bucket=AWS_STORAGE_BUCKET_NAME,
                     Delete={'Objects': objects_to_delete}
                 )
+
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 

@@ -49,8 +49,7 @@ class WebsitePageVersion(models.Model):
     header_metadata_ids = fields.One2many(
         'automated_seo.page_header_metadata',
         'view_version_id',
-        string="Metadata",
-        ondelete='cascade'  # This ensures child records are deleted when the parent is deleted
+        string="Metadata"
     )
 
     header_link_ids = fields.One2many(
@@ -67,6 +66,7 @@ class WebsitePageVersion(models.Model):
             record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
     def action_version(self):
+
         id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
@@ -77,39 +77,37 @@ class WebsitePageVersion(models.Model):
             if current_version:
                 current_version.status = False
                 current_version.stage = view.stage
+                current_version.header_title = view.header_title
+                current_version.header_description = view.header_description
 
             active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
 
             if active_version:
                 active_version.status = True
-
-                view.parse_html = active_version.parse_html if active_version.parse_html else None
+                view.write({
+                    'active_version' : active_version.id,
+                    'parse_html' : active_version.parse_html if active_version.parse_html else None,
+                    'parse_html_filename' : active_version.parse_html_filename   if active_version.parse_html_filename else None,
+                    'parse_html_binary' : active_version.parse_html_binary if active_version.parse_html_binary else None,
+                    'publish' : active_version.publish if active_version.publish else False,
+                    'header_title' : active_version.header_title,
+                    'header_description' : active_version.header_description,
+                    'stage' : active_version.stage
+                })
 
                 view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
 
-                view.parse_html_filename = active_version.parse_html_filename   if active_version.parse_html_filename else None
+                if current_version.header_metadata_ids:
+                    current_version.header_metadata_ids.write({'is_active': False})
 
-                view.parse_html_binary = active_version.parse_html_binary if active_version.parse_html_binary else None
-
-                view.publish = active_version.publish if active_version.publish else False
-
-                view.header_title = active_version.header_title
-
-                view.header_description = active_version.header_description
-
-                view.stage = active_version.stage
-                # Unlink header_metadata_ids from view without deleting them
-                if view.header_metadata_ids :
-                    view.header_metadata_ids.write({'view_id': False})
-                if view.header_link_ids:
-                    view.header_link_ids.write({'view_id': False})
-
-                # Update header_metadata_ids in active_version to point to the current view
                 if active_version.header_metadata_ids:
-                    active_version.header_metadata_ids.write({'view_id': view.id})
+                    active_version.header_metadata_ids.write({'is_active': True})
 
-                if view.header_link_ids:
-                    view.header_link_ids.write({'view_id': view.id})
+                if current_version.header_link_ids:
+                    current_version.header_link_ids.write({'is_active': False})
+
+                if active_version.header_link_ids:
+                    active_version.header_link_ids.write({'is_active': True})
 
                 self.view_id.message_post(body=f"Version '{self.name}' activated", message_type="comment")
 
@@ -202,8 +200,8 @@ class WebsitePageVersion(models.Model):
         if not record.selected_filename and not record.view_id.header_metadata_ids:
             record.create_default_version_metadata(record)
 
-        record.prev_version.header_metadata_ids.write({'view_id': False})
-        record.prev_version.header_link_ids.write({'view_id': False})
+        record.prev_version.header_metadata_ids.write({'is_active': False})
+        record.prev_version.header_link_ids.write({'is_active': False})
 
         return record
 
@@ -269,7 +267,7 @@ class WebsitePageVersion(models.Model):
                 'parse_html_filename': self.parse_html_filename,
                 'parse_html_binary': self.parse_html_binary,
                 'stage': 'draft' ,
-                'publish':False# Reset to draft after unpublishing
+                'publish':False # Reset to draft after unpublishing
             })
             if prev_version:
                 prev_version_record = self.browse(int(prev_version))
@@ -283,7 +281,7 @@ class WebsitePageVersion(models.Model):
                             'view_version_id': self.id
                         }
                         )
-                    prev_version_record.header_metadata_ids.write({'view_id': False})
+                    prev_version_record.header_metadata_ids.write({'is_active': False})
 
                 if prev_version_record.header_link_ids:
                     for link in prev_version_record.header_link_ids:
@@ -294,7 +292,7 @@ class WebsitePageVersion(models.Model):
                             'view_version_id': self.id
                         }
                         )
-                    prev_version_record.header_link_ids.write({'view_id': False})
+                    prev_version_record.header_link_ids.write({'is_active': False})
 
             if self.view_id.website_page_id and self.view_arch:
                 self.view_id.website_page_id.arch_db = self.view_arch
