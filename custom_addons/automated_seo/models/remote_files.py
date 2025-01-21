@@ -42,6 +42,7 @@ class RemoteFolders(models.Model):
     def sync_folders(self):
         base_path = '/home/pratik.panchal/temp/html'
         try:
+
             ssh_command = ['ssh', 'bacancy@35.202.140.10', f'ls -l {base_path}']
             result = subprocess.run(ssh_command, capture_output=True, text=True)
             
@@ -105,6 +106,7 @@ class RemoteFiles(models.Model):
         return self.search(domain + args, limit=limit).name_get()
     
     def _sync_folder_files(self, folder, timeout=10):
+
         try:
             ssh_command = ['ssh', '-o', 'ConnectTimeout=5', 'bacancy@35.202.140.10', 
                           f'ls -1 {folder.path}/*.php']
@@ -135,8 +137,9 @@ class RemoteFiles(models.Model):
     @api.model
     def sync_files(self):
         """Sync PHP files for all folders using parallel processing"""
+        breakpoint()
         folders = self.env['automated_seo.remote_folders'].search([])
-        
+
         with ThreadPoolExecutor(max_workers=3) as executor:
             results = list(executor.map(self._sync_folder_files, folders))
             

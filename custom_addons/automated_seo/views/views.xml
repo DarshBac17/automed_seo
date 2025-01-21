@@ -115,7 +115,7 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'stage']), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-                    <button name="action_done_button"
+                    <button name="action_stage_button"
                             type="object"
                             string="Stage"
                             class="btn oe_highlight"
@@ -129,7 +129,7 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-<!--                    <field name="active_version_id" invisible="1"/>-->
+                    <!--                    <field name="active_version_id" invisible="1"/>-->
 
                     <button name="%(automated_seo_version)d"
                             type="action"
@@ -176,46 +176,46 @@
                                 </div>
                                 <field name="is_new_page" invisible="1"/>
                                 <field name="is_processed" invisible="1"/>
-                               <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}">
+                                <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}">
                                     <label for="file_source" string="File Source"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="file_source" widget="radio" options="{'horizontal': true}"/>
                                 </div>
                                 <field name="has_edit_permission" invisible="1"/>
 
-                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
-    <label for="folder_id" string="Select Folder"/>
-    <p style="margin-left:5px">:</p>
-    <field name="folder_id" 
-        widget="many2one"
-        options="{
-            'no_create': True, 
-            'no_create_edit': True,
-            'no_open': True
-        }"
-        attrs="{'readonly': [('has_edit_permission', '=', False)]}"
-        style="margin-left:5px"/>
-</div>
+<!--                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">-->
+<!--                                    <label for="folder_id" string="Select Folder"/>-->
+<!--                                    <p style="margin-left:5px">:</p>-->
+<!--                                    <field name="folder_id"-->
+<!--                                           widget="many2one"-->
+<!--                                           options="{-->
+<!--                                                'no_create': True, -->
+<!--                                                'no_create_edit': True,-->
+<!--                                                'no_open': True-->
+<!--                                            }"-->
+<!--                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"-->
+<!--                                           style="margin-left:5px"/>-->
+<!--                                </div>-->
 
-<div class="o_row" attrs="{'invisible': ['|', '|', ('is_processed', '=', True), ('file_source', '!=', 'remote'), ('folder_id', '=', False)]}">
-    <label for="selected_filename" string="Select File"/>
-    <p style="margin-left:5px">:</p>
-    <field name="selected_filename"
-        widget="many2one"
-        options="{
-            'no_create': True, 
-            'no_create_edit': True,
-            'no_open': True
-        }"
-        domain="[('is_processed', '=', False), ('folder_id', '=', folder_id)]"
-        attrs="{'readonly': [('has_edit_permission', '=', False)]}"
-        style="margin-left:5px"/>
-    <button name="action_parse_uploaded_file"
-            type="object"
-            string="Process"
-            class="btn btn-primary"
-            attrs="{'invisible': [('selected_filename', '=', False)]}"/>
-</div>
+                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
+                                    <label for="selected_filename" string="Select File"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="selected_filename"
+                                           widget="many2one"
+                                           options="{
+                                                'no_create': True,
+                                                'no_create_edit': True,
+                                                'no_open': True
+                                            }"
+                                           domain="[('is_processed', '=', False)]"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           style="margin-left:5px"/>
+                                    <button name="action_parse_uploaded_file"
+                                            type="object"
+                                            string="Process"
+                                            class="btn btn-primary"
+                                            attrs="{'invisible': [('selected_filename', '=', False)]}"/>
+                                </div>
                             </div>
                         </group>
                         <group>
@@ -247,7 +247,7 @@
                                            placeholder="Add contributors..."
                                            attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
-                                 <div class="o_row"  attrs="{'invisible': [('id', '=', False)]}">
+                                <div class="o_row"  attrs="{'invisible': [('id', '=', False)]}">
                                     <label for="active_version_id" string="Active version"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="active_version_id"

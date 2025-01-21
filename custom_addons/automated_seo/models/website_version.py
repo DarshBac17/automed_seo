@@ -249,8 +249,6 @@ class WebsitePageVersion(models.Model):
             })
 
 
-
-
     def action_create_version(self):
         prev_version = self.env.context.get('prev_version')
         publish =self.env.context.get('publish')
@@ -288,6 +286,8 @@ class WebsitePageVersion(models.Model):
                             'view_version_id': self.id
                         }
                         )
+                    prev_version_record.header_metadata_ids.write({'view_id': False})
+
                 if prev_version_record.header_link_ids:
                     for link in prev_version_record.header_link_ids:
                         self.env['automated_seo.page_header_link'].create({
@@ -297,6 +297,7 @@ class WebsitePageVersion(models.Model):
                             'view_version_id': self.id
                         }
                         )
+                    prev_version_record.header_link_ids.write({'view_id': False})
 
             if self.view_id.website_page_id and self.view_arch:
                 self.view_id.website_page_id.arch_db = self.view_arch

@@ -118,15 +118,16 @@ class View(models.Model):
         ('draft', 'Draft'),
         ('remote', 'Select Remote File')
     ], string="File Source", default='draft')
-    folder_id = fields.Many2one(
-        'automated_seo.remote_folders',
-        string='Folder'
-    )
+
+    # folder_id = fields.Many2one(
+    #     'automated_seo.remote_folders',
+    #     string='Folder'
+    # )
 
     selected_filename = fields.Many2one(
         'automated_seo.remote_files',
         string="Remote Files",
-        domain="[('is_processed', '=', False), ('folder_id', '=', folder_id)]"
+        domain="[('is_processed', '=', False)]"
     )
 
     _sql_constraints = [
@@ -372,12 +373,16 @@ class View(models.Model):
         template = self.env.ref('automated_seo.email_template_preview')
         template.send_mail(self.id, force_send=True)
 
-    def action_done_button(self):
+    def action_stage_button(self):
         if self.validate_header():
-
-
-            page_name = self.selected_filename.name  if self.selected_filename else self.name
             page_version = self.active_version_id[0].name
+
+            selected_file_version = None
+            if self.selected_filename:
+                base_name, ext = os.path.splitext(self.selected_filename.name)
+                selected_file_version = f'{base_name}-{page_version}{ext}'
+
+            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}.php"
 
             # Step 3: Call the push_changes_to_ftp function to upload the file to the FTP server
             upload_success = transfer_file_via_scp(
@@ -500,11 +505,19 @@ class View(models.Model):
             raise UserError("Please select a file first.")
 
         try:
+
             file_name = self.selected_filename.name
-            folder_path = self.folder_id.path
+            file_full_path = self.selected_filename.full_path
 
             # Get remote file content
-            cat_command = ['ssh', 'bacancy@35.202.140.10', f'cat {folder_path}/{file_name}']
+
+            cat_command = [
+                'ssh',
+                '-p',
+                '65002',
+                'u973764812@77.37.36.187',
+                f'cat {file_full_path}'
+            ]
             result = subprocess.run(cat_command, capture_output=True, text=True)
 
             if result.returncode != 0:
@@ -581,6 +594,7 @@ class View(models.Model):
 
         except Exception as e:
             raise UserError(f"Error processing file: {str(e)}")
+
     # def action_parse_uploaded_file(self):
 
     #     self.file_uploaded = bool(self.upload_file)
@@ -1056,33 +1070,6 @@ class View(models.Model):
                 'parse_html_filename' : file_name
             })
 
-    # def add_head(self, html_parser):
-    #     # Add the title with proper indentation
-    #     html_head = f"        <title>{self.header_title or 'Default Title'}</title>"
-    #
-    #     # Generate meta tags for all metadata entries with consistent indentation
-    #     meta_tags = ""
-    #     for metadata in self.header_metadata_ids:
-    #         if metadata.name:  # For standard meta tags like description
-    #             meta_tags += f"\n        <meta name=\"{metadata.name}\" content=\"{metadata.content or ''}\">"
-    #         elif metadata.property:  # For Open Graph meta tags
-    #             meta_tags += f"\n        <meta property=\"{metadata.property}\" content=\"{metadata.content or ''}\">"
-    #
-    #     # Combine everything into the final HTML structure with consistent indentation
-    #     complete_html = f"""
-    #     <!DOCTYPE html>
-    #     <html lang="en">
-    #         <head>
-    #     {html_head}{meta_tags}
-    #         </head>
-    #         <body>
-    #             {html_parser or ''}
-    #         </body>
-    #     </html>
-    #     """
-    #
-    #     return complete_html
-
     def add_js_scripts(self,html_parser):
         soup = BeautifulSoup(html_parser, 'html.parser')
 
@@ -1111,6 +1098,8 @@ class View(models.Model):
         description_meta['name'] = 'description'
         description_meta['content'] = self.header_description
         head_tag.append(description_meta)
+        common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>',"html.parser")
+        head_tag.append(common_meta_tag)
         for metadata in self.header_metadata_ids:
             meta_tag = soup.new_tag('meta')
             if metadata.property:
