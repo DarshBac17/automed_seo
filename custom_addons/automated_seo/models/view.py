@@ -192,7 +192,6 @@ class View(models.Model):
             if self.env.context.get('upload_filename'):
                 self.upload_filename = self.env.context.get('upload_filename')
 
-
     # @api.depends('version.publish')
     # def _compute_publish_status(self):
     #     for record in self:
@@ -349,7 +348,6 @@ class View(models.Model):
     #             except Exception:
     #                 raise UserError('Invalid URL format')
 
-
     def action_view_website_page(self):
         self.ensure_one()
         if not self.page_id:
@@ -397,7 +395,6 @@ class View(models.Model):
             else:
                 self.message_post(body=f"{page_name} file upload failed.")
                 raise UserError(f"{page_name} file upload failed.")
-
 
             # # Get Git details
             # page_name = self.name
@@ -901,7 +898,7 @@ class View(models.Model):
                             print(f"Error resetting file status: {str(e)}")
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")

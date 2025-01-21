@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-<!--        &lt;!&ndash; Folder Sync Cron &ndash;&gt;-->
-<!--        <record id="ir_cron_sync_remote_folders" model="ir.cron">-->
-<!--            <field name="name">Sync Remote Folders</field>-->
-<!--            <field name="model_id" ref="model_automated_seo_remote_folders"/>-->
-<!--            <field name="state">code</field>-->
-<!--            <field name="code">model.sync_folders()</field>-->
-<!--            <field name="interval_number">1</field>-->
-<!--            <field name="interval_type">hours</field>-->
-<!--            <field name="numbercall">-1</field>-->
-<!--            <field name="active">True</field>-->
-<!--            <field name="priority">5</field>-->
-<!--            <field name="doall">False</field>-->
-<!--        </record>-->
-
         <!-- File Sync Cron -->
         <record id="ir_cron_sync_remote_files" model="ir.cron">
             <field name="name">Sync Remote Files</field>
@@ -26,7 +12,7 @@
             <field name="numbercall">-1</field>
             <field name="active">True</field>
             <field name="doall">False</field>
-            <field name="priority">10</field>
+            <field name="priority">5</field>
         </record>
     </data>
 </odoo> 
