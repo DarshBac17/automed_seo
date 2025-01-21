@@ -190,7 +190,6 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'automated_seo/static/src/js/toggle.js',
             'automated_seo/static/src/css/custom.css',
             'automated_seo/static/src/css/casestudy.css',
             'automated_seo/static/src/css/faq.css',
