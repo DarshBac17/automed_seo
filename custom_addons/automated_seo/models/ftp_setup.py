@@ -26,7 +26,9 @@ def transfer_file_via_scp(page_name, file_data):
                     temp_file.name = final_path
                     temp_file.close()
 
-                    scp_command = ['scp', '-P', '65002', temp_file.name, target_path]
+                    ssh_key_path='~/.ssh/seoserver'
+
+                    scp_command = ['scp', '-i', os.path.expanduser(ssh_key_path),'-P', '65002', temp_file.name, target_path]
                     result = subprocess.run(
                         scp_command,
                         capture_output=True,

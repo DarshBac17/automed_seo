@@ -479,6 +479,7 @@ class View(models.Model):
 
             cat_command = [
                 'ssh',
+                '-i', os.path.expanduser('~/.ssh/seoserver'),
                 '-p',
                 '65002',
                 'u973764812@77.37.36.187',
@@ -551,7 +552,7 @@ class View(models.Model):
             # Update file status and create headers
 
             self.is_processed = True
-            # self.selected_filename.write({'is_processed': True})
+            self.selected_filename.write({'is_processed': True})
 
             # Post success message
             self.message_post(

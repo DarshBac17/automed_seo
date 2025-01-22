@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 import subprocess
 import threading
-
+import os
 _logger = logging.getLogger(__name__)
 
 
@@ -44,10 +44,11 @@ class RemoteFiles(models.Model):
 
             ssh_command = [
                 'ssh',
-                '-p','65002',
+                '-i', os.path.expanduser('~/.ssh/seoserver'),  # Use absolute path
+                '-p', '65002',
                 '-o', 'ConnectTimeout=5',
                 'u973764812@77.37.36.187',
-                find_command
+                f"cd {base_path} && find . -type f -name '*.php' -printf '%P\\n'"
             ]
 
             result = subprocess.run(
