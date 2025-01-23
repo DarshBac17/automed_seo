@@ -15,7 +15,7 @@
             </div>
 
             <div class="grid grid-cols-1 gap-y-6 resp-btn-outer">
-                <div class="accordian-outer oe_structure">
+                <div class="accordian-outer o_sub_items_container">
                     <section class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading active">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
