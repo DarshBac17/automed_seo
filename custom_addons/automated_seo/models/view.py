@@ -1763,7 +1763,7 @@ class View(models.Model):
                     except Exception as e:
                         UserError(f"Error :- {e}")
                 if height:
-                    img['heigth'] = int(float(height))
+                    img['height'] = int(float(height))
 
                 if width:
                     img['width'] = int(float(width))
