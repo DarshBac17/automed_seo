@@ -34,12 +34,6 @@
     </record>
 
 
-    <record id="action_create_version" model="ir.actions.act_window">
-        <field name="name">Create Version</field>
-        <field name="res_model">website.page.version</field>
-    </record>
-
-
     <!--  Form View  -->
     <record id="automated_seo_version_form" model="ir.ui.view">
         <field name="name">automated_seo.version.form</field>
@@ -68,15 +62,15 @@
 
                 </sheet>
                 <footer>
-                    <button string="Save"
-                            type="action"
-                            name="%(action_create_version)d"
+                    <button string="Create"
                             class="btn-primary"
+                            name="action_call_create_version"
+                            type="object"
                             context="{
-                                'view_id': view_id,
-                                'description': description,
-                                'change': change,
-                                'base_version': base_version
+                                'default_view_id': view_id,
+                                'default_description': description,
+                                'default_change': change,
+                                'default_base_version': base_version
                             }"
                     />
                     <button string="Cancel" class="btn-secondary" special="cancel"/>

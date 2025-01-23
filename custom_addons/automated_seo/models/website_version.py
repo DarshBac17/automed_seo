@@ -157,112 +157,118 @@ class WebsitePageVersion(models.Model):
             'target': 'self',
         }
 
+
+
     @api.model
     def create(self, vals):
-        if not vals.get('view_id'):
-            raise UserError('View ID is required to create a version')
-        seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
-        initial_version = self.env.context.get('initial_version')
-        current_version = self.env['website.page.version'].search(
-            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
-        view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
+        context = self.env.context
 
-        if current_version and seo_view:
-            current_version.stage = seo_view.stage
-            current_version.header_title = seo_view.header_title
-            current_version.header_description = seo_view.header_description
-            current_version.view_arch = seo_view.page_id.arch_db  if seo_view.page_id.arch_db else None
-            current_version.status = False
-            current_version.header_metadata_ids.write({'is_active': False})
-            current_version.header_link_ids.write({'is_active': False})
-        if initial_version and seo_view:
-            seo_view.page_id.arch_db = view_arch if view_arch else None
-            seo_view.stage = 'in_progress'
-            seo_view.parse_html_filename = None
-            seo_view.parse_html_binary = None
-            seo_view.parse_html = None
+        if context.get("default_stage"):
 
-            vals.update({
-                'name' : 'v1.0.0',
-                'page_id': seo_view.website_page_id.id,
-                'view_arch': view_arch,
-                'user_id': self.env.user.id,
-                'header_title': seo_view.header_title,
-                'header_description': seo_view.header_description,
-                'stage': seo_view.stage
+            if not vals.get('view_id'):
+                raise UserError('View ID is required to create a version')
+            seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
+            initial_version = self.env.context.get('initial_version')
+            current_version = self.env['website.page.version'].search(
+                ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
+            view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
+
+            if current_version and seo_view:
+                current_version.stage = seo_view.stage
+                current_version.header_title = seo_view.header_title
+                current_version.header_description = seo_view.header_description
+                current_version.view_arch = seo_view.page_id.arch_db  if seo_view.page_id.arch_db else None
+                current_version.status = False
+                current_version.header_metadata_ids.write({'is_active': False})
+                current_version.header_link_ids.write({'is_active': False})
+            if initial_version and seo_view:
+                seo_view.page_id.arch_db = view_arch if view_arch else None
+                seo_view.stage = 'in_progress'
+                seo_view.parse_html_filename = None
+                seo_view.parse_html_binary = None
+                seo_view.parse_html = None
+
+                vals.update({
+                    'name' : 'v1.0.0',
+                    'page_id': seo_view.website_page_id.id,
+                    'view_arch': view_arch,
+                    'user_id': self.env.user.id,
+                    'header_title': seo_view.header_title,
+                    'header_description': seo_view.header_description,
+                    'stage': seo_view.stage
+                })
+            else:
+                base_version = self.browse(int(self.env.context.get('base_version')))
+                if not base_version:
+                    raise UserError('Base version is required')
+
+                base_version_vals = base_version.read([
+                    'view_id',
+                    'page_id',
+                    'view_arch',
+                    'parse_html',
+                    'parse_html_binary',
+                    'parse_html_filename',
+                    'header_title',
+                    'header_description',
+                    'selected_filename',
+                    'header_metadata_ids',
+                    'header_link_ids'
+                ])[0]
+
+                base_version_vals['view_id'] = base_version_vals['view_id'][0] if base_version_vals['view_id'] else False
+                base_version_vals['page_id'] = base_version_vals['page_id'][0] if base_version_vals['page_id'] else False
+
+                vals.update(base_version_vals)
+
+                for o2m_field in ['header_metadata_ids', 'header_link_ids']:
+                    if o2m_field in base_version_vals:
+                        vals[o2m_field] = [(6, 0, base_version[o2m_field].ids)]
+
+                change = self.env.context.get('change')
+
+                if not change:
+                    raise UserError('Change is required')
+
+                description = self.env.context.get('description')
+
+                vals.update({
+                    'base_version':base_version.id,
+                    'change': change,
+                    'description' : description,
+                    'status' : True,
+                    'user_id' : self.env.user.id,
+                    'stage' : 'in_progress',
+                    'publish' : False
+                })
+
+                base_version.header_metadata_ids.write({'is_active': False})
+                base_version.header_link_ids.write({'is_active': False})
+
+
+            record = super(WebsitePageVersion, self).create(vals)
+
+
+            if not initial_version:
+                record._compute_version_name()
+
+            seo_view.write({
+                'parse_html': record.parse_html,
+                'parse_html_filename': record.parse_html_filename,
+                'parse_html_binary': record.parse_html_binary,
+                'publish': False,
             })
-        else:
-            base_version = self.browse(int(self.env.context.get('base_version')))
-            if not base_version:
-                raise UserError('Base version is required')
 
-            base_version_vals = base_version.read([
-                'view_id',
-                'page_id',
-                'view_arch',
-                'parse_html',
-                'parse_html_binary',
-                'parse_html_filename',
-                'header_title',
-                'header_description',
-                'selected_filename',
-                'header_metadata_ids',
-                'header_link_ids'
-            ])[0]
+            if seo_view.website_page_id and record.view_arch:
+                seo_view.website_page_id.arch_db = record.view_arch
 
-            base_version_vals['view_id'] = base_version_vals['view_id'][0] if base_version_vals['view_id'] else False
-            base_version_vals['page_id'] = base_version_vals['page_id'][0] if base_version_vals['page_id'] else False
+            record.view_id.message_post(body=f"Version '{record.name}' created and activated", message_type="comment")
 
-            vals.update(base_version_vals)
+            seo_view.active_version = record.id
+            if initial_version and not record.selected_filename:
+                record.create_default_version_metadata(record)
 
-            for o2m_field in ['header_metadata_ids', 'header_link_ids']:
-                if o2m_field in base_version_vals:
-                    vals[o2m_field] = [(6, 0, base_version[o2m_field].ids)]
-
-            change = self.env.context.get('change')
-
-            if not change:
-                raise UserError('Change is required')
-
-            description = self.env.context.get('description')
-
-            vals.update({
-                'base_version':base_version.id,
-                'change': change,
-                'description' : description,
-                'status' : True,
-                'user_id' : self.env.user.id,
-                'stage' : 'in_progress',
-                'publish' : False
-            })
-
-            base_version.header_metadata_ids.write({'is_active': False})
-            base_version.header_link_ids.write({'is_active': False})
-
-
-        record = super(WebsitePageVersion, self).create(vals)
-
-
-        if not initial_version:
-            record._compute_version_name()
-
-        seo_view.write({
-            'parse_html': record.parse_html,
-            'parse_html_filename': record.parse_html_filename,
-            'parse_html_binary': record.parse_html_binary,
-            'publish': False,
-        })
-
-        if seo_view.website_page_id and record.view_arch:
-            seo_view.website_page_id.arch_db = record.view_arch
-
-        record.view_id.message_post(body=f"Version '{record.name}' created and activated", message_type="comment")
-
-        seo_view.active_version = record.id
-        if initial_version and not record.selected_filename:
-            record.create_default_version_metadata(record)
-
-        return record
+            return record
 
 
     def create_default_version_metadata(self, record):
@@ -303,12 +309,8 @@ class WebsitePageVersion(models.Model):
 
 
     def action_call_create_version(self):
-
         self.with_context(self.env.context).create({})
 
-        return {
-            'type': 'ir.actions.act_window_close'
-        }
 
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
@@ -320,6 +322,27 @@ class WebsitePageVersion(models.Model):
         if view_type == 'form':
             raise UserError('Form view is not available for you')
         return result
+
+    # @api.model
+    # def default_get(self, fields_list):
+    #     context = self.env.context
+    #     view_id = context.get('view_id', False)
+    #     description = context.get('description', False)
+    #     change = context.get('change', False)
+    #     base_version = context.get('base_version', False)
+    #
+    #     defaults = super(WebsitePageVersion, self).default_get(fields_list)
+    #
+    #     if 'view_id' in fields_list:
+    #         defaults.update({'view_id': view_id})
+    #     if 'description' in fields_list:
+    #         defaults.update({'description': description})
+    #     if 'change' in fields_list:
+    #         defaults.update({'change': change})
+    #     if 'base_version' in fields_list:
+    #         defaults.update({'base_version': base_version})
+    #
+    #     return defaults
 
     def write(self,vals):
         return super(WebsitePageVersion, self).write(vals)
