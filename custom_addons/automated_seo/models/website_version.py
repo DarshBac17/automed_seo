@@ -161,114 +161,119 @@ class WebsitePageVersion(models.Model):
 
     @api.model
     def create(self, vals):
-        context = self.env.context
 
-        if context.get("default_stage"):
+        if not vals.get('view_id'):
+            raise UserError('View ID is required to create a version')
+        seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
+        initial_version = self.env.context.get('initial_version')
+        current_version = self.env['website.page.version'].search(
+            ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
+        view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
-            if not vals.get('view_id'):
-                raise UserError('View ID is required to create a version')
-            seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
-            initial_version = self.env.context.get('initial_version')
-            current_version = self.env['website.page.version'].search(
-                ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
-            view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
+        if current_version and seo_view:
+            current_version.stage = seo_view.stage
+            current_version.header_title = seo_view.header_title
+            current_version.header_description = seo_view.header_description
+            current_version.view_arch = seo_view.page_id.arch_db  if seo_view.page_id.arch_db else None
+            current_version.status = False
+            current_version.header_metadata_ids.write({'is_active': False})
+            current_version.header_link_ids.write({'is_active': False})
+        if initial_version and seo_view:
+            seo_view.page_id.arch_db = view_arch if view_arch else None
+            seo_view.stage = 'in_progress'
+            seo_view.parse_html_filename = None
+            seo_view.parse_html_binary = None
+            seo_view.parse_html = None
 
-            if current_version and seo_view:
-                current_version.stage = seo_view.stage
-                current_version.header_title = seo_view.header_title
-                current_version.header_description = seo_view.header_description
-                current_version.view_arch = seo_view.page_id.arch_db  if seo_view.page_id.arch_db else None
-                current_version.status = False
-                current_version.header_metadata_ids.write({'is_active': False})
-                current_version.header_link_ids.write({'is_active': False})
-            if initial_version and seo_view:
-                seo_view.page_id.arch_db = view_arch if view_arch else None
-                seo_view.stage = 'in_progress'
-                seo_view.parse_html_filename = None
-                seo_view.parse_html_binary = None
-                seo_view.parse_html = None
+            vals.update({
+                'name' : 'v1.0.0',
+                'page_id': seo_view.website_page_id.id,
+                'view_arch': view_arch,
+                'user_id': self.env.user.id,
+                'header_title': seo_view.header_title,
+                'header_description': seo_view.header_description,
+                'stage': seo_view.stage
+            })
+        else:
+            base_version = self.browse(int(vals.get('base_version')))
+            if not base_version:
+                raise UserError('Base version is required')
 
-                vals.update({
-                    'name' : 'v1.0.0',
-                    'page_id': seo_view.website_page_id.id,
-                    'view_arch': view_arch,
-                    'user_id': self.env.user.id,
-                    'header_title': seo_view.header_title,
-                    'header_description': seo_view.header_description,
-                    'stage': seo_view.stage
-                })
-            else:
-                base_version = self.browse(int(self.env.context.get('base_version')))
-                if not base_version:
-                    raise UserError('Base version is required')
+            base_version_vals = base_version.read([
+                'view_id',
+                'page_id',
+                'view_arch',
+                'parse_html',
+                'parse_html_binary',
+                'parse_html_filename',
+                'header_title',
+                'header_description',
+                'selected_filename',
+                'header_metadata_ids',
+                'header_link_ids'
+            ])[0]
 
-                base_version_vals = base_version.read([
-                    'view_id',
-                    'page_id',
-                    'view_arch',
-                    'parse_html',
-                    'parse_html_binary',
-                    'parse_html_filename',
-                    'header_title',
-                    'header_description',
-                    'selected_filename',
-                    'header_metadata_ids',
-                    'header_link_ids'
-                ])[0]
+            base_version_vals['view_id'] = base_version_vals['view_id'][0] if base_version_vals['view_id'] else False
+            base_version_vals['page_id'] = base_version_vals['page_id'][0] if base_version_vals['page_id'] else False
 
-                base_version_vals['view_id'] = base_version_vals['view_id'][0] if base_version_vals['view_id'] else False
-                base_version_vals['page_id'] = base_version_vals['page_id'][0] if base_version_vals['page_id'] else False
+            vals.update(base_version_vals)
 
-                vals.update(base_version_vals)
+            for o2m_field in ['header_metadata_ids', 'header_link_ids']:
+                if o2m_field in base_version_vals:
+                    # Create copies of the related records
+                    copied_ids = []
+                    for record in base_version[o2m_field]:
+                        # Create new records by copying the fields
+                        copied_record = record.copy()
+                        copied_ids.append(copied_record.id)
 
-                for o2m_field in ['header_metadata_ids', 'header_link_ids']:
-                    if o2m_field in base_version_vals:
-                        vals[o2m_field] = [(6, 0, base_version[o2m_field].ids)]
-
-                change = self.env.context.get('change')
-
-                if not change:
-                    raise UserError('Change is required')
-
-                description = self.env.context.get('description')
-
-                vals.update({
-                    'base_version':base_version.id,
-                    'change': change,
-                    'description' : description,
-                    'status' : True,
-                    'user_id' : self.env.user.id,
-                    'stage' : 'in_progress',
-                    'publish' : False
-                })
-
-                base_version.header_metadata_ids.write({'is_active': False})
-                base_version.header_link_ids.write({'is_active': False})
+                    # Update the vals with the copied record IDs
+                    vals[o2m_field] = [(6, 0, copied_ids)]
 
 
-            record = super(WebsitePageVersion, self).create(vals)
+            change = vals.get('change')
 
+            if not change:
+                raise UserError('Change is required')
 
-            if not initial_version:
-                record._compute_version_name()
+            description = vals.get('description')
 
-            seo_view.write({
-                'parse_html': record.parse_html,
-                'parse_html_filename': record.parse_html_filename,
-                'parse_html_binary': record.parse_html_binary,
-                'publish': False,
+            vals.update({
+                'status' : True,
+                'user_id' : self.env.user.id,
+                'stage' : 'in_progress',
+                'publish' : False
             })
 
-            if seo_view.website_page_id and record.view_arch:
-                seo_view.website_page_id.arch_db = record.view_arch
+            base_version.header_metadata_ids.write({'is_active': False})
+            base_version.header_link_ids.write({'is_active': False})
 
-            record.view_id.message_post(body=f"Version '{record.name}' created and activated", message_type="comment")
+        record = super(WebsitePageVersion, self).create(vals)
 
-            seo_view.active_version = record.id
-            if initial_version and not record.selected_filename:
-                record.create_default_version_metadata(record)
+        if not initial_version:
+            record._compute_version_name()
 
-            return record
+        seo_view.write({
+            'parse_html': record.parse_html,
+            'parse_html_filename': record.parse_html_filename,
+            'parse_html_binary': record.parse_html_binary,
+            'publish': False,
+        })
+
+        if seo_view.website_page_id and record.view_arch:
+            seo_view.website_page_id.arch_db = record.view_arch
+
+        record.view_id.message_post(body=f"Version '{record.name}' created and activated", message_type="comment")
+
+        seo_view.active_version = record.id
+        if initial_version and not record.selected_filename:
+            record.create_default_version_metadata(record)
+        else:
+            record.header_metadata_ids.write({'is_active': True})
+            record.header_link_ids.write({'is_active': True})
+
+
+        return record
 
 
     def create_default_version_metadata(self, record):
@@ -308,8 +313,6 @@ class WebsitePageVersion(models.Model):
             })
 
 
-    def action_call_create_version(self):
-        self.with_context(self.env.context).create({})
 
 
     @api.model
