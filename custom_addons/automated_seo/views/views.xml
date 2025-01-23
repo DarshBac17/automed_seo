@@ -28,34 +28,10 @@
         <field name="target">new</field>
         <field name="binding_model_id" ref="model_automated_seo_view"/>
     </record>
-    <record id="automated_seo_version_form" model="ir.ui.view">
-        <field name="name">automated_seo.version.form</field>
-        <field name="model">website.page.version</field>
-        <field name="arch" type="xml">
-            <form string="Version">
-                <sheet>
-                    <group>
-                        <field name="change" widget="radio" required="1"/>
-                        <field name="description"/>
-                        <field name="view_id" invisible="1"/>
 
-                    </group>
 
-                </sheet>
-                <footer>
-                    <button string="save" name="action_create_version" type="object" class="btn-primary"
-                            context="{'view_id':view_id,'description':description,'change':change,'publish':True,'prev_version':context.get('prev_version')}"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-    <record id="automated_seo_version" model="ir.actions.act_window">
-        <field name="name">Version</field>
-        <field name="res_model">website.page.version</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
+
+
     <!-- Add Send Email button to the main view -->
 
     <!-- Form View -->
@@ -65,13 +41,16 @@
         <field name="arch" type="xml">
             <form string="SEO View Management">
                 <header>
-                    <!-- Preserve existing header buttons but add owner check -->
-                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
-                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"
-                           readonly="1"/>
 
                     <field name="publish" invisible="1"/>
                     <field name="is_owner" invisible="1"/>
+                    <field name="is_new_page" invisible="1"/>
+                    <field name="is_processed" invisible="1"/>
+                    <field name="has_edit_permission" invisible="1"/>
+
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"
+                           readonly="1"/>
 
                     <!-- All buttons now check for is_owner -->
                     <button name="action_edit_website_page"
@@ -129,24 +108,29 @@
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-                    <!--                    <field name="active_version" invisible="1"/>-->
-
-                    <button name="%(automated_seo_version)d"
-                            type="action"
+                    <button name="action_unpublish_button"
+                            type="object"
                             string="Unpublish"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'publish'), ('has_edit_permission', '=', False)]}"
+                    />
+
+                    <button name="%(automated_seo.action_version_form)d"
+                            type="action"
+                            string="New Version"
+                            class="btn oe_highlight justify-content-end"
+                            attrs="{'invisible': [('has_edit_permission', '=', False)]}"
                             context="{
-                        'default_view_id': id,
-                        'prev_version':active_version,
-                        'form_view_ref': 'automated_seo.automated_seo_version_form'
-                    }"/>
+                                'default_view_id': id,
+                                'default_base_version':active_version,
+                                'form_view_ref': 'automated_seo.automated_seo_version_form'
+                            }"
+                    />
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <div class="o_col" style="width:350px">
-                                <!-- Make fields readonly for non-owners -->
                                 <div class="o_row">
                                     <h1>
                                         <field name="name" required="1" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
@@ -174,28 +158,12 @@
                                            style="margin-left:5px" readonly="1"
                                            nolabel="1"/>
                                 </div>
-                                <field name="is_new_page" invisible="1"/>
-                                <field name="is_processed" invisible="1"/>
+
                                 <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}">
                                     <label for="file_source" string="File Source"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="file_source" widget="radio" options="{'horizontal': true}"/>
                                 </div>
-                                <field name="has_edit_permission" invisible="1"/>
-
-<!--                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">-->
-<!--                                    <label for="folder_id" string="Select Folder"/>-->
-<!--                                    <p style="margin-left:5px">:</p>-->
-<!--                                    <field name="folder_id"-->
-<!--                                           widget="many2one"-->
-<!--                                           options="{-->
-<!--                                                'no_create': True, -->
-<!--                                                'no_create_edit': True,-->
-<!--                                                'no_open': True-->
-<!--                                            }"-->
-<!--                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"-->
-<!--                                           style="margin-left:5px"/>-->
-<!--                                </div>-->
 
                                 <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
                                     <label for="selected_filename" string="Select File"/>
@@ -230,14 +198,6 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="write_date" style="margin-left:5px" readonly="1"/>
                                 </div>
-                                <field name="is_owner" invisible="1"/>
-
-                                <!--<div style="margin: 0 0 16px 0">  &lt;!&ndash; top right bottom left &ndash;&gt;
-                                        <button name="action_open_page_header"
-                                                type="object"
-                                                string="OPEN PAGE HEADER"
-                                                class="oe_highlight"/>
-                                    </div>-->
                                 <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
                                     Contributors
                                     <p style="margin-left:5px">:</p>
@@ -292,8 +252,6 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
-                    <!--                    <field name="activity_ids" widget="mail_activity"/>-->
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>
