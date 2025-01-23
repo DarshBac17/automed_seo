@@ -242,7 +242,9 @@ class View(models.Model):
         record  = super(View, self).create(vals)
         record.is_new_page = False
         if not vals.get('file_source') == 'remote' and not vals.get('selected_filename'):
-            self.env['website.page.version'].create({
+            self.env['website.page.version'].with_context({
+                'initial_version' : True
+            }).create({
                 'description' : 'First Version',
                 'view_id':record.id,
                 'page_id':website_page.id,
@@ -511,32 +513,40 @@ class View(models.Model):
             soup = BeautifulSoup(formatted_arch, 'html.parser')
 
             # Create initial version
-            version = self.env['website.page.version'].create({
-                'description': f'Initial version',
+            version = self.env['website.page.version'].with_context({
+                'initial_version' : True
+            }).create({
+                'description': f'{file_name} File is processed',
                 'view_id': self.id,
                 'page_id': self.page_id,
-                # 'view_arch': soup.prettify(),'header_metadata_ids': [[4, 1, False], [4, 2, False], [4, 3, False], [4, 4, False], [2, 5, False], [2, 6, False], [2, 7, False], [2, 8, False]]
+                'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
                 'status': True,
-                # 'publish': True,
-                # 'selected_filename': self.selected_filename.name,
+                'publish': True,
+                'selected_filename': self.selected_filename.name,
             })
-
-            # self.with_context(view_name=self.name).action_compile_button()
-            version.status = False
+            self.create_php_header(header=file_content)
+            self.with_context(view_name=self.name).action_compile_button()
+            # version.status = False
             self.message_post(
                 body=f"File '{file_name}' processed successfully and new version {version.name} created",
                 message_type="comment"
             )
 
             # Create and activate new version
-            new_version = self.env['website.page.version'].create({
-                'description': f'{file_name} File is processed',
+            new_version = self.env['website.page.version'].with_context(
+                {
+                    'view_id': self.id,
+                    'description': f'{file_name} File is processed',
+                    'change': 'major_change',
+                    'base_version': version.id
+                }
+            ).create({
                 'view_id': self.id,
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
-                'prev_version': version.id,
+                'base_version': version.id,
                 'publish': False,
                 'status': True,
                 'selected_filename': self.selected_filename.name
@@ -544,11 +554,11 @@ class View(models.Model):
 
             # Activate new version
             # new_version.with_context(
-            #     prev_version=version.id,
+            #     base_version=version.id,
             #     unpublish=True
             # ).action_create_version()
 
-            self.create_php_header(header=file_content)
+            # self.create_php_header(header=file_content)
             # Update file status and create headers
 
             self.is_processed = True

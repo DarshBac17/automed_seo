@@ -13,12 +13,12 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         # "views/page_header_metadata.xml",
+        'views/version.xml',
         "views/views.xml",
         "views/cron_job.xml",
         "views/email_wizard_view.xml",
 
         'views/templates.xml',
-        'views/version.xml',
         "views/mapper_view.xml",
         "views/php_to_snippet.xml",
         "views/php_mapper_view.xml",

@@ -16,12 +16,12 @@
                 <field name="publish_at" widget="date"/>
                 <field name="status" widget="boolean_toggle" readonly="1"/>
                 <field name="view_id" invisible="1"/>
-<!--                <button name="action_version"-->
-<!--                        type="object"-->
-<!--                        string="Active"-->
-<!--                        class="btn btn-primary"-->
-<!--                        context="{'id': id,'view_id':view_id}"-->
-<!--                />-->
+                <!--                <button name="action_version"-->
+                <!--                        type="object"-->
+                <!--                        string="Active"-->
+                <!--                        class="btn btn-primary"-->
+                <!--                        context="{'id': id,'view_id':view_id}"-->
+                <!--                />-->
                 <field name="parse_html_binary" invisible="1"/>
                 <button name="action_download_html"
                         type="object"
@@ -33,24 +33,88 @@
         </field>
     </record>
 
+
+    <record id="action_create_version" model="ir.actions.act_window">
+        <field name="name">Create Version</field>
+        <field name="res_model">website.page.version</field>
+    </record>
+
+
+    <!--  Form View  -->
+    <record id="automated_seo_version_form" model="ir.ui.view">
+        <field name="name">automated_seo.version.form</field>
+        <field name="model">website.page.version</field>
+        <field name="arch" type="xml">
+            <form string="Version">
+                <sheet>
+                    <group>
+                        <field name="view_id" invisible="1"/>
+                        <field name="base_version"
+                               widget="many2one"
+                               context="{'default_view_id': view_id}"
+                               placeholder="Select base version"
+                               options="{
+                                    'no_create': True,
+                                    'no_create_edit': True,
+                                    'no_open': True
+                               }"
+                               required="1"/>
+                        <field name="change" widget="radio" required="1"/>
+                        <field name="name"
+                               class="text-info font-weight-bold"/>
+                        <field name="description"/>
+
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button string="Save"
+                            type="action"
+                            name="%(action_create_version)d"
+                            class="btn-primary"
+                            context="{
+                                'view_id': view_id,
+                                'description': description,
+                                'change': change,
+                                'base_version': base_version
+                            }"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
     <!-- Action -->
-    <record id="action_version_list" model="ir.actions.act_window">
-        <field name="name">Version</field>
+    <record id="action_version_tree" model="ir.actions.act_window">
+        <field name="name">Version Tree</field>
         <field name="res_model">website.page.version</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_version_tree"/>
         <field name="target">current</field>
     </record>
 
+
+    <record id="action_version_form" model="ir.actions.act_window">
+        <field name="name">Version Form</field>
+        <field name="res_model">website.page.version</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+
     <!-- Access Rule -->
-<!--    <record id="website_page_version_rule" model="ir.rule">-->
-<!--        <field name="name">Website Page Version Access</field>-->
-<!--        <field name="model_id" ref="model_website_page_version"/>  &lt;!&ndash; Changed this line &ndash;&gt;-->
-<!--        <field name="domain_force">[('id', '!=', False)]</field>-->
-<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>  &lt;!&ndash; Added this line &ndash;&gt;-->
-<!--        <field name="perm_read" eval="True"/>-->
-<!--        <field name="perm_write" eval="False"/>-->
-<!--        <field name="perm_create" eval="False"/>-->
-<!--        <field name="perm_unlink" eval="False"/>-->
-<!--    </record>-->
+    <!--    <record id="website_page_version_rule" model="ir.rule">-->
+    <!--        <field name="name">Website Page Version Access</field>-->
+    <!--        <field name="model_id" ref="model_website_page_version"/>  &lt;!&ndash; Changed this line &ndash;&gt;-->
+    <!--        <field name="domain_force">[('id', '!=', False)]</field>-->
+    <!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>  &lt;!&ndash; Added this line &ndash;&gt;-->
+    <!--        <field name="perm_read" eval="True"/>-->
+    <!--        <field name="perm_write" eval="False"/>-->
+    <!--        <field name="perm_create" eval="False"/>-->
+    <!--        <field name="perm_unlink" eval="False"/>-->
+    <!--    </record>-->
 </odoo>
