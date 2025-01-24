@@ -258,6 +258,7 @@ class WebsitePageVersion(models.Model):
             'parse_html_filename': record.parse_html_filename,
             'parse_html_binary': record.parse_html_binary,
             'publish': False,
+            'stage':record.stage
         })
 
         if seo_view.website_page_id and record.view_arch:

@@ -216,3 +216,131 @@ margin-top:85px;
     padding: 5px;
     z-index: 9999;
 }
+.o_version_card_tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+}
+
+.o_version_card_tree .o_data_row {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.o_version_card_tree .o_data_row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stage-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.stage-badge[data-value="draft"] { background: #dc3545; }
+.stage-badge[data-value="in_progress"] { background: #17a2b8; }
+.stage-badge[data-value="in_review"] { background: #ffc107; }
+.stage-badge[data-value="stage"] { background: #007bff; }
+.stage-badge[data-value="publish"] { background: #28a745; }
+.o_version_card_tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+.o_version_card_tree .o_data_row {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.o_version_card_tree .o_data_row:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.o_version_card_tree .stage-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+.o_version_card_tree .o_field_widget {
+    margin-bottom: 0.8rem;
+}
+.o_version_card_tree .btn {
+    margin-top: auto;
+}
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-item small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.o_kanban_record_body {
+    flex: 1;
+}
+
+.stage-badge {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.oe_kanban_card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: white;
+    border: 1px solid #e9ecef;
+}
+
+.oe_kanban_card.oe_kanban_global_click.active-card {
+    background: #ffffb5 !important;
+    border: 1px solid #28a745 !important;
+    box-shadow: 0 0 0 1px #28a745 !important;
+}
+
+.stage-badge-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+
+.oe_kanban_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

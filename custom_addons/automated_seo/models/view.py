@@ -331,6 +331,7 @@ class View(models.Model):
     def action_send_for_review(self):
         self.action_compile_button()
         self.write({'stage': 'in_review'})
+        self.active_version.stage = 'in_review'
         self.message_post(body="Record sent for review", message_type="comment")
 
     def action_set_to_in_preview(self):
