@@ -1159,28 +1159,48 @@ class View(models.Model):
 
             link = breadcrumb.find('a')
             position = index + 1
+            if not link:
+                if len(breadcrumb_items_tags)-1 == index:
+                    url  = f"<?php echo BASE_URL; ?>{page_name}"
+                    id = url + '/'
+                    name = breadcrumb.text.strip()
+                    item = {
+                        "@type": "ListItem",
+                        "position": position,
+                        "item": {
+                            "@type": "WebPage",
+                            "@id": id
+                        }
+                    }
+                    item["item"]["url"] = url
+                    item["item"]["name"] = name
+                    breadcrumb_items.append(item)
+                else:
+                    message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
+                    raise UserError(message)
+
             if link and not link.get('href'):
                 link['href']="#"
 
-            url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+                url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
-            if isinstance(url,ValueError):
-                raise url
-            id = url + '/'
-            name = link.text.strip() if link else breadcrumb.text.strip()
-            item = {
-                "@type": "ListItem",
-                "position": position,
-                "item": {
-                    "@type": "WebPage",
-                    "@id": id
+                if isinstance(url,ValueError):
+                    raise url
+                id = url + '/'
+                name = link.text.strip() if link else breadcrumb.text.strip()
+                item = {
+                    "@type": "ListItem",
+                    "position": position,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": id
+                    }
                 }
-            }
-            if index > 0:
-                item["item"]["url"] = url
-            item["item"]["name"] = name
+                if index > 0:
+                    item["item"]["url"] = url
+                item["item"]["name"] = name
 
-            breadcrumb_items.append(item)
+                breadcrumb_items.append(item)
 
 
         breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
