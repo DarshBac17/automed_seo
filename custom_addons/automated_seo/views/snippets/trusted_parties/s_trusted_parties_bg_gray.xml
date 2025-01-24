@@ -32,9 +32,7 @@
                         <p class="text-primary small-heading">Small Heading</p>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </p>
                     </div>
-                    <div class="col-span-full text-center mt-sm">
-                        <a href="#form" class="btn btn-outline-primary">Button Text</a>
-                    </div>
+                    <div class="col-span-full text-center mt-sm"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
                 </div>
             </div>
         </section>

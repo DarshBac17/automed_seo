@@ -8,9 +8,7 @@
                         <h2>Header Header Header Header Header Header Header Header Header Header Header Header</h2>
                         <p><b>descriptions descriptions</b> descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions </p>
                     </div>
-                    <div class="resp-btn">
-                        <a href="#form" class="btn btn-outline-primary">Button Text</a>
-                    </div>
+                    <div class="resp-btn"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
                 </div>
             </div>
 

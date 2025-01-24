@@ -23,9 +23,7 @@
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description</p>
                     </section>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Button text</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button text</a></div>
             </div>
         </section>
 

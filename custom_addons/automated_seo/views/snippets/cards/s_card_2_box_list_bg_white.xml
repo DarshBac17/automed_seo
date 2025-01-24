@@ -37,9 +37,7 @@
                     </ul>
                 </section>
             </div>
-            <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Title Title Title Title</a>
-            </div>
+            <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button text</a></div>
 
         </section>
     </template>
