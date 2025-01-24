@@ -92,14 +92,14 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_gray.png">
                         <keywords>trusted, gray</keywords>
                     </t>
-<!--                    <t t-snippet="automated_seo.s_trusted_bg_white"-->
-<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_white.png">-->
-<!--                        <keywords>trusted, white</keywords>-->
-<!--                    </t>-->
+                    <!--                    <t t-snippet="automated_seo.s_trusted_bg_white"-->
+                    <!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_bg_white.png">-->
+                    <!--                        <keywords>trusted, white</keywords>-->
+                    <!--                    </t>-->
                 </div>
             </div>
 
-             <div id="snippets_breadcrumbs" class="o_panel">
+            <div id="snippets_breadcrumbs" class="o_panel">
                 <div class="o_panel_header">Breadcrumbs</div>
                 <div class="o_panel_body">
                     <t t-snippet="automated_seo.s_breadcrumb"
@@ -339,14 +339,14 @@
             <div id="snippets_faq" class="o_panel">
                 <div class="o_panel_header">FAQ</div>
                 <div class="o_panel_body">
-                   <!-- <t t-snippet="automated_seo.s_faq_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_white.png">
-                        <keywords>ask, questions, faq, white</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_faq_bg_gray"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_gray.png">
-                        <keywords>ask, questions, faq, gray</keywords>
-                    </t>-->
+                    <!-- <t t-snippet="automated_seo.s_faq_bg_white"
+                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_white.png">
+                         <keywords>ask, questions, faq, white</keywords>
+                     </t>
+                     <t t-snippet="automated_seo.s_faq_bg_gray"
+                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_bg_gray.png">
+                         <keywords>ask, questions, faq, gray</keywords>
+                     </t>-->
                     <t t-snippet="automated_seo.s_faq_with_list_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/faq_with_form_bg_gray.png">
                         <keywords>ask, questions, list,faq, gray</keywords>
@@ -561,19 +561,19 @@
                 </div>
             </div>
 
-<!--            <div id="snippets_trusted_parties" class="o_panel">-->
-<!--                <div class="o_panel_header">Trusted Parties</div>-->
-<!--                <div class="o_panel_body">-->
-<!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_gray"-->
-<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_gray.png">-->
-<!--                        <keywords>trusted, parties</keywords>-->
-<!--                    </t>-->
-<!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_white"-->
-<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_white.png">-->
-<!--                        <keywords>trusted, parties</keywords>-->
-<!--                    </t>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div id="snippets_trusted_parties" class="o_panel">-->
+            <!--                <div class="o_panel_header">Trusted Parties</div>-->
+            <!--                <div class="o_panel_body">-->
+            <!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_gray"-->
+            <!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_gray.png">-->
+            <!--                        <keywords>trusted, parties</keywords>-->
+            <!--                    </t>-->
+            <!--                    <t t-snippet="automated_seo.s_trusted_parties_bg_white"-->
+            <!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/trusted_parties_bg_white.png">-->
+            <!--                        <keywords>trusted, parties</keywords>-->
+            <!--                    </t>-->
+            <!--                </div>-->
+            <!--            </div>-->
 
             <div id="snippets_counting_sec" class="o_panel">
                 <div class="o_panel_header">Counting sec</div>
@@ -697,10 +697,10 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_gray.png">
                         <keywords>footer</keywords>
                     </t>
-<!--                    <t t-snippet="automated_seo.s_footer_bg_white"-->
-<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">-->
-<!--                        <keywords>footer</keywords>-->
-<!--                    </t>-->
+                    <!--                    <t t-snippet="automated_seo.s_footer_bg_white"-->
+                    <!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_bg_white.png">-->
+                    <!--                        <keywords>footer</keywords>-->
+                    <!--                    </t>-->
 
                     <t t-snippet="automated_seo.s_footer_slider_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/footer_slider_bg_gray.png">
@@ -739,6 +739,24 @@
                     <we-button data-add-item="" data-item=".o_sub_items_container > tr:last" data-select-item=""
                                data-no-preview="true" class="o_we_bg_brand_primary">
                         Add Item
+                    </we-button>
+                </we-row>
+            </div>
+            <div data-js="MultipleTabs" data-selector=".tabs">
+                <we-row string="Tabs">
+                    <we-button
+                            data-variable-class="add-tab"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Add tab">
+                        Add Tab
+                    </we-button>
+                    <we-button
+                            data-variable-class="remove-tab"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="remove tab">
+                        Remove Tab
                     </we-button>
                 </we-row>
             </div>
