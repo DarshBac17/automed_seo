@@ -22,8 +22,7 @@
                             </p>
                             <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                             </p>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary">Button text</a>
+                    </div><a href="#form" class="btn btn-outline-primary">Button text</a>
                 </div>
                 <div class="text-center max-lg:-order-1">
                     <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/why-choose.svg" alt="Why Choose Bacancy To Hire AngularJS Developers?" title="Why Choose Bacancy To Hire AngularJS Developers?" class="w-full mx-auto" loading="lazy" width="540" height="535">-->

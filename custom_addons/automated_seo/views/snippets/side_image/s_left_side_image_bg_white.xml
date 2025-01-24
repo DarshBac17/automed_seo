@@ -30,8 +30,7 @@
                         </p>
                         <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
                         </p>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary">Button text</a>
+                    </div><a href="#form" class="btn btn-outline-primary">Button text</a>
                 </div>
 
             </div>

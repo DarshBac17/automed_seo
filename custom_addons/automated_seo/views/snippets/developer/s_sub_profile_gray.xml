@@ -54,9 +54,7 @@
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2"> Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
-                </div>
+                    </div><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a></div>
         </section>
 
     </template>

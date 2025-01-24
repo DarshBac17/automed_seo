@@ -742,6 +742,14 @@
                     </we-button>
                 </we-row>
             </div>
+             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet_breadcrumbs">
+                <we-row string="Content">
+                    <we-button data-add-item="" data-item=".o_sub_items_container > li:last" data-select-item=""
+                               data-no-preview="true" class="o_we_bg_brand_primary">
+                        Add breadcrumbs
+                    </we-button>
+                </we-row>
+            </div>
             <div data-js="MultipleTabs" data-selector=".tabs">
                 <we-row string="Tabs">
                     <we-button

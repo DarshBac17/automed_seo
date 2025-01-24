@@ -29,9 +29,7 @@
                         </ul>
                     </section>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">schedule a developer interview</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">schedule a developer interview</a></div>
             </div>
         </section>
 

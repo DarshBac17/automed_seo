@@ -31,9 +31,7 @@
                         <p>Text Text Text Text Text Text</p>
                         <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description
                         </p>
-                        <div class="text-center mt-md">
-                            <a href="#form" class="btn btn-outline-primary">Button Text</a>
-                        </div>
+                        <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
                     </div>
                 </div>
             </div>

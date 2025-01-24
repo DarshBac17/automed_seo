@@ -8,9 +8,7 @@
                 <div class="side-sticky">
                     <h2 class="cont-padding">Frequently Asked Questions</h2>
                     <a href="#footer-form-id" class="text-h5 faq-head max-md:mt-sm">Still have questions?
-                        <span class="md:block">
-                            <a href="#form" class="btn btn-outline-primary">Button Text</a>
-                        </span>
+                        <span class="md:block"><a href="#form" class="btn btn-outline-primary">Button Text</a></span>
                     </a>
                 </div>
             </div>
