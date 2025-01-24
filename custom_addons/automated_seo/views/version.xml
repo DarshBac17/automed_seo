@@ -61,20 +61,14 @@
                     </group>
 
                 </sheet>
-                <footer>
-                    <button string="Create"
-                            class="btn-primary"
-                            name="action_call_create_version"
-                            type="object"
-                            context="{
-                                'default_view_id': view_id,
-                                'default_description': description,
-                                'default_change': change,
-                                'default_base_version': base_version
-                            }"
-                    />
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
-                </footer>
+<!--                <footer>-->
+<!--                    <button string="Create"-->
+<!--                            class="btn-primary"-->
+<!--                            name="create"-->
+<!--                            type="object"-->
+<!--                    />-->
+<!--                    <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+<!--                </footer>-->
             </form>
         </field>
     </record>

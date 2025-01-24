@@ -256,7 +256,6 @@ class View(models.Model):
         return record
 
     def write(self, vals):
-
         for record in self:
             if 'name' in vals and record.website_page_id:
                 vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
@@ -534,18 +533,13 @@ class View(models.Model):
             )
 
             # Create and activate new version
-            new_version = self.env['website.page.version'].with_context(
-                {
-                    'view_id': self.id,
-                    'description': f'{file_name} File is processed',
-                    'change': 'major_change',
-                    'base_version': version.id
-                }
-            ).create({
+            new_version = self.env['website.page.version'].create({
                 'view_id': self.id,
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
+                'description': f'{file_name} File is processed',
+                'change': 'major_change',
                 'base_version': version.id,
                 'publish': False,
                 'status': True,
