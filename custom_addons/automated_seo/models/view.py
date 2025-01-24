@@ -1163,28 +1163,47 @@ class View(models.Model):
 
             link = breadcrumb.find('a')
             position = index + 1
-            if link and not link.get('href'):
-                link['href']="#"
+            if not link:
+                if len(breadcrumb_items_tags)-1 == index:
+                    url  = f"<?php echo BASE_URL; ?>{page_name}"
+                    id = url + '/'
+                    name = breadcrumb.text.strip()
+                    item = {
+                        "@type": "ListItem",
+                        "position": position,
+                        "item": {
+                            "@type": "WebPage",
+                            "@id": id
+                        }
+                    }
+                    item["item"]["url"] = url
+                    item["item"]["name"] = name
+                    breadcrumb_items.append(item)
+                else:
+                    message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
+                    raise UserError(message)
 
-            url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+            if link:               
 
-            if isinstance(url,ValueError):
-                raise url
-            id = url + '/'
-            name = link.text.strip() if link else breadcrumb.text.strip()
-            item = {
-                "@type": "ListItem",
-                "position": position,
-                "item": {
-                    "@type": "WebPage",
-                    "@id": id
+                url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+
+                if isinstance(url,ValueError):
+                    raise url
+                id = url + '/'
+                name = link.text.strip() if link else breadcrumb.text.strip()
+                item = {
+                    "@type": "ListItem",
+                    "position": position,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": id
+                    }
                 }
-            }
-            if index > 0:
-                item["item"]["url"] = url
-            item["item"]["name"] = name
+                if index > 0:
+                    item["item"]["url"] = url
+                item["item"]["name"] = name
 
-            breadcrumb_items.append(item)
+                breadcrumb_items.append(item)
 
 
         breadcrumb_items_json = self.format_json_with_tabs(breadcrumb_items)
@@ -1218,13 +1237,21 @@ class View(models.Model):
         soup = BeautifulSoup(html_content, "html.parser")
 
         for main_entity in soup.find_all(class_='breadcrumb'):
-            active_item = main_entity.find_all(class_='breadcrumb-item')[-1]
-            active_item["class"].append("active")
-            active_item["aria-current"]="page"
-            text_content = active_item.get_text()
-            active_item.clear()
-            active_item.append(text_content)
-
+            breadcrumb_items_tags = main_entity.find_all(class_="breadcrumb-item")
+            for index, breadcrumb in enumerate(breadcrumb_items_tags):
+                if len(breadcrumb_items_tags) - 1 == index:
+                    breadcrumb["class"].append("active")
+                    breadcrumb["aria-current"]="page"
+                    text_content = breadcrumb.get_text()
+                    breadcrumb.clear()
+                    breadcrumb.append(text_content)
+                else:
+                    a = breadcrumb.find('a')
+                    if not a or not a.get('href'):
+                        message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
+                        raise UserError(message)
+                    separator = soup.new_string(" / ")
+                    a.insert_after(separator)
         return str(soup.prettify())
 
 
@@ -1767,7 +1794,7 @@ class View(models.Model):
                     except Exception as e:
                         UserError(f"Error :- {e}")
                 if height:
-                    img['heigth'] = int(float(height))
+                    img['height'] = int(float(height))
 
                 if width:
                     img['width'] = int(float(width))
