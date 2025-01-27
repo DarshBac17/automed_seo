@@ -772,13 +772,7 @@ class View(models.Model):
                     snippet = tag.get('snippet')
                     if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
-                            match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
-                            if match:
-                                snippet_soup = BeautifulSoup(snippet,'html.parser')
-                                span_tag = snippet_soup.find("span")
-                                if span_tag:
-                                    span_tag.string = match.group(1)
-                                snippet = snippet_soup.prettify()
+                            snippet = self._handle_banner_form(new_section, snippet)
                         elif tag.get('name')=='form':
                             tech_dark_form_heading = re.search(r'\$tech_dark_form_heading\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
                             short_desc = re.search(r'\$short_desc\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
@@ -849,6 +843,35 @@ class View(models.Model):
                 content += str(section)
         return content
 
+
+    def _handle_banner_form(self, section_text, snippet):
+        # Check for btn_name
+        btn_name_match = re.search(r'\$btn_name\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
+        # Check for bannerDevName
+        banner_dev_match = re.search(r'\$bannerDevName\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
+        
+        snippet_soup = BeautifulSoup(snippet, 'html.parser')
+        button = snippet_soup.find('button')
+        
+        if button:
+            if btn_name_match:
+                # Clear existing button content
+                button.clear()
+                span = snippet_soup.new_tag('span')
+                span['class'] = ['o_au_php_var_tag_bannerDevName', 'o_au_php_tag_val_color']
+                span.string = btn_name_match.group(1)
+                button.append(span)
+            elif banner_dev_match:
+                # Clear existing button content
+                button.clear()
+                button.append('Hire ')
+                span = snippet_soup.new_tag('span')
+                span['class'] = ['o_au_php_var_tag_bannerDevName', 'o_au_php_tag_val_color']
+                span.string = banner_dev_match.group(1)
+                button.append(span)
+                button.append(' Developer NOW')
+        
+        return snippet_soup.prettify()
 
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
