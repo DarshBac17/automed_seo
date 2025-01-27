@@ -21,11 +21,11 @@
                 <templates>
                     <t t-name="kanban-box">
                          <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.status.raw_value ? 'active-card' : ''}"
-             t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'}; 
-                          border-radius: 12px; 
-                          box-shadow: #{record.status.raw_value ? '0 4px 12px rgba(40, 167, 69, 0.15)' : '0 2px 8px rgba(0,0,0,0.1)'}; 
-                          transition: all 0.3s ease; 
-                          padding: 16px; 
+             t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'};
+                          border-radius: 12px;
+                          box-shadow: #{record.status.raw_value ? '0 4px 12px rgba(40, 167, 69, 0.15)' : '0 2px 8px rgba(0,0,0,0.1)'};
+                          transition: all 0.3s ease;
+                          padding: 16px;
                           border: #{record.status.raw_value ? '2px solid #28a745' : '1px solid #e9ecef'};">
                             <!-- Header with Stage Badge -->
                             <div class="o_kanban_record_top mb-3">
@@ -35,13 +35,13 @@
                                             <field name="name"/>
                                         </strong>
                                     </div>
-                                    <span t-attf-class="badge #{record.stage.raw_value == 'draft' ? 'bg-danger' : 
-                                          record.stage.raw_value == 'in_progress' ? 'bg-info' : 
-                                          record.stage.raw_value == 'in_review' ? 'bg-warning' : 
+                                    <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
+                                          record.stage.raw_value == 'in_progress' ? 'bg-info' :
+                                          record.stage.raw_value == 'in_review' ? 'bg-warning' :
                                           record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}"
-                                          style="padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; 
+                                          style="padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;
                                                  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        <field name="stage"/>
+                                        <field name="stage" style="text-color:'white'"/>
                                     </span>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                     <field name="user_id" widget="many2one_avatar"/>
                                 </div>
 
-                                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+                                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
                                                             gap: 1rem; margin-top: 1rem;">
                                     <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
                                         <small class="text-muted">Created:</small>
