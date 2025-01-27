@@ -855,12 +855,10 @@ class View(models.Model):
         
         if button:
             if btn_name_match:
-                # Clear existing button content
                 button.clear()
-                span = snippet_soup.new_tag('span')
-                span['class'] = ['o_au_php_var_tag_bannerDevName', 'o_au_php_tag_val_color']
-                span.string = btn_name_match.group(1)
-                button.append(span)
+                button['class'] = ['btn', 'btn-primary', 'h-full']
+                button['name'] = 'contactBtn'
+                button.string = btn_name_match.group(1) 
             elif banner_dev_match:
                 # Clear existing button content
                 button.clear()
