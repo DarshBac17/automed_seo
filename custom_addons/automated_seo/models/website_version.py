@@ -170,10 +170,11 @@ class WebsitePageVersion(models.Model):
         if not self.parse_html_binary:
             raise UserError('No HTML file available for download')
 
+        page_name = self.view_id.name.replace(' ', '_')
+        file_name = f"{page_name}_{self.name}.php"
         return {
             'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=website.page.version&id=%s&field=parse_html_binary&filename_field=parse_html_filename&download=true' % (
-                self.id),
+            'url': f'/web/content/?model=website.page.version&id={self.id}&field=parse_html_binary&filename={file_name}&download=true',
             'target': 'self',
         }
 
