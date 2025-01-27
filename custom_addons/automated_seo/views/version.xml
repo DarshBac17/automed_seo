@@ -102,7 +102,7 @@
                         <field name="change" widget="radio" required="1"/>
                         <field name="name"
                                class="text-info font-weight-bold"/>
-                        <field name="description"/>
+                        <field name="description" required="1"/>
 
                     </group>
 
