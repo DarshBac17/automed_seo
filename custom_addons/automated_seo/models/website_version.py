@@ -12,7 +12,7 @@ class WebsitePageVersion(models.Model):
     _description = 'Website Page Version'
     _order = 'create_date desc'
 
-    name = fields.Char('Version Name',compute='_compute_version_name', store=True)
+    name = fields.Char('Version Name', store=True)
     description = fields.Text('Description')
     view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
@@ -67,7 +67,7 @@ class WebsitePageVersion(models.Model):
     #     for record in self:
     #         record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
-    @api.depends('name')
+
     def _compute_version_name(self):
         self.ensure_one()
 
@@ -118,7 +118,8 @@ class WebsitePageVersion(models.Model):
 
     def action_version(self):
 
-        id =self.env.context.get('id', 'Unknown')
+        self.ensure_one()
+        # id =self.env.context.get('id', 'Unknown')
         view_id = self.env.context.get('view_id')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', view_id)], limit=1)
@@ -126,41 +127,40 @@ class WebsitePageVersion(models.Model):
 
         if view.has_edit_permission:
             if current_version:
-                current_version.status = False
-                current_version.stage = view.stage
-                current_version.header_title = view.header_title
-                current_version.header_description = view.header_description
-
-            active_version  = self.env['website.page.version'].search([('id','=',id)],limit=1)
-
-            if active_version:
-                active_version.status = True
-                view.write({
-                    'active_version' : active_version.id,
-                    'parse_html' : active_version.parse_html if active_version.parse_html else None,
-                    'parse_html_filename' : active_version.parse_html_filename   if active_version.parse_html_filename else None,
-                    'parse_html_binary' : active_version.parse_html_binary if active_version.parse_html_binary else None,
-                    'publish' : active_version.publish if active_version.publish else False,
-                    'header_title' : active_version.header_title,
-                    'header_description' : active_version.header_description,
-                    'stage' : active_version.stage
+                current_version.write({
+                    'status' : False,
+                    'stage' : view.stage,
+                    'header_title' : view.header_title,
+                    "header_description" : view.header_description
                 })
 
-                view.page_id.arch_db = active_version.view_arch if active_version.view_arch else None
+            self.status = True
+            view.write({
+                'active_version' : self.id,
+                'parse_html' : self.parse_html if self.parse_html else None,
+                'parse_html_filename' : self.parse_html_filename   if self.parse_html_filename else None,
+                'parse_html_binary' : self.parse_html_binary if self.parse_html_binary else None,
+                'publish' : self.publish if self.publish else False,
+                'header_title' : self.header_title,
+                'header_description' : self.header_description,
+                'stage' : self.stage
+            })
 
-                if current_version.header_metadata_ids:
-                    current_version.header_metadata_ids.write({'is_active': False})
+            view.page_id.arch_db = self.view_arch if self.view_arch else None
 
-                if active_version.header_metadata_ids:
-                    active_version.header_metadata_ids.write({'is_active': True})
+            if current_version.header_metadata_ids:
+                current_version.header_metadata_ids.write({'is_active': False})
 
-                if current_version.header_link_ids:
-                    current_version.header_link_ids.write({'is_active': False})
+            if self.header_metadata_ids:
+                self.header_metadata_ids.write({'is_active': True})
 
-                if active_version.header_link_ids:
-                    active_version.header_link_ids.write({'is_active': True})
+            if current_version.header_link_ids:
+                current_version.header_link_ids.write({'is_active': False})
 
-                self.view_id.message_post(body=f"Version '{self.name}' activated", message_type="comment")
+            if self.header_link_ids:
+                self.header_link_ids.write({'is_active': True})
+
+            self.view_id.message_post(body=f"Version '{self.name}' activated", message_type="comment")
 
     def action_download_html(self):
         """Download the parsed HTML file"""
@@ -198,7 +198,7 @@ class WebsitePageVersion(models.Model):
             current_version.header_link_ids.write({'is_active': False})
         if initial_version and seo_view:
             seo_view.page_id.arch_db = view_arch if view_arch else None
-            seo_view.stage = 'in_progress'
+            seo_view.stage = 'draft'
             seo_view.parse_html_filename = None
             seo_view.parse_html_binary = None
             seo_view.parse_html = None

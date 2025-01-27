@@ -256,6 +256,7 @@ class View(models.Model):
         return record
 
     def write(self, vals):
+
         for record in self:
             if 'name' in vals and record.website_page_id:
                 vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
@@ -293,6 +294,8 @@ class View(models.Model):
 
 
             if record.active_version:
+                if 'stage' in vals:
+                    record.active_version.stage = vals.get("stage")
                 if 'name' in vals:
                     og_url_meta = record.env['automated_seo.page_header_metadata'].search(
                         ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
