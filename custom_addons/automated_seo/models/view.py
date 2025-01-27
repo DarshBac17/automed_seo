@@ -1266,6 +1266,10 @@ class View(models.Model):
     def handle_breadcrumbs(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
 
+        breadcrumb_navs = soup.find_all( attrs={"aria-label":"breadcrumb"})
+        for nav in breadcrumb_navs:
+            nav.name = "nav"
+
         for main_entity in soup.find_all(class_='breadcrumb'):
             breadcrumb_items_tags = main_entity.find_all(class_="breadcrumb-item")
             for index, breadcrumb in enumerate(breadcrumb_items_tags):
@@ -1280,8 +1284,10 @@ class View(models.Model):
                     if not a or not a.get('href') or a["href"] == "#":
                         message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
                         raise UserError(message)
-                    separator = soup.new_string(" / ")
-                    a.insert_after(separator)
+                    next_sibling = a.next_sibling
+                    if not next_sibling or (isinstance(next_sibling, str) and '/' not in next_sibling):
+                        separator = soup.new_string(" / ")
+                        a.insert_after(separator)
         return str(soup.prettify())
 
 
