@@ -1279,7 +1279,8 @@ class View(models.Model):
                 else:
                     a = breadcrumb.find('a')
                     if not a or not a.get('href') or a["href"] == "#":
-                        message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
+                        clean_text = ' '.join(breadcrumb.text.replace('&amp;','&').replace('&nbsp;', ' ').split()).strip()
+                        message = f"Please add a link in {clean_text} breadcrumb"
                         raise UserError(message)
                     next_sibling = a.next_sibling
                     if not next_sibling or (isinstance(next_sibling, str) and '/' not in next_sibling):
