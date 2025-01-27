@@ -62,6 +62,8 @@ class WebsitePageVersion(models.Model):
         domain="[('view_id', '=', context.get('default_view_id'))]",
         string='Base Version')
 
+    stage_url = fields.Char(string='Stage URL', help="Stage URL")
+
     # @api.depends('major_version', 'minor_version', 'patch_version')
     # def _compute_version_number(self):
     #     for record in self:

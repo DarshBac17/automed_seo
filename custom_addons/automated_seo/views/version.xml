@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-        <!-- Tree View -->
+    <!-- Tree View -->
     <record id="view_version_tree" model="ir.ui.view">
         <field name="name">website.page.version.tree</field>
         <field name="model">website.page.version</field>
         <field name="arch" type="xml">
-            <kanban default_order="id desc" class="o_version_card_tree" 
-                   create="false" edit="false" delete="false">
+            <kanban default_order="id desc" class="o_version_card_tree"
+                    create="false" edit="false" delete="false">
                 <field name="id"/>
                 <field name="parse_html_binary"/>
                 <field name="stage"/>
@@ -20,8 +20,8 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                         <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.status.raw_value ? 'active-card' : ''}"
-             t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'};
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.status.raw_value ? 'active-card' : ''}"
+                             t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'};
                           border-radius: 12px;
                           box-shadow: #{record.status.raw_value ? '0 4px 12px rgba(40, 167, 69, 0.15)' : '0 2px 8px rgba(0,0,0,0.1)'};
                           transition: all 0.3s ease;
@@ -71,9 +71,17 @@
                                         <field name="publish_at" widget="date"/>
                                     </div>
                                 </div>
+
+                                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                                                            gap: 1rem; margin-top: 1rem;">
+                                    <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                        <small class="text-muted">Stage URL:</small>
+                                        <field name="stage_url" widget="url"/>
+                                    </div>
+                                </div>
                                 <div class="d-flex align-items-center justify-content-end mt-3">
-                                    <button name="action_download_html" 
-                                            type="object" 
+                                    <button name="action_download_html"
+                                            type="object"
                                             class="btn btn-link"
                                             attrs="{'invisible': [('parse_html_binary', '=', False)]}">
                                         <i class="fa fa-download"/> Download PHP

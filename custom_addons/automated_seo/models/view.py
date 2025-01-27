@@ -364,7 +364,11 @@ class View(models.Model):
             if upload_success:
                 self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
                 self.write({'stage': 'stage'})
-                self.active_version.stage = 'stage'
+                self.active_version.write({
+                    'stage' : 'stage',
+                    'stage_url' : f"https://automatedseo.bacancy.com/{page_name}"
+                })
+
                 self.message_post(body="Record moved to the done stage", message_type="comment")
             else:
                 self.message_post(body=f"{page_name} file upload failed.")
@@ -532,6 +536,7 @@ class View(models.Model):
                 'status': True,
                 'publish': True,
                 'selected_filename': self.selected_filename.name,
+                'stage_url' : f"https://automatedseo.bacancy.com/{self.selected_filename.name}"
             })
             self.create_php_header(header=file_content)
             self.with_context(view_name=self.name).action_compile_button()
@@ -542,7 +547,7 @@ class View(models.Model):
             )
 
             # Create and activate new version
-            new_version = self.env['website.page.version'].create({
+            self.env['website.page.version'].create({
                 'view_id': self.id,
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
@@ -555,14 +560,6 @@ class View(models.Model):
                 'selected_filename': self.selected_filename.name
             })
 
-            # Activate new version
-            # new_version.with_context(
-            #     base_version=version.id,
-            #     unpublish=True
-            # ).action_create_version()
-
-            # self.create_php_header(header=file_content)
-            # Update file status and create headers
 
             self.is_processed = True
             self.selected_filename.write({'is_processed': True})
