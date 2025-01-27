@@ -141,6 +141,8 @@
         "views/snippets/tab/s_horizontal_tab_bg_gray.xml",
         "views/snippets/tab/s_dedicated_dev_tack_stack_bg_gray.xml",
         "views/snippets/tab/s_dedicated_dev_tack_stack_bg_white.xml",
+        "views/snippets/tab/s_sub_dedicated_dev_tack_stack_bg_white.xml",
+        "views/snippets/tab/s_sub_dedicated_dev_tack_stack_bg_gray.xml",
         "views/snippets/case_study/s_case_study_bg_gray.xml",
         "views/snippets/case_study/s_case_study_bg_white.xml",
         "views/snippets/case_study/s_sub_case_study.xml",

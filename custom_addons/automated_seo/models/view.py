@@ -2050,6 +2050,10 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
+
+        for section in soup.find_all('section',class_='remove'):
+            section.unwrap()
+
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section','float-start', 'rounded-circle', 'rounded','img', "img-fluid", "me-auto"]
 
