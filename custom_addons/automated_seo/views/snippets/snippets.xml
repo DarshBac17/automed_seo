@@ -536,9 +536,17 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/dedicated_dev_tack_stack_bg_gray.png">
                         <keywords>tack, stack, developer, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_dedicated_dev_tack_stack_bg_white"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/dedicated_dev_tack_stack_bg_white.png">
-                        <keywords>tack, stack, developer, white</keywords>
+                    <t t-snippet="automated_seo.s_dedicated_dev_tack_stack_bg_gray"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/dedicated_dev_tack_stack_bg_gray.png">
+                        <keywords>tack, stack, developer, gray</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_sub_dedicated_dev_tack_stack_bg_white"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/s_sub_dedicated_dev_tack_stack_bg_white.png">
+                        <keywords>tack, sub, stack, developer, white</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_sub_dedicated_dev_tack_stack_bg_gray"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/s_sub_dedicated_dev_tach_stack_bg_gray.png">
+                        <keywords>tack, sub, stack, developer, white</keywords>
                     </t>
 
                 </div>
