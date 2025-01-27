@@ -69,22 +69,40 @@ class WebsitePageVersion(models.Model):
 
     @api.depends('name')
     def _compute_version_name(self):
-
         self.ensure_one()
-        # if self.base_version:
-        #     self.name = self.base_version.name
 
         if self.change:
-            if self.change == 'major_change' :
-                max_major_version = self.env['website.page.version'].search([('view_id', '=', self.view_id.id)],order='major_version desc', limit=1)
+            if self.change == 'major_change':
+                max_major_version = self.env['website.page.version'].search(
+                    [('view_id', '=', self.view_id.id)],
+                    order='major_version desc', 
+                    limit=1
+                )
                 self.major_version = max_major_version.major_version + 1
+                self.minor_version = 0
+                self.patch_version = 0
+                
             elif self.change == 'minor_change':
                 self.major_version = self.base_version.major_version
-                self.minor_version = self.base_version.minor_version + 1
+                # Find highest minor version for this major version
+                max_minor_version = self.env['website.page.version'].search([
+                    ('view_id', '=', self.view_id.id),
+                    ('major_version', '=', self.major_version)
+                ], order='minor_version desc', limit=1)
+                self.minor_version = max_minor_version.minor_version + 1 if max_minor_version else 1
+                self.patch_version = 0
+                
             elif self.change == 'patch_change':
                 self.major_version = self.base_version.major_version
                 self.minor_version = self.base_version.minor_version
-                self.patch_version = self.base_version.patch_version + 1
+                # Find highest patch version for this major.minor version
+                max_patch_version = self.env['website.page.version'].search([
+                    ('view_id', '=', self.view_id.id),
+                    ('major_version', '=', self.major_version),
+                    ('minor_version', '=', self.minor_version)
+                ], order='patch_version desc', limit=1)
+                self.patch_version = max_patch_version.patch_version + 1 if max_patch_version else 1
+                
             self.name = f"v{self.major_version}.{self.minor_version}.{self.patch_version}"
 
     @api.onchange('base_version')
