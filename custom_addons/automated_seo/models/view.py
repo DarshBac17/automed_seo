@@ -294,8 +294,8 @@ class View(models.Model):
 
 
             if record.active_version:
-                if 'stage' in vals:
-                    record.active_version.stage = vals.get("stage")
+                # if 'stage' in vals:
+                #     record.active_version.stage = vals.get("stage")
                 if 'name' in vals:
                     og_url_meta = record.env['automated_seo.page_header_metadata'].search(
                         ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
@@ -360,10 +360,11 @@ class View(models.Model):
                 page_name=page_name,
                 file_data= self.parse_html_binary
             )
-
+            upload_success = True
             if upload_success:
                 self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
                 self.write({'stage': 'stage'})
+                self.active_version.stage = 'stage'
                 self.message_post(body="Record moved to the done stage", message_type="comment")
             else:
                 self.message_post(body=f"{page_name} file upload failed.")
@@ -415,15 +416,18 @@ class View(models.Model):
 
     def action_publish_button(self):
         self.write({'stage': 'publish'})
+        self.active_version.stage = 'publish'
         self.message_post(body="Record publish", message_type="comment")
         self.active_version.publish_at = datetime.now()
 
     def action_unpublish_button(self):
         self.write({'stage': 'in_progress'})
+        self.active_version.stage = 'in_progress'
         self.message_post(body="Record in progress", message_type="comment")
 
     def action_reject(self):
         self.write({'stage': 'in_progress'})
+        self.active_version.stage = 'in_progress'
         self.message_post(body="Record rejected", message_type="comment")
 
     def send_email_action(self):
@@ -450,6 +454,7 @@ class View(models.Model):
         if not self.page_id:
             raise UserError("No website page associated with this record.")
         self.write({'stage': 'in_progress'})
+        self.active_version.stage = 'in_progress'
         base_url = self.website_page_id.url
         base_url = base_url.rstrip('/')
 
