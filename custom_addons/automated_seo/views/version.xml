@@ -71,6 +71,14 @@
                                         <field name="publish_at" widget="date"/>
                                     </div>
                                 </div>
+                                <div class="d-flex align-items-center justify-content-end mt-3">
+                                    <button name="action_download_html" 
+                                            type="object" 
+                                            class="btn btn-link"
+                                            attrs="{'invisible': [('parse_html_binary', '=', False)]}">
+                                        <i class="fa fa-download"/> Download PHP
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </t>
