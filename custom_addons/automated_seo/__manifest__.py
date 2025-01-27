@@ -215,6 +215,7 @@
             'automated_seo/static/src/js/php_variable_options.js',
             'automated_seo/static/src/js/p_tag_len_constraints.js',
             'automated_seo/static/src/js/dynamic_editable_box.js',
+            'automated_seo/static/src/js/handle_tabs.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
         'web.assets_backend': [

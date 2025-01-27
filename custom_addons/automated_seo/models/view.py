@@ -1279,7 +1279,7 @@ class View(models.Model):
                     breadcrumb.append(text_content)
                 else:
                     a = breadcrumb.find('a')
-                    if not a or not a.get('href'):
+                    if not a or not a.get('href') or a["href"] == "#":
                         message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
                         raise UserError(message)
                     separator = soup.new_string(" / ")

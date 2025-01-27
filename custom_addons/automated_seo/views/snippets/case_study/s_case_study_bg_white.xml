@@ -15,8 +15,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text</span> Text</p>
-                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <a href="#form" class="btn btn-outline-primary">Button text</a>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p><a href="#form" class="btn btn-outline-primary">Button text</a>
                             </div>
                             <div class="max-md:hidden">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-1.jpg" alt="UPS Courier Service" title="UPS Courier Service" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
@@ -30,8 +29,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
-                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p><a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-2.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-2.jpg" alt="The Credit Repairman" title="The Credit Repairman" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->
@@ -45,8 +43,7 @@
                             <div class="text-white">
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
                                 <p><span class="text-primary">Spam Text:</span> Text</p>
-                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                                <a href="#form" class="btn btn-outline-primary">Button Text</a>
+                                <p class="o_au_len_constraints" data-max-length="350">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p><a href="#form" class="btn btn-outline-primary">Button Text</a>
                             </div>
                             <div class="max-md:hidden">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/case-3.jpg" alt="Portfolio Workbench for Cambridge" title="Portfolio Workbench for Cambridge" width="645" height="320" loading="lazy" class="object-cover h-full w-full">-->

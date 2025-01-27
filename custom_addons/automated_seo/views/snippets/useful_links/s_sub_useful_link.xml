@@ -6,10 +6,8 @@
                 <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="Upgrading AngularJS to Angular: A Comprehensive Guide" title="" class="banner-post-img" loading="lazy" width="352" height="226"/>
                 <div class="content">
                     <span class="tag mb-sm">blog</span>
-                    <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
+                    <h3 class="small-heading">Subtitle Subtitle Subtitle</h3><a href="#" class="btn btn-outline-primary">Keep Reading</a></div>
                     <!--                            <a href="<?php echo BLOG_URL; ?>upgrading-angular-js-to-angular" class="btn btn-outline-primary">Keep Reading</a>-->
-                    <a href="#" class="btn btn-outline-primary">Keep Reading</a>
-                </div>
             </div>
 
         </section>

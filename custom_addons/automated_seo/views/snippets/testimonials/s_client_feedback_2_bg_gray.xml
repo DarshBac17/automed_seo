@@ -51,9 +51,7 @@
 
                     </section>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#footer-form-id" class="btn btn-outline-primary">Button Text</a>
-                </div>
+                <div class="text-center mt-md"><a href="#footer-form-id" class="btn btn-outline-primary">Button Text</a></div>
             </div>
         </section>
 
