@@ -45,7 +45,7 @@ class View(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('stage', 'Stage'),
+        ('approved', 'Approved'),
         ('publish', 'Publish'),
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
@@ -332,20 +332,7 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
-        self.action_compile_button()
-        self.write({'stage': 'in_review'})
-        self.active_version.stage = 'in_review'
-        self.message_post(body="Record sent for review", message_type="comment")
-
-    def action_set_to_in_preview(self):
-        # Set status to 'draft' or 'quotation'
-        self.stage = 'in_preview'
-        self.message_post(body="Record sent for preview", message_type="comment")
-        # Send email to admin here
-        template = self.env.ref('automated_seo.email_template_preview')
-        template.send_mail(self.id, force_send=True)
-
-    def action_stage_button(self):
+        self.action_compile_button()  
         if self.validate_header():
             page_version = self.active_version[0].name
 
@@ -363,16 +350,34 @@ class View(models.Model):
             upload_success = True
             if upload_success:
                 self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
-                self.write({'stage': 'stage'})
+                self.write({'stage': 'in_review'})
                 self.active_version.write({
-                    'stage' : 'stage',
+                    'stage' : 'in_review',
                     'stage_url' : f"https://automatedseo.bacancy.com/{page_name}"
                 })
-
-                self.message_post(body="Record moved to the done stage", message_type="comment")
+                self.message_post(body="Record sent for review", message_type="comment")
+                
+                self.message_post(body="Record moved to the done approved", message_type="comment")
             else:
                 self.message_post(body=f"{page_name} file upload failed.")
                 raise UserError(f"{page_name} file upload failed.")
+
+    def action_set_to_in_preview(self):
+        # Set status to 'draft' or 'quotation'
+        self.stage = 'in_preview'
+        self.message_post(body="Record sent for preview", message_type="comment")
+        # Send email to admin here
+        template = self.env.ref('automated_seo.email_template_preview')
+        template.send_mail(self.id, force_send=True)
+
+    def action_approve_review(self):        
+        current_user = self.env.user.name
+        self.write({'stage': 'approved'})
+        self.active_version.stage = 'approved'
+        self.message_post(
+            body=f"Content review approved by {current_user}", 
+            message_type="comment"
+        )
 
             # # Get Git details
             # page_name = self.name

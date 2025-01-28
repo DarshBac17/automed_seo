@@ -33,7 +33,7 @@ class WebsitePageVersion(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('stage', 'Stage'),
+        ('approved', 'Approved'),
         ('publish', 'Publish'),
     ], string="Stage", default="draft", tracking=True)
     major_version = fields.Integer('Major Version', default=1)

@@ -91,12 +91,12 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'stage']), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
-                    <button name="action_stage_button"
+                    <button name="action_approve_review"
                             type="object"
-                            string="Stage"
+                            string="Approved"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
@@ -105,7 +105,7 @@
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'stage'), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'approved'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
                     <button name="action_unpublish_button"
