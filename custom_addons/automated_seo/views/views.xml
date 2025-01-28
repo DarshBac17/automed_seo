@@ -102,18 +102,15 @@
                             context="{'view_name': name}"/>
 
                     <button name="action_publish_button"
-                            type="object"
-                            string="Publish"
-                            class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'approved'), ('has_edit_permission', '=', False)]}"
-                            context="{'view_name': name}"/>
+                        type="object"
+                        string="Publish"
+                        class="btn oe_highlight"
+                        attrs="{'invisible': ['|', '|', 
+                                ('has_edit_permission', '=', False),
+                                ('stage', 'not in', ['approved', 'unpublish']),
+                                ('publish', '=', True)]}"
+                        context="{'view_name': name}"/>
 
-                    <button name="action_unpublish_button"
-                            type="object"
-                            string="Unpublish"
-                            class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'publish'), ('has_edit_permission', '=', False)]}"
-                    />
 
                     <button name="%(automated_seo.action_version_form)d"
                             type="action"

@@ -47,6 +47,8 @@ class View(models.Model):
         ('in_review', 'In Review'),
         ('approved', 'Approved'),
         ('publish', 'Publish'),
+        ('unpublish', 'Unpublish'),
+
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
         'res.users',
@@ -421,15 +423,16 @@ class View(models.Model):
         return True
 
     def action_publish_button(self):
+        self.env['website.page.version'].search([('view_id', '=', self.id), ('stage', '=', "publish")]).write({'stage': 'unpublish','publish':False})
         self.write({'stage': 'publish'})
         self.active_version.stage = 'publish'
         self.message_post(body="Record publish", message_type="comment")
         self.active_version.publish_at = datetime.now()
 
-    def action_unpublish_button(self):
-        self.write({'stage': 'in_progress'})
-        self.active_version.stage = 'in_progress'
-        self.message_post(body="Record in progress", message_type="comment")
+    # def action_unpublish_button(self):
+    #     self.write({'stage': 'in_progress'})
+    #     self.active_version.stage = 'in_progress'
+    #     self.message_post(body="Record in progress", message_type="comment")
 
     def action_reject(self):
         self.write({'stage': 'in_progress'})

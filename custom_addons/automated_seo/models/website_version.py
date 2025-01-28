@@ -36,6 +36,7 @@ class WebsitePageVersion(models.Model):
         ('in_review', 'In Review'),
         ('approved', 'Approved'),
         ('publish', 'Publish'),
+        ('unpublish', 'Unpublish'),
     ], string="Stage", default="draft", tracking=True)
     major_version = fields.Integer('Major Version', default=1)
     minor_version = fields.Integer('Minor Version', default=0)
