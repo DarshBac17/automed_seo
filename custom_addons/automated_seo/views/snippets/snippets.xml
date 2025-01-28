@@ -26,12 +26,12 @@
 
         </xpath>
 
-<!--        <xpath expr="//div[@id='snippet_effect']" position="replace">-->
-<!--            <div display="none"/>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//div[@id='snippet_content']" position="replace">-->
-<!--            <div display="none"/>-->
-<!--        </xpath>-->
+        <xpath expr="//div[@id='snippet_effect']" position="replace">
+            <div display="none"/>
+        </xpath>
+        <xpath expr="//div[@id='snippet_content']" position="replace">
+            <div display="none"/>
+        </xpath>
         <xpath expr="//div[@id='snippet_structure']" position="replace">
 
             <div id="snippets_header" class="o_panel">

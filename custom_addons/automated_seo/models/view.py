@@ -908,7 +908,7 @@ class View(models.Model):
                             print(f"Error resetting file status: {str(e)}")
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
