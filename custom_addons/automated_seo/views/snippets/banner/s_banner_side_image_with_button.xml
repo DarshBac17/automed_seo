@@ -15,8 +15,7 @@
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
-                    </p>
-                        <a href="#case-study" class="btn btn-outline-primary">Button Text</a>
+                    </p><a href="#case-study" class="btn btn-outline-primary">Button Text</a>
                 </div>
             </div>
         </section>
