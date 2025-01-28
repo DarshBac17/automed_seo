@@ -334,14 +334,15 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
-        self.action_compile_button()  
+        self.action_compile_button()
+
         if self.validate_header():
             selected_file_version = None
             if self.selected_filename:
                 base_name, ext = os.path.splitext(self.selected_filename.name)
-                selected_file_version = f'{base_name}-automated{ext}'
+                selected_file_version = f'{base_name}_{self.active_version.name}.{ext}'
 
-            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}-automated.php"
+            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}_{self.active_version.name}.php"
 
             upload_success = transfer_file_via_scp(
                 page_name=page_name,
@@ -908,7 +909,7 @@ class View(models.Model):
                             print(f"Error resetting file status: {str(e)}")
                 if seo_page:
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
