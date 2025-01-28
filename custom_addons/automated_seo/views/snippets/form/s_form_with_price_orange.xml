@@ -66,9 +66,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-primary">Button text</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-primary">Button text</a></div>
             </div>
         </section>
         <section class="pt-0 form-sec">

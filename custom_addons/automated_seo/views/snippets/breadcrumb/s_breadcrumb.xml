@@ -2,23 +2,15 @@
 
 <odoo>
     <template id="s_breadcrumb" name="Breadcrumbs">
-        <section class="pt-md pb-0 container o_automated_seo_snippet o_automated_seo_php_variable">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a>Item</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a>Item</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a>Item</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a>Item</a>
-                    </li>
+        <section class="pt-md pb-0 container o_automated_seo_snippet_breadcrumbs o_automated_seo_php_variable">
+            <h6 aria-label="breadcrumb">
+                <ol class="breadcrumb o_sub_items_container">
+                    <li class="breadcrumb-item"><a href="#">Item</a></li>
+                    <li class="breadcrumb-item"><a href="#">Item</a></li>
+                    <li class="breadcrumb-item"><a href="#">Item</a></li>
+                    <li class="breadcrumb-item"><a href="#">Item</a></li>
                 </ol>
-            </nav>
+            </h6>
         </section>
     </template>
 </odoo>

@@ -59,8 +59,7 @@
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2"> Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                    </div><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
                 </section>
                 <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="flex items-center mb-sm small-heading-three">
@@ -113,8 +112,7 @@
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
                         <span class="border border-primary bg-light-orange px-2">Span</span>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                    </div><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
                 </section>
                 <section class="boxed bg-gray-light o_replace_section_div">
                     <div class="flex items-center mb-sm small-heading-three">
@@ -165,8 +163,7 @@
                         <span class="border border-primary bg-light-orange px-2"><!--<a
                             href="<?php echo BASE_URL;?>dot-net-core-developer" class="text-primary font-bold">span</a>--><a
                                 href="#" class="text-primary font-bold">span</a></span>
-                    </div>
-                    <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                    </div><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
                 </section>
             </div>
         </section>

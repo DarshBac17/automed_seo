@@ -11,9 +11,7 @@
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
             <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading Heading Heading</h1>
-                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-
-                <a href="#price-sec" class="btn btn-primary">Button Text</a>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p><a href="#price-sec" class="btn btn-primary">Button Text</a>
             </div>
             <div class="lg:col-span-2 flex flex-wrap text-center">
                 <div class="boxed w-1/2 border-r border-b border-secondary">

@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <div class="tab-pane active">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="#">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="ruby-on-rails-development">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -336,7 +336,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-react-native-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -420,7 +420,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-rpa-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -444,7 +444,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-salesforce-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -478,7 +478,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-ai-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -552,7 +552,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-ml-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -576,7 +576,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-devops-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -600,7 +600,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-tableau-consultant">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -675,7 +675,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-cloud-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
@@ -709,7 +709,7 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-software-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">

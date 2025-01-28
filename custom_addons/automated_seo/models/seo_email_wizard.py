@@ -49,6 +49,7 @@ class SEOSendEmailWizard(models.Model):
             # partner_ids=self.recipient_ids.mapped('partner_id').ids,
         )
         view.stage = 'in_progress'
+        view.active_version.stage = 'in_progress'
 
         return {
             'type': 'ir.actions.act_window_close',

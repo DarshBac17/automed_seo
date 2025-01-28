@@ -23,8 +23,7 @@
                     <p class="text-h3 font-bold text-primary mb-0">100+ </p>
                     <p>Text Text Text</p>
                 </div>
-            </div>
-            <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+            </div><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
         </div>
     </section>
 

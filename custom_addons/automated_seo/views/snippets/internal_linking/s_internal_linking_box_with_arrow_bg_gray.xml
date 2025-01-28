@@ -107,9 +107,7 @@
                         <!--                    <a href="<?php echo BASE_URL; ?>artificial-intelligence-solutions" class="w-full flex items-center"><h3 class="text-base mb-0">Custom AI Solutions</h3><span class="ml-auto bg-rightarrowLineBlack mt-1"></span></a>-->
                     </section>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Button Text</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
             </div>
         </section>
 

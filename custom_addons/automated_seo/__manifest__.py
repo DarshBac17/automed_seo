@@ -13,12 +13,12 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         # "views/page_header_metadata.xml",
+        'views/version.xml',
         "views/views.xml",
         "views/cron_job.xml",
         "views/email_wizard_view.xml",
 
         'views/templates.xml',
-        'views/version.xml',
         "views/mapper_view.xml",
         "views/php_to_snippet.xml",
         "views/php_mapper_view.xml",
@@ -141,6 +141,8 @@
         "views/snippets/tab/s_horizontal_tab_bg_gray.xml",
         "views/snippets/tab/s_dedicated_dev_tack_stack_bg_gray.xml",
         "views/snippets/tab/s_dedicated_dev_tack_stack_bg_white.xml",
+        "views/snippets/tab/s_sub_dedicated_dev_tack_stack_bg_white.xml",
+        "views/snippets/tab/s_sub_dedicated_dev_tack_stack_bg_gray.xml",
         "views/snippets/case_study/s_case_study_bg_gray.xml",
         "views/snippets/case_study/s_case_study_bg_white.xml",
         "views/snippets/case_study/s_sub_case_study.xml",
@@ -215,6 +217,7 @@
             'automated_seo/static/src/js/php_variable_options.js',
             'automated_seo/static/src/js/p_tag_len_constraints.js',
             'automated_seo/static/src/js/dynamic_editable_box.js',
+            'automated_seo/static/src/js/handle_tabs.js',
             # 'automated_seo/static/src/js/angular_offer.js'
         ],
         'web.assets_backend': [

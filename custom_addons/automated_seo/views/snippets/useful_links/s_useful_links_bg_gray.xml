@@ -10,28 +10,22 @@
                          <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-1.png" alt="" title="" class="banner-post-img" loading="lazy" width="352" height="226"/>
                          <div class="content">
                              <span class="tag mb-sm">blog</span>
-                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
+                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3><a href="#" class="btn btn-outline-primary">Keep Reading</a></div>
                              <!--                            <a href="<?php echo BLOG_URL; ?>why-use-angular" class="btn btn-outline-primary">Keep Reading</a>-->
-                             <a href="#" class="btn btn-outline-primary">Keep Reading</a>
-                         </div>
                      </section>
                      <section class="boxed banner-post o_replace_section_div">
                          <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-img-2.jpg" alt="" title="" class="banner-post-img" loading="lazy" width="352" height="226"/>
                          <div class="content">
                              <span class="tag mb-sm">blog</span>
-                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
+                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3><a href="#" class="btn btn-outline-primary">Keep Reading</a></div>
                              <!--                            <a href="<?php echo BLOG_URL; ?>whats-new-in-angular-18" class="btn btn-outline-primary">Keep Reading</a>-->
-                             <a href="#" class="btn btn-outline-primary">Keep Reading</a>
-                         </div>
                      </section>
                      <section class="boxed banner-post o_replace_section_div">
                          <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/blog-3.jpg" alt="" title="" class="banner-post-img" loading="lazy" width="352" height="226"/>
                          <div class="content">
                              <span class="tag mb-sm">blog</span>
-                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3>
+                             <h3 class="small-heading">Subtitle Subtitle Subtitle</h3><a href="#" class="btn btn-outline-primary">Keep Reading</a></div>
                              <!--                            <a href="<?php echo BLOG_URL; ?>upgrading-angular-js-to-angular" class="btn btn-outline-primary">Keep Reading</a>-->
-                             <a href="#" class="btn btn-outline-primary">Keep Reading</a>
-                         </div>
                      </section>
                  </div>
              </div>

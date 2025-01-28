@@ -32,8 +32,7 @@
                             <li>Item Item Item Item</li>
                             <li>Item Item Item Item</li>
                             <li>Item Item Item Item</li>
-                        </ul>
-                        <a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
+                        </ul><a href="#form" class="btn btn-outline-primary mt-md">Button Text</a>
                     </div>
                 </div>
             </div>

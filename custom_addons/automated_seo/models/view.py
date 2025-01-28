@@ -45,8 +45,10 @@ class View(models.Model):
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
         ('in_review', 'In Review'),
-        ('stage', 'Stage'),
+        ('approved', 'Approved'),
         ('publish', 'Publish'),
+        ('unpublish', 'Unpublish'),
+
     ], string="Stage", default="draft", tracking=True)
     contributor_ids = fields.Many2many(
         'res.users',
@@ -242,7 +244,9 @@ class View(models.Model):
         record  = super(View, self).create(vals)
         record.is_new_page = False
         if not vals.get('file_source') == 'remote' and not vals.get('selected_filename'):
-            self.env['website.page.version'].create({
+            self.env['website.page.version'].with_context({
+                'initial_version' : True
+            }).create({
                 'description' : 'First Version',
                 'view_id':record.id,
                 'page_id':website_page.id,
@@ -292,6 +296,8 @@ class View(models.Model):
 
 
             if record.active_version:
+                # if 'stage' in vals:
+                #     record.active_version.stage = vals.get("stage")
                 if 'name' in vals:
                     og_url_meta = record.env['automated_seo.page_header_metadata'].search(
                         ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
@@ -328,9 +334,32 @@ class View(models.Model):
         }
 
     def action_send_for_review(self):
-        self.action_compile_button()
-        self.write({'stage': 'in_review'})
-        self.message_post(body="Record sent for review", message_type="comment")
+        self.action_compile_button()  
+        if self.validate_header():
+            selected_file_version = None
+            if self.selected_filename:
+                base_name, ext = os.path.splitext(self.selected_filename.name)
+                selected_file_version = f'{base_name}-automated{ext}'
+
+            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}-automated.php"
+
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data= self.parse_html_binary
+            )
+            if upload_success:
+                self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
+                self.write({'stage': 'in_review'})
+                self.active_version.write({
+                    'stage' : 'in_review',
+                    'stage_url' : f"https://automatedseo.bacancy.com/{page_name}"
+                })
+                self.message_post(body="Record sent for review", message_type="comment")
+                
+                self.message_post(body="Record moved to the done approved", message_type="comment")
+            else:
+                self.message_post(body=f"{page_name} file upload failed.")
+                raise UserError(f"{page_name} file upload failed.")
 
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
@@ -340,29 +369,14 @@ class View(models.Model):
         template = self.env.ref('automated_seo.email_template_preview')
         template.send_mail(self.id, force_send=True)
 
-    def action_stage_button(self):
-        if self.validate_header():
-            page_version = self.active_version[0].name
-
-            selected_file_version = None
-            if self.selected_filename:
-                base_name, ext = os.path.splitext(self.selected_filename.name)
-                selected_file_version = f'{base_name}-{page_version}{ext}'
-
-            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}.php"
-
-            upload_success = transfer_file_via_scp(
-                page_name=page_name,
-                file_data= self.parse_html_binary
-            )
-
-            if upload_success:
-                self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
-                self.write({'stage': 'stage'})
-                self.message_post(body="Record moved to the done stage", message_type="comment")
-            else:
-                self.message_post(body=f"{page_name} file upload failed.")
-                raise UserError(f"{page_name} file upload failed.")
+    def action_approve_review(self):        
+        current_user = self.env.user.name
+        self.write({'stage': 'approved'})
+        self.active_version.stage = 'approved'
+        self.message_post(
+            body=f"Content review approved by {current_user}", 
+            message_type="comment"
+        )
 
             # # Get Git details
             # page_name = self.name
@@ -409,16 +423,20 @@ class View(models.Model):
         return True
 
     def action_publish_button(self):
+        self.env['website.page.version'].search([('view_id', '=', self.id), ('stage', '=', "publish")]).write({'stage': 'unpublish','publish':False})
         self.write({'stage': 'publish'})
+        self.active_version.stage = 'publish'
         self.message_post(body="Record publish", message_type="comment")
         self.active_version.publish_at = datetime.now()
 
-    def action_unpublish_button(self):
-        self.write({'stage': 'in_progress'})
-        self.message_post(body="Record in progress", message_type="comment")
+    # def action_unpublish_button(self):
+    #     self.write({'stage': 'in_progress'})
+    #     self.active_version.stage = 'in_progress'
+    #     self.message_post(body="Record in progress", message_type="comment")
 
     def action_reject(self):
         self.write({'stage': 'in_progress'})
+        self.active_version.stage = 'in_progress'
         self.message_post(body="Record rejected", message_type="comment")
 
     def send_email_action(self):
@@ -445,6 +463,7 @@ class View(models.Model):
         if not self.page_id:
             raise UserError("No website page associated with this record.")
         self.write({'stage': 'in_progress'})
+        self.active_version.stage = 'in_progress'
         base_url = self.website_page_id.url
         base_url = base_url.rstrip('/')
 
@@ -511,45 +530,41 @@ class View(models.Model):
             soup = BeautifulSoup(formatted_arch, 'html.parser')
 
             # Create initial version
-            version = self.env['website.page.version'].create({
-                'description': f'Initial version',
+            version = self.env['website.page.version'].with_context({
+                'initial_version' : True
+            }).create({
+                'description': f'{file_name} File is processed',
                 'view_id': self.id,
                 'page_id': self.page_id,
-                # 'view_arch': soup.prettify(),'header_metadata_ids': [[4, 1, False], [4, 2, False], [4, 3, False], [4, 4, False], [2, 5, False], [2, 6, False], [2, 7, False], [2, 8, False]]
+                'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
                 'status': True,
-                # 'publish': True,
-                # 'selected_filename': self.selected_filename.name,
+                'publish': True,
+                'selected_filename': self.selected_filename.name,
+                'stage_url' : f"https://automatedseo.bacancy.com/{self.selected_filename.name}"
             })
-
-            # self.with_context(view_name=self.name).action_compile_button()
-            version.status = False
+            self.create_php_header(header=file_content)
+            self.with_context(view_name=self.name).action_compile_button()
+            # version.status = False
             self.message_post(
                 body=f"File '{file_name}' processed successfully and new version {version.name} created",
                 message_type="comment"
             )
 
             # Create and activate new version
-            new_version = self.env['website.page.version'].create({
-                'description': f'{file_name} File is processed',
+            self.env['website.page.version'].create({
                 'view_id': self.id,
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
-                'prev_version': version.id,
+                'description': f'{file_name} File is processed',
+                'change': 'major_change',
+                'base_version': version.id,
                 'publish': False,
                 'status': True,
                 'selected_filename': self.selected_filename.name
             })
 
-            # Activate new version
-            # new_version.with_context(
-            #     prev_version=version.id,
-            #     unpublish=True
-            # ).action_create_version()
-
-            self.create_php_header(header=file_content)
-            # Update file status and create headers
 
             self.is_processed = True
             self.selected_filename.write({'is_processed': True})
@@ -759,13 +774,7 @@ class View(models.Model):
                     snippet = tag.get('snippet')
                     if re.search(new_php,new_section):
                         if classes and 'banner' in classes:
-                            match = re.search(r'\$bannerDevName\s*=\s*"([^"]+)"', new_section)
-                            if match:
-                                snippet_soup = BeautifulSoup(snippet,'html.parser')
-                                span_tag = snippet_soup.find("span")
-                                if span_tag:
-                                    span_tag.string = match.group(1)
-                                snippet = snippet_soup.prettify()
+                            snippet = self._handle_banner_form(new_section, snippet)
                         elif tag.get('name')=='form':
                             tech_dark_form_heading = re.search(r'\$tech_dark_form_heading\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
                             short_desc = re.search(r'\$short_desc\s*=\s*[\'"]([^\'\"]+)[\'"]', new_section)
@@ -836,6 +845,33 @@ class View(models.Model):
                 content += str(section)
         return content
 
+
+    def _handle_banner_form(self, section_text, snippet):
+        # Check for btn_name
+        btn_name_match = re.search(r'\$btn_name\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
+        # Check for bannerDevName
+        banner_dev_match = re.search(r'\$bannerDevName\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
+        
+        snippet_soup = BeautifulSoup(snippet, 'html.parser')
+        button = snippet_soup.find('button')
+        
+        if button:
+            if btn_name_match:
+                button.clear()
+                button['class'] = ['btn', 'btn-primary', 'h-full']
+                button['name'] = 'contactBtn'
+                button.string = btn_name_match.group(1) 
+            elif banner_dev_match:
+                # Clear existing button content
+                button.clear()
+                button.append('Hire ')
+                span = snippet_soup.new_tag('span')
+                span['class'] = ['o_au_php_var_tag_bannerDevName', 'o_au_php_tag_val_color']
+                span.string = banner_dev_match.group(1)
+                button.append(span)
+                button.append(' Developer NOW')
+        
+        return snippet_soup.prettify()
 
     def get_approve_url(self):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -1179,8 +1215,7 @@ class View(models.Model):
                     message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
                     raise UserError(message)
 
-            if link and not link.get('href'):
-                link['href']="#"
+            if link:               
 
                 url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
@@ -1233,14 +1268,29 @@ class View(models.Model):
     def handle_breadcrumbs(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
 
-        for main_entity in soup.find_all(class_='breadcrumb'):
-            active_item = main_entity.find_all(class_='breadcrumb-item')[-1]
-            active_item["class"].append("active")
-            active_item["aria-current"]="page"
-            text_content = active_item.get_text()
-            active_item.clear()
-            active_item.append(text_content)
+        breadcrumb_navs = soup.find_all( attrs={"aria-label":"breadcrumb"})
+        for nav in breadcrumb_navs:
+            nav.name = "nav"
 
+        for main_entity in soup.find_all(class_='breadcrumb'):
+            breadcrumb_items_tags = main_entity.find_all(class_="breadcrumb-item")
+            for index, breadcrumb in enumerate(breadcrumb_items_tags):
+                if len(breadcrumb_items_tags) - 1 == index:
+                    breadcrumb["class"].append("active")
+                    breadcrumb["aria-current"]="page"
+                    text_content = breadcrumb.get_text()
+                    breadcrumb.clear()
+                    breadcrumb.append(text_content)
+                else:
+                    a = breadcrumb.find('a')
+                    if not a or not a.get('href') or a["href"] == "#":
+                        clean_text = ' '.join(breadcrumb.text.replace('&amp;','&').replace('&nbsp;', ' ').split()).strip()
+                        message = f"Please add a link in {clean_text} breadcrumb"
+                        raise UserError(message)
+                    next_sibling = a.next_sibling
+                    if not next_sibling or (isinstance(next_sibling, str) and '/' not in next_sibling):
+                        separator = soup.new_string(" / ")
+                        a.insert_after(separator)
         return str(soup.prettify())
 
 
@@ -2043,6 +2093,10 @@ class View(models.Model):
 
     def remove_odoo_classes_from_tag(self, html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
+
+        for section in soup.find_all('section',class_='remove'):
+            section.unwrap()
+
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section','float-start', 'rounded-circle', 'rounded','img', "img-fluid", "me-auto"]
 

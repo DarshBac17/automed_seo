@@ -13,8 +13,7 @@
                     <p class="border-b border-primary inline-block">subheading subheading subheading subheading subheading subheading </p>
                     <h1>Heading Heading Heading Heading Heading Heading Heading</h1>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                    <p class="text-primary font-bold">Description Description Description Description Description</p>
-                    <a href="#price-sec" class="btn btn-primary">Button Text</a>
+                    <p class="text-primary font-bold">Description Description Description Description Description</p><a href="#price-sec" class="btn btn-primary">Button Text</a>
                 </div>
                 <div class="lg:col-span-2 flex flex-wrap text-center">
                     <div class="boxed w-1/2 border-r border-b border-secondary">
