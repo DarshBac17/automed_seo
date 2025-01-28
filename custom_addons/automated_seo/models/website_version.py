@@ -5,7 +5,8 @@ from odoo import models, fields, api
 from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import UserError
 import json
-
+import os
+from .ftp_setup import transfer_file_via_scp
 
 class WebsitePageVersion(models.Model):
     _name = 'website.page.version'
@@ -133,10 +134,32 @@ class WebsitePageVersion(models.Model):
                     'status' : False,
                     'stage' : view.stage,
                     'header_title' : view.header_title,
-                    "header_description" : view.header_description
+                    "header_description" : view.header_description,
+                    "stage_url":None
                 })
 
             self.status = True
+            selected_file_version = None
+            if view.selected_filename:
+                base_name, ext = os.path.splitext(view.selected_filename.name)
+                selected_file_version = f'{base_name}-automated{ext}'
+
+            page_name = f'{selected_file_version}'  if selected_file_version else f"{view.name}-automated.php"
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data= self.parse_html_binary
+            )
+
+            if upload_success:              
+        
+                self.stage_url = f"https://automatedseo.bacancy.com/{page_name}"
+                # self.message_post(body="Record sent for review", message_type="comment")
+                
+                # self.message_post(body="Record moved to the done approved", message_type="comment")
+            else:
+                self.message_post(body=f"{page_name} file upload failed.")
+                raise UserError(f"{page_name} file upload failed.")
+            
             view.write({
                 'active_version' : self.id,
                 'parse_html' : self.parse_html if self.parse_html else None,
@@ -199,6 +222,7 @@ class WebsitePageVersion(models.Model):
             current_version.status = False
             current_version.header_metadata_ids.write({'is_active': False})
             current_version.header_link_ids.write({'is_active': False})
+            current_version.stage_url = None
         if initial_version and seo_view:
             seo_view.page_id.arch_db = view_arch if view_arch else None
             seo_view.stage = 'draft'
@@ -368,6 +392,3 @@ class WebsitePageVersion(models.Model):
     #         defaults.update({'base_version': base_version})
     #
     #     return defaults
-
-    def write(self,vals):
-        return super(WebsitePageVersion, self).write(vals)

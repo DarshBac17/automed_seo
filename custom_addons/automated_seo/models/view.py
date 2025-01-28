@@ -334,20 +334,17 @@ class View(models.Model):
     def action_send_for_review(self):
         self.action_compile_button()  
         if self.validate_header():
-            page_version = self.active_version[0].name
-
             selected_file_version = None
             if self.selected_filename:
                 base_name, ext = os.path.splitext(self.selected_filename.name)
-                selected_file_version = f'{base_name}-{page_version}{ext}'
+                selected_file_version = f'{base_name}-automated{ext}'
 
-            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}.php"
+            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}-automated.php"
 
             upload_success = transfer_file_via_scp(
                 page_name=page_name,
                 file_data= self.parse_html_binary
             )
-            upload_success = True
             if upload_success:
                 self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
                 self.write({'stage': 'in_review'})
