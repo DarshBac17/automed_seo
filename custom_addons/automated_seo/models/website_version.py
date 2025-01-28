@@ -139,26 +139,27 @@ class WebsitePageVersion(models.Model):
                 })
 
             self.status = True
-            selected_file_version = None
-            if view.selected_filename:
-                base_name, ext = os.path.splitext(view.selected_filename.name)
-                selected_file_version = f'{base_name}-automated{ext}'
+            if self.stage in ['approved', 'publish','in_review']:
+                selected_file_version = None
+                if view.selected_filename:
+                    base_name, ext = os.path.splitext(view.selected_filename.name)
+                    selected_file_version = f'{base_name}-automated{ext}'
 
-            page_name = f'{selected_file_version}'  if selected_file_version else f"{view.name}-automated.php"
-            upload_success = transfer_file_via_scp(
-                page_name=page_name,
-                file_data= self.parse_html_binary
-            )
+                page_name = f'{selected_file_version}'  if selected_file_version else f"{view.name}-automated.php"
+                upload_success = transfer_file_via_scp(
+                    page_name=page_name,
+                    file_data= self.parse_html_binary
+                )
 
-            if upload_success:              
-        
-                self.stage_url = f"https://automatedseo.bacancy.com/{page_name}"
-                # self.message_post(body="Record sent for review", message_type="comment")
-                
-                # self.message_post(body="Record moved to the done approved", message_type="comment")
-            else:
-                self.message_post(body=f"{page_name} file upload failed.")
-                raise UserError(f"{page_name} file upload failed.")
+                if upload_success:              
+            
+                    self.stage_url = f"https://automatedseo.bacancy.com/{page_name}"
+                    # self.message_post(body="Record sent for review", message_type="comment")
+                    
+                    # self.message_post(body="Record moved to the done approved", message_type="comment")
+                else:
+                    self.message_post(body=f"{page_name} file upload failed.")
+                    raise UserError(f"{page_name} file upload failed.")
             
             view.write({
                 'active_version' : self.id,
