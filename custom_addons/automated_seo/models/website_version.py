@@ -233,7 +233,7 @@ class WebsitePageVersion(models.Model):
 
         if initial_version and seo_view:
             seo_view.page_id.arch_db = view_arch if view_arch else None
-            seo_view.stage = 'draft'
+            # seo_view.stage = 'draft'/
             seo_view.parse_html_filename = None
             seo_view.parse_html_binary = None
             seo_view.parse_html = None

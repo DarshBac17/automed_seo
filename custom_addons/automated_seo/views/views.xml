@@ -102,6 +102,7 @@
                 <header>
 
                     <field name="publish" invisible="1"/>
+                    <field name="is_publisher" invisible="1"/>
                     <field name="is_owner" invisible="1"/>
                     <field name="is_new_page" invisible="1"/>
                     <field name="is_processed" invisible="1"/>
@@ -150,24 +151,24 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|', '|','|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False),('is_publisher', '=', False)]}"
                             context="{'view_name': name}"/>
 
                     <button name="action_approve_review"
                             type="object"
                             string="Approve"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|', '|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False),('is_publisher', '=', False)]}"
                             context="{'view_name': name}"/>
 
                     <button name="action_publish_button"
                             type="object"
                             string="Publish"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|',
+                            attrs="{'invisible': ['|', '|', '|',
                                 ('has_edit_permission', '=', False),
                                 ('stage', 'not in', ['approved', 'unpublish']),
-                                ('publish', '=', True)]}"
+                                ('publish', '=', True),('is_publisher', '=', False)]}"
                             context="{'view_name': name}"/>
 
 
