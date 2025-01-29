@@ -33,13 +33,14 @@ class View(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True)
-    url = fields.Char(string='Page URL', help="Page URL")
+    url = fields.Char(string='Page URL', help="Page URL", default= "Add page url")
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
     unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
     parse_html = fields.Text(string="Parse HTML")
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
+    user_name = fields.Char(string="User Name", compute="_compute_user_name", store=True)
     version = fields.One2many('website.page.version','view_id',string="Version")
     stage = fields.Selection([
         ('draft', 'Draft'),
@@ -138,6 +139,10 @@ class View(models.Model):
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
 
+    @api.depends('create_uid')
+    def _compute_user_name(self):
+        for record in self:
+            record.user_name = record.create_uid.name if record.create_uid else ''
 
     # @api.onchange('folder_id')
     # def _onchange_folder(self):
@@ -241,6 +246,7 @@ class View(models.Model):
             if page_name:
                 vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
+        vals['user_name'] = self.env.user.name
         record  = super(View, self).create(vals)
         record.is_new_page = False
         if not vals.get('file_source') == 'remote' and not vals.get('selected_filename'):
