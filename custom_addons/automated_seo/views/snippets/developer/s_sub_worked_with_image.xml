@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_worked_with_image" name="Sub worked with Image">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/3m.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-python/3m.svg" alt="" title="" width="40" height="40" loading="lazy" class="h-11 w-11"/>
+        </section>
+
+    </template>
+</odoo>
