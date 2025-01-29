@@ -147,3 +147,11 @@
 .bg-custom-unpublish-border {
     border-left: 6px solid #ff6347 !important; /* Custom color for unpublish stage */
 }
+
+
+.bg-custom-publish-color {
+    background-color: #6a94a0 !important; /* Custom color for unpublish stage */
+}
+.bg-custom-publish-border {
+    border-left: 6px solid #6a94a0 !important; /* Custom color for unpublish stage */
+}
