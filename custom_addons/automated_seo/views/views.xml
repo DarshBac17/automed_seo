@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Tree View -->
+    <record id="automated_seo.view_tree" model="ir.ui.view">
+        <field name="name">automated_seo.view.tree</field>
+        <field name="model">automated_seo.view</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="unique_page_id" readonly="1"/>
+                <field name="name"/>
+                <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
+                <field name="url" widget="url"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+                <field name="stage" widget="badge"
+                       decoration-muted="stage == 'draft'"
+                       decoration-info="stage == 'in_progress'"
+                       decoration-warning="stage == 'in_review'"
+                       decoration-success="stage in ('stage', 'publish')"/>
+            </tree>
+        </field>
+    </record>
+        <!-- Kanban View -->
     <record id="automated_seo.view_kanban" model="ir.ui.view">
     <field name="name">automated_seo.view.kanban</field>
     <field name="model">automated_seo.view</field>
     <field name="arch" type="xml">
-        <kanban class="o_seo_kanban_view" default_order="create_date desc">
+        <kanban class="o_seo_kanban_view">
             <field name="unique_page_id"/>
             <field name="name"/>
             <field name="stage"/>
@@ -18,10 +38,9 @@
             <templates>
                 <t t-name="kanban-box">
                     <div t-attf-class="oe_kanban_global_click view-kanban-card #{record.stage.raw_value == 'draft' ? 'border-left-dark' : 
-                        record.stage.raw_value == 'in_progress' ? 'border-left-info' : 
+                        record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-border' : 
                         record.stage.raw_value == 'in_review' ? 'border-left-warning' :
-                                    record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish-border' :
-
+                        record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish-border' :
                         record.stage.raw_value == 'stage' ? 'border-left-primary' : 'border-left-success'}">
                         <div class="view-kanban-header">
                             <div class="view-kanban-title">
@@ -29,7 +48,7 @@
                             </div>
                             <div class="view-kanban-badge">
                                 <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
-                                    record.stage.raw_value == 'in_progress' ? 'bg-info' : 
+                                    record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-color' : 
                                     record.stage.raw_value == 'in_review' ? 'bg-warning' :
                                     record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish' :
                                     record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}">
@@ -304,12 +323,8 @@
     <record id="automated_seo.view_action" model="ir.actions.act_window">
         <field name="name">Page Management</field>
         <field name="res_model">automated_seo.view</field>
-        <field name="view_mode">kanban,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new record to manage views
-            </p>
-        </field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="automated_seo.view_tree"/>
     </record>
 
     <!-- Main Menu for SEO Management -->
