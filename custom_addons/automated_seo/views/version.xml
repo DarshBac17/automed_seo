@@ -2,98 +2,97 @@
 <odoo>
     <!-- Tree View -->
     <record id="view_version_tree" model="ir.ui.view">
-        <field name="name">website.page.version.tree</field>
-        <field name="model">website.page.version</field>
-        <field name="arch" type="xml">
-            <kanban default_order="id desc" class="o_version_card_tree"
-                    create="false" edit="false" delete="false">
-                <field name="id"/>
-                <field name="parse_html_binary"/>
-                <field name="stage"/>
-                <field name="name"/>
-                <field name="description"/>
-                <field name="user_id"/>
-                <field name="create_date"/>
-                <field name="write_date"/>
-                <field name="publish_at"/>
-                <field name="status"/>
+    <field name="name">website.page.version.tree</field>
+    <field name="model">website.page.version</field>
+    <field name="arch" type="xml">
+        <kanban default_order="id desc" class="o_version_card_tree"
+                create="false" edit="false" delete="false">
+            <field name="id"/>
+            <field name="parse_html_binary"/>
+            <field name="stage"/>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="user_id"/>
+            <field name="create_date"/>
+            <field name="write_date"/>
+            <field name="publish_at"/>
+            <field name="status"/>
 
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.status.raw_value ? 'active-card' : ''}"
-                             t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'};
-                          border-radius: 12px;
-                          box-shadow: #{record.status.raw_value ? '0 4px 12px rgba(40, 167, 69, 0.15)' : '0 2px 8px rgba(0,0,0,0.1)'};
-                          transition: all 0.3s ease;
-                          padding: 16px;
-                          border: #{record.status.raw_value ? '2px solid #28a745' : '1px solid #e9ecef'};">
-                            <!-- Header with Stage Badge -->
-                            <div class="o_kanban_record_top mb-3">
-                                <div class="o_kanban_record_headings d-flex align-items-center justify-content-between w-100">
-                                    <div class="d-flex align-items-center">
-                                        <strong class="o_primary h5 mb-0" style="font-size: 1.5rem; font-weight: 600; color: #2d3436;">
-                                            <field name="name"/>
-                                        </strong>
-                                    </div>
-                                    <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
-                                          record.stage.raw_value == 'in_progress' ? 'bg-info' :
-                                          record.stage.raw_value == 'in_review' ? 'bg-warning' :
-                                          record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}"
-                                          style="padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;
-                                                 font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        <field name="stage" style="text-color:'white'"/>
-                                    </span>
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.status.raw_value ? 'active-card' : ''}"
+                         t-attf-style="background: #{record.status.raw_value ? '#f0fff4' : 'white'};
+                      border-radius: 12px;
+                      box-shadow: #{record.status.raw_value ? '0 4px 12px rgba(40, 167, 69, 0.15)' : '0 2px 8px rgba(0,0,0,0.1)'};
+                      transition: all 0.3s ease;
+                      padding: 16px;
+                      border: #{record.status.raw_value ? '2px solid #28a745' : '1px solid #e9ecef'};">
+                        <!-- Header with Stage Badge -->
+                        <div class="o_kanban_record_top mb-3">
+                            <div class="o_kanban_record_headings d-flex align-items-center justify-content-between w-100">
+                                <div class="d-flex align-items-center">
+                                    <strong class="o_primary h5 mb-0" style="font-size: 1.5rem; font-weight: 600; color: #2d3436;">
+                                        <field name="name"/>
+                                    </strong>
                                 </div>
-                            </div>
-
-                            <!-- Body Content -->
-                            <div class="o_kanban_record_body">
-                                <p class="text-muted mb-3">
-                                    <field name="description"/>
-                                </p>
-
-                                <div class="d-flex align-items-center mb-2">
-                                    <field name="user_id" widget="many2one_avatar"/>
-                                </div>
-
-                                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                                                            gap: 1rem; margin-top: 1rem;">
-                                    <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                        <small class="text-muted">Created:</small>
-                                        <field name="create_date" widget="date"/>
-                                    </div>
-                                    <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                        <small class="text-muted">Modified:</small>
-                                        <field name="write_date" widget="date"/>
-                                    </div>
-                                    <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                        <small class="text-muted">Published:</small>
-                                        <field name="publish_at" widget="date"/>
-                                    </div>
-                                </div>
-
-                                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                                                            gap: 1rem; margin-top: 1rem;">
-                                    <div class="info-item" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                        <small class="text-muted">Stage URL:</small>
-                                        <field name="stage_url" widget="url"/>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-end mt-3">
-                                    <button name="action_download_html"
-                                            type="object"
-                                            class="btn btn-link"
-                                            attrs="{'invisible': [('parse_html_binary', '=', False)]}">
-                                        <i class="fa fa-download"/> Download PHP
-                                    </button>
-                                </div>
+                                <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
+                                      record.stage.raw_value == 'in_progress' ? 'bg-info' :
+                                      record.stage.raw_value == 'in_review' ? 'bg-warning' :
+                                      record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish' :
+                                      record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}"
+                                      style="padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;
+                                             font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    <field name="stage" style="text-color:'white'"/>
+                                </span>
                             </div>
                         </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+
+                        <!-- Body Content -->
+                        <div class="o_kanban_record_body">
+                            <p class="text-muted mb-3">
+                                <field name="description"/>
+                            </p>
+
+                            <div class="d-flex align-items-center mb-2">
+                                <field name="user_id" widget="many2one_avatar"/>
+                            </div>
+
+                            <div class="version-info-grid">
+                                <div class="version-info-item">
+                                    <small class="version-info-label">Created:</small>
+                                    <field name="create_date" widget="date"/>
+                                </div>
+                                <div class="version-info-item">
+                                    <small class="version-info-label">Modified:</small>
+                                    <field name="write_date" widget="date"/>
+                                </div>
+                                <div class="version-info-item">
+                                    <small class="version-info-label">Published:</small>
+                                    <field name="publish_at" widget="date"/>
+                                </div>
+                            </div>
+
+                            <div class="version-info-grid">
+                                <div class="version-info-item">
+                                    <small class="version-info-label">Stage URL:</small>
+                                    <field name="stage_url" widget="url"/>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-end mt-3">
+                                <button name="action_download_html"
+                                        type="object"
+                                        class="btn btn-link"
+                                        attrs="{'invisible': [('parse_html_binary', '=', False)]}">
+                                    <i class="fa fa-download"/> Download PHP
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
 
 
     <!--  Form View  -->

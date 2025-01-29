@@ -434,7 +434,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             span.setAttribute('data-php-var', variable.name);
             const $constButton = this.$el.find('[data-select-class="o_au_php_var_type"]');
             span.setAttribute('data-php-const-var', $constButton.hasClass('active') ? '1' : '0');
-            span.textContent = selectedText;
+            span.textContent = `{ ${selectedText} }`;
             // Remove any existing content and insert the new span
             range.deleteContents();
             range.insertNode(span);

@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Tree View -->
-    <record id="automated_seo.view_tree" model="ir.ui.view">
-        <field name="name">automated_seo.view.tree</field>
-        <field name="model">automated_seo.view</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="unique_page_id" readonly="1"/>
-                <field name="name"/>
-                <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
-                <field name="url" widget="url"/>
-                <field name="create_date"/>
-                <field name="write_date"/>
-                <field name="stage" widget="badge"
-                       decoration-muted="stage == 'draft'"
-                       decoration-info="stage == 'in_progress'"
-                       decoration-warning="stage == 'in_review'"
-                       decoration-success="stage in ('stage', 'publish')"/>
-            </tree>
-        </field>
-    </record>
+    <record id="automated_seo.view_kanban" model="ir.ui.view">
+    <field name="name">automated_seo.view.kanban</field>
+    <field name="model">automated_seo.view</field>
+    <field name="arch" type="xml">
+        <kanban class="o_seo_kanban_view" default_order="create_date desc">
+            <field name="unique_page_id"/>
+            <field name="name"/>
+            <field name="stage"/>
+            <field name="create_uid"/>
+            <field name="user_name"/>
+            <field name="url"/>
+            <field name="create_date"/>
+            <field name="write_date"/>
+            
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click view-kanban-card #{record.stage.raw_value == 'draft' ? 'border-left-dark' : 
+                        record.stage.raw_value == 'in_progress' ? 'border-left-info' : 
+                        record.stage.raw_value == 'in_review' ? 'border-left-warning' :
+                                    record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish-border' :
+
+                        record.stage.raw_value == 'stage' ? 'border-left-primary' : 'border-left-success'}">
+                        <div class="view-kanban-header">
+                            <div class="view-kanban-title">
+                                ID: <field name="unique_page_id"/>
+                            </div>
+                            <div class="view-kanban-badge">
+                                <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
+                                    record.stage.raw_value == 'in_progress' ? 'bg-info' : 
+                                    record.stage.raw_value == 'in_review' ? 'bg-warning' :
+                                    record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish' :
+                                    record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}">
+                                    <field name="stage"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="view-kanban-content">
+                            <h3><strong class="o_primary"><field name="name"/></strong></h3>
+                            <div class="view-kanban-url mb-3">
+                                <i class="fa fa-link me-2"/>
+                                <field name="url" widget="url"/>
+                            </div>
+                            <div class="view-kanban-footer">
+                                <div class="view-kanban-footer-left">
+                                    <field name="create_uid" widget="many2one_avatar_user"/>
+                                    <span class="ms-2 text-muted"><field name="user_name"/></span>
+                                </div>
+                                <div class="view-kanban-footer-right">
+                                    <i class="fa fa-clock-o me-2"/>
+                                    <field name="create_date" widget="date"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
 
     <record id="action_seo_send_email_wizard" model="ir.actions.act_window">
         <field name="name">Send SEO Preview</field>
@@ -96,20 +136,20 @@
 
                     <button name="action_approve_review"
                             type="object"
-                            string="Approved"
+                            string="Approve"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
 
                     <button name="action_publish_button"
-                        type="object"
-                        string="Publish"
-                        class="btn oe_highlight"
-                        attrs="{'invisible': ['|', '|', 
+                            type="object"
+                            string="Publish"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', '|',
                                 ('has_edit_permission', '=', False),
                                 ('stage', 'not in', ['approved', 'unpublish']),
                                 ('publish', '=', True)]}"
-                        context="{'view_name': name}"/>
+                            context="{'view_name': name}"/>
 
 
                     <button name="%(automated_seo.action_version_form)d"
@@ -130,7 +170,8 @@
                             <div class="o_col" style="width:350px">
                                 <div class="o_row">
                                     <h1>
-                                        <field name="name" required="1" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                        <field name="name" required="1"
+                                               attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                     </h1>
                                 </div>
 
@@ -162,7 +203,8 @@
                                     <field name="file_source" widget="radio" options="{'horizontal': true}"/>
                                 </div>
 
-                                <div class="o_row" attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
+                                <div class="o_row"
+                                     attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
                                     <label for="selected_filename" string="Select File"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="selected_filename"
@@ -204,7 +246,7 @@
                                            placeholder="Add contributors..."
                                            attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
-                                <div class="o_row"  attrs="{'invisible': [('id', '=', False)]}">
+                                <div class="o_row" attrs="{'invisible': [('id', '=', False)]}">
                                     <label for="active_version" string="Active version"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="active_version"
@@ -228,12 +270,15 @@
                         <page string="Header Management">
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
-                                    <field name="header_title" string="Header Title" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
-                                    <field name="header_description" string="Page Description" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_title" string="Header Title"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_description" string="Page Description"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
-                                        <field name="header_metadata_ids" attrs="{'readonly': [('has_edit_permission', '=', False)]}">
+                                        <field name="header_metadata_ids"
+                                               attrs="{'readonly': [('has_edit_permission', '=', False)]}">
                                             <tree editable="bottom" class="o_list_view">
                                                 <field name="property" string="Property"/>
                                                 <field name="content" string="Content"/>
@@ -259,7 +304,7 @@
     <record id="automated_seo.view_action" model="ir.actions.act_window">
         <field name="name">Page Management</field>
         <field name="res_model">automated_seo.view</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new record to manage views
