@@ -119,6 +119,13 @@ class View(models.Model):
         default=True
     )
 
+    is_publisher = fields.Boolean(
+        compute='_check_publish_permission',
+        string='Is publisher',
+        store=False,
+        default=False
+    )
+
     file_source = fields.Selection([
         ('draft', 'Draft'),
         ('remote', 'Select Remote File')
@@ -209,6 +216,16 @@ class View(models.Model):
             is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
             record.has_edit_permission = (
                 is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
+            )
+    
+    @api.depends('create_uid')
+    def _check_publish_permission(self):
+        current_user = self.env.user
+        for record in self:
+            is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
+            is_publisher = current_user.has_group('automated_seo.group_automated_seo_publishers')
+            record.is_publisher = (
+                is_admin or is_publisher
             )
 
 
@@ -547,6 +564,7 @@ class View(models.Model):
                 'user_id': self.env.user.id,
                 'status': True,
                 'publish': True,
+                'stage': 'publish',
                 'selected_filename': self.selected_filename.name,
                 'stage_url' : f"https://automatedseo.bacancy.com/{self.selected_filename.name}"
             })
@@ -567,6 +585,7 @@ class View(models.Model):
                 'description': f'{file_name} File is processed',
                 'change': 'major_change',
                 'base_version': version.id,
+                'stage': 'in_progress',
                 'publish': False,
                 'status': True,
                 'selected_filename': self.selected_filename.name
