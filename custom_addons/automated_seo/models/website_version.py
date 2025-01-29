@@ -245,7 +245,6 @@ class WebsitePageVersion(models.Model):
                 'user_id': self.env.user.id,
                 'header_title': seo_view.header_title,
                 'header_description': seo_view.header_description,
-                'stage': seo_view.stage
             })
         else:
             base_version = self.browse(int(vals.get('base_version')))

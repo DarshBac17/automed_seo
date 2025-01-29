@@ -564,7 +564,7 @@ class View(models.Model):
                 'user_id': self.env.user.id,
                 'status': True,
                 'publish': True,
-                'stage': 'in_progress',
+                'stage': 'publish',
                 'selected_filename': self.selected_filename.name,
                 'stage_url' : f"https://automatedseo.bacancy.com/{self.selected_filename.name}"
             })
@@ -585,6 +585,7 @@ class View(models.Model):
                 'description': f'{file_name} File is processed',
                 'change': 'major_change',
                 'base_version': version.id,
+                'stage': 'in_progress',
                 'publish': False,
                 'status': True,
                 'selected_filename': self.selected_filename.name
