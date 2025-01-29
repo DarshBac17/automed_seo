@@ -154,6 +154,7 @@
         "views/snippets/slider/s_sub_combination_slider_gray.xml",
         "views/snippets/developer/s_profile_bg_gray.xml",
         "views/snippets/developer/s_profile_bg_white.xml",
+        "views/snippets/developer/s_sub_worked_with_image.xml",
         "views/snippets/developer/s_sub_profile_gray.xml",
         "views/snippets/developer/s_sub_profile_white.xml",
         "views/snippets/form/s_footer_form.xml",
