@@ -25,7 +25,7 @@
     <field name="name">automated_seo.view.kanban</field>
     <field name="model">automated_seo.view</field>
     <field name="arch" type="xml">
-        <kanban class="o_seo_kanban_view" default_order="create_date desc">
+        <kanban class="o_seo_kanban_view">
             <field name="unique_page_id"/>
             <field name="name"/>
             <field name="stage"/>
@@ -38,7 +38,7 @@
             <templates>
                 <t t-name="kanban-box">
                     <div t-attf-class="oe_kanban_global_click view-kanban-card #{record.stage.raw_value == 'draft' ? 'border-left-dark' : 
-                        record.stage.raw_value == 'in_progress' ? 'border-left-info' : 
+                        record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-border' : 
                         record.stage.raw_value == 'in_review' ? 'border-left-warning' :
                         record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish-border' :
                         record.stage.raw_value == 'stage' ? 'border-left-primary' : 'border-left-success'}">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="view-kanban-badge">
                                 <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
-                                    record.stage.raw_value == 'in_progress' ? 'bg-info' : 
+                                    record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-color' : 
                                     record.stage.raw_value == 'in_review' ? 'bg-warning' :
                                     record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish' :
                                     record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}">
