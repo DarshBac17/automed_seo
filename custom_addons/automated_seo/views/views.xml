@@ -136,7 +136,7 @@
 
                     <button name="action_approve_review"
                             type="object"
-                            string="Approved"
+                            string="Approve"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False)]}"
                             context="{'view_name': name}"/>
