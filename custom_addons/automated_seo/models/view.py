@@ -1814,7 +1814,7 @@ class View(models.Model):
                         file_obj = io.BytesIO(image_data)
 
                         # image_file = io.BytesIO(processed_image)
-                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=new_image_name)
+                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=new_image_name.replace("%20","-").replace("_","-").lower())
 
 
                         website_page.view_id.arch_db = soup.prettify()
@@ -1869,7 +1869,7 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name.replace('%20','-').replace('_','-').lower()}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
