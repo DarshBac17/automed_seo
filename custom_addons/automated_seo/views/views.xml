@@ -319,8 +319,8 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter custom_chatter" style="max-width: 850px; margin: 0 auto;">
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+    <field name="message_ids" widget="mail_thread" readonly="1" options="{'show_reply': false, 'show_composer': false}"/>
+</div>
             </form>
         </field>
     </record>

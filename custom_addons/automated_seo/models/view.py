@@ -378,9 +378,9 @@ class View(models.Model):
                     'stage' : 'in_review',
                     'stage_url' : f"https://automatedseo.bacancy.com/{page_name}"
                 })
-                self.message_post(body="Record sent for review", message_type="comment")
+                self.message_post(body="Record sent for review")
                 
-                self.message_post(body="Record moved to the done approved", message_type="comment")
+                self.message_post(body="Record moved to the done approved")
             else:
                 self.message_post(body=f"{page_name} file upload failed.")
                 raise UserError(f"{page_name} file upload failed.")
@@ -388,7 +388,7 @@ class View(models.Model):
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
         self.stage = 'in_preview'
-        self.message_post(body="Record sent for preview", message_type="comment")
+        self.message_post(body="Record sent for preview")
         # Send email to admin here
         template = self.env.ref('automated_seo.email_template_preview')
         template.send_mail(self.id, force_send=True)
@@ -422,9 +422,9 @@ class View(models.Model):
             #     file_data=self.parse_html_binary
             # )
             # if success:
-            #     self.message_post(body="Changes successfully pushed to Git.", message_type="comment")
+            #     self.message_post(body="Changes successfully pushed to Git.")
             # else:
-            #     self.message_post(body="Failed to push changes to Git.", message_type="comment")
+            #     self.message_post(body="Failed to push changes to Git.")
 
     def validate_header(self):
 
@@ -450,18 +450,18 @@ class View(models.Model):
         self.env['website.page.version'].search([('view_id', '=', self.id), ('stage', '=', "publish")]).write({'stage': 'unpublish','publish':False})
         self.write({'stage': 'publish'})
         self.active_version.stage = 'publish'
-        self.message_post(body="Record publish", message_type="comment")
+        self.message_post(body="Record publish")
         self.active_version.publish_at = datetime.now()
 
     # def action_unpublish_button(self):
     #     self.write({'stage': 'in_progress'})
     #     self.active_version.stage = 'in_progress'
-    #     self.message_post(body="Record in progress", message_type="comment")
+    #     self.message_post(body="Record in progress")
 
     def action_reject(self):
         self.write({'stage': 'in_progress'})
         self.active_version.stage = 'in_progress'
-        self.message_post(body="Record rejected", message_type="comment")
+        self.message_post(body="Record rejected")
 
     def send_email_action(self):
         # Logic to send email using Odoo's email system
@@ -475,7 +475,7 @@ class View(models.Model):
 
     def action_approve(self):
         self.write({'stage': 'approved'})
-        self.message_post(body="Record approved", message_type="comment")
+        self.message_post(body="Record approved")
 
     def action_edit_website_page(self):
         """Opens the related website page in edit mode."""
@@ -609,7 +609,7 @@ class View(models.Model):
     # def action_parse_uploaded_file(self):
 
     #     self.file_uploaded = bool(self.upload_file)
-    #     self.message_post(body=f'{self.upload_filename} File is uploaded', message_type="comment")
+    #     self.message_post(body=f'{self.upload_filename} File is uploaded')
     #     name, ext = self.upload_filename.rsplit('.', 1)
     #     if ext not in ['php','html']:
     #         raise UserError("Upload php or html file.")
@@ -933,8 +933,10 @@ class View(models.Model):
                         except Exception as e:
                             print(f"Error resetting file status: {str(e)}")
                 if seo_page:
+                    snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
+                    snippet_mapper.unlink()
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")

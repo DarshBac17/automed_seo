@@ -161,9 +161,9 @@ class WebsitePageVersion(models.Model):
                 # if upload_success:
                 #
                 #     self.stage_url = f"https://automatedseo.bacancy.com/{page_name}"
-                #     # self.message_post(body="Record sent for review", message_type="comment")
+                #     # self.message_post(body="Record sent for review")
                 #
-                #     # self.message_post(body="Record moved to the done approved", message_type="comment")
+                #     # self.message_post(body="Record moved to the done approved")
                 # else:
                 #     self.message_post(body=f"{page_name} file upload failed.")
                 #     raise UserError(f"{page_name} file upload failed.")
@@ -193,7 +193,7 @@ class WebsitePageVersion(models.Model):
             if self.header_link_ids:
                 self.header_link_ids.write({'is_active': True})
 
-            self.view_id.message_post(body=f"Version '{self.name}' activated", message_type="comment")
+            self.view_id.message_post(body=f"Version '{self.name}' activated")
 
     def action_download_html(self):
         """Download the parsed HTML file"""
@@ -316,7 +316,7 @@ class WebsitePageVersion(models.Model):
         if seo_view.website_page_id and record.view_arch:
             seo_view.website_page_id.arch_db = record.view_arch
 
-        record.view_id.message_post(body=f"Version '{record.name}' created and activated", message_type="comment")
+        record.view_id.message_post(body=f"Version '{record.name}' created and activated")
 
         seo_view.active_version = record.id
         if initial_version and not record.selected_filename:
