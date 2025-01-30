@@ -155,3 +155,9 @@
 .bg-custom-publish-border {
     border-left: 6px solid #6a94a0 !important; /* Custom color for unpublish stage */
 }
+.custom_chatter {
+    width: 90%;
+    max-width: 450px !important;
+    margin: 0 auto;
+    padding: 15px;
+}
