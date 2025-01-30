@@ -58,25 +58,18 @@
                                 </div>
 
                                 <div class="version-info-grid">
-                                    <div class="version-info-item">
-                                        <small class="version-info-label">
-                                            <i class="fa fa-calendar me-2"/>Created
-                                        </small>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fa fa-calendar me-2"/>
                                         <field name="create_date" widget="date"/>
                                     </div>
 
-                                    <div class="version-info-item">
-                                        <small class="version-info-label">
-                                            <i class="fa fa-pencil me-2"/>Modified
-                                        </small>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fa fa-pencil me-2"/>
                                         <field name="write_date" widget="date"/>
                                     </div>
 
-                                    <div class="version-info-item"
-                                         attrs="{'invisible': [('publish_at', 'in', [False,''])]}">
-                                        <small class="version-info-label">
-                                            <i class="fa fa-check-circle me-2"/>Published
-                                        </small>
+                                    <div class="d-flex align-items-center mb-2" attrs="{'invisible': [('publish_at', 'in', [False,''])]}">
+                                        <i class="fa fa-check-circle me-2"/>
                                         <field name="publish_at" widget="date"/>
                                     </div>
                                 </div>
