@@ -243,7 +243,7 @@
                             type="action"
                             string="New Version"
                             class="btn oe_highlight justify-content-end"
-                            attrs="{'invisible': [('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
                             context="{
                                 'default_view_id': id,
                                 'default_base_version':active_version,
@@ -342,7 +342,7 @@
                                                 'no_open': True
                                             }"
                                            domain="[('view_id', '=', id)]"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           attrs="{'readonly': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
                                            style="margin-left:5px"/>
                                 </div>
 
