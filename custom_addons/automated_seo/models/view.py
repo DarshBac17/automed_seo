@@ -432,7 +432,6 @@ class View(models.Model):
                      f"<b>Review URL:</b> {self.active_version.stage_url}<br/><br/>"
                      "🔎 Please review and provide feedback.<br/><br/>"
                      f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
-                     f"data-oe-method='view_action_form' "
                      f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
                      f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
                 message_type='comment',

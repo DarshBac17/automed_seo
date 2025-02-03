@@ -164,7 +164,7 @@
         <field name="name">automated_seo.view.form</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <form string="SEO View Management">
+            <form string="SEO View Management" create="false" delete="false">
                 <header>
 
                     <field name="publish" invisible="1"/>
