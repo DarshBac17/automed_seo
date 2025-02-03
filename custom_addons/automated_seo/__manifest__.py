@@ -211,7 +211,7 @@
         'website.assets_wysiwyg': [
             ('include', 'web._assets_helpers'),
             # 'automated_seo/static/src/js/website_version.js',
-            # 'automated_seo/static/src/js/website_save.js',
+            'automated_seo/static/src/js/website_save.js',
             'automated_seo/static/src/js/snippet_options.js',
             'automated_seo/static/src/js/website_autosave.js',
             'automated_seo/static/src/js/snippet_preview.js',

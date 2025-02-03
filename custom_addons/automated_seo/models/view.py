@@ -1058,7 +1058,7 @@ class View(models.Model):
                     snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
                     snippet_mapper.unlink()
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -2029,9 +2029,9 @@ class View(models.Model):
             except ValueError as e:
                 img['width'] = img.get('width')
 
-            if not img['title']:
+            if not img.get('title'):
                 del img['title']
-            if not img['alt']:
+            if not img.get('alt'):
                 img['alt'] = ""
 
 

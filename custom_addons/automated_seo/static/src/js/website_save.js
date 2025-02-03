@@ -1,5 +1,5 @@
-console.log("============sfsfsf==========save===============call")
-odoo.define('website.custom.editor', function (require) {
+
+odoo.define('website.custom.editor2', function (require) {
     'use strict';
 
     const websiteSnippetEditor = require('website.snippet.editor');
@@ -9,58 +9,44 @@ odoo.define('website.custom.editor', function (require) {
     const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
         events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
             'click .o_we_website_top_actions button[data-action=save]': '_onSaveRequest',
-            'click .o_we_website_top_actions button[data-action=cancel]':'_onDiscardRequest'
-        }),
 
+        }),
+        init: function () {
+            this._super.apply(this, arguments);
+            this.rpcInProgress = false;
+        },
         start: function () {
             this._super.apply(this, arguments);
             console.log("Snippet editor started");
         },
-
         _onSaveRequest: async function (ev) {
             console.log("Save button clicked");
 
             try {
-                // Prevent default behavior
-                ev.preventDefault();
-                ev.stopPropagation();
 
-                // Get the wysiwyg instance
                 const wysiwyg = this.options.wysiwyg;
+                const view_id = wysiwyg.odooEditor.document.body.querySelector('.oe_structure').getAttribute('data-oe-id');
 
-                // Save modified images first if any
-                if (wysiwyg && wysiwyg.saveModifiedImages) {
-                    await wysiwyg.saveModifiedImages();
+                const result = await this._super.apply(this, arguments);
+                console.log("Save completed, reloading...", result);
+
+                if (result !== false) {
+                    console.log("Making RPC call to update stage server...[===========");
+                    let response = await this._rpc({
+                        route: '/website/update_stage_server',
+                        params: {
+                            view_id: view_id,
+                        },
+                    });
+                    console.log("RPC call completed:", response);
                 }
 
-                // Call the original save function
-                await this.trigger_up('request_save', {
-                    reloadEditor: true,
-                    onSuccess: () => {
-                        console.log("Save completed successfully");
-                        // Wait a bit before reloading to ensure save is complete
-                        setTimeout(() => {
-                            console.log("Reloading page...");
-                            window.location.reload(true);
-                        }, 500);
-                    },
-                    onFailure: () => {
-                        console.error("Save operation failed");
-                    },
-                });
-
+                return result;
             } catch (error) {
                 console.error("Save failed:", error);
             }
         },
-        _onDiscardRequest: async function (ev) {
-            try {
-                await this.trigger_up('request_cancel');
 
-            } catch (error) {
-                console.error("Discard failed:", error);
-            }
-        }
     });
 
     return {
