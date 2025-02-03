@@ -135,6 +135,14 @@ odoo.define('website.snippets.php_variable_text_selector', function (require) {
             $editor_toolbar_container.remove();
             const $imageToolsElement = $('.snippet-option-ImageTools');
 
+            // const $altTagField = $('[data-attribute-name="alt"]')
+            // $altTagField.text('Alt');
+
+            // const $titleTagField = $('[data-attribute-name="title"]')
+            // $titleTagField.text('Title');
+
+            $('[data-attribute-name="alt"] we-title').text('Alt');
+            $('[data-attribute-name="title"] we-title').text('Title');
 
             if ($imageToolsElement.length) {
                 $imageToolsElement.parent().children().slice($imageToolsElement.index() + 1).each(function () {

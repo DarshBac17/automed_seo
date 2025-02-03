@@ -51,7 +51,7 @@ class SEOSendEmailWizard(models.Model):
                  f"<b>Record:</b> {page_name}<br/>"
                  f"<b>Version:</b> {view.active_version.name}<br/>"
                  "Needs changes : <br/>"
-                 f"🔎 {view.feedback}<br/><br/>"
+                 f"🔎 {self.feedback}<br/><br/>"
                  f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{view.id}' "
                  f"data-oe-method='view_action_form' "
                  f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "

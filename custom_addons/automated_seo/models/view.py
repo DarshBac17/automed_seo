@@ -1067,8 +1067,6 @@ class View(models.Model):
 
         return super(View, self).unlink()
 
-    def action_test(self):
-        print("header button works")
     def action_download_parsed_html(self):
         self.ensure_one()
         return {
@@ -2031,6 +2029,12 @@ class View(models.Model):
                     img['width'] = int(float(img.get('width')))
             except ValueError as e:
                 img['width'] = img.get('width')
+
+            if not img['title']:
+                del img['title']
+            if not img['alt']:
+                img['alt'] = ""
+
 
         return str(soup.prettify())
 
