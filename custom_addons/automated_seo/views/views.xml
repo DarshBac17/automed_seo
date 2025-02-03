@@ -183,7 +183,7 @@
                     <button name="action_edit_website_page"
                             type="object"
                             string="Edit"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|','|', '|',('id','=',False ),('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"/>
 
                     <button name="action_view_website_page"
