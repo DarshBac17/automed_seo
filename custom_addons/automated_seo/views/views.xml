@@ -202,7 +202,8 @@
                             string="Send For review"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
                             type="object"
-                            class="btn btn-primary"/>
+                            class="btn btn-primary"
+                            confirm="Are you sure you want to send this for review?"/>
                     <!-- Send Email Button -->
                     <!--                    <button name="%(action_seo_send_email_wizard)d"-->
                     <!--                            string="Send Email"-->
@@ -226,7 +227,8 @@
                             string="Approve"
                             class="btn oe_highlight"
                             attrs="{'invisible': ['|', '|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False),('is_reviewer', '=', False)]}"
-                            context="{'view_name': name}"/>
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to approve?"/>
 
                     <button name="action_publish_button"
                             type="object"
@@ -236,7 +238,8 @@
                                 ('has_edit_permission', '=', False),
                                 ('stage', 'not in', ['approved', 'unpublish']),
                                 ('publish', '=', True),('is_publisher', '=', False)]}"
-                            context="{'view_name': name}"/>
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to send this for publish?"/>
 
 
                     <button name="%(automated_seo.action_version_form)d"
