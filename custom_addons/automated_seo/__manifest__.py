@@ -223,6 +223,8 @@
         ],
         'web.assets_backend': [
             'automated_seo/static/src/css/automated_seo.css',
+            'automated_seo/static/src/xml/view_list_button.xml',
+            'automated_seo/static/src/js/views_tree_extend.js',
             # 'automated_seo/static/src/js/website_version.js',
             # 'automated_seo/static/src/js/toggle.js',
         ],
