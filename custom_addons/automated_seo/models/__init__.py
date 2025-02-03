@@ -10,3 +10,4 @@ from . import php_variables
 from . import page_header_metadata
 from . import style_mapper
 from . import remote_files
+from . import view_tags

@@ -1,4 +1,7 @@
 import json
+
+from gevent.resolver.cares import channel
+
 from odoo import models, fields, api
 from bs4 import BeautifulSoup,Comment,NavigableString
 import  html
@@ -26,6 +29,36 @@ import subprocess
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
+
+
+class ViewCreateWizard(models.TransientModel):
+    _name = "automated_seo.view_create_wizard"
+    _description = "Wizard for Creating Automated SEO View"
+
+    file_source = fields.Selection([
+        ('draft', 'Draft'),
+        ('remote', 'Select Remote File')
+    ], string="File Source", default='draft')
+
+    selected_filename = fields.Many2one(
+        'automated_seo.remote_files',
+        string="Remote Files"
+    )
+
+    # def action_create_record(self):
+    #     """ Creates a new record and opens its form view. """
+    #     new_record = self.env["automated_seo.view"].create({
+    #         "file_source": self.file_source,
+    #         "selected_filename": self.selected_filename.id,
+    #     })
+    #     return {
+    #         "type": "ir.actions.act_window",
+    #         "res_model": "automated_seo.view",
+    #         "res_id": new_record.id,
+    #         "view_mode": "form",
+    #         "target": "current",
+    #     }
+
 
 class View(models.Model):
     _name = 'automated_seo.view'
@@ -126,9 +159,16 @@ class View(models.Model):
         default=False
     )
 
+    is_reviewer = fields.Boolean(
+        compute='_check_review_permission',
+        string='Is reviewer',
+        store=False,
+        default=False
+    )
+
     file_source = fields.Selection([
         ('draft', 'Draft'),
-        ('remote', 'Select Remote File')
+        ('remote', 'Remote File')
     ], string="File Source", default='draft')
 
     # folder_id = fields.Many2one(
@@ -141,6 +181,13 @@ class View(models.Model):
         string="Remote Files",
         domain="[('is_processed', '=', False)]"
     )
+
+    tag = fields.Many2many(
+        'automated_seo.view_tags',
+        string="Tag"
+    )
+
+    channel_id = fields.Many2one('mail.channel', string='Discussion Channel')
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
@@ -217,7 +264,7 @@ class View(models.Model):
             record.has_edit_permission = (
                 is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
             )
-    
+
     @api.depends('create_uid')
     def _check_publish_permission(self):
         current_user = self.env.user
@@ -228,6 +275,15 @@ class View(models.Model):
                 is_admin or is_publisher
             )
 
+    @api.depends('create_uid')
+    def _check_review_permission(self):
+        current_user = self.env.user
+        for record in self:
+            is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
+            is_reviewer = current_user.has_group('automated_seo.group_automated_seo_reviewers')
+            record.is_reviewer = (
+                    is_admin or self.is_publisher or is_reviewer
+            )
 
     def _get_next_page_id(self):
         last_view = self.search([], order='id desc', limit=1)
@@ -266,7 +322,7 @@ class View(models.Model):
         vals['user_name'] = self.env.user.name
         record  = super(View, self).create(vals)
         record.is_new_page = False
-        if not vals.get('file_source') == 'remote' and not vals.get('selected_filename'):
+        if not self.env.context.get('default_file_source') == 'remote' and not self.env.context.get('default_selected_filename'):
             self.env['website.page.version'].with_context({
                 'initial_version' : True
             }).create({
@@ -360,30 +416,69 @@ class View(models.Model):
         self.action_compile_button()
 
         if self.validate_header():
-            selected_file_version = None
-            if self.selected_filename:
-                base_name, ext = os.path.splitext(self.selected_filename.name)
-                selected_file_version = f'{base_name}_{self.active_version.name}.{ext}'
+            # selected_file_version = None
+            # if self.selected_filename:
+            #     base_name, ext = os.path.splitext(self.selected_filename.name)
+            #     selected_file_version = f'{base_name}_{self.active_version.name}.{ext}'
 
-            page_name = f'{selected_file_version}'  if selected_file_version else f"{self.name}_{self.active_version.name}.php"
+            page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
+            self.create_channel_for_conversation()
 
-            upload_success = transfer_file_via_scp(
-                page_name=page_name,
-                file_data= self.parse_html_binary
+            self.channel_id.message_post(
+                body="<b>📢 Review request for</b><br/>"
+                     f"<b>Record:</b> {page_name}<br/>"
+                     f"<b>Version:</b> {self.active_version.name}<br/>"
+                     f"<b>Created by:</b> {self.create_uid.name}<br/>"
+                     f"<b>Review URL:</b> {self.active_version.stage_url}<br/><br/>"
+                     "🔎 Please review and provide feedback.<br/><br/>"
+                     f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
+                     f"data-oe-method='view_action_form' "
+                     f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
+                     f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+                message_type='comment',
+                subtype_xmlid=False,
+                author_id=self.env.user.partner_id.id
             )
-            if upload_success:
-                self.message_post(body=f"{page_name} file successfully uploaded to staging server.")
-                self.write({'stage': 'in_review'})
-                self.active_version.write({
-                    'stage' : 'in_review',
-                    'stage_url' : f"https://automatedseo.bacancy.com/{page_name}"
+            self.write({'stage': 'in_review'})
+
+            self.active_version.write({
+                'stage': 'in_review',
+                # 'stage_url': f"https://automatedseo.bacancy.com/{page_name}"
+            })
+
+            self.message_post(body="Record sent for review")
+
+
+    def create_channel_for_conversation(self):
+
+        try:
+            reviewer_group = self.env.ref('automated_seo.group_automated_seo_reviewers')
+            reviewer_users = reviewer_group.users
+            all_partners = set()
+            reviewer_users = reviewer_users if isinstance(reviewer_users, set) else set(reviewer_users)
+            for user in reviewer_users | set(self.contributor_ids):
+                all_partners.add(user.partner_id.id)
+
+            current_partner = self.env.user.partner_id.id
+            all_partners.add(current_partner)
+
+
+            page_name = self.selected_filename.name  if self.selected_filename else f"{self.name}.php"
+
+
+            if not self.channel_id:
+                channel = self.env['mail.channel'].create({
+                    'name': f'Review Discussion: {page_name}',
+                    'channel_type': 'channel',
+                    'channel_partner_ids': [(6, 0, partner) for partner in all_partners]
                 })
-                self.message_post(body="Record sent for review")
-                
-                self.message_post(body="Record moved to the done approved")
-            else:
-                self.message_post(body=f"{page_name} file upload failed.")
-                raise UserError(f"{page_name} file upload failed.")
+
+                self.channel_id = channel.id
+
+        except Exception as e:
+            raise UserError("No website page associated with this record.")
+
+
 
     def action_set_to_in_preview(self):
         # Set status to 'draft' or 'quotation'
@@ -393,12 +488,26 @@ class View(models.Model):
         template = self.env.ref('automated_seo.email_template_preview')
         template.send_mail(self.id, force_send=True)
 
-    def action_approve_review(self):        
+    def action_approve_review(self):
         current_user = self.env.user.name
         self.write({'stage': 'approved'})
         self.active_version.stage = 'approved'
+        page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
+        self.channel_id.message_post(
+            body="<b>📢 Approved</b><br/>"
+                 f"<b>Record:</b> {page_name}<br/>"
+                 f"<b>Version:</b> {self.active_version.name}<br/>"
+                 "🔎 Approved to publish<br/><br/>"
+                 f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
+                 f"data-oe-method='view_action_form' "
+                 f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
+                 f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+            message_type='comment',
+            subtype_xmlid=False,
+            author_id=self.env.user.partner_id.id
+        )
         self.message_post(
-            body=f"Content review approved by {current_user}", 
+            body=f"Content review approved by {current_user}",
             message_type="comment"
         )
 
@@ -450,18 +559,34 @@ class View(models.Model):
         self.env['website.page.version'].search([('view_id', '=', self.id), ('stage', '=', "publish")]).write({'stage': 'unpublish','publish':False})
         self.write({'stage': 'publish'})
         self.active_version.stage = 'publish'
+        page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
+        self.channel_id.message_post(
+            body="<b>📢 Published</b><br/>"
+                 f"<b>Record:</b> {page_name}<br/>"
+                 f"<b>Version:</b> {self.active_version.name}<br/>"
+                 "Record Published<br/><br/>"
+                 f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
+                 f"data-oe-method='view_action_form' "
+                 f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
+                 f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+            message_type='comment',
+            subtype_xmlid=False,
+            author_id=self.env.user.partner_id.id
+        )
+
         self.message_post(body="Record publish")
         self.active_version.publish_at = datetime.now()
+
 
     # def action_unpublish_button(self):
     #     self.write({'stage': 'in_progress'})
     #     self.active_version.stage = 'in_progress'
     #     self.message_post(body="Record in progress")
 
-    def action_reject(self):
-        self.write({'stage': 'in_progress'})
-        self.active_version.stage = 'in_progress'
-        self.message_post(body="Record rejected")
+    # def action_reject(self):
+    #     self.write({'stage': 'in_progress'})
+    #     self.active_version.stage = 'in_progress'
+    #     self.message_post(body="Record rejected")
 
     def send_email_action(self):
         # Logic to send email using Odoo's email system
@@ -583,7 +708,6 @@ class View(models.Model):
                 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
                 'description': f'{file_name} File is processed',
-                'change': 'major_change',
                 'base_version': version.id,
                 'stage': 'in_progress',
                 'publish': False,
@@ -877,16 +1001,16 @@ class View(models.Model):
         btn_name_match = re.search(r'\$btn_name\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
         # Check for bannerDevName
         banner_dev_match = re.search(r'\$bannerDevName\s*=\s*[\'"]([^\'\"]+)[\'"]', section_text)
-        
+
         snippet_soup = BeautifulSoup(snippet, 'html.parser')
         button = snippet_soup.find('button')
-        
+
         if button:
             if btn_name_match:
                 button.clear()
                 button['class'] = ['btn', 'btn-primary', 'h-full']
                 button['name'] = 'contactBtn'
-                button.string = btn_name_match.group(1) 
+                button.string = btn_name_match.group(1)
             elif banner_dev_match:
                 # Clear existing button content
                 button.clear()
@@ -896,7 +1020,7 @@ class View(models.Model):
                 span.string = banner_dev_match.group(1)
                 button.append(span)
                 button.append(' Developer NOW')
-        
+
         return snippet_soup.prettify()
 
     def get_approve_url(self):
@@ -904,7 +1028,6 @@ class View(models.Model):
         return f"{base_url}/web#id={self.id}&model={self._name}&view_type=form&action=approve"
 
     def unlink(self):
-
         for record in self:
             try:
                 if not record.has_edit_permission:
@@ -919,7 +1042,7 @@ class View(models.Model):
                     website_page = record.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
                     if website_page:
                         website_page.unlink()
-                seo_page = record.env['automated_seo.page'].search([('page_name', '=', record.name)])
+                seo_page = record.env['automated_seo.page'].search([('page_name', '=', record.name)],limit=1)
                 if record.selected_filename:
                     remote_file = record.env['automated_seo.remote_files'].search([
                         ('name', '=', record.selected_filename.name)
@@ -936,7 +1059,7 @@ class View(models.Model):
                     snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
                     snippet_mapper.unlink()
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -944,6 +1067,8 @@ class View(models.Model):
 
         return super(View, self).unlink()
 
+    def action_test(self):
+        print("header button works")
     def action_download_parsed_html(self):
         self.ensure_one()
         return {
@@ -1243,7 +1368,7 @@ class View(models.Model):
                     message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
                     raise UserError(message)
 
-            if link:               
+            if link:
 
                 url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
@@ -1804,7 +1929,7 @@ class View(models.Model):
                         # new_image = base64.b64decode(new_image_data)
                         # temp_folder_path = Path('./temp')
                         # temp_folder_path.mkdir(parents=True, exist_ok=True)
-                        
+
                         # Save temporary file
                         # file_path = temp_folder_path / f"{new_image_name}"
                         # with open(file_path, 'wb') as image_file:
@@ -2022,12 +2147,11 @@ class View(models.Model):
 
 
     def replace_php_var_value(self,old_tag_soup,php_var_tags):
-
         for sub_tag in php_var_tags:
             tag_content = str(sub_tag.get_text(strip=True)).strip()
             var_name = next((cls for cls in sub_tag['class'] if cls.startswith("o_au_php_var_tag_")), None)[len("o_au_php_var_tag_"):]
             if var_name:
-                pattern = rf'\${var_name}\s*=\s*(?:".*?"|null);'
+                pattern = rf'\${var_name}\s*=\s*(?:".*?"|\'.*?\'|null);'
                 new_php_var = f'${var_name} = "{tag_content}";'
                 old_tag_soup = re.sub(pattern, new_php_var, old_tag_soup)
         return BeautifulSoup(old_tag_soup, 'html.parser').prettify()
