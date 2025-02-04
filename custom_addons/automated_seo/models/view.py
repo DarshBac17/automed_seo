@@ -2496,7 +2496,14 @@ class View(models.Model):
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
     page_id = fields.Many2one('automated_seo.view', string="View Record",ondelete='cascade')
+    
 
+    def save(self, *args, **kwargs):
+        """Override save method to handle website editor saves"""
+        result = super(IrUiView).save(*args, **kwargs)
+        self.update_stage_server(id=self.id)
+        return result
+    
     @api.model
     def create(self, vals):
         return super(IrUiView, self).create(vals)
@@ -2510,6 +2517,38 @@ class IrUiView(models.Model):
                 version.view_arch = self.arch
 
         return record
+    
+    def update_stage_server(self, id):
+        view = self.env['ir.ui.view'].sudo().search([('id', '=', id)], limit=1)
+        if not view:
+            return {'status': 'error', 'message': 'View not found'}
+        seo_view = self.env['automated_seo.view'].sudo().search([('page_id', '=', view.id)], limit=1)        
+        if seo_view.validate_header():
+            seo_view.action_compile_button()
+            selected_file_version = None
+            if seo_view.selected_filename:
+                base_name, ext = os.path.splitext(seo_view.selected_filename.name)
+                selected_file_version = f'{base_name}_{seo_view.active_version.name}.{ext}'
+
+            page_name = f'{selected_file_version}' if selected_file_version else f"{seo_view.name}_{seo_view.active_version.name}.php"
+
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data=seo_view.parse_html_binary
+            )
+            if upload_success:
+                seo_view.message_post(body=f"{page_name} file successfully uploaded to staging server.")
+                seo_view.active_version.write({
+                    'stage_url': f"https://automatedseo.bacancy.com/{page_name}"
+                })
+                seo_view.message_post(body="Record sent for review")
+
+                seo_view.message_post(body="Record moved to the done approved")
+            else:
+                seo_view.message_post(body=f"{page_name} file upload failed.")
+                return False
+                # raise UserError(f"{page_name} file upload failed.")
+        return True
 
 
 
