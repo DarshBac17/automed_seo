@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="CharLengthValidator" owl="1">
+        <div class="char_length_validator">
+            <input type="text"
+                   t-ref="input"
+                   t-att-value="props.value"
+                   t-on-input="_onInput"
+                   t-attf-class="form-control #{state.isOverLimit ? 'border-danger' : ''}"
+            />
+            <small t-attf-class="char-counter ml-2 #{state.isOverLimit ? 'text-danger' : 'text-muted'}">
+                <t t-esc="state.currentLength"/> / 60
+            </small>
+        </div>
+    </t>
+     <t t-name="DescriptionLengthValidator" owl="1">
+        <div class="char_length_validator">
+            <textarea
+                t-ref="input"
+                t-att-value="props.value"
+                t-on-input="_onInput"
+                t-attf-class="form-control #{state.isOverLimit ? 'border-danger' : ''}"
+                rows="3"
+            />
+            <small t-attf-class="char-counter ml-2 #{state.isOverLimit ? 'text-danger' : 'text-muted'}">
+                <t t-esc="state.currentLength"/> / 160
+            </small>
+        </div>
+    </t>
+</templates>
