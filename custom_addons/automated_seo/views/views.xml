@@ -374,10 +374,15 @@
                         <page string="Header Management">
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
-                                    <field name="header_title" string="Header Title"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
-                                    <field name="header_description" string="Page Description"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_title" 
+                                        string="Header Title"
+                                        widget="char_length_validator"
+                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+
+                                    <field name="header_description" 
+                                        string="Page Description"
+                                        widget="description_length_validator"
+                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
