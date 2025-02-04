@@ -57,12 +57,14 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
             }, 100));
         },
+
         _fetchVariables: function(search = '') {
             var self = this;
             
             return $.get('/php-variables/', {
                 offset: this.currentOffset,
                 limit: this.limit,
+                isConstVar : this.isConstVar,
                 search: search
             }).then((result) => {  // Use arrow function to preserve 'this'
                 if (result.error) {
@@ -89,6 +91,12 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             ev.stopPropagation();
             ev.preventDefault();
 
+            this._closeDropdown()
+            this.$variablesList.empty();
+
+//            console.log(typeof this.variables)
+//            this.variables = []
+
             // Toggle the state
             $button.toggleClass('active');
             this.isConstVar = $button.hasClass('active');
@@ -102,7 +110,9 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             const currentVar = this._hasPhpVariable(selection);
             if (currentVar && currentVar.element) {
                 // Update the constant attribute on the existing span
-                $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
+
+                this._removePhpVariable(selection)
+//                $(currentVar.element).attr('data-php-const-var', this.isConstVar ? '1' : '0');
                 wysiwyg.odooEditor.historyStep();
             }
         },
@@ -114,9 +124,10 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             if (!wysiwyg || !wysiwyg.odooEditor) {
                 return null;
             }
-
             return wysiwyg.odooEditor.document.getSelection();
         },
+
+
         _updateVariablesList: function() {
             
             this.$variablesList.empty();
@@ -219,6 +230,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
 
         // Add scroll handler
         _onScroll: function() {
+
+            console.log("on_scroll_called")
             
             if (!this.$variablesList || !this.$variablesList[0]) {
                 return;
@@ -246,12 +259,18 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             $.get('/php-variables/', {
                 offset: this.currentOffset,
                 limit: this.limit,
+                isConstVar : this.isConstVar,
                 search: this.$search.val().trim()
             }).then((response) => {
                 
                 if (response.variable_names && response.variable_names.length) {
+                    this.variables = {
+                      ...this.variables,  // Keep the old data
+                      ...response.variable_names  // Add new data from response
+                    };
+
                     this._appendVariables(response.variable_names);
-                     this.currentOffset += response.variable_names.length;
+                    this.currentOffset += response.variable_names.length;
                     this.hasMore = response.variable_names.length >= this.limit;
                 } else {
                     this.hasMore = false;
@@ -264,6 +283,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
         },
 
         _appendVariables: function (variables) {
+
             variables.forEach(varName => {
                 this.$variablesList.append(
                     $('<we-button/>', {
@@ -307,6 +327,7 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             this.hasMore = true;
             this.$menu.removeClass('show');
         },
+
         _onSearch: _.debounce(function (ev) {
             var searchTerm = $(ev.currentTarget).val().trim();
 
@@ -337,6 +358,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 }
             });
         }, 300),
+
+
         _onClickAway: function (ev) {
             if (this.isDropdownOpen &&
                 !$(ev.target).closest('.o_we_php_dropdown').length) {
@@ -385,7 +408,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
             const range = selection.getRangeAt(0);
             const $span = $(range.commonAncestorContainer).closest('span[data-php-var]');
             if ($span.length) {
-                const allText = this._getAllTextContent($span[0]);
+                var allText = this._getAllTextContent($span[0]);
+                allText = allText ? allText.toString().replace(/[{}]/g, '').trim() : '';
                 if (!allText.trim()) {
                     // If span is empty, just remove it
                     $span.remove();
@@ -514,9 +538,12 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 wysiwyg.odooEditor.historyStep();
                 this._onSelectionChange(ev);
             } catch (error) {
+                console.log(error)
                 alert('An error occurred while applying the variable. Please try again.');
             }
         },
+
+
         _onSelectionChange: function (event) {
             this._closeDropdown();
 
@@ -557,6 +584,8 @@ odoo.define('website.snippets.php_variable_text_selector3', function (require) {
                 }
             });
         },
+
+
         _setValue: function () {
             const wysiwyg = this.options.wysiwyg;
             if (!wysiwyg) return;

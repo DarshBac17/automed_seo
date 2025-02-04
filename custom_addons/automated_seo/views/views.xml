@@ -239,7 +239,7 @@
                                 ('stage', 'not in', ['approved', 'unpublish']),
                                 ('publish', '=', True),('is_publisher', '=', False)]}"
                             context="{'view_name': name}"
-                            confirm="Are you sure you want to send this for publish?"/>
+                            confirm="Are you sure you want to publish this page?"/>
 
 
                     <button name="%(automated_seo.action_version_form)d"
