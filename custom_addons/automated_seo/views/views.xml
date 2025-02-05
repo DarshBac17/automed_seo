@@ -364,6 +364,12 @@
                                            widget="many2many_tags"
                                     />
                                 </div>
+                                <div class="o_row">
+                                    Image
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="image" widget="binary" filename="image_filename"/>
+                                    <field name="image_filename" invisible="1"/>
+                                </div>
                             </div>
                         </group>
                     </group>

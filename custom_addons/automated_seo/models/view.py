@@ -22,6 +22,9 @@ from datetime import datetime
 from ftplib import FTP
 import os
 from .ftp_setup import transfer_file_via_scp
+import requests
+import imghdr
+from odoo.exceptions import ValidationError
 # from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 import subprocess
@@ -103,7 +106,8 @@ class View(models.Model):
     upload_file = fields.Binary(string="Upload File", attachment=True)
     is_new_page = fields.Boolean(default=True)
     is_processed = fields.Boolean(default=False)
-
+    image = fields.Binary(string="Upload Image")
+    image_filename = fields.Char(string="Image Filename")
     header_title = fields.Char(string="Title")
 
     header_description = fields.Text(string="page description")
@@ -192,7 +196,24 @@ class View(models.Model):
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
-
+    
+    @api.constrains('image', 'image_filename')
+    def _check_image_mime(self):
+        for record in self:
+            if record.image:
+                try:
+                    # Decode base64 and check image type
+                    image_data = base64.b64decode(record.image)
+                    image_type = imghdr.what(None, image_data)
+                    
+                    if not image_type or image_type not in ['jpeg', 'jpg', 'png', 'gif']:
+                        raise ValidationError(
+                            "Invalid image format. Allowed formats: JPEG, PNG, GIF"
+                        )
+                except Exception as e:
+                    raise ValidationError(
+                        f"Invalid image file: {str(e)}"
+                    )
     @api.depends('create_uid')
     def _compute_user_name(self):
         for record in self:
@@ -838,7 +859,32 @@ class View(models.Model):
     #
     #     # Replace all matches in the content
     #     return re.sub(pattern, replacer, content)
-
+    def process_og_image(self, meta_tag):
+        try:
+            image_url = meta_tag.get('content')
+            
+            # Replace PHP variable with base URL
+            base_url = "https://assets.bacancytechnology.com/"
+            image_url = re.sub(
+                r'\<\?php\s+echo\s+BASE_URL_IMAGE;\s*\?>', 
+                base_url, 
+                image_url
+            )
+            
+            # Download image
+            response = requests.get(image_url)
+            if response.status_code == 200:
+                # Convert to base64 and store
+                image_data = base64.b64encode(response.content)
+                self.image = image_data
+                
+                # Extract filename from URL
+                filename = image_url.split('/')[-1]
+                self.image_filename = filename
+                
+        except Exception as e:
+          return UserError("While downloading image: " + str(e))
+    
     def create_php_header(self,header):
         header = BeautifulSoup(header,'html.parser').head
         self.header_title = header.title.text
@@ -848,12 +894,15 @@ class View(models.Model):
             if meta_tag.get('name'):
                 self.header_description = meta_tag.get('content')
             else:
+                if meta_tag.get('property') == "og:image":
+                    self.process_og_image(meta_tag)
                 self.env['automated_seo.page_header_metadata'].create({
                     'view_version_id': self.active_version.id,
                     'view_id': self.id,
                     'property': meta_tag.get('property') if meta_tag.get('property') else None,
                     'content': meta_tag.get('content')
                 })
+
 
         link_tags = header.find_all('link')
         for link_tag in link_tags:
@@ -1058,7 +1107,7 @@ class View(models.Model):
                     snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
                     snippet_mapper.unlink()
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -2500,7 +2549,7 @@ class IrUiView(models.Model):
 
     def save(self, *args, **kwargs):
         """Override save method to handle website editor saves"""
-        result = super(IrUiView).save(*args, **kwargs)
+        result = super(IrUiView,self).save(*args, **kwargs)
         self.update_stage_server(id=self.id)
         return result
     
