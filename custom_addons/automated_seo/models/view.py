@@ -341,6 +341,15 @@ class View(models.Model):
                 vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
         vals['user_name'] = self.env.user.name
+        # Fetch groups
+        review_group = self.env.ref('automated_seo.group_automated_seo_reviewers', raise_if_not_found=False)
+
+        # Get users in these groups
+        users = review_group.users
+
+        # Add users to contributors
+        vals['contributor_ids'] = [(6, 0, users.ids)]
+
         record  = super(View, self).create(vals)
         record.is_new_page = False
         if not self.env.context.get('default_file_source') == 'remote' and not self.env.context.get('default_selected_filename'):
@@ -354,6 +363,7 @@ class View(models.Model):
                 'user_id':self.env.user.id,
                 'status':True
             })
+        record.create_channel_for_conversation()
 
         return record
 
@@ -387,6 +397,10 @@ class View(models.Model):
 
                 if not record.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
+
+            if 'contributor_ids' in vals:
+                for user_id in vals.get('contributor_ids')[0][2]:
+                    self.channel_id.channel_partner_ids = [(4, user_id)]
 
             if 'active_version' in vals and 'header_metadata_ids' in vals:
                 for operation in vals['header_metadata_ids']:
@@ -472,19 +486,16 @@ class View(models.Model):
     def create_channel_for_conversation(self):
 
         try:
-            reviewer_group = self.env.ref('automated_seo.group_automated_seo_reviewers')
-            reviewer_users = reviewer_group.users
+            # reviewer_group = self.env.ref('automated_seo.group_automated_seo_reviewers')
+            # reviewer_users = reviewer_group.users
             all_partners = set()
-            reviewer_users = reviewer_users if isinstance(reviewer_users, set) else set(reviewer_users)
-            for user in reviewer_users | set(self.contributor_ids):
+            # reviewer_users = reviewer_users if isinstance(reviewer_users, set) else set(reviewer_users)
+            for user in set(self.contributor_ids):
                 all_partners.add(user.partner_id.id)
 
             current_partner = self.env.user.partner_id.id
             all_partners.add(current_partner)
-
-
             page_name = self.selected_filename.name  if self.selected_filename else f"{self.name}.php"
-
 
             if not self.channel_id:
                 channel = self.env['mail.channel'].create({
