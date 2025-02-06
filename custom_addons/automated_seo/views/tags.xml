@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.php_to_snippet_tree">
+        <field name="name">Php to Snippet</field>
+        <field name="model">automated_seo.view_tags</field>
+        <field name="arch" type="xml">
+            <tree string="Tags" editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.view_tags_action">
+        <field name="name"> Tags </field>
+        <field name="res_model">automated_seo.view_tags</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_automated_seo_view_tags"
+              name="View Tags"
+              parent="menu_automated_seo_root"
+              action="automated_seo.view_tags_action"
+              groups="automated_seo.group_automated_seo_bacancy_seo"
+              sequence="20"/>
+</odoo>

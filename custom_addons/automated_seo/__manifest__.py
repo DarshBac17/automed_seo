@@ -15,6 +15,7 @@
         # "views/page_header_metadata.xml",
         'views/version.xml',
         "views/views.xml",
+        "views/tags.xml",
         "views/cron_job.xml",
         "views/email_wizard_view.xml",
 
