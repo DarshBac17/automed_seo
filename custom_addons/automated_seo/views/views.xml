@@ -355,9 +355,6 @@
                                     <p style="margin-left:5px">:</p>
                                     <field name="tag"
                                            options="{
-                                                'no_create': False,
-                                                'no_create_edit': True,
-                                                'no_open': True,
                                                 'color_field': 'id'
                                             }"
                                            attrs="{'readonly': [('has_edit_permission', '=', False)]}"
@@ -381,7 +378,7 @@
                         <page string="Header Management">
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
-                                    <field name="header_title" 
+                                    <field name="header_title"
                                         string="Header Title"
                                         widget="char_length_validator"
                                         attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
