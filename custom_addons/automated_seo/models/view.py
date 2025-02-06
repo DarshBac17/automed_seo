@@ -398,9 +398,27 @@ class View(models.Model):
                 if not record.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
 
+
+            breakpoint()
             if 'contributor_ids' in vals:
-                for user_id in vals.get('contributor_ids')[0][2]:
-                    self.channel_id.channel_partner_ids = [(4, user_id)]
+                user_ids = set(vals.get('contributor_ids')[0][2])  # Extract new contributor user IDs
+                existing_user_ids = set(self.contributor_ids.ids)  # Current contributor user IDs
+
+                # Find newly added and removed contributors
+                added_users = user_ids - existing_user_ids
+                removed_users = existing_user_ids - user_ids
+
+                # Convert user IDs to partner IDs
+                added_partners = self.env['res.users'].browse(added_users).mapped('partner_id.id')
+                removed_partners = self.env['res.users'].browse(removed_users).mapped('partner_id.id')
+
+                # Add new partner IDs to the channel
+                for partner_id in added_partners:
+                    self.channel_id.channel_partner_ids = [(4, partner_id)]
+
+                # Remove partner IDs of removed users from the channel
+                for partner_id in removed_partners:
+                    self.channel_id.channel_partner_ids = [(3, partner_id)]
 
             if 'active_version' in vals and 'header_metadata_ids' in vals:
                 for operation in vals['header_metadata_ids']:
