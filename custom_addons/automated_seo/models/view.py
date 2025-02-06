@@ -347,7 +347,7 @@ class View(models.Model):
             self.env['website.page.version'].with_context({
                 'initial_version' : True
             }).create({
-                'description' : 'First Version',
+                # 'description' : 'First Version',
                 'view_id':record.id,
                 'page_id':website_page.id,
                 'view_arch':website_page.view_id.arch_db,
@@ -702,7 +702,7 @@ class View(models.Model):
             version = self.env['website.page.version'].with_context({
                 'initial_version' : True
             }).create({
-                'description': f'{file_name} File is processed',
+                # 'description': f'{file_name} File is processed',
                 'view_id': self.id,
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
@@ -727,7 +727,7 @@ class View(models.Model):
                 'page_id': self.page_id,
                 'view_arch': soup.prettify(),
                 'user_id': self.env.user.id,
-                'description': f'{file_name} File is processed',
+                # 'description': f'{file_name} File is processed',
                 'base_version': version.id,
                 'stage': 'in_progress',
                 'publish': False,

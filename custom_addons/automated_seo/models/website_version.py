@@ -16,7 +16,7 @@ class WebsitePageVersion(models.Model):
     _order = 'create_date desc'
 
     name = fields.Char('Version Name',compute='_compute_version_name', store=True)
-    description = fields.Text('Description')
+    # description = fields.Text('Description')
     view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
     view_arch = fields.Text('Saved View Architecture', required=True)
