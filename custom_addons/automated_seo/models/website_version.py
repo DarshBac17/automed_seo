@@ -6,6 +6,8 @@ from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import UserError
 import json
 import os
+
+from odoo.tools.populate import compute
 from .ftp_setup import transfer_file_via_scp
 
 class WebsitePageVersion(models.Model):
@@ -13,8 +15,8 @@ class WebsitePageVersion(models.Model):
     _description = 'Website Page Version'
     _order = 'create_date desc'
 
-    name = fields.Char('Version Name', store=True)
-    description = fields.Text('Description')
+    name = fields.Char('Version Name',compute='_compute_version_name', store=True)
+    # description = fields.Text('Description')
     view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
     view_arch = fields.Text('Saved View Architecture', required=True)
@@ -25,11 +27,11 @@ class WebsitePageVersion(models.Model):
     status = fields.Boolean('Status',default=False)
     publish = fields.Boolean('Publish',default=False)
     publish_at = fields.Datetime('Publish At')
-    change = fields.Selection([
-        ('major_change', 'Major Changes'),
-        ('minor_change', 'Minor Changes'),
-        ('patch_change', 'Patch Changes'),
-    ], string="Change", default='major_change')
+    # change = fields.Selection([
+    #     ('major_change', 'Major Changes'),
+    #     ('minor_change', 'Minor Changes'),
+    #     ('patch_change', 'Patch Changes'),
+    # ], string="Change", default='major_change')
     stage = fields.Selection([
         ('draft', 'Draft'),
         ('in_progress', 'In Progress'),
@@ -38,9 +40,9 @@ class WebsitePageVersion(models.Model):
         ('publish', 'Publish'),
         ('unpublish', 'Unpublish'),
     ], string="Stage", default="draft", tracking=True)
-    major_version = fields.Integer('Major Version', default=1)
-    minor_version = fields.Integer('Minor Version', default=0)
-    patch_version = fields.Integer('Patch Version', default=0)
+    # major_version = fields.Integer('Major Version', default=1)
+    # minor_version = fields.Integer('Minor Version', default=0)
+    # patch_version = fields.Integer('Patch Version', default=0)
     header_title = fields.Char(string="Title")
     header_description = fields.Text(string="page description")
     # header_description = fields.Text(string="Title")
@@ -71,53 +73,57 @@ class WebsitePageVersion(models.Model):
     #     for record in self:
     #         record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
-
+    @api.depends('view_id')
     def _compute_version_name(self):
         self.ensure_one()
 
-        if self.change:
-            if self.change == 'major_change':
-                max_major_version = self.env['website.page.version'].search(
-                    [('view_id', '=', self.view_id.id)],
-                    order='major_version desc', 
-                    limit=1
-                )
-                self.major_version = max_major_version.major_version + 1
-                self.minor_version = 0
-                self.patch_version = 0
-                
-            elif self.change == 'minor_change':
-                self.major_version = self.base_version.major_version
-                # Find highest minor version for this major version
-                max_minor_version = self.env['website.page.version'].search([
-                    ('view_id', '=', self.view_id.id),
-                    ('major_version', '=', self.major_version)
-                ], order='minor_version desc', limit=1)
-                self.minor_version = max_minor_version.minor_version + 1 if max_minor_version else 1
-                self.patch_version = 0
-                
-            elif self.change == 'patch_change':
-                self.major_version = self.base_version.major_version
-                self.minor_version = self.base_version.minor_version
-                # Find highest patch version for this major.minor version
-                max_patch_version = self.env['website.page.version'].search([
-                    ('view_id', '=', self.view_id.id),
-                    ('major_version', '=', self.major_version),
-                    ('minor_version', '=', self.minor_version)
-                ], order='patch_version desc', limit=1)
-                self.patch_version = max_patch_version.patch_version + 1 if max_patch_version else 1
-                
-            self.name = f"v{self.major_version}.{self.minor_version}.{self.patch_version}"
+        # if self.change:
+        #     if self.change == 'major_change':
+        #         max_major_version = self.env['website.page.version'].search(
+        #             [('view_id', '=', self.view_id.id)],
+        #             order='major_version desc',
+        #             limit=1
+        #         )
+        #         self.major_version = max_major_version.major_version + 1
+        #         self.minor_version = 0
+        #         self.patch_version = 0
+        #
+        #     elif self.change == 'minor_change':
+        #         self.major_version = self.base_version.major_version
+        #         # Find highest minor version for this major version
+        #         max_minor_version = self.env['website.page.version'].search([
+        #             ('view_id', '=', self.view_id.id),
+        #             ('major_version', '=', self.major_version)
+        #         ], order='minor_version desc', limit=1)
+        #         self.minor_version = max_minor_version.minor_version + 1 if max_minor_version else 1
+        #         self.patch_version = 0
+        #
+        #     elif self.change == 'patch_change':
+        #         self.major_version = self.base_version.major_version
+        #         self.minor_version = self.base_version.minor_version
+        #         # Find highest patch version for this major.minor version
+        #         max_patch_version = self.env['website.page.version'].search([
+        #             ('view_id', '=', self.view_id.id),
+        #             ('major_version', '=', self.major_version),
+        #             ('minor_version', '=', self.minor_version)
+        #         ], order='patch_version desc', limit=1)
+        #         self.patch_version = max_patch_version.patch_version + 1 if max_patch_version else 1
 
-    @api.onchange('base_version')
-    def _onchange_base_version(self):
-        self.ensure_one()
-        self._compute_version_name()
+        version_count = self.env['website.page.version'].search_count([
+            ('view_id', '=', self.view_id.id)
+        ])
 
-    @api.onchange('change')
-    def _onchange_change(self):
-        self.ensure_one()
-        self._compute_version_name()
+        self.name = f"v{version_count}"
+
+    # @api.onchange('base_version')
+    # def _onchange_base_version(self):
+    #     self.ensure_one()
+    #     self._compute_version_name()
+
+    # @api.onchange('change')
+    # def _onchange_change(self):
+    #     self.ensure_one()
+    #     self._compute_version_name()
 
 
     def action_version(self):
@@ -213,7 +219,6 @@ class WebsitePageVersion(models.Model):
 
     @api.model
     def create(self, vals):
-
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
         seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
@@ -239,7 +244,6 @@ class WebsitePageVersion(models.Model):
             seo_view.parse_html = None
 
             vals.update({
-                'name' : 'v1.0.0',
                 'page_id': seo_view.website_page_id.id,
                 'view_arch': view_arch,
                 'user_id': self.env.user.id,
@@ -282,13 +286,13 @@ class WebsitePageVersion(models.Model):
                     # Update the vals with the copied record IDs
                     vals[o2m_field] = [(6, 0, copied_ids)]
 
-
-            change = vals.get('change')
-
-            if not change:
-                raise UserError('Change is required')
-
-            description = vals.get('description')
+            #
+            # change = vals.get('change')
+            #
+            # if not change:
+            #     raise UserError('Change is required')
+            #
+            # description = vals.get('description')
 
             vals.update({
                 'status' : True,
@@ -377,6 +381,14 @@ class WebsitePageVersion(models.Model):
             return  result
         if view_type == 'form':
             raise UserError('Form view is not available for you')
+        return result
+
+    def name_get(self):
+        result = []
+        for record in self:
+            # Combine 'name' and 'stage' fields in the dropdown display
+            display_name = f"{record.name} ({(record.create_date.date())})"
+            result.append((record.id, display_name))
         return result
 
     # @api.model

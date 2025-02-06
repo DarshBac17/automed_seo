@@ -57,19 +57,22 @@ class PhpVariableController(http.Controller):
     @http.route('/php-variables/', type='http', auth="public", methods=['GET'], website=True)
     def get_variable_names(self, **kwargs):
         try:
-            # Parse parameters
             offset = int(kwargs.get('offset', 0))
             limit = int(kwargs.get('limit', 5))
+            is_const_var = kwargs.get('isConstVar') == 'true'
+
             search = kwargs.get('search', '')
 
             # Build domain
             domain = []
+
+            domain.append(('is_constant','=',is_const_var))
             if search:
                 domain.append(('name', 'ilike', search))
 
             # Fetch variables
             variables = request.env['automated_seo.php_variables'].search(
-                domain, offset=offset, limit=limit
+                domain, offset=offset, limit=limit,
             )
 
             # Prepare response data

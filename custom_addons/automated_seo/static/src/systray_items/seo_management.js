@@ -91,9 +91,8 @@ class SeoSystray extends Component {
                 target: 'current',
                 res_id: viewId,
             }, {
-                additionalContext: {
-                    menu_id: menuItem.id,
-                },
+                clearBreadcrumbs: true,
+                menuId: menuItem.id,  // This will set the active menu
             });
         } catch (error) {
             console.error('Navigation error:', error);

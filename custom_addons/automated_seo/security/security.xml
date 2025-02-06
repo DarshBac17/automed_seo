@@ -15,10 +15,18 @@
         </record>
 
 
+        <record id="group_automated_seo_reviewers" model="res.groups">
+            <field name="name">Reviewers</field>
+            <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="comment">This user has access to publish page</field>
+        </record>
+
+
         <record id="group_automated_seo_publishers" model="res.groups">
             <field name="name">Publishers</field>
             <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
-            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo')),(4, ref('automated_seo.group_automated_seo_reviewers'))]"/>
             <field name="comment">This user has access to publish page</field>
         </record>
 
@@ -32,7 +40,7 @@
         <record id="group_automated_seo_admin" model="res.groups">
             <field name="name">Admin</field>
             <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
-            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo')),(4, ref('automated_seo.group_automated_seo_reviewers')),(4, ref('automated_seo.group_automated_seo_publishers'))]"/>
             <field name="comment">This user has all access</field>
         </record>
     </data>

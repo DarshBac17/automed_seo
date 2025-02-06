@@ -44,6 +44,23 @@ class SEOSendEmailWizard(models.Model):
 
         active_id = self.env.context.get('active_id')
         view = self.env['automated_seo.view'].browse(active_id)
+        page_name = view.selected_filename.name if view.selected_filename else f"{view.name}.php"
+
+        view.channel_id.message_post(
+            body="<b>📢 Feedback</b><br/>"
+                 f"<b>Record:</b> {page_name}<br/>"
+                 f"<b>Version:</b> {view.active_version.name}<br/>"
+                 "Needs changes : <br/>"
+                 f"🔎 {self.feedback}<br/><br/>"
+                 f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{view.id}' "
+                 f"data-oe-method='view_action_form' "
+                 f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
+                 f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+            message_type='comment',
+            subtype_xmlid=False,
+            author_id=view.env.user.partner_id.id
+        )
+
         view.message_post(
             body=f'Feedback : {self.feedback}',
             # partner_ids=self.recipient_ids.mapped('partner_id').ids,

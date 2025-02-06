@@ -11,7 +11,7 @@
                 <field name="parse_html_binary"/>
                 <field name="stage"/>
                 <field name="name"/>
-                <field name="description"/>
+<!--                <field name="description"/>-->
                 <field name="user_id"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
@@ -49,9 +49,9 @@
 
                             <!-- Body Content -->
                             <div class="o_kanban_record_body">
-                                <p class="version-description">
-                                    <field name="description"/>
-                                </p>
+<!--                                <p class="version-description">-->
+<!--                                    <field name="description"/>-->
+<!--                                </p>-->
 
                                 <div class="version-user">
                                     <field name="user_id" widget="many2one_avatar"/>
@@ -59,17 +59,17 @@
 
                                 <div class="version-info-grid">
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fa fa-calendar me-2"/>
+                                        Created At :
                                         <field name="create_date" widget="date"/>
                                     </div>
 
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fa fa-pencil me-2"/>
+                                         Updated At:
                                         <field name="write_date" widget="date"/>
                                     </div>
 
                                     <div class="d-flex align-items-center mb-2" attrs="{'invisible': [('publish_at', 'in', [False,''])]}">
-                                        <i class="fa fa-check-circle me-2"/>
+                                         Publish At:
                                         <field name="publish_at" widget="date"/>
                                     </div>
                                 </div>
@@ -115,10 +115,10 @@
                                     'no_open': True
                                }"
                                required="1"/>
-                        <field name="change" widget="radio" required="1"/>
-                        <field name="name"
-                               class="text-info font-weight-bold"/>
-                        <field name="description" required="1"/>
+<!--                        <field name="change" widget="radio" required="1"/>-->
+<!--                        <field name="name"-->
+<!--                               class="text-info font-weight-bold"/>-->
+<!--                        <field name="description" required="1"/>-->
 
                     </group>
 

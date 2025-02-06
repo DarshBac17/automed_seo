@@ -3,6 +3,9 @@ from odoo.http import request, Response
 import logging
 _logger = logging.getLogger(__name__)
 from bs4 import BeautifulSoup
+from ..models.ftp_setup import transfer_file_via_scp
+import  os
+from odoo.exceptions import UserError
 
 
 class WebsiteAutoSaveController(http.Controller):
@@ -73,6 +76,39 @@ class WebsiteAutoSaveController(http.Controller):
             # Handle any unexpected errors
             request.env.cr.rollback()
             return {'status': 'error', 'message': str(e)}
+
+    @http.route('/website/update_stage_server', type='json', auth='user', methods=['POST'])
+    def update_stage_server(self, view_id):
+        view = request.env['ir.ui.view'].sudo().search([('id', '=', view_id)], limit=1)
+        if not view:
+            return {'status': 'error', 'message': 'View not found'}
+        seo_view = request.env['automated_seo.view'].sudo().search([('page_id', '=', view.id)], limit=1)        
+        if seo_view.validate_header():
+            seo_view.action_compile_button()
+            selected_file_version = None
+            if seo_view.selected_filename:
+                base_name, ext = os.path.splitext(seo_view.selected_filename.name)
+                selected_file_version = f'{base_name}_{seo_view.active_version.name}.{ext}'
+
+            page_name = f'{selected_file_version}' if selected_file_version else f"{seo_view.name}_{seo_view.active_version.name}.php"
+
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data=seo_view.parse_html_binary
+            )
+            if upload_success:
+                seo_view.message_post(body=f"{page_name} file successfully uploaded to staging server.")
+                seo_view.active_version.write({
+                    'stage_url': f"https://automatedseo.bacancy.com/{page_name}"
+                })
+                seo_view.message_post(body="Record sent for review")
+
+                seo_view.message_post(body="Record moved to the done approved")
+            else:
+                seo_view.message_post(body=f"{page_name} file upload failed.")
+                return False
+                # raise UserError(f"{page_name} file upload failed.")
+        return True
 
 
 class ViewController(http.Controller):

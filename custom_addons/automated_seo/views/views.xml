@@ -1,15 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+
+    <record id="automated_seo.view_action_form" model="ir.actions.act_window">
+        <field name="name">Views form</field>
+        <field name="res_model">automated_seo.view</field>
+        <field name="view_mode">form</field>
+    </record>
+
+
+    <!-- Add Send Email button to the main view -->
+    <record id="automated_seo.view_create_wizard_form" model="ir.ui.view">
+        <field name="name">automated.seo.create.wizard.form</field>
+        <field name="model">automated_seo.view_create_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create New SEO View">
+                <group>
+                    <div class="o_col" style="width:350px">
+                        <div class="o_row">
+                            <label for="file_source" string="File Source"/>
+                            <p style="margin-left:5px">:</p>
+                            <field name="file_source" widget="radio" options="{'horizontal': true}"/>
+                        </div>
+
+                        <div class="o_row"
+                             attrs="{'invisible': [('file_source', '!=', 'remote')]}">
+                            <label for="selected_filename" string="Select File"/>
+                            <p style="margin-left:5px">:</p>
+                            <field name="selected_filename"
+                                   widget="many2one"
+                                   options="{
+                                    'no_create': True,
+                                    'no_create_edit': True,
+                                    'no_open': True
+                                }"
+                                   style="margin-left:5px"/>
+                        </div>
+                    </div>
+
+                </group>
+                <footer>
+                    <button string="Create"
+                            type="action"
+                            name="%(automated_seo.view_action_form)d"
+                            class="btn oe_highlight justify-content-end"
+                            context="{
+                                'default_file_source': file_source,
+                                'default_selected_filename':selected_filename
+                            }"
+                    />
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="automated_seo.view_create_wizard" model="ir.actions.act_window">
+        <field name="name">Create Automated SEO View</field>
+        <field name="res_model">automated_seo.view_create_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="automated_seo.view_create_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
     <!-- Tree View -->
     <record id="automated_seo.view_tree" model="ir.ui.view">
         <field name="name">automated_seo.view.tree</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree js_class="button_in_tree">
                 <field name="unique_page_id" readonly="1"/>
                 <field name="name"/>
                 <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
                 <field name="url" widget="url"/>
+                <field name="tag" widget="many2many_tags" options="{'color_field': 'id'}"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
                 <field name="stage" widget="badge"
@@ -20,6 +84,7 @@
             </tree>
         </field>
     </record>
+
     <!-- Kanban View -->
     <record id="automated_seo.view_kanban" model="ir.ui.view">
         <field name="name">automated_seo.view.kanban</field>
@@ -95,19 +160,17 @@
         <field name="binding_model_id" ref="model_automated_seo_view"/>
     </record>
 
-
-    <!-- Add Send Email button to the main view -->
-
     <!-- Form View -->
     <record id="automated_seo.view_form" model="ir.ui.view">
         <field name="name">automated_seo.view.form</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <form string="SEO View Management">
+            <form string="SEO View Management" create="false" delete="false">
                 <header>
 
                     <field name="publish" invisible="1"/>
                     <field name="is_publisher" invisible="1"/>
+                    <field name="is_reviewer" invisible="1"/>
                     <field name="is_owner" invisible="1"/>
                     <field name="is_new_page" invisible="1"/>
                     <field name="is_processed" invisible="1"/>
@@ -121,7 +184,7 @@
                     <button name="action_edit_website_page"
                             type="object"
                             string="Edit"
-                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|','|', '|',('id','=',False ),('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"/>
 
                     <button name="action_view_website_page"
@@ -140,7 +203,8 @@
                             string="Send For review"
                             attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
                             type="object"
-                            class="btn btn-primary"/>
+                            class="btn btn-primary"
+                            confirm="Are you sure you want to send this for review?"/>
                     <!-- Send Email Button -->
                     <!--                    <button name="%(action_seo_send_email_wizard)d"-->
                     <!--                            string="Send Email"-->
@@ -156,15 +220,16 @@
                             type="action"
                             string="Feedback"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|','|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False),('is_publisher', '=', False)]}"
+                            attrs="{'invisible': ['|', '|','|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False),('is_reviewer', '=', False)]}"
                             context="{'view_name': name}"/>
 
                     <button name="action_approve_review"
                             type="object"
                             string="Approve"
                             class="btn oe_highlight"
-                            attrs="{'invisible': ['|', '|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False),('is_publisher', '=', False)]}"
-                            context="{'view_name': name}"/>
+                            attrs="{'invisible': ['|', '|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False),('is_reviewer', '=', False)]}"
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to approve?"/>
 
                     <button name="action_publish_button"
                             type="object"
@@ -174,14 +239,15 @@
                                 ('has_edit_permission', '=', False),
                                 ('stage', 'not in', ['approved', 'unpublish']),
                                 ('publish', '=', True),('is_publisher', '=', False)]}"
-                            context="{'view_name': name}"/>
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to publish this page?"/>
 
 
                     <button name="%(automated_seo.action_version_form)d"
                             type="action"
                             string="New Version"
                             class="btn oe_highlight justify-content-end"
-                            attrs="{'invisible': [('has_edit_permission', '=', False)]}"
+                            attrs="{'invisible': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
                             context="{
                                 'default_view_id': id,
                                 'default_base_version':active_version,
@@ -222,25 +288,23 @@
                                            nolabel="1"/>
                                 </div>
 
-                                <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}">
+                                <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}" >
                                     <label for="file_source" string="File Source"/>
                                     <p style="margin-left:5px">:</p>
-                                    <field name="file_source" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="file_source" readonly="1"/>
                                 </div>
 
                                 <div class="o_row"
                                      attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
-                                    <label for="selected_filename" string="Select File"/>
+                                    <label for="selected_filename" string="Remote File"/>
                                     <p style="margin-left:5px">:</p>
                                     <field name="selected_filename"
-                                           widget="many2one"
+                                           readonly="1"
                                            options="{
                                                 'no_create': True,
                                                 'no_create_edit': True,
                                                 'no_open': True
                                             }"
-                                           domain="[('is_processed', '=', False)]"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
                                            style="margin-left:5px"/>
                                     <button name="action_parse_uploaded_file"
                                             type="object"
@@ -282,8 +346,30 @@
                                                 'no_open': True
                                             }"
                                            domain="[('view_id', '=', id)]"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           attrs="{'readonly': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
                                            style="margin-left:5px"/>
+                                </div>
+
+                                <div class="o_row" attrs="{'invisible': [('id', '=', False)]}">
+                                    <label for="tag" string="Tag"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="tag"
+                                           options="{
+                                                'no_create': False,
+                                                'no_create_edit': True,
+                                                'no_open': True,
+                                                'color_field': 'id'
+                                            }"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           style="margin-left:5px"
+                                           widget="many2many_tags"
+                                    />
+                                </div>
+                                <div class="o_row">
+                                    Image
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="image" widget="binary" filename="image_filename"/>
+                                    <field name="image_filename" invisible="1"/>
                                 </div>
                             </div>
                         </group>
@@ -295,10 +381,15 @@
                         <page string="Header Management">
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
-                                    <field name="header_title" string="Header Title"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
-                                    <field name="header_description" string="Page Description"
-                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_title" 
+                                        string="Header Title"
+                                        widget="char_length_validator"
+                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+
+                                    <field name="header_description" 
+                                        string="Page Description"
+                                        widget="description_length_validator"
+                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">
@@ -319,8 +410,8 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter custom_chatter" style="max-width: 850px; margin: 0 auto;">
-    <field name="message_ids" widget="mail_thread" readonly="1" options="{'show_reply': false, 'show_composer': false}"/>
-</div>
+                    <field name="message_ids" widget="mail_thread" readonly="1" options="{'show_reply': false, 'show_composer': false}"/>
+                </div>
             </form>
         </field>
     </record>

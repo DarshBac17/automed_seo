@@ -223,8 +223,11 @@
         ],
         'web.assets_backend': [
             'automated_seo/static/src/css/automated_seo.css',
-            # 'automated_seo/static/src/js/website_version.js',
-            # 'automated_seo/static/src/js/toggle.js',
+            'automated_seo/static/src/xml/view_list_button.xml',
+            'automated_seo/static/src/js/views_tree_extend.js',
+            'automated_seo/static/src/js/char_length_validator.js',
+            'automated_seo/static/src/xml/char_length.xml',
+            'automated_seo/static/src/css/char_length.scss',
         ],
         'website.assets_editor': [
             'automated_seo/static/src/systray_items/*',

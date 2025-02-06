@@ -1,0 +1,17 @@
+.char_length_validator {
+   display: flex;
+   align-items: center;
+   
+   .border-danger {
+       border-color: #dc3545 !important;
+   }
+   
+   .char-counter {
+       font-size: 0.8em;
+       margin-left: 8px;
+       
+       &.text-danger {
+           color: #35dc35;
+       }
+   }
+}
