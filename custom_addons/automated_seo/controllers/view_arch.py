@@ -88,7 +88,7 @@ class WebsiteAutoSaveController(http.Controller):
             selected_file_version = None
             if seo_view.selected_filename:
                 base_name, ext = os.path.splitext(seo_view.selected_filename.name)
-                selected_file_version = f'{base_name}_{seo_view.active_version.name}.{ext}'
+                selected_file_version = f'{base_name}_{seo_view.active_version.name}{ext}'
 
             page_name = f'{selected_file_version}' if selected_file_version else f"{seo_view.name}_{seo_view.active_version.name}.php"
 
