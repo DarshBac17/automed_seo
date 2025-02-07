@@ -148,9 +148,10 @@ class WebsitePageVersion(models.Model):
             self.status = True
             if self.stage in ['approved','publish','in_review','unpublish']:
                 selected_file_version = None
+                breakpoint()
                 if view.selected_filename:
                     base_name, ext = os.path.splitext(view.selected_filename.name)
-                    selected_file_version = f'{base_name}_{self.name}.{ext}'
+                    selected_file_version = f'{base_name}_{self.name}{ext}'
 
                 page_name = f'{selected_file_version}'  if selected_file_version else f"{view.name}_{self.name}.php"
                 upload_success = transfer_file_via_scp(

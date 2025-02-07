@@ -1051,7 +1051,7 @@ class View(models.Model):
 
                 #     for span in spans:
                 #         span.string="2***"
-                sub_snippets = None
+                n = None
 
                 if section.find_all('div', class_='boxed'):
                     sub_snippets =section.find_all('div', class_='boxed')
@@ -2608,9 +2608,11 @@ class IrUiView(models.Model):
         if seo_view.validate_header():
             seo_view.action_compile_button()
             selected_file_version = None
+
+            breakpoint()
             if seo_view.selected_filename:
                 base_name, ext = os.path.splitext(seo_view.selected_filename.name)
-                selected_file_version = f'{base_name}_{seo_view.active_version.name}.{ext}'
+                selected_file_version = f'{base_name}_{seo_view.active_version.name}{ext}'
 
             page_name = f'{selected_file_version}' if selected_file_version else f"{seo_view.name}_{seo_view.active_version.name}.php"
 
