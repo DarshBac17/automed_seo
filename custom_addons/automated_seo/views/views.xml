@@ -8,52 +8,60 @@
         <field name="view_mode">form</field>
     </record>
 
-
-    <!-- Add Send Email button to the main view -->
     <record id="automated_seo.view_create_wizard_form" model="ir.ui.view">
         <field name="name">automated.seo.create.wizard.form</field>
         <field name="model">automated_seo.view_create_wizard</field>
         <field name="arch" type="xml">
             <form string="Create New SEO View">
-                <group>
-                    <div class="o_col" style="width:350px">
-                        <div class="o_row">
-                            <label for="file_source" string="File Source"/>
-                            <p style="margin-left:5px">:</p>
-                            <field name="file_source" widget="radio" options="{'horizontal': true}"/>
+                <group style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%;">
+                    <div class="o_col" >
+                        <div class="o_row" style="display: flex; justify-content: center;">
+                            <field name="file_source"
+                                   widget="card_selection"
+                                   options="{
+                                'descriptions': {
+                                    'draft': 'Start with a new draft configuration.',
+                                    'remote': 'Choose an existing file from production'
+                                },
+                                'horizontal':True
+                            }"
+                            />
                         </div>
 
                         <div class="o_row"
                              attrs="{'invisible': [('file_source', '!=', 'remote')]}">
-                            <label for="selected_filename" string="Select File"/>
-                            <p style="margin-left:5px">:</p>
-                            <field name="selected_filename"
-                                   widget="many2one"
-                                   options="{
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <label for="selected_filename" string="Select File"/>
+                                <p style="margin-left:5px; margin-right:5px">:</p>
+                                <field name="selected_filename"
+                                       widget="many2one"
+                                       options="{
                                     'no_create': True,
                                     'no_create_edit': True,
                                     'no_open': True
                                 }"
-                                   style="margin-left:5px"/>
+                                />
+                            </div>
                         </div>
                     </div>
-
                 </group>
-                <footer>
+                <footer style="display: flex; justify-content: center; width: 100%;">
                     <button string="Create"
                             type="action"
                             name="%(automated_seo.view_action_form)d"
-                            class="btn oe_highlight justify-content-end"
+                            class="btn oe_highlight"
                             context="{
-                                'default_file_source': file_source,
-                                'default_selected_filename':selected_filename
-                            }"
+                            'default_file_source': file_source,
+                            'default_selected_filename':selected_filename
+                        }"
                     />
                     <button string="Cancel" class="btn btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
+
+
 
     <record id="automated_seo.view_create_wizard" model="ir.actions.act_window">
         <field name="name">Create Automated SEO View</field>
@@ -90,7 +98,7 @@
         <field name="name">automated_seo.view.kanban</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <kanban class="o_seo_kanban_view">
+            <kanban class="o_seo_kanban_view" js_class="button_in_kanban">
                 <field name="unique_page_id"/>
                 <field name="name"/>
                 <field name="stage"/>
@@ -247,7 +255,7 @@
                             type="action"
                             string="New Version"
                             class="btn oe_highlight justify-content-end"
-                            attrs="{'invisible': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
+                            attrs="{'invisible': ['|','|',('has_edit_permission', '=', False),('stage', '=', 'in_review'),('stage', '=', 'draft')]}"
                             context="{
                                 'default_view_id': id,
                                 'default_base_version':active_version,
@@ -379,14 +387,14 @@
                             <sheet>
                                 <group class="o_half_width" style="margin-bottom: 20px;">
                                     <field name="header_title"
-                                        string="Header Title"
-                                        widget="char_length_validator"
-                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                           string="Header Title"
+                                           widget="char_length_validator"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
 
-                                    <field name="header_description" 
-                                        string="Page Description"
-                                        widget="description_length_validator"
-                                        attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    <field name="header_description"
+                                           string="Page Description"
+                                           widget="description_length_validator"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </group>
                                 <notebook>
                                     <page string="Metadata" class="o_notebook_page" style="padding-top: 10px;">

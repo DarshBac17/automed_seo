@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="automated_seo.view.KanbanView.Buttons" t-inherit="web.KanbanView.Buttons">
+        <xpath expr="//*[@class='btn btn-primary o-kanban-button-new']" position="replace">
+            <button type="button" class="btn btn-primary" style="margin-left: 10px;"  t-on-click="OnCreatePageClick">
+                Create Page
+            </button>
+        </xpath>
+    </t>
+</templates>
