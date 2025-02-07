@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="automated_seo.CardSelectionField" owl="1">
+        <div class="o_card_selection" t-attf-class="o_{{ props.orientation }}" role="radiogroup" t-att-aria-label="string">
+            <t t-foreach="items" t-as="item" t-key="item[0]">
+                <div class="o_card_item" t-att-class="{ 'selected': item[0] === value }">
+                    <div class="o_radio_container">
+                        <input
+                            type="radio"
+                            class="o_hidden_radio"
+                            t-att-checked="item[0] === value"
+                            t-att-disabled="props.readonly"
+                            t-att-name="id"
+                            t-att-data-value="item[0]"
+                            t-att-data-index="item_index"
+                            t-att-id="id + '_' + item[0]"
+                            t-on-change="() => this.onChange(item)"
+                        />
+                        <label class="o_card_content" t-att-for="id + '_' + item[0]">
+                            <div class="o_card_title" t-esc="item[1]"/>
+                            <div class="o_card_description" t-if="getDescription(item)" t-esc="getDescription(item)"/>
+                        </label>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

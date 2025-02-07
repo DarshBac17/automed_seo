@@ -69,7 +69,7 @@
                                     </div>
 
                                     <div class="d-flex align-items-center mb-2" attrs="{'invisible': [('publish_at', 'in', [False,''])]}">
-                                         Publish At:
+                                         Published At:
                                         <field name="publish_at" widget="date"/>
                                     </div>
                                 </div>

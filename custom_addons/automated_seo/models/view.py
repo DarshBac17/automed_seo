@@ -398,8 +398,6 @@ class View(models.Model):
                 if not record.env.context.get('from_ir_view'):
                     formatted_name = new_name.replace(' ', '').upper()
 
-
-            breakpoint()
             if 'contributor_ids' in vals:
                 user_ids = set(vals.get('contributor_ids')[0][2])  # Extract new contributor user IDs
                 existing_user_ids = set(self.contributor_ids.ids)  # Current contributor user IDs
