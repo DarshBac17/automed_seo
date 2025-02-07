@@ -9,6 +9,8 @@ import base64
 import boto3
 import io
 import string
+
+from odoo.api import ondelete
 from odoo.exceptions import UserError
 from botocore.exceptions import ClientError
 import re
@@ -191,7 +193,11 @@ class View(models.Model):
         string="Tag"
     )
 
-    channel_id = fields.Many2one('mail.channel', string='Discussion Channel')
+    channel_id = fields.Many2one(
+        'mail.channel',
+        string='Discussion Channel',
+        ondelete='cascade'
+    )
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
