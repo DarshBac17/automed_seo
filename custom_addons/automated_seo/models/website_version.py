@@ -148,7 +148,6 @@ class WebsitePageVersion(models.Model):
             self.status = True
             if self.stage in ['approved','publish','in_review','unpublish']:
                 selected_file_version = None
-                breakpoint()
                 if view.selected_filename:
                     base_name, ext = os.path.splitext(view.selected_filename.name)
                     selected_file_version = f'{base_name}_{self.name}{ext}'

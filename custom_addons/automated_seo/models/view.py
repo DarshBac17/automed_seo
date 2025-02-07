@@ -1140,7 +1140,7 @@ class View(models.Model):
                     snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
                     snippet_mapper.unlink()
                     seo_page.unlink()
-                # self.delete_img_folder_from_s3(view_name=record.name)
+                self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -2609,7 +2609,6 @@ class IrUiView(models.Model):
             seo_view.action_compile_button()
             selected_file_version = None
 
-            breakpoint()
             if seo_view.selected_filename:
                 base_name, ext = os.path.splitext(seo_view.selected_filename.name)
                 selected_file_version = f'{base_name}_{seo_view.active_version.name}{ext}'
