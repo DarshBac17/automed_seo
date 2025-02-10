@@ -1051,7 +1051,7 @@ class View(models.Model):
 
                 #     for span in spans:
                 #         span.string="2***"
-                n = None
+                sub_snippets = None
 
                 if section.find_all('div', class_='boxed'):
                     sub_snippets =section.find_all('div', class_='boxed')
