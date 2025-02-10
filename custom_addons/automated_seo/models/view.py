@@ -357,6 +357,18 @@ class View(models.Model):
         vals['contributor_ids'] = [(6, 0, users.ids)]
 
         record  = super(View, self).create(vals)
+        file = record.image
+        if isinstance(file, str):
+            file_data = base64.b64decode(file)
+        else:
+            file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
+            
+        # Create file-like object
+        file_obj = io.BytesIO(file_data)
+        response = self.upload_file_to_s3(view_name=record.name, file=file_obj,
+                                          s3_filename=record.image_filename.replace(" ", "-").replace("%20", "-").lower())
+        if not response:
+            raise UserError("Failed to upload image to S3")
         record.is_new_page = False
         if not self.env.context.get('default_file_source') == 'remote' and not self.env.context.get('default_selected_filename'):
             self.env['website.page.version'].with_context({
@@ -438,6 +450,24 @@ class View(models.Model):
                     og_url_meta = record.env['automated_seo.page_header_metadata'].search(
                         ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
                     og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
+
+            new_image = vals['image'] if 'image' in vals else None
+
+            if new_image:
+                new_image_name = vals['image_filename'] if 'image_filename' in vals else record.image_filename
+                current_website = record.env['website'].get_current_website()
+                file = record.image
+                if isinstance(file, str):
+                    file_data = base64.b64decode(file)
+                else:
+                    file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
+
+                file_obj = io.BytesIO(file_data)
+                response = self.upload_file_to_s3(view_name=self.name, file=file_obj,
+                                                  s3_filename=new_image_name.replace(" ", "-").replace("%20",
+                                                                                                       "-").lower())
+                if not response:
+                    raise UserError("Failed to upload image to S3")
 
 
         return super(View, self).write(vals)
@@ -2412,6 +2442,7 @@ class View(models.Model):
                 s3_key = f'inhouse/{s3_filename}'
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
                 'ContentType': content_type})
+            return True
 
 
         except ClientError as e:
@@ -2421,8 +2452,11 @@ class View(models.Model):
                 print(f"The bucket {AWS_STORAGE_BUCKET_NAME} does not exist.")
             else:
                 print(f"An error occurred: {e}")
+            
+            return False
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
+            return False
 
     def delete_img_folder_from_s3(self,view_name):
         folder_name = view_name.replace(" ", "").lower()

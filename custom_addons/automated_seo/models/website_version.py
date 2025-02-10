@@ -335,7 +335,7 @@ class WebsitePageVersion(models.Model):
 
     def create_default_version_metadata(self, record):
         if not record.view_id.header_metadata_ids:
-
+            image_url = f'inhouse/{record.view_id.name.replace(" ","").lower()}/{record.view_id.image_filename.replace(" ", "-").replace("%20", "-").lower()}' if record.view_id.image  else 'main/img/og/DEFAULT_PAGE_IMAGE.jpg'
             self.env['automated_seo.page_header_metadata'].create([
                 {
                     'property': 'og:title',
@@ -351,7 +351,7 @@ class WebsitePageVersion(models.Model):
                 },
                 {
                     'property': 'og:image',
-                    'content': '<?php echo BASE_URL_IMAGE; ?>main/img/og/DEFAULT_PAGE_IMAGE.jpg',
+                    'content': f'<?php echo BASE_URL_IMAGE; ?>{image_url}',
                     'view_id': record.view_id.id,
                     'view_version_id': record.id
                 },
