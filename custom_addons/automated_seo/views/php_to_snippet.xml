@@ -15,7 +15,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="automated_seo.php_to_snippet_action">
-        <field name="name"> Mapper </field>
+        <field name="name"> Php to Snippet </field>
         <field name="res_model">automated_seo.php_to_snippet</field>
         <field name="view_mode">tree</field>
     </record>
