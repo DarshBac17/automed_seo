@@ -201,7 +201,7 @@ class View(models.Model):
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name must be unique!')
     ]
-    
+
     @api.constrains('image', 'image_filename')
     def _check_image_mime(self):
         for record in self:
@@ -210,7 +210,7 @@ class View(models.Model):
                     # Decode base64 and check image type
                     image_data = base64.b64decode(record.image)
                     image_type = imghdr.what(None, image_data)
-                    
+
                     if not image_type or image_type not in ['jpeg', 'jpg', 'png', 'gif']:
                         raise ValidationError(
                             "Invalid image format. Allowed formats: JPEG, PNG, GIF"
@@ -288,7 +288,7 @@ class View(models.Model):
             contributor_ids = record.contributor_ids.ids
             is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
             record.has_edit_permission = (
-                is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
+                    is_admin or current_user.id == record.create_uid.id or current_user.id in contributor_ids
             )
 
     @api.depends('create_uid')
@@ -298,7 +298,7 @@ class View(models.Model):
             is_admin = current_user.has_group('automated_seo.group_automated_seo_admin')
             is_publisher = current_user.has_group('automated_seo.group_automated_seo_publishers')
             record.is_publisher = (
-                is_admin or is_publisher
+                    is_admin or is_publisher
             )
 
     @api.depends('create_uid')
@@ -626,15 +626,21 @@ class View(models.Model):
         self.write({'stage': 'approved'})
         self.active_version.stage = 'approved'
         page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
+
+        # Get the action reference
+        action = self.env.ref('automated_seo.view_action')  # Replace with your actual action XML ID
+        # Get the menu reference
+        menu = self.env.ref('automated_seo.menu_automated_seo_root')
+
         self.channel_id.message_post(
             body="<b>📢 Approved</b><br/>"
                  f"<b>Record:</b> {page_name}<br/>"
                  f"<b>Version:</b> {self.active_version.name}<br/>"
                  "🔎 Approved to publish<br/><br/>"
-                 f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
-                 f"data-oe-method='view_action_form' "
+                 f"<a href='/web#id={self.id}&action={action.id}&model=automated_seo.view&view_type=form&menu_id={menu.id}' "
                  f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
-                 f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+                 f"text-decoration: none; border-radius: 5px; font-weight: bold;' "
+                 f"target='_self'>🚀 Open Record</a>",
             message_type='comment',
             subtype_xmlid=False,
             author_id=self.env.user.partner_id.id
@@ -644,29 +650,29 @@ class View(models.Model):
             message_type="comment"
         )
 
-            # # Get Git details
-            # page_name = self.name
-            #
-            # last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            # user_id = self.env.user.id
-            # base_branch = "master"
-            # feature_branch = "git-commit"
-            #
-            # # Push changes to Git
-            # success = push_changes_to_git(
-            #     page_name=page_name,
-            #     page_version=self.active_version.name,
-            #     last_updated=last_updated,
-            #     user_id=user_id,
-            #     user_name=self.env.user.name,  # Include `user_name`
-            #     base_branch=base_branch,
-            #     feature_branch=feature_branch,
-            #     file_data=self.parse_html_binary
-            # )
-            # if success:
-            #     self.message_post(body="Changes successfully pushed to Git.")
-            # else:
-            #     self.message_post(body="Failed to push changes to Git.")
+        # # Get Git details
+        # page_name = self.name
+        #
+        # last_updated = self.write_date or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # user_id = self.env.user.id
+        # base_branch = "master"
+        # feature_branch = "git-commit"
+        #
+        # # Push changes to Git
+        # success = push_changes_to_git(
+        #     page_name=page_name,
+        #     page_version=self.active_version.name,
+        #     last_updated=last_updated,
+        #     user_id=user_id,
+        #     user_name=self.env.user.name,  # Include `user_name`
+        #     base_branch=base_branch,
+        #     feature_branch=feature_branch,
+        #     file_data=self.parse_html_binary
+        # )
+        # if success:
+        #     self.message_post(body="Changes successfully pushed to Git.")
+        # else:
+        #     self.message_post(body="Failed to push changes to Git.")
 
     def validate_header(self):
 
@@ -695,15 +701,23 @@ class View(models.Model):
         self.write({'stage': 'publish'})
         self.active_version.stage = 'publish'
         page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
+
+
+        # Get the action reference
+        action = self.env.ref('automated_seo.view_action')  # Replace with your actual action XML ID
+        # Get the menu reference
+        menu = self.env.ref('automated_seo.menu_automated_seo_root')
+
+
         self.channel_id.message_post(
             body="<b>📢 Published</b><br/>"
                  f"<b>Record:</b> {page_name}<br/>"
                  f"<b>Version:</b> {self.active_version.name}<br/>"
                  "Record Published<br/><br/>"
-                 f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
-                 f"data-oe-method='view_action_form' "
+                 f"<a href='/web#id={self.id}&action={action.id}&model=automated_seo.view&view_type=form&menu_id={menu.id}' "
                  f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
-                 f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+                 f"text-decoration: none; border-radius: 5px; font-weight: bold;' "
+                 f"target='_self'>🚀 Open Record</a>",
             message_type='comment',
             subtype_xmlid=False,
             author_id=self.env.user.partner_id.id
@@ -985,22 +999,22 @@ class View(models.Model):
 
         try:
             image_url = meta_tag.get('content')
-            
+
             # Replace PHP variable with base URL
             base_url = "https://assets.bacancytechnology.com/"
             image_url = re.sub(
-                r'\<\?php\s+echo\s+BASE_URL_IMAGE;\s*\?>', 
-                base_url, 
+                r'\<\?php\s+echo\s+BASE_URL_IMAGE;\s*\?>',
+                base_url,
                 image_url
             )
-            
+
             # Download image
             response = requests.get(image_url)
             if response.status_code == 200:
                 # Convert to base64 and store
                 image_data = base64.b64encode(response.content)
                 self.image = image_data
-                
+
                 # Extract filename from URL
                 filename = image_url.split('/')[-1]
                 file = image_data
@@ -1014,10 +1028,10 @@ class View(models.Model):
                 if not response:
                     raise UserError("Failed to upload image to S3")
                 self.image_filename = filename
-                
+
         except Exception as e:
-          return UserError("While downloading image: " + str(e))
-    
+            return UserError("While downloading image: " + str(e))
+
     def get_php_header_data(self, header):
         header = BeautifulSoup(header,'html.parser').head
         self.header_title = header.title.text
@@ -1755,7 +1769,7 @@ class View(models.Model):
                     span_contents.append(f'<span>{text}</span>')
                 return f"{indent}<td>{' '.join(span_contents)}</td>"
             return None
-        
+
         def format_nested_content(elem, indent, level):
             """Helper to format nested content with proper indentation"""
             lines = [f"{indent}<{elem.name}{format_attributes(elem)}>"]
@@ -1768,7 +1782,7 @@ class View(models.Model):
                     lines.append(format_element(child, level + 1))
             lines.append(f"{indent}</{elem.name}>")
             return '\n'.join(line for line in lines if line.strip())
-        
+
         def format_element(elem, level=0):
             if isinstance(elem, NavigableString):
                 text = str(elem).strip()
@@ -1791,7 +1805,7 @@ class View(models.Model):
                 # For FAQ links or structural content, preserve HTML structure
                 if 'faq-head' in elem.get('class', []) or not should_inline_content(elem):
                     return format_nested_content(elem, indent, level)
-                
+
                 # For simple links, inline the content
                 content = ' '.join(elem.stripped_strings)
                 return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
@@ -2569,7 +2583,7 @@ class View(models.Model):
                 print(f"The bucket {AWS_STORAGE_BUCKET_NAME} does not exist.")
             else:
                 print(f"An error occurred: {e}")
-            
+
             return False
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
@@ -2731,14 +2745,14 @@ class View(models.Model):
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
     page_id = fields.Many2one('automated_seo.view', string="View Record",ondelete='cascade')
-    
+
 
     def save(self, *args, **kwargs):
         """Override save method to handle website editor saves"""
         result = super(IrUiView,self).save(*args, **kwargs)
         self.update_stage_server(id=self.id)
         return result
-    
+
     @api.model
     def create(self, vals):
         return super(IrUiView, self).create(vals)
@@ -2752,12 +2766,12 @@ class IrUiView(models.Model):
                 version.view_arch = self.arch
 
         return record
-    
+
     def update_stage_server(self, id):
         view = self.env['ir.ui.view'].sudo().search([('id', '=', id)], limit=1)
         if not view:
             return {'status': 'error', 'message': 'View not found'}
-        seo_view = self.env['automated_seo.view'].sudo().search([('page_id', '=', view.id)], limit=1)        
+        seo_view = self.env['automated_seo.view'].sudo().search([('page_id', '=', view.id)], limit=1)
 
         return seo_view.update_stage_file()
 
