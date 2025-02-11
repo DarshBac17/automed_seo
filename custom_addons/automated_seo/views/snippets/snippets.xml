@@ -731,6 +731,8 @@
 
         </xpath>
 
+
+
         <xpath expr="//div[@id='snippet_options']/t" position="attributes">
             <attribute name="t-call">automated_seo.snippet_options</attribute>
         </xpath>
@@ -740,6 +742,48 @@
 
 
     <template id="snippet_options" inherit_id="website.snippet_options" primary="True">
+
+        <xpath expr="//we-input[@data-attribute-name='alt']" position="replace">
+            <we-input string="Alt" class="o_we_large"
+                      data-select-attribute="" data-attribute-name="alt"
+                      placeholder="Alt tag"
+                      title="'Alt tag' specifies an alternate text for an image, if the image cannot be displayed (slow connection, missing image, screen reader ...)."/>
+        </xpath>
+
+        <xpath expr="//we-input[@data-attribute-name='title']" position="replace">
+            <we-input string="Title" class="o_we_large"
+                      data-select-attribute="" data-attribute-name="title"
+                      placeholder="Title tag"
+                      title="'Title tag' is shown as a tooltip when you hover the picture."/>
+        </xpath>
+
+
+        <xpath expr="//div[@data-js='ImageTools']" position="replace">
+
+        </xpath>
+
+        <xpath expr="//div[@class='o_we_image_options']" position="replace">
+
+        </xpath>
+
+        <xpath expr="//div[@data-js='WebsiteAnimate']" position="replace">
+
+        </xpath>
+
+        <xpath expr="//div[@data-js='ContainerWidth']" position="replace">
+
+        </xpath>
+
+        <xpath expr="//div[@data-js='ScrollButton']" position="replace">
+
+        </xpath>
+
+
+        <xpath expr="//div[@data-js='ConditionalVisibility']" position="replace">
+
+        </xpath>
+
+
         <xpath expr="//t[@t-call='website.snippet_options_background_options']" position="replace">
             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet">
                 <we-row string="Content">
@@ -757,7 +801,7 @@
                     </we-button>
                 </we-row>
             </div>
-             <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet_breadcrumbs">
+            <div data-js="MultipleItems" data-selector=".o_automated_seo_snippet_breadcrumbs">
                 <we-row string="Content">
                     <we-button data-add-item="" data-item=".o_sub_items_container > li:last" data-select-item=""
                                data-no-preview="true" class="o_we_bg_brand_primary">

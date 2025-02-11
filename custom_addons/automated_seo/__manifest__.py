@@ -5,7 +5,7 @@
     'license':'LGPL-3',
     'summary': 'A simple QWeb demo',
     'description': """This module demonstrates a basic QWeb template in Odoo 16.""",
-    'author': 'Hetul Patel',
+    'author': 'Bacancy Technologies',
     'depends': ['website', 'web_editor','base',"web"],
     'data': [
         'security/security.xml',

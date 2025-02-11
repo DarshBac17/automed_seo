@@ -282,9 +282,9 @@ class WebsitePageVersion(models.Model):
                 'view_version_id': record.id
             })
         else:
-            record.view_id.update_stage_file()
             # record.header_metadata_ids.write({'is_active': True})
             record.header_link_ids.write({'is_active': True})
+            seo_view.update_stage_file()
 
         return record
 
