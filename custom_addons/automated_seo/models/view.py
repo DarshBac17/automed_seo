@@ -1749,7 +1749,20 @@ class View(models.Model):
                     span_contents.append(f'<span>{text}</span>')
                 return f"{indent}<td>{' '.join(span_contents)}</td>"
             return None
-
+        
+        def format_nested_content(elem, indent, level):
+            """Helper to format nested content with proper indentation"""
+            lines = [f"{indent}<{elem.name}{format_attributes(elem)}>"]
+            for child in elem.children:
+                if isinstance(child, NavigableString):
+                    text = child.strip()
+                    if text:
+                        lines.append(f"{indent}{' ' * indent_size}{text}")
+                else:
+                    lines.append(format_element(child, level + 1))
+            lines.append(f"{indent}</{elem.name}>")
+            return '\n'.join(line for line in lines if line.strip())
+        
         def format_element(elem, level=0):
             if isinstance(elem, NavigableString):
                 text = str(elem).strip()
@@ -1769,21 +1782,13 @@ class View(models.Model):
             if elem.name in self_closing_tags:
                 return f"{indent}<{elem.name}{attrs}/>"
             if elem.name == 'a':
-                if should_inline_content(elem):
-                    content = ' '.join(elem.stripped_strings)
-                    return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
-                else:
-                    # Handle structural content inside anchor
-                    lines = [f"{indent}<{elem.name}{attrs}>"]
-                    for child in elem.children:
-                        if isinstance(child, NavigableString):
-                            text = child.strip()
-                            if text:
-                                lines.append(f"{indent}{' ' * indent_size}{text}")
-                        else:
-                            lines.append(format_element(child, level + 1))
-                    lines.append(f"{indent}</{elem.name}>")
-                    return '\n'.join(line for line in lines if line.strip())
+                # For FAQ links or structural content, preserve HTML structure
+                if 'faq-head' in elem.get('class', []) or not should_inline_content(elem):
+                    return format_nested_content(elem, indent, level)
+                
+                # For simple links, inline the content
+                content = ' '.join(elem.stripped_strings)
+                return f"{indent}<{elem.name}{attrs}>{content}</{elem.name}>"
 
             # Handle inline content tags
             if elem.name in inline_content_tags:
@@ -2627,6 +2632,8 @@ class View(models.Model):
             if tag.name == "section" or tag.name in self_closing_tags:
                 return
 
+            if tag.name == 'span' and tag.get('class',[]) == ['bg-rightarrowLineBlack']:
+                return
             if not tag.contents or all(
                     isinstance(content, str) and content.strip() == "" for content in tag.contents
             ):
