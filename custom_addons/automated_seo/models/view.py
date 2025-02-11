@@ -458,6 +458,12 @@ class View(models.Model):
             #             ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
             #         og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
 
+            if 'header_description' in vals and not vals['header_description']:
+                raise UserError('Header description can not be empty')
+
+            if 'header_title' in vals and not vals['header_title']:
+                raise UserError('Header title can not be empty')
+
             new_image = vals['image'] if 'image' in vals else None
             new_image_name = vals['image_filename'] if 'image_filename' in vals else record.image_filename
             if new_image and new_image_name:
@@ -509,7 +515,7 @@ class View(models.Model):
     def action_send_for_review(self):
         self.action_compile_button()
 
-        if self.validate_header():
+        if self.update_stage_file():
             # selected_file_version = None
             # if self.selected_filename:
             #     base_name, ext = os.path.splitext(self.selected_filename.name)
@@ -540,6 +546,37 @@ class View(models.Model):
             })
 
             self.message_post(body="Record sent for review")
+
+
+    def update_stage_file(self):
+
+        if self.validate_header():
+            self.action_compile_button()
+            selected_file_version = None
+
+            if self.selected_filename:
+                base_name, ext = os.path.splitext(self.selected_filename.name)
+                selected_file_version = f'{base_name}_{self.active_version.name}{ext}'
+
+            page_name = f'{selected_file_version}' if selected_file_version else f"{self.name}_{self.active_version.name}.php"
+
+            upload_success = transfer_file_via_scp(
+                page_name=page_name,
+                file_data=self.parse_html_binary
+            )
+
+            if upload_success:
+
+                self.message_post(body=f"{page_name} file successfully updated to staging server.")
+                self.active_version.write({
+                    'stage_url': f"https://automatedseo.bacancy.com/{page_name}"
+                })
+                return True
+            else:
+                self.message_post(body=f"{page_name} file upload failed.")
+                return False
+                # raise UserError(f"{page_name} file upload failed.")
+        return False
 
 
     def create_channel_for_conversation(self):
@@ -2557,7 +2594,7 @@ class View(models.Model):
             if not br.find_parent('form'):
                 br.decompose()  # Remove <br> tag
 
-        # Return the modified HTML content
+        # Return the modified HTML contentrecord.view_id.update_stage_file()
         return soup.prettify()
 
     def handle_dynamic_anchar_tag(self,html_parser):
@@ -2708,33 +2745,8 @@ class IrUiView(models.Model):
         if not view:
             return {'status': 'error', 'message': 'View not found'}
         seo_view = self.env['automated_seo.view'].sudo().search([('page_id', '=', view.id)], limit=1)        
-        if seo_view.validate_header():
-            seo_view.action_compile_button()
-            selected_file_version = None
 
-            if seo_view.selected_filename:
-                base_name, ext = os.path.splitext(seo_view.selected_filename.name)
-                selected_file_version = f'{base_name}_{seo_view.active_version.name}{ext}'
-
-            page_name = f'{selected_file_version}' if selected_file_version else f"{seo_view.name}_{seo_view.active_version.name}.php"
-
-            upload_success = transfer_file_via_scp(
-                page_name=page_name,
-                file_data=seo_view.parse_html_binary
-            )
-            if upload_success:
-                seo_view.message_post(body=f"{page_name} file successfully uploaded to staging server.")
-                seo_view.active_version.write({
-                    'stage_url': f"https://automatedseo.bacancy.com/{page_name}"
-                })
-                seo_view.message_post(body="Record sent for review")
-
-                seo_view.message_post(body="Record moved to the done approved")
-            else:
-                seo_view.message_post(body=f"{page_name} file upload failed.")
-                return False
-                # raise UserError(f"{page_name} file upload failed.")
-        return True
+        return seo_view.update_stage_file()
 
 
 
