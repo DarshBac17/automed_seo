@@ -524,6 +524,11 @@ class View(models.Model):
             page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
             self.create_channel_for_conversation()
 
+            # Get the action reference
+            action = self.env.ref('automated_seo.view_action')  # Replace with your actual action XML ID
+            # Get the menu reference
+            menu = self.env.ref('automated_seo.menu_automated_seo_root')  # Replace with your actual menu XML ID
+
             self.channel_id.message_post(
                 body="<b>📢 Review request for</b><br/>"
                      f"<b>Record:</b> {page_name}<br/>"
@@ -531,9 +536,10 @@ class View(models.Model):
                      f"<b>Created by:</b> {self.create_uid.name}<br/>"
                      f"<b>Review URL:</b> {self.active_version.stage_url}<br/><br/>"
                      "🔎 Please review and provide feedback.<br/><br/>"
-                     f"<a href='#' data-oe-model='automated_seo.view' data-oe-id='{self.id}' "
+                     f"<a href='/web#id={self.id}&action={action.id}&model=automated_seo.view&view_type=form&menu_id={menu.id}' "
                      f"style='display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; "
-                     f"text-decoration: none; border-radius: 5px; font-weight: bold;'>🚀 Open Record</a>",
+                     f"text-decoration: none; border-radius: 5px; font-weight: bold;' "
+                     f"target='_self'>🚀 Open Record</a>",
                 message_type='comment',
                 subtype_xmlid=False,
                 author_id=self.env.user.partner_id.id

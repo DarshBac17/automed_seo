@@ -68,39 +68,78 @@ class SeoSystray extends Component {
         try {
             // Get current page view_id
             const viewId = await this.getCurrentPageViewId();
-
             if (!viewId) {
-                throw new Error('Could not find view ID for current page');
+                throw new Error("Could not find view ID for the current page");
             }
 
-            // Find the menu item by xmlid
+            console.log("Menu Service:", this.menuService);
+            console.log("Action Service:", this.actionService);
+
+            // Fetch menu item by XML ID
             const menuItem = this.menuService.getAll().find(
-                (item) => item.xmlid === 'automated_seo.menu_automated_view'
+                (item) => item.xmlid === "automated_seo.menu_automated_seo_root"
             );
-
             if (!menuItem) {
-                throw new Error('Menu item not found');
+                throw new Error("Menu item not found");
             }
 
-            // Do the actual navigation
-            await this.actionService.doAction({
-                type: 'ir.actions.act_window',
-                name: 'Page Management',
-                res_model: 'automated_seo.view',
-                views: [[false, 'form']],
-                target: 'current',
-                res_id: viewId,
-            }, {
-                clearBreadcrumbs: true,
-                menuId: menuItem.id,  // This will set the active menu
-            });
+            // Load action dynamically using actionService
+            const actionItem = await this.actionService.loadAction("automated_seo.view_action");
+            if (!actionItem || !actionItem.id) {
+                throw new Error("Action item not found or invalid");
+            }
+
+            // Construct the URL
+            const url = `/web#id=${viewId}&action=${actionItem.id}&model=automated_seo.view&view_type=form&menu_id=${menuItem.id}`;
+
+            // Redirect to the URL
+            window.location.replace(url);
+
         } catch (error) {
-            console.error('Navigation error:', error);
-            this.notification.add(this.env._t('Error opening SEO management page: ') + error.message, {
-                type: 'danger',
-            });
+            console.error("Navigation error:", error);
+            this.notification.add(
+                this.env._t("Error opening SEO management page: ") + error.message,
+                { type: "danger" }
+            );
         }
     }
+//    async redirectPageSeoMenu() {
+//        try {
+//            // Get current page view_id
+//            const viewId = await this.getCurrentPageViewId();
+//
+//            if (!viewId) {
+//                throw new Error('Could not find view ID for current page');
+//            }
+//
+//            // Find the menu item by xmlid
+//            const menuItem = this.menuService.getAll().find(
+//                (item) => item.xmlid === 'automated_seo.menu_automated_view'
+//            );
+//
+//            if (!menuItem) {
+//                throw new Error('Menu item not found');
+//            }
+//
+//            // Do the actual navigation
+//            await this.actionService.doAction({
+//                type: 'ir.actions.act_window',
+//                name: 'Page Management',
+//                res_model: 'automated_seo.view',
+//                views: [[false, 'form']],
+//                target: 'current',
+//                res_id: viewId,
+//            }, {
+//                clearBreadcrumbs: true,
+//                menuId: menuItem.id,  // This will set the active menu
+//            });
+//        } catch (error) {
+//            console.error('Navigation error:', error);
+//            this.notification.add(this.env._t('Error opening SEO management page: ') + error.message, {
+//                type: 'danger',
+//            });
+//        }
+//    }
 }
 
 SeoSystray.template = "automated_seo.SeoSystray";
