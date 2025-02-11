@@ -1435,7 +1435,7 @@ class View(models.Model):
         if  image_url:
             og_image_meta = soup.new_tag('meta')
             og_image_meta['property'] = 'og:image'
-            og_image_meta['content'] = image_url
+            og_image_meta['content'] = f'<?php echo BASE_URL_IMAGE; ?>{image_url}'
             head_tag.append(og_image_meta)
 
 
