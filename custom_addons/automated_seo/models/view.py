@@ -71,7 +71,6 @@ class View(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', required=True)
-    url = fields.Char(string='Page URL', help="Page URL", default= "Add page url")
     page_id = fields.One2many('ir.ui.view', 'page_id', string="Views")
     unique_page_id = fields.Char(string="Page Id")
     website_page_id = fields.Many2one('website.page', string="Website Page", readonly=True)
@@ -110,18 +109,18 @@ class View(models.Model):
     is_processed = fields.Boolean(default=False)
     image = fields.Binary(string="Upload Image")
     image_filename = fields.Char(string="Image Filename")
-    header_title = fields.Char(string="Title")
-
-    header_description = fields.Text(string="page description")
+    header_title = fields.Char(string="Header title")
+    header_description = fields.Text(string="Header description")
+    publish_url = fields.Char(string='Publish URL', help="Publish URL")
     # header_description = fields.Text(string="Title")
 
     # One-to-Many relationship: A page can have multiple metadata entries
-    header_metadata_ids = fields.One2many(
-        'automated_seo.page_header_metadata',
-        'view_id',
-        string="Metadata",
-        domain = [('is_active', '=', True)]
-    )
+    # header_metadata_ids = fields.One2many(
+    #     'automated_seo.page_header_metadata',
+    #     'view_id',
+    #     string="Metadata",
+    #     domain = [('is_active', '=', True)]
+    # )
 
     header_link_ids = fields.One2many(
         'automated_seo.page_header_link',
@@ -320,12 +319,13 @@ class View(models.Model):
         else:
             return 'PAGE0001'
 
+
     @api.model
     def create(self, vals):
         website_page = False
         new_page = None
         if not self.env.context.get('from_ir_view'):
-            vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
+            vals['name'] = vals['name'].replace("_", "-").replace(" ", "-").lower().strip()
             page_name = vals['name']
             # new_page = self.env['website'].with_context(from_seo_view=True).new_page(page_name)
             new_page = self.env['website'].with_context(
@@ -346,6 +346,8 @@ class View(models.Model):
             if page_name:
                 vals["header_title"] = page_name.strip()
                 vals["header_description"] = "Default page description"
+                vals["publish_url"] = f'https://www.bacancytechnology.com/{page_name}'
+
         vals['user_name'] = self.env.user.name
         # Fetch groups
         review_group = self.env.ref('automated_seo.group_automated_seo_reviewers', raise_if_not_found=False)
@@ -357,6 +359,21 @@ class View(models.Model):
         vals['contributor_ids'] = [(6, 0, users.ids)]
 
         record  = super(View, self).create(vals)
+        # file = record.image
+        # if file:
+        #     if isinstance(file, str):
+        #         file_data = base64.b64decode(file)
+        #     else:
+        #         file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
+        #
+        #     # Create file-like object
+        #     file_obj = io.BytesIO(file_data)
+        #     response = self.upload_file_to_s3(view_name=record.name, file=file_obj,
+        #                                       s3_filename=record.image_filename.replace(" ", "-").replace("%20", "-").lower())
+        #     if not response:
+        #         raise UserError("Failed to upload image to S3")
+
+
         record.is_new_page = False
         if not self.env.context.get('default_file_source') == 'remote' and not self.env.context.get('default_selected_filename'):
             self.env['website.page.version'].with_context({
@@ -377,19 +394,19 @@ class View(models.Model):
 
         for record in self:
             if 'name' in vals and record.website_page_id:
-                vals['name'] = vals['name'].replace("_", "-").replace(" ", "-")
-                new_name = vals['name']
+                vals['name'] = vals['name'].replace("_", "-").replace(" ", "-").lower().strip()
+
                 current_website = record.env['website'].get_current_website()
 
                 record.website_page_id.write({
-                    'name': new_name,
-                    'url': '/' + new_name.lower().replace(' ', '-'),
+                    'name': vals['name'],
+                    'url': '/' + vals['name'].lower().replace(' ', '-'),
                 })
 
                 if record.page_id:
                     record.page_id.write({
-                        'name': new_name,
-                        'key': 'website.' + new_name.lower().replace(' ', '_'),
+                        'name': vals['name'],
+                        'key': 'website.' + vals['name'].lower().replace(' ', '_'),
                     })
 
                 menu_item = record.env['website.menu'].search([
@@ -399,10 +416,12 @@ class View(models.Model):
 
 
                 if menu_item:
-                    menu_item.write({'name': new_name})
+                    menu_item.write({'name': vals['name']})
 
-                if not record.env.context.get('from_ir_view'):
-                    formatted_name = new_name.replace(' ', '').upper()
+                # if not record.env.context.get('from_ir_view'):
+                #     formatted_name = vals['name'].replace(' ', '').upper()
+
+                record.publish_url = f'https://www.bacancytechnology.com/{vals["name"]}'
 
             if 'contributor_ids' in vals:
                 user_ids = set(vals.get('contributor_ids')[0][2])  # Extract new contributor user IDs
@@ -424,23 +443,41 @@ class View(models.Model):
                 for partner_id in removed_partners:
                     self.channel_id.channel_partner_ids = [(3, partner_id)]
 
-            if 'active_version' in vals and 'header_metadata_ids' in vals:
-                for operation in vals['header_metadata_ids']:
-                    if operation[0] == 2:  # If delete operation
-                        self.env['automated_seo.page_header_metadata'].browse(operation[1]).write({'is_active': False})
-                vals['header_metadata_ids'] = [(4, rec.id, 0) for rec in self.header_metadata_ids]
+            # if 'active_version' in vals and 'header_metadata_ids' in vals:
+            #     for operation in vals['header_metadata_ids']:
+            #         if operation[0] == 2:  # If delete operation
+            #             self.env['automated_seo.page_header_metadata'].browse(operation[1]).write({'is_active': False})
+            #     vals['header_metadata_ids'] = [(4, rec.id, 0) for rec in self.header_metadata_ids]
 
 
-            if record.active_version:
-                # if 'stage' in vals:
-                #     record.active_version.stage = vals.get("stage")
-                if 'name' in vals:
-                    og_url_meta = record.env['automated_seo.page_header_metadata'].search(
-                        ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
-                    og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
+            # if record.active_version:
+            #     # if 'stage' in vals:
+            #     #     record.active_version.stage = vals.get("stage")
+            #     if 'name' in vals:
+            #         og_url_meta = record.env['automated_seo.page_header_metadata'].search(
+            #             ['&', ('view_version_id', '=', record.active_version.id), ('property', '=', 'og:url')], limit=1)
+            #         og_url_meta.content = f'<?php echo BASE_URL; ?>{vals["name"]}'
+
+            new_image = vals['image'] if 'image' in vals else None
+            new_image_name = vals['image_filename'] if 'image_filename' in vals else record.image_filename
+            if new_image and new_image_name:
+
+                # current_website = record.env['website'].get_current_website()
+                file = new_image
+                if isinstance(file, str):
+                    file_data = base64.b64decode(file)
+                else:
+                    file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
 
 
-        return super(View, self).write(vals)
+                file_obj = io.BytesIO(file_data)
+                response = self.upload_file_to_s3(view_name=self.name, file=file_obj,
+                                                  s3_filename=new_image_name.replace(" ", "-").replace("%20",
+                                                                                                       "-").lower())
+                if not response:
+                    raise UserError("Failed to upload image to S3")
+
+        return  super(View, self).write(vals)
 
     # @api.constrains('url')
     # def _check_url_valid(self):
@@ -594,18 +631,20 @@ class View(models.Model):
             raise UserError("Set Head Title")
         if not self.header_description:
             raise UserError("Set Head Description")
-        if self.header_metadata_ids:
-            required_metadata = {"og:description","og:title","og:image","og:url"}
-            header_metadata = {
-                metadata.property
-                for metadata in self.header_metadata_ids
-                if metadata.property and metadata.content
-            }
-            result = required_metadata.issubset(header_metadata)
-            if not result:
-                raise UserError(f"Head metadata must include all listed properties:\n{required_metadata}")
-        else:
-            raise UserError("Set Head metadata")
+        # if not self.image_filename or self.image:
+        #     raise UserError("Upload OG Image")
+        # if self.header_metadata_ids:
+        #     required_metadata = {"og:description","og:title","og:image","og:url"}
+        #     header_metadata = {
+        #         metadata.property
+        #         for metadata in self.header_metadata_ids
+        #         if metadata.property and metadata.content
+        #     }
+        #     result = required_metadata.issubset(header_metadata)
+        #     if not result:
+        #         raise UserError(f"Head metadata must include all listed properties:\n{required_metadata}")
+        # else:
+        #     raise UserError("Set Head metadata")
         return True
 
     def action_publish_button(self):
@@ -746,7 +785,14 @@ class View(models.Model):
                 'selected_filename': self.selected_filename.name,
                 'stage_url' : f"https://automatedseo.bacancy.com/{self.selected_filename.name}"
             })
-            self.create_php_header(header=file_content)
+            self.get_php_header_data(header=file_content)
+            version.write({
+                'header_title': self.header_title,
+                'header_description': self.header_description,
+                'image': self.image,
+                'image_filename': self.image_filename,
+                'publish_url': self.publish_url
+            })
             self.with_context(view_name=self.name).action_compile_button()
             # version.status = False
             self.message_post(
@@ -893,6 +939,7 @@ class View(models.Model):
     #     # Replace all matches in the content
     #     return re.sub(pattern, replacer, content)
     def process_og_image(self, meta_tag):
+
         try:
             image_url = meta_tag.get('content')
             
@@ -913,28 +960,51 @@ class View(models.Model):
                 
                 # Extract filename from URL
                 filename = image_url.split('/')[-1]
+                file = image_data
+                if isinstance(file, str):
+                    file_data = base64.b64decode(file)
+                else:
+                    file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
+
+                file_obj = io.BytesIO(file_data)
+                response = self.upload_file_to_s3(file=file_obj, view_name=self.name, s3_filename=filename)
+                if not response:
+                    raise UserError("Failed to upload image to S3")
                 self.image_filename = filename
                 
         except Exception as e:
           return UserError("While downloading image: " + str(e))
     
-    def create_php_header(self,header):
+    def get_php_header_data(self, header):
         header = BeautifulSoup(header,'html.parser').head
         self.header_title = header.title.text
-        meta_tags = header.find_all('meta')
-        for meta_tag in meta_tags :
-            # try:
-            if meta_tag.get('name'):
-                self.header_description = meta_tag.get('content')
-            else:
-                if meta_tag.get('property') == "og:image":
-                    self.process_og_image(meta_tag)
-                self.env['automated_seo.page_header_metadata'].create({
-                    'view_version_id': self.active_version.id,
-                    'view_id': self.id,
-                    'property': meta_tag.get('property') if meta_tag.get('property') else None,
-                    'content': meta_tag.get('content')
-                })
+
+        meta_description = header.find("meta", attrs={"name": "description"})
+        if meta_description:
+            self.header_description = meta_description.get('content')
+
+        meta_image = header.find("meta", attrs={"property": "og:image"})
+        if meta_image:
+            self.process_og_image(meta_image)
+
+        meta_url = header.find("meta", attrs={"property": "og:url"})
+        if meta_url:
+            self.publish_url = meta_url.get('content')
+
+
+        # for meta_tag in meta_tags :
+        #     # try:
+        #     if meta_tag.get('name'):
+        #         self.header_description = meta_tag.get('content')
+        #     else:
+        #         if meta_tag.get('property') == "og:image":
+        #             self.process_og_image(meta_tag)
+        #         self.env['automated_seo.page_header_metadata'].create({
+        #             'view_version_id': self.active_version.id,
+        #             'view_id': self.id,
+        #             'property': meta_tag.get('property') if meta_tag.get('property') else None,
+        #             'content': meta_tag.get('content')
+        #         })
 
 
         link_tags = header.find_all('link')
@@ -1115,7 +1185,7 @@ class View(models.Model):
                     raise UserError("You do not have permission to delete this page. Only the owner can edit it.")
                 versions = record.env['website.page.version'].search([('view_id', '=', record.id)])
                 if versions:
-                    versions.header_metadata_ids.unlink()
+                    # versions.header_metadata_ids.unlink()
                     versions.header_link_ids.unlink()
                     versions.unlink()
                 # Delete associated website page
@@ -1140,7 +1210,7 @@ class View(models.Model):
                     snippet_mapper = record.env['automated_seo.snippet_mapper'].search([('page', '=', seo_page.id)])
                     snippet_mapper.unlink()
                     seo_page.unlink()
-                self.delete_img_folder_from_s3(view_name=record.name)
+                # self.delete_img_folder_from_s3(view_name=record.name)
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
@@ -1340,7 +1410,7 @@ class View(models.Model):
         head_tag = soup.head
         page_name = self.name.strip().lower().replace(" ", "-")
         title_tag = soup.new_tag('title')
-        title_tag.string = self.header_title or 'Default Title'
+        title_tag.string = self.header_title
         head_tag.append(title_tag)
 
         description_meta = soup.new_tag('meta')
@@ -1350,12 +1420,37 @@ class View(models.Model):
         common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>',"html.parser")
         head_tag.append(common_meta_tag)
 
-        for metadata in self.header_metadata_ids:
-            meta_tag = soup.new_tag('meta')
-            if metadata.property:
-                meta_tag['property'] = metadata.property
-                meta_tag['content'] = metadata.content or ''
-            head_tag.append(meta_tag)
+        og_title_meta = soup.new_tag('meta')
+        og_title_meta['property'] = 'og:title'
+        og_title_meta['content'] = self.header_title
+        head_tag.append(og_title_meta)
+
+        og_desc_meta = soup.new_tag('meta')
+        og_desc_meta['property'] = 'og:description'
+        og_desc_meta['content'] = self.header_description
+        head_tag.append(og_desc_meta)
+
+        image_url = f'inhouse/{self.name.replace(" ", "").lower()}/{self.image_filename.replace(" ", "-").replace("%20", "-").lower()}' if self.name and self.image_filename and self.image else None
+
+        if  image_url:
+            og_image_meta = soup.new_tag('meta')
+            og_image_meta['property'] = 'og:image'
+            og_image_meta['content'] = image_url
+            head_tag.append(og_image_meta)
+
+
+        og_url_meta = soup.new_tag('meta')
+        og_url_meta['property'] = 'og:url'
+        og_url_meta['content'] = self.publish_url.replace("https://www.bacancytechnology.com/","<?php echo BASE_URL; ?>")
+        head_tag.append(og_url_meta)
+
+
+        # for metadata in self.header_metadata_ids:
+        #     meta_tag = soup.new_tag('meta')
+        #     if metadata.property:
+        #         meta_tag['property'] = metadata.property
+        #         meta_tag['content'] = metadata.content or ''
+        #     head_tag.append(meta_tag)
 
         # link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         # head_tag.append(link_css_php)
@@ -2397,7 +2492,6 @@ class View(models.Model):
         return html_content
 
     def upload_file_to_s3(self, file, s3_filename, view_name=None):
-
         content_type, _ = mimetypes.guess_type(s3_filename)
 
         content_type = content_type or 'application/octet-stream'
@@ -2410,8 +2504,10 @@ class View(models.Model):
                 s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
             else:
                 s3_key = f'inhouse/{s3_filename}'
+
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
                 'ContentType': content_type})
+            return True
 
 
         except ClientError as e:
@@ -2421,8 +2517,11 @@ class View(models.Model):
                 print(f"The bucket {AWS_STORAGE_BUCKET_NAME} does not exist.")
             else:
                 print(f"An error occurred: {e}")
+            
+            return False
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
+            return False
 
     def delete_img_folder_from_s3(self,view_name):
         folder_name = view_name.replace(" ", "").lower()

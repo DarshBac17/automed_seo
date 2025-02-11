@@ -1,57 +1,70 @@
-
-odoo.define('website.custom.editor2', function (require) {
+odoo.define('website.editor.error.handler', function (require) {
     'use strict';
 
     const websiteSnippetEditor = require('website.snippet.editor');
-    const ajax = require('web.ajax');
     const Wysiwyg = require('web_editor.wysiwyg');
-
+        const core = require('web.core');
+    const _t = core._t;
     const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
         events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
             'click .o_we_website_top_actions button[data-action=save]': '_onSaveRequest',
-
         }),
-        init: function () {
-            this._super.apply(this, arguments);
-            this.rpcInProgress = false;
-        },
-        start: function () {
-            this._super.apply(this, arguments);
-            console.log("Snippet editor started");
-        },
         _onSaveRequest: async function (ev) {
-            console.log("Save button clicked");
+             try {
+                    if (this.validateBreadcrumb()) {
+                        await this._super.apply(this, arguments);
+                    }
 
-            try {
+                } catch (error) {
+                    const errorData = error.data || {};
+                    const errorMessage = errorData.message || error.message || _t('Unknown error occurred');
 
-                const wysiwyg = this.options.wysiwyg;
-                const view_id = wysiwyg.odooEditor.document.body.querySelector('.oe_structure').getAttribute('data-oe-id');
-
-                const result = await this._super.apply(this, arguments);
-                console.log("Save completed, reloading...", result);
-
-                if (result !== false) {
-                    console.log("Making RPC call to update stage server...[===========");
-                    let response = await this._rpc({
-                        route: '/website/update_stage_server',
-                        params: {
-                            view_id: view_id,
-                        },
+                    this.displayNotification({
+                        type: 'danger',
+                        title: _t('Save Failed'),
+                        message: errorMessage,
+                        sticky: false
                     });
-                    console.log("RPC call completed:", response);
+
+                return Promise.reject(error);
                 }
-
-                return result;
-            } catch (error) {
-                console.error("Save failed:", error);
-            }
         },
-
+        validateBreadcrumb: function() {
+            const wysiwyg = this.options.wysiwyg;
+            const breadcrumbItems = wysiwyg.odooEditor.document.body.querySelectorAll('.breadcrumb-item');
+            const missingLinks = [];
+        
+            for (let i = 0; i < breadcrumbItems.length; i++) {
+                const item = breadcrumbItems[i];
+                const link = item.querySelector('a');
+                
+                // Skip link validation for the last item
+                if (i === breadcrumbItems.length - 1) {
+                    continue;
+                }
+        
+                if (!link || !link.getAttribute('href') || link.getAttribute('href') === "#") {
+                    const cleanText = item.textContent.trim().replace('&amp;', '&').replace('&nbsp;', ' ');
+                    missingLinks.push(cleanText);
+                }
+            }
+        
+            if (missingLinks.length > 0) {
+                const errorMessage = `Missing links in breadcrumb items: ${missingLinks.join(', ')}`;
+                this.displayNotification({
+                    type: 'danger',
+                    title: _t('Save Failed'),
+                    message: _t(errorMessage),
+                    sticky: false
+                });
+                return false;
+            }
+        
+            return true; // Validation passed
+        }
     });
 
-    return {
-        SnippetsMenu: aSnippetMenu,
-    };
+    return aSnippetMenu;
 });
 //odoo.define('website.custom.editor', function (require) {
 //    'use strict';
