@@ -1441,7 +1441,11 @@ class View(models.Model):
 
         og_url_meta = soup.new_tag('meta')
         og_url_meta['property'] = 'og:url'
+
+        if not self.publish_url:
+            self.publish_url = f"https://www.bacancytechnology.com/{self.name}"
         og_url_meta['content'] = self.publish_url.replace("https://www.bacancytechnology.com/","<?php echo BASE_URL; ?>")
+
         head_tag.append(og_url_meta)
 
 

@@ -15,7 +15,7 @@ class WebsitePageVersion(models.Model):
     _description = 'Website Page Version'
     _order = 'create_date desc'
 
-    name = fields.Char('Version Name',compute='_compute_version_name', store=True)
+    name = fields.Char('Version Name', store=True)
     # description = fields.Text('Description')
     view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
@@ -76,7 +76,7 @@ class WebsitePageVersion(models.Model):
     #     for record in self:
     #         record.name = f"v{record.major_version}.{record.minor_version}.{record.patch_version}"
 
-    @api.depends('view_id')
+    # @api.depends('view_id')
     def _compute_version_name(self):
         self.ensure_one()
 
@@ -159,6 +159,10 @@ class WebsitePageVersion(models.Model):
             ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
+        version_count = self.env['website.page.version'].search_count([
+            ('view_id', '=', self.view_id.id)
+        ])
+        vals['name'] = f"v{version_count}"
         if current_version and seo_view:
             current_version.stage = seo_view.stage
             current_version.header_title = seo_view.header_title
