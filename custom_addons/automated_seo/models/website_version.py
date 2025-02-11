@@ -160,9 +160,9 @@ class WebsitePageVersion(models.Model):
         view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
         version_count = self.env['website.page.version'].search_count([
-            ('view_id', '=', self.view_id.id)
+            ('view_id', '=', vals.get('view_id'))
         ])
-        vals['name'] = f"v{version_count}"
+        vals['name'] = f"v{version_count+1}"
         if current_version and seo_view:
             current_version.stage = seo_view.stage
             current_version.header_title = seo_view.header_title
@@ -194,6 +194,9 @@ class WebsitePageVersion(models.Model):
             base_version = self.browse(int(vals.get('base_version')))
             if not base_version:
                 raise UserError('Base version is required')
+
+            if not base_version.header_title or not base_version.header_description:
+                raise UserError("Selected base version has missing header data")
 
             base_version_vals = base_version.read([
                 'view_id',
@@ -249,8 +252,7 @@ class WebsitePageVersion(models.Model):
 
         record = super(WebsitePageVersion, self).create(vals)
 
-        if not initial_version:
-            record._compute_version_name()
+
 
         seo_view.write({
             'parse_html': record.parse_html,
@@ -271,6 +273,8 @@ class WebsitePageVersion(models.Model):
         record.view_id.message_post(body=f"Version '{record.name}' created and activated")
 
         seo_view.active_version = record.id
+
+
         if initial_version and not record.selected_filename:
             self.env['automated_seo.page_header_link'].create({
                 'view_id': record.view_id.id,
@@ -278,6 +282,7 @@ class WebsitePageVersion(models.Model):
                 'view_version_id': record.id
             })
         else:
+            record.view_id.update_stage_file()
             # record.header_metadata_ids.write({'is_active': True})
             record.header_link_ids.write({'is_active': True})
 
