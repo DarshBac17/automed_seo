@@ -2280,6 +2280,8 @@ class View(models.Model):
                 del img['title']
             if not img.get('alt'):
                 img['alt'] = ""
+            if img.get('alt') == '' or img.get('alt') == "":
+                raise UserError("Please add alt tag to the image")
 
 
         return str(soup.prettify())
