@@ -11,7 +11,7 @@ odoo.define('website.editor.error.handler', function (require) {
         }),
         _onSaveRequest: async function (ev) {
              try {
-                    if (this.validateBreadcrumb()) {
+                    if (this.validateBreadcrumb() && this.validateImageAltTags()) {
                         await this._super.apply(this, arguments);
                     }
 
@@ -29,6 +29,7 @@ odoo.define('website.editor.error.handler', function (require) {
                 return Promise.reject(error);
                 }
         },
+
         validateBreadcrumb: function() {
             const wysiwyg = this.options.wysiwyg;
             const breadcrumbItems = wysiwyg.odooEditor.document.body.querySelectorAll('.breadcrumb-item');
@@ -60,6 +61,37 @@ odoo.define('website.editor.error.handler', function (require) {
                 return false;
             }
         
+            return true; // Validation passed
+        },
+
+        validateImageAltTags: function() {
+            const wysiwyg = this.options.wysiwyg;
+            const images = wysiwyg.odooEditor.document.body.querySelectorAll('img');
+            const missingAltTags = [];
+
+            for (const image of images) {
+                const altText = image.getAttribute('alt');
+                const src = image.getAttribute('src') || '';
+
+                // Check if alt attribute is missing or empty
+                if (!altText || altText.trim() === '') {
+                    // Get filename from src as a reference
+                    const fileName = src.split('/').pop() || 'Unknown Image';
+                    missingAltTags.push(fileName);
+                }
+            }
+
+            if (missingAltTags.length > 0) {
+                const errorMessage = `Missing alt text for images: ${missingAltTags.join(', ')}`;
+                this.displayNotification({
+                    type: 'danger',
+                    title: _t('Save Failed'),
+                    message: _t(errorMessage),
+                    sticky: false
+                });
+                return false;
+            }
+
             return true; // Validation passed
         }
     });

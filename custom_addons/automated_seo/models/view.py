@@ -1245,6 +1245,7 @@ class View(models.Model):
                     # versions.header_metadata_ids.unlink()
                     versions.header_link_ids.unlink()
                     versions.unlink()
+
                 # Delete associated website page
                 if record.page_id:
                     website_page = record.env['website.page'].search([('view_id', 'in', record.page_id.ids)], limit=1)
@@ -1268,6 +1269,9 @@ class View(models.Model):
                     snippet_mapper.unlink()
                     seo_page.unlink()
                 self.delete_img_folder_from_s3(view_name=record.name)
+
+                if record.channel_id:
+                    record.channel_id.unlink()
 
             except Exception as e:
                 print(f"Error while deleting associated records for view {record.name}: {str(e)}")
