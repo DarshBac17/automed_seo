@@ -16,3 +16,4 @@ access_restrict_bacancy_seo_apps,restrict_bacancy_seo_apps,base.model_ir_module_
 access_remote_files,access.remote.files,model_automated_seo_remote_files,automated_seo.group_automated_seo_bacancy_seo,1,1,1,1
 access_view_tags,access.view.tags,model_automated_seo_view_tags,automated_seo.group_automated_seo_bacancy_seo,1,1,1,1
 access_automated_seo_view_create_wizard,access.automated.seo.view.create.wizard,model_automated_seo_view_create_wizard,automated_seo.group_automated_seo_bacancy_seo,1,1,1,1
+access_version_compare_wizard,access.version.compare.wizard,model_version_compare_wizard,base.group_user,1,1,1,1

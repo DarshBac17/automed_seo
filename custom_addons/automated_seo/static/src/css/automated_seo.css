@@ -161,3 +161,10 @@
     margin: 0 auto;
     padding: 15px;
 }
+
+.diff_add {background-color: #ffcccc !important;}
+.diff_chg {background-color: #ffcccc !important;}
+.diff_sub {background-color: #ffcccc !important;}
+td.diff_header {display: none;}
+
+.ae_highlight {background-color: #ffcccc !important;}

@@ -13,6 +13,7 @@
         "views/website/footer.xml",
         "views/website/header.xml",
         # "views/page_header_metadata.xml",
+        'views/version_compare.xml',
         'views/version.xml',
         "views/views.xml",
         "views/tags.xml",

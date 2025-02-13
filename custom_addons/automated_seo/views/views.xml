@@ -167,7 +167,13 @@
         <field name="target">new</field>
         <field name="binding_model_id" ref="model_automated_seo_view"/>
     </record>
-
+<record id="action_version_compare_wizard" model="ir.actions.act_window">
+    <field name="name">Compare Versions</field>
+    <field name="res_model">version.compare.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_version_compare_wizard_form"/>
+    <field name="target">new</field>
+</record>
     <!-- Form View -->
     <record id="automated_seo.view_form" model="ir.ui.view">
         <field name="name">automated_seo.view.form</field>
@@ -214,11 +220,10 @@
                             class="btn btn-primary"
                             confirm="Are you sure you want to send this for review?"/>
                     <!-- Send Email Button -->
-                    <!--                    <button name="%(action_seo_send_email_wizard)d"-->
-                    <!--                            string="Send Email"-->
-                    <!--                            attrs="{'invisible': [('stage', '!=', 'in_progress')]}"-->
-                    <!--                            type="action"-->
-                    <!--                            class="btn btn-primary"/>-->
+                   <button name="%(action_version_compare_wizard)d"
+                            string="Compare version"
+                            type="action"
+                            class="btn btn-primary"/>
 
                     <!-- Done Button (Only visible to owner in review stage) -->
 
