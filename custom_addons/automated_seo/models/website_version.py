@@ -6,7 +6,12 @@ from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import UserError
 import json
 import os
-
+from bs4 import BeautifulSoup, NavigableString
+from itertools import zip_longest
+import  html
+from .ftp_setup import transfer_file_via_scp
+import re
+import  base64
 from odoo.tools.populate import compute
 from .ftp_setup import transfer_file_via_scp
 
@@ -27,10 +32,350 @@ class VersionCompareWizard(models.TransientModel):
         string="Compare version",
         domain="[('id', '!=', base_version),('view_id', '=', view_id)]",
     )
+    def is_php_content(self,text):
+                # Check if content is PHP tag/include
+        return '<?php' in text or text.strip().startswith('php')
+    def highlight_differences(self, base_soup, compare_soup):
+        def compare_elements(base_elem, compare_elem):
+            # Handle text nodes
+            if isinstance(base_elem, NavigableString) and isinstance(compare_elem, NavigableString):
+                base_text = str(base_elem).strip()
+                compare_text = str(compare_elem).strip()
+                
+                if self.is_php_content(base_text) or self.is_php_content(compare_text):
+                    return compare_elem
+                    
+                if base_text != compare_text:
+                    base_words = base_text.split()
+                    compare_words = compare_text.split()
+                    result = []
+                    
+                    for base_word, compare_word in zip_longest(base_words, compare_words):
+                        if base_word != compare_word:
+                            result.append(f'<span class="ae_highlight">{compare_word or ""}</span>')
+                        else:
+                            result.append(base_word)
+                            
+                    return BeautifulSoup(' '.join(result), 'html.parser')
+                return compare_elem
+                
+            # Handle elements
+            if hasattr(base_elem, 'children') and hasattr(compare_elem, 'children'):
+                for base_child, compare_child in zip_longest(list(base_elem.children), list(compare_elem.children)):
+                    if base_child and compare_child:
+                        result = compare_elements(base_child, compare_child)
+                        if result != compare_child:
+                            compare_child.replace_with(result)
+                            
+            return compare_elem
 
+        # Start comparison from root
+        return compare_elements(base_soup, compare_soup)
+                
+    def compare_sections(self, base_soup, compare_soup):
+    # Get all sections
+        base_sections = base_soup.find_all('section',{'data-snippet': True})
+        compare_sections = compare_soup.find_all('section', {'data-snippet': True})
+        
+        # Create dict of section_type: hash pairs from base
+        base_section_data = {
+            section.get('data-snippet').split('-')[0]: section.get('data-snippet').split('-')[1] 
+            for section in base_sections
+        }
+        
+        matched_sections = set()
+        css = """
+        <style>
+            .ae_highlight { background-color: #ffcccc; }
+            .ae_new_section { background-color: #ccffcc; }
+            .ae_missing_section { background-color: #ffcccc; opacity: 0.7; }
+        </style>
+        """
+        
+        for compare_section in compare_sections:
+            compare_type = compare_section.get('data-snippet').split('-')[0]
+            
+            if compare_type not in base_section_data:
+                # New section type
+                compare_section['class'] = compare_section.get('class', []) + ['ae_new_section']
+            else:
+                # Find matching base section with same hash
+                base_hash = base_section_data[compare_type]
+                base_section = base_soup.find('section', {'data-snippet': f"{compare_type}-{base_hash}"})
+                # base_section = next(
+                #     (section for section in base_sections 
+                #     if section.get('data-snippet') == f"{compare_type}-{base_hash}"),
+                #     None
+                # )
+                
+                if base_section:
+                    # Compare content and highlight differences
+                    highlighted = self.highlight_differences(base_section, compare_section)
+                    if highlighted:
+                        compare_section.replace_with(highlighted)
+                    matched_sections.add(base_section)
+        
+        return  str(compare_soup)
+    
+
+    def add_head(self, html_parser, seo_view_id):
+        soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
+        head_tag = soup.head
+        seo_view = self.env['automated_seo.view'].browse(seo_view_id)
+        base_version = self.env['website.page.version'].search([('id', '=', self.base_version.id)], limit=1)
+        page_name = seo_view.name.strip().lower().replace(" ", "-")
+        title_tag = soup.new_tag('title')
+        title_tag.string = base_version.header_title
+        head_tag.append(title_tag)
+
+        description_meta = soup.new_tag('meta')
+        description_meta['name'] = 'description'
+        description_meta['content'] = base_version.header_description
+        head_tag.append(description_meta)
+        common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>',"html.parser")
+        head_tag.append(common_meta_tag)
+
+        og_title_meta = soup.new_tag('meta')
+        og_title_meta['property'] = 'og:title'
+        og_title_meta['content'] = base_version.header_title
+        head_tag.append(og_title_meta)
+
+        og_desc_meta = soup.new_tag('meta')
+        og_desc_meta['property'] = 'og:description'
+        og_desc_meta['content'] = base_version.header_description
+        head_tag.append(og_desc_meta)
+
+        image_url = f'inhouse/{base_version.view_id.name.replace(" ", "").lower()}/{base_version.image_filename.replace(" ", "-").replace("%20", "-").lower()}' if base_version.view_id.name and base_version.image_filename and base_version.image else None
+
+        if  image_url:
+            og_image_meta = soup.new_tag('meta')
+            og_image_meta['property'] = 'og:image'
+            og_image_meta['content'] = f'<?php echo BASE_URL_IMAGE; ?>{image_url}'
+            head_tag.append(og_image_meta)
+
+
+        og_url_meta = soup.new_tag('meta')
+        og_url_meta['property'] = 'og:url'
+
+        # if not self.publish_url:
+        #     self.publish_url = f"https://www.bacancytechnology.com/{self.name}"
+        og_url_meta['content'] = base_version.view_id.publish_url.replace("https://www.bacancytechnology.com/","<?php echo BASE_URL; ?>")
+
+        head_tag.append(og_url_meta)
+
+
+        # for metadata in self.header_metadata_ids:
+        #     meta_tag = soup.new_tag('meta')
+        #     if metadata.property:
+        #         meta_tag['property'] = metadata.property
+        #         meta_tag['content'] = metadata.content or ''
+        #     head_tag.append(meta_tag)
+
+        # link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        # head_tag.append(link_css_php)
+        link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
+        head_tag.append(link_css_php)
+        for link in base_version.header_link_ids:
+            tag = soup.new_tag('link')
+            tag['rel'] = "preload"
+            tag['href'] = link.css_link
+            tag['as'] = 'style'
+            tag['onload'] = "this.onload=null;this.rel='stylesheet'"
+            head_tag.append(tag)
+
+        css = """
+            <style>
+                .ae_highlight { background-color: #ffcccc; }
+                .ae_new_section { background-color: #ccffcc; }
+                .ae_missing_section { background-color: #ffcccc; opacity: 0.7; }
+            </style>
+            """
+        webpage_script = f"""
+            <script type="application/ld+json">
+            {{
+                "@context": "https://schema.org",
+                "@graph": [
+                    {{
+                        "@type": "WebSite",
+                        "@id": "<?php echo BASE_URL; ?>#website",
+                        "url": "<?php echo BASE_URL; ?>",
+                        "name": "Bacancy",
+                        "description": "Top product development company with Agile methodology. Hire software developers to get complete product development solution from the best agile software development company.",
+                        "potentialAction": [
+                            {{
+                                "@type": "SearchAction",
+                                "target": {{
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "<?php echo BASE_URL; ?>?s={{search_term_string}}"
+                                }},
+                                "query-input": "required name=search_term_string"
+                            }}
+                        ],
+                        "inLanguage": "en-US"
+                    }},
+                    {{
+                        "@type": "WebPage",
+                        "@id": "<?php echo BASE_URL; ?>{page_name}/#webpage",
+                        "url": "<?php echo BASE_URL; ?>{page_name}/",
+                        "name": "{base_version.header_title}",
+                        "isPartOf": {{
+                            "@id": "<?php echo BASE_URL; ?>#website"
+                        }},
+                        "datePublished": "2013-04-15T13:23:16+00:00",
+                        "dateModified": "2024-07-17T14:31:52+00:00",
+                        "description": "{base_version.header_description}"
+                    }}
+                ]
+            }}
+            </script>
+            {css}
+        """
+
+        webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
+
+        head_tag.append(webpage_script_soup)
+
+
+        if html_parser:
+            parsed_content = BeautifulSoup(html_parser, 'html.parser')
+            soup.body.append(parsed_content)
+
+        breadcrumb_items_tags = soup.find_all(class_="breadcrumb-item")
+
+        breadcrumb_items = []
+
+        for index, breadcrumb in enumerate(breadcrumb_items_tags):
+
+            link = breadcrumb.find('a')
+            position = index + 1
+            if not link:
+                if len(breadcrumb_items_tags)-1 == index:
+                    url  = f"<?php echo BASE_URL; ?>{page_name}"
+                    id = url + '/'
+                    name = breadcrumb.text.strip()
+                    item = {
+                        "@type": "ListItem",
+                        "position": position,
+                        "item": {
+                            "@type": "WebPage",
+                            "@id": id
+                        }
+                    }
+                    item["item"]["url"] = url
+                    item["item"]["name"] = name
+                    breadcrumb_items.append(item)
+                else:
+                    message = f"Please add a link in {breadcrumb.text.strip()} breadcrumb"
+                    raise UserError(message)
+
+            if link:
+
+                url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
+
+                if isinstance(url,ValueError):
+                    raise url
+                id = url + '/'
+                name = link.text.strip() if link else breadcrumb.text.strip()
+                item = {
+                    "@type": "ListItem",
+                    "position": position,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": id
+                    }
+                }
+                if index > 0:
+                    item["item"]["url"] = url
+                item["item"]["name"] = name
+
+                breadcrumb_items.append(item)
+
+
+        breadcrumb_items_json = seo_view.format_json_with_tabs(breadcrumb_items)
+
+        # Generate the final script
+        breadcrumb_script = f"""
+            <script type="application/ld+json">
+            {{
+                "@context": "http://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": {breadcrumb_items_json}
+            }}
+            </script>
+        """
+        breadcrumb_script_soup = BeautifulSoup(breadcrumb_script, 'html.parser')
+        head_tag.append(breadcrumb_script_soup)
+        return soup.prettify()
+
+    def action_compile_button(self,version_compare_parser):
+        # view = View()
+        seo_view_id = self.compare_version.view_id.id
+        seo_view = self.env['automated_seo.view'].browse(seo_view_id)
+        html_parser = seo_view.replace_php_tags_in_html(html_parser=version_compare_parser)
+        html_parser = seo_view.handle_dynamic_anchar_tag(html_parser=html_parser)
+        if html_parser:
+            html_parser = seo_view.remove_bom(html_parser=html_parser)
+            html_parser = seo_view.remove_empty_tags(html_parser = html_parser)
+            html_parser = seo_view.handle_breadcrumbs(html_content=html_parser)
+            html_parser = seo_view.handle_itemprop_in_faq(html_content=html_parser)
+            html_parser = self.add_head(html_parser = html_parser, seo_view_id = seo_view_id)
+            html_parser = seo_view.add_js_scripts(html_parser)
+            html_parser = seo_view.remove_odoo_classes_from_tag(html_parser)
+            soup = BeautifulSoup(html_parser, "html.parser")
+            html_parser = soup.prettify()
+            html_parser = seo_view.format_paragraphs(html_content=html_parser)
+            html_parser = seo_view.remove_extra_spaces(html_parser = html_parser)
+            html_parser = seo_view.format_html_php(html_content=html_parser)
+            html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
+            html_parser = html.unescape(html_parser)
+            return html_parser
+
+            # file = base64.b64encode(html_parser.encode('utf-8'))
+            # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
+            # file_name = f"{view_name}_{self.active_version.name}.php"
+    # @api.onchange('base_version_id', 'compare_version_id')
+    def compute_diff(self):
+        if self.base_version and self.compare_version:
+            base_content = self.base_version.view_arch or ''
+            compare_content = self.compare_version.view_arch or ''
+            if base_content and compare_content:
+                base_soup = BeautifulSoup(base_content, 'html.parser')
+                compare_soup = BeautifulSoup(compare_content, 'html.parser')
+                result = self.compare_sections(base_soup, compare_soup)
+                print("Resul================================")
+                print(result)
+                print("=======================pasrse content===============")
+                # print()
+                html_parser = self.action_compile_button(version_compare_parser=result)
+                print("Final Output=========")
+                print(html_parser)
+                file = base64.b64encode(html_parser.encode('utf-8'))
+                result2 = transfer_file_via_scp(page_name="version_compare.php", file_data=file)
+                print("Result=======================")
+                print(result2)
+    #
 
     def action_compare_versions(self):
-        pass
+        if self.base_version and self.compare_version:
+            base_content = self.base_version.view_arch or ''
+            compare_content = self.compare_version.view_arch or ''
+            if base_content and compare_content:
+                base_soup = BeautifulSoup(base_content, 'html.parser')
+                compare_soup = BeautifulSoup(compare_content, 'html.parser')
+                result = self.compare_sections(compare_soup, base_soup)
+                html_parser = self.action_compile_button(version_compare_parser=result)
+                file = base64.b64encode(html_parser.encode('utf-8'))
+                compare_file_name = f"{self.base_version.view_id.name}_version_compare.php"
+                result = transfer_file_via_scp(page_name = compare_file_name, file_data=file)
+                if result:
+                    seo_view = self.env['automated_seo.view'].browse(self.base_version.view_id.id)
+                    seo_view.write({
+                        "diff_html" : html_parser,
+                        "diff_html_binary" : file,
+                        "diff_html_filename" : compare_file_name,
+                        "diff_url" : f"https://automatedseo.bacancy.com/{compare_file_name}"
+                    })
+
 
 
 

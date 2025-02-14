@@ -112,6 +112,12 @@ class View(models.Model):
     header_title = fields.Char(string="Header title")
     header_description = fields.Text(string="Header description")
     publish_url = fields.Char(string='Publish URL', help="Publish URL")
+    diff_html = fields.Html(string='Differences', readonly=True)
+    diff_html_binary = fields.Binary(string='Differences Binary', readonly=True)
+    diff_html_filename = fields.Char(string='Differences Filename', readonly=True)
+    diff_url = fields.Char(string='Diff URL', readonly=True)
+
+
     # header_description = fields.Text(string="Title")
 
     # One-to-Many relationship: A page can have multiple metadata entries

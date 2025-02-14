@@ -11,4 +11,4 @@ from . import page_header_metadata
 from . import style_mapper
 from . import remote_files
 from . import view_tags
-from . import versioncompare
+# from . import versioncompare
