@@ -10,6 +10,31 @@ import os
 from odoo.tools.populate import compute
 from .ftp_setup import transfer_file_via_scp
 
+class VersionCompareWizard(models.TransientModel):
+    _name = "automated_seo.version_compare_wizard"
+    _description = "Wizard for Comparing two versions"
+
+    view_id = fields.Many2one('automated_seo.view', string='View', required=True)
+
+    base_version = fields.Many2one(
+        'website.page.version',
+        string="Base version",
+        domain = "[('view_id', '=', view_id)]",
+    )
+
+    compare_version = fields.Many2one(
+        'website.page.version',
+        string="Compare version",
+        domain="[('id', '!=', base_version),('view_id', '=', view_id)]",
+    )
+
+
+    def action_compare_versions(self):
+        pass
+
+
+
+
 class WebsitePageVersion(models.Model):
     _name = 'website.page.version'
     _description = 'Website Page Version'

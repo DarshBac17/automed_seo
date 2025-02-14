@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="automated_seo.version_compare_wizard_form" model="ir.ui.view">
+        <field name="name">version.compare.wizard.form</field>
+        <field name="model">automated_seo.version_compare_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Compare Versions">
+                <sheet>
+                    <group>
+                        <field name="view_id"/>
+                        <field name="base_version"/>
+                        <field name="compare_version"/>
+                    </group>
+                    <footer>
+                        <button name="action_compare_versions" string="Compare" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="automated_seo.version_compare_wizard_action" model="ir.actions.act_window">
+        <field name="name">Compare Page Versions</field>
+        <field name="res_model">automated_seo.version_compare_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="automated_seo.version_compare_wizard_form"/>
+        <field name="target">new</field>  <!-- Ensures it opens in a modal popup -->
+    </record>
+
 
     <record id="automated_seo.view_action_form" model="ir.actions.act_window">
         <field name="name">Views form</field>
@@ -167,13 +197,13 @@
         <field name="target">new</field>
         <field name="binding_model_id" ref="model_automated_seo_view"/>
     </record>
-<record id="action_version_compare_wizard" model="ir.actions.act_window">
-    <field name="name">Compare Versions</field>
-    <field name="res_model">version.compare.wizard</field>
-    <field name="view_mode">form</field>
-    <field name="view_id" ref="view_version_compare_wizard_form"/>
-    <field name="target">new</field>
-</record>
+    <record id="action_version_compare_wizard" model="ir.actions.act_window">
+        <field name="name">Compare Versions</field>
+        <field name="res_model">version.compare.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_version_compare_wizard_form"/>
+        <field name="target">new</field>
+    </record>
     <!-- Form View -->
     <record id="automated_seo.view_form" model="ir.ui.view">
         <field name="name">automated_seo.view.form</field>
@@ -219,11 +249,15 @@
                             type="object"
                             class="btn btn-primary"
                             confirm="Are you sure you want to send this for review?"/>
-                    <!-- Send Email Button -->
-                   <button name="%(action_version_compare_wizard)d"
-                            string="Compare version"
+
+                    <button name="%(automated_seo.version_compare_wizard_action)d"
                             type="action"
-                            class="btn btn-primary"/>
+                            string="Compare Versions"
+                            class="oe_highlight"
+                            context="{
+                                'default_view_id': active_id,
+                                'default_base_version':active_version
+                            }"/>
 
                     <!-- Done Button (Only visible to owner in review stage) -->
 
