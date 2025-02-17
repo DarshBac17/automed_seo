@@ -9,6 +9,9 @@ import os
 from bs4 import BeautifulSoup, NavigableString
 from itertools import zip_longest
 import  html
+import io
+import xml.etree.ElementTree as ET
+from PIL import Image, UnidentifiedImageError
 from .ftp_setup import transfer_file_via_scp
 import re
 import  base64
@@ -38,6 +41,13 @@ class VersionCompareWizard(models.TransientModel):
     def highlight_differences(self, base_soup, compare_soup):
         def compare_elements(base_elem, compare_elem):
             # Handle text nodes
+            if compare_elem and compare_elem.name == 'img':
+                base_src = base_elem.get('src') if base_elem else None 
+                compare_src = compare_elem.get('src')
+                if base_src != compare_src:
+                    compare_elem['class'] = compare_elem.get('class', []) + ['ae_img_highlight']
+                return compare_elem
+             
             if isinstance(base_elem, NavigableString) and isinstance(compare_elem, NavigableString):
                 base_text = str(base_elem).strip()
                 compare_text = str(compare_elem).strip()
@@ -51,7 +61,11 @@ class VersionCompareWizard(models.TransientModel):
                     result = []
                     
                     for base_word, compare_word in zip_longest(base_words, compare_words):
-                        if base_word != compare_word:
+                        if compare_word and not base_word:
+                            # New word
+                            result.append(f'<span class="ae_new_section">{compare_word}</span>')
+                        elif base_word != compare_word:
+                            # Changed word in existing section
                             result.append(f'<span class="ae_highlight">{compare_word or ""}</span>')
                         else:
                             result.append(base_word)
@@ -61,6 +75,19 @@ class VersionCompareWizard(models.TransientModel):
                 
             # Handle elements
             if hasattr(base_elem, 'children') and hasattr(compare_elem, 'children'):
+                base_children = list(base_elem.children)
+                compare_children = list(compare_elem.children)
+
+                if len(compare_children) > len(base_children):
+                    for i in range(len(base_children), len(compare_children)):
+                        if isinstance(compare_children[i], NavigableString):
+                            continue
+                        new_elem = compare_children[i]
+                        if new_elem.get('class'):
+                            new_elem['class'] = new_elem.get('class', []) + ['ae_new_section']
+                        else:
+                            new_elem['class'] = ['ae_new_section']
+                        
                 for base_child, compare_child in zip_longest(list(base_elem.children), list(compare_elem.children)):
                     if base_child and compare_child:
                         result = compare_elements(base_child, compare_child)
@@ -69,7 +96,6 @@ class VersionCompareWizard(models.TransientModel):
                             
             return compare_elem
 
-        # Start comparison from root
         return compare_elements(base_soup, compare_soup)
                 
     def compare_sections(self, base_soup, compare_soup):
@@ -188,6 +214,7 @@ class VersionCompareWizard(models.TransientModel):
                 .ae_highlight { background-color: #ffcccc; }
                 .ae_new_section { background-color: #ccffcc; }
                 .ae_missing_section { background-color: #ffcccc; opacity: 0.7; }
+                .ae_img_highlight { background-color: #ffcccc; padding:15px; }
             </style>
             """
         webpage_script = f"""
@@ -307,11 +334,116 @@ class VersionCompareWizard(models.TransientModel):
         head_tag.append(breadcrumb_script_soup)
         return soup.prettify()
 
+
+    def remove_sub_snippet_sections(self,html_parser):
+        # Parse the HTML content
+        soup = BeautifulSoup(html_parser, 'html.parser')
+
+        sections = soup.find_all('section', class_='o_replace_section_div')
+        for sec in sections:
+            sec.name = 'div'
+        return soup.prettify()
+
+    def handle_dynamic_img_tag(self,view_name,html_parser):
+        soup = BeautifulSoup(html_parser, "html.parser")
+
+        for img in soup.select('img'):
+            url = img.get('src')
+            if url and url.startswith("/web/image/"):
+                image_name = url.split('/')[-1]
+                image_id = int(url.split('/')[-2].split('-')[0])
+                attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
+                image_data = base64.b64decode(attachment.datas) if attachment.datas else None
+                name, ext = image_name.rsplit('.', 1)
+                height = None
+                width = None
+                if ext != 'svg':
+                    try:
+                        # Try to open the image directly with Pillow
+                        image = Image.open(io.BytesIO(image_data))
+                        width, height = image.size
+                    except UnidentifiedImageError as e:
+                        UserError(f"Error :- {e}")
+                else:
+                    try:
+                        svg_content = image_data.decode("utf-8")
+                        root = ET.fromstring(svg_content)
+
+                        width = root.attrib.get("width")
+                        height = root.attrib.get("height")
+
+                        if not width or not height:
+                            view_box = root.attrib.get("viewBox")
+                            if view_box:
+                                _, _, width, height = view_box.split()
+
+                    except Exception as e:
+                        UserError(f"Error :- {e}")
+                if height:
+                    img['height'] = int(float(height))
+
+                if width:
+                    img['width'] = int(float(width))
+
+                img_tag_classes = img.get("class", [])
+                element = next((cls for cls in img_tag_classes if cls.startswith('o_imagename')), None)
+
+                if element:
+                    new_image_name = element.split('_',2)[-1]
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name.replace('%20','-').replace('_','-').lower()}"
+                    img['src'] = odoo_img_url
+                    img['data-src'] = odoo_img_url
+
+
+
+            for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width",
+                         "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
+                         "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
+
+                if img.has_attr(attr):
+                    del img[attr]
+
+        return str(soup.prettify())
+
+
+    def handle_dynamic_img_tag2(self,html_parser):
+        soup = BeautifulSoup(html_parser, "html.parser")
+        base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
+        for img in soup.select('img'):
+            url = img.get('src')
+
+            img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
+            try:
+                if img.get('height') :
+                    img['height'] = int(float(img.get('height')))
+            except ValueError as e:
+                img['height'] = img.get('height')
+            try:
+                if img.get('height') :
+                    img['width'] = int(float(img.get('width')))
+            except ValueError as e:
+                img['width'] = img.get('width')
+
+            if not img.get('title'):
+                del img['title']
+            if not img.get('alt'):
+                img['alt'] = ""
+            if img.get('alt') == '' or img.get('alt') == "":
+                raise UserError("Please add alt tag to the image")
+
+        return str(soup.prettify())
+
+
+        return str(soup.prettify())
     def action_compile_button(self,version_compare_parser):
         # view = View()
         seo_view_id = self.compare_version.view_id.id
         seo_view = self.env['automated_seo.view'].browse(seo_view_id)
-        html_parser = seo_view.replace_php_tags_in_html(html_parser=version_compare_parser)
+        html_parser = self.handle_dynamic_img_tag(html_parser=version_compare_parser, view_name=seo_view.name)
+        html_parser = self.handle_dynamic_img_tag2(html_parser = html_parser)
+        html_parser = seo_view.replace_php_tags_in_html(html_parser=html_parser)
         html_parser = seo_view.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
             html_parser = seo_view.remove_bom(html_parser=html_parser)
@@ -334,32 +466,19 @@ class VersionCompareWizard(models.TransientModel):
             # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             # file_name = f"{view_name}_{self.active_version.name}.php"
     # @api.onchange('base_version_id', 'compare_version_id')
-    def compute_diff(self):
-        if self.base_version and self.compare_version:
-            base_content = self.base_version.view_arch or ''
-            compare_content = self.compare_version.view_arch or ''
-            if base_content and compare_content:
-                base_soup = BeautifulSoup(base_content, 'html.parser')
-                compare_soup = BeautifulSoup(compare_content, 'html.parser')
-                result = self.compare_sections(base_soup, compare_soup)
-                print("Resul================================")
-                print(result)
-                print("=======================pasrse content===============")
-                # print()
-                html_parser = self.action_compile_button(version_compare_parser=result)
-                print("Final Output=========")
-                print(html_parser)
-                file = base64.b64encode(html_parser.encode('utf-8'))
-                result2 = transfer_file_via_scp(page_name="version_compare.php", file_data=file)
-                print("Result=======================")
-                print(result2)
-    #
+
 
     def action_compare_versions(self):
         if self.base_version and self.compare_version:
             base_content = self.base_version.view_arch or ''
             compare_content = self.compare_version.view_arch or ''
+            base_content = self.remove_sub_snippet_sections(html_parser=base_content)
+            compare_content = self.remove_sub_snippet_sections(html_parser=compare_content)
             if base_content and compare_content:
+                base_content = html.unescape(base_content)
+                compare_content = html.unescape(compare_content)
+                base_content = self.handle_dynamic_img_tag(html_parser=base_content, view_name=self.base_version.view_id.name)
+                compare_content = self.handle_dynamic_img_tag(html_parser=compare_content, view_name=self.base_version.view_id.name)
                 base_soup = BeautifulSoup(base_content, 'html.parser')
                 compare_soup = BeautifulSoup(compare_content, 'html.parser')
                 result = self.compare_sections(compare_soup, base_soup)
