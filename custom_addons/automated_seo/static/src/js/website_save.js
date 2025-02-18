@@ -66,7 +66,8 @@ odoo.define('website.editor.error.handler', function (require) {
 
         validateImageAltTags: function() {
             const wysiwyg = this.options.wysiwyg;
-            const images = wysiwyg.odooEditor.document.body.querySelectorAll('img');
+            const o_editable = wysiwyg.odooEditor.document.body.querySelector('.o_editable');
+            const images = o_editable.querySelectorAll('img')
             const missingAltTags = [];
 
             for (const image of images) {
