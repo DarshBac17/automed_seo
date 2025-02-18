@@ -471,10 +471,9 @@ class VersionCompareWizard(models.TransientModel):
 
         soup = BeautifulSoup(html_content, 'html.parser')
         
-        # Find all anchor tags
         for anchor in soup.find_all('a'):
-            # Replace anchor with its text content
-            anchor.unwrap()
+            if not ('btn' in anchor.get('class', [])):
+                anchor.unwrap()
             
         return str(soup)
 
