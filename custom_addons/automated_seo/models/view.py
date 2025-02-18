@@ -2029,7 +2029,7 @@ class View(models.Model):
 
         version = self.env['website.page.version'].search(['&',('view_id', '=', seo_view.id),('status', '=', True)],limit=1)
 
-        page = self.env['automated_seo.page'].search(['&',('page_name', '=', view_name),('version_id','=',version.id)], limit=1)
+        page = self.env['automated_seo.page'].search([('page_name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
         soup = BeautifulSoup(html_parser, "html.parser")
         sections = soup.find_all('section', {'data-snippet': True})

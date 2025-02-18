@@ -436,7 +436,6 @@ class VersionCompareWizard(models.TransientModel):
         return str(soup.prettify())
 
 
-        return str(soup.prettify())
     def action_compile_button(self,version_compare_parser):
         # view = View()
         seo_view_id = self.compare_version.view_id.id
