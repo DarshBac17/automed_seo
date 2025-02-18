@@ -467,10 +467,25 @@ class VersionCompareWizard(models.TransientModel):
     # @api.onchange('base_version_id', 'compare_version_id')
 
 
+    def remove_anchor_tags(self, html_content):
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+        # Find all anchor tags
+        for anchor in soup.find_all('a'):
+            # Replace anchor with its text content
+            anchor.unwrap()
+            
+        return str(soup)
+
     def action_compare_versions(self):
         if self.base_version and self.compare_version:
             base_content = self.base_version.view_arch or ''
             compare_content = self.compare_version.view_arch or ''
+             # Remove anchor tags before comparison
+            base_content = self.remove_anchor_tags(base_content)
+            compare_content = self.remove_anchor_tags(compare_content)
+            
             base_content = self.remove_sub_snippet_sections(html_parser=base_content)
             compare_content = self.remove_sub_snippet_sections(html_parser=compare_content)
             if base_content and compare_content:
