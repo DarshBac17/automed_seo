@@ -1,8 +1,5 @@
 
 $(document).ready(function() {
-    console.log("======================main.js loaded");
-
-
     $(".nav-menu").click(function() {
         $(".nav-menu").removeClass("active");
         $(this).addClass("active");
@@ -125,9 +122,9 @@ $(document).ready(function() {
         $(".faq-head").insertAfter(".faq-head-outer");
     }
 
-    $(".shadow-form .boxed p.mb-0").each(function() {
-        $(this).next("button").addBack().wrapAll('<div class="flex items-center justify-center"></div>');
-    });
+//    $(".shadow-form .boxed p.mb-0").each(function() {
+//        $(this).next("button").addBack().wrapAll('<div class="flex items-center justify-center"></div>');
+//    });
 
     $(".shadow-form").each(function() {
         var $this = $(this);
