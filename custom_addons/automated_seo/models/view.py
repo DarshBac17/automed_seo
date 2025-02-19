@@ -1297,6 +1297,7 @@ class View(models.Model):
         html_parser = self.replace_php_tags_in_html(html_parser=html_parser)
         html_parser = self.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
+            html_parser = self.remove_br_tags(html_content=html_parser)
             html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.handle_breadcrumbs(html_content=html_parser)
@@ -2559,7 +2560,7 @@ class View(models.Model):
             html_content = html_content.replace(entity, char)
 
         # Parse the modified content back into BeautifulSoup
-        html_content = self.remove_br_tags(html_content=html_content)
+
 
         return html_content
 
@@ -2615,17 +2616,22 @@ class View(models.Model):
 
     def remove_br_tags(self, html_content):
         soup = BeautifulSoup(html_content, "html.parser")
-
-        # Find all <br> tags
-        br_tags = soup.find_all('br')
-
-        # Iterate through each <br> tag
-        for br in br_tags:
-            # Check if the parent is a form tag
-            if not br.find_parent('form'):
-                br.decompose()  # Remove <br> tag
-
-        # Return the modified HTML contentrecord.view_id.update_stage_file()
+        sections = soup.find_all('section', {'data-snippet': True})
+        for section in sections:
+            snippet_id = section.get('data-snippet').split('-')[0]
+            if snippet_id in ['s_form_with_price_gray','s_form_with_price_orange']:
+                    br_tags = section.find_all('br')
+                    for br in br_tags:
+                        try:
+                            if br.parent.parent.parent.parent.name == 'a':
+                                br['class'] =  ['none', 'md:block']
+                        except Exception as e:
+                            print("Error",e)
+                            pass
+            else:
+                br_tags = section.find_all('br')
+                for br in br_tags:
+                    br.decompose()
         return soup.prettify()
 
     def handle_dynamic_anchar_tag(self,html_parser):
@@ -2659,6 +2665,9 @@ class View(models.Model):
                 return
 
             if tag.name == 'span' and tag.get('class',[]) == ['bg-rightarrowLineBlack']:
+                return
+
+            if tag.name =='br' and tag.get('class',[]) == ['none', 'md:block']:
                 return
             if not tag.contents or all(
                     isinstance(content, str) and content.strip() == "" for content in tag.contents
