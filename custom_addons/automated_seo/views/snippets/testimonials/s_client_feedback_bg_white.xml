@@ -2,7 +2,7 @@
 <odoo>
     <template id="s_client_feedback_bg_white" name="Client feedback White">
 
-        <section class="o_automated_seo_snippet container">
+        <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
         <div class="cont-padding text-center">
                <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
                         Heading
@@ -11,45 +11,43 @@
                         Description Description Description Description Description Description Description Description
                     </p>
             </div>
-            <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
-                <div class="boxed bg-gray-light pt-0 o_replace_section_div">
+            <div class="grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 o_sub_items_container">
+                <section class="boxed bg-gray-light pt-0 o_replace_section_div">
                     <div class="size-60 -mt-5 mb-sm">
 <!--                        https://assets.bacancytechnology.com-->
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" alt="Steve" loading="lazy" height="60px" width="60px" class="steve"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/steve.png" alt="" loading="lazy" height="60" width="60"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light pt-0 o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light pt-0 o_replace_section_div">
                     <div class="size-60 -mt-5 mb-sm">
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" loading="lazy" height="60px" width="60px" class="gerry-dunne"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="" loading="lazy" height="60" width="60"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
-                </div>
-                <div class="boxed bg-gray-light pt-0 o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light pt-0 o_replace_section_div">
                     <div class="size-60 -mt-5 mb-sm">
 <!--                        <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" alt="David Carta" loading="lazy" height="60px" width="60px" class="david-carta"/>
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/dcarta.png" alt="" loading="lazy" height="60" width="60"/>
 
                     </div>
-                    <p class="text-primary small-heading">Heading</p>
+                    <p class="text-primary small-heading">Person Name</p>
                     <p>Description Description Description Description Description Description Description Description
                         Description Description Description Description Description Description Description Description
                     </p>
-                </div>
+                </section>
             </div>
-            <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button Name</a>
-            </div>
+            <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
     </section>
     </template>
 </odoo>

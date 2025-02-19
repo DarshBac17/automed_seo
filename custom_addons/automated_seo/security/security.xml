@@ -14,16 +14,33 @@
             <field name="comment">This user has website access and view access</field>
         </record>
 
+
+        <record id="group_automated_seo_reviewers" model="res.groups">
+            <field name="name">Reviewers</field>
+            <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="comment">This user has access to publish page</field>
+        </record>
+
+
+        <record id="group_automated_seo_publishers" model="res.groups">
+            <field name="name">Publishers</field>
+            <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo')),(4, ref('automated_seo.group_automated_seo_reviewers'))]"/>
+            <field name="comment">This user has access to publish page</field>
+        </record>
+
         <odoo>
             <!-- Restrict Bacancy Seo group from seeing the Apps menu -->
             <record id="base.menu_apps" model="ir.ui.menu">
-                <field name="groups_id" eval="[(3, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+                <field name="groups_id" eval="[(3, ref('automated_seo.group_automated_seo_bacancy_seo')),(3, ref('automated_seo.group_automated_seo_publishers'))]"/>
             </record>
         </odoo>
+
         <record id="group_automated_seo_admin" model="res.groups">
             <field name="name">Admin</field>
             <field name="category_id" ref="automated_seo.module_category_automated_seo"/>
-            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo'))]"/>
+            <field name="implied_ids" eval="[(4, ref('automated_seo.group_automated_seo_bacancy_seo')),(4, ref('automated_seo.group_automated_seo_reviewers')),(4, ref('automated_seo.group_automated_seo_publishers'))]"/>
             <field name="comment">This user has all access</field>
         </record>
     </data>

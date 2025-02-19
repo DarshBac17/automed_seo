@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_trusted_bg_gray" name="Trusted Gray">
-        <section class="trusted bg-gray-light py-md">
-            <div class="container">
-                <div class="grid gap-6 grid-cols-3 md:grid-cols-6 lg:grid-cols-7 items-center justify-center [&amp;_div]:m-auto">
-                    <p class="mb-0 text-h5 text-dark col-span-full text-center lg:col-span-1">Trusted By</p>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/1.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/1.svg"
-                             alt="mercedes" title="mercedes" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
-                    </div>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/2.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/2.svg"
-                             alt="Warner Bros" title="Warner Bros" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
-                    </div>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/3.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/3.svg"
-                             alt="disney" title="disney" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
-                    </div>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/4.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/4.svg"
-                             alt="dubai bazaar" title="dubai bazaar" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
-                    </div>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/5.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/5.svg"
-                             alt="red bull" title="red bull" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
-                    </div>
-                    <div>
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/6.svg"
-                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/6.svg"
-                             alt="3m" title="3m" width="72" height="70"
-                             class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+        <section class="ou_section">
+            <section class=" trusted bg-gray-light py-md o_automated_seo_php_variable">
+                <div class="container o_not_editable">
+                    <div class="grid gap-6 grid-cols-3 md:grid-cols-6 lg:grid-cols-7 items-center justify-center [&amp;_div]:m-auto">
+                        <p class="mb-0 text-h5 text-dark col-span-full text-center lg:col-span-1">Trusted By</p>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/1.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/1.svg"
+                                 alt="mercedes" title="mercedes" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/2.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/2.svg"
+                                 alt="Warner Bros" title="Warner Bros" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/3.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/3.svg"
+                                 alt="disney" title="disney" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/4.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/4.svg"
+                                 alt="dubai bazaar" title="dubai bazaar" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/5.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/5.svg"
+                                 alt="red bull" title="red bull" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
+                        <div>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/6.svg"
+                                 data-src="https://assets.bacancytechnology.com/main-boot-5/images/trustedby-svg/6.svg"
+                                 alt="3m" title="3m" width="72" height="70"
+                                 class="w-[max(72px,6.979vw)] h-[max(72px,3.75vw)]" loading="lazy"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
     </template>
 </odoo>

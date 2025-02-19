@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_service_sub_card_gray" name="Service sub card gray">
-        <section class="remove" style="margin: 0; padding: 0;">
+    <template id="s_service_sub_card_gray" name="Service Sub Card Gray">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
             <div class="boxed bg-gray-light">
                 <h3 class="text-h4">Title Title Title Title Title Title</h3>
                 <p>Description Description Description <a href="#" class="text-primary font-bold">Description Description Description Description   </a> Description Description Description Description Description Description Description Description Description.</p>

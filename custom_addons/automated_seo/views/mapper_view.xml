@@ -7,8 +7,8 @@
             <tree string="Mapper" editable="top">
                 <field name="name"/>
                 <field name="snippet_id"/>
-<!--                <field name="styles" widget='many2many_tags' options="{'color_field': 'id'}"/>-->
                 <field name="php_tags" widget="many2many_tags"/>
+                <field name="style" widget="many2many_tags" options="{'color_field': 'id'}"/>
             </tree>
         </field>
     </record>

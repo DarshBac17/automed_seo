@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_sub_faq_tab_gray" name="sub faq tab gray">
-        <section class="remove" style="margin: 0; padding: 0;">
-            <div class="accordion-item accordian-tab bg-gray" itemscope="itemscope" itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <template id="s_sub_faq_tab_gray" name="Sub FAQ Tab Gray">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <div class="accordion-item accordian-tab bg-gray" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
                 <div class="faq-heading">
                     <h3 itemprop="name" class="font-bold text-dark text-base mb-0">questions questions questions
                         questions ?

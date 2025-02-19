@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_service_tab_bg_gray" name="Service tab Gray">
-        <section class="o_automated_seo_snippet container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 bg-gray-light custom-flex-layout">
-            <div class="custom-left-section">
+    <template id="s_service_tab_bg_gray" name="Service Tab Gray">
+        <section class="o_automated_seo_snippet container grid gap-6 md:gap-y-0 grid-cols-1 md:grid-cols-2 bg-gray-light  o_automated_seo_php_variable">
+            <div>
                 <div class="side-sticky">
                     <div class="md:cont-padding">
                         <h2>Header Header Header Header Header Header Header Header Header Header Header Header</h2>
                         <p><b>descriptions descriptions</b> descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions descriptions </p>
                     </div>
-                    <div class="resp-btn">
-                        <a href="#form" class="btn btn-outline-primary">descriptions descriptions descriptions </a>
-                    </div>
+                    <div class="resp-btn"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-y-6 resp-btn-outer custom-right-section">
-                <div class="accordian-outer oe_structure">
-                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
+            <div class="grid grid-cols-1 gap-y-6 resp-btn-outer">
+                <div class="accordian-outer o_sub_items_container">
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading active">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -31,8 +29,8 @@
 
                             </ul>
                         </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
+                    </section>
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -47,8 +45,8 @@
 
                             </ul>
                         </div>
-                    </div>
-                    <div class="accordion-item accordian-tab bg-white o_replace_section_div">
+                    </section>
+                    <section class="accordion-item accordian-tab bg-white o_replace_section_div">
                         <div class="faq-heading">
                             <h3 class="font-bold text-dark text-base mb-0">Title Title Title Title Title Title Title </h3>
                         </div>
@@ -63,7 +61,7 @@
 
                             </ul>
                         </div>
-                    </div>
+                    </section>
 <!--                    <div class="oe_structure grid grid-cols-1 gap-y-6" data-name="add_child_card">
                         &lt;!&ndash; Drag and drop zone for new cards &ndash;&gt;
                     </div>-->

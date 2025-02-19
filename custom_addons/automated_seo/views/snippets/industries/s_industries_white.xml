@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="s_industries_white" name="Industries White">
-        <section class="o_automated_seo_snippet industry-sec">
+        <section class="o_automated_seo_snippet industry-sec o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading </h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 oe_structure">
-                    <div class="ind-box o_replace_section_div">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 o_sub_items_container">
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48">-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-2.svg" alt="Startups" class="mr-sm ind-2" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-2.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-3.svg" alt="Startups" class="mr-sm ind-3" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-3.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-4.svg" alt="Startups" class="mr-sm ind-4" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-4.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-5.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-5.svg" alt="Startups" class="mr-sm ind-5" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-5.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-5.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-6.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-6.svg" alt="Startups" class="mr-sm ind-6" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-6.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-6.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-7.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-7.svg" alt="Startups" class="mr-sm ind-7" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-7.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-7.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-8.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-8.svg" alt="Startups" class="mr-sm ind-8" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-8.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-8.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-9.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-9.svg" alt="Startups" class="mr-sm ind-9" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-9.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-9.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-10.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-10.svg" alt="Startups" class="mr-sm ind-10" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-10.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-10.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-11.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-11.svg" alt="Startups" class="mr-sm ind-11" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-11.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-11.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-12.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-12.svg" alt="Startups" class="mr-sm ind-12" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-12.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-12.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-13.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-13.svg" alt="Startups" class="mr-sm ind-13" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-13.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-13.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-14.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-14.svg" alt="Startups" class="mr-sm ind-14" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-14.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-14.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
-                    <div class="ind-box o_replace_section_div">
+                        <p>Name Name Name</p>
+                    </section>
+                    <section class="ind-box o_replace_section_div">
                         <!--                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/industries/ind-1.svg" alt="Startups" class="mr-sm ind-1" loading="lazy" height="48" width="48" />-->
-                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-15.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-15.svg" alt="Startups" class="mr-sm ind-15" loading="lazy" height="48" width="48" />
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-15.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/industries/ind-15.svg" alt="Startups" class="mr-sm" loading="lazy" height="48" width="48" />
 
-                        <p>Description Description</p>
-                    </div>
+                        <p>Name Name Name</p>
+                    </section>
                 </div>
             </div>
         </section>

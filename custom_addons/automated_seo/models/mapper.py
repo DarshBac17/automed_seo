@@ -6,3 +6,5 @@ class Mapper(models.Model):
     name = fields.Char(string="Snippet Name")
     snippet_id = fields.Char(string="Snippet id")
     php_tags = fields.Many2many('automated_seo.php_mapper', string ="PHP Tags")
+    style = fields.Many2many('automated_seo.style_mapper', string ="Style Tags")
+

@@ -1,121 +1,463 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+    <record id="automated_seo.version_compare_wizard_form" model="ir.ui.view">
+        <field name="name">version.compare.wizard.form</field>
+        <field name="model">automated_seo.version_compare_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Compare Versions">
+                <sheet>
+                    <group>
+                        <field name="view_id"/>
+                        <field name="base_version"/>
+                        <field name="compare_version"/>
+                    </group>
+                    <footer>
+                        <button name="action_compare_versions" string="Compare" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="automated_seo.version_compare_wizard_action" model="ir.actions.act_window">
+        <field name="name">Compare Page Versions</field>
+        <field name="res_model">automated_seo.version_compare_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="automated_seo.version_compare_wizard_form"/>
+        <field name="target">new</field>  <!-- Ensures it opens in a modal popup -->
+    </record>
+
+
+    <record id="automated_seo.view_action_form" model="ir.actions.act_window">
+        <field name="name">Views form</field>
+        <field name="res_model">automated_seo.view</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="automated_seo.view_create_wizard_form" model="ir.ui.view">
+        <field name="name">automated.seo.create.wizard.form</field>
+        <field name="model">automated_seo.view_create_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create New SEO View">
+                <group style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%;">
+                    <div class="o_col" >
+                        <div class="o_row" style="display: flex; justify-content: center;">
+                            <field name="file_source"
+                                   widget="card_selection"
+                                   options="{
+                                'descriptions': {
+                                    'draft': 'Start with a new draft configuration.',
+                                    'remote': 'Choose an existing file from production'
+                                },
+                                'horizontal':True
+                            }"
+                            />
+                        </div>
+
+                        <div class="o_row"
+                             attrs="{'invisible': [('file_source', '!=', 'remote')]}">
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <label for="selected_filename" string="Select File"/>
+                                <p style="margin-left:5px; margin-right:5px">:</p>
+                                <field name="selected_filename"
+                                       widget="many2one"
+                                       options="{
+                                    'no_create': True,
+                                    'no_create_edit': True,
+                                    'no_open': True
+                                }"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </group>
+                <footer style="display: flex; justify-content: center; width: 100%;">
+                    <button string="Create"
+                            type="action"
+                            name="%(automated_seo.view_action_form)d"
+                            class="btn oe_highlight"
+                            context="{
+                            'default_file_source': file_source,
+                            'default_selected_filename':selected_filename
+                        }"
+                    />
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="automated_seo.view_create_wizard" model="ir.actions.act_window">
+        <field name="name">Create Automated SEO View</field>
+        <field name="res_model">automated_seo.view_create_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="automated_seo.view_create_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
     <!-- Tree View -->
     <record id="automated_seo.view_tree" model="ir.ui.view">
         <field name="name">automated_seo.view.tree</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree js_class="button_in_tree">
                 <field name="unique_page_id" readonly="1"/>
                 <field name="name"/>
                 <field name="create_uid" widget="many2one_avatar_user" options="{'size': [64, 64]}" string="Owner"/>
+                <field name="publish_url" widget="url" attrs="{'invisible': [('stage', '!=', 'publish')]}"/>
+                <field name="tag" widget="many2many_tags" options="{'color_field': 'id'}"/>
                 <field name="create_date"/>
                 <field name="write_date"/>
+                <field name="stage" widget="badge"
+                       decoration-muted="stage == 'draft'"
+                       decoration-info="stage == 'in_progress'"
+                       decoration-warning="stage == 'in_review'"
+                       decoration-success="stage in ('stage', 'publish')"/>
             </tree>
         </field>
     </record>
 
+    <!-- Kanban View -->
+    <record id="automated_seo.view_kanban" model="ir.ui.view">
+        <field name="name">automated_seo.view.kanban</field>
+        <field name="model">automated_seo.view</field>
+        <field name="arch" type="xml">
+            <kanban class="o_seo_kanban_view" js_class="button_in_kanban">
+                <field name="unique_page_id"/>
+                <field name="name"/>
+                <field name="stage"/>
+                <field name="create_uid"/>
+                <field name="user_name"/>
+                <field name="publish_url"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click view-kanban-card #{record.stage.raw_value == 'draft' ? 'border-left-dark' :
+                        record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-border' : 
+                        record.stage.raw_value == 'in_review' ? 'border-left-warning' :
+                        record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish-border' :
+                        record.stage.raw_value == 'stage' ? 'border-left-primary' : 'border-left-success'}">
+                            <div class="view-kanban-header">
+                                <div class="view-kanban-title">
+                                    ID:
+                                    <field name="unique_page_id"/>
+                                </div>
+                                <div class="view-kanban-badge">
+                                    <span t-attf-class="badge text-white #{record.stage.raw_value == 'draft' ? 'bg-dark' :
+                                    record.stage.raw_value == 'in_progress' ? 'bg-custom-publish-color' : 
+                                    record.stage.raw_value == 'in_review' ? 'bg-warning' :
+                                    record.stage.raw_value == 'unpublish' ? 'bg-custom-unpublish' :
+                                    record.stage.raw_value == 'stage' ? 'bg-primary' : 'bg-success'}">
+                                        <field name="stage"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="view-kanban-content">
+                                <h3>
+                                    <strong class="o_primary">
+                                        <field name="name"/>
+                                    </strong>
+                                </h3>
+                                <div class="view-kanban-url mb-3">
+                                    <i class="fa fa-link me-2"/>
+                                    <field name="publish_url" widget="url"/>
+                                </div>
+                                <div class="view-kanban-footer">
+                                    <div class="view-kanban-footer-left">
+                                        <field name="create_uid" widget="many2one_avatar_user"/>
+                                        <span class="ms-2 text-muted">
+                                            <field name="user_name"/>
+                                        </span>
+                                    </div>
+                                    <div class="view-kanban-footer-right">
+                                        <i class="fa fa-clock-o me-2"/>
+                                        <field name="create_date" widget="date"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_seo_send_email_wizard" model="ir.actions.act_window">
+        <field name="name">Send SEO Preview</field>
+        <field name="res_model">seo.send.email.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_automated_seo_view"/>
+    </record>
+<!--    <record id="action_version_compare_wizard" model="ir.actions.act_window">-->
+<!--        <field name="name">Compare Versions</field>-->
+<!--        <field name="res_model">version.compare.wizard</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="view_id" ref="view_version_compare_wizard_form"/>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
     <!-- Form View -->
     <record id="automated_seo.view_form" model="ir.ui.view">
         <field name="name">automated_seo.view.form</field>
         <field name="model">automated_seo.view</field>
         <field name="arch" type="xml">
-            <form string="SEO View Management">
+            <form string="SEO View Management" create="false" delete="false">
                 <header>
-                    <!-- Edit Button -->
 
+                    <field name="publish" invisible="1"/>
+                    <field name="is_publisher" invisible="1"/>
+                    <field name="is_reviewer" invisible="1"/>
+                    <field name="is_owner" invisible="1"/>
+                    <field name="is_new_page" invisible="1"/>
+                    <field name="is_processed" invisible="1"/>
+                    <field name="has_edit_permission" invisible="1"/>
+
+                    <field name="stage" widget="statusbar" statusbar_visible="draft,in_progress,in_review,stage,publish"
+                           statusbar_colors="{'draft': 'blue', 'in_progress': 'orange', 'in_review': 'green', 'stage': 'grey'}"
+                           readonly="1"/>
+
+                    <!-- All buttons now check for is_owner -->
                     <button name="action_edit_website_page"
                             type="object"
                             string="Edit"
+                            attrs="{'invisible': ['|','|', '|',('id','=',False ),('publish', '=', True), ('stage', 'not in', ['draft', 'in_progress']), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"/>
 
-
-                    <!-- Preview Button -->
                     <button name="action_view_website_page"
                             type="object"
                             string="Preview"
                             class="btn oe_highlight"/>
-                    <!-- Compile Button -->
 
-                      <button name="action_custom_button"
+                    <button name="action_compile_button"
                             type="object"
                             string="Compile"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
                             class="btn oe_highlight"
                             context="{'view_name': name}"/>
 
+                    <button name="action_send_for_review"
+                            string="Send For review"
+                            attrs="{'invisible': ['|', '|', ('publish', '=', True), ('stage', '!=', 'in_progress'), ('has_edit_permission', '=', False)]}"
+                            type="object"
+                            class="btn btn-primary"
+                            confirm="Are you sure you want to send this for review?"/>
 
+                    <button name="%(automated_seo.version_compare_wizard_action)d"
+                            type="action"
+                            string="Compare Versions"
+                            class="oe_highlight"
+                            context="{
+                                'default_view_id': active_id,
+                                'default_base_version':active_version
+                            }"/>
+
+                    <!-- Done Button (Only visible to owner in review stage) -->
+
+
+                    <!-- Reject Button -->
+                    <button name="%(action_seo_send_email_wizard)d"
+                            type="action"
+                            string="Feedback"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', '|','|', ('publish', '=', True), ('stage', 'not in', ['in_review', 'approved']), ('has_edit_permission', '=', False),('is_reviewer', '=', False)]}"
+                            context="{'view_name': name}"/>
+
+                    <button name="action_approve_review"
+                            type="object"
+                            string="Approve"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', '|', '|', ('publish', '=', True), ('stage', '!=', 'in_review'), ('has_edit_permission', '=', False),('is_reviewer', '=', False)]}"
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to approve?"/>
+
+                    <button name="action_publish_button"
+                            type="object"
+                            string="Publish"
+                            class="btn oe_highlight"
+                            attrs="{'invisible': ['|', '|', '|',
+                                ('has_edit_permission', '=', False),
+                                ('stage', 'not in', ['approved', 'unpublish']),
+                                ('publish', '=', True),('is_publisher', '=', False)]}"
+                            context="{'view_name': name}"
+                            confirm="Are you sure you want to publish this page?"/>
+
+
+                    <button name="%(automated_seo.action_version_form)d"
+                            type="action"
+                            string="New Version"
+                            class="btn oe_highlight justify-content-end"
+                            attrs="{'invisible': ['|','|',('has_edit_permission', '=', False),('stage', '=', 'in_review'),('stage', '=', 'draft')]}"
+                            context="{
+                                'default_view_id': id,
+                                'default_base_version':active_version,
+                                'form_view_ref': 'automated_seo.automated_seo_version_form'
+                            }"
+                    />
                 </header>
                 <sheet>
                     <group>
                         <group>
-                            <div class="o_col" style="width:250px">
-                                 <div class="o_row">
-                                   <h1><field name="name" required="1"/></h1>
+                            <div class="o_col" style="width:350px">
+                                <div class="o_row">
+                                    <h1>
+                                        <field name="name" required="1"
+                                               attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    </h1>
                                 </div>
 
-                                 <div class="o_row">
+                                <div class="o_row">
                                     Page Id
                                     <p style="margin-left:5px">:</p>
-
                                     <field name="unique_page_id" readonly="1"
-                                       attrs="{'invisible': [('id', '=', False)]}"/>
+                                           attrs="{'invisible': [('id', '=', False)]}"/>
                                 </div>
+
+                                <!--                                <div class="o_row">-->
+                                <!--                                    Page Url-->
+                                <!--                                    <p style="margin-left:5px">:</p>-->
+                                <!--                                    <field name="url" widget="url" style="margin-left:5px" nolabel="1"-->
+                                <!--                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>-->
+                                <!--                                </div>-->
 
                                 <div class="o_row">
                                     Owner
                                     <p style="margin-left:5px">:</p>
-
                                     <field name="create_uid" widget="many2one_avatar" options="{'size': [250, 250]}"
-                                           style="margin-left:5px"
+                                           style="margin-left:5px" readonly="1"
                                            nolabel="1"/>
                                 </div>
 
+                                <div class="o_row" attrs="{'invisible': [('is_new_page', '=', False)]}" >
+                                    <label for="file_source" string="File Source"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="file_source" readonly="1"/>
+                                </div>
 
+                                <div class="o_row"
+                                     attrs="{'invisible': ['|', ('is_processed', '=', True), ('file_source', '!=', 'remote')]}">
+                                    <label for="selected_filename" string="Remote File"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="selected_filename"
+                                           readonly="1"
+                                           options="{
+                                                'no_create': True,
+                                                'no_create_edit': True,
+                                                'no_open': True
+                                            }"
+                                           style="margin-left:5px"/>
+                                    <button name="action_parse_uploaded_file"
+                                            type="object"
+                                            string="Process"
+                                            class="btn btn-primary"
+                                            attrs="{'invisible': [('selected_filename', '=', False)]}"/>
+                                </div>
                             </div>
                         </group>
                         <group>
                             <div class="o_col" style="width:250px">
-                                 <div class="o_row">
+                                <div class="o_row">
                                     Created At
                                     <p style="margin-left:5px">:</p>
-                                    <field name="create_date" style="margin-left:5px"/>
+                                    <field name="create_date" style="margin-left:5px" readonly="1"/>
                                 </div>
                                 <div class="o_row">
                                     Updated At
                                     <p style="margin-left:5px">:</p>
-                                    <field name="write_date" style="margin-left:5px"/>
+                                    <field name="write_date" style="margin-left:5px" readonly="1"/>
                                 </div>
-                                <div class="o_row">
-                                    <field name="parse_html_binary" filename="parse_html_filename" invisible="1"/>
-                                    <label for="parse_html_filename" string="File:"
-                                           attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                                    <div class="d-flex align-items-center">
-                                        <field name="parse_html_filename" readonly="1" nolabel="1"
-                                               attrs="{'invisible': [('parse_html_binary', '=', False)]}"/>
-                                        <button name="action_download_parsed_html" type="object"
-                                                icon="fa-download" class="btn btn-link ms-2"
-                                                attrs="{'invisible': [('parse_html_binary', '=', False)]}"
-                                                title="Download File"/>
-                                    </div>
+                                <div class="o_row" attrs="{'invisible': [('is_owner', '=', False)]}">
+                                    Contributors
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="contributor_ids"
+                                           widget="many2many_tags_avatar"
+                                           options="{'color_field': 'color', 'no_create_edit': True}"
+                                           placeholder="Add contributors..."
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                                 </div>
+                                <div class="o_row" attrs="{'invisible': [('id', '=', False)]}">
+                                    <label for="active_version" string="Active version"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="active_version"
+                                           widget="many2one"
+                                           options="{
+                                                'no_create': True,
+                                                'no_create_edit': True,
+                                                'no_open': True
+                                            }"
+                                           domain="[('view_id', '=', id)]"
+                                           attrs="{'readonly': ['|',('has_edit_permission', '=', False),('stage', '=', 'in_review')]}"
+                                           style="margin-left:5px"/>
+                                </div>
+
+                                <div class="o_row" attrs="{'invisible': [('id', '=', False)]}">
+                                    <label for="tag" string="Tag"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="tag"
+                                           options="{
+                                                'color_field': 'id'
+                                            }"
+                                           attrs="{'readonly': [('has_edit_permission', '=', False)]}"
+                                           style="margin-left:5px"
+                                           widget="many2many_tags"
+                                    />
+                                </div>
+                                <div class="o_row" attrs="{'invisible': [('id', '=', False)]}">
+                                    <label for="diff_url" string="Compare URL"/>
+                                    <p style="margin-left:5px">:</p>
+                                    <field name="diff_html_binary" attrs="{'invisible': 1}"/>
+                                <field name="diff_url" string="Compare version url" widget="url" attrs="{'invisible': [('diff_html_binary', '=', False)]}"/>
+                                </div>
+                                <!--                                <div class="o_row">-->
+                                <!--                                    Image-->
+                                <!--                                    <p style="margin-left:5px">:</p>-->
+                                <!--                                    <field name="image" widget="binary" filename="image_filename"/>-->
+                                <!--                                    <field name="image_filename" invisible="1"/>-->
+                                <!--                                </div>-->
                             </div>
                         </group>
                     </group>
                     <notebook>
-                        <page string="Page Versions"
-                              attrs="{'invisible': [('version', 'in', [False, ''])]}">
-                            <field name="version" />
+                        <page string="Page Versions" attrs="{'invisible': [('version', 'in', [False, ''])]}">
+                            <field name="version" attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
                         </page>
-                        <page string="Compile Output"
-                              attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
-                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}"/>
+                        <page string="Header Management">
+                            <sheet>
+                                <group colspan="2">
+                                    <!-- Left Section -->
+                                    <group>
+                                        <field name="header_title"
+                                               widget="char_length_validator"
+                                               attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                        <field name="header_description"
+                                               widget="description_length_validator"
+                                               attrs="{'readonly': [('has_edit_permission', '=', False)]}"/>
+                                    </group>
+
+                                    <!-- Right Section -->
+                                    <group>
+                                        <field name="image" widget="binary" filename="image_filename"/>
+                                        <field name="image_filename" invisible="1"/>
+                                        <field name="publish_url" readonly="1"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </page>
+
+                        <page string="Compile Output" attrs="{'invisible': [('parse_html', 'in', [False, ''])]}">
+                            <field name="parse_html" widget="ace" options="{'mode': 'xml'}" readonly="1"/>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
-                    <!--                    <field name="activity_ids" widget="mail_activity"/>-->
-                    <field name="message_ids" widget="mail_thread"/>
+                <div class="oe_chatter custom_chatter" style="max-width: 850px; margin: 0 auto;">
+                    <field name="message_ids" widget="mail_thread" readonly="1" options="{'show_reply': false, 'show_composer': false}"/>
                 </div>
             </form>
         </field>
@@ -125,12 +467,8 @@
     <record id="automated_seo.view_action" model="ir.actions.act_window">
         <field name="name">Page Management</field>
         <field name="res_model">automated_seo.view</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new record to manage views
-            </p>
-        </field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="automated_seo.view_tree"/>
     </record>
 
     <!-- Main Menu for SEO Management -->
@@ -145,4 +483,3 @@
               action="automated_seo.view_action"
               sequence="10"/>
 </odoo>
-

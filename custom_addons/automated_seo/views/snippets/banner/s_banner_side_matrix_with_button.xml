@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_side_matrix_with_button" name="Banner side matrix with Button">
-        <section class="banner banner-post header-top bg-dark">
+    <template id="s_banner_side_matrix_with_button" name="Banner Side Matrix with Button">
+        <section class="banner banner-post header-top bg-dark o_automated_seo_php_variable">
             <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
             <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
             <?php endif; ?>-->
-            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="ruby-on-rails-development_banner-3 banner-post-img"/>
-
+            <div class="phone-tablet-if"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="" title="" width="1900" height="900" loading="eager" class="banner-post-img"/>
+            <div class="phone-tablet-endif"/>
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
             <div class="lg:col-span-3">
                     <h1>Heading Heading Heading Heading Heading Heading Heading</h1>
-                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
-
-                <a href="#price-sec" class="btn btn-primary">Button Name</a>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p><a href="#price-sec" class="btn btn-primary">Button Text</a>
             </div>
             <div class="lg:col-span-2 flex flex-wrap text-center">
                 <div class="boxed w-1/2 border-r border-b border-secondary">
-                    <p class="text-white text-h2 mb-0 font-bold banner-companyYears">142</p>
+                    <p class="text-white text-h2 mb-0 font-bold">142</p>
                     <p class="text-primary">Description Description</p>
                 </div>
                 <div class="boxed w-1/2 border-b border-secondary">
-                    <p class="text-white text-h2 mb-0 font-bold employeeCount">1000</p>
-                    <p class="text-primary agiledevetext">Description</p>
+                    <p class="text-white text-h2 mb-0 font-bold">1000</p>
+                    <p class="text-primary">Description Description</p>
                 </div>
                 <div class="boxed w-1/2 border-r border-secondary">
                     <p class="text-white text-h2 mb-0 font-bold">98%</p>
                     <p class="text-primary">Description Description</p>
                 </div>
                 <div class="boxed w-1/2">
-                    <p class="text-white text-h2 mb-0 font-bold clientproject">1022</p>
+                    <p class="text-white text-h2 mb-0 font-bold">1022</p>
                     <p class="text-primary">Description Description</p>
                 </div>
             </div>

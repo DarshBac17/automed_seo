@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="automated_seo.style_tree">
+        <field name="name">Mapper</field>
+        <field name="model">automated_seo.style_mapper</field>
+        <field name="arch" type="xml">
+            <tree string="Mapper" editable="bottom">
+                <field name="name"/>
+                <field name="link"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automated_seo.style_action">
+        <field name="name">Style</field>
+        <field name="res_model">automated_seo.style_mapper</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_automated_seo_mapper"
+              name="Style"
+              parent="menu_automated_seo_root"
+              action="automated_seo.style_action"
+              sequence="20"/>
+</odoo>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_footer_slider_bg_white" name="Footer slider White">
-        <section>
-            <div class="container footer-slider">
+    <template id="s_footer_slider_bg_white" name="Footer Slider White">
+        <section class="o_automated_seo_php_variable o_not_editable">
+            <div class="container">
                 <div class="footer-slider slick-slider slick-dotted">
                     <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
                             aria-disabled="true">Previous
@@ -19,7 +19,7 @@
                                     <!--                                             alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"-->
                                     <!--                                             height="365" width="365" class="m-auto w-[max(365px,4.932vw)]">-->
                                     <!--                 a                   </div>-->
-                                    <div class="top-tier">
+                                    <div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-1.jpg"
                                              alt="Top-Tier IT Geniuses" title="Top-Tier IT Geniuses" loading="lazy"
                                              height="365" width="365" class="m-auto w-[max(365px,4.932vw)]"/>
@@ -72,7 +72,7 @@
 <!--                                             alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"-->
 <!--                                             width="365" class="m-auto w-[max(365px,4.932vw)]">-->
 <!--                                    </div>-->
-                                    <div class="experience-team">
+                                    <div>
                                         <img src="https://assets.bacancytechnology.com/main-boot-5/images/insight-slide-3.jpg"
                                              alt="Experienced Team" title="Experienced Team" loading="lazy" height="365"
                                              width="365" class="m-auto w-[max(365px,4.932vw)]"/>

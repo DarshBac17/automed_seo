@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_vertical_tab_bg_gray" name="Vertical tab Gray">
-        <section class="tabs tabbibg-sec side-tab bg-gray-light">
+    <template id="s_vertical_tab_bg_gray" name="Vertical Tab Gray">
+        <section class="tabs tabbibg-sec side-tab bg-gray-light o_automated_seo_php_variable o_automated_seo_snippet">
             <div class="container">
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
@@ -12,142 +12,140 @@
                     </p>
                 </div>
                 <div class="tab-content style-check md:bg-white">
-                    <div class="tab-header">
-                        <div class="tab-head bg-white active">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
-                        <div class="tab-head bg-white">
-                            <div class="head">Heading Heading Heading Heading Heading Heading</div>
-                        </div>
+                    <div class="tab-header o_sub_items_container">
+                        <section class="tab-head bg-white o_replace_section_div active">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
+                        <section class="tab-head o_replace_section_div bg-white">
+                            <div class="head">Title Title</div>
+                        </section>
                     </div>
-                    <div class="side-tab-content">
-                        <div class="tab-pane boxed active">
+                    <div class="side-tab-content o_sub_items_container">
+                        <section class="tab-pane boxed active o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
-                        <div class="tab-pane boxed">
+                        </section>
+                        <section class="tab-pane boxed o_replace_section_div">
                             <p>Description Description Description Description Description Description Description
                                 Description
                                 Description Description Description Description Description Description Description
                                 Description
                             </p>
                             <ul>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
-                                <li>Description Description</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
+                                <li>List Item List Item</li>
                             </ul>
-                        </div>
+                        </section>
                     </div>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Button name</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
             </div>
         </section>
 

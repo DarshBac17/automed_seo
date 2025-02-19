@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_version_compare_wizard_form" model="ir.ui.view">
+        <field name="name">version.compare.wizard.form</field>
+        <field name="model">version.compare.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="base_version_id"/>
+                    <field name="compare_version_id"/>
+                </group>
+                <div class="diff-viewer">
+                    <field name="diff_html" widget="html"/>
+                </div>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                    <button string="Compare" name="action_upload_compare_to_stage_version" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_version_compare" model="ir.actions.act_window">
+        <field name="name">Compare Versions</field>
+        <field name="res_model">version.compare.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

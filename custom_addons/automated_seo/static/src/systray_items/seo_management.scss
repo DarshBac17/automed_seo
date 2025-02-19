@@ -1,0 +1,5 @@
+.o_seo_menu {
+    &:not(.o_translatable) {
+        @include button-variant($o-brand-primary, $o-brand-primary);
+    }
+}

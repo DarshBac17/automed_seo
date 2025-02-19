@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_counting_sec" name="Counting second">
-        <section class="banner-post text-center text-white">
+    <template id="s_counting_sec" name="Counting Second">
+        <section class="banner-post text-center text-white o_automated_seo_php_variable">
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/counting-bg.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/counting-bg.jpg" alt="Our Development Center Strength" title="Our Development Center Strength" width="1900" height="900" loading="lazy" class="banner-post-img"/>
             <div class="container content">
-                <div class="cont-padding [&amp;_&gt;_*]:text-white company-years">
+                <div class="cont-padding [&amp;_&gt;_*]:text-white">
                     <h2><!--<?php echo $companyYears ?> --> Heading heading heading</h2>
-                    <p class="text-h5 font-light count-dev-name"> <!--<?php echo $countDevName ?>-->Description Description Description Description Description Description Description Description Description Description Description Description </p>
+                    <p class="text-h5 font-light"> <!--<?php echo $countDevName ?>-->Description Description Description Description Description Description Description Description Description Description Description Description </p>
                 </div>
                 <div class="grid gap-6 md:grid-cols-2 lg:items-center">
                     <div>
@@ -16,7 +16,7 @@
                         <div class="col-span-full">
                             <h3 class="text-h4 text-white">Sub Heading Sub heading</h3>
                         </div>
-                        <div class="agile-development">
+                        <div>
 <!--                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/agile-developer.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/agile-developer.png" alt="<?php echo $agiledevetext ?>" loading="lazy" height="120" width="120"/>-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/agile-developer.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/agile-developer.png" loading="lazy" height="120" width="120"/>
                             <p class="mb-0 font-bold text-h2"><!--<?php echo $employeeCount ?>--> 1050+</p>
@@ -27,13 +27,13 @@
                             <p class="mb-0 font-bold text-h2"><?php echo $SrDeveloper ?></p>
                             <p>&lt;!&ndash;<?php echo $countDevName ?>&ndash;&gt; Developers</p>
                         </div>-->
-                        <div class="agile-coach">
+                        <div>
 <!--                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/agile-coach.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/agile-coach.png" alt="<?php echo $agileCoach ?>" loading="lazy" height="120" width="120"/>-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/agile-coach.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/agile-coach.png" loading="lazy" height="120" width="120"/>
                             <p class="mb-0 font-bold text-h2"><!--<?php echo $agileCoach ?>--> 05</p>
                             <p><!--<?php echo $agcoachtext ?>--> Text Text Text</p>
                         </div>
-                        <div class="scrum-master">
+                        <div>
 <!--                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/certified-scrum-master.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/certified-scrum-master.png" alt="<?php echo $scrummastertext ?>" loading="lazy" height="120" width="120"/>-->
                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/certified-scrum-master.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/certified-scrum-master.png" loading="lazy" height="120" width="120"/>
                             <p class="mb-0 font-bold text-h2"><!--<?php echo $scrumMaster ?>--> 14</p>
@@ -45,14 +45,14 @@
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-1.svg" alt="Work at Your Time Zone" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" alt="Work at Your Time Zone" loading="lazy" height="48" width="48" class="county-1"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-1.png" alt="Work at Your Time Zone" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-2.svg" alt="Easy Communication" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" alt="Easy Communication" loading="lazy" height="48" width="48" class="county-2"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-2.png" alt="Easy Communication" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
@@ -66,14 +66,14 @@
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-4.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-4.svg" alt="In Business Since 2011" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" alt="In Business Since 2011" loading="lazy" height="48" width="48" class="county-4"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-4.png" alt="In Business Since 2011" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>
                     <div>
                         <div class="svg-icon">
 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-5.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/counting-sec/county-5.svg" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48">-->
-                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48" class="county-5"/>
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/country-icon-5-1.png" alt="5/5 Pro User Rating" loading="lazy" height="48" width="48"/>
                         </div>
                         <p>Text Text Text</p>
                     </div>

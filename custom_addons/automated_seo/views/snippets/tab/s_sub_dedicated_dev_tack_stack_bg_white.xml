@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_sub_dedicated_dev_tack_stack_bg_white" name="Sub Dedicated Dev Tack Stack White">
+        <section class="remove o_automated_seo_php_variable" style="margin: 0; padding: 0;">
+            <a href="hire-javascript-developer">
+                <div class="boxed bg-white border border-secondary flex items-center h-full">
+                    <div class="svg-icon">
+                        <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/javascript.svg"
+                             data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/javascript.svg"
+                             alt="Javascript Developer" loading="lazy" height="48" width="48"/>
+                    </div>
+                    <h3 class="text-h4 mb-0 ml-sm">Text Text</h3>
+                </div>
+            </a>
+        </section>
+
+    </template>
+</odoo>

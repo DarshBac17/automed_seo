@@ -1,65 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
-    <template id="s_dedicated_dev_tack_stack_bg_gray" name="Dedicated Dev tech stack Gray">
+    <template id="s_dedicated_dev_tack_stack_bg_gray" name="Dedicated Dev Tech Stack Gray">
 
-        <section class="bg-gray-light tabs tabbibg-sec hover-box">
+        <section class="bg-gray-light tabs tabbibg-sec hover-box o_automated_seo_php_variable">
             <div class="container">
                 <div class="cont-padding text-center">
-                    <h2>Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading Heading
-                        Heading
-                    </h2>
-                    <p>Description Description Description Description Description Description Description Description
-                        Description Description Description Description Description Description Description Description
-                    </p>
+                   <h2>Hire Dedicated Developers for Diverse Technology Requirements</h2>
+                    <p>We have <span class="o_au_php_var o_text-php-var-info" data-php-var="companyYears" data-php-const-var="0">companyYears</span> years of proven experience in the service industry. <b>Hire dedicated developers</b> from India to scale your development team and manage the entire development cycle of your project in a hassle-free way. </p>
                 </div>
                 <div class="tab-content">
                     <div class="tab-header md:flex flex-wrap">
                         <div class="tab-head active">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Frontend</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Backend</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Mobile App</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Automation</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Platforms</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">AI</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">ML</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">DevOps</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Data Science</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Cloud</div>
                         </div>
                         <div class="tab-head">
-                            <div class="head bg-white">Heading</div>
+                            <div class="head bg-gray-light">Hire Developer</div>
                         </div>
                     </div>
                     <div>
                         <div class="tab-pane active">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="#">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/angular.svg"
-                                                 alt="Angular Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Angular Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Angular Developer</h3>
                                     </div>
                                 </a>
                                 <a href="#">
@@ -67,9 +63,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/react.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/react.svg"
-                                                 alt="React Developer" loading="lazy" height="48" width="48" />
+                                                 alt="React Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">React Developer</h3>
                                     </div>
                                 </a>
                                 <a href="#">
@@ -77,9 +73,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/vue.svg"
-                                                 alt="Vue Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Vue Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Vue Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-javascript-developer">
@@ -87,9 +83,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/javascript.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/javascript.svg"
-                                                 alt="Javascript Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Javascript Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Javascript Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-ui-ux-designer">
@@ -97,9 +93,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ui-ux.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ui-ux.svg"
-                                                 alt="UI/UX Developer" loading="lazy" height="48" width="48" />
+                                                 alt="UI/UX Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">UI/UX Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-html-css-developer">
@@ -107,9 +103,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/html-css.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/html-css.svg"
-                                                 alt="HTML/CSS Developer" loading="lazy" height="48" width="48" />
+                                                 alt="HTML/CSS Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">HTML/CSS Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-front-end-developer">
@@ -117,9 +113,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/frontend.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/frontend.svg"
-                                                 alt="Frontend Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Frontend Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Frontend Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-tailwind-css-developer">
@@ -127,9 +123,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/tailwind.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/tailwind.svg"
-                                                 alt="Tailwind CSS Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Tailwind CSS Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Tailwind CSS Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-typescript-developers">
@@ -137,9 +133,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/typescript.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/typescript.svg"
-                                                 alt="Typescript Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Typescript Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Typescript Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-svelte-developers">
@@ -147,24 +143,24 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/svelte.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/svelte.svg"
-                                                 alt="Svelte Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Svelte Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Svelte Developer</h3>
                                     </div>
                                 </a>
 
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="ruby-on-rails-development">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ror.svg"
-                                                 alt="ROR Developer" loading="lazy" height="48" width="48" />
+                                                 alt="ROR Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">ROR Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-node-developer">
@@ -172,9 +168,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/nodejs.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/nodejs.svg"
-                                                 alt="Node Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Node Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Node Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-golang-developer">
@@ -182,9 +178,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/golang.svg"
-                                                 alt="Golang Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Golang Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Golang Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-laravel-developer">
@@ -192,9 +188,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/laravel.svg"
-                                                 alt="Laravel Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Laravel Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Laravel Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-dot-net-developer">
@@ -202,9 +198,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dotnet.svg"
-                                                 alt=".NET Developer" loading="lazy" height="48" width="48" />
+                                                 alt=".NET Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">.NET Developer</h3>
                                     </div>
                                 </a>
                                 <a href="dot-net-core-developer">
@@ -212,9 +208,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/net-core.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/net-core.svg"
-                                                 alt=".NET Core Developer" loading="lazy" height="48" width="48" />
+                                                 alt=".NET Core Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">.NET Core Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-java-developers">
@@ -222,9 +218,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/java.svg"
-                                                 alt="Java Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Java Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Java Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-spring-boot-developer">
@@ -232,9 +228,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/spring-boot.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/spring-boot.svg"
-                                                 alt="Spring Boot Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Spring Boot Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Spring Boot Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-python-developer">
@@ -242,9 +238,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/python.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/python.svg"
-                                                 alt="Python Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Python Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">Python Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-r-developer">
@@ -252,9 +248,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/r.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/r.svg"
-                                                 alt="R Developer" loading="lazy" height="48" width="48" />
+                                                 alt="R Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">R Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-php-developer">
@@ -262,9 +258,9 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/php.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/php.svg"
-                                                 alt="PHP Developer" loading="lazy" height="48" width="48" />
+                                                 alt="PHP Developer" loading="lazy" height="48" width="48"/>
                                         </div>
-                                        <h3 class="text-h4 mb-0 ml-sm">Heading</h3>
+                                        <h3 class="text-h4 mb-0 ml-sm">PHP Developer</h3>
                                     </div>
                                 </a>
                                 <a href="hire-django-developer">
@@ -272,7 +268,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/django.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/django.svg"
-                                                 alt="Django Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Django Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Django Developer</h3>
                                     </div>
@@ -282,7 +278,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/back-end.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/back-end.svg"
-                                                 alt="Backend Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Backend Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Backend Developer</h3>
                                     </div>
@@ -292,7 +288,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/rust.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/rust.svg"
-                                                 alt="Rust Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Rust Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Rust Developer</h3>
                                     </div>
@@ -302,7 +298,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/csharp.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/csharp.svg"
-                                                 alt="C# Developer" loading="lazy" height="48" width="48" />
+                                                 alt="C# Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">C# Developer</h3>
                                     </div>
@@ -312,7 +308,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/c-plus-plus.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/c-plus-plus.svg"
-                                                 alt="C++ Developer" loading="lazy" height="48" width="48" />
+                                                 alt="C++ Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">C++ Developer</h3>
                                     </div>
@@ -322,7 +318,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/haskell.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/haskell.svg"
-                                                 alt="Haskell Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Haskell Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Haskell Developer</h3>
                                     </div>
@@ -332,7 +328,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/c-logo.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/c-logo.svg"
-                                                 alt="Haskell Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Haskell Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">C Developer</h3>
                                     </div>
@@ -340,13 +336,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-react-native-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/react.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/react.svg"
-                                                 alt="React Native Developer" loading="lazy" height="48" width="48" />
+                                                 alt="React Native Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">React Native Developer</h3>
                                     </div>
@@ -356,7 +352,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/flutter.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/flutter.svg"
-                                                 alt="Flutter Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Flutter Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Flutter Developer</h3>
                                     </div>
@@ -366,7 +362,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ionic.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ionic.svg"
-                                                 alt="Ionic Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Ionic Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Ionic Developer</h3>
                                     </div>
@@ -376,7 +372,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/kotlin.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/kotlin.svg"
-                                                 alt="Kotlin Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Kotlin Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Kotlin Developer</h3>
                                     </div>
@@ -386,7 +382,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/apple.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/apple.svg"
-                                                 alt="IOS Developer" loading="lazy" height="48" width="48" />
+                                                 alt="IOS Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">IOS Developer</h3>
                                     </div>
@@ -396,7 +392,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/mobile-app.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/mobile-app.svg"
-                                                 alt="Mobile App Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Mobile App Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Mobile App Developer</h3>
                                     </div>
@@ -406,7 +402,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/android.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/android.svg"
-                                                 alt="Android Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Android Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Android Developer</h3>
                                     </div>
@@ -416,7 +412,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/swift.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/swift.svg"
-                                                 alt="Swift Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Swift Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Swift Developer</h3>
                                     </div>
@@ -424,13 +420,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-rpa-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/rpa.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/rpa.svg"
-                                                 alt="RPA Developer" loading="lazy" height="48" width="48" />
+                                                 alt="RPA Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">RPA Developer</h3>
                                     </div>
@@ -440,7 +436,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ui-path.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ui-path.svg"
-                                                 alt="UiPath Developer" loading="lazy" height="48" width="48" />
+                                                 alt="UiPath Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">UiPath Developer</h3>
                                     </div>
@@ -448,13 +444,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-salesforce-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/salesforce.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/salesforce.svg"
-                                                 alt="Salesforce Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Salesforce Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Salesforce Developer</h3>
                                     </div>
@@ -464,7 +460,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/microsoft-dynamics.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/microsoft-dynamics.svg"
-                                                 alt="MS Dynamics 365 Developer" loading="lazy" height="48" width="48" />
+                                                 alt="MS Dynamics 365 Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">MS Dynamics 365 Developer</h3>
                                     </div>
@@ -474,7 +470,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/service-now.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/service-now.svg"
-                                                 alt="ServiceNow Developer" loading="lazy" height="48" width="48" />
+                                                 alt="ServiceNow Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">ServiceNow Developer</h3>
                                     </div>
@@ -482,13 +478,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-ai-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ai.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ai.svg"
-                                                 alt="AI Developer" loading="lazy" height="48" width="48" />
+                                                 alt="AI Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">AI Developer</h3>
                                     </div>
@@ -498,7 +494,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/chatgpt.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/chatgpt.svg"
-                                                 alt="ChatGPT Developer" loading="lazy" height="48" width="48" />
+                                                 alt="ChatGPT Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">ChatGPT Developer</h3>
                                     </div>
@@ -508,7 +504,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/alexa-skill.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/alexa-skill.svg"
-                                                 alt="Alexa Skill Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Alexa Skill Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Alexa Skill Developer</h3>
                                     </div>
@@ -518,7 +514,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/openai.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/openai.svg"
-                                                 alt="OpenAI Developer" loading="lazy" height="48" width="48" />
+                                                 alt="OpenAI Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">OpenAI Developer</h3>
                                     </div>
@@ -528,7 +524,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/pytorch.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/pytorch.svg"
-                                                 alt="Pytorch Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Pytorch Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Pytorch Developer</h3>
                                     </div>
@@ -538,7 +534,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/prompt-engineers.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/prompt-engineers.svg"
-                                                 alt="Prompt Engineer icon" loading="lazy" height="48" width="48" />
+                                                 alt="Prompt Engineer icon" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Prompt Engineer</h3>
                                     </div>
@@ -548,7 +544,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/AIOps.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/AIOps.svg"
-                                                 alt="AIOps Engineer" loading="lazy" height="48" width="48" />
+                                                 alt="AIOps Engineer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">AIOps Engineer</h3>
                                     </div>
@@ -556,13 +552,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-ml-developer">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ml.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/ml.svg"
-                                                 alt="ML Developer" loading="lazy" height="48" width="48" />
+                                                 alt="ML Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">ML Developer</h3>
                                     </div>
@@ -572,7 +568,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/neural-network.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/neural-network.svg"
-                                                 alt="Neural Network Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Neural Network Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Neural Network Developer</h3>
                                     </div>
@@ -580,13 +576,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-devops-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/devops.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/devops.svg"
-                                                 alt="DevOps Developer" loading="lazy" height="48" width="48" />
+                                                 alt="DevOps Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">DevOps Developer</h3>
                                     </div>
@@ -596,7 +592,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/devsecops.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/devsecops.svg"
-                                                 alt="DevSecOps Developer" loading="lazy" height="48" width="48" />
+                                                 alt="DevSecOps Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">DevSecOps Developer</h3>
                                     </div>
@@ -604,13 +600,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-tableau-consultant">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/tableau.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/tableau.svg"
-                                                 alt="Tableau Consultant" loading="lazy" height="48" width="48" />
+                                                 alt="Tableau Consultant" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Tableau Consultant</h3>
                                     </div>
@@ -620,7 +616,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-analyst.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-analyst.svg"
-                                                 alt="Data Analyst" loading="lazy" height="48" width="48" />
+                                                 alt="Data Analyst" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Data Analyst</h3>
                                     </div>
@@ -630,7 +626,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-scientist.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-scientist.svg"
-                                                 alt="Data Scientist" loading="lazy" height="48" width="48" />
+                                                 alt="Data Scientist" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Data Scientist</h3>
                                     </div>
@@ -640,7 +636,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/power-bi-consultant.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/power-bi-consultant.svg"
-                                                 alt="PowerBI Consultant" loading="lazy" height="48" width="48" />
+                                                 alt="PowerBI Consultant" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">PowerBI Consultant</h3>
                                     </div>
@@ -650,7 +646,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-engineer.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/data-engineer.svg"
-                                                 alt="Data Engineer" loading="lazy" height="48" width="48" />
+                                                 alt="Data Engineer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Data Engineer</h3>
                                     </div>
@@ -660,7 +656,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/qlik.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/qlik.svg"
-                                                 alt="Qlik Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Qlik Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Qlik Developer</h3>
                                     </div>
@@ -671,7 +667,7 @@
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/automation-anywhere.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/automation-anywhere.svg"
                                                  alt="Automation Anywhere Developer" loading="lazy" height="48"
-                                                 width="48" />
+                                                 width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Automation Anywhere Developer</h3>
                                     </div>
@@ -679,13 +675,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-cloud-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/cloud.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/cloud.svg"
-                                                 alt="Cloud Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Cloud Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Cloud Developer</h3>
                                     </div>
@@ -695,7 +691,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/aws.svg"
-                                                 alt="AWS Developer" loading="lazy" height="48" width="48" />
+                                                 alt="AWS Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">AWS Developer</h3>
                                     </div>
@@ -705,7 +701,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/azure.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/azure.svg"
-                                                 alt="Azure Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Azure Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Azure Developer</h3>
                                     </div>
@@ -713,13 +709,13 @@
                             </div>
                         </div>
                         <div class="tab-pane">
-                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 oe_structure">
                                 <a href="hire-software-developers">
                                     <div class="boxed bg-gray-light border border-secondary flex items-center h-full">
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/software.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/software.svg"
-                                                 alt="Software Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Software Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Software Developer</h3>
                                     </div>
@@ -729,7 +725,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/software-tester.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/software-tester.svg"
-                                                 alt="Software Tester" loading="lazy" height="48" width="48" />
+                                                 alt="Software Tester" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Software Tester</h3>
                                     </div>
@@ -739,7 +735,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dedicated-developer.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/dedicated-developer.svg"
-                                                 alt="Full Stack Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Full Stack Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Full Stack Developer</h3>
                                     </div>
@@ -749,7 +745,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/offshore.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/offshore.svg"
-                                                 alt="Offshore Developer" loading="lazy" height="48" width="48" />
+                                                 alt="Offshore Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Offshore Developer</h3>
                                     </div>
@@ -759,7 +755,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/powerapps.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/powerapps.svg"
-                                                 alt="PowerApps Developer" loading="lazy" height="48" width="48" />
+                                                 alt="PowerApps Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">PowerApps Developer</h3>
                                     </div>
@@ -769,7 +765,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/remote.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/remote.svg"
-                                                 alt="Remote Developers" loading="lazy" height="48" width="48" />
+                                                 alt="Remote Developers" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">Remote Developers</h3>
                                     </div>
@@ -779,7 +775,7 @@
                                         <div class="svg-icon">
                                             <img src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/api.svg"
                                                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/tech-icon-svg/api.svg"
-                                                 alt="API Developer" loading="lazy" height="48" width="48" />
+                                                 alt="API Developer" loading="lazy" height="48" width="48"/>
                                         </div>
                                         <h3 class="text-h4 mb-0 ml-sm">API Developer</h3>
                                     </div>

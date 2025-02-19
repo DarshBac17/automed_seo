@@ -1,71 +1,102 @@
-console.log("======================save===============call")
-odoo.define('website.custom.editor', function (require) {
+odoo.define('website.editor.error.handler', function (require) {
     'use strict';
 
     const websiteSnippetEditor = require('website.snippet.editor');
-    const ajax = require('web.ajax');
     const Wysiwyg = require('web_editor.wysiwyg');
-
+        const core = require('web.core');
+    const _t = core._t;
     const aSnippetMenu = websiteSnippetEditor.SnippetsMenu.include({
         events: _.extend({}, websiteSnippetEditor.SnippetsMenu.prototype.events, {
             'click .o_we_website_top_actions button[data-action=save]': '_onSaveRequest',
-            'click .o_we_website_top_actions button[data-action=cancel]':'_onDiscardRequest'
         }),
-
-        start: function () {
-            this._super.apply(this, arguments);
-            console.log("Snippet editor started");
-        },
-
         _onSaveRequest: async function (ev) {
-            console.log("Save button clicked");
+             try {
+                    if (this.validateBreadcrumb() && this.validateImageAltTags()) {
+                        await this._super.apply(this, arguments);
+                    }
 
-            try {
-                // Prevent default behavior
-                ev.preventDefault();
-                ev.stopPropagation();
+                } catch (error) {
+                    const errorData = error.data || {};
+                    const errorMessage = errorData.message || error.message || _t('Unknown error occurred');
 
-                // Get the wysiwyg instance
-                const wysiwyg = this.options.wysiwyg;
+                    this.displayNotification({
+                        type: 'danger',
+                        title: _t('Save Failed'),
+                        message: errorMessage,
+                        sticky: false
+                    });
 
-                // Save modified images first if any
-                if (wysiwyg && wysiwyg.saveModifiedImages) {
-                    await wysiwyg.saveModifiedImages();
+                return Promise.reject(error);
                 }
-
-                // Call the original save function
-                await this.trigger_up('request_save', {
-                    reloadEditor: true,
-                    onSuccess: () => {
-                        console.log("Save completed successfully");
-                        // Wait a bit before reloading to ensure save is complete
-                        setTimeout(() => {
-                            console.log("Reloading page...");
-                            window.location.reload(true);
-                        }, 500);
-                    },
-                    onFailure: () => {
-                        console.error("Save operation failed");
-                    },
-                });
-
-            } catch (error) {
-                console.error("Save failed:", error);
-            }
         },
-        _onDiscardRequest: async function (ev) {
-            try {
-                await this.trigger_up('request_cancel');
 
-            } catch (error) {
-                console.error("Discard failed:", error);
+        validateBreadcrumb: function() {
+            const wysiwyg = this.options.wysiwyg;
+            const breadcrumbItems = wysiwyg.odooEditor.document.body.querySelectorAll('.breadcrumb-item');
+            const missingLinks = [];
+        
+            for (let i = 0; i < breadcrumbItems.length; i++) {
+                const item = breadcrumbItems[i];
+                const link = item.querySelector('a');
+                
+                // Skip link validation for the last item
+                if (i === breadcrumbItems.length - 1) {
+                    continue;
+                }
+        
+                if (!link || !link.getAttribute('href') || link.getAttribute('href') === "#") {
+                    const cleanText = item.textContent.trim().replace('&amp;', '&').replace('&nbsp;', ' ');
+                    missingLinks.push(cleanText);
+                }
             }
+        
+            if (missingLinks.length > 0) {
+                const errorMessage = `Missing links in breadcrumb items: ${missingLinks.join(', ')}`;
+                this.displayNotification({
+                    type: 'danger',
+                    title: _t('Save Failed'),
+                    message: _t(errorMessage),
+                    sticky: false
+                });
+                return false;
+            }
+        
+            return true; // Validation passed
+        },
+
+        validateImageAltTags: function() {
+            const wysiwyg = this.options.wysiwyg;
+            const images = wysiwyg.odooEditor.document.body.querySelectorAll('img');
+            const missingAltTags = [];
+
+            for (const image of images) {
+                const altText = image.getAttribute('alt');
+                const src = image.getAttribute('src') || '';
+
+                // Check if alt attribute is missing or empty
+                if (!altText || altText.trim() === '') {
+                    // Get filename from src as a reference
+                    const fileName = src.split('/').pop() || 'Unknown Image';
+                    missingAltTags.push(fileName);
+                }
+            }
+
+            if (missingAltTags.length > 0) {
+                const errorMessage = `Missing alt text for images: ${missingAltTags.join(', ')}`;
+                this.displayNotification({
+                    type: 'danger',
+                    title: _t('Save Failed'),
+                    message: _t(errorMessage),
+                    sticky: false
+                });
+                return false;
+            }
+
+            return true; // Validation passed
         }
     });
 
-    return {
-        SnippetsMenu: aSnippetMenu,
-    };
+    return aSnippetMenu;
 });
 //odoo.define('website.custom.editor', function (require) {
 //    'use strict';

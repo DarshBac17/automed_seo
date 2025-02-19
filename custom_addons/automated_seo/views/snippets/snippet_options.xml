@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_seo_options">
+
+
+        <div data-js="EditableBoxSelector" data-selector=".o_editable">
+
+        </div>
+
+        <div data-js="LengthConstraintSelector" data-selector=".o_automated_seo_php_variable">
+
+        </div>
+
+        <div data-js="SeoOptionsSelector" data-selector=".o_automated_seo_php_variable">
+            <we-title data-bs-original-title="" title="" style="" class="mt-4 mb-4">
+                <span>Seo options</span>
+            </we-title>
+            <div class="mt-4 php-var-input-sec">
+
+            </div>
+
+            <div class="mt-4">
+                <label class="mb-2 font-weight-bold fw-bold">Seo Related</label>
+
+                <div class="d-flex align-items-center gap-2">
+                    <we-button
+                            data-variable-class="strong-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Strong">
+                        <i class="fa fa-bold"></i> Strong Tag
+                    </we-button>
+                    <we-button
+                            data-variable-class="b-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="B Tag">
+                        <i class="fa fa-text-height"></i> B Tag
+                    </we-button>
+                    <we-button
+                            data-variable-class="font-bold"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Font-Bold">
+                        <i class="fa fa-font"></i> Font-Bold
+                    </we-button>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <we-button
+                            data-variable-class="italic-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="Strong">
+                        <i class="fa fa-italic fa-fw"></i>
+                    </we-button>
+                    <we-button
+                            data-variable-class="underline-tag"
+                            data-no-preview="true"
+                            class="btn btn-sm btn-primary"
+                            title="B Tag">
+                        <i class="fa fa-underline fa-fw"></i>
+                    </we-button>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="mb-2 font-weight-bold fw-bold">Link Editing</label>
+                <div class="d-flex flex-column gap-2">
+                    <!-- Link Management Section -->
+                    <div class="d-flex align-items-center gap-2">
+                        <we-button
+                                data-variable-class="a-tag"
+                                data-no-preview="true"
+                                class="btn btn-sm btn-primary"
+                                title="Add/Edit Link">
+                            <i class="fa fa-link"></i>
+                        </we-button>
+                    </div>
+
+                    <!-- URL Input Section - Initially Hidden -->
+                    <div class="url-input-section d-none">
+                        <div class="form-group mb-2">
+                            <input type="text"
+                                   class="form-control form-control-sm link-url-input text-white"
+                                   placeholder="Enter URL (e.g., https://...)"
+                            />
+                        </div>
+                        <div class="form-group mb-2">
+                            <we-select string="Style" class="link-style-dropdown" data-no-preview="true">
+                                <we-button class="link-style-option active" data-style-class="" data-display="none">none</we-button>
+                                <we-button class="link-style-option" data-style-class="text-primary font-bold" data-display="Text Primary">Text Primary</we-button>
+                            </we-select>
+                        </div>
+
+
+                        <div class="form-group mb-2">
+                            <we-checkbox
+                                    string="Open in new tab"
+                                    data-select-class="o_au_link_target"
+                                    data-no-preview="true"/>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <we-button
+                                    data-save-url="true"
+                                    class="btn btn-sm btn-primary">
+                                Save Link
+                            </we-button>
+                            <we-button
+                                    data-remove-url="true"
+                                    class="btn btn-sm btn-danger d-none">
+                                Remove Link
+                            </we-button>
+                            <we-button
+                                    data-cancel-url="true"
+                                    class="btn btn-sm btn-secondary">
+                                Cancel
+                            </we-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </template>
+</odoo>
+

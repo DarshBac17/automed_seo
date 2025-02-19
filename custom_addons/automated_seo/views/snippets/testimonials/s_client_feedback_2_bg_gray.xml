@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_client_feedback_2_bg_gray" name="Client Feedback 2 gray">
-        <section class="o_automated_seo_snippet bg-gray-light">
+    <template id="s_client_feedback_2_bg_gray" name="Client Feedback 2 Gray">
+        <section class="o_automated_seo_snippet bg-gray-light o_automated_seo_php_variable">
             <div class="container">
 
                 <div class="cont-padding text-center">
                     <h2>Heading Heading Heading Heading Heading Heading</h2>
                     <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check oe_structure">
-                    <div class="boxed bg-white o_replace_section_div">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 style-check o_sub_items_container">
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" title="Gerry Dunne" width="60" height="60" loading="lazy" class="w-full">-->
-                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="Gerry Dunne" title="Gerry Dunne" width="60" height="60" loading="lazy" class="w-full gerry-dunne"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/Gerry-Dunne.png" alt="" title="" width="60" height="60" loading="lazy" class="w-full"/>
                             </div>
                             <div>
                                 <p class="text-h4 font-bold mb-0">Person Name</p>
@@ -21,12 +21,12 @@
                             </div>
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full">-->
-                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" alt="Mike Lim" title="Mike Lim" width="60" height="60" loading="lazy" class="w-full mike"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/mike.png" alt="" title="" width="60" height="60" loading="lazy" class="w-full"/>
                             </div>
                             <div>
                                 <p class="text-h4 font-bold mb-0">Person Name</p>
@@ -35,12 +35,12 @@
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
 
-                    </div>
-                    <div class="boxed bg-white o_replace_section_div">
+                    </section>
+                    <section class="boxed bg-white o_replace_section_div">
                         <div class="flex items-center mb-sm small-heading">
                             <div class="size-60 mr-sm">
                                 <!--                            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full">-->
-                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" alt="Laura Odorczyk" title="Laura Odorczyk" width="60" height="60" loading="lazy" class="w-full laura"/>
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" data-src="https://assets.bacancytechnology.com/main-boot-5/images/testimonials/laura.png" alt="" title="" width="60" height="60" loading="lazy" class="w-full"/>
                             </div>
                             <div>
                                 <p class="text-h4 font-bold mb-0">Person Name</p>
@@ -49,11 +49,9 @@
                         </div>
                         <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description </p>
 
-                    </div>
+                    </section>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="#footer-form-id" class="btn btn-outline-primary">Button Text</a>
-                </div>
+                <div class="text-center mt-md"><a href="#footer-form-id" class="btn btn-outline-primary">Button Text</a></div>
             </div>
         </section>
 

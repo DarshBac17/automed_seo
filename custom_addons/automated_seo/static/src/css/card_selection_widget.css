@@ -1,0 +1,77 @@
+.o_card_selection {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    align-items: stretch; /* Ensure all items stretch to the same height */
+    flex-wrap: wrap; /* In case items don't fit in one row */
+}
+
+.o_card_selection.o_horizontal {
+    flex-direction: row;
+}
+
+.o_card_selection.o_vertical {
+    flex-direction: column;
+}
+
+.o_card_item {
+    flex: 1;
+    min-width: 200px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch items to equal height */
+}
+
+.o_card_item.selected .o_card_content {
+    border-color: #7c7bad;
+    background-color: #f8f9fa;
+}
+
+.o_radio_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Make sure it fills height */
+}
+
+.o_hidden_radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.o_hidden_radio:focus + .o_card_content {
+    outline: 2px solid #7c7bad;
+    outline-offset: 2px;
+}
+
+.o_card_content {
+    flex-grow: 1; /* Ensures content stretches equally */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Balances content inside */
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    height: 100%; /* Set a fixed height for uniformity */
+}
+
+.o_card_content:hover {
+    border-color: #7c7bad;
+    background-color: #f8f9fa;
+}
+
+.o_card_title {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.o_card_description {
+    color: #6c757d;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    flex-grow: 1; /* Allows description to expand and align items */
+}

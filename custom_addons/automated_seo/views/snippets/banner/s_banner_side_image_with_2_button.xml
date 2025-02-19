@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_banner_side_image_with_2_button" name="Banner side image with 2 button">
-        <section class="banner banner-post header-top banner-after">
+    <template id="s_banner_side_image_with_2_button" name="Banner Side Image with 2 Button">
+        <section class="banner banner-post header-top banner-after o_automated_seo_php_variable">
 
             <img src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"
                  data-src="https://assets.bacancytechnology.com/main-boot-5/images/hire-iphone-application/banner-2.jpg"
-                 alt="Hire iOS Developers" title="Hire iOS Developers" width="1900" height="900" loading="eager"
-                 class="banner-post-img hire-iphone-application-banner-2"/>
+                 alt="" title="" width="1900" height="900" loading="eager"
+                 class="banner-post-img"/>
 
             <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
 
@@ -17,8 +17,8 @@
                         Description Description Description Description Description Description Description Description
                     </p>
                     <div class="flex flex-wrap gap-6 text-center resp-btn-two">
-                        <a href="#case-study" class="btn btn-outline-primary">Button Name</a>
-                        <a href="#tech-stack" class="btn btn-primary">Button Name</a>
+                        <a href="#case-study" class="btn btn-outline-primary">Button Text</a>
+                        <a href="#tech-stack" class="btn btn-primary">Button Text</a>
                     </div>
                 </div>
             </div>

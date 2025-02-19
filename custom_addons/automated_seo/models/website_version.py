@@ -1,21 +1,22 @@
 from email.policy import default
+# from multiprocessing.managers import view_type
 
 from odoo import models, fields, api
+from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import UserError
 import json
 import os
 from bs4 import BeautifulSoup, NavigableString
 from itertools import zip_longest
-import html
+import  html
 import io
 import xml.etree.ElementTree as ET
 from PIL import Image, UnidentifiedImageError
 from .ftp_setup import transfer_file_via_scp
 import re
-import base64
+import  base64
 from odoo.tools.populate import compute
 from .ftp_setup import transfer_file_via_scp
-
 
 class VersionCompareWizard(models.TransientModel):
     _name = "automated_seo.version_compare_wizard"
@@ -26,7 +27,7 @@ class VersionCompareWizard(models.TransientModel):
     base_version = fields.Many2one(
         'website.page.version',
         string="Base version",
-        domain="[('view_id', '=', view_id)]",
+        domain = "[('view_id', '=', view_id)]",
     )
 
     compare_version = fields.Many2one(
@@ -34,33 +35,31 @@ class VersionCompareWizard(models.TransientModel):
         string="Compare version",
         domain="[('id', '!=', base_version),('view_id', '=', view_id)]",
     )
-
-    def is_php_content(self, text):
-        # Check if content is PHP tag/include
+    def is_php_content(self,text):
+                # Check if content is PHP tag/include
         return '<?php' in text or text.strip().startswith('php')
-
     def highlight_differences(self, base_soup, compare_soup):
         def compare_elements(base_elem, compare_elem):
             # Handle text nodes
             if compare_elem and compare_elem.name == 'img':
-                base_src = base_elem.get('src') if base_elem else None
+                base_src = base_elem.get('src') if base_elem else None 
                 compare_src = compare_elem.get('src')
                 if base_src != compare_src:
                     compare_elem['class'] = compare_elem.get('class', []) + ['ae_img_highlight']
                 return compare_elem
-
+             
             if isinstance(base_elem, NavigableString) and isinstance(compare_elem, NavigableString):
                 base_text = str(base_elem).strip()
                 compare_text = str(compare_elem).strip()
-
+                
                 if self.is_php_content(base_text) or self.is_php_content(compare_text):
                     return compare_elem
-
+                    
                 if base_text != compare_text:
                     base_words = base_text.split()
                     compare_words = compare_text.split()
                     result = []
-
+                    
                     for base_word, compare_word in zip_longest(base_words, compare_words):
                         if compare_word and not base_word:
                             # New word
@@ -70,10 +69,10 @@ class VersionCompareWizard(models.TransientModel):
                             result.append(f'<span class="ae_highlight">{compare_word or ""}</span>')
                         else:
                             result.append(base_word)
-
+                            
                     return BeautifulSoup(' '.join(result), 'html.parser')
                 return compare_elem
-
+                
             # Handle elements
             if hasattr(base_elem, 'children') and hasattr(compare_elem, 'children'):
                 base_children = list(base_elem.children)
@@ -88,28 +87,28 @@ class VersionCompareWizard(models.TransientModel):
                             new_elem['class'] = new_elem.get('class', []) + ['ae_new_section']
                         else:
                             new_elem['class'] = ['ae_new_section']
-
+                        
                 for base_child, compare_child in zip_longest(list(base_elem.children), list(compare_elem.children)):
                     if base_child and compare_child:
                         result = compare_elements(base_child, compare_child)
                         if result != compare_child:
                             compare_child.replace_with(result)
-
+                            
             return compare_elem
 
         return compare_elements(base_soup, compare_soup)
-
+                
     def compare_sections(self, base_soup, compare_soup):
-        # Get all sections
-        base_sections = base_soup.find_all('section', {'data-snippet': True})
+    # Get all sections
+        base_sections = base_soup.find_all('section',{'data-snippet': True})
         compare_sections = compare_soup.find_all('section', {'data-snippet': True})
-
+        
         # Create dict of section_type: hash pairs from base
         base_section_data = {
-            section.get('data-snippet').split('-')[0]: section.get('data-snippet').split('-')[1]
+            section.get('data-snippet').split('-')[0]: section.get('data-snippet').split('-')[1] 
             for section in base_sections
         }
-
+        
         matched_sections = set()
         css = """
         <style>
@@ -118,10 +117,10 @@ class VersionCompareWizard(models.TransientModel):
             .ae_missing_section { background-color: #ffcccc; opacity: 0.7; }
         </style>
         """
-
+        
         for compare_section in compare_sections:
             compare_type = compare_section.get('data-snippet').split('-')[0]
-
+            
             if compare_type not in base_section_data:
                 # New section type
                 compare_section['class'] = compare_section.get('class', []) + ['ae_new_section']
@@ -130,19 +129,20 @@ class VersionCompareWizard(models.TransientModel):
                 base_hash = base_section_data[compare_type]
                 base_section = base_soup.find('section', {'data-snippet': f"{compare_type}-{base_hash}"})
                 # base_section = next(
-                #     (section for section in base_sections
+                #     (section for section in base_sections 
                 #     if section.get('data-snippet') == f"{compare_type}-{base_hash}"),
                 #     None
                 # )
-
+                
                 if base_section:
                     # Compare content and highlight differences
                     highlighted = self.highlight_differences(base_section, compare_section)
                     if highlighted:
                         compare_section.replace_with(highlighted)
                     matched_sections.add(base_section)
-
-        return str(compare_soup)
+        
+        return  str(compare_soup)
+    
 
     def add_head(self, html_parser, seo_view_id):
         soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
@@ -158,7 +158,7 @@ class VersionCompareWizard(models.TransientModel):
         description_meta['name'] = 'description'
         description_meta['content'] = base_version.header_description
         head_tag.append(description_meta)
-        common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>', "html.parser")
+        common_meta_tag = BeautifulSoup('<?php include("tailwind/template/common-meta.php"); ?>',"html.parser")
         head_tag.append(common_meta_tag)
 
         og_title_meta = soup.new_tag('meta')
@@ -173,21 +173,22 @@ class VersionCompareWizard(models.TransientModel):
 
         image_url = f'inhouse/{base_version.view_id.name.replace(" ", "").lower()}/{base_version.image_filename.replace(" ", "-").replace("%20", "-").lower()}' if base_version.view_id.name and base_version.image_filename and base_version.image else None
 
-        if image_url:
+        if  image_url:
             og_image_meta = soup.new_tag('meta')
             og_image_meta['property'] = 'og:image'
             og_image_meta['content'] = f'<?php echo BASE_URL_IMAGE; ?>{image_url}'
             head_tag.append(og_image_meta)
+
 
         og_url_meta = soup.new_tag('meta')
         og_url_meta['property'] = 'og:url'
 
         # if not self.publish_url:
         #     self.publish_url = f"https://www.bacancytechnology.com/{self.name}"
-        og_url_meta['content'] = base_version.view_id.publish_url.replace("https://www.bacancytechnology.com/",
-                                                                          "<?php echo BASE_URL; ?>")
+        og_url_meta['content'] = base_version.view_id.publish_url.replace("https://www.bacancytechnology.com/","<?php echo BASE_URL; ?>")
 
         head_tag.append(og_url_meta)
+
 
         # for metadata in self.header_metadata_ids:
         #     meta_tag = soup.new_tag('meta')
@@ -198,7 +199,7 @@ class VersionCompareWizard(models.TransientModel):
 
         # link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         # head_tag.append(link_css_php)
-        link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>', "html.parser")
+        link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
         for link in base_version.header_link_ids:
             tag = soup.new_tag('link')
@@ -257,9 +258,10 @@ class VersionCompareWizard(models.TransientModel):
             {css}
         """
 
-        webpage_script_soup = BeautifulSoup(webpage_script, 'html.parser')
+        webpage_script_soup = BeautifulSoup(webpage_script,'html.parser')
 
         head_tag.append(webpage_script_soup)
+
 
         if html_parser:
             parsed_content = BeautifulSoup(html_parser, 'html.parser')
@@ -274,8 +276,8 @@ class VersionCompareWizard(models.TransientModel):
             link = breadcrumb.find('a')
             position = index + 1
             if not link:
-                if len(breadcrumb_items_tags) - 1 == index:
-                    url = f"<?php echo BASE_URL; ?>{page_name}"
+                if len(breadcrumb_items_tags)-1 == index:
+                    url  = f"<?php echo BASE_URL; ?>{page_name}"
                     id = url + '/'
                     name = breadcrumb.text.strip()
                     item = {
@@ -295,10 +297,9 @@ class VersionCompareWizard(models.TransientModel):
 
             if link:
 
-                url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(
-                    breadcrumb_items_tags) - 1 else ValueError("breadcrumb url not set")
+                url = link.get('href') if link else f"<?php echo BASE_URL; ?>{page_name}" if index == len(breadcrumb_items_tags)-1 else ValueError("breadcrumb url not set")
 
-                if isinstance(url, ValueError):
+                if isinstance(url,ValueError):
                     raise url
                 id = url + '/'
                 name = link.text.strip() if link else breadcrumb.text.strip()
@@ -316,6 +317,7 @@ class VersionCompareWizard(models.TransientModel):
 
                 breadcrumb_items.append(item)
 
+
         breadcrumb_items_json = seo_view.format_json_with_tabs(breadcrumb_items)
 
         # Generate the final script
@@ -332,7 +334,8 @@ class VersionCompareWizard(models.TransientModel):
         head_tag.append(breadcrumb_script_soup)
         return soup.prettify()
 
-    def remove_sub_snippet_sections(self, html_parser):
+
+    def remove_sub_snippet_sections(self,html_parser):
         # Parse the HTML content
         soup = BeautifulSoup(html_parser, 'html.parser')
 
@@ -341,7 +344,7 @@ class VersionCompareWizard(models.TransientModel):
             sec.name = 'div'
         return soup.prettify()
 
-    def handle_dynamic_img_tag(self, view_name, html_parser):
+    def handle_dynamic_img_tag(self,view_name,html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
 
         for img in soup.select('img'):
@@ -386,24 +389,25 @@ class VersionCompareWizard(models.TransientModel):
                 element = next((cls for cls in img_tag_classes if cls.startswith('o_imagename')), None)
 
                 if element:
-                    new_image_name = element.split('_', 2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ', '').lower()}/{new_image_name.replace('%20', '-').replace('_', '-').lower()}"
+                    new_image_name = element.split('_',2)[-1]
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name.replace('%20','-').replace('_','-').lower()}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
+
+
             for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
-                         "data-scale-x", "data-scale-y", "data-height", "data-aspect-ratio", "data-width",
-                         "data-bs-original-title", "aria-describedby", "data-shape", "data-file-name",
-                         "data-shape-colors",
-                         "data-gl-filter", "data-quality", "data-scroll-zone-start", "data-scroll-zone-end", "style",
-                         " data-shape-colors"]:
+                         "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width",
+                         "data-bs-original-title","aria-describedby","data-shape","data-file-name","data-shape-colors",
+                         "data-gl-filter","data-quality","data-scroll-zone-start","data-scroll-zone-end","style"," data-shape-colors"]:
 
                 if img.has_attr(attr):
                     del img[attr]
 
         return str(soup.prettify())
 
-    def handle_dynamic_img_tag2(self, html_parser):
+
+    def handle_dynamic_img_tag2(self,html_parser):
         soup = BeautifulSoup(html_parser, "html.parser")
         base_url_php = "<?php echo BASE_URL_IMAGE; ?>"
         for img in soup.select('img'):
@@ -412,12 +416,12 @@ class VersionCompareWizard(models.TransientModel):
             img['src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             img['data-src'] = url.replace("https://assets.bacancytechnology.com/", base_url_php)
             try:
-                if img.get('height'):
+                if img.get('height') :
                     img['height'] = int(float(img.get('height')))
             except ValueError as e:
                 img['height'] = img.get('height')
             try:
-                if img.get('height'):
+                if img.get('height') :
                     img['width'] = int(float(img.get('width')))
             except ValueError as e:
                 img['width'] = img.get('width')
@@ -431,26 +435,27 @@ class VersionCompareWizard(models.TransientModel):
 
         return str(soup.prettify())
 
-    def action_compile_button(self, version_compare_parser):
+
+    def action_compile_button(self,version_compare_parser):
         # view = View()
         seo_view_id = self.compare_version.view_id.id
         seo_view = self.env['automated_seo.view'].browse(seo_view_id)
         html_parser = self.handle_dynamic_img_tag(html_parser=version_compare_parser, view_name=seo_view.name)
-        html_parser = self.handle_dynamic_img_tag2(html_parser=html_parser)
+        html_parser = self.handle_dynamic_img_tag2(html_parser = html_parser)
         html_parser = seo_view.replace_php_tags_in_html(html_parser=html_parser)
         html_parser = seo_view.handle_dynamic_anchar_tag(html_parser=html_parser)
         if html_parser:
             html_parser = seo_view.remove_bom(html_parser=html_parser)
-            html_parser = seo_view.remove_empty_tags(html_parser=html_parser)
+            html_parser = seo_view.remove_empty_tags(html_parser = html_parser)
             html_parser = seo_view.handle_breadcrumbs(html_content=html_parser)
             html_parser = seo_view.handle_itemprop_in_faq(html_content=html_parser)
-            html_parser = self.add_head(html_parser=html_parser, seo_view_id=seo_view_id)
+            html_parser = self.add_head(html_parser = html_parser, seo_view_id = seo_view_id)
             html_parser = seo_view.add_js_scripts(html_parser)
             html_parser = seo_view.remove_odoo_classes_from_tag(html_parser)
             soup = BeautifulSoup(html_parser, "html.parser")
             html_parser = soup.prettify()
             html_parser = seo_view.format_paragraphs(html_content=html_parser)
-            html_parser = seo_view.remove_extra_spaces(html_parser=html_parser)
+            html_parser = seo_view.remove_extra_spaces(html_parser = html_parser)
             html_parser = seo_view.format_html_php(html_content=html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
@@ -459,51 +464,52 @@ class VersionCompareWizard(models.TransientModel):
             # file = base64.b64encode(html_parser.encode('utf-8'))
             # version = self.env['website.page.version'].search(['&',('view_id','=',self.id),("status", "=", True)],limit =1)
             # file_name = f"{view_name}_{self.active_version.name}.php"
-
     # @api.onchange('base_version_id', 'compare_version_id')
+
 
     def remove_anchor_tags(self, html_content):
 
         soup = BeautifulSoup(html_content, 'html.parser')
-
+        
         for anchor in soup.find_all('a'):
             if not ('btn' in anchor.get('class', [])):
                 anchor.unwrap()
-
+            
         return str(soup)
 
     def action_compare_versions(self):
         if self.base_version and self.compare_version:
             base_content = self.base_version.view_arch or ''
             compare_content = self.compare_version.view_arch or ''
-            # Remove anchor tags before comparison
+             # Remove anchor tags before comparison
             base_content = self.remove_anchor_tags(base_content)
             compare_content = self.remove_anchor_tags(compare_content)
-
+            
             base_content = self.remove_sub_snippet_sections(html_parser=base_content)
             compare_content = self.remove_sub_snippet_sections(html_parser=compare_content)
             if base_content and compare_content:
                 base_content = html.unescape(base_content)
                 compare_content = html.unescape(compare_content)
-                base_content = self.handle_dynamic_img_tag(html_parser=base_content,
-                                                           view_name=self.base_version.view_id.name)
-                compare_content = self.handle_dynamic_img_tag(html_parser=compare_content,
-                                                              view_name=self.base_version.view_id.name)
+                base_content = self.handle_dynamic_img_tag(html_parser=base_content, view_name=self.base_version.view_id.name)
+                compare_content = self.handle_dynamic_img_tag(html_parser=compare_content, view_name=self.base_version.view_id.name)
                 base_soup = BeautifulSoup(base_content, 'html.parser')
                 compare_soup = BeautifulSoup(compare_content, 'html.parser')
                 result = self.compare_sections(compare_soup, base_soup)
                 html_parser = self.action_compile_button(version_compare_parser=result)
                 file = base64.b64encode(html_parser.encode('utf-8'))
                 compare_file_name = f"{self.base_version.view_id.name}_version_compare.php"
-                result = transfer_file_via_scp(page_name=compare_file_name, file_data=file)
+                result = transfer_file_via_scp(page_name = compare_file_name, file_data=file)
                 if result:
                     seo_view = self.env['automated_seo.view'].browse(self.base_version.view_id.id)
                     seo_view.write({
-                        "diff_html": html_parser,
-                        "diff_html_binary": file,
-                        "diff_html_filename": compare_file_name,
-                        "diff_url": f"https://automatedseo.bacancy.com/{compare_file_name}"
+                        "diff_html" : html_parser,
+                        "diff_html_binary" : file,
+                        "diff_html_filename" : compare_file_name,
+                        "diff_url" : f"https://automatedseo.bacancy.com/{compare_file_name}"
                     })
+
+
+
 
 
 class WebsitePageVersion(models.Model):
@@ -513,15 +519,15 @@ class WebsitePageVersion(models.Model):
 
     name = fields.Char('Version Name', store=True)
     # description = fields.Text('Description')
-    view_id = fields.Many2one('automated_seo.view', string='View', required=True)
+    view_id =  fields.Many2one('automated_seo.view', string='View', required=True)
     page_id = fields.Many2one('website.page', string='Website Page', required=True)
     view_arch = fields.Text('Saved View Architecture', required=True)
     parse_html = fields.Text(string="Parse HTML")
     parse_html_binary = fields.Binary(string="Parsed HTML File", attachment=True)
     parse_html_filename = fields.Char(string="Parsed HTML Filename")
     user_id = fields.Many2one('res.users', string='Created by')
-    status = fields.Boolean('Status', default=False)
-    publish = fields.Boolean('Publish', default=False)
+    status = fields.Boolean('Status',default=False)
+    publish = fields.Boolean('Publish',default=False)
     publish_at = fields.Datetime('Publish At')
     # change = fields.Selection([
     #     ('major_change', 'Major Changes'),
@@ -624,13 +630,14 @@ class WebsitePageVersion(models.Model):
     #     self.ensure_one()
     #     self._compute_version_name()
 
+
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
         """Override to prevent form view from loading"""
         result = super(WebsitePageVersion, self).get_view(view_id, view_type, **options)
         form_view_ref = self.env.context.get('form_view_ref')
         if form_view_ref:
-            return result
+            return  result
         if view_type == 'form':
             raise UserError('Form view is not available for you')
         return result
@@ -643,21 +650,21 @@ class WebsitePageVersion(models.Model):
             result.append((record.id, display_name))
         return result
 
+
     @api.model
     def create(self, vals):
         if not vals.get('view_id'):
             raise UserError('View ID is required to create a version')
-        seo_view = self.env['automated_seo.view'].search([('id', '=', vals['view_id'])])
+        seo_view = self.env['automated_seo.view'].search([('id','=',vals['view_id'])])
         initial_version = self.env.context.get('initial_version')
         current_version = self.env['website.page.version'].search(
             ['&', ('status', '=', True), ('view_id', '=', seo_view.id)])
-        view_arch = vals.get('view_arch') if vals.get(
-            'view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
+        view_arch = vals.get('view_arch') if vals.get('view_arch') else seo_view.website_page_id.arch_db if seo_view.website_page_id else False
 
         version_count = self.env['website.page.version'].search_count([
             ('view_id', '=', vals.get('view_id'))
         ])
-        vals['name'] = f"v{version_count + 1}"
+        vals['name'] = f"v{version_count+1}"
         if current_version and seo_view:
             current_version.stage = seo_view.stage
             current_version.header_title = seo_view.header_title
@@ -665,7 +672,7 @@ class WebsitePageVersion(models.Model):
             current_version.image = seo_view.image
             current_version.image_filename = seo_view.image_filename
             current_version.publish_url = seo_view.publish_url
-            current_version.view_arch = seo_view.page_id.arch_db if seo_view.page_id.arch_db else None
+            current_version.view_arch = seo_view.page_id.arch_db  if seo_view.page_id.arch_db else None
             current_version.status = False
             # current_version.header_metadata_ids.write({'is_active': False})
             current_version.header_link_ids.write({'is_active': False})
@@ -683,7 +690,7 @@ class WebsitePageVersion(models.Model):
                 'user_id': self.env.user.id,
                 'header_title': seo_view.header_title,
                 'header_description': seo_view.header_description,
-                'publish_url': seo_view.publish_url
+                'publish_url':seo_view.publish_url
             })
         else:
             base_version = self.browse(int(vals.get('base_version')))
@@ -736,10 +743,10 @@ class WebsitePageVersion(models.Model):
             # description = vals.get('description')
 
             vals.update({
-                'status': True,
-                'user_id': self.env.user.id,
-                'stage': 'in_progress',
-                'publish': False
+                'status' : True,
+                'user_id' : self.env.user.id,
+                'stage' : 'in_progress',
+                'publish' : False
             })
 
             # base_version.header_metadata_ids.write({'is_active': False})
@@ -747,16 +754,18 @@ class WebsitePageVersion(models.Model):
 
         record = super(WebsitePageVersion, self).create(vals)
 
+
+
         seo_view.write({
             'parse_html': record.parse_html,
             'parse_html_filename': record.parse_html_filename,
             'parse_html_binary': record.parse_html_binary,
             'publish': False,
-            'stage': record.stage,
+            'stage':record.stage,
             'header_title': record.header_title,
             'header_description': record.header_description,
-            'image': record.image,
-            'image_filename': record.image_filename,
+            'image':record.image,
+            'image_filename':record.image_filename,
             'publish_url': record.publish_url
         })
 
@@ -766,6 +775,7 @@ class WebsitePageVersion(models.Model):
         record.view_id.message_post(body=f"Version '{record.name}' created and activated")
 
         seo_view.active_version = record.id
+
 
         if initial_version and not record.selected_filename:
             self.env['automated_seo.page_header_link'].create({
@@ -779,6 +789,7 @@ class WebsitePageVersion(models.Model):
             seo_view.update_stage_file()
 
         return record
+
 
     # def create_default_version_metadata(self, record):
     #     if not record.view_id.header_metadata_ids:
@@ -815,6 +826,8 @@ class WebsitePageVersion(models.Model):
     #             'css_link' : "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
     #             'view_version_id': record.id
     #         })
+
+
 
     def action_version(self):
 

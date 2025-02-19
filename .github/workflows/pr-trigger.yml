@@ -1,0 +1,25 @@
+name: Pull Request Trigger
+
+on:
+  push:
+    # types: [opened]  # Trigger only when a PR is opened (can also use 'synchronize' to trigger on updates)
+    branches:
+      - dev         # Target branch should be 'dev' in your case (or adjust as needed)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Script on EC2
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/
+            ./update_server.sh
+#    - name: Run shell script or make an API call
+#      run: |
+#        # Run your shell script or call an API here
+#         curl -X POST http://65.0.83.186:8069/webhook-handler

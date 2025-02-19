@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="s_internal_linking_list_bg_white" name="Internal linking list White">
-        <section class="container">
+    <template id="s_internal_linking_list_bg_white" name="Internal Linking List White">
+        <section class="container o_automated_seo_php_variable">
             <div class="text-center cont-padding">
                 <h2>Heading Heading Heading Heading Heading Heading Heading Heading</h2>
             </div>
             <div class="style-check">
                 <ul class="grid grid-cols-1 md:grid-cols-2 boxed bg-gray-light">
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
                     <!--                    <li>Angular UI/UX Development</li>-->
                     <!--                    <li>-->
                     <!--                        <a href="<?php echo BASE_URL; ?>angular-upgrade-service" class="text-primary font-bold">Angular-->
                     <!--                            Upgrade Services-->
                     <!--                        </a>-->
                     <!--                    </li>-->
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
-                    <li>Description Description Description Description</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
+                    <li>list Item list Item list Item list Item</li>
 
                 </ul>
-                <div class="text-center mt-md">
-                    <a href="#form" class="btn btn-outline-primary">Description Description Description</a>
-                </div>
+                <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button Text</a></div>
             </div>
         </section>
 

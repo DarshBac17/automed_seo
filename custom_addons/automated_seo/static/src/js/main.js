@@ -98,26 +98,26 @@ $(document).ready(function() {
         $parent.toggleClass("active");
     });
 
-    $(".footer-address").slick({
-        arrows: true,
-        dots: false,
-        slidesToShow: 3,
-        slidesToScroll: 2,
-        responsive: [
-            { breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-            { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } }
-        ]
-    });
-
-    $(".footer-slider").slick({
-        infinite: false,
-        customPaging: function(slider, i) {
-            return '<button class="tab">' + $(slider.$slides[i]).attr("title") + "</button>";
-        },
-        arrows: true,
-        dots: true,
-        responsive: [{ breakpoint: 767, settings: { arrows: false } }]
-    });
+//    $(".footer-address").slick({
+//        arrows: true,
+//        dots: false,
+//        slidesToShow: 3,
+//        slidesToScroll: 2,
+//        responsive: [
+//            { breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+//            { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } }
+//        ]
+//    });
+//
+//    $(".footer-slider").slick({
+//        infinite: false,
+//        customPaging: function(slider, i) {
+//            return '<button class="tab">' + $(slider.$slides[i]).attr("title") + "</button>";
+//        },
+//        arrows: true,
+//        dots: true,
+//        responsive: [{ breakpoint: 767, settings: { arrows: false } }]
+//    });
 
     if (window.matchMedia("(max-width: 767px)").matches) {
         $(".resp-btn").insertAfter(".resp-btn-outer");

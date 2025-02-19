@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <odoo>
-    <template id="s_steps_bg_white" name="Steps white">
-        <section class="o_automated_seo_snippet container">
+    <template id="s_steps_bg_white" name="Steps White">
+        <section class="o_automated_seo_snippet container o_automated_seo_php_variable">
             <h2 class="text-center cont-padding">Header Header Header Header</h2>
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 oe_structure">
-                <div class="boxed bg-gray-light o_replace_section_div">
+            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 o_sub_items_container">
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">1</span>
                     <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description Description Description</p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">2</span>
                     <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description.</p>
-                </div>
-                <div class="boxed bg-gray-light o_replace_section_div">
+                </section>
+                <section class="boxed bg-gray-light o_replace_section_div">
                     <span class="bg-dark text-white h-11 w-11 flex items-center justify-center rounded-full mb-sm">3</span>
                     <h3 class="text-h4 small-heading">Subheading Subheading Subheading</h3>
                     <p class="small-heading-two">Description Description Description Description Description Description Description Description Description Description</p>
-                </div>
+                </section>
             </div>
-            <div class="text-center mt-md">
-                <a href="#form" class="btn btn-outline-primary">Button text</a>
-            </div>
+            <div class="text-center mt-md"><a href="#form" class="btn btn-outline-primary">Button text</a></div>
         </section>
 
     </template>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_faq_with_list_bg_gray" name="Faq bg Gray">
+        <section class="o_automated_seo_snippet o_automated_seo_php_variable bg-gray-light">
+            <div class="container grid md:gap-6 grid-cols-1 md:grid-cols-11">
+                <div class="md:col-span-3 o_not_editable">
+                    <div class="side-sticky">
+                        <h2 class="cont-padding">Frequently Asked Questions</h2>
+                        <a href="#footer-form-id" class="text-h5 text-primary faq-head max-md:mt-sm">Still have questions? <span class="md:block">Let’s talk<span class="bg-rightarrowLineBlack"></span></span></a>
+                    </div>
+                </div>
+                <div class="md:col-span-8 faq-head-outer">
+                    <div class="accordian-outer o_sub_items_container" itemscope="acceptedAnswer" itemtype="https://schema.org/FAQPage">
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-heading active">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
+                            </div>
+                            <div class="accordian-text active o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
+                            </div>
+                        </section>
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-heading">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
+                            </div>
+                            <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
+                            </div>
+                        </section>
+                        <section class="accordion-item accordian-tab bg-white o_replace_section_div" itemscope="acceptedAnswer" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-heading">
+                                <h3 itemprop="name" class="font-bold text-dark text-base mb-0">Question Question Question Question Question Question?</h3>
+                            </div>
+                            <div class="accordian-text o_answer_itemprop" itemscope="acceptedAnswer" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+                                <ul><li>List Item</li><li>List Item</li></ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

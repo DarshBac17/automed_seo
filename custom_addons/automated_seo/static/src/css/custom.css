@@ -1,20 +1,346 @@
-.custom-flex-layout {
-    display: flex;  /* Switch from grid to flex */
-    flex-direction: row;  /* Ensure it's a row layout */
+.o_replace_section_div {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.ou_section {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
+}
+
+
+.device-type-if,
+.device-type-endif {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+
+.o_au_php_tag_val_color {
+    color: #dc3545;
+    /* Red */
+}
+
+.o_text-php-var-info {
+    color: #17a2b8;
+    /* Cyan */
+}
+
+.o_snippet_preview_popup {
+    position: fixed;
+    display: none;
+    z-index: 1999;
+    /* Increased z-index to ensure visibility */
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
+    .o_preview_frame {
+        .preview-header {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: 500;
+            font-size: 13px;
+            color: #212529;
+        }
+
+        .preview-content {
+            padding: 8px;
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 2px;
+            }
+        }
+    }
+}
+
+/* Style for the container div */
+.o_col {
+    width: 350px;
+    /* Adjust the width as per your design */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for rows inside the container */
+.o_row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Ensure filenames adjust dynamically */
+.o_row field[name="upload_filename"] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    /* Adjust this value to control how much space filenames can occupy */
+    display: inline-block;
+}
+
+/* Add margin and alignment for labels */
+.o_row p {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+/* Style for buttons */
+.o_row .btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+    .o_col {
+        width: 100%;
+        /* Full-width on smaller screens */
+    }
+
+    .o_row field[name="upload_filename"] {
+        max-width: 100%;
+        /* Allow full width for filenames on smaller screens */
+    }
+}
+
+.php-var-1,
+.php-var-2,
+.php-var-3,
+.php-var-4 {
+    font-weight: bold;
+}
+
+
+.o_we_php_dropdown {
+    position: relative;
+    margin: 8px 0;
+}
+
+.o_we_php_dropdown_toggle {
+    display: flex;
     justify-content: space-between;
-    gap: 20px;  /* Add some spacing between left and right sections */
+    align-items: center;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-.custom-left-section {
-    order: 1;  /* Keep the left section in the first place */
-    flex-basis: 30%;  /* Set the desired width */
-    position: sticky;
-    top: 20px;
-    align-self: flex-start;
+.o_we_php_dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    margin-top: 4px;
+    z-index: 1000;
 }
 
-.custom-right-section {
-    order: 2;  /* Keep the right section in the second place */
-    flex-basis: 65%;  /* Set the desired width */
-    flex-grow: 1;  /* Allow it to grow if needed */
+.o_we_php_dropdown_menu.show {
+    display: block;
+}
+
+.o_we_php_search_wrapper {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.o_we_php_search {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
+
+.o_we_php_variables_list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.o_we_php_variables_list we-button {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.o_we_php_variables_list we-button:hover {
+    background: #f8f9fa;
+}
+
+#wrap .container::before,
+#wrap .o_container_small::before,
+#wrap .container::after,
+#wrap .o_container_small::after,
+#wrap .container-fluid::before,
+#wrap .container-sm::before,
+#wrap .container-md::before,
+#wrap .container-lg::before,
+#wrap .container-xl::before,
+#wrap .container-xxl::before,
+#wrap .container-fluid::after,
+#wrap .container-sm::after,
+#wrap .container-md::after,
+#wrap .container-lg::after,
+#wrap .container-xl::after,
+#wrap .container-xxl::after{
+    display: none;
+}
+
+.o_au_php_form_single-form, .o_au_php_form_center-form{
+margin-top:85px;
+}
+
+.o_editable_box {
+    position: relative;
+    border: 2px solid blue;
+    padding: 5px;
+    z-index: 9999;
+}
+.o_version_card_tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+}
+
+.o_version_card_tree .o_data_row {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.o_version_card_tree .o_data_row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stage-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.stage-badge[data-value="draft"] { background: #dc3545; }
+.stage-badge[data-value="in_progress"] { background: #17a2b8; }
+.stage-badge[data-value="in_review"] { background: #ffc107; }
+.stage-badge[data-value="stage"] { background: #007bff; }
+.stage-badge[data-value="publish"] { background: #28a745; }
+.o_version_card_tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+.o_version_card_tree .o_data_row {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.o_version_card_tree .o_data_row:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.o_version_card_tree .stage-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+.o_version_card_tree .o_field_widget {
+    margin-bottom: 0.8rem;
+}
+.o_version_card_tree .btn {
+    margin-top: auto;
+}
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-item small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.o_kanban_record_body {
+    flex: 1;
+}
+
+.stage-badge {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.oe_kanban_card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: white;
+    border: 1px solid #e9ecef;
+}
+
+.oe_kanban_card.oe_kanban_global_click.active-card {
+    background: #ffffb5 !important;
+    border: 1px solid #28a745 !important;
+    box-shadow: 0 0 0 1px #28a745 !important;
+}
+
+.stage-badge-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+
+.oe_kanban_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
