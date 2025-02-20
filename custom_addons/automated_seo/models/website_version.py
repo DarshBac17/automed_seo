@@ -17,6 +17,7 @@ import re
 import  base64
 from odoo.tools.populate import compute
 from .ftp_setup import transfer_file_via_scp
+import difflib
 
 class VersionCompareWizard(models.TransientModel):
     _name = "automated_seo.version_compare_wizard"
@@ -35,6 +36,8 @@ class VersionCompareWizard(models.TransientModel):
         string="Compare version",
         domain="[('id', '!=', base_version),('view_id', '=', view_id)]",
     )
+    diff_html = fields.Html(string='Differences', readonly=True)
+
     def is_php_content(self,text):
                 # Check if content is PHP tag/include
         return '<?php' in text or text.strip().startswith('php')
@@ -477,36 +480,81 @@ class VersionCompareWizard(models.TransientModel):
             
         return str(soup)
 
+    # def action_compare_versions(self):
+    #     if self.base_version and self.compare_version:
+    #         base_content = self.base_version.view_arch or ''
+    #         compare_content = self.compare_version.view_arch or ''
+    #          # Remove anchor tags before comparison
+    #         base_content = self.remove_anchor_tags(base_content)
+    #         compare_content = self.remove_anchor_tags(compare_content)
+    #
+    #         base_content = self.remove_sub_snippet_sections(html_parser=base_content)
+    #         compare_content = self.remove_sub_snippet_sections(html_parser=compare_content)
+    #         if base_content and compare_content:
+    #             base_content = html.unescape(base_content)
+    #             compare_content = html.unescape(compare_content)
+    #             base_content = self.handle_dynamic_img_tag(html_parser=base_content, view_name=self.base_version.view_id.name)
+    #             compare_content = self.handle_dynamic_img_tag(html_parser=compare_content, view_name=self.base_version.view_id.name)
+    #             base_soup = BeautifulSoup(base_content, 'html.parser')
+    #             compare_soup = BeautifulSoup(compare_content, 'html.parser')
+    #             result = self.compare_sections(compare_soup, base_soup)
+    #             html_parser = self.action_compile_button(version_compare_parser=result)
+    #             file = base64.b64encode(html_parser.encode('utf-8'))
+    #             compare_file_name = f"{self.base_version.view_id.name}_version_compare.php"
+    #             result = transfer_file_via_scp(page_name = compare_file_name, file_data=file)
+    #             if result:
+    #                 seo_view = self.env['automated_seo.view'].browse(self.base_version.view_id.id)
+    #                 seo_view.write({
+    #                     "diff_html" : html_parser,
+    #                     "diff_html_binary" : file,
+    #                     "diff_html_filename" : compare_file_name,
+    #                     "diff_url" : f"https://automatedseo.bacancy.com/{compare_file_name}"
+    #                 })
+
+    @api.onchange('base_version', 'compare_version')
     def action_compare_versions(self):
         if self.base_version and self.compare_version:
-            base_content = self.base_version.view_arch or ''
-            compare_content = self.compare_version.view_arch or ''
-             # Remove anchor tags before comparison
-            base_content = self.remove_anchor_tags(base_content)
-            compare_content = self.remove_anchor_tags(compare_content)
-            
-            base_content = self.remove_sub_snippet_sections(html_parser=base_content)
-            compare_content = self.remove_sub_snippet_sections(html_parser=compare_content)
-            if base_content and compare_content:
-                base_content = html.unescape(base_content)
-                compare_content = html.unescape(compare_content)
-                base_content = self.handle_dynamic_img_tag(html_parser=base_content, view_name=self.base_version.view_id.name)
-                compare_content = self.handle_dynamic_img_tag(html_parser=compare_content, view_name=self.base_version.view_id.name)
-                base_soup = BeautifulSoup(base_content, 'html.parser')
-                compare_soup = BeautifulSoup(compare_content, 'html.parser')
-                result = self.compare_sections(compare_soup, base_soup)
-                html_parser = self.action_compile_button(version_compare_parser=result)
-                file = base64.b64encode(html_parser.encode('utf-8'))
-                compare_file_name = f"{self.base_version.view_id.name}_version_compare.php"
-                result = transfer_file_via_scp(page_name = compare_file_name, file_data=file)
-                if result:
-                    seo_view = self.env['automated_seo.view'].browse(self.base_version.view_id.id)
-                    seo_view.write({
-                        "diff_html" : html_parser,
-                        "diff_html_binary" : file,
-                        "diff_html_filename" : compare_file_name,
-                        "diff_url" : f"https://automatedseo.bacancy.com/{compare_file_name}"
-                    })
+            # Get HTML content with null checks
+            base_content = self.base_version.parse_html or ''
+            compare_content = self.compare_version.parse_html or ''
+            # base_content = html.unescape(base_content)
+            # compare_content = html.unescape(compare_content)
+
+            # Convert to string if needed
+            base_html = str(base_content) if base_content else ''
+            compare_html = str(compare_content) if compare_content else ''
+
+            # Create BeautifulSoup objects
+            # base_soup = BeautifulSoup(base_html, 'html.parser')
+            # compare_soup = BeautifulSoup(compare_html, 'html.parser')
+
+            # Convert to pretty format
+            # base_pretty = base_soup.prettify() if base_soup else ''
+            # compare_pretty = compare_soup.prettify() if compare_soup else ''
+
+            # Generate diff with custom styling
+            if base_html and compare_html:
+                diff = difflib.HtmlDiff()
+                diff_html = diff.make_file(
+                    base_html.splitlines(),
+                    compare_html.splitlines(),
+                    f"Version {self.base_version.name}",
+                    f"Version {self.compare_version.name}"
+                )
+
+                # Add custom CSS for red highlighting
+                css = """
+                <style>
+                    .diff_add {background-color: #ffcccc !important;}
+                    .diff_chg {background-color: #ffcccc !important;}
+                    .diff_sub {background-color: #ffcccc !important;}
+                    td.diff_header {display: none;}
+                </style>
+                """
+
+                self.diff_html = css + diff_html
+            else:
+                self.diff_html = '<p>No content available for comparison</p>'
 
 
 

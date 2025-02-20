@@ -12,6 +12,9 @@
                         <field name="base_version"/>
                         <field name="compare_version"/>
                     </group>
+                    <div class="diff-viewer">
+                        <field name="diff_html" widget="html"/>
+                    </div>
                     <footer>
                         <button name="action_compare_versions" string="Compare" type="object" class="oe_highlight"/>
                         <button string="Cancel" special="cancel" class="btn-secondary"/>
