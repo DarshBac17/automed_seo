@@ -126,51 +126,51 @@ $(document).ready(function() {
 //        $(this).next("button").addBack().wrapAll('<div class="flex items-center justify-center"></div>');
 //    });
 
-    $(".shadow-form").each(function() {
-        var $this = $(this);
-        var $price = $this.find(".text-h1");
-        var priceText = $price.text().trim();
-        if (priceText.charAt(0) === "$") {
-            $price.data("original-price", priceText);
-            $price.text(maskPrice(priceText));
-            if ($this.find(".toggle-price").length === 0) {
-                $this.find(".boxed .text-h1").first().after('<div class="toggle-price svg-icon ml-sm"><img src="https://assets.bacancytechnology.com/main-boot-5/images/close-eye.svg" alt="icon" width="40" height="40" class="price-hidden"></div>');
-            }
-        }
-    });
-
-    $(document).on("click", ".toggle-price", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        var isMasked = false;
-        $(".shadow-form").each(function() {
-            var $price = $(this).find(".text-h1").text().trim();
-            if ($price.charAt(0) === "$" && $price.indexOf("*") !== -1) {
-                isMasked = true;
-                return false;
-            }
-        });
-
-        if (isMasked) {
-            $(".shadow-form").each(function() {
-                var $price = $(this).find(".text-h1");
-                var originalPrice = $price.data("original-price");
-                if (originalPrice && originalPrice.charAt(0) === "$") {
-                    $price.text(originalPrice);
-                }
-            });
-            $(".toggle-price img").attr("src", "https://assets.bacancytechnology.com/main-boot-5/images/open-eye.svg").attr("alt", "Show Price");
-        } else {
-            $(".shadow-form").each(function() {
-                var $price = $(this).find(".text-h1");
-                var originalPrice = $price.data("original-price");
-                if (originalPrice && originalPrice.charAt(0) === "$") {
-                    $price.text(maskPrice(originalPrice));
-                }
-            });
-            $(".toggle-price img").attr("src", "https://assets.bacancytechnology.com/main-boot-5/images/close-eye.svg").attr("alt", "Hide Price");
-        }
-    });
+//    $(".shadow-form").each(function() {
+//        var $this = $(this);
+//        var $price = $this.find(".text-h1");
+//        var priceText = $price.text().trim();
+//        if (priceText.charAt(0) === "$") {
+//            $price.data("original-price", priceText);
+//            $price.text(maskPrice(priceText));
+//            if ($this.find(".toggle-price").length === 0) {
+//                $this.find(".boxed .text-h1").first().after('<div class="toggle-price svg-icon ml-sm"><img src="https://assets.bacancytechnology.com/main-boot-5/images/close-eye.svg" alt="icon" width="40" height="40" class="price-hidden"></div>');
+//            }
+//        }
+//    });
+//
+//    $(document).on("click", ".toggle-price", function(e) {
+//        e.stopPropagation();
+//        e.preventDefault();
+//        var isMasked = false;
+//        $(".shadow-form").each(function() {
+//            var $price = $(this).find(".text-h1").text().trim();
+//            if ($price.charAt(0) === "$" && $price.indexOf("*") !== -1) {
+//                isMasked = true;
+//                return false;
+//            }
+//        });
+//
+//        if (isMasked) {
+//            $(".shadow-form").each(function() {
+//                var $price = $(this).find(".text-h1");
+//                var originalPrice = $price.data("original-price");
+//                if (originalPrice && originalPrice.charAt(0) === "$") {
+//                    $price.text(originalPrice);
+//                }
+//            });
+//            $(".toggle-price img").attr("src", "https://assets.bacancytechnology.com/main-boot-5/images/open-eye.svg").attr("alt", "Show Price");
+//        } else {
+//            $(".shadow-form").each(function() {
+//                var $price = $(this).find(".text-h1");
+//                var originalPrice = $price.data("original-price");
+//                if (originalPrice && originalPrice.charAt(0) === "$") {
+//                    $price.text(maskPrice(originalPrice));
+//                }
+//            });
+//            $(".toggle-price img").attr("src", "https://assets.bacancytechnology.com/main-boot-5/images/close-eye.svg").attr("alt", "Hide Price");
+//        }
+//    });
 
     $(window).load(function() {
         adjustHeights(".small-heading");
