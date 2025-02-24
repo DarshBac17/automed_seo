@@ -1310,6 +1310,7 @@ class View(models.Model):
             # html_parser = self.format_paragraphs(html_content=html_parser)
             # html_parser = self.remove_extra_spaces(html_parser = html_parser)
             html_parser = self.format_html_php(html_content=html_parser)
+            html_parser = self.update_include_paths(html_parser)
             html_parser = re.sub(r'itemscope=""', 'itemscope', html_parser)
             html_parser = html.unescape(html_parser)
 
@@ -1467,6 +1468,39 @@ class View(models.Model):
         soup.body.append(js_scripts)
         return soup.prettify()
 
+    def update_include_paths(self,html_parser):
+        """
+        Finds and updates the include paths in the given PHP code.
+
+        :param html_parser: The PHP code as a string.
+        :param new_path: The new path to replace in include statements.
+        :return: Updated PHP code with modified include paths.
+        """
+        php_tag_pattern = r"<\?php[\s\S]*?\?>"  # Regex pattern to find PHP tags
+        include_pattern = r'include\s*(?:\(\s*)?["\']([^"\']+)["\']\s*(?:\))?;'
+
+        def replace_match(match):
+            filename = match.group(1)
+            path = self.get_relative_path()
+            return f'include("{path}{filename}")'  # Replace with new path
+
+        def update_php_tag(match):
+            php_code = match.group(0)  # Extract PHP code block
+            return re.sub(include_pattern, replace_match, php_code)  # Replace include paths inside PHP tags
+
+        return re.sub(php_tag_pattern, update_php_tag, html_parser)
+
+    def get_relative_path(self):
+        hierarchy = self.name.replace("_", "-").replace(" ", "-").lower().strip().count('/')
+
+        path = ''
+        while hierarchy > 0:
+            path += '../'
+            hierarchy -= 1
+
+        return path
+
+
     def add_head(self, html_parser):
         soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
         head_tag = soup.head
@@ -1522,10 +1556,20 @@ class View(models.Model):
         # head_tag.append(link_css_php)
         link_css_php = BeautifulSoup('<?php include("tailwind/template/link-css.php"); ?>',"html.parser")
         head_tag.append(link_css_php)
+
+
+        default_link_tag = soup.new_tag('link')
+        default_link_tag['rel'] = "preload"
+        default_link_tag['href'] = "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
+        default_link_tag['as'] = 'style'
+        default_link_tag['onload'] = "this.onload=null;this.rel='stylesheet'"
+        head_tag.append(default_link_tag)
+
+        path = self.get_relative_path()
         for link in self.header_link_ids:
             tag = soup.new_tag('link')
             tag['rel'] = "preload"
-            tag['href'] = link.css_link
+            tag['href'] = path + link.css_link
             tag['as'] = 'style'
             tag['onload'] = "this.onload=null;this.rel='stylesheet'"
             head_tag.append(tag)

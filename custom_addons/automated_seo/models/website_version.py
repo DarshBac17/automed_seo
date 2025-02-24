@@ -275,13 +275,13 @@ class WebsitePageVersion(models.Model):
         seo_view.active_version = record.id
 
 
-        if initial_version and not record.selected_filename:
-            self.env['automated_seo.page_header_link'].create({
-                'view_id': record.view_id.id,
-                'css_link': "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
-                'view_version_id': record.id
-            })
-        else:
+        # if initial_version and not record.selected_filename:
+        #     self.env['automated_seo.page_header_link'].create({
+        #         'view_id': record.view_id.id,
+        #         'css_link': "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css",
+        #         'view_version_id': record.id
+        #     })
+        if not initial_version:
             # record.header_metadata_ids.write({'is_active': True})
             record.header_link_ids.write({'is_active': True})
             seo_view.update_stage_file()
