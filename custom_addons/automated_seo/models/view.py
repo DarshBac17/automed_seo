@@ -2190,6 +2190,13 @@ class View(models.Model):
                 website_page.view_id.arch_db = soup.prettify()
                 website_page.view_id.arch = soup.prettify()
 
+    def clean_filename(self, filename):
+        cleaned = re.sub(r'[^a-zA-Z0-9]', '-', filename)
+        cleaned = re.sub(r'-+', '-', cleaned)
+        cleaned = cleaned.strip('-')
+        cleaned = cleaned.lower()
+        return cleaned
+
     def handle_img_change(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
         html_parser = website_page.view_id.arch_db
@@ -2230,7 +2237,7 @@ class View(models.Model):
                         file_obj = io.BytesIO(image_data)
 
                         # image_file = io.BytesIO(processed_image)
-                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=new_image_name.replace("%20","-").replace("_","-").lower())
+                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=self.clean_filename(filename=new_image_name))
 
 
                         website_page.view_id.arch_db = soup.prettify()
@@ -2285,7 +2292,7 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{new_image_name.replace('%20','-').replace('_','-').lower()}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{self.clean_filename(filename=new_image_name)}"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
 
