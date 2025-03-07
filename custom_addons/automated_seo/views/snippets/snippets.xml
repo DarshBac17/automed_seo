@@ -46,42 +46,56 @@
             <div id="snippets_banner" class="o_panel">
                 <div class="o_panel_header">Banner</div>
                 <div class="o_panel_body">
+                    <t t-snippet="automated_seo.s_full_banner_side_image"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/s_banner_full_side_image.png">
+                        <keywords>banner, side, image, gray</keywords>
+                    </t>
+                    <t t-snippet="automated_seo.s_full_banner_side_matrix"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/s_banner_side_matrix.png">
+                        <keywords>banner, side, matrix, gray</keywords>
+                    </t>
+
+                    <t t-snippet="automated_seo.s_full_banner_side_matrix_icon"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/s_banner_full_side_matrix_icon.png">
+                        <keywords>banner, side, matrix, gray</keywords>
+                    </t>
+
                     <t t-snippet="automated_seo.s_banner_health_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_health_gray.png">
                         <keywords>banner, health, gray</keywords>
                     </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_form_and_bg"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_form_and_bg_image.png">
-                        <keywords>banner, side image, form</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_button"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_button.png">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_2_button.png">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_2_buttons_and_bg.png">
-                        <keywords>banner, side image, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button_and_icon.png">
-                        <keywords>banner, side, matrix, button, icon</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button.png">
-                        <keywords>banner, side, matrix, button</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_matrix_with_form"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_a_form.png">
-                        <keywords>banner, side, matrix, button, form</keywords>
-                    </t>
-                    <t t-snippet="automated_seo.s_banner_side_image_with_icons"
-                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_icon.png">
-                        <keywords>banner, side image, icons</keywords>
-                    </t>
+<!--                    <t t-snippet="automated_seo.s_banner_side_image_with_form_and_bg"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_form_and_bg_image.png">-->
+<!--                        <keywords>banner, side image, form</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_image_with_button"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_button.png">-->
+<!--                        <keywords>banner, side image, button</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_2_button.png">-->
+<!--                        <keywords>banner, side image, button</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_image_with_2_button_and_bg"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_2_buttons_and_bg.png">-->
+<!--                        <keywords>banner, side image, button</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button_and_icon"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button_and_icon.png">-->
+<!--                        <keywords>banner, side, matrix, button, icon</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_matrix_with_button"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_button.png">-->
+<!--                        <keywords>banner, side, matrix, button</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_matrix_with_form"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_matrix_with_a_form.png">-->
+<!--                        <keywords>banner, side, matrix, button, form</keywords>-->
+<!--                    </t>-->
+<!--                    <t t-snippet="automated_seo.s_banner_side_image_with_icons"-->
+<!--                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/banner_side_image_with_icon.png">-->
+<!--                        <keywords>banner, side image, icons</keywords>-->
+<!--                    </t>-->
                 </div>
             </div>
 
