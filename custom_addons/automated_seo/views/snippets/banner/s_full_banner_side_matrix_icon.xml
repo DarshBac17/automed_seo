@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_full_banner_side_matrix_icon" name="Full Banner Side Matrix icon">
+        <section class="banner banner-post header-top bg-dark o_automated_seo_php_variable">
+            <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
+            <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="Hire Angular Developers" title="Hire Angular Developers" width="1900" height="900" loading="eager" class="banner-post-img">
+            <?php endif; ?>-->
+
+            <div class="phone-tablet-if"/>
+            <img src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/ruby-on-rails-development/banner-3.jpg" alt="" title="" width="1900" height="900" loading="eager" class="banner-post-img"/>
+            <div class="phone-tablet-endif"/>
+
+            <div class="grid gap-6 grid-cols-1 lg:grid-cols-5 content container text-white items-center">
+                <!--<?php if ($deviceType != "phone" && $deviceType != "tablet") : ?>
+                <div class="lg:col-span-2 lg:order-2">
+                    <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-side-4.png" alt="Hire Angular Developers" title="Hire Angular Developers" width="785" height="754" loading="lazy" class="w-full">
+                </div>
+                <?php endif; ?>-->
+                <div class="lg:col-span-3">
+                    <h1>Heading Heading Heading Heading Heading</h1>
+                    <p>Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+
+                    <p class="text-primary font-bold">Description Description Description Description Description</p>
+
+                    <div class="flex flex-wrap gap-6 text-center resp-btn-two mb-sm">
+                        <a href="#case-study" class="btn btn-outline-primary">Button Text</a>
+                        <a href="#tech-stack" class="btn btn-primary">Button Text</a>
+                    </div>
+
+                    <form class="emailFormbanner_org o_au_php_form_banner-form" id="emailFormbanner" data-success="Thanks for your enquiry, we'll be in touch soon" data-error="Please fill all required fields">
+                        <div class="grid md:gap-0 gap-6 md:grid-cols-2">
+                            <div class="relative">
+                                <input type="text" class="form-control h-full w-full p-3 text-secondary" placeholder="Email Address" id="email" maxlength="80" name="contactEmailHD" size="20"/>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary h-full" name="contactBtn">Hire <span class="o_au_php_var_tag_bannerDevName o_au_php_tag_val_color"># Change Text #</span>
+                                    <!--HIRE &lt;!&ndash;<?php echo $bannerDevName ?>&ndash;&gt; Developer NOW--> Developer NOW
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!--                    <div class="form-php"/>-->
+                    <div class="grid grid-cols-subgrid gap-6 sm:grid-cols-2 md:grid-cols-3 md:[&amp;>div:not(:last-child)]:border-r md:[&amp;>div:not(:last-child)]:pr-2 mt-sm">
+                        <div class="flex items-center">
+                            <div class="w-28 md:w-1/5 mr-sm">
+                                <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-1.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
+                            </div>
+                            <p class="w-3/4">Text Text Text</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-28 md:w-1/5 mr-sm">
+                                <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-2.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-2.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-2.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
+                            </div>
+                            <p class="w-3/4">Text Text Text</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-28 md:w-1/5 mr-sm">
+                                <!--                                <img src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" data-src="<?php echo BASE_URL_IMAGE; ?>main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full">-->
+                                <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-dev/banner-3.svg" alt="icon" width="40" height="40" loading="lazy" class="w-full"/>
+                            </div>
+                            <p class="w-3/4">Text Text Text</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 flex flex-wrap text-center">
+                    <div class="boxed w-1/2 border-r border-b border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-1.svg" alt="" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+                    </div>
+                    <div class="boxed w-1/2 border-b border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-2.svg" alt="" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+
+                    </div>
+                    <div class="boxed w-1/2 border-r border-secondary">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-3.svg" alt="" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+
+                    </div>
+                    <div class="boxed w-1/2">
+                        <div class="svg-icon mb-sm">
+                            <img src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" data-src="https://assets.bacancytechnology.com/main-boot-5/images/angular-js-development/banner-svg-icon-4.svg" alt="" width="48" height="48" loading="lazy" class="mx-auto"/>
+                        </div>
+                        <p>Description Description</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
