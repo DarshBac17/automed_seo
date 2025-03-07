@@ -2191,11 +2191,12 @@ class View(models.Model):
                 website_page.view_id.arch = soup.prettify()
 
     def clean_filename(self, filename):
+        name, ext = os.path.splitext(filename)
         cleaned = re.sub(r'[^a-zA-Z0-9]', '-', filename)
         cleaned = re.sub(r'-+', '-', cleaned)
         cleaned = cleaned.strip('-')
         cleaned = cleaned.lower()
-        return cleaned
+        return f"{cleaned}{ext}"
 
     def handle_img_change(self, view_name):
         website_page = self.env['website.page'].search([('name', '=', view_name)], limit=1)
