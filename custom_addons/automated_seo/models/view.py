@@ -109,8 +109,8 @@ class View(models.Model):
     is_processed = fields.Boolean(default=False)
     image = fields.Binary(string="Upload Image")
     image_filename = fields.Char(string="Image Filename")
-    header_title = fields.Char(string="Header title")
-    header_description = fields.Text(string="Header description")
+    header_title = fields.Char(string="Meta title")
+    header_description = fields.Text(string="Meta description")
     publish_url = fields.Char(string='Publish URL', help="Publish URL")
     # header_description = fields.Text(string="Title")
 
