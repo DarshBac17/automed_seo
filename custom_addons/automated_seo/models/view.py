@@ -1,4 +1,6 @@
 import json
+from email.policy import default
+from tokenize import String
 
 from gevent.resolver.cares import channel
 
@@ -34,6 +36,12 @@ import subprocess
 AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
+
+
+class IrAttachment(models.Model):
+    _inherit = 'ir.attachment'
+    is_uploaded_s3 = fields.Boolean(default=False, string="Is image uploaded to S3")
+    s3_file_path = fields.Char(string="s3 path")
 
 
 class ViewCreateWizard(models.TransientModel):
@@ -109,8 +117,8 @@ class View(models.Model):
     is_processed = fields.Boolean(default=False)
     image = fields.Binary(string="Upload Image")
     image_filename = fields.Char(string="Image Filename")
-    header_title = fields.Char(string="Header title")
-    header_description = fields.Text(string="Header description")
+    header_title = fields.Char(string="Meta title")
+    header_description = fields.Text(string="Meta description")
     publish_url = fields.Char(string='Publish URL', help="Publish URL")
     # header_description = fields.Text(string="Title")
 
@@ -219,6 +227,7 @@ class View(models.Model):
                     raise ValidationError(
                         f"Invalid image file: {str(e)}"
                     )
+
     @api.depends('create_uid')
     def _compute_user_name(self):
         for record in self:
@@ -477,7 +486,7 @@ class View(models.Model):
 
 
                 file_obj = io.BytesIO(file_data)
-                response = self.upload_file_to_s3(view_name=self.name, file=file_obj,
+                response,path  = self.upload_file_to_s3(view_name=self.name, file=file_obj,
                                                   s3_filename=new_image_name.replace(" ", "-").replace("%20",
                                                                                                        "-").lower())
                 if not response:
@@ -1024,7 +1033,7 @@ class View(models.Model):
                     file_data = base64.b64decode(file.decode()) if hasattr(file, 'decode') else file
 
                 file_obj = io.BytesIO(file_data)
-                response = self.upload_file_to_s3(file=file_obj, view_name=self.name, s3_filename=filename)
+                response,path = self.upload_file_to_s3(file=file_obj, view_name=self.name, s3_filename=filename)
                 if not response:
                     raise UserError("Failed to upload image to S3")
                 self.image_filename = filename
@@ -2210,8 +2219,10 @@ class View(models.Model):
                 image_id = int(url.split('/')[-2].split('-')[0])
                 attachment = self.env['ir.attachment'].search([('id', '=', image_id)])
                 name, ext = image_name.rsplit('.', 1)
-                hash_suffix = self.generate_hash()
-                new_image_name = f"{name}_{hash_suffix}.{ext}"
+                new_image_name = image_name
+                if not attachment.is_uploaded_s3:
+                    hash_suffix = self.generate_hash()
+                    new_image_name = f"{name}_{hash_suffix}.{ext}"
                 if f'o_au_img_{name}_{image_id}' not in img_tag_classes:
                     img['class'] = [cls for cls in img['class'] if
                                     not (cls.startswith('o_au_img_') or cls.startswith('o_imagename_'))]
@@ -2238,8 +2249,13 @@ class View(models.Model):
                         file_obj = io.BytesIO(image_data)
 
                         # image_file = io.BytesIO(processed_image)
-                        self.upload_file_to_s3(file=file_obj, view_name=view_name, s3_filename=self.clean_filename(filename=new_image_name))
-
+                        if not attachment.is_uploaded_s3:
+                            response,path = self.upload_file_to_s3(file=file_obj, view_name=view_name,
+                                                   s3_filename=self.clean_filename(filename=new_image_name))
+                            if response:
+                                attachment.name = new_image_name
+                                attachment.is_uploaded_s3 = True
+                                attachment.s3_file_path = path
 
                         website_page.view_id.arch_db = soup.prettify()
                         website_page.view_id.arch = soup.prettify()
@@ -2293,11 +2309,9 @@ class View(models.Model):
 
                 if element:
                     new_image_name = element.split('_',2)[-1]
-                    odoo_img_url = f"https://assets.bacancytechnology.com/inhouse/{view_name.replace(' ','').lower()}/{self.clean_filename(filename=new_image_name)}"
+                    odoo_img_url = f"https://assets.bacancytechnology.com/{ attachment.s3_file_path }"
                     img['src'] = odoo_img_url
                     img['data-src'] = odoo_img_url
-
-
 
             for attr in ["data-mimetype", "data-original-id", "data-original-src", "data-resize-width",
                          "data-scale-x","data-scale-y","data-height","data-aspect-ratio","data-width",
@@ -2554,6 +2568,9 @@ class View(models.Model):
         for section in soup.find_all('section',class_='remove'):
             section.unwrap()
 
+        for span in soup.find_all('span', class_="o_unwrap"):
+            span.unwrap()
+
         class_to_remove = ['oe_structure', 'remove', 'custom-flex-layout',
                            'custom-left-section', 'custom-right-section','float-start', 'rounded-circle', 'rounded','img', "img-fluid", "me-auto"]
 
@@ -2632,7 +2649,7 @@ class View(models.Model):
 
             s3.upload_fileobj(file, AWS_STORAGE_BUCKET_NAME, s3_key, ExtraArgs={
                 'ContentType': content_type})
-            return True
+            return True,s3_key
 
 
         except ClientError as e:
@@ -2643,10 +2660,27 @@ class View(models.Model):
             else:
                 print(f"An error occurred: {e}")
 
-            return False
+            return False,None
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-            return False
+            return False,None
+
+    def get_all_images_from_s3(prefix="inhouse/"):
+        s3 = boto3.client('s3',
+                          aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
+        images = []
+        paginator = s3.get_paginator('list_objects_v2')
+        pages = paginator.paginate(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=prefix)
+
+        for page in pages:
+            if 'Contents' in page:
+                for obj in page['Contents']:
+                    if obj['Key'].lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
+                        images.append(f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{obj['Key']}")
+
+        return images
 
     def delete_img_folder_from_s3(self,view_name):
         folder_name = view_name.replace(" ", "").lower()
@@ -2812,6 +2846,7 @@ class View(models.Model):
 class IrUiView(models.Model):
     _inherit = 'ir.ui.view'
     page_id = fields.Many2one('automated_seo.view', string="View Record",ondelete='cascade')
+
 
 
     def save(self, *args, **kwargs):
