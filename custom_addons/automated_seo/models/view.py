@@ -1310,7 +1310,7 @@ class View(models.Model):
             html_parser = self.remove_bom(html_parser=html_parser)
             html_parser = self.remove_empty_tags(html_parser = html_parser)
             html_parser = self.handle_breadcrumbs(html_content=html_parser)
-            html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
+            # html_parser = self.handle_itemprop_in_faq(html_content=html_parser)
             html_parser = self.add_head(html_parser)
             html_parser = self.add_js_scripts(html_parser)
             html_parser = self.remove_odoo_classes_from_tag(html_parser)
@@ -1740,13 +1740,13 @@ class View(models.Model):
         return str(soup.prettify())
 
 
-    def handle_itemprop_in_faq(self,html_content):
-
-        soup = BeautifulSoup(html_content,"html.parser")
-        for main_entity in soup.find_all(class_='o_answer_itemprop'):
-            main_entity.find_all()[0]["itemprop"] = "text"
-
-        return str(soup.prettify())
+    # def handle_itemprop_in_faq(self,html_content):
+    #
+    #     soup = BeautifulSoup(html_content,"html.parser")
+    #     for main_entity in soup.find_all(class_='o_answer_itemprop'):
+    #         main_entity.find_all()[0]["itemprop"] = "text"
+    #
+    #     return str(soup.prettify())
 
     def format_paragraphs(self,html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
