@@ -209,6 +209,7 @@ class WebsitePageVersion(models.Model):
                 'header_description',
                 'image',
                 'image_filename',
+                'publish_at',
                 'publish_url',
                 'selected_filename',
                 # 'header_metadata_ids',

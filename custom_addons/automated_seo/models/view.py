@@ -25,6 +25,8 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from ftplib import FTP
 import os
+
+from odoo.tools import parse_html
 from .ftp_setup import transfer_file_via_scp
 import requests
 import imghdr
@@ -710,7 +712,7 @@ class View(models.Model):
         self.write({'stage': 'publish'})
         self.active_version.stage = 'publish'
         page_name = self.selected_filename.name if self.selected_filename else f"{self.name}.php"
-
+        self.update_head_schema_dates()
 
         # Get the action reference
         action = self.env.ref('automated_seo.view_action')  # Replace with your actual action XML ID
@@ -733,7 +735,6 @@ class View(models.Model):
         )
 
         self.message_post(body="Record publish")
-        self.active_version.publish_at = datetime.now()
 
 
     # def action_unpublish_button(self):
@@ -1509,6 +1510,60 @@ class View(models.Model):
 
         return path
 
+    def update_head_schema_dates(self):
+        html = self.parse_html
+        current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        new_published = self.active_version.publish_at
+        if not self.active_version.publish_at:
+            new_published = current_datetime
+            self.active_version.publish_at = current_datetime
+        new_modified = current_datetime
+
+        def replace_dates_in_ldjson(match):
+            indent = match.group(1)
+            json_block = match.group(2)
+
+            try:
+                # Parse and update the JSON
+                json_data = json.loads(json_block)
+                if "@graph" in json_data:
+                    for item in json_data["@graph"]:
+                        if item.get("@type", "").lower() == "webpage":
+                            item["datePublished"] = new_published
+                            item["dateModified"] = new_modified
+                elif json_data.get("@type", "").lower() == "webpage":
+                    json_data["datePublished"] = new_published
+                    json_data["dateModified"] = new_modified
+
+                # Convert JSON back to string
+                formatted_json = json.dumps(json_data, indent=4)
+                # Re-indent JSON to original level
+                indented_json = '\n'.join(f'{indent}{line}' for line in formatted_json.splitlines())
+
+                return f'{indent}<script type="application/ld+json">\n{indented_json}\n{indent}</script>'
+
+            except Exception as e:
+                print("JSON error:", e)
+                return match.group(0)
+
+
+        updated_html = re.sub(
+            r'(^[ \t]*)<script[^>]*type=["\']application/ld\+json["\'][^>]*>\s*(\{.*?\})\s*</script>',
+            replace_dates_in_ldjson,
+            html,
+            flags=re.DOTALL | re.IGNORECASE | re.MULTILINE
+        )
+
+        file = base64.b64encode(updated_html.encode('utf-8'))
+
+        self.write({
+            'parse_html': updated_html,
+            'parse_html_binary': file
+        })
+        self.active_version.write({
+            'parse_html': updated_html,
+            'parse_html_binary': file
+        })
 
     def add_head(self, html_parser):
         soup = BeautifulSoup('<html lang="en"><head></head><body></body></html>', 'html.parser')
@@ -1583,6 +1638,9 @@ class View(models.Model):
             tag['onload'] = "this.onload=null;this.rel='stylesheet'"
             head_tag.append(tag)
 
+        publish_at = self.active_version.publish_at.strftime(
+            '%Y-%m-%d %H:%M:%S') if self.active_version.publish_at else False
+        modified_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         webpage_script = f"""
             <script type="application/ld+json">
@@ -1615,8 +1673,8 @@ class View(models.Model):
                         "isPartOf": {{
                             "@id": "<?php echo BASE_URL; ?>#website"
                         }},
-                        "datePublished": "2013-04-15T13:23:16+00:00",
-                        "dateModified": "2024-07-17T14:31:52+00:00",
+                        "datePublished": "{publish_at}",
+                        "dateModified": "{modified_at}",
                         "description": "{self.header_description}"
                     }}
                 ]
