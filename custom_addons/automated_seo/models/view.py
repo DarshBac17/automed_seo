@@ -1512,12 +1512,14 @@ class View(models.Model):
 
     def update_head_schema_dates(self):
         html = self.parse_html
-        current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        new_published = self.active_version.publish_at
-        if not self.active_version.publish_at:
-            new_published = current_datetime
-            self.active_version.publish_at = current_datetime
-        new_modified = current_datetime
+        current_datetime = datetime.now()
+
+        new_published = self.active_version.publish_at if self.active_version.publish_at else None
+        if not new_published:
+            new_published = current_datetime.isoformat()[:16] + '+00:00'
+            self.active_version.publish_at = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+
+        new_modified = current_datetime.isoformat()[:16] + '+00:00'
 
         def replace_dates_in_ldjson(match):
             indent = match.group(1)
@@ -1638,9 +1640,14 @@ class View(models.Model):
             tag['onload'] = "this.onload=null;this.rel='stylesheet'"
             head_tag.append(tag)
 
-        publish_at = self.active_version.publish_at.strftime(
-            '%Y-%m-%d %H:%M:%S') if self.active_version.publish_at else False
-        modified_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        publish_at = self.active_version.publish_at
+        if publish_at:
+            publish_at = publish_at.isoformat()[:16] + '+00:00'  # This will show UTC+0000
+        else:
+            publish_at = False
+
+        modified_at = datetime.now().isoformat()[:16] + '+00:00'
 
         webpage_script = f"""
             <script type="application/ld+json">
