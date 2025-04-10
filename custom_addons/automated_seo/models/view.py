@@ -1044,6 +1044,7 @@ class View(models.Model):
 
     def get_php_header_data(self, header):
         header = BeautifulSoup(header,'html.parser').head
+
         self.header_title = header.title.text
 
         meta_description = header.find("meta", attrs={"name": "description"})
@@ -1058,6 +1059,23 @@ class View(models.Model):
         if meta_url:
             self.publish_url = meta_url.get('content')
 
+        # Get the script tags from the header
+        script_tags = header.find_all('script', {'type': 'application/ld+json'})
+
+        for script in script_tags:
+            content = script.string
+            if content:
+                match = re.search(r"""['"]datePublished['"]\s*:\s*['"]([^'"]+)['"]""", content)
+                if match:
+                    # Parse with timezone awareness
+                    dt_with_tz = datetime.strptime(match.group(1), '%Y-%m-%dT%H:%M:%S%z')
+
+                    # Strip timezone info (Odoo needs naive UTC datetime)
+                    dt_naive_utc = dt_with_tz.replace(tzinfo=None)
+
+                    # Assign to Odoo datetime field
+                    self.active_version.publish_at = dt_naive_utc
+                    break
 
         # for meta_tag in meta_tags :
         #     # try:
