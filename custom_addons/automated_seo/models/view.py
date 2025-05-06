@@ -34,10 +34,15 @@ from odoo.exceptions import ValidationError
 # from .git_script import push_changes_to_git
 from urllib.parse import urlparse
 import subprocess
-# from dotenv import load_dotenv
-AWS_ACCESS_KEY_ID = 'AKIA4XF7TG4AOK3TI2WY'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'bacancy-website-images'
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get environment variables
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_S3_BUCKET_NAME')
 
 
 class IrAttachment(models.Model):
