@@ -109,6 +109,7 @@
         "views/snippets/cards/s_card_2_box_list_bg_white.xml",
         "views/snippets/cards/s_card_2_box_list_bg_gray.xml",
         "views/snippets/cards/s_card_with_icon_grid_2_bg_white.xml",
+        "views/snippets/cards/s_card_with_icon_grid_2_bg_gray.xml",
         "views/snippets/cards/s_card_bg_white.xml",
         "views/snippets/cards/s_card_bg_gray.xml",
         "views/snippets/cards/s_sub_card_gray.xml",
