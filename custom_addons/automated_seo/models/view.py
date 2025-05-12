@@ -40,8 +40,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get environment variables
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_S3_BUCKET_NAME')
 
 
@@ -2721,14 +2721,50 @@ class View(models.Model):
 
         return html_content
 
+    def get_s3_client_with_sts(self,role_arn, session_name):
+        """
+        Retrieves a Boto3 S3 client using temporary credentials from STS.
+
+        Args:
+            role_arn (str): The ARN of the IAM role to assume.
+            session_name (str): A name for the session.
+
+        Returns:
+            boto3.client: A Boto3 S3 client object.
+        """
+        try:
+
+            sts_client = boto3.client('sts')
+            response = sts_client.assume_role(
+                RoleArn=role_arn,
+                RoleSessionName=session_name,
+                DurationSeconds=3600
+            )
+            credentials = response['Credentials']
+
+            session = boto3.Session(
+                aws_access_key_id=credentials['AccessKeyId'],
+                aws_secret_access_key=credentials['SecretAccessKey'],
+                aws_session_token=credentials['SessionToken']
+            )
+
+            s3_client = session.client('s3')
+            return s3_client
+
+        except ClientError as e:
+            print(f"Error assuming role: {e}")
+            return None
+
     def upload_file_to_s3(self, file, s3_filename, view_name=None):
         content_type, _ = mimetypes.guess_type(s3_filename)
 
         content_type = content_type or 'application/octet-stream'
-        s3 = boto3.client('s3',
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                          )
+
+        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),f"user_{self.env.user.login}_{datetime.now()}")
+        # s3 = boto3.client('s3',
+        #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
+        #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        #                   )
         try:
             if view_name:
                 s3_key = f'inhouse/{view_name.replace(" ","").lower()}/{s3_filename}'
@@ -2753,28 +2789,33 @@ class View(models.Model):
             print(f"An unexpected error occurred: {e}")
             return False,None
 
-    def get_all_images_from_s3(prefix="inhouse/"):
-        s3 = boto3.client('s3',
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-
-        images = []
-        paginator = s3.get_paginator('list_objects_v2')
-        pages = paginator.paginate(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=prefix)
-
-        for page in pages:
-            if 'Contents' in page:
-                for obj in page['Contents']:
-                    if obj['Key'].lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
-                        images.append(f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{obj['Key']}")
-
-        return images
+    # def get_all_images_from_s3(prefix="inhouse/"):
+    #     # s3 = boto3.client('s3',
+    #     #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
+    #     #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    #
+    #     s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),f"user_{self.env.user.login}_{datetime.now()}")
+    #
+    #     images = []
+    #     paginator = s3.get_paginator('list_objects_v2')
+    #     pages = paginator.paginate(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=prefix)
+    #
+    #     for page in pages:
+    #         if 'Contents' in page:
+    #             for obj in page['Contents']:
+    #                 if obj['Key'].lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
+    #                     images.append(f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{obj['Key']}")
+    #
+    #     return images
 
     def delete_img_folder_from_s3(self,view_name):
         folder_name = view_name.replace(" ", "").lower()
-        s3 = boto3.client('s3',
-                          aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+        # s3 = boto3.client('s3',
+        #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
+        #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
+        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),f"user_{self.env.user.login}_{datetime.now()}")
+
         try:
             response = s3.list_objects_v2(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=f'inhouse/{folder_name}/')
 
