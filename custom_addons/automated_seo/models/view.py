@@ -2721,6 +2721,12 @@ class View(models.Model):
 
         return html_content
 
+    def get_sts_role_session_name(self):
+        # Only keep allowed characters
+        safe_login = re.sub(r'[^\w+=,.@-]', '_', self.env.user.login)
+        timestamp = datetime.now().strftime('%Y%m%dT%H%M%S')
+        return f"user_{safe_login}_{timestamp}"
+
     def get_s3_client_with_sts(self,role_arn, session_name):
         """
         Retrieves a Boto3 S3 client using temporary credentials from STS.
@@ -2760,7 +2766,7 @@ class View(models.Model):
 
         content_type = content_type or 'application/octet-stream'
 
-        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),f"user_{self.env.user.login}_{datetime.now()}")
+        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),self.get_sts_role_session_name())
         # s3 = boto3.client('s3',
         #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
         #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -2814,7 +2820,7 @@ class View(models.Model):
         #                   aws_access_key_id=AWS_ACCESS_KEY_ID,
         #                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),f"user_{self.env.user.login}_{datetime.now()}")
+        s3 = self.get_s3_client_with_sts(os.getenv('AWS_USER_ARN_ROLE'),self.get_sts_role_session_name())
 
         try:
             response = s3.list_objects_v2(Bucket=AWS_STORAGE_BUCKET_NAME, Prefix=f'inhouse/{folder_name}/')
