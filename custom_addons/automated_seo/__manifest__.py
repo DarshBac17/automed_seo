@@ -94,6 +94,7 @@
         "views/snippets/services/s_service_tab_bg_gray.xml",
         "views/snippets/services/s_service_sub_tab_gray.xml",
         "views/snippets/services/s_service_list_bg_white.xml",
+        "views/snippets/services/s_service_list_bg_gray.xml",
         "views/snippets/cards/s_card_with_icon_bg_gray.xml",
         "views/snippets/cards/s_card_with_icon_bg_white.xml",
         "views/snippets/cards/s_sub_card_with_icon_gray.xml",
