@@ -144,6 +144,10 @@
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/service_list_bg_white.png">
                         <keywords>service, list, white</keywords>
                     </t>
+                    <t t-snippet="automated_seo.s_service_list_bg_gray"
+                       t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/service_list_bg_gray.png">
+                        <keywords>service, list, gray</keywords>
+                    </t>
                     <t t-snippet="automated_seo.s_service_tab_bg_gray"
                        t-thumbnail="/automated_seo/static/src/img/snippet_thumbnail/service_tab_bg_gray.png">
                         <keywords>service, tabs, gray</keywords>
